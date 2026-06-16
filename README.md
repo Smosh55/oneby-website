@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OneBy — Demo Website
 
-## Getting Started
+Marketing site for **OneBy**, _The AI Communications OS for Small Business_.
 
-First, run the development server:
+> Never miss a customer because you're busy. When you can't pick up, OneBy's AI
+> answers, captures the details, and turns the conversation into a summary and a
+> task — automatically.
+
+Built around the core product story: **Call → AI → Summary → Task → Resolution.**
+
+## Tech stack
+
+- **Next.js 16** (App Router) + **React 19**
+- **Tailwind CSS v4** (CSS-first config; brand tokens in `src/app/globals.css`)
+- **TypeScript**
+- **lucide-react** icons
+- **Inter** via `next/font`
+
+## Brand
+
+Design tokens are sourced from the OneBy Universal Brand Guide:
+
+| Token | Hex | Use |
+| --- | --- | --- |
+| Deep Navy | `#04034F` | Headings, dark surfaces, primary brand |
+| Professional Blue | `#008FE0` | Primary actions, links, interactive |
+| Accent Green | `#1CDB96` | Success, highlights, call indicators |
+
+Logos live in `public/brand/`. Full guide and the original brief are in `docs/`.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> **Note:** This repo lives in OneDrive. If `npm install` ever hits file-lock
+> errors, pause OneDrive sync during installs, or move the project outside the
+> synced folder.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Homepage structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`src/app/page.tsx` composes 14 sections from `src/components/`:
 
-## Learn More
+Nav · Hero · LogoCloud · Problem · Solution · HowItWorks · Features ·
+ReceptionistDemo (interactive) · Stories · Industries · Comparison · Pricing ·
+FAQ (accordion) · CTA · Footer
 
-To learn more about Next.js, take a look at the following resources:
+## Docs
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `docs/brief/website-prompt.txt` — the original product/positioning brief
+- `docs/brief/wordpress-seo-handoff.txt` — separate WordPress SEO project (not part of this site)

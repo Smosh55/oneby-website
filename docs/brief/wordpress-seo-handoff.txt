@@ -1,0 +1,29 @@
+CONTEXT HANDOFF — OneBy.AI WordPress/Divi SEO project
+
+Goal: Connect Claude Code to the One By AI WordPress site (https://oneby.ai)
+to produce SEO-optimized Divi pages and blog posts at scale (full site +
+ongoing blog).
+
+Site facts (confirmed from wp-admin):
+- WordPress + Divi page builder (pages stored as [et_pb_section] shortcode markup)
+- SEO plugin: Yoast SEO (meta title/description/focus keyword/schema are REST-accessible)
+- Security: Wordfence + a Security plugin active — may block REST API/App Passwords;
+  whitelist fix available if connection is blocked
+- Backups: UpdraftPlus installed (take a fresh backup before any writes)
+- Admin user: moshe (moshe@oneby.ai)
+
+Connection plan (decided):
+- Do NOT use the admin token. Create a dedicated WordPress user "claude-editor"
+  with role = Editor, then generate an Application Password named "claude-code"
+  under that account.
+- Connect via WordPress REST API using that app password.
+- Store the credential in a local file (e.g. ~/.wpconnect), not in chat.
+
+Safety workflow (decided):
+- Read-only audit first (list existing pages/posts/Yoast settings, no writes)
+- All new content created as DRAFTS; user reviews/publishes
+- New content only — never edit existing pages/slugs without explicit instruction
+
+Next step: user is creating the claude-editor Editor account + app password.
+Then: secure-store the credential, run a read-only connection test, then plan
+site architecture (pillar pages + topic clusters) and begin producing content.

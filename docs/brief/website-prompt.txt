@@ -1,0 +1,342 @@
+You are an elite SaaS product strategist, UX designer, conversion copywriter, startup founder, and senior full-stack engineer.
+
+Your job is to create a complete venture-backed quality website, product strategy, information architecture, UI/UX design system, page copy, user flows, wireframes, and development plan for a company called **OneBy**.
+
+# IMPORTANT
+
+Do NOT position OneBy as another VoIP provider, PBX, SIP platform, or phone system.
+
+We are NOT competing on dial tone.
+
+We are NOT competing on minutes.
+
+We are NOT competing on phone hardware.
+
+Instead, position OneBy as:
+
+**The AI Communications Operating System for Small Business**
+
+and
+
+**The platform that turns conversations into action.**
+
+Every feature, page, headline, design decision, and workflow should reinforce this positioning.
+
+# COMPANY OVERVIEW
+
+Company Name:
+OneBy
+
+Primary Tagline:
+Never Miss A Customer Because You're Busy
+
+Alternative Taglines:
+Every Call Becomes Work
+
+The Phone System That Remembers Everything
+
+Turn Conversations Into Action
+
+Primary Value Proposition:
+
+OneBy combines:
+
+* Business calling
+* SMS
+* AI receptionists
+* AI call answering
+* AI voicemail replacement
+* Call transcription
+* AI summaries
+* Customer timelines
+* Task management
+* Workflow automation
+
+into one seamless platform.
+
+The goal is that every customer interaction automatically becomes actionable work.
+
+# CORE DIFFERENTIATOR
+
+Traditional Phone Systems:
+
+Call → Voicemail → Forgotten
+
+OneBy:
+
+Call → AI → Summary → Task → Resolution
+
+We are selling outcomes, not communication tools.
+
+# PRIMARY TARGET MARKET
+
+Rank these markets by priority:
+
+1. Home Services
+
+   * HVAC
+   * Plumbing
+   * Electricians
+   * Roofing
+   * Restoration
+   * Garage Door Companies
+   * Pest Control
+
+2. Property Management
+
+3. MSPs and IT Service Providers
+
+4. Small Law Firms
+
+5. Medical Offices
+
+Focus heavily on Home Services and Property Management.
+
+# WEBSITE GOALS
+
+The website should:
+
+* Convert visitors into demo requests
+* Convert visitors into free trials
+* Explain the value in under 30 seconds
+* Make OneBy feel modern, intelligent, and premium
+* Compete visually with RingCentral, OpenPhone, Dialpad, Zoom Phone, ServiceTitan, and HubSpot
+* Emphasize AI and workflow automation
+* Emphasize simplicity
+* Avoid enterprise jargon
+
+# DELIVERABLES
+
+Create ALL of the following:
+
+1. Complete sitemap
+2. Navigation structure
+3. Homepage wireframe
+4. Homepage copy
+5. Product page wireframes
+6. Feature page wireframes
+7. Pricing page
+8. About page
+9. Industry landing pages
+10. Demo page
+11. Blog strategy
+12. SEO strategy
+13. Conversion funnel
+14. Lead capture strategy
+15. Free trial strategy
+16. Competitive positioning
+17. Mobile experience
+18. Desktop experience
+19. Design system
+20. Brand voice guide
+
+# HOMEPAGE STRUCTURE
+
+Create a homepage that includes:
+
+Hero Section
+
+Problem Section
+
+Solution Section
+
+How It Works
+
+Feature Grid
+
+AI Receptionist Demo
+
+Customer Stories
+
+Industry Use Cases
+
+Competitive Comparison
+
+Pricing Preview
+
+Call To Action
+
+FAQ
+
+Footer
+
+For every section provide:
+
+* Headline
+* Subheadline
+* Copy
+* Visual recommendations
+* CTA recommendations
+
+# FEATURES TO HIGHLIGHT
+
+AI Receptionist
+
+When calls are unanswered:
+
+* AI answers
+* Collects information
+* Understands intent
+* Creates summary
+* Creates task
+* Sends notifications
+
+Smart Summaries
+
+Automatically summarize every conversation.
+
+Customer Timeline
+
+Every call, text, voicemail, task, and note in one place.
+
+Business SMS
+
+Shared team inbox.
+
+Workflow Automation
+
+Tasks created automatically from conversations.
+
+Mobile App
+
+Manage business communications anywhere.
+
+Call Recording
+
+Searchable recordings with AI insights.
+
+# KEY PRODUCT STORY
+
+The most important workflow in the product:
+
+Customer calls.
+
+Nobody answers.
+
+AI answers.
+
+AI gathers information.
+
+AI creates summary.
+
+AI creates task.
+
+Business owner receives notification.
+
+Customer receives follow-up.
+
+Issue gets resolved.
+
+Design the entire website around this story.
+
+# COMPETITIVE POSITIONING
+
+Explain how OneBy differs from:
+
+RingCentral
+
+OpenPhone
+
+Dialpad
+
+Zoom Phone
+
+ServiceTitan
+
+HubSpot
+
+Salesforce
+
+Housecall Pro
+
+Jobber
+
+AppFolio
+
+Position OneBy as:
+
+Communication First
+
+Workflow Native
+
+AI Native
+
+Action Focused
+
+# PRICING STRATEGY
+
+Recommend:
+
+* Starter Plan
+* Growth Plan
+* Pro Plan
+
+Include:
+
+* Features
+* Limits
+* Upsells
+* Trial strategy
+
+Avoid competing solely on price.
+
+# DESIGN DIRECTION
+
+Style:
+
+Modern SaaS
+
+Apple-level polish
+
+Linear-inspired simplicity
+
+Stripe-inspired clarity
+
+HubSpot-level conversion optimization
+
+Use:
+
+* Clean whitespace
+* Rounded cards
+* Modern typography
+* Product screenshots
+* Interactive demos
+* Strong AI visuals
+
+Provide:
+
+Color palette
+
+Typography system
+
+Spacing system
+
+Button styles
+
+Component library recommendations
+
+# SEO STRATEGY
+
+Generate:
+
+Primary keywords
+
+Secondary keywords
+
+Industry keywords
+
+Content strategy
+
+Blog topics
+
+Landing page topics
+
+Comparison page topics
+
+# FINAL DELIVERABLE
+
+Output a complete investor-quality website blueprint that a design team, engineering team, marketing team, and AI coding agent could immediately use to build and launch OneBy.
+
+Do not give a summary.
+
+Produce the complete detailed blueprint with maximum depth and specificity.
