@@ -1,26 +1,36 @@
 import Reveal from "./Reveal";
 import {
-  Bot,
+  AudioLines,
   FileText,
   History,
   MessageSquare,
-  Workflow,
+  UserCheck,
   Smartphone,
-  Mic,
+  Bot,
   Search,
 } from "lucide-react";
 
 const features = [
   {
-    icon: Bot,
-    title: "AI Receptionist",
-    body: "Answers unanswered calls, collects information, understands intent, and never puts a customer on hold.",
+    icon: AudioLines,
+    title: "Post-Call Automation",
+    body: "After every call — answered or missed, desk phone or mobile — OneBy transcribes it, writes the summary, and creates the next task. No notes, no manual entry.",
     span: true,
   },
   {
     icon: FileText,
     title: "Smart Summaries",
     body: "Every conversation distilled into a clean, scannable recap — automatically.",
+  },
+  {
+    icon: UserCheck,
+    title: "Task Creation & Assignment",
+    body: "Tasks created from conversations and assigned to the right person, with a due date — nothing left to chance.",
+  },
+  {
+    icon: Bot,
+    title: "AI Receptionist",
+    body: "When a call goes unanswered, AI answers, captures the details, and hands off a ready-to-action task.",
   },
   {
     icon: History,
@@ -33,19 +43,9 @@ const features = [
     body: "A shared team inbox so texts never get stranded on one person's phone.",
   },
   {
-    icon: Workflow,
-    title: "Workflow Automation",
-    body: "Tasks created automatically from conversations and routed to the right person.",
-  },
-  {
     icon: Smartphone,
     title: "Mobile App",
     body: "Run your business communications from anywhere — the truck, the office, the couch.",
-  },
-  {
-    icon: Mic,
-    title: "Call Recording",
-    body: "Searchable recordings with AI insights you can actually act on.",
     span: true,
   },
 ];

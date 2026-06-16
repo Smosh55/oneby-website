@@ -125,9 +125,9 @@ export default function IndustryLanding({ industry }: { industry: Industry }) {
       <section className="py-18 lg:py-24">
         <div className="container-x">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <span className="eyebrow text-error">The cost of a missed call</span>
+            <span className="eyebrow text-error">The cost of a lost conversation</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              What {industry.shortName.toLowerCase()} teams lose to voicemail.
+              What {industry.shortName.toLowerCase()} teams lose on every call.
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-5 sm:grid-cols-3">
@@ -166,8 +166,44 @@ export default function IndustryLanding({ industry }: { industry: Industry }) {
         </div>
       </section>
 
-      {/* Capabilities */}
+      {/* Every call, not just missed */}
       <section className="py-18 lg:py-24">
+        <div className="container-x">
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <span className="eyebrow">Not just missed calls</span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+              Every call gets smarter — answered ones too.
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted">
+              Missed-call answering is just the start. After <em>every</em>{" "}
+              {industry.shortName.toLowerCase()} call — picked up at the desk, on
+              a mobile, or by the AI — OneBy transcribes it, writes the summary,
+              and creates and assigns the follow-up task. Nothing said on a call
+              ever falls through again.
+            </p>
+          </Reveal>
+          <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">
+            {[
+              { k: "Capture", v: "Every call recorded & transcribed" },
+              { k: "Summarize", v: "The key details, written for you" },
+              { k: "Assign", v: "A task on the right person's plate" },
+            ].map((s) => (
+              <div
+                key={s.k}
+                className="rounded-2xl border border-line bg-canvas px-5 py-6 text-center"
+              >
+                <p className="text-sm font-bold uppercase tracking-wide text-blue">
+                  {s.k}
+                </p>
+                <p className="mt-2 text-[0.95rem] text-muted">{s.v}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Capabilities */}
+      <section className="pb-18 lg:pb-24">
         <div className="container-x">
           <Reveal className="mx-auto max-w-2xl text-center">
             <span className="eyebrow">Why {industry.shortName} teams choose OneBy</span>

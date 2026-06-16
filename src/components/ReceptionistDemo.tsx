@@ -45,12 +45,12 @@ export default function ReceptionistDemo() {
         <div className="max-w-lg">
           <span className="eyebrow text-green">See it live</span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            Hear how the AI handles a real missed call.
+            Hear a call turn into an assigned task.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-white/70">
-            Press play. Watch a call get answered, understood, and turned into
-            an assigned task — exactly what happens when you&apos;re too busy to
-            pick up.
+            Press play. Watch OneBy answer, understand, summarize, and assign —
+            the same post-call automation that runs on every call, whether your
+            team picks up or the AI does.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <button
@@ -146,7 +146,7 @@ export default function ReceptionistDemo() {
                 <div className="flex items-center gap-2.5 rounded-xl border border-green/30 bg-green/10 px-3.5 py-3">
                   <CheckCircle2 size={18} className="text-green" />
                   <p className="text-[0.82rem] font-semibold">
-                    Task created · Schedule A/C diagnostic — due today
+                    Task created &amp; assigned · Schedule A/C diagnostic — due today
                   </p>
                 </div>
               </div>

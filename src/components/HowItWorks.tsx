@@ -1,36 +1,36 @@
 import Reveal from "./Reveal";
-import { PhoneIncoming, Bot, FileText, ListChecks, BellRing } from "lucide-react";
+import { PhoneCall, AudioLines, FileText, ListChecks, BellRing } from "lucide-react";
 
 const steps = [
   {
-    icon: PhoneIncoming,
+    icon: PhoneCall,
     k: "01",
-    title: "Customer calls",
-    body: "A lead or existing customer dials your business line — day, night, or while you're mid-job.",
+    title: "A call happens",
+    body: "Inbound or outbound, answered by your team or by OneBy's AI — on the desk phone, the mobile app, or anywhere.",
   },
   {
-    icon: Bot,
+    icon: AudioLines,
     k: "02",
-    title: "AI answers",
-    body: "When nobody picks up, the AI receptionist answers in a natural voice, understands intent, and asks the right questions.",
+    title: "OneBy captures it",
+    body: "Every call is recorded and transcribed automatically. Nothing depends on someone remembering to take notes.",
   },
   {
     icon: FileText,
     k: "03",
     title: "AI summarizes",
-    body: "The conversation is transcribed and distilled into a clean summary — name, need, urgency, and context.",
+    body: "The conversation is distilled into a clean summary — who called, what they need, what was promised, and what's next.",
   },
   {
     icon: ListChecks,
     k: "04",
-    title: "Task is created",
-    body: "OneBy turns the summary into an assigned task with a due date and drops it on the customer's timeline.",
+    title: "A task is created & assigned",
+    body: "OneBy turns the summary into a task with an owner and a due date, and drops it on the customer's timeline.",
   },
   {
     icon: BellRing,
     k: "05",
-    title: "You're notified",
-    body: "Owner and team get pinged instantly. The customer gets a follow-up. The job gets booked.",
+    title: "Everyone's in the loop",
+    body: "The right people are notified instantly, the customer gets follow-up, and the work actually gets done.",
   },
 ];
 
@@ -41,11 +41,12 @@ export default function HowItWorks() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">How it works</span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-            One missed call becomes resolved work — in seconds.
+            Every call becomes resolved work — in seconds.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            This is the workflow OneBy is built around. No app to open, no
-            recording to replay, no sticky note to lose.
+            This is the workflow OneBy runs on every conversation — answered or
+            missed. No app to open, no recording to replay, no sticky note to
+            lose.
           </p>
         </Reveal>
 

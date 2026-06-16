@@ -6,6 +6,10 @@ import Reveal from "./Reveal";
 
 const faqs = [
   {
+    q: "Does OneBy only work on missed calls?",
+    a: "No — OneBy works on every call. Answered or missed, on your desk phone or the mobile app, after any call it transcribes the conversation, writes a summary, and creates and assigns the follow-up task. AI answering of unanswered calls is just one capability.",
+  },
+  {
     q: "Does OneBy replace my current phone number?",
     a: "No. You can keep your existing business number — we port it over or forward to it. There's no new hardware to buy and nothing to rip out.",
   },

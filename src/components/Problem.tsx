@@ -1,21 +1,21 @@
 import Reveal from "./Reveal";
-import { PhoneOff, Voicemail, Trash2 } from "lucide-react";
+import { PhoneOff, NotebookPen, UserX } from "lucide-react";
 
 const stats = [
   {
     icon: PhoneOff,
-    stat: "1 in 4",
-    label: "calls to small businesses go unanswered",
+    stat: "Missed calls",
+    label: "leak leads — callers rarely leave a voicemail, they just call the next company",
   },
   {
-    icon: Voicemail,
-    stat: "80%",
-    label: "of callers won't leave a voicemail — they call the next company",
+    icon: NotebookPen,
+    stat: "Answered calls",
+    label: "leak details — what was said gets forgotten the moment someone hangs up",
   },
   {
-    icon: Trash2,
-    stat: "$1,200+",
-    label: "average value of a single missed home-service job",
+    icon: UserX,
+    stat: "Follow-ups",
+    label: "fall through — no notes, no task, nobody assigned to make it happen",
   },
 ];
 
@@ -26,13 +26,13 @@ export default function Problem() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow text-error">The hidden leak</span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-            Every missed call is a customer handing money to your competitor.
+            Your calls are full of work that never gets done.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            You&apos;re on a ladder, under a sink, or driving to the next job.
-            The phone rings, nobody answers, and the lead is gone before you
-            ever knew it existed. Voicemail doesn&apos;t fix it — it just
-            records the loss.
+            It&apos;s not just the calls you miss. Every call you <em>do</em>{" "}
+            answer is full of commitments, details, and next steps — and the
+            moment you hang up, most of it evaporates. The conversation
+            happened; the follow-up didn&apos;t.
           </p>
         </Reveal>
 
@@ -43,7 +43,7 @@ export default function Problem() {
                 <span className="grid h-11 w-11 place-items-center rounded-xl bg-error/10 text-error">
                   <s.icon size={20} />
                 </span>
-                <p className="mt-5 text-4xl font-extrabold tracking-tight text-navy">
+                <p className="mt-5 text-2xl font-bold tracking-tight text-navy">
                   {s.stat}
                 </p>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">

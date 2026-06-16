@@ -2,11 +2,11 @@ import Reveal from "./Reveal";
 import { Check, X } from "lucide-react";
 
 const rows = [
-  "AI answers unanswered calls",
-  "Turns conversations into tasks automatically",
-  "Unified call + SMS + voicemail timeline",
-  "Built for field & home-service teams",
-  "Works without new phone hardware",
+  "Post-call automation on every call",
+  "Auto-creates AND assigns follow-up tasks",
+  "AI summaries for answered & missed calls",
+  "Unified call + SMS + task timeline",
+  "Built for teams of every size",
   "Action-focused, not just communication",
 ];
 
@@ -20,9 +20,9 @@ const cols = [
 const matrix: boolean[][] = [
   [true, false, false],
   [true, false, false],
+  [true, false, false],
   [true, true, false],
-  [true, false, true],
-  [true, false, true],
+  [true, true, true],
   [true, false, false],
 ];
 

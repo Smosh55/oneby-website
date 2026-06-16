@@ -1,5 +1,5 @@
 import {
-  PhoneMissed,
+  PhoneCall,
   Sparkles,
   CheckCircle2,
   ArrowRight,
@@ -31,24 +31,25 @@ export default function Hero() {
         {/* Copy */}
         <div className="max-w-xl">
           <span className="animate-rise eyebrow rounded-full border border-blue/20 bg-blue/5 px-3 py-1.5">
-            <Sparkles size={14} /> The AI Communications OS for small business
+            <Sparkles size={14} /> The AI Communications OS for every business
           </span>
 
           <h1
             className="animate-rise mt-5 text-[2.6rem] leading-[1.05] font-extrabold tracking-tight text-navy sm:text-6xl"
             style={{ animationDelay: "60ms" }}
           >
-            Never miss a customer{" "}
-            <span className="text-gradient">because you&apos;re busy.</span>
+            Turn every call{" "}
+            <span className="text-gradient">into action.</span>
           </h1>
 
           <p
             className="animate-rise mt-6 text-lg leading-relaxed text-muted"
             style={{ animationDelay: "120ms" }}
           >
-            When you can&apos;t pick up, OneBy&apos;s AI answers, captures the
-            details, and turns the conversation into a summary and a task —
-            automatically. Every call becomes work that actually gets done.
+            Answered or missed, desk phone or mobile — OneBy listens to every
+            call, writes the summary, and creates and assigns the follow-up task
+            automatically. Make every conversation smarter, for teams of every
+            size.
           </p>
 
           <div
@@ -73,10 +74,10 @@ export default function Hero() {
                   <Star key={i} size={15} className="fill-green text-green" />
                 ))}
               </span>
-              4.9/5 from home-service teams
+              4.9/5 from teams everywhere
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <CheckCircle2 size={16} className="text-green" /> No new phone hardware
+              <CheckCircle2 size={16} className="text-green" /> Works on answered &amp; missed calls
             </span>
           </div>
         </div>
@@ -102,17 +103,17 @@ function HeroMock() {
           </span>
         </div>
 
-        {/* incoming missed call */}
+        {/* handled call — answered on the desk phone */}
         <div className="flex items-center gap-3 rounded-xl border border-line bg-canvas px-4 py-3">
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-error/10 text-error">
-            <PhoneMissed size={18} />
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-green/10 text-green-600">
+            <PhoneCall size={18} />
           </span>
           <div className="min-w-0">
-            <p className="text-sm font-semibold text-navy">Missed call · Maria G.</p>
-            <p className="truncate text-xs text-muted">(512) 555-0142 · 0:14s</p>
+            <p className="text-sm font-semibold text-navy">Call with Maria G.</p>
+            <p className="truncate text-xs text-muted">Desk phone · 4:12 · completed</p>
           </div>
           <span className="ml-auto rounded-full bg-blue/10 px-2.5 py-1 text-[11px] font-semibold text-blue">
-            AI answered
+            AI summarized
           </span>
         </div>
 
@@ -137,7 +138,7 @@ function HeroMock() {
           </span>
           <div>
             <p className="text-sm font-semibold text-navy">
-              Task created · Schedule A/C diagnostic
+              Task created &amp; assigned · Schedule A/C diagnostic
             </p>
             <p className="text-xs text-muted">Assigned to Dispatch · Due today</p>
           </div>
@@ -147,9 +148,9 @@ function HeroMock() {
       {/* floating notification chip */}
       <div className="absolute -right-3 -top-4 hidden rounded-xl border border-line bg-white px-3.5 py-2.5 shadow-[var(--shadow-lg)] sm:block">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">
-          Owner notified
+          Team notified
         </p>
-        <p className="text-sm font-semibold text-navy">New lead in 8 seconds ⚡</p>
+        <p className="text-sm font-semibold text-navy">Summary + task in 8s ⚡</p>
       </div>
     </div>
   );

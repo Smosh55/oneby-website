@@ -12,23 +12,24 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://oneby.ai"),
   title: {
-    default: "OneBy — The AI Communications OS for Small Business",
+    default: "OneBy — The AI Communications OS That Turns Calls Into Action",
     template: "%s · OneBy",
   },
   description:
-    "OneBy turns every call into action. When you can't answer, AI does — it gathers the details, summarizes the conversation, and creates the task so nothing falls through the cracks.",
+    "OneBy makes every call smarter. Answered or missed, desk phone or mobile, it transcribes the conversation, writes the summary, and creates and assigns the follow-up task — automatically. For businesses of every size.",
   keywords: [
+    "post-call automation",
+    "AI call summaries",
+    "call task automation",
     "AI receptionist",
-    "AI call answering",
     "business phone system",
-    "home services software",
-    "call summaries",
     "workflow automation",
+    "call transcription",
   ],
   openGraph: {
-    title: "OneBy — Never Miss A Customer Because You're Busy",
+    title: "OneBy — Turn Every Call Into Action",
     description:
-      "The AI Communications OS for Small Business. Every call becomes work.",
+      "The AI Communications OS that makes every call smarter. Every conversation becomes a summary and an assigned task — automatically.",
     type: "website",
     url: "https://oneby.ai",
   },
