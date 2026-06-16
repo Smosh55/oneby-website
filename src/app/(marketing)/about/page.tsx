@@ -86,6 +86,13 @@ export default function AboutPage() {
                 Plug in, port your number, and stop letting the phone cost you
                 customers.
               </p>
+              <p>
+                We don't think of OneBy as a phone company. We're building the
+                operating system for how a business communicates, the layer that
+                finally remembers everything that was said and does something
+                about it. We're not selling minutes or dial tone. We're selling
+                outcomes: leads caught, jobs booked, customers called back.
+              </p>
             </div>
           </Reveal>
         </div>

@@ -1,11 +1,16 @@
 import Reveal from "./Reveal";
-import { Phone, MessageSquare, Bot, ListChecks, Clock, Users } from "lucide-react";
+import { Phone, MessageSquare, Bot, ListChecks, Clock, Users, Sparkles } from "lucide-react";
 
 const pillars = [
   {
     icon: Bot,
-    title: "Communication-first AI",
+    title: "Communication-first",
     body: "Not a chatbot bolted onto a CRM. OneBy starts where the customer starts, with the conversation, and works outward from there.",
+  },
+  {
+    icon: Sparkles,
+    title: "AI-native",
+    body: "The AI isn't a feature we added. It runs on every call by default, listening, summarizing, and deciding what happens next.",
   },
   {
     icon: ListChecks,

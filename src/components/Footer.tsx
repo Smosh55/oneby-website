@@ -6,11 +6,11 @@ const groups: { title: string; links: FooterLink[] }[] = [
   {
     title: "Product",
     links: [
-      { label: "AI Receptionist", href: "/#features" },
-      { label: "Post-Call Automation", href: "/#features" },
-      { label: "Desk Phones & Provisioning", href: "/#features" },
-      { label: "Business SMS & Fax", href: "/#features" },
-      { label: "Workflow Automation", href: "/#features" },
+      { label: "Overview", href: "/product" },
+      { label: "AI Receptionist", href: "/features/ai-receptionist" },
+      { label: "AI Voicemail Replacement", href: "/features/ai-voicemail-replacement" },
+      { label: "Desk Phones & Fax", href: "/features/desk-phones" },
+      { label: "Task Automation", href: "/features/task-automation" },
       { label: "Pricing", href: "/pricing" },
     ],
   },

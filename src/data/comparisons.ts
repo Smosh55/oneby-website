@@ -497,6 +497,122 @@ export const comparisons: Comparison[] = [
       },
     ],
   },
+  {
+    slug: "hubspot",
+    competitor: "HubSpot",
+    category: "CRM",
+    metaTitle: "OneBy vs HubSpot: Honest Comparison",
+    metaDescription:
+      "HubSpot is a powerful CRM and marketing platform. OneBy is the communications layer that captures and summarizes every call and turns it into a task. Compare them.",
+    keywords: [
+      "OneBy vs HubSpot",
+      "HubSpot alternative",
+      "HubSpot for small business",
+      "HubSpot phone system",
+    ],
+    heroTitle: "OneBy vs HubSpot",
+    heroSub:
+      "HubSpot is a deep CRM and marketing suite. OneBy isn't trying to be your CRM. It's the communications layer that answers the phone, summarizes every call, and turns it into an assigned task, then feeds the record wherever it needs to go.",
+    theirStrengths: [
+      "Deep CRM, marketing, and sales pipeline tooling",
+      "Huge app marketplace and integrations",
+      "Great for content and email marketing at scale",
+    ],
+    wins: [
+      {
+        title: "Communication-first, not record-first",
+        body: "HubSpot stores the contact. OneBy starts at the conversation: it answers the call, captures what was said, and creates the follow-up automatically.",
+      },
+      {
+        title: "Light enough for the trades",
+        body: "Most home-service and local teams find a full CRM heavy. OneBy is live in a day and built around the phone, not a sales pipeline.",
+      },
+      {
+        title: "Every call becomes a task",
+        body: "No manual logging. Answered or missed, the call turns into a summary and an assigned task on its own.",
+      },
+    ],
+    matrix: [
+      { label: "Cloud phone system + desk phones", oneby: true, them: false },
+      { label: "AI receptionist + call answering", oneby: true, them: false },
+      { label: "Post-call summaries + assigned tasks", oneby: true, them: "Manual logging" },
+      { label: "CRM, marketing & pipeline depth", oneby: "Via integration", them: true },
+      { label: "Simple enough for non-sales teams", oneby: true, them: "Can be heavy" },
+      { label: "Live in a day", oneby: true, them: "Varies" },
+    ],
+    pickThemIf:
+      "You're a sales or marketing org that needs a full CRM, pipelines, and marketing automation.",
+    pickOneByIf:
+      "You live on the phone and want every call answered, summarized, and turned into a task without running a heavy CRM.",
+    faqs: [
+      {
+        q: "Is OneBy a CRM?",
+        a: "No. OneBy is the communications layer. It captures and summarizes calls and creates tasks, and it can sync those into a CRM you already use.",
+      },
+      {
+        q: "Can OneBy work with HubSpot?",
+        a: "Yes. On Growth and Pro, OneBy integrates with popular CRMs so call summaries and tasks flow into your records.",
+      },
+    ],
+  },
+  {
+    slug: "salesforce",
+    competitor: "Salesforce",
+    category: "CRM",
+    metaTitle: "OneBy vs Salesforce: Honest Comparison",
+    metaDescription:
+      "Salesforce is enterprise CRM. OneBy is the communications layer for businesses that live on the phone, capturing and summarizing every call into an assigned task.",
+    keywords: [
+      "OneBy vs Salesforce",
+      "Salesforce alternative",
+      "Salesforce for small business",
+      "Salesforce phone integration",
+    ],
+    heroTitle: "OneBy vs Salesforce",
+    heroSub:
+      "Salesforce is the heavyweight CRM for enterprise sales orgs. OneBy is the opposite kind of tool: a communications suite that answers your calls and turns each one into a summary and an assigned task, with no admin team required.",
+    theirStrengths: [
+      "Enormously configurable enterprise CRM",
+      "Deep reporting, automation, and ecosystem",
+      "The standard for large, complex sales orgs",
+    ],
+    wins: [
+      {
+        title: "No admin, no implementation project",
+        body: "Salesforce often needs a consultant and weeks of setup. OneBy is live in a day, configured around your phone, not a sales process.",
+      },
+      {
+        title: "It answers the phone",
+        body: "Salesforce is a database. OneBy is the actual phone system plus the AI that captures and summarizes every call.",
+      },
+      {
+        title: "Built for small and local teams",
+        body: "The trades and local businesses don't need enterprise CRM. They need every call caught and turned into a booked job.",
+      },
+    ],
+    matrix: [
+      { label: "Cloud phone system + desk phones", oneby: true, them: false },
+      { label: "AI receptionist + call answering", oneby: true, them: false },
+      { label: "Post-call summaries + assigned tasks", oneby: true, them: "Manual logging" },
+      { label: "Enterprise CRM & reporting depth", oneby: "Via integration", them: true },
+      { label: "No implementation project", oneby: true, them: false },
+      { label: "Live in a day", oneby: true, them: false },
+    ],
+    pickThemIf:
+      "You're a large enterprise with a complex sales process and a team to administer the CRM.",
+    pickOneByIf:
+      "You're a small or local business that wants every call captured and turned into action, without an enterprise rollout.",
+    faqs: [
+      {
+        q: "Can OneBy replace Salesforce?",
+        a: "For communication-first teams, often yes. For complex enterprise sales, OneBy complements the CRM by feeding it call summaries and tasks.",
+      },
+      {
+        q: "Does OneBy need a long implementation?",
+        a: "No. Most teams are live the same day. Port your number, set routing, and you're capturing calls in minutes.",
+      },
+    ],
+  },
 ];
 
 export const comparisonsBySlug = Object.fromEntries(
@@ -515,5 +631,9 @@ export const comparisonCategories: Array<{ category: string; items: Comparison[]
   {
     category: "Property management software",
     items: comparisons.filter((c) => c.category === "Property management software"),
+  },
+  {
+    category: "CRMs",
+    items: comparisons.filter((c) => c.category === "CRM"),
   },
 ];

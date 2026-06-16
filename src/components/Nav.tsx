@@ -7,7 +7,7 @@ import { industryGroups } from "@/data/industries";
 import { getIcon } from "@/components/industry/iconMap";
 
 const links = [
-  { label: "Features", href: "/#features" },
+  { label: "Product", href: "/product" },
   { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },

@@ -54,8 +54,19 @@ export default function Problem() {
           ))}
         </div>
 
+        {/* kill voicemail */}
+        <Reveal delay={100} className="mt-12 text-center">
+          <p className="text-xl font-bold tracking-tight text-navy sm:text-2xl">
+            So we did the obvious thing. We killed voicemail.
+          </p>
+          <p className="mx-auto mt-2 max-w-xl text-[0.975rem] text-muted">
+            Instead of recording a message nobody listens to, OneBy answers,
+            understands, and turns the call into action.
+          </p>
+        </Reveal>
+
         {/* old way vs new way teaser */}
-        <Reveal delay={120} className="mt-12">
+        <Reveal delay={160} className="mt-8">
           <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 rounded-2xl border border-line bg-canvas px-6 py-5 text-center sm:flex-row sm:justify-center sm:gap-5 sm:text-left">
             <span className="text-sm font-semibold text-muted line-through decoration-error/60">
               Call → Voicemail → Forgotten
