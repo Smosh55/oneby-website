@@ -56,7 +56,7 @@ export default function Hero() {
             className="animate-rise mt-8 flex flex-wrap items-center gap-3"
             style={{ animationDelay: "180ms" }}
           >
-            <a href="#demo" className="btn btn-primary text-base">
+            <a href="/demo" className="btn btn-primary text-base">
               Book a demo <ArrowRight size={18} />
             </a>
             <a href="#pricing" className="btn btn-ghost text-base">

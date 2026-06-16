@@ -22,15 +22,15 @@ export default function CTA() {
                 demo or start your free trial today.
               </p>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <a href="#" className="btn btn-primary text-base">
+                <a href="/demo" className="btn btn-primary text-base">
                   Book a demo <ArrowRight size={18} />
                 </a>
-                <a href="#" className="btn btn-white text-base">
+                <a href="/pricing" className="btn btn-white text-base">
                   Start free trial
                 </a>
               </div>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/60">
-                {["14-day free trial", "No hardware required", "Live in a day"].map(
+                {["14-day free trial", "No contracts", "Live in a day"].map(
                   (t) => (
                     <span key={t} className="inline-flex items-center gap-1.5">
                       <CheckCircle2 size={16} className="text-green" /> {t}

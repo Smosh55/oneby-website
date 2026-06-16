@@ -101,7 +101,7 @@ export default function IndustriesHub() {
                 action. Book a demo and we&apos;ll map it to your workflow.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Link href="/#demo" className="btn btn-primary text-base">
+                <Link href="/demo" className="btn btn-primary text-base">
                   Book a demo <ArrowRight size={18} />
                 </Link>
                 <Link href="/#pricing" className="btn btn-white text-base">

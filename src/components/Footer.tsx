@@ -30,7 +30,7 @@ const groups: { title: string; links: FooterLink[] }[] = [
       { label: "Blog", href: "/blog" },
       { label: "Compare", href: "/compare" },
       { label: "Customers", href: "/#stories" },
-      { label: "Book a demo", href: "/#demo" },
+      { label: "Book a demo", href: "/demo" },
     ],
   },
   {

@@ -64,7 +64,7 @@ export default function ComparisonLanding({ data }: { data: Comparison }) {
               {data.heroSub}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/#demo" className="btn btn-primary text-base">
+              <Link href="/demo" className="btn btn-primary text-base">
                 Book a demo <ArrowRight size={18} />
               </Link>
               <Link href="/pricing" className="btn btn-ghost text-base">
@@ -239,7 +239,7 @@ export default function ComparisonLanding({ data }: { data: Comparison }) {
                 and an assigned task, live.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Link href="/#demo" className="btn btn-primary text-base">
+                <Link href="/demo" className="btn btn-primary text-base">
                   Book a demo <ArrowRight size={18} />
                 </Link>
                 <Link href="/#pricing" className="btn btn-white text-base">

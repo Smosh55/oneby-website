@@ -165,7 +165,7 @@ export default function PricingPage() {
                     </span>
                   </div>
                   <Link
-                    href="/#demo"
+                    href="/demo"
                     className={`btn mt-6 w-full ${
                       plan.featured ? "btn-white" : plan.ctaClass
                     }`}
@@ -337,10 +337,10 @@ export default function PricingPage() {
                 missed call turn into a booked job.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Link href="/#demo" className="btn btn-primary text-base">
+                <Link href="/demo" className="btn btn-primary text-base">
                   Book a demo <ArrowRight size={18} />
                 </Link>
-                <Link href="/#demo" className="btn btn-white text-base">
+                <Link href="/demo" className="btn btn-white text-base">
                   Start free trial
                 </Link>
               </div>

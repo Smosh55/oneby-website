@@ -104,7 +104,7 @@ export default function Nav() {
           >
             Sign in
           </Link>
-          <Link href="/#demo" className="btn btn-primary text-[0.9375rem]">
+          <Link href="/demo" className="btn btn-primary text-[0.9375rem]">
             Book a demo
           </Link>
         </div>
@@ -169,7 +169,7 @@ export default function Nav() {
                 Sign in
               </Link>
               <Link
-                href="/#demo"
+                href="/demo"
                 onClick={() => setOpen(false)}
                 className="btn btn-primary w-full"
               >

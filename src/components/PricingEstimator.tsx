@@ -133,7 +133,7 @@ export default function PricingEstimator() {
           </div>
         </div>
         <div className="mt-6">
-          <a href="/#demo" className="btn btn-white w-full">
+          <a href="/demo" className="btn btn-white w-full">
             Get this exact quote
           </a>
           <p className="mt-3 text-center text-[0.75rem] text-white/45">

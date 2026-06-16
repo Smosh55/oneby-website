@@ -49,7 +49,7 @@ export default function IndustryLanding({ industry }: { industry: Industry }) {
                 {industry.heroSub}
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link href="/#demo" className="btn btn-primary text-base">
+                <Link href="/demo" className="btn btn-primary text-base">
                   Book a demo <ArrowRight size={18} />
                 </Link>
                 <Link href="/#pricing" className="btn btn-ghost text-base">
@@ -282,7 +282,7 @@ export default function IndustryLanding({ industry }: { industry: Industry }) {
                   work. Live in a day, no new hardware.
                 </p>
                 <div className="mt-8 flex flex-wrap justify-center gap-3">
-                  <Link href="/#demo" className="btn btn-primary text-base">
+                  <Link href="/demo" className="btn btn-primary text-base">
                     Book a demo <ArrowRight size={18} />
                   </Link>
                   <Link href="/#pricing" className="btn btn-white text-base">
