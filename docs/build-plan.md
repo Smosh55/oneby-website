@@ -9,6 +9,12 @@ pragmatic order, building on the FusionPBX you already run.
 > thin app layer that turns calls into summaries and tasks. Ship value in weeks,
 > not quarters.
 
+> **North star: see `product-strategy.md`.** OneBy is the all-in-one for small
+> service shops. This file covers the communications spearhead (the wedge);
+> ticketing, invoicing + payments, and lightweight scheduling are core product
+> roadmap, not just integrations. Accounting / heavy dispatch / inventory we
+> still integrate, not build.
+
 ---
 
 ## 1. The big picture

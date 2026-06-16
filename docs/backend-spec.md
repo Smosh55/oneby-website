@@ -298,9 +298,12 @@ return 200 fast (enqueue, don't process inline).
 
 ## 9. Build order (matches the cost/effort plan)
 
-1. `pbx/hangup` -> calls table -> transcribe -> summarize -> task. (The wow.)
+1. `pbx/hangup` -> calls table -> transcribe -> summarize -> **ticket** (the
+   `tasks` table is the ticket model: status, priority, assignee, customer). The wow.
 2. Notifications + simple routing.
 3. SMS inbox.
 4. AI receptionist (rented first, self-host later).
-5. Invoicing + Stripe Connect 0.4%.
-6. Search (pgvector over transcripts), mobile PWA.
+5. Invoicing + Stripe Connect 0.4% (core, per the all-in-one strategy).
+6. Lightweight scheduling: calendar + assign-tech-to-ticket + day view
+   (enough to run a small shop; integrate Google Calendar). See `product-strategy.md`.
+7. Search (pgvector over transcripts), mobile PWA, QuickBooks integration.
