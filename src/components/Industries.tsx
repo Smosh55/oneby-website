@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Reveal from "./Reveal";
 import {
   Wrench,
@@ -6,6 +7,7 @@ import {
   Scale,
   Stethoscope,
   ArrowUpRight,
+  ArrowRight,
 } from "lucide-react";
 
 const industries = [
@@ -13,28 +15,33 @@ const industries = [
     icon: Wrench,
     title: "Home Services",
     body: "HVAC, plumbing, electrical, roofing, restoration, garage doors, pest control. Capture every job, even from the field.",
+    href: "/industries",
     featured: true,
   },
   {
     icon: Building2,
     title: "Property Management",
     body: "Turn every tenant call into a tracked maintenance ticket — automatically routed to the right vendor.",
+    href: "/industries/property-management",
     featured: true,
   },
   {
     icon: Server,
     title: "MSPs & IT Services",
     body: "Triage support calls into tickets with context, so SLAs are never missed.",
+    href: "/industries/msp-it",
   },
   {
     icon: Scale,
     title: "Law Firms",
     body: "Intake new matters and qualify callers without paying for an answering service.",
+    href: "/industries/law-firms",
   },
   {
     icon: Stethoscope,
     title: "Medical Offices",
     body: "Handle overflow and after-hours calls with summaries your front desk can act on.",
+    href: "/industries/medical-offices",
   },
 ];
 
@@ -51,13 +58,9 @@ export default function Industries() {
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {industries.map((ind, i) => (
-            <Reveal
-              key={ind.title}
-              delay={(i % 3) * 70}
-              className={ind.featured ? "lg:row-span-1" : ""}
-            >
-              <a
-                href="#demo"
+            <Reveal key={ind.title} delay={(i % 3) * 70}>
+              <Link
+                href={ind.href}
                 className={`group flex h-full flex-col rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 ${
                   ind.featured
                     ? "bg-gradient-to-br from-navy to-navy-700 text-white shadow-[var(--shadow-lg)]"
@@ -100,9 +103,31 @@ export default function Industries() {
                     Priority industry
                   </span>
                 )}
-              </a>
+              </Link>
             </Reveal>
           ))}
+
+          {/* View-all card */}
+          <Reveal delay={140}>
+            <Link
+              href="/industries"
+              className="group surface-card flex h-full flex-col items-start justify-center gap-3 rounded-2xl p-7 hover:border-blue/30 hover:shadow-[var(--shadow-md)]"
+            >
+              <span className="text-lg font-semibold text-navy">
+                See all industries
+              </span>
+              <span className="text-[0.95rem] text-muted">
+                Find the playbook for your trade.
+              </span>
+              <span className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold text-blue">
+                Explore{" "}
+                <ArrowRight
+                  size={16}
+                  className="transition-transform group-hover:translate-x-0.5"
+                />
+              </span>
+            </Link>
+          </Reveal>
         </div>
       </div>
     </section>
