@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   ArrowRight,
   ChevronRight,
+  Star,
 } from "lucide-react";
 import type { Industry } from "@/data/industries";
 import type { PostMeta } from "@/lib/blog";
@@ -12,6 +13,14 @@ import { cities } from "@/data/locations";
 import { getIcon } from "./iconMap";
 import Reveal from "@/components/Reveal";
 import IndustryFAQ from "./IndustryFAQ";
+import DemoForm from "@/components/DemoForm";
+
+const trustChips = [
+  "14-day free trial",
+  "Live in a day",
+  "Keep your number",
+  "No contract",
+];
 
 export default function IndustryLanding({
   industry,
@@ -60,7 +69,7 @@ export default function IndustryLanding({
                 <Link href="/demo" className="btn btn-primary text-base">
                   Book a demo <ArrowRight size={18} />
                 </Link>
-                <Link href="/#pricing" className="btn btn-ghost text-base">
+                <Link href="/pricing" className="btn btn-ghost text-base">
                   Start free trial
                 </Link>
               </div>
@@ -125,6 +134,31 @@ export default function IndustryLanding({
                 </div>
               </div>
             </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust bar */}
+      <section className="border-y border-line bg-canvas/60 py-6">
+        <div className="container-x flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:gap-8">
+          <div className="inline-flex items-center gap-2 text-sm text-muted">
+            <span className="flex">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} size={15} className="fill-green text-green" />
+              ))}
+            </span>
+            <span>
+              <span className="font-semibold text-navy">4.9/5</span> from{" "}
+              {industry.shortName.toLowerCase()} teams
+            </span>
+          </div>
+          <span className="hidden h-4 w-px bg-line sm:block" />
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-muted">
+            {trustChips.map((c) => (
+              <span key={c} className="inline-flex items-center gap-1.5">
+                <CheckCircle2 size={15} className="text-green" /> {c}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -259,8 +293,42 @@ export default function IndustryLanding({
         </div>
       </section>
 
+      {/* Embedded lead form */}
+      <section id="demo-form" className="bg-canvas py-18 lg:py-24">
+        <div className="container-x grid items-start gap-10 lg:grid-cols-[1fr_1.05fr]">
+          <Reveal className="min-w-0 lg:pt-4">
+            <span className="eyebrow">Book your {industry.shortName} demo</span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+              See it answer a real {industry.shortName} call.
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted">
+              Tell us about your shop and we&apos;ll show you OneBy turning your
+              next missed call into a booked job. Live in a day, and you keep
+              your number.
+            </p>
+            <ul className="mt-6 space-y-3">
+              {[
+                "A 20-minute walkthrough on your real call flow",
+                "Watch a call become a summary and an assigned ticket",
+                "No pressure, no contract, cancel anytime",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-3">
+                  <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-green/15 text-green-600">
+                    <CheckCircle2 size={12} strokeWidth={3} />
+                  </span>
+                  <span className="text-[0.95rem] text-ink">{b}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <div className="min-w-0">
+            <DemoForm />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="bg-canvas py-18 lg:py-24">
+      <section className="py-18 lg:py-24">
         <div className="container-x">
           <Reveal className="mx-auto mb-10 max-w-2xl text-center">
             <span className="eyebrow">FAQ</span>
@@ -355,7 +423,7 @@ export default function IndustryLanding({
                   <Link href="/demo" className="btn btn-primary text-base">
                     Book a demo <ArrowRight size={18} />
                   </Link>
-                  <Link href="/#pricing" className="btn btn-white text-base">
+                  <Link href="/pricing" className="btn btn-white text-base">
                     Start free trial
                   </Link>
                 </div>
