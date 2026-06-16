@@ -50,9 +50,35 @@ function Cell({ value }: { value: boolean | string }) {
   return <span className="text-[0.85rem] font-medium text-navy">{value}</span>;
 }
 
+const base = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "OneBy",
+  description:
+    "The AI Communications OS: calling, desk phones, SMS, and fax, plus post-call automation that turns every call into a summary and an assigned task.",
+  brand: { "@type": "Brand", name: "OneBy" },
+  url: `${base}/pricing`,
+  offers: plans
+    .filter((p) => p.price !== "Custom")
+    .map((p) => ({
+      "@type": "Offer",
+      name: `${p.name} plan`,
+      price: p.price,
+      priceCurrency: "USD",
+      url: `${base}/pricing`,
+      availability: "https://schema.org/InStock",
+    })),
+};
+
 export default function PricingPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden pt-28 pb-10 lg:pt-32">
         <div className="pointer-events-none absolute inset-0 -z-10">

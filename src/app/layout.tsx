@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Analytics from "@/components/Analytics";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -9,8 +10,10 @@ const inter = Inter({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://oneby.ai"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "OneBy: The AI Communications OS That Turns Calls Into Action",
     template: "%s · OneBy",
@@ -31,11 +34,40 @@ export const metadata: Metadata = {
     description:
       "The AI Communications OS that makes every call smarter. Every conversation becomes a summary and an assigned task, automatically.",
     type: "website",
-    url: "https://oneby.ai",
+    url: SITE_URL,
+    siteName: "OneBy",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "OneBy: Turn Every Call Into Action",
+    description:
+      "The AI Communications OS that makes every call smarter. Every conversation becomes a summary and an assigned task.",
   },
   icons: {
     icon: "/brand/oneby-mark.svg",
   },
+};
+
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "OneBy",
+      url: SITE_URL,
+      logo: `${SITE_URL}/brand/oneby-logo.svg`,
+      description:
+        "The AI Communications OS that turns every call into action: post-call automation, AI receptionist, and tasks that create and assign themselves.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "OneBy",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -46,7 +78,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-surface text-ink">
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
         {children}
+        <Analytics />
       </body>
     </html>
   );

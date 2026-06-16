@@ -40,14 +40,37 @@ export default async function ComparePage({
   const data = comparisonsBySlug[slug];
   if (!data) notFound();
 
-  const faqJsonLd = {
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
+  const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: data.faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
+    "@graph": [
+      {
+        "@type": "FAQPage",
+        mainEntity: data.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: base },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Compare",
+            item: `${base}/compare`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: `OneBy vs ${data.competitor}`,
+            item: `${base}/compare/${data.slug}`,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -55,7 +78,7 @@ export default async function ComparePage({
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ComparisonLanding data={data} />
     </>

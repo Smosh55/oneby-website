@@ -40,14 +40,37 @@ export default async function IndustryPage({
   const industry = industriesBySlug[slug];
   if (!industry) notFound();
 
-  const faqJsonLd = {
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
+  const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: industry.faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
+    "@graph": [
+      {
+        "@type": "FAQPage",
+        mainEntity: industry.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: base },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Industries",
+            item: `${base}/industries`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: industry.shortName,
+            item: `${base}/industries/${industry.slug}`,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -55,7 +78,7 @@ export default async function IndustryPage({
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <IndustryLanding industry={industry} />
     </>
