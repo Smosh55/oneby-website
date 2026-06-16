@@ -35,9 +35,9 @@ export default function DemoPage() {
         <div className="absolute top-16 right-[8%] h-64 w-64 rounded-full bg-[radial-gradient(closest-side,rgba(28,219,150,0.16),transparent)]" />
       </div>
 
-      <div className="container-x grid items-start gap-12 lg:grid-cols-[1fr_1.05fr]">
+      <div className="container-x grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
         {/* Pitch */}
-        <div className="max-w-xl lg:pt-6">
+        <div className="max-w-xl min-w-0 lg:pt-6">
           <span className="eyebrow rounded-full border border-blue/20 bg-blue/5 px-3 py-1.5">
             Book a demo
           </span>
@@ -77,7 +77,7 @@ export default function DemoPage() {
         </div>
 
         {/* Form */}
-        <div className="lg:sticky lg:top-24">
+        <div className="min-w-0 lg:sticky lg:top-24">
           <DemoForm />
         </div>
       </div>

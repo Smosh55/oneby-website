@@ -45,8 +45,8 @@ export default function IndustryLanding({
             <span className="font-medium text-navy">{industry.shortName}</span>
           </nav>
 
-          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
-            <div className="max-w-xl">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+            <div className="max-w-xl min-w-0">
               <span className="eyebrow rounded-full border border-blue/20 bg-blue/5 px-3 py-1.5">
                 <Icon size={14} /> {industry.heroEyebrow}
               </span>
@@ -75,7 +75,7 @@ export default function IndustryLanding({
             </div>
 
             {/* scenario mock */}
-            <Reveal delay={80}>
+            <Reveal delay={80} className="min-w-0">
               <div className="surface-card rounded-2xl p-5 shadow-[var(--shadow-xl)]">
                 <div className="flex items-center gap-2 pb-4">
                   <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />

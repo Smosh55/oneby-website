@@ -27,9 +27,9 @@ export default function Hero() {
         />
       </div>
 
-      <div className="container-x grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
+      <div className="container-x grid items-center gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
         {/* Copy */}
-        <div className="max-w-xl">
+        <div className="max-w-xl min-w-0">
           <span className="animate-rise eyebrow rounded-full border border-blue/20 bg-blue/5 px-3 py-1.5">
             <Sparkles size={14} /> The AI Communications OS for every business
           </span>
@@ -91,7 +91,7 @@ export default function Hero() {
 
 function HeroMock() {
   return (
-    <div className="animate-rise relative" style={{ animationDelay: "160ms" }}>
+    <div className="animate-rise relative min-w-0" style={{ animationDelay: "160ms" }}>
       {/* main app window */}
       <div className="surface-card rounded-2xl p-5 shadow-[var(--shadow-xl)]">
         <div className="flex items-center gap-2 pb-4">

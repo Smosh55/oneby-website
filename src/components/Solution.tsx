@@ -29,7 +29,7 @@ export default function Solution() {
     <section className="relative overflow-hidden py-20 lg:py-28">
       <div className="container-x">
         <div className="grid items-center gap-14 lg:grid-cols-2">
-          <Reveal>
+          <Reveal className="min-w-0">
             <span className="eyebrow">One platform, not five tools</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
               OneBy turns conversations into action.
@@ -59,7 +59,7 @@ export default function Solution() {
           </Reveal>
 
           {/* unified inbox mock */}
-          <Reveal delay={100}>
+          <Reveal delay={100} className="min-w-0">
             <div className="surface-card rounded-2xl p-2 shadow-[var(--shadow-lg)]">
               <div className="rounded-xl bg-navy p-5 text-white">
                 <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
