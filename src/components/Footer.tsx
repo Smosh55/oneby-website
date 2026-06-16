@@ -1,19 +1,45 @@
-const groups = [
+import Link from "next/link";
+
+type FooterLink = { label: string; href: string };
+
+const groups: { title: string; links: FooterLink[] }[] = [
   {
     title: "Product",
-    links: ["AI Receptionist", "Smart Summaries", "Customer Timeline", "Business SMS", "Workflow Automation", "Mobile App"],
+    links: [
+      { label: "AI Receptionist", href: "/#features" },
+      { label: "Smart Summaries", href: "/#features" },
+      { label: "Customer Timeline", href: "/#features" },
+      { label: "Business SMS", href: "/#features" },
+      { label: "Workflow Automation", href: "/#features" },
+      { label: "Pricing", href: "/#pricing" },
+    ],
   },
   {
     title: "Industries",
-    links: ["Home Services", "Property Management", "MSPs & IT", "Law Firms", "Medical Offices"],
-  },
-  {
-    title: "Company",
-    links: ["About", "Customers", "Careers", "Blog", "Contact"],
+    links: [
+      { label: "HVAC", href: "/industries/hvac" },
+      { label: "Plumbing", href: "/industries/plumbing" },
+      { label: "Roofing", href: "/industries/roofing" },
+      { label: "Property Management", href: "/industries/property-management" },
+      { label: "All industries", href: "/industries" },
+    ],
   },
   {
     title: "Resources",
-    links: ["Pricing", "Help Center", "API Docs", "Status", "Security"],
+    links: [
+      { label: "Blog", href: "/blog" },
+      { label: "Customers", href: "/#stories" },
+      { label: "FAQ", href: "/#pricing" },
+      { label: "Book a demo", href: "/#demo" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/#how" },
+      { label: "Careers", href: "/#demo" },
+      { label: "Contact", href: "/#demo" },
+    ],
   },
 ];
 
@@ -42,13 +68,13 @@ export default function Footer() {
               </h4>
               <ul className="mt-4 space-y-3">
                 {g.links.map((l) => (
-                  <li key={l}>
-                    <a
-                      href="#"
+                  <li key={l.label}>
+                    <Link
+                      href={l.href}
                       className="text-[0.9rem] text-white/70 transition-colors hover:text-white"
                     >
-                      {l}
-                    </a>
+                      {l.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -59,15 +85,15 @@ export default function Footer() {
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-sm text-white/50 sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} OneBy. All rights reserved.</p>
           <div className="flex flex-wrap gap-6">
-            <a href="#" className="transition-colors hover:text-white">
+            <Link href="/#demo" className="transition-colors hover:text-white">
               Privacy
-            </a>
-            <a href="#" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#demo" className="transition-colors hover:text-white">
               Terms
-            </a>
-            <a href="#" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#demo" className="transition-colors hover:text-white">
               Security
-            </a>
+            </Link>
           </div>
         </div>
       </div>
