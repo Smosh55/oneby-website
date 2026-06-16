@@ -7,11 +7,19 @@ import {
   ChevronRight,
 } from "lucide-react";
 import type { Industry } from "@/data/industries";
+import type { PostMeta } from "@/lib/blog";
+import { cities } from "@/data/locations";
 import { getIcon } from "./iconMap";
 import Reveal from "@/components/Reveal";
 import IndustryFAQ from "./IndustryFAQ";
 
-export default function IndustryLanding({ industry }: { industry: Industry }) {
+export default function IndustryLanding({
+  industry,
+  relatedPosts = [],
+}: {
+  industry: Industry;
+  relatedPosts?: PostMeta[];
+}) {
   const Icon = getIcon(industry.icon);
 
   return (
@@ -263,6 +271,68 @@ export default function IndustryLanding({ industry }: { industry: Industry }) {
           <IndustryFAQ faqs={industry.faqs} />
         </div>
       </section>
+
+      {/* Local areas served */}
+      <section className="pb-4">
+        <div className="container-x">
+          <div className="rounded-2xl border border-line bg-canvas px-6 py-7 sm:px-8">
+            <h2 className="text-sm font-bold uppercase tracking-wide text-faint">
+              {industry.shortName} answering service by city
+            </h2>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {cities.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/industries/${industry.slug}/${c.slug}`}
+                  className="rounded-full border border-line bg-white px-3 py-1.5 text-[0.85rem] font-medium text-ink/80 transition-colors hover:border-blue/40 hover:text-blue"
+                >
+                  {c.name}, {c.state}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Related reading (pillar -> cluster) */}
+      {relatedPosts.length > 0 && (
+        <section className="py-18 lg:py-24">
+          <div className="container-x">
+            <Reveal className="mb-8 flex items-center gap-3">
+              <h2 className="text-xl font-bold tracking-tight text-navy">
+                More on {industry.shortName.toLowerCase()} and the phone
+              </h2>
+              <span className="h-px flex-1 bg-line" />
+            </Reveal>
+            <div className="grid gap-5 sm:grid-cols-3">
+              {relatedPosts.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/blog/${p.slug}`}
+                  className="group surface-card flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue/30 hover:shadow-[var(--shadow-md)]"
+                >
+                  <span className="w-fit rounded-full bg-canvas-2 px-2.5 py-1 text-[11px] font-semibold text-navy">
+                    {p.category}
+                  </span>
+                  <h3 className="mt-4 text-[1.05rem] font-semibold leading-snug text-navy">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-[0.875rem] leading-relaxed text-muted">
+                    {p.excerpt}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-blue">
+                    Read
+                    <ArrowRight
+                      size={14}
+                      className="transition-transform group-hover:translate-x-0.5"
+                    />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="py-18 lg:py-24">

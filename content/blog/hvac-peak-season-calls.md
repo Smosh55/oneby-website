@@ -6,6 +6,7 @@ author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"
 tags: ["HVAC", "peak season", "call answering", "scheduling"]
+industry: "hvac"
 featured: false
 seoTitle: "How HVAC Companies Stop Losing Peak Season Calls"
 seoDescription: "Peak season floods your phone and buries the front desk. Learn how HVAC companies capture every call during demand spikes without overstaffing."

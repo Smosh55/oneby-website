@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { industries } from "@/data/industries";
 import { comparisons } from "@/data/comparisons";
 import { features } from "@/data/features";
+import { cities } from "@/data/locations";
 import { getAllPosts } from "@/lib/blog";
 
 const BASE = "https://oneby.ai";
@@ -29,6 +30,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const localRoutes: MetadataRoute.Sitemap = industries.flatMap((i) =>
+    cities.map((c) => ({
+      url: `${BASE}/industries/${i.slug}/${c.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    }))
+  );
+
   const compareRoutes: MetadataRoute.Sitemap = comparisons.map((c) => ({
     url: `${BASE}/compare/${c.slug}`,
     changeFrequency: "monthly",
@@ -46,6 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticRoutes,
     ...featureRoutes,
     ...industryRoutes,
+    ...localRoutes,
     ...compareRoutes,
     ...postRoutes,
   ];

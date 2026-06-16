@@ -6,6 +6,7 @@ author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"
 tags: ["plumbing", "lead response", "speed to lead", "missed calls", "home services"]
+industry: "plumbing"
 featured: false
 seoTitle: "Why Faster Plumbers Win More Jobs"
 seoDescription: "Plumber lead response decides who books the job. Learn how to capture every call and answer faster, even mid-job under a sink."

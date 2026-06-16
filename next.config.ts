@@ -42,14 +42,29 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     // Permanent (308) redirects for the WordPress -> Next cutover on oneby.ai.
-    // Populate this from the old site's URL list (export from Google Search
-    // Console "Pages" or the WordPress sitemap) so existing SEO equity carries
-    // over. A few safe defaults are included; add one line per legacy URL.
+    //
+    // IMPORTANT: replace/confirm these against the REAL old URL list. Get it by
+    // opening https://oneby.ai/sitemap_index.xml in a browser, or exporting
+    // Google Search Console -> Pages, or whitelisting your IP in Wordfence and
+    // re-pulling. Each legacy URL that earned rankings/backlinks should 301 to
+    // its closest new page so the equity transfers. One line per old URL.
+    //
+    // The entries below are PLAUSIBLE WordPress/Divi defaults, safe because the
+    // new site doesn't use these paths. Verify before launch.
     return [
       { source: "/home", destination: "/", permanent: true },
       { source: "/index.php", destination: "/", permanent: true },
-      // { source: "/old-blog-path/:slug", destination: "/blog/:slug", permanent: true },
-      // { source: "/services/hvac", destination: "/industries/hvac", permanent: true },
+      { source: "/about-us", destination: "/about", permanent: true },
+      { source: "/contact", destination: "/demo", permanent: true },
+      { source: "/contact-us", destination: "/demo", permanent: true },
+      { source: "/get-started", destination: "/demo", permanent: true },
+      { source: "/features", destination: "/product", permanent: true },
+      { source: "/services", destination: "/product", permanent: true },
+      { source: "/plans", destination: "/pricing", permanent: true },
+      // Industry/service patterns (confirm the real Divi slugs):
+      // { source: "/services/:slug", destination: "/industries/:slug", permanent: true },
+      // Old blog structure (WordPress default is often /YYYY/MM/slug):
+      // { source: "/:year(\\d{4})/:month(\\d{2})/:slug", destination: "/blog/:slug", permanent: true },
     ];
   },
 };

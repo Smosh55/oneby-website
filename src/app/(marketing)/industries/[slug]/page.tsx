@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { industries, industriesBySlug } from "@/data/industries";
 import IndustryLanding from "@/components/industry/IndustryLanding";
+import { getPostsForIndustry } from "@/lib/blog";
 import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
@@ -81,7 +82,10 @@ export default async function IndustryPage({
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
-      <IndustryLanding industry={industry} />
+      <IndustryLanding
+        industry={industry}
+        relatedPosts={getPostsForIndustry(industry.slug)}
+      />
     </>
   );
 }

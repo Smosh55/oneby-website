@@ -9,6 +9,7 @@ import {
   formatDate,
 } from "@/lib/blog";
 import Prose from "@/components/blog/Prose";
+import { industriesBySlug } from "@/data/industries";
 import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
@@ -90,10 +91,18 @@ export default async function BlogPost({
             <ArrowLeft size={15} /> All articles
           </Link>
 
-          <div className="mt-6 flex items-center gap-3 text-xs font-semibold">
+          <div className="mt-6 flex flex-wrap items-center gap-3 text-xs font-semibold">
             <span className="rounded-full bg-blue/10 px-2.5 py-1 text-blue">
               {post.category}
             </span>
+            {post.industry && industriesBySlug[post.industry] && (
+              <Link
+                href={`/industries/${post.industry}`}
+                className="rounded-full bg-canvas-2 px-2.5 py-1 text-navy transition-colors hover:bg-line"
+              >
+                For {industriesBySlug[post.industry].shortName} →
+              </Link>
+            )}
           </div>
 
           <h1 className="mt-4 text-[2.1rem] font-extrabold leading-[1.12] tracking-tight text-navy sm:text-[2.75rem]">

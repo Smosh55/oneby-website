@@ -6,6 +6,7 @@ author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"
 tags: ["hvac", "dispatch", "call summaries", "task automation", "home services"]
+industry: "hvac"
 featured: false
 seoTitle: "HVAC Dispatch: Win Back Hours Every Day"
 seoDescription: "HVAC dispatch eats hours in phone tag and replayed voicemails. See how call summaries and auto tasks give dispatchers their day back."

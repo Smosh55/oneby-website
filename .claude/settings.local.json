@@ -9,7 +9,8 @@
       "PowerShell($w = Get-Command winget -ErrorAction SilentlyContinue; if\\($w\\){ \"winget: $\\($w.Source\\)\"; winget --version } else { \"winget: NOT FOUND\" })",
       "PowerShell(winget install --id OpenJS.NodeJS.LTS -e --accept-source-agreements --accept-package-agreements --silent)",
       "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); function chk\\($n\\){ $c = Get-Command $n -ErrorAction SilentlyContinue; if\\($c\\){ \"{0}: {1}\" -f $n, \\(& $n --version 2>&1 | Select-Object -First 1\\) } else { \"{0}: still not found\" -f $n } }; chk node; chk npm; chk gh)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:oneby.ai)"
     ]
   }
 }

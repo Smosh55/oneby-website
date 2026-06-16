@@ -14,6 +14,7 @@ export type PostMeta = {
   authorRole: string;
   category: string;
   tags: string[];
+  industry: string; // optional industry slug linking a post to its pillar
   featured: boolean;
   seoTitle: string;
   seoDescription: string;
@@ -42,6 +43,7 @@ function parseFile(file: string): Post {
     authorRole: String(data.authorRole ?? "OneBy"),
     category: String(data.category ?? "Insights"),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+    industry: String(data.industry ?? ""),
     featured: Boolean(data.featured ?? false),
     seoTitle: String(data.seoTitle ?? title),
     seoDescription: String(data.seoDescription ?? excerpt),
@@ -79,6 +81,16 @@ export function getRelatedPosts(slug: string, category: string, limit = 3): Post
   const sameCat = all.filter((p) => p.category === category);
   const rest = all.filter((p) => p.category !== category);
   return [...sameCat, ...rest].slice(0, limit);
+}
+
+// Posts linked to an industry pillar, newest first. Falls back to the most
+// recent posts so every industry page still gets a "related reading" cluster.
+export function getPostsForIndustry(slug: string, limit = 3): PostMeta[] {
+  const all = getAllPosts();
+  const matched = all.filter((p) => p.industry === slug);
+  if (matched.length >= limit) return matched.slice(0, limit);
+  const fill = all.filter((p) => p.industry !== slug);
+  return [...matched, ...fill].slice(0, limit);
 }
 
 export function getCategories(): string[] {

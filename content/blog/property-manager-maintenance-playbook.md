@@ -6,6 +6,7 @@ author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"
 tags: ["property management", "maintenance requests", "tenant calls", "ticket routing", "home services"]
+industry: "property-management"
 featured: false
 seoTitle: "Property Manager Maintenance Request Playbook"
 seoDescription: "Maintenance request management gets messy across a portfolio. Turn every tenant call into a tracked, routed ticket with this playbook."
