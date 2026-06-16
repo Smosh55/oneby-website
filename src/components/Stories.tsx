@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 const stories = [
   {
     quote:
-      "We were losing 15–20 calls a week to voicemail. OneBy answers them now and books the job before I'm even off the roof. It paid for itself in the first weekend.",
+      "We were losing 15 to 20 calls a week to voicemail. OneBy answers them now and books the job before I'm even off the roof. It paid for itself in the first weekend.",
     name: "Marcus T.",
     role: "Owner, Ridgeway Roofing",
     metric: "+31%",

@@ -6,7 +6,7 @@ const steps = [
     icon: PhoneCall,
     k: "01",
     title: "A call happens",
-    body: "Inbound or outbound, answered by your team or by OneBy's AI — on the desk phone, the mobile app, or anywhere.",
+    body: "Inbound or outbound, answered by your team or by OneBy's AI, on the desk phone, the mobile app, or anywhere.",
   },
   {
     icon: AudioLines,
@@ -18,7 +18,7 @@ const steps = [
     icon: FileText,
     k: "03",
     title: "AI summarizes",
-    body: "The conversation is distilled into a clean summary — who called, what they need, what was promised, and what's next.",
+    body: "The conversation gets boiled down to a clean summary: who called, what they need, what you promised, and what's next.",
   },
   {
     icon: ListChecks,
@@ -41,12 +41,12 @@ export default function HowItWorks() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">How it works</span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-            Every call becomes resolved work — in seconds.
+            Every call becomes resolved work, in seconds.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            This is the workflow OneBy runs on every conversation — answered or
+            This is the workflow OneBy runs on every conversation, answered or
             missed. No app to open, no recording to replay, no sticky note to
-            lose.
+            lose under a coffee cup.
           </p>
         </Reveal>
 

@@ -21,7 +21,7 @@ const industries = [
   {
     icon: Building2,
     title: "Property Management",
-    body: "Turn every tenant call into a tracked maintenance ticket — automatically routed to the right vendor.",
+    body: "Turn every tenant call into a tracked maintenance ticket, routed to the right vendor on its own.",
     href: "/industries/property-management",
     featured: true,
   },

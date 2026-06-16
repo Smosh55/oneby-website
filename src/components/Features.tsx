@@ -14,18 +14,18 @@ const features = [
   {
     icon: AudioLines,
     title: "Post-Call Automation",
-    body: "After every call — answered or missed, desk phone or mobile — OneBy transcribes it, writes the summary, and creates the next task. No notes, no manual entry.",
+    body: "After every call, answered or missed, desk phone or mobile, OneBy transcribes it, writes the summary, and tees up the next task. No notes, no manual data entry.",
     span: true,
   },
   {
     icon: FileText,
     title: "Smart Summaries",
-    body: "Every conversation distilled into a clean, scannable recap — automatically.",
+    body: "Every conversation boiled down to a clean, scannable recap. Automatically.",
   },
   {
     icon: UserCheck,
     title: "Task Creation & Assignment",
-    body: "Tasks created from conversations and assigned to the right person, with a due date — nothing left to chance.",
+    body: "Tasks created from conversations and handed to the right person with a due date. Nothing left to chance.",
   },
   {
     icon: Bot,
@@ -45,7 +45,7 @@ const features = [
   {
     icon: Smartphone,
     title: "Mobile App",
-    body: "Run your business communications from anywhere — the truck, the office, the couch.",
+    body: "Run your business comms from anywhere: the truck, the office, the couch.",
     span: true,
   },
 ];

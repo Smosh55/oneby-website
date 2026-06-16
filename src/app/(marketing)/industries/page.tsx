@@ -6,9 +6,9 @@ import { getIcon } from "@/components/industry/iconMap";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Industries — AI Call Answering Built for Your Trade",
+  title: "Industries: AI Call Answering Built for Your Trade",
   description:
-    "OneBy is purpose-built for businesses that can't always pick up — HVAC, plumbing, roofing, property management, and more. Find the playbook for your industry.",
+    "OneBy is purpose-built for businesses that can't always pick up: HVAC, plumbing, roofing, property management, and more. Find the playbook for your industry.",
   alternates: { canonical: "/industries" },
 };
 
@@ -29,7 +29,7 @@ export default function IndustriesHub() {
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             Every business that lives on the phone loses customers to voicemail.
             OneBy answers, captures the details, and turns each call into booked
-            work — with a playbook built for your industry.
+            work, with a playbook built for your industry.
           </p>
         </div>
       </section>

@@ -5,7 +5,7 @@ import { getAllPosts, formatDate } from "@/lib/blog";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Blog — Playbooks for Capturing Every Customer",
+  title: "Blog: Playbooks for Capturing Every Customer",
   description:
     "Practical guides on call answering, lead capture, AI receptionists, and workflow automation for home service and small businesses.",
   alternates: { canonical: "/blog" },

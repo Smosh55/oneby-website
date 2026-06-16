@@ -46,10 +46,10 @@ export default function Hero() {
             className="animate-rise mt-6 text-lg leading-relaxed text-muted"
             style={{ animationDelay: "120ms" }}
           >
-            Answered or missed, desk phone or mobile — OneBy listens to every
-            call, writes the summary, and creates and assigns the follow-up task
-            automatically. Make every conversation smarter, for teams of every
-            size.
+            Answered or missed, desk phone or mobile, OneBy listens to every
+            call, writes the summary, and spins up the follow-up task (then
+            hands it to the right person). Every conversation, instantly
+            smarter. Built for teams of every size.
           </p>
 
           <div
@@ -82,7 +82,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Visual — the story, as product UI */}
+        {/* Visual: the story, as product UI */}
         <HeroMock />
       </div>
     </section>
@@ -103,7 +103,7 @@ function HeroMock() {
           </span>
         </div>
 
-        {/* handled call — answered on the desk phone */}
+        {/* handled call, answered on the desk phone */}
         <div className="flex items-center gap-3 rounded-xl border border-line bg-canvas px-4 py-3">
           <span className="grid h-10 w-10 place-items-center rounded-full bg-green/10 text-green-600">
             <PhoneCall size={18} />
@@ -126,7 +126,7 @@ function HeroMock() {
             </span>
           </div>
           <p className="mt-2 text-[0.875rem] leading-relaxed text-ink">
-            No A/C — upstairs unit not cooling. Customer is home after 3pm today.
+            No A/C upstairs, not cooling since last night. Customer&apos;s home after 3pm.
             Existing client, last service Aug 2024. Wants a same-day visit.
           </p>
         </div>

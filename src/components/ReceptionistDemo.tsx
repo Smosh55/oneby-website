@@ -7,7 +7,7 @@ type Line = { who: "ai" | "caller"; text: string };
 
 const script: Line[] = [
   { who: "ai", text: "Thanks for calling Summit HVAC, this is the OneBy assistant. How can I help?" },
-  { who: "caller", text: "Hi — my upstairs A/C stopped cooling overnight." },
+  { who: "caller", text: "Hi, my upstairs A/C stopped cooling overnight." },
   { who: "ai", text: "I'm sorry to hear that. Is this for the home on file, and are you available this afternoon?" },
   { who: "caller", text: "Yes, same address. I'm home after 3." },
   { who: "ai", text: "Perfect. I've logged the details and our dispatch team will confirm a same-day visit shortly." },
@@ -48,9 +48,9 @@ export default function ReceptionistDemo() {
             Hear a call turn into an assigned task.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-white/70">
-            Press play. Watch OneBy answer, understand, summarize, and assign —
-            the same post-call automation that runs on every call, whether your
-            team picks up or the AI does.
+            Press play. Watch OneBy answer, understand, summarize, and assign.
+            The same post-call automation runs on every call, no matter who
+            picks up.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <button
@@ -139,14 +139,14 @@ export default function ReceptionistDemo() {
                     <Sparkles size={12} /> AI summary
                   </p>
                   <p className="mt-1.5 text-[0.82rem] leading-relaxed text-white/85">
-                    Existing customer — upstairs A/C not cooling. Available after
-                    3pm today. Requesting same-day diagnostic.
+                    Existing customer, upstairs A/C not cooling. Free after 3pm.
+                    Wants a same-day diagnostic.
                   </p>
                 </div>
                 <div className="flex items-center gap-2.5 rounded-xl border border-green/30 bg-green/10 px-3.5 py-3">
                   <CheckCircle2 size={18} className="text-green" />
                   <p className="text-[0.82rem] font-semibold">
-                    Task created &amp; assigned · Schedule A/C diagnostic — due today
+                    Task created &amp; assigned · Schedule A/C diagnostic, due today
                   </p>
                 </div>
               </div>

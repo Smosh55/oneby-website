@@ -5,17 +5,17 @@ const stats = [
   {
     icon: PhoneOff,
     stat: "Missed calls",
-    label: "leak leads — callers rarely leave a voicemail, they just call the next company",
+    label: "leak leads. Callers rarely leave a voicemail. They just dial the next company.",
   },
   {
     icon: NotebookPen,
     stat: "Answered calls",
-    label: "leak details — what was said gets forgotten the moment someone hangs up",
+    label: "leak details. Whatever got said evaporates the second the call ends.",
   },
   {
     icon: UserX,
     stat: "Follow-ups",
-    label: "fall through — no notes, no task, nobody assigned to make it happen",
+    label: "fall through. No notes, no task, and nobody on the hook to do it.",
   },
 ];
 
@@ -29,10 +29,10 @@ export default function Problem() {
             Your calls are full of work that never gets done.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            It&apos;s not just the calls you miss. Every call you <em>do</em>{" "}
-            answer is full of commitments, details, and next steps — and the
-            moment you hang up, most of it evaporates. The conversation
-            happened; the follow-up didn&apos;t.
+            The calls you miss are only half the problem. Every call you{" "}
+            <em>do</em> answer is packed with promises, details, and next steps,
+            and the second you hang up, most of it just evaporates. The
+            conversation happened. The follow-up? Not so much.
           </p>
         </Reveal>
 

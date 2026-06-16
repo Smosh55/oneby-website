@@ -5,7 +5,7 @@ const pillars = [
   {
     icon: Bot,
     title: "Communication-first AI",
-    body: "Not a chatbot bolted onto a CRM. OneBy starts where the customer starts — the conversation — and works outward from there.",
+    body: "Not a chatbot bolted onto a CRM. OneBy starts where the customer starts, with the conversation, and works outward from there.",
   },
   {
     icon: ListChecks,
@@ -31,9 +31,9 @@ export default function Solution() {
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
               Calling, SMS, an AI receptionist, summaries, customer timelines,
-              and task automation — combined into one seamless system. The
-              phone system that finally remembers everything and actually does
-              something about it.
+              and task automation, all in one system that actually fits
+              together. The phone setup that finally remembers everything and
+              does something about it.
             </p>
 
             <ul className="mt-8 space-y-4">
@@ -76,7 +76,7 @@ export default function Solution() {
                   <InboxRow
                     icon={<Bot size={15} />}
                     name="AI receptionist · Unknown"
-                    meta="New lead — roof leak, captured details"
+                    meta="New lead, roof leak, details captured"
                     tone="green"
                   />
                   <InboxRow

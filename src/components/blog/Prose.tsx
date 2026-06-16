@@ -1,8 +1,8 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-// Renders post markdown with OneBy brand typography. No external prose plugin —
-// element mapping keeps full control of spacing, color, and rhythm.
+// Renders post markdown with OneBy brand typography. No external prose plugin.
+// Element mapping keeps full control of spacing, color, and rhythm.
 export default function Prose({ content }: { content: string }) {
   return (
     <div className="text-[1.0625rem] leading-[1.75] text-ink/90">

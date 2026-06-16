@@ -156,7 +156,7 @@ export default async function BlogPost({
               </h2>
               <p className="mx-auto mt-3 max-w-md text-white/70">
                 See how OneBy answers your calls, captures the details, and books
-                the job — automatically.
+                the job, automatically.
               </p>
               <div className="mt-7 flex flex-wrap justify-center gap-3">
                 <Link href="/#demo" className="btn btn-primary text-base">

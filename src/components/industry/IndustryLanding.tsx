@@ -172,14 +172,14 @@ export default function IndustryLanding({ industry }: { industry: Industry }) {
           <Reveal className="mx-auto max-w-3xl text-center">
             <span className="eyebrow">Not just missed calls</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              Every call gets smarter — answered ones too.
+              Every call gets smarter, answered ones too.
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
               Missed-call answering is just the start. After <em>every</em>{" "}
-              {industry.shortName.toLowerCase()} call — picked up at the desk, on
-              a mobile, or by the AI — OneBy transcribes it, writes the summary,
+              {industry.shortName.toLowerCase()} call, picked up at the desk, on
+              a mobile, or by the AI, OneBy transcribes it, writes the summary,
               and creates and assigns the follow-up task. Nothing said on a call
-              ever falls through again.
+              slips through again.
             </p>
           </Reveal>
           <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">

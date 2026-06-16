@@ -7,19 +7,19 @@ import Reveal from "./Reveal";
 const faqs = [
   {
     q: "Does OneBy only work on missed calls?",
-    a: "No — OneBy works on every call. Answered or missed, on your desk phone or the mobile app, after any call it transcribes the conversation, writes a summary, and creates and assigns the follow-up task. AI answering of unanswered calls is just one capability.",
+    a: "Nope. OneBy works on every call. Answered or missed, on your desk phone or the mobile app, after any call it transcribes the conversation, writes a summary, and creates and assigns the follow-up task. AI answering unanswered calls is just one piece of it.",
   },
   {
     q: "Does OneBy replace my current phone number?",
-    a: "No. You can keep your existing business number — we port it over or forward to it. There's no new hardware to buy and nothing to rip out.",
+    a: "Nope. Keep your existing business number. We port it over or forward to it, so there's no new hardware to buy and nothing to rip out.",
   },
   {
     q: "What does the AI receptionist actually do?",
-    a: "When a call goes unanswered, the AI answers in a natural voice, asks the right questions to understand what the caller needs, captures their details, and creates a summary and a task for your team — then notifies you instantly.",
+    a: "When a call goes unanswered, the AI answers in a natural voice, asks the right questions to figure out what the caller needs, captures their details, and creates a summary and a task for your team, then pings you instantly.",
   },
   {
     q: "Will customers know they're talking to AI?",
-    a: "The assistant is transparent and professional. Most callers simply feel heard and helped — and you get the details you need without missing the lead.",
+    a: "The assistant is upfront and professional. Most callers just feel heard and helped, and you get the details you need without losing the lead.",
   },
   {
     q: "How long does it take to set up?",
@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "What happens during the free trial?",
-    a: "You get full access for 14 days — AI receptionist, summaries, tasks, and the shared inbox. No contract, and you can cancel anytime.",
+    a: "You get full access for 14 days: AI receptionist, summaries, tasks, and the shared inbox. No contract, and you can cancel anytime.",
   },
 ];
 
