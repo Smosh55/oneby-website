@@ -7,6 +7,8 @@ import {
   UserCheck,
   Smartphone,
   Bot,
+  Phone,
+  Printer,
   Search,
 } from "lucide-react";
 
@@ -43,6 +45,16 @@ const features = [
     body: "A shared team inbox so texts never get stranded on one person's phone.",
   },
   {
+    icon: Phone,
+    title: "Desk Phones, Auto-Provisioned",
+    body: "Plug in a handset and it sets itself up. No IT visit, no fiddling with config files.",
+  },
+  {
+    icon: Printer,
+    title: "Online Fax",
+    body: "Yes, fax. Send and receive it from the app, because some customers still run on paper.",
+  },
+  {
     icon: Smartphone,
     title: "Mobile App",
     body: "Run your business comms from anywhere: the truck, the office, the couch.",
@@ -57,11 +69,12 @@ export default function Features() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">The platform</span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-            Everything you need to never drop a customer.
+            A whole communications suite. Plus a brain.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            Each feature feeds the next. Calls become summaries, summaries
-            become tasks, tasks become resolved jobs.
+            Calling, desk phones, SMS, and fax come standard, so you can retire
+            the old phone system. The AI on top is the part that turns every
+            call into summaries, tasks, and resolved jobs.
           </p>
         </Reveal>
 

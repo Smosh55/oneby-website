@@ -7,11 +7,11 @@ const groups: { title: string; links: FooterLink[] }[] = [
     title: "Product",
     links: [
       { label: "AI Receptionist", href: "/#features" },
-      { label: "Smart Summaries", href: "/#features" },
-      { label: "Customer Timeline", href: "/#features" },
-      { label: "Business SMS", href: "/#features" },
+      { label: "Post-Call Automation", href: "/#features" },
+      { label: "Desk Phones & Provisioning", href: "/#features" },
+      { label: "Business SMS & Fax", href: "/#features" },
       { label: "Workflow Automation", href: "/#features" },
-      { label: "Pricing", href: "/#pricing" },
+      { label: "Pricing", href: "/pricing" },
     ],
   },
   {
@@ -36,7 +36,7 @@ const groups: { title: string; links: FooterLink[] }[] = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "/#how" },
+      { label: "About", href: "/about" },
       { label: "Careers", href: "/#demo" },
       { label: "Contact", href: "/#demo" },
     ],

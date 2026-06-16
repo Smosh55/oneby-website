@@ -1,56 +1,7 @@
+import Link from "next/link";
 import Reveal from "./Reveal";
 import { Check } from "lucide-react";
-
-const plans = [
-  {
-    name: "Starter",
-    tagline: "For solo operators and small crews",
-    price: "49",
-    unit: "/user / mo",
-    cta: "Start free trial",
-    ctaClass: "btn-ghost",
-    features: [
-      "Business calling & SMS",
-      "AI receptionist (after-hours)",
-      "Call transcription & summaries",
-      "Customer timeline",
-      "Mobile app",
-    ],
-  },
-  {
-    name: "Growth",
-    tagline: "For teams that live on the phone",
-    price: "89",
-    unit: "/user / mo",
-    cta: "Book a demo",
-    ctaClass: "btn-primary",
-    featured: true,
-    features: [
-      "Everything in Starter",
-      "24/7 AI receptionist",
-      "Automatic task creation & routing",
-      "Shared team inbox",
-      "Workflow automation",
-      "Call recording + AI search",
-    ],
-  },
-  {
-    name: "Pro",
-    tagline: "For multi-location & high volume",
-    price: "Custom",
-    unit: "talk to sales",
-    cta: "Contact sales",
-    ctaClass: "btn-navy",
-    features: [
-      "Everything in Growth",
-      "Multi-location routing",
-      "Advanced analytics & reporting",
-      "CRM & field-software integrations",
-      "Priority support & onboarding",
-      "Dedicated success manager",
-    ],
-  },
-];
+import { plans } from "@/data/pricing";
 
 export default function Pricing() {
   return (
@@ -62,9 +13,15 @@ export default function Pricing() {
             Plans that pay for themselves in one saved job.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            Start free for 14 days. No phone hardware, no contracts, cancel
-            anytime.
+            Start free for 14 days. No contracts, no surprises, cancel anytime.
+            Full suite included: calling, desk phones, SMS, and fax.
           </p>
+          <Link
+            href="/pricing"
+            className="mt-4 inline-flex text-sm font-semibold text-blue hover:underline"
+          >
+            Compare every plan feature by feature →
+          </Link>
         </Reveal>
 
         <div className="mt-14 grid items-stretch gap-5 lg:grid-cols-3">

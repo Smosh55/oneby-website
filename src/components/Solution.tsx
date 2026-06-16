@@ -30,10 +30,10 @@ export default function Solution() {
               OneBy turns conversations into action.
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
-              Calling, SMS, an AI receptionist, summaries, customer timelines,
-              and task automation, all in one system that actually fits
-              together. The phone setup that finally remembers everything and
-              does something about it.
+              Calling, desk phones, SMS, fax, an AI receptionist, summaries,
+              customer timelines, and task automation, all in one system that
+              actually fits together. The phone setup that finally remembers
+              everything and does something about it.
             </p>
 
             <ul className="mt-8 space-y-4">

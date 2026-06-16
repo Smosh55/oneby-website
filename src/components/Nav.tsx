@@ -8,9 +8,9 @@ import { getIcon } from "@/components/industry/iconMap";
 
 const links = [
   { label: "Features", href: "/#features" },
-  { label: "Pricing", href: "/#pricing" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blog" },
-  { label: "Customers", href: "/#stories" },
+  { label: "About", href: "/about" },
 ];
 
 export default function Nav() {
