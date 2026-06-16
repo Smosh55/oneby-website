@@ -13,14 +13,14 @@ export default function Pricing() {
             Plans that pay for themselves in one saved job.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            Start free for 14 days. No contracts, no surprises, cancel anytime.
-            Full suite included: calling, desk phones, SMS, and fax.
+            Cheap lines for the phones that just dial. AI seats only on the
+            lines that book jobs. Start free for 14 days, cancel anytime.
           </p>
           <Link
             href="/pricing"
             className="mt-4 inline-flex text-sm font-semibold text-blue hover:underline"
           >
-            Compare every plan feature by feature →
+            Build your plan with the estimator →
           </Link>
         </Reveal>
 

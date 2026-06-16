@@ -1,18 +1,38 @@
 import type { Metadata } from "next";
 import { Fragment } from "react";
 import Link from "next/link";
-import { Check, Minus, ArrowRight } from "lucide-react";
+import { Check, Minus, ArrowRight, Phone, Sparkles } from "lucide-react";
 import { plans, matrix, addOns } from "@/data/pricing";
 import Reveal from "@/components/Reveal";
+import PricingEstimator from "@/components/PricingEstimator";
 
 export const metadata: Metadata = {
-  title: "Pricing: One Suite, Three Simple Plans",
+  title: "Pricing: Cheap Lines, AI Only Where You Need It",
   description:
-    "Calling, desk phones, SMS, fax, and AI that turns every call into action. Start free for 14 days. No contracts, cancel anytime. Compare Starter, Growth, and Pro.",
+    "Put a basic line on the phones that just dial, and AI seats on the lines that book jobs. Estimate your plan in seconds. Start free for 14 days, cancel anytime.",
   alternates: { canonical: "/pricing" },
 };
 
-const cols = ["Starter", "Growth", "Pro"];
+const cols = plans.map((p) => p.name);
+
+const pricingFaqs = [
+  {
+    q: "Do I need the full AI suite on every phone?",
+    a: "Nope, and you shouldn't pay for it. Put a Basic Line on the warehouse phone, the break room, and the back office. Add an AI seat only on the lines that book jobs, like dispatch, intake, and sales.",
+  },
+  {
+    q: "What's the difference between a line and an AI seat?",
+    a: "A Basic Line is the phone system: calling, desk phone, SMS, and fax. An AI seat is a line plus the brain: 24/7 AI receptionist, post-call automation, summaries, and tasks that create and assign themselves.",
+  },
+  {
+    q: "What about lobby, conference, and paging phones?",
+    a: "Those run as common-area phones at a flat low rate. Dialtone only, no user license, so a hallway handset never costs you a full seat.",
+  },
+  {
+    q: "Can I move AI from one line to another?",
+    a: "Anytime. Turn an AI seat on for the busy season and back to a Basic Line when things slow down. You're never locked in.",
+  },
+];
 
 function Cell({ value }: { value: boolean | string }) {
   if (value === true)
@@ -43,13 +63,47 @@ export default function PricingPage() {
             Pricing
           </span>
           <h1 className="mx-auto mt-5 max-w-3xl text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[3.25rem]">
-            One suite. Three plans. Zero surprises.
+            Pay for a dialtone where you need a dialtone.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-            Calling, desk phones, SMS, and fax come in the box. The AI that turns
-            every call into a summary and an assigned task is the reason you
-            stay. Start free for 14 days, cancel anytime.
+            Not every phone needs a brain. Put a cheap Basic Line on the
+            extensions that just dial, and add an AI seat only on the lines that
+            book jobs. Start free for 14 days, cancel anytime.
           </p>
+        </div>
+      </section>
+
+      {/* Two things you buy */}
+      <section className="pb-4">
+        <div className="container-x">
+          <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
+            <div className="surface-card rounded-2xl p-6">
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-green/10 text-green-600">
+                <Phone size={20} />
+              </span>
+              <h2 className="mt-4 text-lg font-semibold text-navy">
+                1. Lines, for every phone
+              </h2>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">
+                Calling, desk phone with auto-provisioning, SMS, and fax. Cheap
+                enough to put on every extension, including the ones that just
+                need a dialtone.
+              </p>
+            </div>
+            <div className="surface-card rounded-2xl p-6">
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-blue/10 text-blue">
+                <Sparkles size={20} />
+              </span>
+              <h2 className="mt-4 text-lg font-semibold text-navy">
+                2. AI seats, where they pay off
+              </h2>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">
+                Add the AI receptionist, post-call automation, and auto-assigned
+                tasks only on the lines that book jobs. The brain goes where the
+                revenue is.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -147,8 +201,25 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Comparison matrix */}
+      {/* Estimator */}
       <section className="py-16 lg:py-20">
+        <div className="container-x">
+          <Reveal className="mx-auto mb-8 max-w-2xl text-center">
+            <span className="eyebrow">Build your plan</span>
+            <h2 className="mt-4 text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+              Mix lines and AI seats. See the price instantly.
+            </h2>
+            <p className="mt-3 text-[1.05rem] leading-relaxed text-muted">
+              Most teams run a handful of AI seats and a pile of basic lines.
+              Drag the numbers around and watch the total.
+            </p>
+          </Reveal>
+          <PricingEstimator />
+        </div>
+      </section>
+
+      {/* Comparison matrix */}
+      <section className="pb-16 lg:pb-20">
         <div className="container-x">
           <h2 className="mb-8 text-center text-2xl font-bold tracking-tight text-navy sm:text-3xl">
             Every feature, side by side
@@ -223,6 +294,25 @@ export default function PricingPage() {
                 <h3 className="font-semibold text-navy">{a.name}</h3>
                 <p className="mt-2 text-[0.9rem] leading-relaxed text-muted">
                   {a.detail}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing FAQ */}
+      <section className="pb-16">
+        <div className="container-x">
+          <h2 className="mb-8 text-center text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+            Questions about how it's priced
+          </h2>
+          <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2">
+            {pricingFaqs.map((f) => (
+              <div key={f.q} className="surface-card rounded-2xl p-6">
+                <h3 className="font-semibold text-navy">{f.q}</h3>
+                <p className="mt-2 text-[0.92rem] leading-relaxed text-muted">
+                  {f.a}
                 </p>
               </div>
             ))}

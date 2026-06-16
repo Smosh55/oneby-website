@@ -1,10 +1,11 @@
 // Pricing data shared by the homepage preview (Pricing.tsx) and the full
-// /pricing page. Edit plans/matrix here once.
+// /pricing page. Model: cheap universal "lines" (the phone system) plus
+// "AI seats" you add only on the lines that need the brain.
 
 export type Plan = {
   name: string;
   tagline: string;
-  price: string; // "49" or "Custom"
+  price: string; // "18" or "Custom"
   unit: string;
   cta: string;
   ctaClass: string; // btn-* class for the homepage card
@@ -14,35 +15,34 @@ export type Plan = {
 
 export const plans: Plan[] = [
   {
-    name: "Starter",
-    tagline: "For solo operators and small crews",
-    price: "49",
-    unit: "/user / mo",
+    name: "Basic Line",
+    tagline: "For phones that just need to work",
+    price: "18",
+    unit: "/line / mo",
     cta: "Start free trial",
     ctaClass: "btn-ghost",
     features: [
       "Business calling & SMS",
+      "Desk phone with auto-provisioning",
+      "Online fax",
       "Keep your number (free porting)",
-      "AI receptionist (after-hours)",
-      "Call transcription & summaries",
-      "Customer timeline",
       "Mobile app",
+      "Customer timeline",
     ],
   },
   {
     name: "Growth",
-    tagline: "For teams that live on the phone",
+    tagline: "AI seat for the lines that book jobs",
     price: "89",
-    unit: "/user / mo",
+    unit: "/seat / mo",
     cta: "Book a demo",
     ctaClass: "btn-primary",
     featured: true,
     features: [
-      "Everything in Starter",
+      "Everything in Basic Line",
       "24/7 AI receptionist",
+      "Post-call automation on every call",
       "Create AND assign tasks automatically",
-      "Desk phones with auto-provisioning",
-      "Online fax",
       "Shared team inbox & workflow automation",
       "Call recording + AI search",
     ],
@@ -65,30 +65,40 @@ export const plans: Plan[] = [
   },
 ];
 
+// Per-unit monthly rates used by the interactive estimator.
+export const estimatorRates = {
+  aiSeat: 89, // a Growth AI seat
+  basicLine: 18, // a Basic Line
+  commonArea: 6, // shared/common-area device (lobby, conference, paging)
+};
+
 // Feature comparison matrix. value: true = included, false = not,
-// or a string for plan-specific detail.
-export type MatrixRow = { label: string; values: [boolean | string, boolean | string, boolean | string] };
+// or a string for plan-specific detail. Columns map to plans above.
+export type MatrixRow = {
+  label: string;
+  values: [boolean | string, boolean | string, boolean | string];
+};
 export type MatrixGroup = { group: string; rows: MatrixRow[] };
 
 export const matrix: MatrixGroup[] = [
   {
-    group: "Calling & devices",
+    group: "Calling & devices (on every line)",
     rows: [
       { label: "Cloud business phone system", values: [true, true, true] },
       { label: "Keep / port your number", values: [true, true, true] },
       { label: "Included phone numbers", values: ["1", "3", "Custom"] },
       { label: "Business SMS", values: [true, true, true] },
+      { label: "Online fax", values: [true, true, true] },
+      { label: "Desk phones with auto-provisioning", values: [true, true, true] },
       { label: "Mobile app", values: [true, true, true] },
-      { label: "Desk phones with auto-provisioning", values: [false, true, true] },
-      { label: "Online fax", values: ["Add-on", true, true] },
       { label: "Multi-location routing", values: [false, false, true] },
     ],
   },
   {
-    group: "AI & automation",
+    group: "AI & automation (the brain)",
     rows: [
-      { label: "AI receptionist", values: ["After-hours", "24/7", "24/7"] },
-      { label: "Call transcription & summaries", values: [true, true, true] },
+      { label: "AI receptionist", values: [false, "24/7", "24/7"] },
+      { label: "Call transcription & summaries", values: [false, true, true] },
       { label: "Create AND assign tasks", values: [false, true, true] },
       { label: "Workflow automation", values: [false, true, true] },
       { label: "Call recording + AI search", values: [false, true, true] },
