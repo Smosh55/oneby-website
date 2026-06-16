@@ -54,17 +54,41 @@ Call/text  ->  AI summary  ->  Ticket (assigned)  ->  Scheduled  ->  Done  ->  I
   didn't get better, you've drifted into being a worse Jobber. The AI is the
   reason to switch; keep it the best part.
 
-## Revised roadmap
-1. **MVP (wedge):** call/text -> AI summary -> **ticket** (status, assignee,
-   due, customer timeline). Notifications + routing. *Sellable on its own.*
-2. **AI receptionist** (rented Vapi/Retell -> self-host) + SMS shared inbox.
-3. **Invoicing + payments** (Stripe Connect, 0.4% platform fee): invoice a done
-   ticket, text a pay link, take a card, auto-reconcile.
-4. **Lightweight scheduling:** calendar + assign-tech-to-ticket + day view.
-   Enough to run the shop; integrate with Google Calendar.
-5. **Depth + polish:** recurring/maintenance plans, basic reporting, mobile app,
-   "ask your calls" search. Integrations (QuickBooks for accounting) instead of
-   building accounting.
+## Walk before you run (the gate)
+
+Decision (2026-06-16): invoicing and payments are **deferred**. We walk first.
+Do not start "the run" until "the walk" is live, in real shops, and loved.
+
+**THE WALK (the operational core, built around the AI spearhead):**
+1. **Call/text -> AI summary -> ticket** (status, assignee, due, customer
+   timeline). Notifications + routing. *The differentiator.*
+2. **AI receptionist** (rented Vapi/Retell, then self-host). *The spearhead. The
+   reason a shop leaves Jobber for you. Keep it the best part.*
+3. **SMS shared inbox.**
+4. **Lightweight scheduling + calendar sync.** Assign a ticket to a tech and a
+   time, see a day view, and 2-way sync to Google Calendar / Microsoft 365.
+   Ticketing and scheduling are coupled, so build them together. The calendar
+   *integration* is cheap; lean on it instead of building a dispatch board.
+
+Pitch it as "OneBy answers your phone, books the job, and puts it on your
+calendar," NOT as "another scheduling app." The AI is the wedge; ticketing and
+scheduling are the table stakes that surround it.
+
+**THE RUN (deferred until the walk is live and loved):**
+5. **Invoicing + payments** (Stripe Connect, 0.4% platform fee): invoice a done
+   ticket, text a pay link, take a card, auto-reconcile. *Real expansion
+   revenue, real added surface (billing, PCI, disputes). Not before the walk.*
+6. **Dispatch depth + polish:** availability/conflict handling, recurring and
+   maintenance plans, reporting, mobile app, "ask your calls" search, QuickBooks
+   integration (integrate accounting, don't build it).
+
+> Scope guardrail for scheduling: ship "assign ticket -> tech + time -> sync to
+> their calendar." Do NOT build route optimization, drag-drop dispatch boards,
+> or crew logistics in v1. That depth is where you bleed time for little gain at
+> 5-tech scale; it's "the run," and only if customers ask.
+
+The all-in-one is still the destination. We just don't sprint to it. The fastest
+way to lose is to ship a me-too FSM while the AI receptionist is still mediocre.
 
 ## What we still integrate, never build
 Accounting (QuickBooks), heavy dispatch optimization, inventory/procurement,

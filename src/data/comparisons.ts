@@ -271,7 +271,7 @@ export const comparisons: Comparison[] = [
     category: "Field service software",
     metaTitle: "OneBy vs ServiceTitan: Honest Comparison",
     metaDescription:
-      "ServiceTitan is powerful but built for big shops. OneBy is the simpler all-in-one for small service businesses: calls, tickets, scheduling, invoicing, and an AI receptionist ServiceTitan doesn't have.",
+      "OneBy answers your phone with AI and turns every call into a ticket, simpler than ServiceTitan. ServiceTitan has deep scheduling and financials today; OneBy is growing toward a full all-in-one.",
     keywords: [
       "OneBy vs ServiceTitan",
       "ServiceTitan alternative",
@@ -280,7 +280,7 @@ export const comparisons: Comparison[] = [
     ],
     heroTitle: "OneBy vs ServiceTitan",
     heroSub:
-      "ServiceTitan is powerful, but it's built for big, established trade businesses and takes real time and budget to roll out. OneBy is the simpler all-in-one for small shops, and it also answers your phone with an AI receptionist, which ServiceTitan does not.",
+      "OneBy answers your phone with an AI receptionist and turns every call into an assigned ticket, with business calling and SMS, and you're live in a day, which is simpler and faster to start than ServiceTitan. ServiceTitan is genuinely deep for established trade businesses today, with dispatch, invoicing, and financials. A full all-in-one is where OneBy is headed, but it isn't all shipped yet.",
     theirStrengths: [
       "Deep job, dispatch, and invoicing for large trades",
       "Rich reporting and financials",
@@ -288,30 +288,30 @@ export const comparisons: Comparison[] = [
     ],
     wins: [
       {
-        title: "One tool instead of a stack",
-        body: "Run your whole small shop in OneBy: calling, tickets, scheduling, invoicing, and payments in one place, instead of stitching together a phone system, job software, and a payments add-on.",
-      },
-      {
         title: "It actually answers your phone",
-        body: "ServiceTitan manages the job, but the work starts with a call. OneBy answers it with an AI receptionist, captures the details, and turns the call into a ticket on its own.",
+        body: "ServiceTitan manages the job, but the work starts with a call. OneBy answers it with an AI receptionist, captures the details, and turns the call into a ticket on its own. ServiceTitan has no AI receptionist.",
       },
       {
-        title: "Everything a small shop touches daily, without the bloat",
-        body: "Calls, tickets, scheduling, invoicing, and payments are all built in, so you skip the enterprise rollout and you're live in a day.",
+        title: "Calls become tickets, in one simple place",
+        body: "Every call turns into a summary and an assigned ticket, alongside business calling and SMS, so nothing slips. It's one simple place for the conversation and the follow-up.",
+      },
+      {
+        title: "Built to grow into your whole back office",
+        body: "OneBy is simple and live in a day today. Scheduling, invoicing, and payments are on the roadmap, so the wedge you start with is built to grow into a full all-in-one over time.",
       },
     ],
     matrix: [
-      { label: "Cloud phone + AI receptionist", oneby: true, them: false },
-      { label: "Tickets built in", oneby: true, them: true },
-      { label: "Invoicing & payments built in", oneby: true, them: true },
-      { label: "Deep dispatch & financials", oneby: "The essentials", them: true },
-      { label: "Mature integrations & ecosystem", oneby: "Focused", them: true },
-      { label: "Live in a day", oneby: true, them: false },
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Turns calls into tickets automatically", oneby: true, them: "Manual" },
+      { label: "Business calling + SMS", oneby: true, them: false },
+      { label: "Invoicing & payments", oneby: "On the roadmap", them: true },
+      { label: "Scheduling & dispatch", oneby: "On the roadmap", them: true },
+      { label: "Simple, live in a day", oneby: true, them: false },
     ],
     pickThemIf:
-      "You're a larger, established trade business that needs deep dispatch, financials, and reporting, and you have the budget and team to run it.",
+      "You're a larger, established trade business that needs deep dispatch, financials, and reporting right now, and you have the budget and team to run it.",
     pickOneByIf:
-      "You're a small shop that wants one simple system to run calls into jobs into invoices into payments, you're tired of heavy, expensive software, and you want the phone answered.",
+      "You're a small shop that wants every call answered and turned into a ticket in something simple you're live in a day, and you like that OneBy is growing into a full all-in-one.",
     faqs: [
       {
         q: "Is OneBy a ServiceTitan replacement?",
@@ -329,7 +329,7 @@ export const comparisons: Comparison[] = [
     category: "Field service software",
     metaTitle: "OneBy vs Housecall Pro: Honest Comparison",
     metaDescription:
-      "Housecall Pro is friendly job software. OneBy is the all-in-one alternative for small shops that also answers your phone with AI: calls, tickets, scheduling, invoicing, and payments in one place.",
+      "OneBy answers your phone with AI and turns every call into a ticket, simpler than Housecall Pro. Housecall Pro has scheduling, invoicing, and payments today; OneBy is growing toward a full all-in-one.",
     keywords: [
       "OneBy vs Housecall Pro",
       "Housecall Pro alternative",
@@ -338,7 +338,7 @@ export const comparisons: Comparison[] = [
     ],
     heroTitle: "OneBy vs Housecall Pro",
     heroSub:
-      "Housecall Pro is a solid choice for established home-service teams, but it's job software that doesn't answer your phone. OneBy is the simpler all-in-one alternative that also picks up the call with an AI receptionist, which Housecall Pro does not.",
+      "OneBy answers your phone with an AI receptionist and turns every call into a ticket, with business calling and SMS, and you're live in a day, which is simpler and faster to start than Housecall Pro. Housecall Pro is a solid job platform today with real scheduling, invoicing, and payments, but it doesn't answer your phone. A full all-in-one is where OneBy is headed, not everything it ships yet.",
     theirStrengths: [
       "Easy scheduling, invoicing, and payments",
       "Approachable for small home-service teams",
@@ -346,30 +346,30 @@ export const comparisons: Comparison[] = [
     ],
     wins: [
       {
-        title: "One tool instead of a stack",
-        body: "OneBy runs calls, tickets, scheduling, invoicing, and payments in one place, so you don't bolt a separate phone system onto your job software.",
-      },
-      {
         title: "It actually answers your phone",
-        body: "Housecall Pro runs the job after it's booked. OneBy makes sure the call gets answered by an AI receptionist, captured, and turned into a ticket so the job exists in the first place.",
+        body: "Housecall Pro runs the job after it's booked. OneBy makes sure the call gets answered by an AI receptionist, captured, and turned into a ticket so the job exists in the first place. Housecall Pro has no AI receptionist.",
       },
       {
-        title: "Everything a small shop touches daily, without the bloat",
-        body: "Calling, tickets, scheduling, invoicing, and payments are all built in, with an AI receptionist for the calls you can't grab, and you're live in a day.",
+        title: "Calls become tickets, in one simple place",
+        body: "Every call turns into a summary and an assigned ticket, alongside business calling and SMS, so the calls you can't grab still get captured in one simple place.",
+      },
+      {
+        title: "Simple, and live in a day",
+        body: "OneBy is simple to start and live in a day today. Scheduling, invoicing, and payments are on the roadmap, so what you start with is built to grow into a full all-in-one over time.",
       },
     ],
     matrix: [
-      { label: "Cloud phone + AI receptionist", oneby: true, them: false },
-      { label: "Tickets built in", oneby: true, them: true },
-      { label: "Invoicing & payments built in", oneby: true, them: true },
-      { label: "Scheduling depth", oneby: "The essentials", them: true },
-      { label: "Online booking for customers", oneby: false, them: true },
-      { label: "Live in a day", oneby: true, them: true },
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Turns calls into tickets automatically", oneby: true, them: "Manual" },
+      { label: "Business calling + SMS", oneby: true, them: false },
+      { label: "Invoicing & payments", oneby: "On the roadmap", them: true },
+      { label: "Scheduling & dispatch", oneby: "On the roadmap", them: true },
+      { label: "Simple, live in a day", oneby: true, them: true },
     ],
     pickThemIf:
-      "You're an established home-service business that wants deep scheduling, customer booking, and a mature job platform, and you don't mind running a separate phone system.",
+      "You're an established home-service business that wants deep scheduling, customer booking, invoicing, and payments right now, and you have the team to run it.",
     pickOneByIf:
-      "You're a small shop that wants one simple system to run calls into jobs into invoices into payments, you're tired of heavy software, and you want the phone answered.",
+      "You're a small shop that wants every call answered and turned into a ticket in something simple you're live in a day, and you like that OneBy is growing into a full all-in-one.",
     faqs: [
       {
         q: "Do I have to choose one or the other?",
@@ -387,7 +387,7 @@ export const comparisons: Comparison[] = [
     category: "Field service software",
     metaTitle: "OneBy vs Jobber: Honest Comparison",
     metaDescription:
-      "Jobber is clean job management. OneBy is the all-in-one alternative that also answers your phone with AI: calls become tickets, tickets become scheduled, invoiced, paid jobs, all in one tool.",
+      "OneBy answers your phone with AI and turns every call into a ticket, simpler than Jobber. Jobber has quoting, scheduling, and invoicing today; OneBy is growing toward a full all-in-one.",
     keywords: [
       "OneBy vs Jobber",
       "Jobber alternative",
@@ -396,7 +396,7 @@ export const comparisons: Comparison[] = [
     ],
     heroTitle: "OneBy vs Jobber",
     heroSub:
-      "Jobber is tidy job management and a good fit for established crews, but it doesn't answer your phone. OneBy is the simpler all-in-one alternative that also picks up the call with an AI receptionist, which Jobber does not.",
+      "OneBy answers your phone with an AI receptionist and turns every call into a ticket, with business calling and SMS, and you're live in a day, which is simpler and faster to start than Jobber. Jobber is tidy job management today with real quoting, scheduling, and invoicing for established crews, but it doesn't answer your phone. A full all-in-one is where OneBy is headed, not everything it ships yet.",
     theirStrengths: [
       "Simple quoting, scheduling, and invoicing",
       "Great fit for small and growing crews",
@@ -404,30 +404,30 @@ export const comparisons: Comparison[] = [
     ],
     wins: [
       {
-        title: "One tool instead of a stack",
-        body: "OneBy runs calls, tickets, scheduling, invoicing, and payments in one place, so you don't pay for a separate phone system on top of your job software.",
-      },
-      {
         title: "It actually answers your phone",
-        body: "Jobber manages booked work. OneBy answers the call that creates the work with an AI receptionist, even mid-job, captures the details, and turns it into a ticket first.",
+        body: "Jobber manages booked work. OneBy answers the call that creates the work with an AI receptionist, even mid-job, captures the details, and turns it into a ticket first. Jobber has no AI receptionist.",
       },
       {
-        title: "Everything a small shop touches daily, without the bloat",
-        body: "Calling, tickets, scheduling, invoicing, and payments are all built in, so there's nothing to stitch together and you're live in a day.",
+        title: "Calls become tickets, in one simple place",
+        body: "Every call turns into a summary and an assigned ticket, alongside business calling and SMS, so the call that creates the job is captured in one simple place.",
+      },
+      {
+        title: "Simple, and live in a day",
+        body: "OneBy is simple to start and live in a day today. Scheduling, invoicing, and payments are on the roadmap, so the wedge you start with is built to grow into a full all-in-one over time.",
       },
     ],
     matrix: [
-      { label: "Cloud phone + AI receptionist", oneby: true, them: false },
-      { label: "Tickets built in", oneby: true, them: true },
-      { label: "Invoicing & payments built in", oneby: true, them: true },
-      { label: "Quoting & scheduling depth", oneby: "The essentials", them: true },
-      { label: "Built for small crews", oneby: true, them: true },
-      { label: "Live in a day", oneby: true, them: true },
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Turns calls into tickets automatically", oneby: true, them: "Manual" },
+      { label: "Business calling + SMS", oneby: true, them: false },
+      { label: "Invoicing & payments", oneby: "On the roadmap", them: true },
+      { label: "Scheduling & dispatch", oneby: "On the roadmap", them: true },
+      { label: "Simple, live in a day", oneby: true, them: true },
     ],
     pickThemIf:
-      "You're an established crew that wants deep quoting, scheduling, and invoicing in a mature job platform, and you're fine running a separate phone system.",
+      "You're an established crew that wants deep quoting, scheduling, and invoicing in a mature job platform right now, and you have the team to run it.",
     pickOneByIf:
-      "You're a small shop that wants one simple system to run calls into jobs into invoices into payments, you're tired of heavy software, and you want the phone answered.",
+      "You're a small shop that wants every call answered and turned into a ticket in something simple you're live in a day, and you like that OneBy is growing into a full all-in-one.",
     faqs: [
       {
         q: "Can OneBy and Jobber work together?",
@@ -445,7 +445,7 @@ export const comparisons: Comparison[] = [
     category: "Property management software",
     metaTitle: "OneBy vs AppFolio: Honest Comparison",
     metaDescription:
-      "AppFolio is full property management software. OneBy is the simpler all-in-one that answers every tenant call with AI and turns it into a tracked, scheduled, invoiced maintenance ticket.",
+      "OneBy answers your phone with AI and turns every tenant call into a maintenance ticket, simpler than AppFolio. AppFolio has full accounting, leasing, invoicing, and payments today; OneBy is growing toward a full all-in-one.",
     keywords: [
       "OneBy vs AppFolio",
       "AppFolio alternative",
@@ -454,7 +454,7 @@ export const comparisons: Comparison[] = [
     ],
     heroTitle: "OneBy vs AppFolio",
     heroSub:
-      "AppFolio is powerful, but it's built for property managers at scale and is heavier to set up. OneBy is the simpler all-in-one for small operations, and it also answers tenant calls with an AI receptionist, which AppFolio does not.",
+      "OneBy answers tenant calls with an AI receptionist and turns every one into a maintenance ticket, with business calling and SMS, and you're live in a day, which is simpler and faster to start than AppFolio. AppFolio is genuinely deep for property managers at scale today, with full accounting, leasing, invoicing, and payments, but it doesn't answer your phone. A full all-in-one is where OneBy is headed, not everything it ships yet.",
     theirStrengths: [
       "End-to-end property accounting and leasing",
       "Owner and tenant portals",
@@ -462,30 +462,30 @@ export const comparisons: Comparison[] = [
     ],
     wins: [
       {
-        title: "One tool instead of a stack",
-        body: "OneBy runs calls, tickets, scheduling, invoicing, and payments in one place, so a small operation isn't paying for an enterprise platform plus a separate phone system.",
-      },
-      {
         title: "It actually answers your phone",
-        body: "OneBy answers every tenant call with an AI receptionist (even after hours), captures the unit and the issue, and turns it into a routed maintenance ticket on its own.",
+        body: "OneBy answers every tenant call with an AI receptionist (even after hours), captures the unit and the issue, and turns it into a routed maintenance ticket on its own. AppFolio has no AI receptionist.",
       },
       {
-        title: "Everything a small shop touches daily, without the bloat",
-        body: "Calling, tickets, scheduling, invoicing, and payments are all built in, so your office isn't drowning in calls or wrestling a heavy rollout, and you're live in a day.",
+        title: "Calls become tickets, in one simple place",
+        body: "Every tenant call turns into a summary and an assigned maintenance ticket, alongside business calling and SMS, so your office isn't drowning in calls and nothing slips.",
+      },
+      {
+        title: "Built to grow into your whole back office",
+        body: "OneBy is simple and live in a day today. Scheduling, invoicing, and payments are on the roadmap, so the wedge you start with is built to grow into a full all-in-one over time.",
       },
     ],
     matrix: [
-      { label: "Cloud phone + AI receptionist", oneby: true, them: false },
-      { label: "Maintenance tickets built in", oneby: true, them: "Manual / portal" },
-      { label: "Invoicing & payments built in", oneby: true, them: true },
-      { label: "Accounting & leasing depth", oneby: "The essentials", them: true },
-      { label: "Owner & tenant portals", oneby: false, them: true },
-      { label: "Live in a day", oneby: true, them: false },
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Turns calls into maintenance tickets automatically", oneby: true, them: "Manual" },
+      { label: "Business calling + SMS", oneby: true, them: false },
+      { label: "Invoicing & payments", oneby: "On the roadmap", them: true },
+      { label: "Accounting, leasing & scheduling", oneby: "On the roadmap", them: true },
+      { label: "Simple, live in a day", oneby: true, them: false },
     ],
     pickThemIf:
-      "You're a property manager at scale that needs full accounting, leasing, and owner portals, and you have the budget and team to run it.",
+      "You're a property manager at scale that needs full accounting, leasing, owner portals, invoicing, and payments right now, and you have the budget and team to run it.",
     pickOneByIf:
-      "You're a small operation that wants one simple system to run calls into tickets into invoices into payments, you're tired of heavy, expensive software, and you want the phone answered.",
+      "You're a small operation that wants every tenant call answered and turned into a ticket in something simple you're live in a day, and you like that OneBy is growing into a full all-in-one.",
     faqs: [
       {
         q: "Is OneBy a property management platform?",
