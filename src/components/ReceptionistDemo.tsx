@@ -57,6 +57,7 @@ export default function ReceptionistDemo() {
               onClick={play}
               className="btn btn-primary text-base"
               disabled={phase === "playing"}
+              suppressHydrationWarning
             >
               {phase === "playing" ? (
                 "Playing…"
