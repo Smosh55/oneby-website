@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Reveal from "./Reveal";
 import { Check, X } from "lucide-react";
 
@@ -111,6 +112,14 @@ export default function Comparison() {
             Comparison reflects typical product positioning. Competitor names
             are trademarks of their respective owners.
           </p>
+          <div className="mt-6 text-center">
+            <Link
+              href="/compare"
+              className="inline-flex text-sm font-semibold text-blue hover:underline"
+            >
+              See the head-to-head comparisons →
+            </Link>
+          </div>
         </Reveal>
       </div>
     </section>
