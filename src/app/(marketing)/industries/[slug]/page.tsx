@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { industries, industriesBySlug } from "@/data/industries";
 import IndustryLanding from "@/components/industry/IndustryLanding";
+import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
   return industries.map((i) => ({ slug: i.slug }));
@@ -78,7 +79,7 @@ export default async function IndustryPage({
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <IndustryLanding industry={industry} />
     </>

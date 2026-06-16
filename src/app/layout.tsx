@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Analytics from "@/components/Analytics";
+import { jsonLd } from "@/lib/jsonld";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -46,6 +47,10 @@ export const metadata: Metadata = {
   icons: {
     icon: "/brand/oneby-mark.svg",
   },
+  // Set GOOGLE_SITE_VERIFICATION in env to emit the Search Console meta tag.
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 const orgJsonLd = {
@@ -81,7 +86,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(orgJsonLd) }}
         />
         {children}
         <Analytics />

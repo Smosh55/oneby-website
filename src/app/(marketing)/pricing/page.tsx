@@ -5,6 +5,7 @@ import { Check, Minus, ArrowRight, Phone, Sparkles } from "lucide-react";
 import { plans, matrix, addOns } from "@/data/pricing";
 import Reveal from "@/components/Reveal";
 import PricingEstimator from "@/components/PricingEstimator";
+import { jsonLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "Pricing: Cheap Lines, AI Only Where You Need It",
@@ -77,7 +78,7 @@ export default function PricingPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(productJsonLd) }}
       />
       {/* Hero */}
       <section className="relative overflow-hidden pt-28 pb-10 lg:pt-32">

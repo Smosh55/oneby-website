@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Check, Loader2, CalendarCheck } from "lucide-react";
 import { industries } from "@/data/industries";
 
@@ -34,6 +34,7 @@ export default function DemoForm() {
     "idle"
   );
   const [serverError, setServerError] = useState("");
+  const honeypot = useRef<HTMLInputElement>(null);
 
   const set = (k: keyof Fields, v: string) => {
     setF((p) => ({ ...p, [k]: v }));
@@ -60,7 +61,7 @@ export default function DemoForm() {
       const res = await fetch("/api/demo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(f),
+        body: JSON.stringify({ ...f, website: honeypot.current?.value ?? "" }),
       });
       const data = await res.json();
       if (res.ok && data.ok) {
@@ -98,6 +99,19 @@ export default function DemoForm() {
       noValidate
       className="surface-card rounded-2xl p-6 sm:p-8"
     >
+      {/* honeypot: hidden from humans, catches bots */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="website">Leave this field empty</label>
+        <input
+          ref={honeypot}
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-2">
         <Field
           label="Full name"

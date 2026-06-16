@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { comparisons, comparisonsBySlug } from "@/data/comparisons";
 import ComparisonLanding from "@/components/compare/ComparisonLanding";
+import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
   return comparisons.map((c) => ({ slug: c.slug }));
@@ -78,7 +79,7 @@ export default async function ComparePage({
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <ComparisonLanding data={data} />
     </>

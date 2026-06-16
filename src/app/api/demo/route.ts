@@ -15,9 +15,22 @@ type DemoLead = {
   industry?: string;
   teamSize?: string;
   message?: string;
+  // honeypot: real users never fill this (it's hidden in the form)
+  website?: string;
 };
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+// Per-field length caps to keep payloads sane and block junk.
+const LIMITS: Record<string, number> = {
+  name: 120,
+  email: 200,
+  phone: 40,
+  company: 160,
+  industry: 80,
+  teamSize: 40,
+  message: 2000,
+};
 
 export async function POST(req: Request) {
   let lead: DemoLead;
@@ -28,6 +41,23 @@ export async function POST(req: Request) {
       { ok: false, error: "Invalid request." },
       { status: 400 }
     );
+  }
+
+  // Honeypot: if the hidden field is filled, it's a bot. Accept silently so the
+  // bot thinks it succeeded, but do nothing.
+  if (typeof lead.website === "string" && lead.website.trim() !== "") {
+    return NextResponse.json({ ok: true });
+  }
+
+  // Reject oversized fields before doing anything else.
+  for (const [key, max] of Object.entries(LIMITS)) {
+    const v = lead[key as keyof DemoLead];
+    if (typeof v === "string" && v.length > max) {
+      return NextResponse.json(
+        { ok: false, error: "That submission looks too long. Mind trimming it?" },
+        { status: 400 }
+      );
+    }
   }
 
   const name = lead.name?.trim();

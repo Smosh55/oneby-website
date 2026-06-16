@@ -9,6 +9,7 @@ import {
   formatDate,
 } from "@/lib/blog";
 import Prose from "@/components/blog/Prose";
+import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }));
@@ -76,7 +77,7 @@ export default async function BlogPost({
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       <article className="pt-28 lg:pt-32">
