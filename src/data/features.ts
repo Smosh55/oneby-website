@@ -290,6 +290,36 @@ export const features: Feature[] = [
     cardline: "Searchable recordings with AI insights.",
   },
   {
+    slug: "invoicing",
+    name: "Invoicing & Payments",
+    group: "Collaboration",
+    icon: "CreditCard",
+    metaTitle: "Invoicing & Card Payments for Service Businesses",
+    metaDescription:
+      "Turn a finished job into a paid invoice without leaving OneBy. Send it by text, take a card, and watch it close out on the customer timeline.",
+    keywords: ["service invoicing", "field service payments", "get paid by text", "card payments for contractors"],
+    heroEyebrow: "Invoicing & Payments",
+    heroTitle: "From finished job to paid, in two taps.",
+    heroSub:
+      "The call became a job. The job got done. Now turn it into an invoice, text the customer a pay link, and take the card. No second app, no chasing checks.",
+    bullets: [
+      "Build an invoice straight from a completed task",
+      "Send it by text or email with a one-tap pay link",
+      "Accept cards and get paid faster",
+      "Payments close the task and post to the customer timeline",
+    ],
+    how: [
+      { step: "Invoice the job", body: "Open a finished task, add line items, and the invoice is ready in seconds." },
+      { step: "Send the pay link", body: "Text or email the customer a secure hosted payment page. No login required for them." },
+      { step: "Get paid, auto-reconciled", body: "The card clears, the invoice marks paid, and it all lands on the timeline." },
+    ],
+    faqs: [
+      { q: "Do customers need an account to pay?", a: "No. They tap the link in the text and pay by card on a secure hosted page." },
+      { q: "Can I invoice from a call?", a: "Yes. A call becomes a task, the task becomes the job, and the job becomes the invoice, all in one place." },
+    ],
+    cardline: "Job done to paid, without leaving OneBy.",
+  },
+  {
     slug: "mobile-app",
     name: "Mobile App",
     group: "Calling & devices",

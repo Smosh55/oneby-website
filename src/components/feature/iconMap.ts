@@ -9,6 +9,7 @@ import {
   Printer,
   Mic,
   Smartphone,
+  CreditCard,
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
@@ -24,6 +25,7 @@ export const featureIconMap: Record<string, LucideIcon> = {
   Printer,
   Mic,
   Smartphone,
+  CreditCard,
 };
 
 export function getFeatureIcon(name: string): LucideIcon {
