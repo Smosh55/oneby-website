@@ -59,6 +59,14 @@ export default function Footer() {
               The AI Communications OS for small business. Never miss a customer
               because you&apos;re busy.
             </p>
+            <div className="mt-5 space-y-1 text-[0.9rem] text-white/70">
+              <a href="mailto:support@oneby.ai" className="block hover:text-white">
+                support@oneby.ai
+              </a>
+              <a href="tel:+16266632944" className="block hover:text-white">
+                (626) ONE-BY44
+              </a>
+            </div>
           </div>
 
           {groups.map((g) => (
@@ -85,14 +93,14 @@ export default function Footer() {
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-sm text-white/50 sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} OneBy. All rights reserved.</p>
           <div className="flex flex-wrap gap-6">
-            <Link href="/#demo" className="transition-colors hover:text-white">
+            <Link href="/privacy" className="transition-colors hover:text-white">
               Privacy
             </Link>
-            <Link href="/#demo" className="transition-colors hover:text-white">
+            <Link href="/terms" className="transition-colors hover:text-white">
               Terms
             </Link>
-            <Link href="/#demo" className="transition-colors hover:text-white">
-              Security
+            <Link href="/refunds" className="transition-colors hover:text-white">
+              Refunds
             </Link>
           </div>
         </div>

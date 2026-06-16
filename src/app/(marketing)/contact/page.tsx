@@ -13,14 +13,14 @@ const ways = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@oneby.ai",
-    href: "mailto:hello@oneby.ai",
+    value: "support@oneby.ai",
+    href: "mailto:support@oneby.ai",
   },
   {
     icon: Phone,
     label: "Call or text",
-    value: "(555) 000-0000",
-    href: "tel:+15550000000",
+    value: "(626) ONE-BY44",
+    href: "tel:+16266632944",
   },
   {
     icon: CalendarClock,

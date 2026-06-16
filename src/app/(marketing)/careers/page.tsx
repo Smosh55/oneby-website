@@ -85,7 +85,7 @@ export default function CareersPage() {
                 Tell us what you're great at and why OneBy. We read every note.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <a href="mailto:careers@oneby.ai" className="btn btn-primary text-base">
+                <a href="mailto:support@oneby.ai" className="btn btn-primary text-base">
                   Email us <ArrowRight size={18} />
                 </a>
                 <Link href="/about" className="btn btn-white text-base">
