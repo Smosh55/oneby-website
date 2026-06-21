@@ -266,6 +266,238 @@ export const comparisons: Comparison[] = [
     ],
   },
   {
+    slug: "nextiva",
+    competitor: "Nextiva",
+    category: "Phone system",
+    metaTitle: "OneBy vs Nextiva: Honest Comparison",
+    metaDescription:
+      "Nextiva is a mature, well-supported business phone system. OneBy adds an AI receptionist and post-call automation that turns every call into a summary and an assigned task. Compare them.",
+    keywords: [
+      "OneBy vs Nextiva",
+      "Nextiva alternative",
+      "Nextiva comparison",
+      "AI business phone system",
+    ],
+    heroTitle: "OneBy vs Nextiva",
+    heroSub:
+      "Nextiva is a dependable, well-supported business phone system with a deep feature set. OneBy is a full suite too, but the reason to switch is the AI on top: every call becomes a summary and an assigned task, on its own.",
+    theirStrengths: [
+      "Mature platform with a strong support reputation",
+      "Broad feature set and contact-center options",
+      "Reliable at scale for established businesses",
+    ],
+    wins: [
+      {
+        title: "Every call becomes action",
+        body: "Nextiva moves the call. OneBy works the call afterward: it transcribes, summarizes, and creates and assigns the follow-up task automatically.",
+      },
+      {
+        title: "Pay for AI only where it helps",
+        body: "Put cheap Basic Lines on the phones that just dial and AI seats on the lines that book jobs, instead of one plan priced across every seat.",
+      },
+      {
+        title: "Live in a day",
+        body: "Port your number, plug in a desk phone, and you're capturing calls the same day. No long onboarding.",
+      },
+    ],
+    matrix: [
+      { label: "Cloud phone system + desk phones", oneby: true, them: true },
+      { label: "Business SMS + fax", oneby: true, them: true },
+      { label: "AI receptionist included", oneby: true, them: "Add-on" },
+      { label: "Post-call automation on every call", oneby: true, them: false },
+      { label: "Creates AND assigns tasks from calls", oneby: true, them: false },
+      { label: "Mix cheap lines with AI seats", oneby: true, them: false },
+    ],
+    pickThemIf:
+      "You want a mature, broadly supported phone system with contact-center options and you don't need calls turned into tasks.",
+    pickOneByIf:
+      "You want every call to become booked, assigned work, with AI only on the lines that need it.",
+    faqs: [
+      {
+        q: "Can OneBy replace Nextiva?",
+        a: "Yes. OneBy is a full communications suite with calling, desk phones, SMS, and fax, and you can port your existing numbers.",
+      },
+      {
+        q: "What does OneBy add over Nextiva?",
+        a: "An AI receptionist and post-call automation that turns every call into a summary and an assigned task, as the core of the product.",
+      },
+    ],
+  },
+  {
+    slug: "google-voice",
+    competitor: "Google Voice",
+    category: "Phone system",
+    metaTitle: "OneBy vs Google Voice: Honest Comparison",
+    metaDescription:
+      "Google Voice is a cheap, simple second number. OneBy is a real business phone system with an AI receptionist that answers, summarizes, and turns every call into a task. Compare them.",
+    keywords: [
+      "OneBy vs Google Voice",
+      "Google Voice alternative",
+      "Google Voice for business",
+      "business phone with AI",
+    ],
+    heroTitle: "OneBy vs Google Voice",
+    heroSub:
+      "Google Voice is a cheap, simple way to get a second number. OneBy is a real business phone system: an AI receptionist that answers every call, summarizes it, and turns it into an assigned task.",
+    theirStrengths: [
+      "Very cheap and simple to start",
+      "Tidy if you already live in Google Workspace",
+      "Fine for a basic second number",
+    ],
+    wins: [
+      {
+        title: "It actually answers for you",
+        body: "Google Voice rings and takes a voicemail. OneBy answers with an AI receptionist, captures the details, and books the job even when you can't pick up.",
+      },
+      {
+        title: "Calls become summaries and tasks",
+        body: "No more replaying voicemails. Every call turns into a clean summary and an assigned follow-up task automatically.",
+      },
+      {
+        title: "A real business suite",
+        body: "Desk phones with auto-provisioning, business SMS, fax, and routing, not just a forwarding number.",
+      },
+    ],
+    matrix: [
+      { label: "Get a business number fast", oneby: true, them: true },
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Post-call summaries + assigned tasks", oneby: true, them: false },
+      { label: "Desk phones with auto-provisioning", oneby: true, them: false },
+      { label: "Business SMS + fax", oneby: true, them: "Basic SMS" },
+      { label: "Real support + call routing", oneby: true, them: "Limited" },
+    ],
+    pickThemIf:
+      "You just want a cheap second number for occasional calls and don't need anyone, or anything, to answer for you.",
+    pickOneByIf:
+      "You run a business on the phone and want every call answered, summarized, and turned into a booked job.",
+    faqs: [
+      {
+        q: "Is OneBy more expensive than Google Voice?",
+        a: "It costs more than a bare number because it does far more: it answers calls with AI, summarizes them, and creates tasks. The missed calls it catches usually pay for it many times over.",
+      },
+      {
+        q: "Can I port my Google Voice number?",
+        a: "In most cases yes. Porting is free and you keep your number.",
+      },
+    ],
+  },
+  {
+    slug: "grasshopper",
+    competitor: "Grasshopper",
+    category: "Phone system",
+    metaTitle: "OneBy vs Grasshopper: Honest Comparison",
+    metaDescription:
+      "Grasshopper is a simple virtual phone for solopreneurs. OneBy adds an AI receptionist that actually answers, summarizes every call, and turns it into a task. Compare them.",
+    keywords: [
+      "OneBy vs Grasshopper",
+      "Grasshopper alternative",
+      "Grasshopper comparison",
+      "virtual phone with AI",
+    ],
+    heroTitle: "OneBy vs Grasshopper",
+    heroSub:
+      "Grasshopper is a simple virtual phone number for solo operators and small teams. OneBy goes further: an AI receptionist that answers every call, summarizes it, and turns it into a booked job.",
+    theirStrengths: [
+      "Quick to set up, no hardware",
+      "Friendly for solopreneurs and side businesses",
+      "Simple call forwarding and voicemail",
+    ],
+    wins: [
+      {
+        title: "Something actually answers",
+        body: "Grasshopper forwards calls and takes voicemail. OneBy answers with an AI receptionist and captures the job, so callers don't hang up on a beep.",
+      },
+      {
+        title: "Calls become tasks, not voicemails",
+        body: "Every call turns into a summary and an assigned follow-up, so nothing lives in a voicemail box you forget to check.",
+      },
+      {
+        title: "Grows with you",
+        body: "Add desk phones, team members, and routing when you're ready. It's a real system, not just a forwarding number.",
+      },
+    ],
+    matrix: [
+      { label: "Virtual business number", oneby: true, them: true },
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Post-call summaries + assigned tasks", oneby: true, them: false },
+      { label: "Desk phones with auto-provisioning", oneby: true, them: false },
+      { label: "Business SMS + fax", oneby: true, them: "SMS only" },
+      { label: "Scales to a team", oneby: true, them: "Limited" },
+    ],
+    pickThemIf:
+      "You're a solo operator who just wants a separate business line with voicemail and forwarding.",
+    pickOneByIf:
+      "You want every call answered and turned into a booked job, with room to grow into a full phone system.",
+    faqs: [
+      {
+        q: "Is OneBy overkill for a solo business?",
+        a: "Not at all. The Solo plan is built for one-person businesses, and the AI answering pays for itself the first time it catches a job you would have missed.",
+      },
+      {
+        q: "Does Grasshopper answer calls with AI?",
+        a: "No. Grasshopper forwards calls and takes messages. OneBy answers with an AI receptionist and turns the call into a task.",
+      },
+    ],
+  },
+  {
+    slug: "smith-ai",
+    competitor: "Smith.ai",
+    category: "Answering service",
+    metaTitle: "OneBy vs Smith.ai: Honest Comparison",
+    metaDescription:
+      "Smith.ai offers human receptionists billed per call. OneBy is a flat-rate AI receptionist that answers unlimited calls and turns each into a summary and a task. Compare them.",
+    keywords: [
+      "OneBy vs Smith.ai",
+      "Smith.ai alternative",
+      "AI receptionist vs Smith.ai",
+      "answering service alternative",
+    ],
+    heroTitle: "OneBy vs Smith.ai",
+    heroSub:
+      "Smith.ai gives you real human receptionists who answer and book calls. OneBy is a flat-rate AI receptionist that answers every call, never waits on hold, and turns each one into a summary and an assigned task.",
+    theirStrengths: [
+      "Real humans who handle nuanced, sensitive calls",
+      "Live appointment booking and warm transfers",
+      "Great for callers who refuse to talk to a machine",
+    ],
+    wins: [
+      {
+        title: "Flat rate, not per call",
+        body: "Smith.ai bills per call or per minute, so a busy month gets expensive fast. OneBy is a flat monthly rate no matter how the phone rings.",
+      },
+      {
+        title: "Never busy, never on hold",
+        body: "The AI answers unlimited calls at once, instantly, day or night. No queue when your call volume spikes.",
+      },
+      {
+        title: "Configured to your business",
+        body: "It asks your questions, flags your emergencies, and turns every call into a summary and an assigned task, the same way at 2pm or 2am.",
+      },
+    ],
+    matrix: [
+      { label: "Answers every call live", oneby: true, them: true },
+      { label: "Flat monthly pricing", oneby: true, them: "Per call / minute" },
+      { label: "Unlimited simultaneous calls", oneby: true, them: "Limited" },
+      { label: "Post-call summaries + assigned tasks", oneby: true, them: "Messages" },
+      { label: "Your own phone system + desk phones", oneby: true, them: false },
+      { label: "Human escalation for complex calls", oneby: "On request", them: true },
+    ],
+    pickThemIf:
+      "Your calls are often complex or sensitive and you specifically want a trained human on every one, and per-call pricing works for your volume.",
+    pickOneByIf:
+      "You want every call answered instantly at a flat rate and turned into a booked job, with a human escalation path when it's needed.",
+    faqs: [
+      {
+        q: "Is an AI receptionist as good as Smith.ai's humans?",
+        a: "For capturing the details, booking the job, and never missing a call, the AI is consistent and always available. Humans still win on genuinely unusual or sensitive calls, which is why OneBy keeps a human escalation path.",
+      },
+      {
+        q: "How does pricing compare?",
+        a: "Smith.ai bills per call or minute, so cost climbs with volume. OneBy is a flat monthly rate, so a busy season does not spike your bill.",
+      },
+    ],
+  },
+  {
     slug: "servicetitan",
     competitor: "ServiceTitan",
     category: "Field service software",
@@ -623,6 +855,10 @@ export const comparisonCategories: Array<{ category: string; items: Comparison[]
   {
     category: "Phone systems",
     items: comparisons.filter((c) => c.category === "Phone system"),
+  },
+  {
+    category: "Answering services",
+    items: comparisons.filter((c) => c.category === "Answering service"),
   },
   {
     category: "Field service software",

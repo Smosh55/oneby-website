@@ -64,6 +64,14 @@ const orgJsonLd = {
       logo: `${SITE_URL}/brand/oneby-logo.svg`,
       description:
         "The AI Communications OS that turns every call into action: post-call automation, AI receptionist, and tasks that create and assign themselves.",
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+1-626-663-2944",
+        email: "support@oneby.ai",
+        contactType: "customer support",
+        areaServed: "US",
+        availableLanguage: "English",
+      },
     },
     {
       "@type": "WebSite",
