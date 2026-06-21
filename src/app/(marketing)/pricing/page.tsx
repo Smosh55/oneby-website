@@ -54,22 +54,34 @@ function Cell({ value }: { value: boolean | string }) {
 const base = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
 const productJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Product",
-  name: "OneBy",
-  description:
-    "The AI Communications OS: calling, desk phones, SMS, and fax, plus post-call automation that turns every call into a summary and an assigned task.",
-  brand: { "@type": "Brand", name: "OneBy" },
-  url: `${base}/pricing`,
-  offers: plans
-    .filter((p) => p.price !== "Custom")
-    .map((p) => ({
-      "@type": "Offer",
-      name: `${p.name} plan`,
-      price: p.price,
-      priceCurrency: "USD",
+  "@graph": [
+    {
+      "@type": "Product",
+      name: "OneBy",
+      description:
+        "The AI Communications OS: calling, desk phones, SMS, and fax, plus post-call automation that turns every call into a summary and an assigned task.",
+      brand: { "@type": "Brand", name: "OneBy" },
       url: `${base}/pricing`,
-      availability: "https://schema.org/InStock",
-    })),
+      offers: plans
+        .filter((p) => p.price !== "Custom")
+        .map((p) => ({
+          "@type": "Offer",
+          name: `${p.name} plan`,
+          price: p.price,
+          priceCurrency: "USD",
+          url: `${base}/pricing`,
+          availability: "https://schema.org/InStock",
+        })),
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: pricingFaqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
 };
 
 export default function PricingPage() {

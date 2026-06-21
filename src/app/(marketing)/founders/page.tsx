@@ -17,6 +17,9 @@ import {
   founderPricing,
   type FounderTier,
 } from "@/data/founders";
+import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
+
+const base = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
 
 export const metadata: Metadata = {
   title: "Become a OneBy Founding Member",
@@ -48,9 +51,40 @@ const faqs = [
   },
 ];
 
+const foundersJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: base },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Founding Members",
+          item: `${base}/founders`,
+        },
+      ],
+    },
+  ],
+};
+
 export default function FoundersPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(foundersJsonLd) }}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden pt-28 pb-16 lg:pt-32">
         <div className="pointer-events-none absolute inset-0 -z-10">
