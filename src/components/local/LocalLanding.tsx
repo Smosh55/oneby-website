@@ -8,7 +8,7 @@ import {
   MapPin,
 } from "lucide-react";
 import type { Industry } from "@/data/industries";
-import type { City } from "@/data/locations";
+import { type City, nearbyCities } from "@/data/locations";
 import { getIcon } from "@/components/industry/iconMap";
 import Reveal from "@/components/Reveal";
 
@@ -22,6 +22,9 @@ export default function LocalLanding({
   const Icon = getIcon(industry.icon);
   const place = `${city.name}, ${city.state}`;
   const trade = industry.shortName.toLowerCase();
+  const hoods = city.neighborhoods;
+  const codes = city.areaCodes;
+  const nearby = nearbyCities(city.slug);
 
   return (
     <>
@@ -56,9 +59,11 @@ export default function LocalLanding({
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted">
               {city.name} {trade} businesses live on the phone, and the calls
-              you miss go straight to the competitor down the road. OneBy answers
-              every call, captures the details, and turns it into a booked job,
-              for teams across {place} and the surrounding metro.
+              you miss go straight to the competitor down the road. From{" "}
+              {hoods[0]} to {hoods[1]}, OneBy answers every call across{" "}
+              {city.region}, captures the details, and turns it into a booked
+              job. Keep your local {codes[0]} or {codes[1]} number, no new
+              hardware required.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/demo" className="btn btn-primary text-base">
@@ -138,6 +143,38 @@ export default function LocalLanding({
         </div>
       </section>
 
+      {/* Local coverage */}
+      <section className="pb-12 lg:pb-16">
+        <div className="container-x">
+          <Reveal>
+            <div className="rounded-2xl border border-line bg-canvas/50 p-7 sm:p-9">
+              <span className="eyebrow">
+                <MapPin size={14} /> Local coverage
+              </span>
+              <h2 className="mt-4 text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+                From {hoods[0]} to {hoods[hoods.length - 1]}, we have{" "}
+                {city.region} covered.
+              </h2>
+              <p className="mt-3 max-w-2xl text-muted">
+                OneBy answers calls for {trade} teams across {city.name} and the
+                surrounding metro, day and night, so a missed call never turns
+                into a missed job.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {hoods.map((h) => (
+                  <span
+                    key={h}
+                    className="rounded-full border border-line bg-surface px-3 py-1 text-sm font-medium text-ink/70"
+                  >
+                    {h}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Local FAQ */}
       <section className="bg-canvas py-16 lg:py-20">
         <div className="container-x">
@@ -147,9 +184,9 @@ export default function LocalLanding({
                 Do you serve {place}?
               </h3>
               <p className="mt-2 text-[0.92rem] leading-relaxed text-muted">
-                Yes. OneBy works anywhere in and around {city.name}. You keep
-                your local number, and the AI answers every call no matter where
-                your crew is.
+                Yes. OneBy covers {city.name} and the wider {city.region}, from{" "}
+                {hoods[0]} and {hoods[1]} to {hoods[2]} and {hoods[3]}. Wherever
+                your crew is working, the AI answers every call.
               </p>
             </div>
             <div className="surface-card rounded-2xl p-6">
@@ -157,8 +194,8 @@ export default function LocalLanding({
                 Can I keep my {city.name} number?
               </h3>
               <p className="mt-2 text-[0.92rem] leading-relaxed text-muted">
-                Of course. Porting is free, and there's no new hardware to
-                install to get started.
+                Of course. Keep your {codes[0]} or {codes[1]} number, porting is
+                free, and there's no new hardware to install to get started.
               </p>
             </div>
             {industry.faqs.slice(0, 2).map((f) => (
@@ -170,6 +207,34 @@ export default function LocalLanding({
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Nearby metros (internal links) */}
+      <section className="pt-14 lg:pt-20">
+        <div className="container-x">
+          <Reveal>
+            <h2 className="text-xl font-bold tracking-tight text-navy">
+              OneBy also answers {trade} calls nearby
+            </h2>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {nearby.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/industries/${industry.slug}/${c.slug}`}
+                  className="group flex items-center justify-between rounded-xl border border-line bg-surface px-4 py-3 text-sm font-medium text-navy transition-colors hover:border-blue"
+                >
+                  <span>
+                    {industry.shortName} in {c.name}
+                  </span>
+                  <ArrowRight
+                    size={15}
+                    className="shrink-0 text-faint transition-colors group-hover:text-blue"
+                  />
+                </Link>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 

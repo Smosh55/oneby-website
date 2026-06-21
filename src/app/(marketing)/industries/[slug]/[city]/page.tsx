@@ -25,7 +25,7 @@ export async function generateMetadata({
   const title = `${industry.shortName} Answering Service in ${place.name}, ${place.state}`;
   return {
     title,
-    description: `OneBy answers every ${industry.shortName.toLowerCase()} call in ${place.name}, ${place.state}, captures the details, and turns it into a booked job. AI receptionist, summaries, and tasks, live in a day.`,
+    description: `OneBy answers every ${industry.shortName.toLowerCase()} call across ${place.region}, from ${place.neighborhoods[0]} to ${place.neighborhoods[1]}, and turns it into a booked job. AI receptionist, call summaries, and tasks, live in a day. Keep your ${place.areaCodes[0]} number.`,
     keywords: [
       `${industry.shortName} answering service ${place.name}`,
       `${industry.shortName} AI receptionist ${place.name}`,
@@ -57,7 +57,10 @@ export default async function LocalPage({
     "@type": "Service",
     serviceType: `${industry.shortName} answering service`,
     provider: { "@type": "Organization", name: "OneBy", url: base },
-    areaServed: { "@type": "City", name: `${place.name}, ${place.state}` },
+    areaServed: [
+      { "@type": "City", name: `${place.name}, ${place.state}` },
+      ...place.neighborhoods.map((n) => ({ "@type": "Place", name: n })),
+    ],
     url: `${base}/industries/${slug}/${city}`,
   };
 
