@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PhoneCall,
   Sparkles,
@@ -29,6 +29,9 @@ const nav = [
 ];
 
 const tags = ["Existing customer", "HVAC", "Same-day"];
+
+const SUMMARY =
+  "Existing customer, upstairs A/C not cooling since last night. Home after 3pm, wants a same-day visit.";
 
 type Tone = "green" | "blue" | "amber";
 
@@ -83,14 +86,44 @@ const transcript = [
   { who: "OneBy", line: "Got it, welcome back. I'll book a same-day diagnostic and text you the arrival window." },
 ];
 
+type Phase = "transcribing" | "summarizing" | "typing" | "done";
+
 export default function HeroAppMock() {
+  const [phase, setPhase] = useState<Phase>("transcribing");
+  const [typed, setTyped] = useState(0);
+  const [openTranscript, setOpenTranscript] = useState(false);
   const [status, setStatus] = useState<Record<number, "pending" | "acted" | "ignored">>({
     1: "pending",
     2: "pending",
     3: "pending",
   });
-  const [openTranscript, setOpenTranscript] = useState(false);
 
+  // processing -> summarizing -> typing
+  useEffect(() => {
+    if (phase === "transcribing") {
+      const t = setTimeout(() => setPhase("summarizing"), 1000);
+      return () => clearTimeout(t);
+    }
+    if (phase === "summarizing") {
+      const t = setTimeout(() => setPhase("typing"), 850);
+      return () => clearTimeout(t);
+    }
+  }, [phase]);
+
+  // typewriter for the summary (chunked so it stays smooth and finishes
+  // even when timers are throttled in a backgrounded tab)
+  useEffect(() => {
+    if (phase !== "typing") return;
+    if (typed >= SUMMARY.length) {
+      const t = setTimeout(() => setPhase("done"), 250);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => setTyped((n) => Math.min(n + 3, SUMMARY.length)), 28);
+    return () => clearTimeout(t);
+  }, [phase, typed]);
+
+  const processing = phase === "transcribing" || phase === "summarizing";
+  const done = phase === "done";
   const set = (id: number, s: "pending" | "acted" | "ignored") =>
     setStatus((prev) => ({ ...prev, [id]: s }));
 
@@ -101,7 +134,11 @@ export default function HeroAppMock() {
         <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">AI answered</p>
         <p className="text-sm font-semibold text-navy">In 2 rings ⚡</p>
       </div>
-      <div className="absolute -right-4 bottom-24 z-10 hidden rounded-xl border border-line bg-white px-3.5 py-2.5 shadow-[var(--shadow-lg)] lg:block">
+      <div
+        className={`absolute -right-4 bottom-24 z-10 hidden rounded-xl border border-line bg-white px-3.5 py-2.5 shadow-[var(--shadow-lg)] transition-all duration-500 lg:block ${
+          done ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+        }`}
+      >
         <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">Owner notified</p>
         <p className="text-sm font-semibold text-navy">Summary + tasks · 8s</p>
       </div>
@@ -127,8 +164,13 @@ export default function HeroAppMock() {
         <div className="grid grid-cols-1 sm:grid-cols-[184px_1fr]">
           {/* sidebar */}
           <aside className="hidden border-r border-line bg-canvas/40 p-4 sm:block">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/oneby-logo.svg" alt="OneBy" className="mb-5 h-6 w-auto" />
+            <div className="mb-5 flex items-center gap-2">
+              <span className="grid h-7 w-7 place-items-center rounded-lg bg-navy">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/brand/oneby-mark.svg" alt="" className="h-4 w-4" />
+              </span>
+              <span className="text-[0.95rem] font-bold tracking-tight text-navy">OneBy</span>
+            </div>
             <nav className="space-y-1">
               {nav.map((n) => (
                 <div
@@ -166,25 +208,33 @@ export default function HeroAppMock() {
                   <p className="text-[0.95rem] font-semibold text-navy">Call with Maria G.</p>
                   <p className="truncate text-xs text-muted">Desk phone · 4:12 · completed</p>
                 </div>
-                <span className="ml-auto shrink-0 rounded-full bg-blue/10 px-2.5 py-1 text-[11px] font-semibold text-blue">
-                  AI summarized
-                </span>
+                {done ? (
+                  <span className="ml-auto shrink-0 rounded-full bg-blue/10 px-2.5 py-1 text-[11px] font-semibold text-blue">
+                    AI summarized
+                  </span>
+                ) : (
+                  <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full bg-blue/10 px-2.5 py-1 text-[11px] font-semibold text-blue">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue" /> Summarizing
+                  </span>
+                )}
               </div>
 
               {/* tags */}
-              <div className="mt-3 flex flex-wrap items-center gap-1.5">
-                {tags.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-md border border-line bg-surface px-2 py-0.5 text-[0.7rem] font-medium text-ink/70"
-                  >
-                    {t}
+              {done && (
+                <div className="animate-rise mt-3 flex flex-wrap items-center gap-1.5">
+                  {tags.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-md border border-line bg-surface px-2 py-0.5 text-[0.7rem] font-medium text-ink/70"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                  <span className="inline-flex items-center gap-0.5 rounded-md border border-dashed border-line px-2 py-0.5 text-[0.7rem] font-medium text-faint">
+                    <Plus size={11} /> Tag
                   </span>
-                ))}
-                <span className="inline-flex items-center gap-0.5 rounded-md border border-dashed border-line px-2 py-0.5 text-[0.7rem] font-medium text-faint">
-                  <Plus size={11} /> Tag
-                </span>
-              </div>
+                </div>
+              )}
             </div>
 
             {/* summary */}
@@ -193,74 +243,109 @@ export default function HeroAppMock() {
                 <Sparkles size={15} className="text-blue" />
                 <span className="text-xs font-bold uppercase tracking-wide text-blue">AI summary</span>
               </div>
-              <p className="mt-2 text-[0.9rem] leading-relaxed text-ink">
-                Existing customer, upstairs A/C not cooling since last night. Home after 3pm,
-                wants a same-day visit.
-              </p>
+
+              {processing ? (
+                <div className="mt-3 flex items-center gap-2.5">
+                  <Dots />
+                  <span className="text-[0.85rem] font-medium text-muted">
+                    {phase === "transcribing" ? "Transcribing the call" : "Writing the summary"}
+                  </span>
+                </div>
+              ) : (
+                <p className="mt-2 min-h-[2.75rem] text-[0.9rem] leading-relaxed text-ink">
+                  {SUMMARY.slice(0, typed)}
+                  {phase === "typing" && (
+                    <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-blue align-middle" />
+                  )}
+                </p>
+              )}
 
               {/* read full transcript */}
-              <button
-                type="button"
-                onClick={() => setOpenTranscript((v) => !v)}
-                className="mt-3 inline-flex items-center gap-1.5 text-[0.78rem] font-semibold text-blue hover:underline"
-                aria-expanded={openTranscript}
-              >
-                <FileText size={14} />
-                {openTranscript ? "Hide transcript" : "Read full transcript"}
-                <ChevronDown
-                  size={14}
-                  className={`transition-transform ${openTranscript ? "rotate-180" : ""}`}
-                />
-              </button>
+              {done && (
+                <div className="animate-rise">
+                  <button
+                    type="button"
+                    onClick={() => setOpenTranscript((v) => !v)}
+                    className="mt-3 inline-flex items-center gap-1.5 text-[0.78rem] font-semibold text-blue hover:underline"
+                    aria-expanded={openTranscript}
+                  >
+                    <FileText size={14} />
+                    {openTranscript ? "Hide transcript" : "Read full transcript"}
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform ${openTranscript ? "rotate-180" : ""}`}
+                    />
+                  </button>
 
-              {openTranscript && (
-                <div className="mt-3 space-y-2 rounded-lg border border-line bg-surface px-3.5 py-3">
-                  {transcript.map((t, i) => (
-                    <p key={i} className="text-[0.8rem] leading-relaxed text-ink">
-                      <span
-                        className={`font-semibold ${
-                          t.who === "OneBy" ? "text-blue" : "text-navy"
-                        }`}
-                      >
-                        {t.who}:
-                      </span>{" "}
-                      {t.line}
-                    </p>
-                  ))}
+                  {openTranscript && (
+                    <div className="mt-3 space-y-2 rounded-lg border border-line bg-surface px-3.5 py-3">
+                      {transcript.map((t, i) => (
+                        <p key={i} className="text-[0.8rem] leading-relaxed text-ink">
+                          <span
+                            className={`font-semibold ${t.who === "OneBy" ? "text-blue" : "text-navy"}`}
+                          >
+                            {t.who}:
+                          </span>{" "}
+                          {t.line}
+                        </p>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
 
             {/* action items */}
-            <div className="mt-4">
-              <div className="flex items-center gap-2 px-1 pb-2">
-                <span className="text-[11px] font-bold uppercase tracking-wide text-faint">
-                  Action items
-                </span>
-                <span className="h-px flex-1 bg-line" />
-              </div>
+            {done && (
+              <div className="mt-4">
+                <div className="animate-rise flex items-center gap-2 px-1 pb-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wide text-faint">
+                    Action items
+                  </span>
+                  <span className="h-px flex-1 bg-line" />
+                </div>
 
-              <div className="space-y-2">
-                {items.map((it) => (
-                  <ActionRow
-                    key={it.id}
-                    item={it}
-                    status={status[it.id]}
-                    onAct={() => set(it.id, "acted")}
-                    onIgnore={() => set(it.id, "ignored")}
-                    onUndo={() => set(it.id, "pending")}
-                  />
-                ))}
-              </div>
+                <div className="space-y-2">
+                  {items.map((it, i) => (
+                    <div
+                      key={it.id}
+                      className="animate-rise"
+                      style={{ animationDelay: `${i * 110}ms` }}
+                    >
+                      <ActionRow
+                        item={it}
+                        status={status[it.id]}
+                        onAct={() => set(it.id, "acted")}
+                        onIgnore={() => set(it.id, "ignored")}
+                        onUndo={() => set(it.id, "pending")}
+                      />
+                    </div>
+                  ))}
+                </div>
 
-              <p className="px-1 pt-2.5 text-[0.72rem] leading-snug text-faint">
-                It never invents facts. When it&apos;s unsure, it asks instead of guessing.
-              </p>
-            </div>
+                <p className="px-1 pt-2.5 text-[0.72rem] leading-snug text-faint">
+                  It never invents facts. When it&apos;s unsure, it asks instead of guessing.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function Dots() {
+  return (
+    <span className="flex items-center gap-1">
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className="h-1.5 w-1.5 animate-bounce rounded-full bg-blue"
+          style={{ animationDelay: `${i * 140}ms` }}
+        />
+      ))}
+    </span>
   );
 }
 
