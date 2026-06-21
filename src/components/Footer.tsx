@@ -27,10 +27,11 @@ const groups: { title: string; links: FooterLink[] }[] = [
   {
     title: "Resources",
     links: [
+      { label: "AI Receptionist Guide", href: "/ai-receptionist" },
+      { label: "Missed Call Calculator", href: "/missed-call-calculator" },
       { label: "Founding Members", href: "/founders" },
       { label: "Blog", href: "/blog" },
       { label: "Compare", href: "/compare" },
-      { label: "Customers", href: "/#stories" },
       { label: "Book a demo", href: "/demo" },
     ],
   },

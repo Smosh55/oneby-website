@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description:
     "Book a 20-minute OneBy demo. We'll show you a real call become a summary and an assigned task, live, and map it to your business.",
   alternates: { canonical: "/demo" },
+  // Pure lead-capture page: keep it out of the index, still follow its links.
+  robots: { index: false, follow: true },
 };
 
 const points = [

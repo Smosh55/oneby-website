@@ -150,6 +150,39 @@ export default async function BlogPost({
             </div>
           </div>
         )}
+        {/* Go deeper (internal links to pillar + tools) */}
+        <div className="container-x mt-12 max-w-3xl">
+          <div className="rounded-2xl border border-line bg-canvas/50 p-6">
+            <p className="text-xs font-bold uppercase tracking-wide text-faint">
+              Go deeper
+            </p>
+            <div className="mt-2 flex flex-col divide-y divide-line">
+              <Link
+                href="/ai-receptionist"
+                className="group flex items-center justify-between py-3 font-semibold text-navy"
+              >
+                The complete AI receptionist guide
+                <ArrowRight size={16} className="text-faint transition-colors group-hover:text-blue" />
+              </Link>
+              <Link
+                href="/missed-call-calculator"
+                className="group flex items-center justify-between py-3 font-semibold text-navy"
+              >
+                See what missed calls are costing you
+                <ArrowRight size={16} className="text-faint transition-colors group-hover:text-blue" />
+              </Link>
+              {post.industry && industriesBySlug[post.industry] && (
+                <Link
+                  href={`/industries/${post.industry}`}
+                  className="group flex items-center justify-between py-3 font-semibold text-navy"
+                >
+                  OneBy for {industriesBySlug[post.industry].shortName}
+                  <ArrowRight size={16} className="text-faint transition-colors group-hover:text-blue" />
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
       </article>
 
       {/* CTA */}
