@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   PhoneCall,
   Sparkles,
@@ -98,6 +98,30 @@ export default function HeroAppMock() {
     3: "pending",
   });
 
+  // replay the intro each time the mock scrolls back into view
+  const rootRef = useRef<HTMLDivElement>(null);
+  const wasVisible = useRef(false);
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !wasVisible.current) {
+          wasVisible.current = true;
+          setTyped(0);
+          setOpenTranscript(false);
+          setStatus({ 1: "pending", 2: "pending", 3: "pending" });
+          setPhase("transcribing");
+        } else if (!entry.isIntersecting) {
+          wasVisible.current = false;
+        }
+      },
+      { threshold: 0.45 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   // processing -> summarizing -> typing
   useEffect(() => {
     if (phase === "transcribing") {
@@ -128,9 +152,9 @@ export default function HeroAppMock() {
     setStatus((prev) => ({ ...prev, [id]: s }));
 
   return (
-    <div className="relative mx-auto w-full max-w-5xl">
+    <div ref={rootRef} className="relative mx-auto w-full max-w-5xl">
       {/* floating chips */}
-      <div className="absolute -left-4 top-16 z-10 hidden rounded-xl border border-line bg-white px-3.5 py-2.5 shadow-[var(--shadow-lg)] lg:block">
+      <div className="absolute -left-4 top-1/3 z-10 hidden rounded-xl border border-line bg-white px-3.5 py-2.5 shadow-[var(--shadow-lg)] lg:block">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">AI answered</p>
         <p className="text-sm font-semibold text-navy">In 2 rings ⚡</p>
       </div>
@@ -150,7 +174,13 @@ export default function HeroAppMock() {
           <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
           <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
           <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-          <span className="ml-3 text-xs font-semibold text-faint">OneBy · Workspace</span>
+          <span className="ml-3 inline-flex items-center gap-1.5">
+            <span className="grid h-5 w-5 place-items-center rounded-[6px] bg-navy">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/oneby-mark.svg" alt="" className="h-3 w-3" />
+            </span>
+            <span className="text-xs font-semibold text-faint">OneBy · Workspace</span>
+          </span>
           <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-green/10 px-2.5 py-1 text-[11px] font-semibold text-green-600">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-70" />
@@ -164,12 +194,12 @@ export default function HeroAppMock() {
         <div className="grid grid-cols-1 sm:grid-cols-[184px_1fr]">
           {/* sidebar */}
           <aside className="hidden border-r border-line bg-canvas/40 p-4 sm:block">
-            <div className="mb-5 flex items-center gap-2">
-              <span className="grid h-7 w-7 place-items-center rounded-lg bg-navy">
+            <div className="mb-5 flex items-center gap-2.5">
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-navy shadow-sm">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/brand/oneby-mark.svg" alt="" className="h-4 w-4" />
+                <img src="/brand/oneby-mark.svg" alt="OneBy" className="h-5 w-5" />
               </span>
-              <span className="text-[0.95rem] font-bold tracking-tight text-navy">OneBy</span>
+              <span className="text-base font-bold tracking-tight text-navy">OneBy</span>
             </div>
             <nav className="space-y-1">
               {nav.map((n) => (
