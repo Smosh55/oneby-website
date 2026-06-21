@@ -7,6 +7,7 @@ import {
   ChevronRight,
   Star,
   Phone,
+  Calendar,
 } from "lucide-react";
 import type { Industry } from "@/data/industries";
 import type { PostMeta } from "@/lib/blog";
@@ -125,12 +126,26 @@ export default function IndustryLanding({
                   </p>
                 </div>
 
-                <div className="mt-3 flex items-center gap-3 rounded-xl border border-green/25 bg-green/[0.07] px-4 py-3">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-green/15 text-green-600">
-                    <CheckCircle2 size={18} />
-                  </span>
-                  <p className="text-sm font-semibold text-navy">
-                    {industry.scenarioTask}
+                <div className="mt-3">
+                  <div className="flex items-center gap-2 px-1 pb-1.5">
+                    <span className="text-[11px] font-bold uppercase tracking-wide text-faint">
+                      Action item
+                    </span>
+                    <span className="h-px flex-1 bg-line" />
+                  </div>
+                  <div className="flex items-center gap-3 rounded-xl border border-green/25 bg-green/[0.07] px-3.5 py-2.5">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-green/15 text-green-600">
+                      <Calendar size={16} />
+                    </span>
+                    <p className="min-w-0 text-[0.82rem] font-semibold text-navy">
+                      {industry.scenarioTask}
+                    </p>
+                    <span className="ml-auto inline-flex shrink-0 items-center gap-1 text-[10px] font-semibold text-green-600">
+                      <span className="h-1.5 w-1.5 rounded-full bg-green" /> Confident
+                    </span>
+                  </div>
+                  <p className="px-1 pt-2 text-[0.7rem] leading-snug text-faint">
+                    Unsure items get flagged with a question, never guessed.
                   </p>
                 </div>
               </div>

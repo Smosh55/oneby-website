@@ -110,6 +110,36 @@ export const features: Feature[] = [
     cardline: "Every call, distilled to what matters.",
   },
   {
+    slug: "honest-ai",
+    name: "Honest AI That Asks",
+    group: "AI & automation",
+    icon: "ShieldCheck",
+    metaTitle: "AI Call Summaries That Don't Make Things Up",
+    metaDescription:
+      "OneBy stays faithful to what was actually said. When it's unsure, it flags the item with a question instead of guessing, so a wrong fact never lands in your task list.",
+    keywords: ["accurate AI call summaries", "AI that doesn't hallucinate", "trustworthy call AI", "faithful call summary"],
+    heroEyebrow: "Honest AI",
+    heroTitle: "It asks when it's unsure. It never makes things up.",
+    heroSub:
+      "The fastest way to lose trust in AI is one confident wrong answer. OneBy sticks to what was actually said, flags anything it isn't sure about with a question, and never pads or invents.",
+    bullets: [
+      "Faithful to the call, never invents facts",
+      "Low-confidence items flagged with a clarifying question",
+      "Every summary and action links back to the recording",
+      "No padding, no filler, just what was said",
+    ],
+    how: [
+      { step: "It summarizes only what was said", body: "No guessing, no embellishing. If it wasn't in the call, it isn't in the summary." },
+      { step: "It rates its own confidence", body: "Every action item is tagged confident, review, or low-confidence, so you know what to trust." },
+      { step: "It asks instead of asserting", body: "When something is ambiguous, you get a question to confirm, not a wrong fact to clean up later." },
+    ],
+    faqs: [
+      { q: "How do I know the AI got it right?", a: "Every summary and action ties back to the recording and transcript, so anyone can verify in a tap. And low-confidence items are flagged, not buried." },
+      { q: "What if the AI mishears something?", a: "It rates its own confidence and asks you to confirm anything ambiguous, instead of asserting a wrong detail." },
+    ],
+    cardline: "Faithful summaries. Flags what it's unsure of.",
+  },
+  {
     slug: "task-automation",
     name: "Task Creation & Assignment",
     group: "AI & automation",

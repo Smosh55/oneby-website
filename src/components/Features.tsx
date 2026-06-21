@@ -9,6 +9,7 @@ import {
   Bot,
   Phone,
   Printer,
+  ShieldCheck,
   Search,
 } from "lucide-react";
 
@@ -28,6 +29,11 @@ const features = [
     icon: UserCheck,
     title: "Task Creation & Assignment",
     body: "Tasks created from conversations and handed to the right person with a due date. Nothing left to chance.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Honest AI That Asks",
+    body: "Faithful to what was said, never invents facts. When it's unsure, it flags the item with a question instead of guessing.",
   },
   {
     icon: Bot,

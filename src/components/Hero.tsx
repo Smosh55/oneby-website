@@ -4,6 +4,8 @@ import {
   CheckCircle2,
   ArrowRight,
   Star,
+  Calendar,
+  CornerUpRight,
 } from "lucide-react";
 
 export default function Hero() {
@@ -131,17 +133,48 @@ function HeroMock() {
           </p>
         </div>
 
-        {/* generated task */}
-        <div className="mt-3 flex items-center gap-3 rounded-xl border border-green/25 bg-green/[0.07] px-4 py-3">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-green/15 text-green-600">
-            <CheckCircle2 size={18} />
-          </span>
-          <div>
-            <p className="text-sm font-semibold text-navy">
-              Task created &amp; assigned · Schedule A/C diagnostic
-            </p>
-            <p className="text-xs text-muted">Assigned to Dispatch · Due today</p>
+        {/* typed, one-tap action items */}
+        <div className="mt-3">
+          <div className="flex items-center gap-2 px-1 pb-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wide text-faint">
+              Action items
+            </span>
+            <span className="h-px flex-1 bg-line" />
           </div>
+
+          <div className="flex items-center gap-3 rounded-xl border border-green/25 bg-green/[0.07] px-3.5 py-2.5">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-green/15 text-green-600">
+              <Calendar size={16} />
+            </span>
+            <div className="min-w-0">
+              <p className="truncate text-[0.82rem] font-semibold text-navy">
+                Schedule A/C diagnostic
+              </p>
+              <p className="text-[0.7rem] text-muted">Dispatch · today</p>
+            </div>
+            <span className="ml-auto inline-flex shrink-0 items-center gap-1 text-[10px] font-semibold text-green-600">
+              <span className="h-1.5 w-1.5 rounded-full bg-green" /> Confident
+            </span>
+          </div>
+
+          <div className="mt-2 flex items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue">
+              <CornerUpRight size={16} />
+            </span>
+            <div className="min-w-0">
+              <p className="truncate text-[0.82rem] font-semibold text-navy">
+                Text Maria her arrival window
+              </p>
+              <p className="text-[0.7rem] text-muted">Follow-up</p>
+            </div>
+            <span className="ml-auto inline-flex shrink-0 items-center gap-1 text-[10px] font-semibold text-green-600">
+              <span className="h-1.5 w-1.5 rounded-full bg-green" /> Confident
+            </span>
+          </div>
+
+          <p className="px-1 pt-2 text-[0.7rem] leading-snug text-faint">
+            Low-confidence items get flagged with a question, never guessed.
+          </p>
         </div>
       </div>
 
@@ -150,7 +183,7 @@ function HeroMock() {
         <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">
           Team notified
         </p>
-        <p className="text-sm font-semibold text-navy">Summary + task in 8s ⚡</p>
+        <p className="text-sm font-semibold text-navy">Summary + actions in 8s ⚡</p>
       </div>
     </div>
   );
