@@ -175,7 +175,7 @@ export default function HeroAppMock() {
           <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
           <span className="h-3 w-3 rounded-full bg-[#28c840]" />
           <span className="ml-3 inline-flex items-center gap-1.5">
-            <span className="grid h-6 w-6 place-items-center rounded-md border border-line bg-white shadow-sm">
+            <span className="grid h-6 w-6 place-items-center rounded-md border border-line bg-white shadow-sm sm:hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/brand/oneby-mark.svg" alt="" className="h-4 w-4" />
             </span>
