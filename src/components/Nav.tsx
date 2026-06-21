@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Gift } from "lucide-react";
 import { industryGroups } from "@/data/industries";
 import { getIcon } from "@/components/industry/iconMap";
 
@@ -99,6 +99,12 @@ export default function Nav() {
 
         <div className="hidden lg:flex items-center gap-2">
           <Link
+            href="/founders"
+            className="inline-flex items-center gap-1.5 rounded-full border border-green/30 bg-green/10 px-3 py-1.5 text-[0.875rem] font-semibold text-green-600 transition-colors hover:bg-green/15"
+          >
+            <Gift size={14} /> Founders
+          </Link>
+          <Link
             href="/#demo"
             className="px-3.5 py-2 rounded-lg text-[0.9375rem] font-medium text-ink/80 hover:text-navy transition-colors"
           >
@@ -160,6 +166,13 @@ export default function Nav() {
                 {l.label}
               </Link>
             ))}
+            <Link
+              href="/founders"
+              onClick={() => setOpen(false)}
+              className="mt-1 inline-flex items-center gap-2 rounded-lg bg-green/10 px-3 py-3 text-[0.95rem] font-semibold text-green-600"
+            >
+              <Gift size={16} /> Founding Members
+            </Link>
             <div className="flex flex-col gap-2 pt-3">
               <Link
                 href="/#demo"

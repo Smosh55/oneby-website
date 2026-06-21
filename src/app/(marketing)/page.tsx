@@ -9,6 +9,7 @@ import Stories from "@/components/Stories";
 import Industries from "@/components/Industries";
 import Comparison from "@/components/Comparison";
 import Pricing from "@/components/Pricing";
+import FoundersBanner from "@/components/FoundersBanner";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 
@@ -26,6 +27,7 @@ export default function Home() {
       <Industries />
       <Comparison />
       <Pricing />
+      <FoundersBanner />
       <FAQ />
       <CTA />
     </>
