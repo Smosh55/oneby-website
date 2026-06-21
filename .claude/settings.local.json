@@ -13,7 +13,8 @@
       "WebFetch(domain:oneby.ai)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(awk 'c==2{print} /^---$/{c++}' content/blog/small-business-phone-number.md)"
     ]
   }
 }
