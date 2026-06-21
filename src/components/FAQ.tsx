@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "Does it work with the tools I already use?",
-    a: "Growth and Pro plans integrate with popular CRMs and field-service software so tasks and customer records stay in sync.",
+    a: "Solo and Pro plans integrate with popular CRMs and field-service software so tasks and customer records stay in sync.",
   },
   {
     q: "What happens during the free trial?",

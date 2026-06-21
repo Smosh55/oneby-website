@@ -19,11 +19,11 @@ const cols = plans.map((p) => p.name);
 const pricingFaqs = [
   {
     q: "Do I need the full AI suite on every phone?",
-    a: "Nope, and you shouldn't pay for it. Put a Basic Line on the warehouse phone, the break room, and the back office. Add an AI seat only on the lines that book jobs, like dispatch, intake, and sales.",
+    a: "Nope, and you shouldn't pay for it. Put a Line on the warehouse phone, the break room, and the back office. Add an AI seat only on the lines that book jobs, like dispatch, intake, and sales.",
   },
   {
     q: "What's the difference between a line and an AI seat?",
-    a: "A Basic Line is the phone system: calling, desk phone, SMS, and fax. An AI seat is a line plus the brain: 24/7 AI receptionist, post-call automation, summaries, and tasks that create and assign themselves.",
+    a: "A Line is the phone system: calling, desk phone, SMS, and fax. An AI seat (our Solo plan) is a line plus the brain: 24/7 AI receptionist, post-call automation, summaries, and tasks that create and assign themselves.",
   },
   {
     q: "What about lobby, conference, and paging phones?",
@@ -31,7 +31,7 @@ const pricingFaqs = [
   },
   {
     q: "Can I move AI from one line to another?",
-    a: "Anytime. Turn an AI seat on for the busy season and back to a Basic Line when things slow down. You're never locked in.",
+    a: "Anytime. Turn an AI seat on for the busy season and back to a Line when things slow down. You're never locked in.",
   },
 ];
 
@@ -105,7 +105,7 @@ export default function PricingPage() {
             Pay for a dialtone where you need a dialtone.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-            Not every phone needs a brain. Put a cheap Basic Line on the
+            Not every phone needs a brain. Put a cheap Line on the
             extensions that just dial, and add an AI seat only on the lines that
             book jobs. Start free for 14 days, cancel anytime.
           </p>

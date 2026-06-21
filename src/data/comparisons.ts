@@ -57,7 +57,7 @@ export const comparisons: Comparison[] = [
       },
       {
         title: "Pay for AI only where it helps",
-        body: "Put cheap Basic Lines on the phones that just dial and AI seats on the lines that book jobs. No paying enterprise prices across every extension.",
+        body: "Put cheap Lines on the phones that just dial and AI seats on the lines that book jobs. No paying enterprise prices across every extension.",
       },
       {
         title: "Simple enough to run yourself",
@@ -293,7 +293,7 @@ export const comparisons: Comparison[] = [
       },
       {
         title: "Pay for AI only where it helps",
-        body: "Put cheap Basic Lines on the phones that just dial and AI seats on the lines that book jobs, instead of one plan priced across every seat.",
+        body: "Put cheap Lines on the phones that just dial and AI seats on the lines that book jobs, instead of one plan priced across every seat.",
       },
       {
         title: "Live in a day",
@@ -551,7 +551,7 @@ export const comparisons: Comparison[] = [
       },
       {
         q: "Can the two work together?",
-        a: "Yes. On Growth and Pro, OneBy integrates with popular field-service tools so call summaries and tasks flow into your workflow.",
+        a: "Yes. On Solo and Pro, OneBy integrates with popular field-service tools so call summaries and tasks flow into your workflow.",
       },
     ],
   },
@@ -783,7 +783,7 @@ export const comparisons: Comparison[] = [
       },
       {
         q: "Can OneBy work with HubSpot?",
-        a: "Yes. On Growth and Pro, OneBy integrates with popular CRMs so call summaries and tasks flow into your records.",
+        a: "Yes. On Solo and Pro, OneBy integrates with popular CRMs so call summaries and tasks flow into your records.",
       },
     ],
   },

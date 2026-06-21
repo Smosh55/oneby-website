@@ -14,7 +14,13 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git push *)",
-      "Bash(awk 'c==2{print} /^---$/{c++}' content/blog/small-business-phone-number.md)"
+      "Bash(awk 'c==2{print} /^---$/{c++}' content/blog/small-business-phone-number.md)",
+      "WebSearch",
+      "Bash(sed -i 's/Basic Lines/Lines/g; s/Basic Line/Line/g' \"app/\\(marketing\\)/pricing/page.tsx\" data/comparisons.ts)",
+      "Bash(sed -i 's/AI seats \\(Growth\\)/AI seats \\(Solo\\)/g' components/PricingEstimator.tsx)",
+      "Bash(grep -rn \"Basic Line\\\\|Growth\\\\|\\\\$89\\\\|aiSeat: 89\\\\|soloRetailMonthly: 29\\\\|/seat / mo\" .)",
+      "Bash(sed -i 's/Basic Lines/Lines/g' data/features.ts)",
+      "Bash(sed -i 's/An AI seat is a line plus the brain:/An AI seat \\(our Solo plan\\) is a line plus the brain:/' \"app/\\(marketing\\)/pricing/page.tsx\")"
     ]
   }
 }

@@ -7,10 +7,10 @@
 // forever" because the per-year cost never goes away.
 
 export const founderPricing = {
-  soloRetailMonthly: 29,
-  soloLockedMonthly: 19,
-  proRetailMonthly: 79,
-  proLockedMonthly: 59,
+  soloRetailMonthly: 39,
+  soloLockedMonthly: 29,
+  proRetailMonthly: 99,
+  proLockedMonthly: 69,
 };
 
 export type FounderTier = {

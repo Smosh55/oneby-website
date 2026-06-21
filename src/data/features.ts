@@ -165,7 +165,7 @@ export const features: Feature[] = [
     ],
     faqs: [
       { q: "Can I customize routing?", a: "Yes. Route tasks by call type, team, location, or time of day." },
-      { q: "Does it sync with my other tools?", a: "On Growth and Pro, tasks flow into popular CRM and field-service software." },
+      { q: "Does it sync with my other tools?", a: "On Solo and Pro, tasks flow into popular CRM and field-service software." },
     ],
     cardline: "Calls become owned, due-dated tasks.",
   },
@@ -254,7 +254,7 @@ export const features: Feature[] = [
       { step: "Start taking calls", body: "It's live on your number with the AI working behind every call." },
     ],
     faqs: [
-      { q: "Do I have to use desk phones?", a: "No. Use desk phones, the mobile app, or both. Basic Lines and AI seats work either way." },
+      { q: "Do I have to use desk phones?", a: "No. Use desk phones, the mobile app, or both. Lines and AI seats work either way." },
       { q: "Can I keep my number?", a: "Yes. Porting is free and there's no new hardware to rip out." },
     ],
     cardline: "Real desk phones that set themselves up.",

@@ -17,7 +17,7 @@ const rows: {
   {
     key: "aiSeats",
     rate: estimatorRates.aiSeat,
-    label: "AI seats (Growth)",
+    label: "AI seats (Solo)",
     hint: "For the lines that book jobs: dispatch, intake, sales, the owner.",
     icon: Sparkles,
     accent: "text-blue",

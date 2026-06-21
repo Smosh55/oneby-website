@@ -1,11 +1,12 @@
 // Pricing data shared by the homepage preview (Pricing.tsx) and the full
-// /pricing page. Model: cheap universal "lines" (the phone system) plus
-// "AI seats" you add only on the lines that need the brain.
+// /pricing page. Model: a cheap "Line" (the phone system) plus AI plans (Solo,
+// Pro) that add the brain. Priced to undercut the AI-receptionist market while
+// staying margin-safe (cost to serve a Solo is ~$75/yr).
 
 export type Plan = {
   name: string;
   tagline: string;
-  price: string; // "18" or "Custom"
+  price: string; // "15" or "Custom"
   unit: string;
   cta: string;
   ctaClass: string; // btn-* class for the homepage card
@@ -15,9 +16,9 @@ export type Plan = {
 
 export const plans: Plan[] = [
   {
-    name: "Basic Line",
+    name: "Line",
     tagline: "For phones that just need to work",
-    price: "18",
+    price: "15",
     unit: "/line / mo",
     cta: "Start free trial",
     ctaClass: "btn-ghost",
@@ -31,44 +32,44 @@ export const plans: Plan[] = [
     ],
   },
   {
-    name: "Growth",
-    tagline: "AI seat for the lines that book jobs",
-    price: "89",
-    unit: "/seat / mo",
-    cta: "Book a demo",
+    name: "Solo",
+    tagline: "The AI that answers and books the job",
+    price: "39",
+    unit: "/mo",
+    cta: "Start free trial",
     ctaClass: "btn-primary",
     featured: true,
     features: [
-      "Everything in Basic Line",
+      "Everything in Line",
       "24/7 AI receptionist",
       "Post-call automation on every call",
       "Create AND assign tasks automatically",
-      "Shared team inbox & workflow automation",
       "Call recording + AI search",
+      "Popular CRM & tool integrations",
     ],
   },
   {
     name: "Pro",
-    tagline: "For multi-location and high volume",
-    price: "Custom",
-    unit: "talk to sales",
-    cta: "Contact sales",
+    tagline: "For teams that run on the phone",
+    price: "99",
+    unit: "/mo",
+    cta: "Book a demo",
     ctaClass: "btn-navy",
     features: [
-      "Everything in Growth",
-      "Multi-location call routing",
+      "Everything in Solo",
+      "Multiple users & numbers",
+      "Shared team inbox & workflow automation",
       "Advanced analytics & reporting",
-      "CRM & field-software integrations",
-      "Priority support & onboarding",
-      "Dedicated success manager",
+      "Custom integrations",
+      "Priority support",
     ],
   },
 ];
 
 // Per-unit monthly rates used by the interactive estimator.
 export const estimatorRates = {
-  aiSeat: 89, // a Growth AI seat
-  basicLine: 18, // a Basic Line
+  aiSeat: 39, // a Solo line with the AI brain
+  basicLine: 15, // a Line, dialtone only
   commonArea: 6, // shared/common-area device (lobby, conference, paging)
 };
 
@@ -86,7 +87,7 @@ export const matrix: MatrixGroup[] = [
     rows: [
       { label: "Cloud business phone system", values: [true, true, true] },
       { label: "Keep / port your number", values: [true, true, true] },
-      { label: "Included phone numbers", values: ["1", "3", "Custom"] },
+      { label: "Included phone numbers", values: ["1", "1", "3+"] },
       { label: "Business SMS", values: [true, true, true] },
       { label: "Online fax", values: [true, true, true] },
       { label: "Desk phones with auto-provisioning", values: [true, true, true] },
@@ -107,11 +108,12 @@ export const matrix: MatrixGroup[] = [
   {
     group: "Collaboration & admin",
     rows: [
+      { label: "Included users", values: ["1", "1", "Up to 5"] },
       { label: "Customer timeline", values: [true, true, true] },
-      { label: "Shared team inbox", values: [false, true, true] },
+      { label: "Shared team inbox", values: [false, false, true] },
       { label: "Analytics & reporting", values: ["Basic", "Standard", "Advanced"] },
-      { label: "CRM & field-software integrations", values: [false, "Popular tools", "Custom"] },
-      { label: "Support", values: ["Email", "Priority", "Dedicated CSM"] },
+      { label: "CRM & tool integrations", values: [false, "Popular tools", "Custom"] },
+      { label: "Support", values: ["Email", "Priority", "Dedicated"] },
     ],
   },
 ];
@@ -119,6 +121,6 @@ export const matrix: MatrixGroup[] = [
 export const addOns: { name: string; detail: string }[] = [
   { name: "Extra phone numbers", detail: "Local or toll-free, add as many as you need." },
   { name: "Desk phone hardware", detail: "Plug-and-play handsets that provision themselves." },
-  { name: "Additional fax pages", detail: "For the months the paperwork piles up." },
-  { name: "Extra AI minutes", detail: "For high-volume seasons when the phone never stops." },
+  { name: "Extra basic lines", detail: "Phones that just dial, $15 each, no AI needed." },
+  { name: "Multi-location & Enterprise", detail: "Custom routing, a branded AI voice, and a dedicated manager. Talk to sales." },
 ];

@@ -114,7 +114,7 @@ export const industries: Industry[] = [
       },
       {
         q: "Will it work with my existing dispatch software?",
-        a: "OneBy creates structured tasks you can act on directly, and on Growth and Pro plans it plugs into popular field-service tools to keep jobs in sync.",
+        a: "OneBy creates structured tasks you can act on directly, and on Solo and Pro plans it plugs into popular field-service tools to keep jobs in sync.",
       },
       {
         q: "Do I have to change my phone number?",
@@ -282,7 +282,7 @@ export const industries: Industry[] = [
       },
       {
         q: "Does it work alongside our scheduling tools?",
-        a: "Yep. OneBy creates structured tasks and plugs into popular field-service software on Growth and Pro plans.",
+        a: "Yep. OneBy creates structured tasks and plugs into popular field-service software on Solo and Pro plans.",
       },
       {
         q: "Can we keep our current number?",
@@ -527,7 +527,7 @@ export const industries: Industry[] = [
       },
       {
         q: "Will it work with our scheduling system?",
-        a: "OneBy creates structured tasks and plugs into popular field-service tools on Growth and Pro plans.",
+        a: "OneBy creates structured tasks and plugs into popular field-service tools on Solo and Pro plans.",
       },
       {
         q: "Do we keep our phone number?",
@@ -690,7 +690,7 @@ export const industries: Industry[] = [
       },
       {
         q: "Will it integrate with our PM software?",
-        a: "OneBy creates structured tickets and plugs into popular property-management platforms on Growth and Pro plans.",
+        a: "OneBy creates structured tickets and plugs into popular property-management platforms on Solo and Pro plans.",
       },
       {
         q: "Can tenants text in requests too?",
@@ -753,7 +753,7 @@ export const industries: Industry[] = [
       },
       {
         title: "Clean ticket handoff",
-        body: "Every call becomes a structured ticket, ready to drop into your PSA on Growth and Pro plans.",
+        body: "Every call becomes a structured ticket, ready to drop into your PSA on Solo and Pro plans.",
       },
     ],
     quote:
@@ -771,7 +771,7 @@ export const industries: Industry[] = [
       },
       {
         q: "Does it integrate with our PSA?",
-        a: "OneBy creates structured tickets and plugs into popular PSA and ticketing tools on Growth and Pro plans.",
+        a: "OneBy creates structured tickets and plugs into popular PSA and ticketing tools on Solo and Pro plans.",
       },
       {
         q: "Can we route by time of day?",
