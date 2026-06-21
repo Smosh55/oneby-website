@@ -175,9 +175,9 @@ export default function HeroAppMock() {
           <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
           <span className="h-3 w-3 rounded-full bg-[#28c840]" />
           <span className="ml-3 inline-flex items-center gap-1.5">
-            <span className="grid h-5 w-5 place-items-center rounded-[6px] bg-navy">
+            <span className="grid h-6 w-6 place-items-center rounded-md border border-line bg-white shadow-sm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brand/oneby-mark.svg" alt="" className="h-3 w-3" />
+              <img src="/brand/oneby-mark.svg" alt="" className="h-4 w-4" />
             </span>
             <span className="text-xs font-semibold text-faint">OneBy · Workspace</span>
           </span>
@@ -195,9 +195,9 @@ export default function HeroAppMock() {
           {/* sidebar */}
           <aside className="hidden border-r border-line bg-canvas/40 p-4 sm:block">
             <div className="mb-5 flex items-center gap-2.5">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-navy shadow-sm">
+              <span className="grid h-9 w-9 place-items-center rounded-xl border border-line bg-white shadow-sm">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/brand/oneby-mark.svg" alt="OneBy" className="h-5 w-5" />
+                <img src="/brand/oneby-mark.svg" alt="OneBy" className="h-6 w-6" />
               </span>
               <span className="text-base font-bold tracking-tight text-navy">OneBy</span>
             </div>
