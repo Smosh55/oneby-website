@@ -422,6 +422,7 @@ function Dots() {
 }
 
 const inputCls = "min-w-0 rounded-lg border border-line bg-canvas px-2.5 py-1.5 text-[0.8rem] text-ink outline-none placeholder:text-faint focus:border-blue";
+const numCls = `${inputCls} [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`;
 
 function LiveView({ phase, typed, tags }: { phase: Phase; typed: number; tags: string[] }) {
   const done = phase === "done";
@@ -1093,7 +1094,7 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
                   <span className="min-w-0 flex-1 truncate text-[0.82rem] text-ink">{it.name}</span>
                 )}
                 {edit ? (
-                  <span className="inline-flex items-center gap-0.5"><span className="text-[0.8rem] text-faint">$</span><input type="number" value={it.price} onChange={(e) => update(i, "price", e.target.value)} className={`${inputCls} w-16 text-right`} /></span>
+                  <span className="inline-flex items-center gap-0.5"><span className="text-[0.8rem] text-faint">$</span><input type="number" value={it.price} onChange={(e) => update(i, "price", e.target.value)} className={`${numCls} w-16 text-right`} /></span>
                 ) : (
                   <span className="shrink-0 text-[0.82rem] font-semibold text-navy">${it.price.toLocaleString()}</span>
                 )}
@@ -1216,10 +1217,10 @@ function BillingView({
                   <div key={i} className="flex items-center gap-1.5">
                     <button type="button" onClick={() => removeLine(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
                     <input value={l.label} onChange={(e) => update(i, "label", e.target.value)} placeholder="Item or service" className={`${inputCls} min-w-0 flex-1`} />
-                    <input type="number" value={l.qty} onChange={(e) => update(i, "qty", e.target.value)} aria-label="Quantity" className={`${inputCls} w-9 text-center`} />
+                    <input type="number" value={l.qty} onChange={(e) => update(i, "qty", e.target.value)} aria-label="Quantity" className={`${numCls} w-10 text-center`} />
                     <span className="text-[0.78rem] text-faint">×</span>
                     <span className="text-[0.78rem] text-faint">$</span>
-                    <input type="number" value={l.price} onChange={(e) => update(i, "price", e.target.value)} aria-label="Price" className={`${inputCls} w-14 text-right`} />
+                    <input type="number" value={l.price} onChange={(e) => update(i, "price", e.target.value)} aria-label="Price" className={`${numCls} w-14 text-right`} />
                   </div>
                 ) : (
                   <div key={i} className="flex items-start justify-between gap-2 text-[0.85rem]">
@@ -1323,13 +1324,13 @@ function BillingView({
             </div>
             <div className="space-y-1.5">
               {miles.map((m, i) => (
-                <div key={i} className="flex items-center gap-2 rounded-lg bg-canvas px-3 py-2 text-[0.82rem]">
+                <div key={i} className="flex items-center gap-1.5 rounded-lg bg-canvas px-2.5 py-2 text-[0.82rem]">
                   <Flag size={13} className="shrink-0 text-blue" />
                   {editMile ? (
                     <>
                       <input value={m.label} onChange={(e) => updMile(i, "label", e.target.value)} className={`${inputCls} min-w-0 flex-1`} />
-                      <input type="number" value={m.pct} onChange={(e) => updMile(i, "pct", e.target.value)} aria-label="Percent" className={`${inputCls} w-12 text-right`} />
-                      <span className="text-faint">%</span>
+                      <input type="number" value={m.pct} onChange={(e) => updMile(i, "pct", e.target.value)} aria-label="Percent" className={`${numCls} w-12 text-right`} />
+                      <span className="shrink-0 text-faint">%</span>
                       <button type="button" onClick={() => removeMile(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
                     </>
                   ) : (
