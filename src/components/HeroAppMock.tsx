@@ -73,6 +73,17 @@ const NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
   messages: { id: "tasks", label: "See the tasks" },
 };
 
+// Compact (homepage hero) variant: just the core loop. The full 11-module
+// workspace renders on /product.
+const CORE: ModId[] = ["live", "tickets", "schedule", "billing", "messages", "tasks"];
+const CORE_NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
+  live: { id: "tickets", label: "See the ticket" },
+  tickets: { id: "schedule", label: "Schedule it" },
+  schedule: { id: "billing", label: "Bill the job" },
+  billing: { id: "messages", label: "Text the customer" },
+  messages: { id: "tasks", label: "See the tasks" },
+};
+
 type Phase = "transcribing" | "summarizing" | "typing" | "done";
 type TaskState = "pending" | "acted" | "ignored";
 type Job = { time: string; title: string; tech: string; hot?: boolean; duration?: string };
