@@ -196,6 +196,13 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
   const [customers, setCustomers] = useState<Customer[]>(CUSTOMERS);
   const [subtasks, setSubtasks] = useState<Subtask[]>(SUBTASK_SEED);
   const [newTickets, setNewTickets] = useState<Ticket[]>([]);
+  // Edits to non-primary tickets, keyed by id, lifted here so they survive
+  // leaving and re-entering the Tickets module. #1042 keeps using the shared
+  // state above (tags/notes/subtasks/assignedTech) that also feeds Live/Billing/Team.
+  const [tagsBy, setTagsBy] = useState<Record<string, string[]>>({});
+  const [notesBy, setNotesBy] = useState<Record<string, string[]>>({});
+  const [subsBy, setSubsBy] = useState<Record<string, Subtask[]>>({});
+  const [techBy, setTechBy] = useState<Record<string, string>>({});
   const openCustomer = (name: string) => { const c = CUSTOMERS.find((x) => x.name === name); setCustSel(c ? c.id : null); setActive("customers"); };
   const openTicket = (id: string | null) => { setTicketSel(id); setActive("tickets"); };
   const addTicket = () => {
@@ -227,6 +234,10 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
           setExtra({});
           setTicketSel(null);
           setNewTickets([]);
+          setTagsBy({});
+          setNotesBy({});
+          setSubsBy({});
+          setTechBy({});
           setCustSel(null);
           setCustomers(CUSTOMERS);
           setSubtasks(SUBTASK_SEED);
@@ -395,7 +406,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
               {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} customers={customers} setCustomers={setCustomers} setActive={setActive} openTicket={openTicket} />}
               {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} openTicket={openTicket} />}
               {active === "tickets" && (
-                <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} addJob={addJob} setActive={setActive} newTickets={newTickets} addTicket={addTicket} />
+                <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} addJob={addJob} setActive={setActive} newTickets={newTickets} addTicket={addTicket} tagsBy={tagsBy} setTagsBy={setTagsBy} notesBy={notesBy} setNotesBy={setNotesBy} subsBy={subsBy} setSubsBy={setSubsBy} techBy={techBy} setTechBy={setTechBy} />
               )}
               {active === "schedule" && (
                 <ScheduleView day={day} setDay={setDay} weekOffset={weekOffset} setWeekOffset={setWeekOffset} extra={extra} addJob={addJob} openTicket={openTicket} />
@@ -711,6 +722,14 @@ function TicketsView({
   setActive,
   newTickets,
   addTicket,
+  tagsBy,
+  setTagsBy,
+  notesBy,
+  setNotesBy,
+  subsBy,
+  setSubsBy,
+  techBy,
+  setTechBy,
 }: {
   tags: string[];
   setTags: (t: string[]) => void;
@@ -728,6 +747,14 @@ function TicketsView({
   setActive: (m: ModId) => void;
   newTickets: Ticket[];
   addTicket: () => void;
+  tagsBy: Record<string, string[]>;
+  setTagsBy: (m: Record<string, string[]>) => void;
+  notesBy: Record<string, string[]>;
+  setNotesBy: (m: Record<string, string[]>) => void;
+  subsBy: Record<string, Subtask[]>;
+  setSubsBy: (m: Record<string, Subtask[]>) => void;
+  techBy: Record<string, string>;
+  setTechBy: (m: Record<string, string>) => void;
 }) {
   const [n, setN] = useState("");
   const [picking, setPicking] = useState(false);
@@ -748,13 +775,6 @@ function TicketsView({
   const [schTech, setSchTech] = useState("");
   const SCHED_SLOTS = ["8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"];
   const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  // Edits to non-primary tickets live here, keyed by id, so they don't leak
-  // between tickets. The primary job (#1042) keeps using the lifted state that
-  // also feeds Live, Billing and Team.
-  const [tagsBy, setTagsBy] = useState<Record<string, string[]>>({});
-  const [notesBy, setNotesBy] = useState<Record<string, string[]>>({});
-  const [subsBy, setSubsBy] = useState<Record<string, Subtask[]>>({});
-  const [techBy, setTechBy] = useState<Record<string, string>>({});
   const applyService = (it: Item) => {
     const steps = it.tasks ?? [];
     setCurSubs((xs) => [...xs, ...steps.map((label, k) => ({ id: Date.now() + k, label, assignee: curTech, done: false }))]);
@@ -800,13 +820,14 @@ function TicketsView({
   const curNotes = isPrimary ? notes : (notesBy[sid] ?? tk?.notes ?? []);
   const curSubs = isPrimary ? subtasks : (subsBy[sid] ?? tk?.subtasks ?? []);
   const curTech = isPrimary ? assignedTech : (techBy[sid] ?? tk?.tech ?? TEAM[0].name);
-  const setCurTags = (t: string[]) => (isPrimary ? setTags(t) : setTagsBy((m) => ({ ...m, [sid]: t })));
-  const addCurNote = (t: string) => (isPrimary ? addNote(t) : setNotesBy((m) => ({ ...m, [sid]: [...(m[sid] ?? tk?.notes ?? []), t] })));
+  const setCurTags = (t: string[]) => (isPrimary ? setTags(t) : setTagsBy({ ...tagsBy, [sid]: t }));
+  const addCurNote = (t: string) => (isPrimary ? addNote(t) : setNotesBy({ ...notesBy, [sid]: [...(notesBy[sid] ?? tk?.notes ?? []), t] }));
   const setCurSubs: SubtaskSetter = (u) => {
     if (isPrimary) { setSubtasks(u); return; }
-    setSubsBy((m) => { const cur = m[sid] ?? tk?.subtasks ?? []; return { ...m, [sid]: typeof u === "function" ? u(cur) : u }; });
+    const cur = subsBy[sid] ?? tk?.subtasks ?? [];
+    setSubsBy({ ...subsBy, [sid]: typeof u === "function" ? u(cur) : u });
   };
-  const setCurTech = (t: string) => (isPrimary ? setAssignedTech(t) : setTechBy((m) => ({ ...m, [sid]: t })));
+  const setCurTech = (t: string) => (isPrimary ? setAssignedTech(t) : setTechBy({ ...techBy, [sid]: t }));
 
   if (!tk) {
     return (
@@ -2098,7 +2119,7 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
         {tab === "messages" && (
           <div className="space-y-2">
             {rec.convos.map((m, i) => (
-              <button type="button" key={i} onClick={() => setActive("messages")} className="flex w-full gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
+              <button type="button" key={i} onClick={() => setActive(m.kind === "Call" ? "live" : "messages")} className="flex w-full gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-green/10 text-green-600">{m.kind === "Call" ? <PhoneCall size={15} /> : <MessageSquare size={15} />}</span>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2"><p className="text-[0.8rem] font-semibold text-navy">{m.kind}</p><span className="shrink-0 text-[0.68rem] text-faint">{m.when}</span></div>
