@@ -1050,8 +1050,10 @@ function TeamView({ assignedTech, setActive }: { assignedTech: string; setActive
 
 function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c: Item[]) => void }) {
   const [edit, setEdit] = useState(false);
+  const [filter, setFilter] = useState<"All" | "Service" | "Part">("All");
   const update = (i: number, field: "name" | "price", v: string) =>
     setCatalog(catalog.map((it, idx) => (idx === i ? { ...it, [field]: field === "price" ? Number(v) || 0 : v } : it)));
+  const toggleType = (i: number) => setCatalog(catalog.map((it, idx) => (idx === i ? { ...it, type: it.type === "Service" ? "Part" : "Service" } : it)));
   const add = () => setCatalog([...catalog, { id: Date.now(), name: "New item", type: "Service", price: 0, tasks: [] }]);
   const remove = (i: number) => setCatalog(catalog.filter((_, idx) => idx !== i));
   const updTask = (i: number, ti: number, v: string) => setCatalog(catalog.map((it, idx) => (idx === i ? { ...it, tasks: (it.tasks ?? []).map((t, j) => (j === ti ? v : t)) } : it)));
@@ -1066,14 +1068,25 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
           <span className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">{catalog.length} items</span>
           <button type="button" onClick={() => setEdit(!edit)} className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${edit ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {edit ? "Done" : "Edit"}</button>
         </div>
+        <div className="mb-2 flex gap-1.5">
+          {(["All", "Service", "Part"] as const).map((f) => (
+            <button key={f} type="button" onClick={() => setFilter(f)} className={`rounded-full px-2.5 py-1 text-[0.72rem] font-semibold transition-colors ${filter === f ? "bg-blue text-white" : "bg-canvas-2 text-ink/70"}`}>{f === "All" ? "All" : f === "Service" ? "Services" : "Parts"}</button>
+          ))}
+        </div>
         <div className="space-y-1.5">
-          {catalog.map((it, i) => (
+          {catalog.map((it, i) => {
+            if (filter !== "All" && it.type !== filter) return null;
+            return (
             <div key={it.id} className="rounded-lg bg-canvas px-2.5 py-1.5">
               <div className="flex items-center gap-2">
                 {edit && (
                   <button type="button" onClick={() => remove(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
                 )}
-                <span className={`shrink-0 rounded px-1.5 py-0.5 text-[0.6rem] font-bold uppercase ${it.type === "Service" ? "bg-blue/10 text-blue" : "bg-green/10 text-green-600"}`}>{it.type === "Service" ? "Svc" : "Part"}</span>
+                {edit ? (
+                  <button type="button" onClick={() => toggleType(i)} aria-label="Toggle type" className={`shrink-0 rounded px-1.5 py-0.5 text-[0.6rem] font-bold uppercase ${it.type === "Service" ? "bg-blue/10 text-blue" : "bg-green/10 text-green-600"}`}>{it.type === "Service" ? "Svc" : "Part"}</button>
+                ) : (
+                  <span className={`shrink-0 rounded px-1.5 py-0.5 text-[0.6rem] font-bold uppercase ${it.type === "Service" ? "bg-blue/10 text-blue" : "bg-green/10 text-green-600"}`}>{it.type === "Service" ? "Svc" : "Part"}</span>
+                )}
                 {edit ? (
                   <input value={it.name} onChange={(e) => update(i, "name", e.target.value)} className={`${inputCls} flex-1`} />
                 ) : (
@@ -1108,7 +1121,8 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
                 </div>
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
         {edit && (
           <button type="button" onClick={add} className="mt-2 inline-flex items-center gap-1 text-[0.78rem] font-semibold text-blue hover:underline"><Plus size={12} /> Add item</button>
