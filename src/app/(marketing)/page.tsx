@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import LogoCloud from "@/components/LogoCloud";
+import Punchline from "@/components/Punchline";
 import Problem from "@/components/Problem";
 import Solution from "@/components/Solution";
 import HowItWorks from "@/components/HowItWorks";
@@ -18,6 +19,7 @@ export default function Home() {
     <>
       <Hero />
       <LogoCloud />
+      <Punchline />
       <Problem />
       <Solution />
       <HowItWorks />

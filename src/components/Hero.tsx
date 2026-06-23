@@ -26,25 +26,23 @@ export default function Hero() {
         {/* Centered copy */}
         <div className="mx-auto max-w-3xl text-center">
           <span className="animate-rise eyebrow rounded-full border border-blue/20 bg-blue/5 px-3 py-1.5">
-            <Sparkles size={14} /> Calls, tickets, scheduling, and invoicing in one
+            <Sparkles size={14} /> The all-in-one for busy service pros
           </span>
 
           <h1
             className="animate-rise mt-5 text-[2.6rem] leading-[1.04] font-extrabold tracking-tight text-navy sm:text-6xl lg:text-[4.25rem]"
             style={{ animationDelay: "60ms" }}
           >
-            Catch every call.{" "}
-            <span className="text-gradient">Win every job.</span>
+            Never miss a call.{" "}
+            <span className="text-gradient">Never miss a customer.</span>
           </h1>
 
           <p
             className="animate-rise mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted"
             style={{ animationDelay: "120ms" }}
           >
-            Your team answers the calls they can. OneBy's AI catches the ones
-            they can't, so you never miss one. Then every call, answered by a
-            person or by AI, turns into a summary, a ticket, and the next step.
-            One platform, not four.
+            Your team answers the calls they can. OneBy's AI catches the rest,
+            and turns every call into a summary, a lead, and the next step.
           </p>
 
           <div
