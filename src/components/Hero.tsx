@@ -33,17 +33,18 @@ export default function Hero() {
             className="animate-rise mt-5 text-[2.6rem] leading-[1.04] font-extrabold tracking-tight text-navy sm:text-6xl lg:text-[4.25rem]"
             style={{ animationDelay: "60ms" }}
           >
-            Turn every call into a{" "}
-            <span className="text-gradient">booked, invoiced job.</span>
+            Catch every call.{" "}
+            <span className="text-gradient">Win every job.</span>
           </h1>
 
           <p
             className="animate-rise mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted"
             style={{ animationDelay: "120ms" }}
           >
-            OneBy answers your calls with AI, then tickets, schedules, and
-            invoices the job, all in one place. It replaces your phone system,
-            your answering service, your scheduler, and your invoicing app.
+            Your team answers the calls they can. OneBy's AI catches the ones
+            they can't, so you never miss one. Then every call, answered by a
+            person or by AI, turns into a summary, a ticket, and the next step.
+            One platform, not four.
           </p>
 
           <div

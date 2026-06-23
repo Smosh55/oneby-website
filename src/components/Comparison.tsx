@@ -3,12 +3,12 @@ import Reveal from "./Reveal";
 import { Check, X } from "lucide-react";
 
 const rows = [
-  "Post-call automation on every call",
-  "Auto-creates AND assigns follow-up tasks",
-  "AI summaries for answered & missed calls",
-  "Unified call + SMS + task timeline",
-  "Built for teams of every size",
-  "Action-focused, not just communication",
+  "Answers your phone with AI",
+  "Turns every call into a ticket",
+  "Scheduling & dispatch",
+  "Invoicing & payments",
+  "Calling, SMS & desk phones",
+  "Everything in one place",
 ];
 
 const cols = [
@@ -21,9 +21,9 @@ const cols = [
 const matrix: boolean[][] = [
   [true, false, false],
   [true, false, false],
-  [true, false, false],
+  [true, false, true],
+  [true, false, true],
   [true, true, false],
-  [true, true, true],
   [true, false, false],
 ];
 
@@ -37,8 +37,9 @@ export default function Comparison() {
             Not another phone system. Not another CRM.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            Phone systems move minutes. CRMs store records. OneBy sits in the
-            middle and turns the conversation itself into action.
+            Phone systems move minutes. Field CRMs store jobs but don't answer
+            your phone. OneBy does both: it answers the call with AI and runs the
+            whole job, in one place.
           </p>
         </Reveal>
 

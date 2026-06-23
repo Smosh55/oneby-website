@@ -1,5 +1,5 @@
 import Reveal from "./Reveal";
-import { PhoneOff, NotebookPen, UserX } from "lucide-react";
+import { PhoneOff, Unplug, UserX } from "lucide-react";
 
 const stats = [
   {
@@ -8,14 +8,14 @@ const stats = [
     label: "leak leads. Callers rarely leave a voicemail. They just dial the next company.",
   },
   {
-    icon: NotebookPen,
-    stat: "Answered calls",
-    label: "leak details. Whatever got said evaporates the second the call ends.",
+    icon: Unplug,
+    stat: "Scattered tools",
+    label: "lose the job. Your phone, your scheduler, and your invoicing app don't talk, so details fall between them.",
   },
   {
     icon: UserX,
     stat: "Follow-ups",
-    label: "fall through. No notes, no task, and nobody on the hook to do it.",
+    label: "fall through. No ticket, no task, no invoice, and nobody on the hook to do it.",
   },
 ];
 
@@ -26,13 +26,13 @@ export default function Problem() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow text-error">The hidden leak</span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-            Your calls are full of work that never gets done.
+            You're losing jobs to the phone, and to the apps that don't talk.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            The calls you miss are only half the problem. Every call you{" "}
-            <em>do</em> answer is packed with promises, details, and next steps,
-            and the second you hang up, most of it just evaporates. The
-            conversation happened. The follow-up? Not so much.
+            The calls you miss go straight to a competitor. The calls you answer
+            get scattered across a phone system, an answering service, a
+            scheduler, and an invoicing app that never sync. The job falls
+            through the cracks between them.
           </p>
         </Reveal>
 
@@ -54,14 +54,14 @@ export default function Problem() {
           ))}
         </div>
 
-        {/* kill voicemail */}
+        {/* one place for the whole job */}
         <Reveal delay={100} className="mt-12 text-center">
           <p className="text-xl font-bold tracking-tight text-navy sm:text-2xl">
-            So we did the obvious thing. We killed voicemail.
+            So we built one place for the whole job.
           </p>
           <p className="mx-auto mt-2 max-w-xl text-[0.975rem] text-muted">
-            Instead of recording a message nobody listens to, OneBy answers,
-            understands, and turns the call into action.
+            OneBy answers the call, then tickets, schedules, and invoices it,
+            without jumping between four apps.
           </p>
         </Reveal>
 
@@ -69,11 +69,11 @@ export default function Problem() {
         <Reveal delay={160} className="mt-8">
           <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 rounded-2xl border border-line bg-canvas px-6 py-5 text-center sm:flex-row sm:justify-center sm:gap-5 sm:text-left">
             <span className="text-sm font-semibold text-muted line-through decoration-error/60">
-              Call → Voicemail → Forgotten
+              Call → Voicemail → four apps → dropped
             </span>
             <span className="hidden text-faint sm:block">→</span>
             <span className="text-sm font-bold text-navy">
-              Call → AI → Summary → Task → Resolution
+              Call → AI → Ticket → Scheduled → Invoiced → Paid
             </span>
           </div>
         </Reveal>

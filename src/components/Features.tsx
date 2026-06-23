@@ -10,6 +10,9 @@ import {
   Phone,
   Printer,
   ShieldCheck,
+  Ticket,
+  CalendarDays,
+  Receipt,
   Search,
 } from "lucide-react";
 
@@ -39,6 +42,21 @@ const features = [
     icon: Bot,
     title: "AI Receptionist",
     body: "When a call goes unanswered, AI answers, captures the details, and hands off a ready-to-action task.",
+  },
+  {
+    icon: Ticket,
+    title: "Ticketing",
+    body: "Every call becomes a structured ticket, assigned and ready, with the summary attached. Nothing lives on a sticky note.",
+  },
+  {
+    icon: CalendarDays,
+    title: "Scheduling",
+    body: "Assign a tech and a time, see the whole week, and sync two-way with Google and Microsoft calendars.",
+  },
+  {
+    icon: Receipt,
+    title: "Invoicing & Payments",
+    body: "Quote it, invoice it, and text a pay link the customer taps to pay by card. Milestone billing for big jobs.",
   },
   {
     icon: History,
@@ -75,12 +93,12 @@ export default function Features() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">The platform</span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-            A whole communications suite. Plus a brain.
+            One platform for the whole job.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            Calling, desk phones, SMS, and fax come standard, so you can retire
-            the old phone system. The AI on top is the part that turns every
-            call into summaries, tasks, and resolved jobs.
+            Answer the call, ticket it, schedule it, invoice it, and get paid,
+            plus calling, SMS, and desk phones. Everything in one place, with the
+            AI doing the busywork.
           </p>
         </Reveal>
 

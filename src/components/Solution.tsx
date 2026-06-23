@@ -4,8 +4,8 @@ import { Phone, MessageSquare, Bot, Users, Ticket, CalendarDays, Receipt } from 
 const pillars = [
   {
     icon: Bot,
-    title: "It answers every call",
-    body: "AI picks up in a natural voice, gets the details, and never drops a customer to voicemail.",
+    title: "It catches every call",
+    body: "Your team answers what they can. The AI catches the rest, overflow and after-hours included, so nothing goes to voicemail.",
   },
   {
     icon: Ticket,
@@ -35,10 +35,10 @@ export default function Solution() {
               The whole job, from the first ring to paid.
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
-              OneBy replaces your phone system, your answering service, your
-              scheduler, and your invoicing app with one platform built around
-              the call. Every conversation flows straight into a booked,
-              scheduled, invoiced job.
+              Your team answers the calls they can; the AI catches the rest, so
+              you never miss one. Then every call, whoever picks up, gets
+              summarized and flows straight into a ticket, a schedule, and an
+              invoice. One platform built around the call.
             </p>
 
             <ul className="mt-8 space-y-4">

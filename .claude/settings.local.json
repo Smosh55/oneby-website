@@ -22,7 +22,10 @@
       "Bash(sed -i 's/Basic Lines/Lines/g' data/features.ts)",
       "Bash(sed -i 's/An AI seat is a line plus the brain:/An AI seat \\(our Solo plan\\) is a line plus the brain:/' \"app/\\(marketing\\)/pricing/page.tsx\")",
       "Bash(sed -i -e 's|/mo for Pro|/user for Pro|' -e 's|proRetailMonthly}/mo|proRetailMonthly}/user|' -e 's|proLockedMonthly}/mo|proLockedMonthly}/user|' page.tsx)",
-      "Bash(grep -n \"Pro\\\\|/user\\\\|/mo for\\\\|RetailMonthly}/\\\\|LockedMonthly}/\" page.tsx)"
+      "Bash(grep -n \"Pro\\\\|/user\\\\|/mo for\\\\|RetailMonthly}/\\\\|LockedMonthly}/\" page.tsx)",
+      "Bash(rm -f .git/index .git/index-DESKTOP-90OI4FL .git/index-DESKTOP-90OI4FL-2)",
+      "Bash(git read-tree *)",
+      "Bash(git reset *)"
     ]
   }
 }

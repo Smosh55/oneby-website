@@ -102,12 +102,13 @@ export default function PricingPage() {
             Pricing
           </span>
           <h1 className="mx-auto mt-5 max-w-3xl text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[3.25rem]">
-            Pay for a dialtone where you need a dialtone.
+            One simple price for the whole platform.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-            Not every phone needs a brain. Put a cheap Line on the
-            extensions that just dial, and add an AI seat only on the lines that
-            book jobs. Start free for 14 days, cancel anytime.
+            Every plan includes the full CRM: AI receptionist, ticketing,
+            scheduling, invoicing, and SMS. Put a cheap Line on the phones that
+            just dial, and an AI seat where the jobs come in. Start free, no
+            credit card.
           </p>
         </div>
       </section>

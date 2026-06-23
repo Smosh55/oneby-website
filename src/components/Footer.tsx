@@ -8,6 +8,9 @@ const groups: { title: string; links: FooterLink[] }[] = [
     links: [
       { label: "Overview", href: "/product" },
       { label: "AI Receptionist", href: "/features/ai-receptionist" },
+      { label: "Ticketing", href: "/features/ticketing" },
+      { label: "Scheduling", href: "/features/scheduling" },
+      { label: "Invoicing & Payments", href: "/features/invoicing" },
       { label: "AI Voicemail Replacement", href: "/features/ai-voicemail-replacement" },
       { label: "Desk Phones & Fax", href: "/features/desk-phones" },
       { label: "Task Automation", href: "/features/task-automation" },
