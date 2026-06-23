@@ -1680,10 +1680,12 @@ function EmailView() {
 }
 
 function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; openTicket: (id: string | null) => void }) {
+  const jobsWeek = Object.values(DAY_JOBS).flat().length;
+  const openBal = CUSTOMERS.reduce((n, c) => n + c.balance, 0);
   const stats: { label: string; value: string; icon: LucideIcon; tone: string; go: ModId }[] = [
-    { label: "Jobs this week", value: "7", icon: CalendarDays, tone: "bg-blue/10 text-blue", go: "schedule" },
+    { label: "Jobs this week", value: String(jobsWeek), icon: CalendarDays, tone: "bg-blue/10 text-blue", go: "schedule" },
     { label: "Calls caught", value: "12", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "live" },
-    { label: "Unbilled", value: "$2,480", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { label: "Open balance", value: `$${openBal.toLocaleString()}`, icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
     { label: "Collected this week", value: "$9,120", icon: DollarSign, tone: "bg-green/10 text-green-600", go: "billing" },
   ];
   const upNext = [
@@ -1693,7 +1695,7 @@ function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; op
   const needs: { title: string; body: string; icon: LucideIcon; tone: string; go: ModId }[] = [
     { title: "$1,280 overdue · Sun City Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
     { title: "Urgent ticket unassigned", body: "#1041 water heater leaking · James R.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
-    { title: "2 voicemails to review", body: "Transcribed, waiting on you", icon: Voicemail, tone: "bg-blue/10 text-blue", go: "live" },
+    { title: "1 voicemail to review", body: "Transcribed, waiting on you", icon: Voicemail, tone: "bg-blue/10 text-blue", go: "live" },
   ];
   return (
     <div>
