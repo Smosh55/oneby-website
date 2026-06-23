@@ -51,8 +51,8 @@ export const plans: Plan[] = [
   {
     name: "Pro",
     tagline: "For teams that run on the phone",
-    price: "99",
-    unit: "/mo",
+    price: "49",
+    unit: "/user / mo",
     cta: "Book a demo",
     ctaClass: "btn-navy",
     features: [
@@ -87,7 +87,7 @@ export const matrix: MatrixGroup[] = [
     rows: [
       { label: "Cloud business phone system", values: [true, true, true] },
       { label: "Keep / port your number", values: [true, true, true] },
-      { label: "Included phone numbers", values: ["1", "1", "3+"] },
+      { label: "Included phone numbers", values: ["1", "1", "1 / user"] },
       { label: "Business SMS", values: [true, true, true] },
       { label: "Online fax", values: [true, true, true] },
       { label: "Desk phones with auto-provisioning", values: [true, true, true] },
@@ -108,7 +108,7 @@ export const matrix: MatrixGroup[] = [
   {
     group: "Collaboration & admin",
     rows: [
-      { label: "Included users", values: ["1", "1", "Up to 5"] },
+      { label: "Included users", values: ["1", "1", "2+"] },
       { label: "Customer timeline", values: [true, true, true] },
       { label: "Shared team inbox", values: [false, false, true] },
       { label: "Analytics & reporting", values: ["Basic", "Standard", "Advanced"] },

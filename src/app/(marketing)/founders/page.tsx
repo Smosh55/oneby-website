@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "What does \"founder rate locked for life\" actually mean?",
-    a: `You pay your pledge today, which covers your first full year. After that, your plan renews at your locked founder rate ($${founderPricing.soloLockedMonthly}/mo for Solo, $${founderPricing.proLockedMonthly}/mo for Pro), and that rate is frozen for as long as you stay subscribed. Standard pricing will go up over time. Yours won't.`,
+    a: `You pay your pledge today, which covers your first full year. After that, your plan renews at your locked founder rate ($${founderPricing.soloLockedMonthly}/mo for Solo, $${founderPricing.proLockedMonthly}/user for Pro), and that rate is frozen for as long as you stay subscribed. Standard pricing will go up over time. Yours won't.`,
   },
   {
     q: "Why isn't it free forever after I pay?",
@@ -154,7 +154,7 @@ export default function FoundersPage() {
               tone="muted"
               rows={[
                 ["Solo", `$${founderPricing.soloRetailMonthly}/mo`],
-                ["Pro", `$${founderPricing.proRetailMonthly}/mo`],
+                ["Pro", `$${founderPricing.proRetailMonthly}/user`],
               ]}
               foot="What everyone else pays after launch."
             />
@@ -163,7 +163,7 @@ export default function FoundersPage() {
               tone="primary"
               rows={[
                 ["Solo", `$${founderPricing.soloLockedMonthly}/mo`],
-                ["Pro", `$${founderPricing.proLockedMonthly}/mo`],
+                ["Pro", `$${founderPricing.proLockedMonthly}/user`],
               ]}
               foot="Frozen for as long as you stay. It never goes up."
             />

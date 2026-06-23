@@ -9,8 +9,9 @@
 export const founderPricing = {
   soloRetailMonthly: 39,
   soloLockedMonthly: 29,
-  proRetailMonthly: 99,
-  proLockedMonthly: 69,
+  // Pro is per user now (teams pay per seat).
+  proRetailMonthly: 49,
+  proLockedMonthly: 35,
 };
 
 export type FounderTier = {
@@ -74,26 +75,26 @@ export const founderTiers: FounderTier[] = [
     price: 349,
     tagline: "Built for a small team that lives on the phone.",
     includes: [
-      "A full year of OneBy Pro",
+      "A full year of Pro for 2 seats",
       "Multiple numbers and team members",
       "Shared inbox, assignments, and integrations",
       "Priority support",
     ],
-    locked: `$${founderPricing.proLockedMonthly}/mo`,
+    locked: `$${founderPricing.proLockedMonthly}/user`,
   },
   {
     id: "office-starter",
     name: "Office Starter",
-    price: 549,
+    price: 799,
     tagline: "Three desks, one tidy phone system, zero IT headache.",
     hardware: true,
     includes: [
       "Three ready-to-go OneBy desk phones",
-      "A full year of OneBy team service",
+      "A full year of Pro service for 3 seats",
       "Multi-line, shared inbox, assignments",
       "We set it up with you on a call",
     ],
-    locked: `$${founderPricing.proLockedMonthly}/mo`,
+    locked: `$${founderPricing.proLockedMonthly}/user`,
   },
   {
     id: "founding-partner",
