@@ -63,7 +63,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for HVAC",
     heroTitle: "Never lose another no-cooling call to voicemail.",
     heroSub:
-      "Your techs are on rooftops and in crawl spaces, not glued to the phone. When a call lands and nobody can grab it, OneBy's AI picks up, gets the address and the symptom, and drops a ready-to-dispatch task in your queue.",
+      "Your techs are on rooftops and in crawl spaces, not glued to the phone. When a call lands and nobody can grab it, OneBy's AI picks up, gets the address and the symptom, and drops a ready-to-dispatch task in your queue. From there the same platform schedules the tech, invoices the job, and texts the arrival window, so the whole job runs in one place.",
     heroStat: { stat: "+31%", label: "more service calls booked" },
     pains: [
       {
@@ -146,7 +146,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for plumbing",
     heroTitle: "A burst pipe can't wait for a callback.",
     heroSub:
-      "Plumbing emergencies love midnight, Sundays, and the exact moment you're under a sink across town. OneBy answers, calms the customer down, gets what's flooding and where, and turns it into an urgent job your team can act on.",
+      "Plumbing emergencies love midnight, Sundays, and the exact moment you're under a sink across town. OneBy answers, calms the customer down, gets what's flooding and where, and turns it into an urgent job your team can act on. Then it books the visit, sends the quote, and collects payment, all without leaving the platform.",
     heroStat: { stat: "4 hrs", label: "saved per day on callbacks" },
     pains: [
       {
@@ -227,7 +227,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for electrical",
     heroTitle: "Stop letting quote requests ring out.",
     heroSub:
-      "Panel upgrades, EV chargers, outages, inspections. Electrical leads are worth real money and easy to lose. OneBy answers the call, captures the scope and the property details, and turns it into a quote-ready task.",
+      "Panel upgrades, EV chargers, outages, inspections. Electrical leads are worth real money and easy to lose. OneBy answers the call, captures the scope and the property details, and turns it into a quote-ready task. From the same place you send the estimate, schedule the work, and invoice it when the job is done.",
     heroStat: { stat: "+34%", label: "more estimate requests captured" },
     pains: [
       {
@@ -310,7 +310,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for roofing",
     heroTitle: "Catch every storm-season lead.",
     heroSub:
-      "When a storm rolls through, the phone doesn't stop. OneBy answers every call, captures the damage details and the address, and books the inspection, so you fill the schedule instead of the voicemail box.",
+      "When a storm rolls through, the phone doesn't stop. OneBy answers every call, captures the damage details and the address, and books the inspection, so you fill the schedule instead of the voicemail box. Then OneBy tickets the job, schedules the crew, and invoices the work, start to finish in one platform.",
     heroStat: { stat: "+40%", label: "more inspections booked after storms" },
     pains: [
       {
@@ -391,7 +391,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for restoration",
     heroTitle: "In restoration, the first call answered wins the job.",
     heroSub:
-      "Water, fire, and mold losses are emergencies, and they almost always go to the company that picks up first. OneBy answers 24/7, captures the loss details, and dispatches instantly so you're on site before anyone else.",
+      "Water, fire, and mold losses are emergencies, and they almost always go to the company that picks up first. OneBy answers 24/7, captures the loss details, and dispatches instantly so you're on site before anyone else. The same platform tracks the job, schedules the crew, and invoices the loss, all in one place.",
     heroStat: { stat: "24/7", label: "live emergency answering" },
     pains: [
       {
@@ -472,7 +472,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for garage doors",
     heroTitle: "A car stuck in the garage is a same-day job.",
     heroSub:
-      "Broken springs and stuck doors are urgent, high-intent calls. OneBy answers every one, captures the door type and the symptom, and books the repair before the customer dials the next company on the list.",
+      "Broken springs and stuck doors are urgent, high-intent calls. OneBy answers every one, captures the door type and the symptom, and books the repair before the customer dials the next company on the list. From there it schedules the tech, sends the invoice, and texts the customer, the whole job in one place.",
     heroStat: { stat: "+27%", label: "more same-day repairs booked" },
     pains: [
       {
@@ -553,7 +553,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for pest control",
     heroTitle: "An infestation is an emotional, urgent call.",
     heroSub:
-      "Someone staring at a wasp nest or bed bugs wants help today, not tomorrow. OneBy answers, captures the pest and the property details, and books the treatment, turning anxious callers into scheduled jobs.",
+      "Someone staring at a wasp nest or bed bugs wants help today, not tomorrow. OneBy answers, captures the pest and the property details, and books the treatment, turning anxious callers into scheduled jobs. Then OneBy schedules the route, invoices the visit, and texts reminders, all from one platform.",
     heroStat: { stat: "+25%", label: "more treatments scheduled" },
     pains: [
       {
@@ -635,7 +635,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for property management",
     heroTitle: "Every tenant call becomes a tracked ticket.",
     heroSub:
-      "Across hundreds of units, the tenant calls never stop. Leaks, lockouts, no heat, noise. OneBy answers each one, captures the unit and the issue, and spins up a routed maintenance ticket on its own, so nothing slips between buildings.",
+      "Across hundreds of units, the tenant calls never stop. Leaks, lockouts, no heat, noise. OneBy answers each one, captures the unit and the issue, and spins up a routed maintenance ticket on its own, so nothing slips between buildings. From there the ticket schedules the tech, tracks the work, and invoices the owner, all in one place.",
     heroStat: { stat: "0", label: "missed maintenance requests" },
     pains: [
       {
@@ -716,7 +716,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for MSPs & IT",
     heroTitle: "Turn every support call into a ticket with context.",
     heroSub:
-      "When a client's network goes down, they call. OneBy answers, figures out the account and the issue, and creates a triaged ticket, so SLAs hold even when your techs are heads-down on another incident.",
+      "When a client's network goes down, they call. OneBy answers, figures out the account and the issue, and creates a triaged ticket, so SLAs hold even when your techs are heads-down on another incident. The same platform schedules the work, tracks it to resolution, and invoices the account.",
     heroStat: { stat: "100%", label: "of inbound issues ticketed" },
     pains: [
       {
@@ -797,7 +797,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for law firms",
     heroTitle: "Capture every new matter, even in court.",
     heroSub:
-      "A prospective client who hits voicemail just dials the next firm on the list. OneBy answers, qualifies the matter, and captures the intake details, so you book consultations while you're still in session.",
+      "A prospective client who hits voicemail just dials the next firm on the list. OneBy answers, qualifies the matter, and captures the intake details, so you book consultations while you're still in session. Then it schedules the consult, tracks the matter, and invoices the client, all in one place.",
     heroStat: { stat: "+35%", label: "more consultations booked" },
     pains: [
       {
@@ -878,7 +878,7 @@ export const industries: Industry[] = [
     heroEyebrow: "Built for medical & dental",
     heroTitle: "Handle overflow without overwhelming the front desk.",
     heroSub:
-      "When every line is busy, patients get hold music or voicemail. OneBy answers the overflow, captures the reason for the call, and creates a task your front desk can clear quickly, so no patient is left waiting.",
+      "When every line is busy, patients get hold music or voicemail. OneBy answers the overflow, captures the reason for the call, and creates a task your front desk can clear quickly, so no patient is left waiting. The same platform schedules the visit, texts reminders, and keeps every call on the patient's record.",
     heroStat: { stat: "0", label: "patients stuck in voicemail" },
     pains: [
       {
