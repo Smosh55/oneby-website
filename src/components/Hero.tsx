@@ -26,23 +26,24 @@ export default function Hero() {
         {/* Centered copy */}
         <div className="mx-auto max-w-3xl text-center">
           <span className="animate-rise eyebrow rounded-full border border-blue/20 bg-blue/5 px-3 py-1.5">
-            <Sparkles size={14} /> The AI Communications OS for every business
+            <Sparkles size={14} /> Calls, tickets, scheduling, and invoicing in one
           </span>
 
           <h1
             className="animate-rise mt-5 text-[2.6rem] leading-[1.04] font-extrabold tracking-tight text-navy sm:text-6xl lg:text-[4.25rem]"
             style={{ animationDelay: "60ms" }}
           >
-            Turn every call <span className="text-gradient">into action.</span>
+            Turn every call into a{" "}
+            <span className="text-gradient">booked, invoiced job.</span>
           </h1>
 
           <p
             className="animate-rise mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted"
             style={{ animationDelay: "120ms" }}
           >
-            OneBy answers your calls, writes the summary, and turns each one into
-            the next action. Answered or missed, desk phone or mobile, nothing
-            slips through.
+            OneBy answers your calls with AI, then tickets, schedules, and
+            invoices the job, all in one place. It replaces your phone system,
+            your answering service, your scheduler, and your invoicing app.
           </p>
 
           <div
@@ -50,29 +51,38 @@ export default function Hero() {
             style={{ animationDelay: "180ms" }}
           >
             <a href="/demo" className="btn btn-primary text-base">
-              Book a demo <ArrowRight size={18} />
+              Start free, no credit card <ArrowRight size={18} />
             </a>
             <a href="/pricing" className="btn btn-ghost text-base">
-              Start free trial
+              See pricing
             </a>
           </div>
 
+          {/* risk reversal */}
           <div
-            className="animate-rise mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted"
+            className="animate-rise mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium text-muted"
             style={{ animationDelay: "240ms" }}
           >
-            <span className="inline-flex items-center gap-1.5">
-              <span className="flex">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <Star key={i} size={15} className="fill-green text-green" />
-                ))}
-              </span>
-              4.9/5 from teams everywhere
+            {["No credit card", "No contract", "Keep your number", "Live in a day"].map(
+              (r) => (
+                <span key={r} className="inline-flex items-center gap-1.5">
+                  <CheckCircle2 size={16} className="text-green" /> {r}
+                </span>
+              )
+            )}
+          </div>
+
+          {/* proof */}
+          <div
+            className="animate-rise mt-4 inline-flex items-center gap-1.5 text-sm text-muted"
+            style={{ animationDelay: "300ms" }}
+          >
+            <span className="flex">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} size={15} className="fill-green text-green" />
+              ))}
             </span>
-            <span className="inline-flex items-center gap-1.5">
-              <CheckCircle2 size={16} className="text-green" /> Live in a day, keep
-              your number
-            </span>
+            4.9/5 from service pros
           </div>
         </div>
 

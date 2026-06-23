@@ -1,26 +1,26 @@
 import Reveal from "./Reveal";
-import { Phone, MessageSquare, Bot, ListChecks, Clock, Users, Sparkles } from "lucide-react";
+import { Phone, MessageSquare, Bot, Users, Ticket, CalendarDays, Receipt } from "lucide-react";
 
 const pillars = [
   {
     icon: Bot,
-    title: "Communication-first",
-    body: "Not a chatbot bolted onto a CRM. OneBy starts where the customer starts, with the conversation, and works outward from there.",
+    title: "It answers every call",
+    body: "AI picks up in a natural voice, gets the details, and never drops a customer to voicemail.",
   },
   {
-    icon: Sparkles,
-    title: "AI-native",
-    body: "The AI isn't a feature we added. It runs on every call by default, listening, summarizing, and deciding what happens next.",
+    icon: Ticket,
+    title: "It tickets the job",
+    body: "The call becomes a structured ticket on its own: who called, what they need, how urgent, assigned and ready.",
   },
   {
-    icon: ListChecks,
-    title: "Workflow-native",
-    body: "Every call, text, and voicemail becomes a task with an owner and a due date. Nothing lives in a recording nobody listens to.",
+    icon: CalendarDays,
+    title: "It schedules the work",
+    body: "Drop the job on a tech and a time, synced two-way with Google and Microsoft calendars.",
   },
   {
-    icon: Clock,
-    title: "Action-focused",
-    body: "We don't sell minutes or dial tone. We sell outcomes: leads captured, jobs booked, customers followed up with.",
+    icon: Receipt,
+    title: "It invoices and gets paid",
+    body: "Invoice the finished job and text a pay link. The customer taps to pay by card.",
   },
 ];
 
@@ -32,13 +32,13 @@ export default function Solution() {
           <Reveal className="min-w-0">
             <span className="eyebrow">One platform, not five tools</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              OneBy turns conversations into action.
+              The whole job, from the first ring to paid.
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
-              Calling, desk phones, SMS, fax, an AI receptionist, summaries,
-              customer timelines, and task automation, all in one system that
-              actually fits together. The phone setup that finally remembers
-              everything and does something about it.
+              OneBy replaces your phone system, your answering service, your
+              scheduler, and your invoicing app with one platform built around
+              the call. Every conversation flows straight into a booked,
+              scheduled, invoiced job.
             </p>
 
             <ul className="mt-8 space-y-4">

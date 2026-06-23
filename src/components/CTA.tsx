@@ -15,22 +15,23 @@ export default function CTA() {
 
             <div className="relative mx-auto max-w-2xl">
               <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-[2.75rem] sm:leading-[1.1]">
-                Stop letting the phone cost you customers.
+                Your phone should book jobs, not lose them.
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-white/70">
-                See OneBy turn your next missed call into a booked job. Book a
-                demo or start your free trial today.
+                Start free with a trial number, watch the AI answer and turn the
+                call into a booked, invoiced job, then add your line when you're
+                ready. No credit card to start.
               </p>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
                 <a href="/demo" className="btn btn-primary text-base">
-                  Book a demo <ArrowRight size={18} />
+                  Start free, no credit card <ArrowRight size={18} />
                 </a>
                 <a href="/pricing" className="btn btn-white text-base">
-                  Start free trial
+                  See pricing
                 </a>
               </div>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/60">
-                {["14-day free trial", "No contracts", "Live in a day"].map(
+                {["No credit card", "No contract", "Keep your number", "Live in a day"].map(
                   (t) => (
                     <span key={t} className="inline-flex items-center gap-1.5">
                       <CheckCircle2 size={16} className="text-green" /> {t}
