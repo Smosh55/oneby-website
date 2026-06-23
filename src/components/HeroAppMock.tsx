@@ -1214,13 +1214,19 @@ function BillingView({
             <div className="mt-2 space-y-1.5">
               {lines.map((l, i) =>
                 editBill ? (
-                  <div key={i} className="flex items-center gap-1.5">
-                    <button type="button" onClick={() => removeLine(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
-                    <input value={l.label} onChange={(e) => update(i, "label", e.target.value)} placeholder="Item or service" className={`${inputCls} min-w-0 flex-1`} />
-                    <input type="number" value={l.qty} onChange={(e) => update(i, "qty", e.target.value)} aria-label="Quantity" className={`${numCls} w-10 text-center`} />
-                    <span className="text-[0.78rem] text-faint">×</span>
-                    <span className="text-[0.78rem] text-faint">$</span>
-                    <input type="number" value={l.price} onChange={(e) => update(i, "price", e.target.value)} aria-label="Price" className={`${numCls} w-14 text-right`} />
+                  <div key={i} className="rounded-lg border border-line bg-canvas/60 p-2">
+                    <div className="flex items-center gap-1.5">
+                      <input value={l.label} onChange={(e) => update(i, "label", e.target.value)} placeholder="Item or service" className={`${inputCls} min-w-0 flex-1`} />
+                      <button type="button" onClick={() => removeLine(i)} aria-label="Remove line" className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={12} /></button>
+                    </div>
+                    <div className="mt-1.5 flex items-center gap-1.5 text-[0.78rem] text-faint">
+                      <span>Qty</span>
+                      <input type="number" value={l.qty} onChange={(e) => update(i, "qty", e.target.value)} aria-label="Quantity" className={`${numCls} w-12 text-center`} />
+                      <span>×</span>
+                      <span>$</span>
+                      <input type="number" value={l.price} onChange={(e) => update(i, "price", e.target.value)} aria-label="Price" className={`${numCls} w-16 text-right`} />
+                      <span className="ml-auto font-semibold text-navy">${(l.qty * l.price).toLocaleString()}</span>
+                    </div>
                   </div>
                 ) : (
                   <div key={i} className="flex items-start justify-between gap-2 text-[0.85rem]">
