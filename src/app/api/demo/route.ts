@@ -14,6 +14,8 @@ type DemoLead = {
   company?: string;
   industry?: string;
   teamSize?: string;
+  provider?: string;
+  source?: string;
   message?: string;
   // honeypot: real users never fill this (it's hidden in the form)
   website?: string;
@@ -29,6 +31,8 @@ const LIMITS: Record<string, number> = {
   company: 160,
   industry: 80,
   teamSize: 40,
+  provider: 80,
+  source: 200,
   message: 2000,
 };
 
@@ -86,6 +90,8 @@ export async function POST(req: Request) {
     company,
     industry: lead.industry ?? "",
     teamSize: lead.teamSize ?? "",
+    provider: lead.provider ?? "",
+    source: lead.source ?? "",
     message: lead.message?.trim() ?? "",
     receivedAt: new Date().toISOString(),
   });

@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check, Loader2, CalendarCheck } from "lucide-react";
 import { industries } from "@/data/industries";
+import { track, getSource } from "@/lib/analytics";
 
 type Fields = {
   name: string;
@@ -11,6 +12,7 @@ type Fields = {
   company: string;
   industry: string;
   teamSize: string;
+  provider: string;
   message: string;
 };
 
@@ -21,11 +23,22 @@ const empty: Fields = {
   company: "",
   industry: "",
   teamSize: "",
+  provider: "",
   message: "",
 };
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const teamSizes = ["Just me", "2 to 10", "11 to 50", "51 to 200", "200+"];
+const providers = [
+  "RingCentral",
+  "Nextiva",
+  "Dialpad",
+  "OpenPhone",
+  "Grasshopper",
+  "Google Voice",
+  "A landline / nothing",
+  "Other",
+];
 
 export default function DemoForm() {
   const [f, setF] = useState<Fields>(empty);
@@ -35,8 +48,18 @@ export default function DemoForm() {
   );
   const [serverError, setServerError] = useState("");
   const honeypot = useRef<HTMLInputElement>(null);
+  const source = useRef("");
+  const started = useRef(false);
+
+  useEffect(() => {
+    source.current = getSource();
+  }, []);
 
   const set = (k: keyof Fields, v: string) => {
+    if (!started.current) {
+      started.current = true;
+      track("lead_form_started", { source: source.current });
+    }
     setF((p) => ({ ...p, [k]: v }));
     if (errors[k]) setErrors((e) => ({ ...e, [k]: undefined }));
   };
@@ -61,10 +84,20 @@ export default function DemoForm() {
       const res = await fetch("/api/demo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...f, website: honeypot.current?.value ?? "" }),
+        body: JSON.stringify({
+          ...f,
+          source: source.current,
+          website: honeypot.current?.value ?? "",
+        }),
       });
       const data = await res.json();
       if (res.ok && data.ok) {
+        track("lead_submitted", {
+          industry: f.industry,
+          teamSize: f.teamSize,
+          provider: f.provider,
+          source: source.current,
+        });
         setStatus("done");
       } else {
         setServerError(data.error || "Something went wrong. Try again?");
@@ -156,6 +189,13 @@ export default function DemoForm() {
           onChange={(v) => set("teamSize", v)}
           options={teamSizes}
           placeholder="How many of you?"
+        />
+        <Select
+          label="Current phone provider"
+          value={f.provider}
+          onChange={(v) => set("provider", v)}
+          options={providers}
+          placeholder="Who are you using now?"
         />
       </div>
 

@@ -18,6 +18,7 @@ import {
   type FounderTier,
 } from "@/data/founders";
 import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
+import ReserveButton from "@/components/ReserveButton";
 
 const base = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
 
@@ -466,14 +467,7 @@ function TierCard({ tier }: { tier: FounderTier }) {
         ))}
       </ul>
 
-      <Link
-        href="/demo"
-        className={`mt-6 ${
-          tier.highlight ? "btn btn-primary" : "btn btn-ghost"
-        } w-full`}
-      >
-        Reserve this tier
-      </Link>
+      <ReserveButton tier={tier.id} primary={tier.highlight} className="mt-6 w-full" />
     </div>
   );
 }
