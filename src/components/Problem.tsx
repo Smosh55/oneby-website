@@ -1,5 +1,5 @@
 import Reveal from "./Reveal";
-import { PhoneOff, Unplug, UserX } from "lucide-react";
+import { PhoneOff, Unplug, UserX, ArrowRight } from "lucide-react";
 
 const stats = [
   {
@@ -34,6 +34,14 @@ export default function Problem() {
             scheduler, and an invoicing app that never sync. The job falls
             through the cracks between them.
           </p>
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <p className="text-sm font-semibold text-navy">
+              A busy shop can lose six figures a year to missed calls alone.
+            </p>
+            <a href="/missed-call-calculator" className="btn btn-ghost text-sm">
+              Calculate your number <ArrowRight size={16} />
+            </a>
+          </div>
         </Reveal>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-3">

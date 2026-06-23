@@ -1,14 +1,12 @@
 import Hero from "@/components/Hero";
 import LogoCloud from "@/components/LogoCloud";
-import Punchline from "@/components/Punchline";
 import Problem from "@/components/Problem";
 import Solution from "@/components/Solution";
-import HowItWorks from "@/components/HowItWorks";
-import Features from "@/components/Features";
-import ReceptionistDemo from "@/components/ReceptionistDemo";
+import HearItWork from "@/components/HearItWork";
 import Stories from "@/components/Stories";
 import Industries from "@/components/Industries";
 import Comparison from "@/components/Comparison";
+import Features from "@/components/Features";
 import Pricing from "@/components/Pricing";
 import FoundersBanner from "@/components/FoundersBanner";
 import FAQ from "@/components/FAQ";
@@ -19,15 +17,13 @@ export default function Home() {
     <>
       <Hero />
       <LogoCloud />
-      <Punchline />
       <Problem />
       <Solution />
-      <HowItWorks />
-      <Features />
-      <ReceptionistDemo />
+      <HearItWork />
       <Stories />
       <Industries />
       <Comparison />
+      <Features />
       <Pricing />
       <FoundersBanner />
       <FAQ />
