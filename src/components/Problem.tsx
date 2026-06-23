@@ -60,8 +60,8 @@ export default function Problem() {
             So we built one place for the whole job.
           </p>
           <p className="mx-auto mt-2 max-w-xl text-[0.975rem] text-muted">
-            OneBy answers the call, then tickets, schedules, and invoices it,
-            without jumping between four apps.
+            OneBy catches every call, then summarizes, tickets, schedules, and
+            invoices it, without jumping between four apps.
           </p>
         </Reveal>
 
@@ -73,7 +73,7 @@ export default function Problem() {
             </span>
             <span className="hidden text-faint sm:block">→</span>
             <span className="text-sm font-bold text-navy">
-              Call → AI → Ticket → Scheduled → Invoiced → Paid
+              Call → Summary → Ticket → Scheduled → Invoiced → Paid
             </span>
           </div>
         </Reveal>

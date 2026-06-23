@@ -18,9 +18,9 @@ export default function CTA() {
                 Your phone should book jobs, not lose them.
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-white/70">
-                Start free with a trial number, watch the AI answer and turn the
-                call into a booked, invoiced job, then add your line when you're
-                ready. No credit card to start.
+                Start free with a trial number, see OneBy catch the calls you'd
+                miss and turn every call into a booked, invoiced job, then add
+                your line when you're ready. No credit card to start.
               </p>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
                 <a href="/demo" className="btn btn-primary text-base">
