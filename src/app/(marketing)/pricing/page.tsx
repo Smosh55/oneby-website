@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Fragment } from "react";
 import Link from "next/link";
-import { Check, Minus, ArrowRight, Phone, Sparkles } from "lucide-react";
+import { Check, Minus, ArrowRight } from "lucide-react";
 import { plans, matrix, addOns } from "@/data/pricing";
 import Reveal from "@/components/Reveal";
-import PricingEstimator from "@/components/PricingEstimator";
 import { jsonLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
-  title: "Pricing: Cheap Lines, AI Only Where You Need It",
+  title: "Pricing: Simple Plans for the Whole Platform",
   description:
     "Put a basic line on the phones that just dial, and AI seats on the lines that book jobs. Estimate your plan in seconds. Start free, no credit card, cancel anytime.",
   alternates: { canonical: "/pricing" },
@@ -18,20 +17,20 @@ const cols = plans.map((p) => p.name);
 
 const pricingFaqs = [
   {
-    q: "Do I need the full AI suite on every phone?",
-    a: "Nope, and you shouldn't pay for it. Put a Line on the warehouse phone, the break room, and the back office. Add an AI seat only on the lines that book jobs, like dispatch, intake, and sales.",
+    q: "What's included in each plan?",
+    a: "Every plan includes the full CRM: AI receptionist, ticketing, scheduling, invoicing, and SMS, plus calling and desk phones. Higher plans add more users, integrations, and priority support.",
   },
   {
-    q: "What's the difference between a line and an AI seat?",
-    a: "A Line is the phone system: calling, desk phone, SMS, and fax. An AI seat (our Solo plan) is a line plus the brain: 24/7 AI receptionist, post-call automation, summaries, and tasks that create and assign themselves.",
+    q: "Do I need a credit card to start?",
+    a: "No. Start the CRM free with no card. You add a card when you're ready to put your business line on OneBy and go live, and you keep your number.",
   },
   {
-    q: "What about lobby, conference, and paging phones?",
-    a: "Those run as common-area phones at a flat low rate. Dialtone only, no user license, so a hallway handset never costs you a full seat.",
+    q: "What's the difference between Line, Solo, and Pro?",
+    a: "Line is the phone system for phones that just need a dialtone. Solo adds the AI that answers, summarizes, and turns calls into jobs. Pro is Solo for a whole team, with shared inbox, integrations, and priority support.",
   },
   {
-    q: "Can I move AI from one line to another?",
-    a: "Anytime. Turn an AI seat on for the busy season and back to a Line when things slow down. You're never locked in.",
+    q: "Can I change plans later?",
+    a: "Anytime. Move up or down as your team changes. No contract, and you can cancel whenever you want.",
   },
 ];
 
@@ -110,40 +109,6 @@ export default function PricingPage() {
             just dial, and an AI seat where the jobs come in. Start free, no
             credit card.
           </p>
-        </div>
-      </section>
-
-      {/* Two things you buy */}
-      <section className="pb-4">
-        <div className="container-x">
-          <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
-            <div className="surface-card rounded-2xl p-6">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-green/10 text-green-600">
-                <Phone size={20} />
-              </span>
-              <h2 className="mt-4 text-lg font-semibold text-navy">
-                1. Lines, for every phone
-              </h2>
-              <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">
-                Calling, desk phone with auto-provisioning, SMS, and fax. Cheap
-                enough to put on every extension, including the ones that just
-                need a dialtone.
-              </p>
-            </div>
-            <div className="surface-card rounded-2xl p-6">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-blue/10 text-blue">
-                <Sparkles size={20} />
-              </span>
-              <h2 className="mt-4 text-lg font-semibold text-navy">
-                2. AI seats, where they pay off
-              </h2>
-              <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">
-                Add the AI receptionist, post-call automation, and auto-assigned
-                tasks only on the lines that book jobs. The brain goes where the
-                revenue is.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -238,23 +203,23 @@ export default function PricingPage() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Estimator */}
-      <section className="py-16 lg:py-20">
-        <div className="container-x">
-          <Reveal className="mx-auto mb-8 max-w-2xl text-center">
-            <span className="eyebrow">Build your plan</span>
-            <h2 className="mt-4 text-2xl font-bold tracking-tight text-navy sm:text-3xl">
-              Mix lines and AI seats. See the price instantly.
-            </h2>
-            <p className="mt-3 text-[1.05rem] leading-relaxed text-muted">
-              Most teams run a handful of AI seats and a pile of basic lines.
-              Drag the numbers around and watch the total.
-            </p>
-          </Reveal>
-          <PricingEstimator />
+          {/* reassurance + enterprise */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium text-muted">
+            {["No credit card", "No contract", "Keep your number", "Live in a day"].map(
+              (r) => (
+                <span key={r} className="inline-flex items-center gap-1.5">
+                  <Check size={15} strokeWidth={3} className="text-green-600" /> {r}
+                </span>
+              )
+            )}
+          </div>
+          <p className="mt-6 text-center text-sm text-muted">
+            Multiple locations or high volume?{" "}
+            <Link href="/demo" className="font-semibold text-blue hover:underline">
+              Talk to sales about Enterprise.
+            </Link>
+          </p>
         </div>
       </section>
 

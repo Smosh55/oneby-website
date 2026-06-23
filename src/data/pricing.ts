@@ -20,7 +20,7 @@ export const plans: Plan[] = [
     tagline: "For phones that just need to work",
     price: "15",
     unit: "/line / mo",
-    cta: "Start free trial",
+    cta: "Start free",
     ctaClass: "btn-ghost",
     features: [
       "Business calling & SMS",
@@ -36,7 +36,7 @@ export const plans: Plan[] = [
     tagline: "The AI that answers and books the job",
     price: "39",
     unit: "/mo",
-    cta: "Start free trial",
+    cta: "Start free",
     ctaClass: "btn-primary",
     featured: true,
     features: [
@@ -53,7 +53,7 @@ export const plans: Plan[] = [
     tagline: "For teams that run on the phone",
     price: "49",
     unit: "/user / mo",
-    cta: "Book a demo",
+    cta: "Start free",
     ctaClass: "btn-navy",
     features: [
       "Everything in Solo",
