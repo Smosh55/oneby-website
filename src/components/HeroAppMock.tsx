@@ -1158,23 +1158,75 @@ function Banner({ title, body }: { title: string; body: string }) {
   );
 }
 
-function MessagesView({ msgs, setMsgs }: { msgs: { me: boolean; text: string }[]; setMsgs: (m: { me: boolean; text: string }[]) => void }) {
-  const quick = ["On our way 🚐", "Running 10 min late", "All done, invoice sent"];
+type Msg = { me: boolean; text: string };
+type Thread = { id: string; name: string; unread?: number; msgs: Msg[] };
+
+function MessagesView({ msgs, setMsgs }: { msgs: Msg[]; setMsgs: (m: Msg[]) => void }) {
+  const TEMPLATES = ["On our way 🚐", "Running 10 min late", "All done, invoice sent", "Confirming your appointment"];
+  const [others, setOthers] = useState<Thread[]>([
+    { id: "james", name: "James R.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "My water heater is getting worse." }] },
+    { id: "oak", name: "Oak Street HOA", msgs: [{ me: true, text: "Crew is booked for the 12-unit maintenance Thursday at 8:30." }, { me: false, text: "Great, the COI is on file." }] },
+    { id: "dana", name: "Dana P.", unread: 1, msgs: [{ me: false, text: "Is the thermostat still blinking after the install?" }] },
+  ]);
+  const [sel, setSel] = useState<string | null>(null);
+  const [draft, setDraft] = useState("");
+
+  const mariaThread: Thread = { id: "maria", name: JOB.customer, msgs };
+  const allThreads = [mariaThread, ...others];
+  const cur = allThreads.find((t) => t.id === sel);
+
+  const send = (text: string) => {
+    if (!text.trim()) return;
+    if (sel === "maria") setMsgs([...msgs, { me: true, text }]);
+    else setOthers((xs) => xs.map((t) => (t.id === sel ? { ...t, msgs: [...t.msgs, { me: true, text }] } : t)));
+    setDraft("");
+    toast("Message sent");
+  };
+
+  if (!cur) {
+    return (
+      <div>
+        <ModuleHeader title="Messages" sub={`${allThreads.length} conversations`} />
+        <div className="space-y-2">
+          {allThreads.map((t) => {
+            const last = t.msgs[t.msgs.length - 1];
+            const ini = t.name.split(" ").map((w) => w[0]).slice(0, 2).join("");
+            return (
+              <button key={t.id} type="button" onClick={() => { setSel(t.id); setOthers((xs) => xs.map((x) => (x.id === t.id ? { ...x, unread: undefined } : x))); }} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-blue/10 text-[0.72rem] font-bold text-blue">{ini}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-[0.84rem] font-semibold text-navy">{t.name}</p>
+                  <p className="truncate text-[0.74rem] text-muted">{last ? (last.me ? "You: " : "") + last.text : "No messages"}</p>
+                </div>
+                {t.unread ? <span className="grid h-5 min-w-[1.25rem] shrink-0 place-items-center rounded-full bg-blue px-1 text-[0.66rem] font-bold text-white">{t.unread}</span> : <ChevronRight size={16} className="shrink-0 text-faint" />}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <ModuleHeader title="Messages" sub={`Texting ${JOB.customer}`} />
+      <ModuleHeader title="Messages" sub={`Texting ${cur.name}`} />
+      <button type="button" onClick={() => setSel(null)} className="mb-3 inline-flex items-center gap-1 text-[0.76rem] font-semibold text-muted transition-colors hover:text-navy"><ChevronLeft size={14} /> Inbox</button>
       <div className="rounded-xl border border-line bg-surface p-4">
         <div className="space-y-2">
-          {msgs.map((m, i) => (
+          {cur.msgs.map((m, i) => (
             <div key={i} className={`flex ${m.me ? "justify-end" : "justify-start"}`}>
               <span className={`max-w-[80%] rounded-2xl px-3 py-2 text-[0.82rem] leading-snug ${m.me ? "bg-blue text-white" : "bg-canvas-2 text-ink"}`}>{m.text}</span>
             </div>
           ))}
         </div>
         <div className="mt-3 flex flex-wrap gap-1.5">
-          {quick.map((q) => (
-            <button key={q} type="button" onClick={() => setMsgs([...msgs, { me: true, text: q }])} className="inline-flex items-center gap-1 rounded-full border border-line bg-canvas px-2.5 py-1 text-[0.74rem] font-medium text-ink/70 transition-colors hover:border-blue hover:text-blue"><Send size={11} /> {q}</button>
+          {TEMPLATES.map((q) => (
+            <button key={q} type="button" onClick={() => send(q)} className="inline-flex items-center gap-1 rounded-full border border-line bg-canvas px-2.5 py-1 text-[0.74rem] font-medium text-ink/70 transition-colors hover:border-blue hover:text-blue"><Send size={11} /> {q}</button>
           ))}
+        </div>
+        <div className="mt-3 flex gap-2">
+          <input value={draft} onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") send(draft); }} placeholder="Type a message" className={`${inputCls} flex-1`} />
+          <button type="button" onClick={() => send(draft)} className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-blue px-3 py-1.5 text-[0.78rem] font-semibold text-white hover:opacity-90"><Send size={13} /> Send</button>
         </div>
       </div>
     </div>
