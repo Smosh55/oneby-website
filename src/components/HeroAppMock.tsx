@@ -35,7 +35,6 @@ import {
   MousePointerClick,
   LayoutDashboard,
   UserRound,
-  Voicemail,
   Play,
   Pause,
   DollarSign,
@@ -526,7 +525,7 @@ function LiveView({ phase, typed, tags, openTicket }: { phase: Phase; typed: num
       <div className="mt-5">
         <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Earlier today</p>
         <div className="space-y-2">
-          <VoicemailRow />
+          <AnsweredCallRow />
           <div className="flex items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-green/10 text-green-600"><PhoneCall size={16} /></span>
             <div className="min-w-0">
@@ -606,7 +605,7 @@ function ActiveCallCard() {
   );
 }
 
-function VoicemailRow() {
+function AnsweredCallRow() {
   const [playing, setPlaying] = useState(false);
   return (
     <div className="rounded-xl border border-line bg-canvas px-3.5 py-3">
@@ -614,25 +613,25 @@ function VoicemailRow() {
         <button
           type="button"
           onClick={() => setPlaying((p) => !p)}
-          className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-blue text-white transition-opacity hover:opacity-90"
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-green text-white transition-opacity hover:opacity-90"
         >
           {playing ? <Pause size={15} /> : <Play size={15} className="ml-0.5" />}
         </button>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
-            <Voicemail size={13} className="text-blue" />
-            <p className="text-[0.84rem] font-semibold text-navy">Voicemail · Dana P.</p>
+            <PhoneCall size={13} className="text-green-600" />
+            <p className="text-[0.84rem] font-semibold text-navy">AI answered · Dana P.</p>
             <span className="ml-auto text-[0.72rem] text-faint">0:42</span>
           </div>
           {/* progress bar */}
           <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-line">
-            <div className={`h-full rounded-full bg-blue ${playing ? "animate-pulse" : ""}`} style={{ width: playing ? "100%" : "0%", transition: playing ? "width 42s linear" : "none" }} />
+            <div className={`h-full rounded-full bg-green ${playing ? "animate-pulse" : ""}`} style={{ width: playing ? "100%" : "0%", transition: playing ? "width 42s linear" : "none" }} />
           </div>
         </div>
       </div>
       <p className="mt-2.5 rounded-lg bg-surface px-3 py-2 text-[0.78rem] leading-relaxed text-ink">
-        <span className="font-semibold text-blue">Transcript: </span>
-        Hi, it&apos;s Dana, my A/C is making a grinding noise and not blowing cold. Can someone come take a look this week? Thanks.
+        <span className="font-semibold text-green-600">AI captured: </span>
+        Dana&apos;s A/C is grinding and not blowing cold; she wants someone out this week. Picked up on the second ring, no voicemail.
       </p>
     </div>
   );
@@ -1736,7 +1735,7 @@ function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; op
   const needs: { title: string; body: string; icon: LucideIcon; tone: string; go: ModId }[] = [
     { title: "$1,280 overdue · Sun City Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
     { title: "Urgent ticket unassigned", body: "#1041 water heater leaking · James R.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
-    { title: "1 voicemail to review", body: "Transcribed, waiting on you", icon: Voicemail, tone: "bg-blue/10 text-blue", go: "live" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "live" },
   ];
   return (
     <div>
