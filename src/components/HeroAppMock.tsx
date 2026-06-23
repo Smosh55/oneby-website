@@ -383,7 +383,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
 
             <div className="flex-1">
               {active === "home" && <HomeView setActive={setActive} openTicket={openTicket} />}
-              {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} customers={customers} setCustomers={setCustomers} />}
+              {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} customers={customers} setCustomers={setCustomers} setActive={setActive} openTicket={openTicket} />}
               {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} openTicket={openTicket} />}
               {active === "tickets" && (
                 <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} addJob={addJob} setActive={setActive} />
@@ -437,11 +437,18 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
   );
 }
 
-function ModuleHeader({ title, sub }: { title: string; sub: string }) {
+function ModuleHeader({ title, sub, action }: { title: string; sub: string; action?: { label: string; onClick: () => void } }) {
   return (
-    <div className="mb-4">
-      <h3 className="text-sm font-bold text-navy">{title}</h3>
-      <p className="text-xs text-faint">{sub}</p>
+    <div className="mb-4 flex items-start justify-between gap-3">
+      <div className="min-w-0">
+        <h3 className="text-sm font-bold text-navy">{title}</h3>
+        <p className="text-xs text-faint">{sub}</p>
+      </div>
+      {action && (
+        <button type="button" onClick={action.onClick} className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-blue px-2.5 py-1.5 text-[0.74rem] font-semibold text-white transition-opacity hover:opacity-90">
+          <Plus size={13} /> {action.label}
+        </button>
+      )}
     </div>
   );
 }
@@ -464,7 +471,7 @@ function LiveView({ phase, typed, tags, openTicket }: { phase: Phase; typed: num
   const processing = phase === "transcribing" || phase === "summarizing";
   return (
     <div>
-      <ModuleHeader title="Live activity" sub="One call active, one just wrapped" />
+      <ModuleHeader title="Live activity" sub="One call active, one just wrapped" action={{ label: "Log call", onClick: () => toast("Call logged") }} />
 
       <ActiveCallCard />
 
@@ -790,7 +797,7 @@ function TicketsView({
   if (!tk) {
     return (
       <div>
-        <ModuleHeader title="Tickets" sub={`${TICKETS.length} open jobs`} />
+        <ModuleHeader title="Tickets" sub={`${TICKETS.length} open jobs`} action={{ label: "New ticket", onClick: () => toast("New ticket created") }} />
         <div className="space-y-4">
           {TICKET_STATUSES.map((s) => {
             const inCol = TICKETS.filter((t) => t.status === s);
@@ -1043,7 +1050,7 @@ function ScheduleView({
 
   return (
     <div>
-      <ModuleHeader title="Schedule" sub="Book the crew, today or weeks out" />
+      <ModuleHeader title="Schedule" sub="Book the crew, today or weeks out" action={{ label: "New job", onClick: () => toast("New job added") }} />
       <div className="rounded-xl border border-line bg-surface p-4">
         <div className="mb-3 flex items-center justify-between">
           <button type="button" onClick={() => setWeekOffset(weekOffset - 1)} className="grid h-7 w-7 place-items-center rounded-lg border border-line text-muted hover:border-blue hover:text-blue"><ChevronLeft size={15} /></button>
@@ -1140,7 +1147,7 @@ function TeamView({ assignedTech, setActive }: { assignedTech: string; setActive
   if (!t) {
     return (
       <div>
-        <ModuleHeader title="Team" sub="3 techs · 7 jobs this week" />
+        <ModuleHeader title="Team" sub="3 techs · 7 jobs this week" action={{ label: "Add teammate", onClick: () => toast("Invite sent") }} />
         <div className="space-y-2">
           {TEAM.map((m) => (
             <button key={m.name} type="button" onClick={() => setSel(m.name)} className={`flex w-full items-center gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-colors hover:border-blue ${m.name === assignedTech ? "border-blue/30 bg-blue/[0.04]" : "border-line bg-surface"}`}>
@@ -1222,7 +1229,7 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
 
   return (
     <div>
-      <ModuleHeader title="Catalog" sub="Your services and parts, priced once" />
+      <ModuleHeader title="Catalog" sub="Your services and parts, priced once" action={{ label: "New item", onClick: () => toast("Item added") }} />
       <div className="rounded-xl border border-line bg-surface p-4">
         <div className="mb-2 flex items-center justify-between">
           <span className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">{catalog.length} items</span>
@@ -1350,7 +1357,7 @@ function BillingView({
 
   return (
     <div>
-      <ModuleHeader title="Billing" sub={`Job #${billTicket.id} · ${billTicket.customer}`} />
+      <ModuleHeader title="Billing" sub={`Job #${billTicket.id} · ${billTicket.customer}`} action={{ label: "New invoice", onClick: () => toast("Invoice drafted") }} />
 
       <div className="mb-3 flex items-center gap-3 rounded-xl border border-warning/25 bg-warning/[0.06] px-3.5 py-2.5">
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-warning/15 text-warning"><DollarSign size={16} /></span>
@@ -1602,7 +1609,7 @@ function MessagesView({ msgs, setMsgs }: { msgs: Msg[]; setMsgs: (m: Msg[]) => v
   if (!cur) {
     return (
       <div>
-        <ModuleHeader title="Messages" sub={`${allThreads.length} conversations`} />
+        <ModuleHeader title="Messages" sub={`${allThreads.length} conversations`} action={{ label: "New message", onClick: () => toast("New conversation started") }} />
         <div className="space-y-2">
           {allThreads.map((t) => {
             const last = t.msgs[t.msgs.length - 1];
@@ -1662,7 +1669,7 @@ function TasksView({ tasks, setTasks, setActive }: { tasks: Record<number, TaskS
   const choiceFor = (it: (typeof TASKS)[number]) => choices[it.id] ?? it.options[0];
   return (
     <div>
-      <ModuleHeader title="Tasks" sub="Act on what the call needs" />
+      <ModuleHeader title="Tasks" sub="Act on what the call needs" action={{ label: "New task", onClick: () => toast("Task added") }} />
       <div className="space-y-2">
         {TASKS.map((it) => {
           const st = tasks[it.id];
@@ -1755,7 +1762,7 @@ function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; op
   ];
   return (
     <div>
-      <ModuleHeader title="Today" sub="Your whole shop at a glance" />
+      <ModuleHeader title="Today" sub="Your whole shop at a glance" action={{ label: "Quick add", onClick: () => toast("Created") }} />
       <div className="grid grid-cols-2 gap-2.5">
         {stats.map((s) => (
           <button key={s.label} type="button" onClick={() => setActive(s.go)} className="rounded-xl border border-line bg-surface p-3.5 text-left transition-colors hover:border-blue">
@@ -1843,7 +1850,7 @@ function custTimeline(c: Customer): TLEntry[] {
   ];
 }
 
-function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number | null; setSel: (n: number | null) => void; customers: Customer[]; setCustomers: (c: Customer[]) => void }) {
+function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTicket }: { sel: number | null; setSel: (n: number | null) => void; customers: Customer[]; setCustomers: (c: Customer[]) => void; setActive: (m: ModId) => void; openTicket: (id: string | null) => void }) {
   const [edit, setEdit] = useState(false);
   const [q, setQ] = useState("");
   const [tab, setTab] = useState<"activity" | "jobs" | "tickets" | "invoices" | "messages" | "assets" | "files">("activity");
@@ -1864,12 +1871,11 @@ function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number |
     const filtered = customers.filter((x) => x.name.toLowerCase().includes(q.toLowerCase()));
     return (
       <div>
-        <ModuleHeader title="Customers" sub={`${customers.length} customers · click to open`} />
+        <ModuleHeader title="Customers" sub={`${customers.length} customers · click to open`} action={{ label: "New customer", onClick: newCustomer }} />
         <div className="relative mb-3">
           <Search size={14} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-faint" />
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search customers" className={`${inputCls} w-full pl-8`} />
         </div>
-        <button type="button" onClick={newCustomer} className="mb-3 inline-flex items-center gap-1 rounded-lg border border-dashed border-line px-3 py-1.5 text-[0.78rem] font-semibold text-blue transition-colors hover:border-blue"><Plus size={13} /> New customer</button>
         <div className="space-y-1.5">
           {filtered.map((x) => (
             <button key={x.id} type="button" onClick={() => { setSel(x.id); setEdit(false); }} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
@@ -2024,70 +2030,73 @@ function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number |
         {tab === "jobs" && (
           <div className="space-y-2">
             {rec.jobs.map((j) => (
-              <div key={j.title} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+              <button type="button" key={j.title} onClick={() => setActive("schedule")} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><CalendarDays size={15} /></span>
                 <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{j.title}</p><p className="text-[0.72rem] text-muted">{j.when}</p></div>
                 <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${pill(j.status)}`}>{j.status}</span>
                 <span className="shrink-0 text-[0.82rem] font-semibold text-navy">${j.amount}</span>
-              </div>
+                <ChevronRight size={14} className="shrink-0 text-faint" />
+              </button>
             ))}
           </div>
         )}
         {tab === "tickets" && (
           <div className="space-y-2">
             {rec.tickets.map((t) => (
-              <div key={t.id} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+              <button type="button" key={t.id} onClick={() => openTicket(t.id)} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Ticket size={15} /></span>
                 <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{t.issue}</p><p className="text-[0.72rem] text-muted">#{t.id}</p></div>
                 <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${pill(t.status)}`}>{t.status}</span>
-              </div>
+                <ChevronRight size={14} className="shrink-0 text-faint" />
+              </button>
             ))}
           </div>
         )}
         {tab === "invoices" && (
           <div className="space-y-2">
             {rec.invoices.map((iv) => (
-              <div key={iv.id} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+              <button type="button" key={iv.id} onClick={() => setActive("billing")} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Receipt size={15} /></span>
                 <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{iv.id}</p></div>
                 <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${pill(iv.status)}`}>{iv.status}</span>
                 <span className="shrink-0 text-[0.82rem] font-semibold text-navy">${iv.amount.toLocaleString()}</span>
-              </div>
+                <ChevronRight size={14} className="shrink-0 text-faint" />
+              </button>
             ))}
           </div>
         )}
         {tab === "messages" && (
           <div className="space-y-2">
             {rec.convos.map((m, i) => (
-              <div key={i} className="flex gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+              <button type="button" key={i} onClick={() => setActive("messages")} className="flex w-full gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-green/10 text-green-600">{m.kind === "Call" ? <PhoneCall size={15} /> : <MessageSquare size={15} />}</span>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2"><p className="text-[0.8rem] font-semibold text-navy">{m.kind}</p><span className="shrink-0 text-[0.68rem] text-faint">{m.when}</span></div>
                   <p className="text-[0.74rem] leading-relaxed text-muted">{m.text}</p>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         )}
         {tab === "assets" && (
           <div className="space-y-2">
             {rec.assets.map((a) => (
-              <div key={a.name} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+              <button type="button" key={a.name} onClick={() => toast("Opening equipment record")} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Package size={15} /></span>
                 <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{a.name}</p><p className="truncate text-[0.72rem] text-muted">{a.meta}</p></div>
                 <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${a.warranty === "Under warranty" ? "bg-green/10 text-green-600" : "bg-canvas-2 text-faint"}`}>{a.warranty}</span>
-              </div>
+              </button>
             ))}
           </div>
         )}
         {tab === "files" && (
           <div className="space-y-2">
             {rec.files.map((fl) => (
-              <div key={fl.name} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+              <button type="button" key={fl.name} onClick={() => toast(`Opening ${fl.name}`)} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><FileText size={15} /></span>
                 <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{fl.name}</p><p className="truncate text-[0.72rem] text-muted">{fl.meta}</p></div>
                 <ChevronRight size={15} className="shrink-0 text-faint" />
-              </div>
+              </button>
             ))}
           </div>
         )}
