@@ -46,12 +46,14 @@ const JOB = { customer: "Maria G.", issue: "Upstairs A/C not cooling", ticket: "
 const SUMMARY =
   "Existing customer, upstairs A/C not cooling since last night. Home after 3pm, wants a same-day visit.";
 
-type ModId = "live" | "tickets" | "schedule" | "team" | "catalog" | "billing" | "messages" | "tasks" | "email";
+type ModId = "home" | "live" | "tickets" | "schedule" | "customers" | "team" | "catalog" | "billing" | "messages" | "tasks" | "email";
 
 const MODULES: { id: ModId; label: string; icon: LucideIcon; badge?: string; soon?: boolean }[] = [
+  { id: "home", label: "Home", icon: LayoutDashboard },
   { id: "live", label: "Live", icon: Activity },
   { id: "tickets", label: "Tickets", icon: Ticket, badge: "1" },
   { id: "schedule", label: "Schedule", icon: CalendarDays },
+  { id: "customers", label: "Customers", icon: UserRound },
   { id: "team", label: "Team", icon: Users },
   { id: "catalog", label: "Catalog", icon: Package },
   { id: "billing", label: "Billing", icon: Receipt },
@@ -304,6 +306,8 @@ export default function HeroAppMock() {
             </div>
 
             <div className="flex-1">
+              {active === "home" && <HomeView setActive={setActive} />}
+              {active === "customers" && <CustomersView />}
               {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} />}
               {active === "tickets" && (
                 <TicketsView tags={tags} addTag={addTag} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} />
@@ -384,7 +388,7 @@ function LiveView({ phase, typed, tags }: { phase: Phase; typed: number; tags: s
           <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-green/10 text-green-600"><PhoneCall size={18} /></span>
           <div className="min-w-0">
             <p className="text-[0.95rem] font-semibold text-navy">Call with {JOB.customer}</p>
-            <p className="truncate text-xs text-muted">Desk phone · answered in 2 rings · 4:12</p>
+            <p className="truncate text-xs text-muted">Answered by Dana · desk phone · 4:12</p>
           </div>
           {done ? (
             <span className="ml-auto shrink-0 rounded-full bg-blue/10 px-2.5 py-1 text-[11px] font-semibold text-blue">AI summarized</span>
@@ -426,6 +430,54 @@ function LiveView({ phase, typed, tags }: { phase: Phase; typed: number; tags: s
           <Ticket size={15} /> Turned into Ticket #{JOB.ticket}, automatically
         </p>
       )}
+
+      {/* recent calls / phone log */}
+      <div className="mt-5">
+        <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Earlier today</p>
+        <div className="space-y-2">
+          <VoicemailRow />
+          <div className="flex items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-green/10 text-green-600"><PhoneCall size={16} /></span>
+            <div className="min-w-0">
+              <p className="text-[0.84rem] font-semibold text-navy">Missed call, caught by AI</p>
+              <p className="truncate text-[0.72rem] text-muted">New lead · roof leak · details captured</p>
+            </div>
+            <span className="ml-auto shrink-0 rounded-full bg-green/10 px-2 py-0.5 text-[10px] font-semibold text-green-600">AI answered</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VoicemailRow() {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <div className="rounded-xl border border-line bg-canvas px-3.5 py-3">
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={() => setPlaying((p) => !p)}
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-blue text-white transition-opacity hover:opacity-90"
+        >
+          {playing ? <Pause size={15} /> : <Play size={15} className="ml-0.5" />}
+        </button>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-1.5">
+            <Voicemail size={13} className="text-blue" />
+            <p className="text-[0.84rem] font-semibold text-navy">Voicemail · Dana P.</p>
+            <span className="ml-auto text-[0.72rem] text-faint">0:42</span>
+          </div>
+          {/* progress bar */}
+          <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-line">
+            <div className={`h-full rounded-full bg-blue ${playing ? "animate-pulse" : ""}`} style={{ width: playing ? "100%" : "0%", transition: playing ? "width 42s linear" : "none" }} />
+          </div>
+        </div>
+      </div>
+      <p className="mt-2.5 rounded-lg bg-surface px-3 py-2 text-[0.78rem] leading-relaxed text-ink">
+        <span className="font-semibold text-blue">Transcript: </span>
+        Hi, it&apos;s Dana, my A/C is making a grinding noise and not blowing cold. Can someone come take a look this week? Thanks.
+      </p>
     </div>
   );
 }
@@ -915,6 +967,98 @@ function EmailView() {
         <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue/10 text-blue"><Mail size={22} /></span>
         <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-canvas-2 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-faint"><Lock size={11} /> Coming soon</p>
         <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">Send and track email from the same customer timeline as your calls, texts, and jobs. Launching soon.</p>
+      </div>
+    </div>
+  );
+}
+
+function HomeView({ setActive }: { setActive: (m: ModId) => void }) {
+  const stats: { label: string; value: string; icon: LucideIcon; tone: string; go: ModId }[] = [
+    { label: "Jobs today", value: "7", icon: CalendarDays, tone: "bg-blue/10 text-blue", go: "schedule" },
+    { label: "Calls caught", value: "12", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "live" },
+    { label: "Unbilled", value: "$2,480", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { label: "Collected this week", value: "$9,120", icon: DollarSign, tone: "bg-green/10 text-green-600", go: "billing" },
+  ];
+  const upNext = [
+    { time: "1:00", title: "Install · Lee", tech: "Luis R." },
+    { time: "3:30", title: "A/C diagnostic · Maria G.", tech: "Luis R." },
+  ];
+  return (
+    <div>
+      <ModuleHeader title="Today" sub="Your whole shop at a glance" />
+      <div className="grid grid-cols-2 gap-2.5">
+        {stats.map((s) => (
+          <button key={s.label} type="button" onClick={() => setActive(s.go)} className="rounded-xl border border-line bg-surface p-3.5 text-left transition-colors hover:border-blue">
+            <span className={`grid h-8 w-8 place-items-center rounded-lg ${s.tone}`}><s.icon size={16} /></span>
+            <p className="mt-2 text-xl font-extrabold tracking-tight text-navy">{s.value}</p>
+            <p className="text-[0.72rem] text-muted">{s.label}</p>
+          </button>
+        ))}
+      </div>
+      <p className="mt-3 inline-flex items-center gap-1 text-[0.72rem] font-semibold text-green-600">
+        <TrendingUp size={12} /> Revenue up 18% vs last month
+      </p>
+      <div className="mt-4">
+        <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Up next</p>
+        <div className="space-y-2">
+          {upNext.map((j) => (
+            <div key={j.time} className="flex items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5">
+              <span className="w-12 shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
+                <p className="text-[0.72rem] text-muted">{j.tech}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CustomersView() {
+  const timeline: { when: string; icon: LucideIcon; tone: string; title: string; body: string }[] = [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · A/C not cooling", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Luis arriving 3:30" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
+    { when: "Last summer", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · A/C install", body: "$4,200 · 12-month warranty" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ];
+  return (
+    <div>
+      <ModuleHeader title="Customer" sub="Everything OneBy remembers" />
+      <div className="rounded-xl border border-line bg-surface p-4">
+        <div className="flex items-center gap-3">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy text-sm font-bold text-white">MG</span>
+          <div className="min-w-0">
+            <p className="text-[0.95rem] font-semibold text-navy">Maria G.</p>
+            <p className="text-xs text-muted">(602) 555-0148 · Customer since 2023</p>
+          </div>
+          <span className="ml-auto shrink-0 rounded-full bg-green/10 px-2 py-0.5 text-[10px] font-semibold text-green-600">VIP</span>
+        </div>
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {["Existing customer", "HVAC", "3 jobs"].map((t) => (
+            <span key={t} className="rounded-md border border-line bg-canvas px-2 py-0.5 text-[0.7rem] font-medium text-ink/70">{t}</span>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-4">
+        <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Timeline</p>
+        <div className="space-y-2.5">
+          {timeline.map((e, i) => (
+            <div key={i} className="flex gap-3">
+              <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${e.tone}`}><e.icon size={15} /></span>
+              <div className="min-w-0 flex-1 border-b border-line pb-2.5">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="truncate text-[0.82rem] font-semibold text-navy">{e.title}</p>
+                  <span className="shrink-0 text-[0.68rem] text-faint">{e.when}</span>
+                </div>
+                <p className="text-[0.74rem] text-muted">{e.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
