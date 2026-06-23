@@ -1823,7 +1823,7 @@ function custTimeline(c: Customer): TLEntry[] {
 function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number | null; setSel: (n: number | null) => void; customers: Customer[]; setCustomers: (c: Customer[]) => void }) {
   const [edit, setEdit] = useState(false);
   const [q, setQ] = useState("");
-  const [tab, setTab] = useState<"activity" | "jobs" | "tickets" | "invoices" | "messages">("activity");
+  const [tab, setTab] = useState<"activity" | "jobs" | "tickets" | "invoices" | "messages" | "assets" | "files">("activity");
 
   const c = customers.find((x) => x.id === sel) || null;
   const upd = (field: "name" | "phone" | "email" | "address", v: string) =>
@@ -1886,6 +1886,16 @@ function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number |
       { kind: "Text", when: "Today 4:13", text: "Arrival window texted: Luis, 3 to 5pm." },
       { kind: "Call", when: "Mar 2026", text: "Booked the annual maintenance tune-up." },
     ],
+    assets: [
+      { name: "Carrier 3-ton A/C", meta: "Installed Jul 2025 · Model 24ABC6 · Upstairs", warranty: "Under warranty" },
+      { name: "Carrier gas furnace", meta: "Installed Jul 2025 · Model 59TP6 · Basement", warranty: "Under warranty" },
+      { name: "Nest thermostat", meta: "Installed Jul 2025 · 2nd gen", warranty: "Out of warranty" },
+    ],
+    files: [
+      { name: "Install photos", meta: "3 photos · Jul 2025" },
+      { name: "Signed estimate.pdf", meta: "PDF · Jul 2025" },
+      { name: "Warranty certificate.pdf", meta: "PDF · Jul 2025" },
+    ],
   };
   const lifetime = rec.invoices.reduce((n, i) => n + i.amount, 0);
   const TABS = [
@@ -1894,6 +1904,8 @@ function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number |
     { id: "tickets", label: "Tickets" },
     { id: "invoices", label: "Invoices" },
     { id: "messages", label: "Conversations" },
+    { id: "assets", label: "Equipment" },
+    { id: "files", label: "Files" },
   ] as const;
   const pill = (s: string) => {
     if (["Done", "Paid", "Closed"].includes(s)) return "bg-green/10 text-green-600";
@@ -1939,6 +1951,12 @@ function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number |
             ))
           )}
         </div>
+      </div>
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button type="button" onClick={() => toast("New job started")} className="inline-flex items-center gap-1.5 rounded-lg bg-blue px-3 py-1.5 text-[0.78rem] font-semibold text-white transition-opacity hover:opacity-90"><Plus size={13} /> New job</button>
+        <button type="button" onClick={() => toast("Invoice drafted")} className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-3 py-1.5 text-[0.78rem] font-semibold text-navy transition-colors hover:border-blue"><Receipt size={13} /> New invoice</button>
+        <button type="button" onClick={() => toast("Note added")} className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-3 py-1.5 text-[0.78rem] font-semibold text-navy transition-colors hover:border-blue"><Pencil size={13} /> Add note</button>
       </div>
 
       {/* source of truth: value + records */}
@@ -2024,6 +2042,28 @@ function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number |
                   <div className="flex items-center justify-between gap-2"><p className="text-[0.8rem] font-semibold text-navy">{m.kind}</p><span className="shrink-0 text-[0.68rem] text-faint">{m.when}</span></div>
                   <p className="text-[0.74rem] leading-relaxed text-muted">{m.text}</p>
                 </div>
+              </div>
+            ))}
+          </div>
+        )}
+        {tab === "assets" && (
+          <div className="space-y-2">
+            {rec.assets.map((a) => (
+              <div key={a.name} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Package size={15} /></span>
+                <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{a.name}</p><p className="truncate text-[0.72rem] text-muted">{a.meta}</p></div>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${a.warranty === "Under warranty" ? "bg-green/10 text-green-600" : "bg-canvas-2 text-faint"}`}>{a.warranty}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        {tab === "files" && (
+          <div className="space-y-2">
+            {rec.files.map((fl) => (
+              <div key={fl.name} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><FileText size={15} /></span>
+                <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{fl.name}</p><p className="truncate text-[0.72rem] text-muted">{fl.meta}</p></div>
+                <ChevronRight size={15} className="shrink-0 text-faint" />
               </div>
             ))}
           </div>
