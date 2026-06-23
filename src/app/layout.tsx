@@ -16,33 +16,33 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "OneBy: The AI Communications OS That Turns Calls Into Action",
+    default: "OneBy: The All-in-One CRM That Catches Every Call",
     template: "%s · OneBy",
   },
   description:
-    "OneBy makes every call smarter. Answered or missed, desk phone or mobile, it transcribes the conversation, writes the summary, and creates and assigns the follow-up task, automatically. For businesses of every size.",
+    "OneBy is the all-in-one CRM for service businesses. Catch every call, then ticket, schedule, and invoice the job, all in one place. Start free, no credit card.",
   keywords: [
-    "post-call automation",
-    "AI call summaries",
-    "call task automation",
+    "VoIP CRM",
+    "all-in-one CRM for service business",
+    "field service CRM",
     "AI receptionist",
     "business phone system",
-    "workflow automation",
-    "call transcription",
+    "ticketing scheduling invoicing software",
+    "CRM with phone system",
   ],
   openGraph: {
-    title: "OneBy: Turn Every Call Into Action",
+    title: "OneBy: Catch Every Call. Win Every Job.",
     description:
-      "The AI Communications OS that makes every call smarter. Every conversation becomes a summary and an assigned task, automatically.",
+      "The all-in-one CRM for service businesses: calls, tickets, scheduling, and invoicing in one place. Start free, no credit card.",
     type: "website",
     url: SITE_URL,
     siteName: "OneBy",
   },
   twitter: {
     card: "summary_large_image",
-    title: "OneBy: Turn Every Call Into Action",
+    title: "OneBy: Catch Every Call. Win Every Job.",
     description:
-      "The AI Communications OS that makes every call smarter. Every conversation becomes a summary and an assigned task.",
+      "The all-in-one CRM for service businesses: calls, tickets, scheduling, and invoicing in one place.",
   },
   icons: {
     icon: "/brand/oneby-mark.svg",
@@ -63,7 +63,7 @@ const orgJsonLd = {
       url: SITE_URL,
       logo: `${SITE_URL}/brand/oneby-logo.svg`,
       description:
-        "The AI Communications OS that turns every call into action: post-call automation, AI receptionist, and tasks that create and assign themselves.",
+        "OneBy is the all-in-one CRM for service businesses: it catches every call and turns it into a ticket, a schedule, and an invoice, in one place.",
       contactPoint: {
         "@type": "ContactPoint",
         telephone: "+1-626-663-2944",

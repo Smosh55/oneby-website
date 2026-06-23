@@ -27,7 +27,8 @@
       "Bash(git read-tree *)",
       "Bash(git reset *)",
       "Bash(cd /c/dev/oneby-website *)",
-      "Bash(echo \"exit: $?\")"
+      "Bash(echo \"exit: $?\")",
+      "Bash(Select-String -Pattern \"main ->\")"
     ]
   }
 }
