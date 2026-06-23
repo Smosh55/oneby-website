@@ -393,7 +393,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
               {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} customers={customers} setCustomers={setCustomers} />}
               {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} openTicket={openTicket} />}
               {active === "tickets" && (
-                <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} />
+                <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} addJob={addJob} setActive={setActive} />
               )}
               {active === "schedule" && (
                 <ScheduleView day={day} setDay={setDay} weekOffset={weekOffset} setWeekOffset={setWeekOffset} extra={extra} addJob={addJob} openTicket={openTicket} />
@@ -689,6 +689,8 @@ function TicketsView({
   catalog,
   subtasks,
   setSubtasks,
+  addJob,
+  setActive,
 }: {
   tags: string[];
   setTags: (t: string[]) => void;
@@ -702,6 +704,8 @@ function TicketsView({
   catalog: Item[];
   subtasks: Subtask[];
   setSubtasks: SubtaskSetter;
+  addJob: (key: string, job: Job) => void;
+  setActive: (m: ModId) => void;
 }) {
   const [n, setN] = useState("");
   const [picking, setPicking] = useState(false);
@@ -716,6 +720,12 @@ function TicketsView({
   const [stage, setStage] = useState(1);
   const [nt, setNt] = useState("");
   const [svcPick, setSvcPick] = useState(false);
+  const [sched, setSched] = useState(false);
+  const [schDay, setSchDay] = useState(2);
+  const [schTime, setSchTime] = useState("");
+  const [schTech, setSchTech] = useState("");
+  const SCHED_SLOTS = ["8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"];
+  const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   // Edits to non-primary tickets live here, keyed by id, so they don't leak
   // between tickets. The primary job (#1042) keeps using the lifted state that
   // also feeds Live, Billing and Team.
@@ -747,6 +757,7 @@ function TicketsView({
   };
   const action = STAGE_ACTION[stages[stage]] ?? "Advance";
   const atEnd = stage >= stages.length - 1;
+  const isSchedAction = action.startsWith("Schedule");
   const tk = TICKETS.find((t) => t.id === sel);
 
   // Each ticket opens to its own real status, and the workflow never leaks
@@ -872,7 +883,7 @@ function TicketsView({
             {atEnd ? (
               <span className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-green/10 px-3 py-2 text-[0.82rem] font-bold text-green-600"><CheckCircle2 size={15} /> Job complete</span>
             ) : (
-              <button type="button" onClick={() => { const next = stages[stage + 1]; setStage(stage + 1); toast(`Ticket moved to ${next}`); }} className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-navy px-3.5 py-2.5 text-[0.84rem] font-semibold text-white transition-opacity hover:opacity-90">
+              <button type="button" onClick={() => { if (isSchedAction) { setSched((v) => !v); } else { const next = stages[stage + 1]; setStage(stage + 1); toast(`Ticket moved to ${next}`); } }} className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-navy px-3.5 py-2.5 text-[0.84rem] font-semibold text-white transition-opacity hover:opacity-90">
                 {action} <ChevronRight size={15} />
               </button>
             )}
@@ -888,6 +899,36 @@ function TicketsView({
               {Object.keys(FLOWS).map((f) => <option key={f} value={f}>{f}</option>)}
             </select>
           </div>
+
+          {!atEnd && isSchedAction && sched && (
+            <div className="animate-rise mt-3 rounded-lg border border-line bg-canvas p-2.5">
+              <p className="mb-1.5 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Pick a slot and tech</p>
+              <div className="flex flex-wrap gap-1.5">
+                <select value={schDay} onChange={(e) => setSchDay(Number(e.target.value))} aria-label="Day" className={inputCls}>
+                  {DOW.map((d, i) => <option key={d} value={i}>{d}</option>)}
+                </select>
+                <select value={schTime} onChange={(e) => setSchTime(e.target.value)} aria-label="Time" className={inputCls}>
+                  <option value="">Time</option>
+                  {SCHED_SLOTS.map((t) => <option key={t} value={t}>{t}</option>)}
+                </select>
+                <select value={schTech || curTech} onChange={(e) => setSchTech(e.target.value)} aria-label="Tech" className={inputCls}>
+                  {TEAM.filter((t) => t.role !== "Dispatch").map((t) => <option key={t.name} value={t.name}>{t.name}</option>)}
+                </select>
+              </div>
+              <div className="mt-2 flex items-center justify-between gap-2">
+                <button type="button" onClick={() => setActive("schedule")} className="inline-flex items-center gap-1 text-[0.74rem] font-semibold text-blue hover:underline">Open the full schedule <ChevronRight size={12} /></button>
+                <button type="button" disabled={!schTime} onClick={() => {
+                  const tech = schTech || curTech;
+                  addJob(`0:${schDay}`, { time: schTime, title: `${tk.issue} · ${tk.customer}`, tech, duration: "1h" });
+                  setCurTech(tech);
+                  const si = stages.indexOf("Scheduled");
+                  if (si >= 0 && si > stage) setStage(si);
+                  setSched(false);
+                  toast(`Scheduled ${DOW[schDay]} ${schTime} with ${tech}`);
+                }} className={`rounded-lg px-3 py-1.5 text-[0.78rem] font-semibold text-white ${schTime ? "bg-blue hover:opacity-90" : "cursor-not-allowed bg-line"}`}>Add to schedule</button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* tasks with assignees */}
