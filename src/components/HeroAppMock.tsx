@@ -375,6 +375,7 @@ export default function HeroAppMock() {
                   editBill={editBill}
                   setEditBill={setEditBill}
                   catalog={catalog}
+                  setCatalog={setCatalog}
                   subtasks={subtasks}
                   setSubtasks={setSubtasks}
                   assignedTech={assignedTech}
@@ -1134,23 +1135,25 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
 }
 
 function BillingView({
-  tab, setTab, quote, setQuote, invoice, setInvoice, mile, setMile, lines, setLines, editBill, setEditBill, catalog, setSubtasks, assignedTech,
+  tab, setTab, quote, setQuote, invoice, setInvoice, mile, setMile, lines, setLines, editBill, setEditBill, catalog, setCatalog, setSubtasks, assignedTech,
 }: {
   tab: "quote" | "invoice" | "milestones"; setTab: (t: "quote" | "invoice" | "milestones") => void;
   quote: "draft" | "sent" | "approved"; setQuote: (s: "draft" | "sent" | "approved") => void;
   invoice: "draft" | "sent" | "paid"; setInvoice: (s: "draft" | "sent" | "paid") => void;
   mile: "draft" | "sent"; setMile: (s: "draft" | "sent") => void;
-  lines: Line[]; setLines: (l: Line[]) => void; editBill: boolean; setEditBill: (b: boolean) => void; catalog: Item[];
+  lines: Line[]; setLines: (l: Line[]) => void; editBill: boolean; setEditBill: (b: boolean) => void; catalog: Item[]; setCatalog: (c: Item[]) => void;
   subtasks: Subtask[]; setSubtasks: SubtaskSetter; assignedTech: string;
 }) {
   const [pick, setPick] = useState(false);
+  const [pickQ, setPickQ] = useState("");
   const [pdf, setPdf] = useState(false);
   const [editMile, setEditMile] = useState(false);
   const [miles, setMiles] = useState<{ label: string; pct: number }[]>([
     { label: "Deposit", pct: 30 },
     { label: "On completion", pct: 70 },
   ]);
-  const mileBase = 4000;
+  const [mileItem, setMileItem] = useState("Full system install");
+  const [mileBase, setMileBase] = useState(4000);
   const pctTotal = miles.reduce((n, m) => n + m.pct, 0);
   const updMile = (i: number, field: "label" | "pct", v: string) =>
     setMiles(miles.map((m, idx) => (idx === i ? { ...m, [field]: field === "pct" ? Number(v) || 0 : v } : m)));
@@ -1161,6 +1164,12 @@ function BillingView({
   const update = (i: number, field: "label" | "qty" | "price", v: string) =>
     setLines(lines.map((l, idx) => (idx === i ? { ...l, [field]: field === "label" ? v : Number(v) || 0 } : l)));
   const addCustom = () => setLines([...lines, { label: "", qty: 1, price: 0 }]);
+  const saveToCatalog = (l: Line) => {
+    const name = l.label.trim();
+    if (!name) return;
+    setCatalog([...catalog, { id: Date.now(), name, type: "Service", price: l.price, tasks: [] }]);
+    toast(`${name} saved to catalog`);
+  };
   const addItem = (it: Item) => {
     setLines([...lines, { label: it.name, qty: 1, price: it.price }]);
     if (it.type === "Service" && it.tasks && it.tasks.length > 0) {
@@ -1227,6 +1236,9 @@ function BillingView({
                       <input type="number" value={l.price} onChange={(e) => update(i, "price", e.target.value)} aria-label="Price" className={`${numCls} w-16 text-right`} />
                       <span className="ml-auto font-semibold text-navy">${(l.qty * l.price).toLocaleString()}</span>
                     </div>
+                    {l.label.trim() && !catalog.some((c) => c.name.toLowerCase() === l.label.trim().toLowerCase()) && (
+                      <button type="button" onClick={() => saveToCatalog(l)} className="mt-1.5 inline-flex items-center gap-1 text-[0.72rem] font-semibold text-blue hover:underline"><Package size={11} /> Save to catalog</button>
+                    )}
                   </div>
                 ) : (
                   <div key={i} className="flex items-start justify-between gap-2 text-[0.85rem]">
@@ -1247,13 +1259,22 @@ function BillingView({
               )}
 
               {editBill && pick && (
-                <div className="animate-rise mt-1 max-h-36 overflow-y-auto rounded-lg border border-line bg-canvas p-1.5">
-                  {catalog.map((it) => (
-                    <button key={it.id} type="button" onClick={() => addItem(it)} className="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[0.78rem] text-ink hover:bg-canvas-2">
-                      <span className="truncate">{it.name}</span>
-                      <span className="ml-2 shrink-0 font-semibold text-navy">${it.price.toLocaleString()}</span>
-                    </button>
-                  ))}
+                <div className="animate-rise mt-1 rounded-lg border border-line bg-canvas p-1.5">
+                  <div className="relative mb-1.5">
+                    <Search size={13} className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-faint" />
+                    <input value={pickQ} onChange={(e) => setPickQ(e.target.value)} placeholder="Search catalog" aria-label="Search catalog" className={`${inputCls} w-full pl-7`} />
+                  </div>
+                  <div className="max-h-32 overflow-y-auto">
+                    {catalog.filter((it) => it.name.toLowerCase().includes(pickQ.toLowerCase())).map((it) => (
+                      <button key={it.id} type="button" onClick={() => addItem(it)} className="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[0.78rem] text-ink hover:bg-canvas-2">
+                        <span className="truncate">{it.name}{it.type === "Service" && it.tasks && it.tasks.length > 0 ? <span className="ml-1 text-[0.66rem] text-faint">· {it.tasks.length} steps</span> : ""}</span>
+                        <span className="ml-2 shrink-0 font-semibold text-navy">${it.price.toLocaleString()}</span>
+                      </button>
+                    ))}
+                    {catalog.filter((it) => it.name.toLowerCase().includes(pickQ.toLowerCase())).length === 0 && (
+                      <p className="px-2 py-2 text-center text-[0.74rem] text-faint">No matches</p>
+                    )}
+                  </div>
                 </div>
               )}
 
@@ -1324,9 +1345,17 @@ function BillingView({
 
         {tab === "milestones" && (
           <>
-            <div className="mb-2 flex items-center justify-between">
-              <p className="text-[0.78rem] text-muted">Full system install · ${mileBase.toLocaleString()}</p>
-              <button type="button" onClick={() => setEditMile(!editMile)} className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${editMile ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {editMile ? "Done" : "Edit"}</button>
+            <div className="mb-2 flex items-center justify-between gap-2">
+              {editMile ? (
+                <div className="flex min-w-0 flex-1 items-center gap-1.5">
+                  <input value={mileItem} onChange={(e) => setMileItem(e.target.value)} aria-label="Milestone item" className={`${inputCls} min-w-0 flex-1`} />
+                  <span className="text-[0.78rem] text-faint">$</span>
+                  <input type="number" value={mileBase} onChange={(e) => setMileBase(Number(e.target.value) || 0)} aria-label="Milestone total" className={`${numCls} w-20 text-right`} />
+                </div>
+              ) : (
+                <p className="min-w-0 truncate text-[0.78rem] text-muted">{mileItem} · ${mileBase.toLocaleString()}</p>
+              )}
+              <button type="button" onClick={() => setEditMile(!editMile)} className={`inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${editMile ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {editMile ? "Done" : "Edit"}</button>
             </div>
             <div className="space-y-1.5">
               {miles.map((m, i) => (
