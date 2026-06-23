@@ -351,7 +351,7 @@ export default function HeroAppMock() {
             <div className="flex-1">
               {active === "home" && <HomeView setActive={setActive} openTicket={openTicket} />}
               {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} />}
-              {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} />}
+              {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} openTicket={openTicket} />}
               {active === "tickets" && (
                 <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} />
               )}
@@ -425,7 +425,7 @@ function Dots() {
 const inputCls = "min-w-0 rounded-lg border border-line bg-canvas px-2.5 py-1.5 text-[0.8rem] text-ink outline-none placeholder:text-faint focus:border-blue";
 const numCls = `${inputCls} [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`;
 
-function LiveView({ phase, typed, tags }: { phase: Phase; typed: number; tags: string[] }) {
+function LiveView({ phase, typed, tags, openTicket }: { phase: Phase; typed: number; tags: string[]; openTicket: (id: string | null) => void }) {
   const done = phase === "done";
   const processing = phase === "transcribing" || phase === "summarizing";
   return (
@@ -477,9 +477,9 @@ function LiveView({ phase, typed, tags }: { phase: Phase; typed: number; tags: s
       </div>
 
       {done && (
-        <p className="animate-rise mt-3 inline-flex items-center gap-1.5 rounded-lg bg-green/10 px-3 py-2 text-[0.8rem] font-semibold text-green-600">
-          <Ticket size={15} /> Turned into Ticket #{JOB.ticket}, automatically
-        </p>
+        <button type="button" onClick={() => openTicket(JOB.ticket)} className="animate-rise mt-3 inline-flex items-center gap-1.5 rounded-lg bg-green/10 px-3 py-2 text-[0.8rem] font-semibold text-green-600 transition-colors hover:bg-green/15">
+          <Ticket size={15} /> Turned into Ticket #{JOB.ticket}, automatically <ChevronRight size={14} />
+        </button>
       )}
 
       {/* recent calls / phone log */}
