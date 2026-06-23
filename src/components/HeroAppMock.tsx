@@ -28,6 +28,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Search,
+  Bell,
   Plus,
   Pencil,
   Tag,
@@ -243,13 +244,16 @@ export default function HeroAppMock() {
             </span>
             <span className="text-xs font-semibold text-faint">OneBy · Workspace</span>
           </span>
-          <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-green/10 px-2.5 py-1 text-[11px] font-semibold text-green-600">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-70" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-green" />
+          <div className="ml-auto flex items-center gap-2">
+            <TopBarActions />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-green/10 px-2.5 py-1 text-[11px] font-semibold text-green-600">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green" />
+              </span>
+              Live
             </span>
-            Live
-          </span>
+          </div>
         </div>
 
         {/* body */}
@@ -450,6 +454,44 @@ function LiveView({ phase, typed, tags }: { phase: Phase; typed: number; tags: s
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function TopBarActions() {
+  const [notif, setNotif] = useState(false);
+  const items = [
+    { icon: PhoneCall, tone: "text-green-600 bg-green/10", title: "Missed call caught by AI", time: "2m" },
+    { icon: Receipt, tone: "text-blue bg-blue/10", title: "James R. paid invoice, $240", time: "18m" },
+    { icon: Clock, tone: "text-warning bg-warning/15", title: "Luis is running 10 min late", time: "33m" },
+  ];
+  return (
+    <div className="flex items-center gap-2">
+      <div className="relative hidden w-36 md:block">
+        <Search size={13} className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-faint" />
+        <input placeholder="Search" aria-label="Search" className="w-full rounded-md border border-line bg-surface py-1 pl-7 pr-2 text-[0.72rem] text-ink outline-none placeholder:text-faint focus:border-blue" />
+      </div>
+      <div className="relative">
+        <button type="button" aria-label="Notifications" onClick={() => setNotif(!notif)} className="relative grid h-6 w-6 place-items-center rounded-md text-muted transition-colors hover:bg-canvas-2 hover:text-navy">
+          <Bell size={15} />
+          <span className="absolute right-0.5 top-0.5 h-1.5 w-1.5 rounded-full bg-warning" />
+        </button>
+        {notif && (
+          <div className="absolute right-0 top-8 z-30 w-60 rounded-xl border border-line bg-surface p-1.5 shadow-[var(--shadow-lg)]">
+            <p className="px-2 py-1 text-[0.64rem] font-bold uppercase tracking-wide text-faint">Notifications</p>
+            {items.map((it, i) => (
+              <div key={i} className="flex items-start gap-2 rounded-lg px-2 py-1.5 hover:bg-canvas-2">
+                <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-md ${it.tone}`}><it.icon size={12} /></span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[0.74rem] font-medium text-navy">{it.title}</p>
+                  <p className="text-[0.64rem] text-faint">{it.time} ago</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      <span className="grid h-6 w-6 place-items-center rounded-full bg-navy text-[0.58rem] font-bold text-white">SM</span>
     </div>
   );
 }
