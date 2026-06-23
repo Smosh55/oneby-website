@@ -118,10 +118,11 @@ export default function AiReceptionistPage() {
             The AI receptionist that books the job, not just the message.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted">
-            An AI receptionist answers every call in a natural voice,
-            understands what the caller needs, and turns the conversation into a
-            summary and a booked job. No front desk to hire, no calls to
-            voicemail, no leads left on the table. Here is exactly how it works.
+            An AI receptionist answers the calls your team can't get to, in a
+            natural voice, understands what the caller needs, and turns the
+            conversation into a summary and a booked job. No missed leads, no
+            calls to voicemail, no front desk to hire. Here is exactly how it
+            works.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/demo" className="btn btn-primary text-base">
