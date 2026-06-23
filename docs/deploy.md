@@ -57,3 +57,24 @@ build config needed. This is the pre-launch runbook.
 - [ ] `npm run build` is clean.
 - [ ] Spot-check on a real phone (the homepage and the hero demo).
 - [ ] Click the full demo loop once on production.
+
+## 8. Dependency audit status
+`npm audit` reports 4 moderate advisories, all in build-time tooling operating on
+our own trusted input. They are NOT runtime-exploitable here:
+- **js-yaml (via gray-matter)** parses our own blog frontmatter at build time.
+- **postcss (via next)** processes our own CSS at build time.
+
+Do NOT run `npm audit fix --force`: it would downgrade Next.js to v9 and
+gray-matter to v2 (both breaking) and break the build. Leave these until the
+upstream packages patch; re-run `npm audit` after a routine `npm update` or the
+next Next.js minor bump. No high/critical advisories.
+
+## Security posture (reviewed)
+- Rate limiting on `/api/demo` (5/min per IP). In-memory, so per-instance on
+  serverless; move to Vercel KV / Upstash for production-grade limiting.
+- `/api/demo` logs lead PII to server logs only; wire a real destination and
+  avoid long-term PII in logs.
+- Headers: CSP (prod), HSTS, nosniff, X-Frame-Options, Referrer-Policy,
+  Permissions-Policy. JSON-LD is escaped. External links use rel=noopener.
+- CSP uses 'unsafe-inline' for scripts (Next bootstrap + GA, no nonce). Fine for
+  a static marketing site; revisit if user-generated content is ever rendered.
