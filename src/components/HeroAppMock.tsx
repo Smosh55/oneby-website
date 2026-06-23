@@ -74,7 +74,7 @@ const NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
 
 type Phase = "transcribing" | "summarizing" | "typing" | "done";
 type TaskState = "pending" | "acted" | "ignored";
-type Job = { time: string; title: string; tech: string; hot?: boolean };
+type Job = { time: string; title: string; tech: string; hot?: boolean; duration?: string };
 type Line = { label: string; qty: number; price: number };
 type Item = { id: number; name: string; type: "Service" | "Part"; price: number };
 
@@ -91,15 +91,15 @@ function dateFor(offset: number, i: number) {
 }
 
 const DAY_JOBS: Record<number, Job[]> = {
-  0: [{ time: "10:00", title: "No-cool · Ortiz", tech: "Sam K." }],
-  1: [{ time: "8:30", title: "Maintenance · Oak HOA", tech: "Luis R." }],
+  0: [{ time: "10:00", title: "No-cool · Ortiz", tech: "Sam K.", duration: "1h" }],
+  1: [{ time: "8:30", title: "Maintenance · Oak HOA", tech: "Luis R.", duration: "2h" }],
   2: [
-    { time: "9:00", title: "Tune-up · Garcia", tech: "Sam K." },
-    { time: "1:00", title: "Install · Lee", tech: "Luis R." },
-    { time: "3:30", title: "A/C diagnostic · Maria G.", tech: "Luis R.", hot: true },
+    { time: "9:00", title: "Tune-up · Garcia", tech: "Sam K.", duration: "1h" },
+    { time: "1:00", title: "Install · Lee", tech: "Luis R.", duration: "Half day" },
+    { time: "3:30", title: "A/C diagnostic · Maria G.", tech: "Luis R.", hot: true, duration: "1h" },
   ],
-  3: [{ time: "11:00", title: "Estimate · Park Ave", tech: "Sam K." }],
-  4: [{ time: "2:00", title: "Install · Reyes", tech: "Luis R." }],
+  3: [{ time: "11:00", title: "Estimate · Park Ave", tech: "Sam K.", duration: "30m" }],
+  4: [{ time: "2:00", title: "Install · Reyes", tech: "Luis R.", duration: "Half day" }],
 };
 
 const TEAM = [
@@ -211,8 +211,8 @@ export default function HeroAppMock() {
     return () => clearTimeout(t);
   }, [phase, typed]);
 
-  const addJob = (key: string, time: string) =>
-    setExtra((e) => ({ ...e, [key]: [...(e[key] ?? []), { time, title: "New job", tech: "Unassigned" }] }));
+  const addJob = (key: string, job: Job) =>
+    setExtra((e) => ({ ...e, [key]: [...(e[key] ?? []), job] }));
   const addTag = () => {
     const avail = TAG_POOL.find((x) => !tags.includes(x));
     if (avail) setTags([...tags, avail]);
@@ -591,12 +591,19 @@ function ScheduleView({
   day, setDay, weekOffset, setWeekOffset, extra, addJob,
 }: {
   day: number; setDay: (d: number) => void; weekOffset: number; setWeekOffset: (n: number) => void;
-  extra: Record<string, Job[]>; addJob: (key: string, time: string) => void;
+  extra: Record<string, Job[]>; addJob: (key: string, job: Job) => void;
 }) {
-  const [t, setT] = useState("");
+  const TECH_DOT: Record<string, string> = { "Luis R.": "bg-blue", "Sam K.": "bg-green", "Mia T.": "bg-warning" };
+  const SCHED_TECHS = TEAM.filter((x) => x.role !== "Dispatch").map((x) => x.name);
+  const [tech, setTech] = useState("All");
+  const [nt, setNt] = useState("");
+  const [ntitle, setNtitle] = useState("");
+  const [ntech, setNtech] = useState(SCHED_TECHS[0]);
+  const [ndur, setNdur] = useState("1h");
   const key = `${weekOffset}:${day}`;
   const base = weekOffset === 0 ? DAY_JOBS[day] ?? [] : [];
-  const jobs = [...base, ...(extra[key] ?? [])];
+  const allJobs = [...base, ...(extra[key] ?? [])];
+  const jobs = tech === "All" ? allJobs : allJobs.filter((j) => j.tech === tech);
   const head = dateFor(weekOffset, 0);
 
   return (
@@ -629,23 +636,43 @@ function ScheduleView({
           })}
         </div>
 
-        <div className="mt-4 space-y-2">
-          {jobs.length === 0 && <p className="py-3 text-center text-[0.8rem] text-faint">Nothing booked. Add a time below.</p>}
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {["All", ...SCHED_TECHS].map((tn) => (
+            <button key={tn} type="button" onClick={() => setTech(tn)} className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.72rem] font-semibold transition-colors ${tech === tn ? "bg-blue text-white" : "bg-canvas-2 text-ink/70"}`}>
+              {tn !== "All" && <span className={`h-1.5 w-1.5 rounded-full ${TECH_DOT[tn] ?? "bg-line"}`} />}
+              {tn === "All" ? "All techs" : tn}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-3 space-y-2">
+          {jobs.length === 0 && <p className="py-3 text-center text-[0.8rem] text-faint">{tech === "All" ? "Nothing booked. Add a job below." : `Nothing booked for ${tech}.`}</p>}
           {jobs.map((j, i) => (
             <div key={`${j.time}-${i}`} className={`flex items-center gap-3 rounded-lg border px-3 py-2.5 ${j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"}`}>
               <span className="w-12 shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
-                <p className="text-[0.72rem] text-muted">{j.tech}</p>
+                <p className="flex items-center gap-1.5 text-[0.72rem] text-muted">
+                  <span className={`h-1.5 w-1.5 rounded-full ${TECH_DOT[j.tech] ?? "bg-line"}`} />
+                  {j.tech}{j.duration ? ` · ${j.duration}` : ""}
+                </p>
               </div>
               {j.hot && <CheckCircle2 size={16} className="shrink-0 text-green-600" />}
             </div>
           ))}
         </div>
 
-        <div className="mt-3 flex gap-2">
-          <input value={t} onChange={(e) => setT(e.target.value)} placeholder="Add a custom time, e.g. 4:45 PM" className={`${inputCls} flex-1`} />
-          <button type="button" onClick={() => { if (t.trim()) { addJob(key, t.trim()); setT(""); } }} className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90"><Plus size={13} /> Add</button>
+        <div className="mt-3 rounded-lg border border-line bg-canvas/40 p-2.5">
+          <p className="mb-1.5 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Add a job</p>
+          <div className="flex flex-wrap gap-1.5">
+            <input value={nt} onChange={(e) => setNt(e.target.value)} placeholder="Time" aria-label="Time" className={`${inputCls} w-16`} />
+            <select value={ndur} onChange={(e) => setNdur(e.target.value)} aria-label="Duration" className={inputCls}>{["30m", "1h", "2h", "Half day"].map((d) => <option key={d} value={d}>{d}</option>)}</select>
+            <select value={ntech} onChange={(e) => setNtech(e.target.value)} aria-label="Tech" className={inputCls}>{[...SCHED_TECHS, "Unassigned"].map((tn) => <option key={tn} value={tn}>{tn}</option>)}</select>
+          </div>
+          <div className="mt-1.5 flex gap-1.5">
+            <input value={ntitle} onChange={(e) => setNtitle(e.target.value)} placeholder="Job, e.g. A/C diagnostic" className={`${inputCls} min-w-0 flex-1`} />
+            <button type="button" onClick={() => { if (nt.trim()) { addJob(key, { time: nt.trim(), title: ntitle.trim() || "New job", tech: ntech, duration: ndur }); setNt(""); setNtitle(""); } }} className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90"><Plus size={13} /> Add</button>
+          </div>
         </div>
 
         <p className="mt-3 inline-flex items-center gap-1.5 text-[0.72rem] text-faint"><Calendar size={12} /> Synced two-way with Google and Microsoft calendars</p>
