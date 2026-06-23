@@ -27,6 +27,7 @@ import {
   Lock,
   ChevronLeft,
   ChevronRight,
+  Search,
   Plus,
   Pencil,
   Tag,
@@ -1021,28 +1022,101 @@ function HomeView({ setActive }: { setActive: (m: ModId) => void }) {
   );
 }
 
-function CustomersView() {
-  const timeline: { when: string; icon: LucideIcon; tone: string; title: string; body: string }[] = [
-    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · A/C not cooling", body: "AI summarized, became Ticket #1042" },
-    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Luis arriving 3:30" },
-    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
-    { when: "Last summer", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · A/C install", body: "$4,200 · 12-month warranty" },
-    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+type Customer = { id: number; name: string; initials: string; phone: string; email: string; address: string; since: string; tags: string[]; balance: number; vip?: boolean; last: string };
+type TLEntry = { when: string; icon: LucideIcon; tone: string; title: string; body: string };
+
+const CUSTOMERS: Customer[] = [
+  { id: 1, name: "Maria G.", initials: "MG", phone: "(602) 555-0148", email: "maria.g@email.com", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["HVAC", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+  { id: 2, name: "James R.", initials: "JR", phone: "(602) 555-0192", email: "jrowe@email.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Plumbing"], balance: 240, last: "Invoice sent Jun 18" },
+  { id: 3, name: "Oak Street HOA", initials: "OH", phone: "(480) 555-0110", email: "manager@oakstreethoa.com", address: "Oak St, Tempe AZ", since: "2022", tags: ["Commercial", "Maintenance plan"], balance: 0, last: "Tune-up Jun 10" },
+  { id: 4, name: "Dana P.", initials: "DP", phone: "(623) 555-0177", email: "dana.p@email.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
+  { id: 5, name: "Reyes Family", initials: "RF", phone: "(480) 555-0143", email: "reyes.home@email.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["HVAC", "Install"], balance: 0, last: "Install Apr 3" },
+  { id: 6, name: "Sun City Diner", initials: "SD", phone: "(602) 555-0166", email: "book@suncitydiner.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Commercial"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
+];
+
+const MARIA_TIMELINE: TLEntry[] = [
+  { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · A/C not cooling", body: "AI summarized, became Ticket #1042" },
+  { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Luis arriving 3:30" },
+  { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
+  { when: "Last summer", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · A/C install", body: "$4,200 · 12-month warranty" },
+  { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+];
+
+function custTimeline(c: Customer): TLEntry[] {
+  if (c.id === 1) return MARIA_TIMELINE;
+  return [
+    { when: c.last.replace(/^[A-Za-z ]+/, "").trim() || "Recent", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: c.last, body: "Logged to the customer timeline" },
+    { when: c.since, icon: Receipt, tone: "bg-blue/10 text-blue", title: c.balance > 0 ? `Open balance · $${c.balance}` : "All invoices paid", body: c.balance > 0 ? "Reminder scheduled" : "No outstanding balance" },
+    { when: c.since, icon: UserRound, tone: "bg-canvas-2 text-muted", title: `Customer since ${c.since}`, body: c.tags.join(" · ") },
   ];
+}
+
+function CustomersView() {
+  const [customers, setCustomers] = useState<Customer[]>(CUSTOMERS);
+  const [sel, setSel] = useState<number | null>(null);
+  const [edit, setEdit] = useState(false);
+  const [q, setQ] = useState("");
+
+  const c = customers.find((x) => x.id === sel) || null;
+  const upd = (field: "phone" | "email" | "address", v: string) =>
+    setCustomers(customers.map((x) => (x.id === sel ? { ...x, [field]: v } : x)));
+
+  if (!c) {
+    const filtered = customers.filter((x) => x.name.toLowerCase().includes(q.toLowerCase()));
+    return (
+      <div>
+        <ModuleHeader title="Customers" sub={`${customers.length} customers · click to open`} />
+        <div className="relative mb-3">
+          <Search size={14} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-faint" />
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search customers" className={`${inputCls} w-full pl-8`} />
+        </div>
+        <div className="space-y-1.5">
+          {filtered.map((x) => (
+            <button key={x.id} type="button" onClick={() => { setSel(x.id); setEdit(false); }} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-[0.7rem] font-bold text-white">{x.initials}</span>
+              <div className="min-w-0 flex-1">
+                <p className="text-[0.85rem] font-semibold text-navy">{x.name}{x.vip && <span className="ml-1.5 rounded bg-green/10 px-1 py-0.5 text-[9px] font-bold text-green-600">VIP</span>}</p>
+                <p className="truncate text-[0.72rem] text-muted">{x.phone} · {x.last}</p>
+              </div>
+              {x.balance > 0 && <span className="shrink-0 rounded-md bg-warning/15 px-2 py-0.5 text-[0.7rem] font-semibold text-warning">${x.balance} due</span>}
+              <ChevronRight size={15} className="shrink-0 text-faint" />
+            </button>
+          ))}
+          {filtered.length === 0 && <p className="py-4 text-center text-[0.8rem] text-faint">No customers match that search.</p>}
+        </div>
+      </div>
+    );
+  }
+
+  const tl = custTimeline(c);
   return (
     <div>
-      <ModuleHeader title="Customer" sub="Everything OneBy remembers" />
+      <button type="button" onClick={() => { setSel(null); setEdit(false); }} className="mb-3 inline-flex items-center gap-1 text-[0.78rem] font-semibold text-blue hover:underline"><ChevronLeft size={14} /> All customers</button>
       <div className="rounded-xl border border-line bg-surface p-4">
         <div className="flex items-center gap-3">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy text-sm font-bold text-white">MG</span>
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy text-sm font-bold text-white">{c.initials}</span>
           <div className="min-w-0">
-            <p className="text-[0.95rem] font-semibold text-navy">Maria G.</p>
-            <p className="text-xs text-muted">(602) 555-0148 · Customer since 2023</p>
+            <p className="text-[0.95rem] font-semibold text-navy">{c.name}{c.vip && <span className="ml-1.5 rounded-full bg-green/10 px-2 py-0.5 text-[10px] font-semibold text-green-600">VIP</span>}</p>
+            <p className="text-xs text-muted">Customer since {c.since}{c.balance > 0 ? ` · $${c.balance} balance` : ""}</p>
           </div>
-          <span className="ml-auto shrink-0 rounded-full bg-green/10 px-2 py-0.5 text-[10px] font-semibold text-green-600">VIP</span>
+          <button type="button" onClick={() => setEdit(!edit)} className={`ml-auto inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${edit ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {edit ? "Done" : "Edit"}</button>
         </div>
-        <div className="mt-2 flex flex-wrap gap-1.5">
-          {["Existing customer", "HVAC", "3 jobs"].map((t) => (
+
+        <div className="mt-3 space-y-2">
+          {([["phone", "Phone"], ["email", "Email"], ["address", "Address"]] as const).map(([f, label]) => (
+            <div key={f} className="flex items-center gap-2">
+              <span className="w-14 shrink-0 text-[0.66rem] font-bold uppercase text-faint">{label}</span>
+              {edit ? (
+                <input value={c[f]} onChange={(e) => upd(f, e.target.value)} className={`${inputCls} min-w-0 flex-1`} />
+              ) : (
+                <span className="min-w-0 flex-1 truncate text-[0.82rem] text-ink">{c[f]}</span>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {c.tags.map((t) => (
             <span key={t} className="rounded-md border border-line bg-canvas px-2 py-0.5 text-[0.7rem] font-medium text-ink/70">{t}</span>
           ))}
         </div>
@@ -1051,7 +1125,7 @@ function CustomersView() {
       <div className="mt-4">
         <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Timeline</p>
         <div className="space-y-2.5">
-          {timeline.map((e, i) => (
+          {tl.map((e, i) => (
             <div key={i} className="flex gap-3">
               <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${e.tone}`}><e.icon size={15} /></span>
               <div className="min-w-0 flex-1 border-b border-line pb-2.5">
