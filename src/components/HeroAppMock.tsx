@@ -29,6 +29,7 @@ import {
   Plus,
   Pencil,
   Tag,
+  MousePointerClick,
   type LucideIcon,
 } from "lucide-react";
 
