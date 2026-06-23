@@ -170,7 +170,7 @@ function ToastHost() {
   );
 }
 
-export default function HeroAppMock() {
+export default function HeroAppMock({ compact = false }: { compact?: boolean }) {
   const [active, setActive] = useState<ModId>("live");
   const [phase, setPhase] = useState<Phase>("transcribing");
   const [typed, setTyped] = useState(0);
@@ -274,7 +274,8 @@ export default function HeroAppMock() {
     setExtra((e) => ({ ...e, [key]: [...(e[key] ?? []), job] }));
   const addNote = (text: string) => setNotes([...notes, text]);
 
-  const next = NEXT[active];
+  const mods = compact ? MODULES.filter((m) => CORE.includes(m.id)) : MODULES;
+  const next = (compact ? CORE_NEXT : NEXT)[active];
 
   return (
     <div
@@ -329,7 +330,7 @@ export default function HeroAppMock() {
               <span className="text-base font-bold tracking-tight text-navy">OneBy</span>
             </div>
             <nav className="space-y-1">
-              {MODULES.map((m) => {
+              {mods.map((m) => {
                 const on = m.id === active;
                 return (
                   <button
@@ -352,12 +353,20 @@ export default function HeroAppMock() {
                 );
               })}
             </nav>
+            {compact && (
+              <a
+                href="/product"
+                className="mt-3 flex items-center gap-1.5 rounded-lg px-3 py-2 text-[0.8rem] font-semibold text-blue hover:bg-blue/10"
+              >
+                Full workspace <ArrowRight size={14} />
+              </a>
+            )}
           </aside>
 
           {/* main */}
           <div className="flex min-h-[460px] flex-col p-4 sm:p-6">
             <div className="mb-4 flex gap-1.5 overflow-x-auto pb-1 sm:hidden">
-              {MODULES.filter((m) => !m.soon).map((m) => (
+              {mods.filter((m) => !m.soon).map((m) => (
                 <button
                   key={m.id}
                   type="button"
@@ -369,6 +378,14 @@ export default function HeroAppMock() {
                   {m.label}
                 </button>
               ))}
+              {compact && (
+                <a
+                  href="/product"
+                  className="inline-flex shrink-0 items-center gap-1 rounded-full bg-blue/10 px-3 py-1.5 text-xs font-semibold text-blue"
+                >
+                  Full workspace <ArrowRight size={12} />
+                </a>
+              )}
             </div>
 
             <div className="flex-1">

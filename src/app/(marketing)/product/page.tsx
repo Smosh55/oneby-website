@@ -4,6 +4,7 @@ import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { featureGroups } from "@/data/features";
 import { getFeatureIcon } from "@/components/feature/iconMap";
 import Reveal from "@/components/Reveal";
+import HeroAppMock from "@/components/HeroAppMock";
 
 export const metadata: Metadata = {
   title: "Product: A Full Communications Suite, Plus a Brain",
@@ -39,6 +40,23 @@ export default function ProductHub() {
               See pricing
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Interactive workspace tour (full) */}
+      <section className="pb-10 pt-4">
+        <div className="container-x">
+          <Reveal className="mx-auto mb-10 max-w-2xl text-center">
+            <span className="eyebrow justify-center text-blue">Live demo</span>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+              Click through the whole workspace.
+            </h2>
+            <p className="mt-3 text-muted">
+              Every module, the way your team would use it: answer a call, ticket
+              it, schedule it, bill it, and more.
+            </p>
+          </Reveal>
+          <HeroAppMock />
         </div>
       </section>
 

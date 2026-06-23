@@ -88,7 +88,7 @@ export default function Hero() {
 
         {/* Oversized, interactive app mock */}
         <div className="animate-rise mt-14 lg:mt-16" style={{ animationDelay: "220ms" }}>
-          <HeroAppMock />
+          <HeroAppMock compact />
         </div>
       </div>
     </section>
