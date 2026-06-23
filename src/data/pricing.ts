@@ -66,13 +66,6 @@ export const plans: Plan[] = [
   },
 ];
 
-// Per-unit monthly rates used by the interactive estimator.
-export const estimatorRates = {
-  aiSeat: 39, // a Solo line with the AI brain
-  basicLine: 15, // a Line, dialtone only
-  commonArea: 6, // shared/common-area device (lobby, conference, paging)
-};
-
 // Feature comparison matrix. value: true = included, false = not,
 // or a string for plan-specific detail. Columns map to plans above.
 export type MatrixRow = {
