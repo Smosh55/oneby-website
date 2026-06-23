@@ -418,6 +418,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
                   subtasks={subtasks}
                   setSubtasks={setSubtasks}
                   assignedTech={assignedTech}
+                  ticketSel={ticketSel}
                 />
               )}
               {active === "messages" && <MessagesView msgs={msgs} setMsgs={setMsgs} />}
@@ -1280,15 +1281,16 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
 }
 
 function BillingView({
-  tab, setTab, quote, setQuote, invoice, setInvoice, mile, setMile, lines, setLines, editBill, setEditBill, catalog, setCatalog, setSubtasks, assignedTech,
+  tab, setTab, quote, setQuote, invoice, setInvoice, mile, setMile, lines, setLines, editBill, setEditBill, catalog, setCatalog, setSubtasks, assignedTech, ticketSel,
 }: {
   tab: "quote" | "invoice" | "milestones"; setTab: (t: "quote" | "invoice" | "milestones") => void;
   quote: "draft" | "sent" | "approved"; setQuote: (s: "draft" | "sent" | "approved") => void;
   invoice: "draft" | "sent" | "paid"; setInvoice: (s: "draft" | "sent" | "paid") => void;
   mile: "draft" | "sent"; setMile: (s: "draft" | "sent") => void;
   lines: Line[]; setLines: (l: Line[]) => void; editBill: boolean; setEditBill: (b: boolean) => void; catalog: Item[]; setCatalog: (c: Item[]) => void;
-  subtasks: Subtask[]; setSubtasks: SubtaskSetter; assignedTech: string;
+  subtasks: Subtask[]; setSubtasks: SubtaskSetter; assignedTech: string; ticketSel: string | null;
 }) {
+  const billTicket = TICKETS.find((t) => t.id === ticketSel) ?? TICKETS[0];
   const [pick, setPick] = useState(false);
   const [pickQ, setPickQ] = useState("");
   const [pdf, setPdf] = useState(false);
@@ -1334,7 +1336,7 @@ function BillingView({
 
   return (
     <div>
-      <ModuleHeader title="Billing" sub={`Job #${JOB.ticket} · ${JOB.customer}`} />
+      <ModuleHeader title="Billing" sub={`Job #${billTicket.id} · ${billTicket.customer}`} />
 
       <div className="mb-3 flex items-center gap-3 rounded-xl border border-warning/25 bg-warning/[0.06] px-3.5 py-2.5">
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-warning/15 text-warning"><DollarSign size={16} /></span>
@@ -1433,11 +1435,11 @@ function BillingView({
               <div className="animate-rise mt-3 rounded-lg border border-line bg-white p-4">
                 <div className="flex items-center justify-between border-b border-line pb-2">
                   <span className="text-sm font-extrabold tracking-tight text-navy">INVOICE</span>
-                  <span className="text-[0.7rem] text-muted">#{JOB.ticket}</span>
+                  <span className="text-[0.7rem] text-muted">#{billTicket.id}</span>
                 </div>
                 <div className="mt-2 grid grid-cols-2 gap-2 text-[0.7rem]">
                   <div><p className="font-bold uppercase text-faint">From</p><p className="text-navy">Summit HVAC</p></div>
-                  <div><p className="font-bold uppercase text-faint">Bill to</p><p className="text-navy">{JOB.customer}</p></div>
+                  <div><p className="font-bold uppercase text-faint">Bill to</p><p className="text-navy">{billTicket.customer}</p></div>
                 </div>
                 <div className="mt-2 space-y-1 border-t border-line pt-2 text-[0.72rem]">
                   {lines.map((l, i) => (
@@ -1455,7 +1457,7 @@ function BillingView({
             {tab === "quote" && quote === "draft" && <SendBtn label="Send quote for approval" onClick={() => setQuote("sent")} />}
             {tab === "quote" && quote === "sent" && (
               <div className="animate-rise mt-4">
-                <Banner title="Quote sent" body={`Texted to ${JOB.customer}. She can approve with one tap.`} />
+                <Banner title="Quote sent" body={`Texted to ${billTicket.customer}. One tap to approve.`} />
                 <button type="button" onClick={() => setQuote("approved")} className="mt-2 w-full rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600">Mark approved</button>
               </div>
             )}
@@ -1466,7 +1468,7 @@ function BillingView({
             {tab === "invoice" && invoice === "draft" && <SendBtn label="Send invoice + pay link" onClick={() => { setInvoice("sent"); toast("Invoice sent with pay link"); }} />}
             {tab === "invoice" && invoice === "sent" && (
               <div className="animate-rise mt-4">
-                <Banner title="Invoice sent" body={`Pay link texted to ${JOB.customer}. Tap to pay by card.`} />
+                <Banner title="Invoice sent" body={`Pay link texted to ${billTicket.customer}. Tap to pay by card.`} />
                 <button type="button" onClick={() => setInvoice("paid")} className="mt-2 w-full rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600">Mark as paid</button>
               </div>
             )}
@@ -1477,7 +1479,7 @@ function BillingView({
                   <span className="rounded-full border border-green/30 px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wide text-green-600">Receipt</span>
                 </div>
                 <div className="mt-2 space-y-0.5 text-[0.74rem] text-muted">
-                  <div className="flex justify-between"><span>Invoice</span><span className="font-semibold text-navy">#{JOB.ticket}</span></div>
+                  <div className="flex justify-between"><span>Invoice</span><span className="font-semibold text-navy">#{billTicket.id}</span></div>
                   <div className="flex justify-between"><span>Paid by</span><span className="font-semibold text-navy">Visa ending 4242</span></div>
                   <div className="flex justify-between"><span>Date</span><span className="font-semibold text-navy">Jun 23, 2026</span></div>
                   <div className="flex justify-between border-t border-green/20 pt-1 text-[0.85rem]"><span className="font-bold text-navy">Total</span><span className="font-extrabold text-green-600">${total.toLocaleString()}</span></div>
@@ -1531,7 +1533,7 @@ function BillingView({
             {mile === "draft" ? (
               <SendBtn label="Send milestone schedule" onClick={() => setMile("sent")} />
             ) : (
-              <div className="animate-rise mt-4"><Banner title="Milestones sent" body={`Deposit link texted to ${JOB.customer}. The rest bills on completion.`} /></div>
+              <div className="animate-rise mt-4"><Banner title="Milestones sent" body={`Deposit link texted to ${billTicket.customer}. The rest bills on completion.`} /></div>
             )}
           </>
         )}
