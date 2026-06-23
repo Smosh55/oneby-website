@@ -29,10 +29,11 @@ export default function Problem() {
             You're losing jobs to the phone, and to the apps that don't talk.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            The calls you miss go straight to a competitor. The calls you answer
-            get scattered across a phone system, an answering service, a
-            scheduler, and an invoicing app that never sync. The job falls
-            through the cracks between them.
+            The calls you miss while you're on a roof, under a sink, or driving
+            between jobs go straight to a competitor. The calls you answer get
+            scattered across a phone system, an answering service, a scheduler,
+            and an invoicing app that never sync. The job falls through the
+            cracks between them.
           </p>
           <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <p className="text-sm font-semibold text-navy">
@@ -69,7 +70,8 @@ export default function Problem() {
           </p>
           <p className="mx-auto mt-2 max-w-xl text-[0.975rem] text-muted">
             OneBy catches every call, then summarizes, tickets, schedules, and
-            invoices it, without jumping between four apps.
+            invoices it, so you book more jobs and get paid faster, without
+            jumping between four apps.
           </p>
         </Reveal>
 
