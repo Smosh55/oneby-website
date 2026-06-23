@@ -1824,6 +1824,7 @@ function custTimeline(c: Customer): TLEntry[] {
 function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number | null; setSel: (n: number | null) => void; customers: Customer[]; setCustomers: (c: Customer[]) => void }) {
   const [edit, setEdit] = useState(false);
   const [q, setQ] = useState("");
+  const [tab, setTab] = useState<"activity" | "jobs" | "tickets" | "invoices" | "messages">("activity");
 
   const c = customers.find((x) => x.id === sel) || null;
   const upd = (field: "name" | "phone" | "email" | "address", v: string) =>
@@ -1866,6 +1867,40 @@ function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number |
   }
 
   const tl = custTimeline(c);
+  const rec = {
+    jobs: [
+      { title: "A/C diagnostic", when: "Today", status: "Scheduled", amount: 189 },
+      { title: "System tune-up", when: "Mar 2026", status: "Done", amount: 129 },
+      { title: "Full A/C install", when: "Jul 2025", status: "Done", amount: 4200 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Upstairs A/C not cooling", status: "Open" },
+      { id: "0987", issue: "Annual maintenance visit", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 189, status: c.balance > 0 ? "Due" : "Paid" },
+      { id: "INV-0987", amount: 129, status: "Paid" },
+      { id: "INV-0820", amount: 4200, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "A/C not cooling since last night, wants a same-day visit." },
+      { kind: "Text", when: "Today 4:13", text: "Arrival window texted: Luis, 3 to 5pm." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the annual maintenance tune-up." },
+    ],
+  };
+  const lifetime = rec.invoices.reduce((n, i) => n + i.amount, 0);
+  const TABS = [
+    { id: "activity", label: "Activity" },
+    { id: "jobs", label: "Jobs" },
+    { id: "tickets", label: "Tickets" },
+    { id: "invoices", label: "Invoices" },
+    { id: "messages", label: "Conversations" },
+  ] as const;
+  const pill = (s: string) => {
+    if (["Done", "Paid", "Closed"].includes(s)) return "bg-green/10 text-green-600";
+    if (["Due", "Open"].includes(s)) return "bg-warning/15 text-warning";
+    return "bg-blue/10 text-blue";
+  };
   return (
     <div>
       <button type="button" onClick={() => { setSel(null); setEdit(false); }} className="mb-3 inline-flex items-center gap-1 text-[0.78rem] font-semibold text-blue hover:underline"><ChevronLeft size={14} /> All customers</button>
@@ -1907,22 +1942,93 @@ function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number |
         </div>
       </div>
 
-      <div className="mt-4">
-        <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Timeline</p>
-        <div className="space-y-2.5">
-          {tl.map((e, i) => (
-            <div key={i} className="flex gap-3">
-              <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${e.tone}`}><e.icon size={15} /></span>
-              <div className="min-w-0 flex-1 border-b border-line pb-2.5">
-                <div className="flex items-center justify-between gap-2">
-                  <p className="truncate text-[0.82rem] font-semibold text-navy">{e.title}</p>
-                  <span className="shrink-0 text-[0.68rem] text-faint">{e.when}</span>
-                </div>
-                <p className="text-[0.74rem] text-muted">{e.body}</p>
-              </div>
-            </div>
-          ))}
+      {/* source of truth: value + records */}
+      <div className="mt-4 grid grid-cols-3 gap-2">
+        <div className="rounded-xl border border-line bg-canvas px-3 py-2.5">
+          <p className="text-[0.62rem] font-bold uppercase tracking-wide text-faint">Lifetime</p>
+          <p className="mt-0.5 text-[0.95rem] font-extrabold text-navy">${lifetime.toLocaleString()}</p>
         </div>
+        <div className="rounded-xl border border-line bg-canvas px-3 py-2.5">
+          <p className="text-[0.62rem] font-bold uppercase tracking-wide text-faint">Open balance</p>
+          <p className={`mt-0.5 text-[0.95rem] font-extrabold ${c.balance > 0 ? "text-warning" : "text-navy"}`}>${c.balance}</p>
+        </div>
+        <div className="rounded-xl border border-line bg-canvas px-3 py-2.5">
+          <p className="text-[0.62rem] font-bold uppercase tracking-wide text-faint">Jobs</p>
+          <p className="mt-0.5 text-[0.95rem] font-extrabold text-navy">{rec.jobs.length}</p>
+        </div>
+      </div>
+
+      <div className="mt-4 flex gap-1.5 overflow-x-auto border-b border-line">
+        {TABS.map((t) => (
+          <button key={t.id} type="button" onClick={() => setTab(t.id)} className={`shrink-0 border-b-2 px-2.5 pb-2 text-[0.8rem] font-semibold transition-colors ${tab === t.id ? "border-blue text-blue" : "border-transparent text-muted hover:text-navy"}`}>{t.label}</button>
+        ))}
+      </div>
+
+      <div className="mt-3">
+        {tab === "activity" && (
+          <div className="space-y-2.5">
+            {tl.map((e, i) => (
+              <div key={i} className="flex gap-3">
+                <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${e.tone}`}><e.icon size={15} /></span>
+                <div className="min-w-0 flex-1 border-b border-line pb-2.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="truncate text-[0.82rem] font-semibold text-navy">{e.title}</p>
+                    <span className="shrink-0 text-[0.68rem] text-faint">{e.when}</span>
+                  </div>
+                  <p className="text-[0.74rem] text-muted">{e.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        {tab === "jobs" && (
+          <div className="space-y-2">
+            {rec.jobs.map((j) => (
+              <div key={j.title} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><CalendarDays size={15} /></span>
+                <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{j.title}</p><p className="text-[0.72rem] text-muted">{j.when}</p></div>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${pill(j.status)}`}>{j.status}</span>
+                <span className="shrink-0 text-[0.82rem] font-semibold text-navy">${j.amount}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        {tab === "tickets" && (
+          <div className="space-y-2">
+            {rec.tickets.map((t) => (
+              <div key={t.id} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Ticket size={15} /></span>
+                <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{t.issue}</p><p className="text-[0.72rem] text-muted">#{t.id}</p></div>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${pill(t.status)}`}>{t.status}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        {tab === "invoices" && (
+          <div className="space-y-2">
+            {rec.invoices.map((iv) => (
+              <div key={iv.id} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Receipt size={15} /></span>
+                <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{iv.id}</p></div>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${pill(iv.status)}`}>{iv.status}</span>
+                <span className="shrink-0 text-[0.82rem] font-semibold text-navy">${iv.amount.toLocaleString()}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        {tab === "messages" && (
+          <div className="space-y-2">
+            {rec.convos.map((m, i) => (
+              <div key={i} className="flex gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-green/10 text-green-600">{m.kind === "Call" ? <PhoneCall size={15} /> : <MessageSquare size={15} />}</span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2"><p className="text-[0.8rem] font-semibold text-navy">{m.kind}</p><span className="shrink-0 text-[0.68rem] text-faint">{m.when}</span></div>
+                  <p className="text-[0.74rem] leading-relaxed text-muted">{m.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
