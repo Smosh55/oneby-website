@@ -182,6 +182,10 @@ export default function HeroAppMock() {
     { me: false, text: "Perfect, thank you!" },
   ]);
   const [tasks, setTasks] = useState<Record<number, TaskState>>({ 1: "pending", 2: "pending", 3: "pending" });
+  const [ticketSel, setTicketSel] = useState<string | null>(null);
+  const [custSel, setCustSel] = useState<number | null>(null);
+  const openCustomer = (name: string) => { const c = CUSTOMERS.find((x) => x.name === name); setCustSel(c ? c.id : null); setActive("customers"); };
+  const openTicket = (id: string | null) => { setTicketSel(id); setActive("tickets"); };
 
   const rootRef = useRef<HTMLDivElement>(null);
   const wasVisible = useRef(false);
@@ -198,6 +202,8 @@ export default function HeroAppMock() {
           setDay(2);
           setWeekOffset(0);
           setExtra({});
+          setTicketSel(null);
+          setCustSel(null);
           setBillTab("quote");
           setQuote("draft");
           setInvoice("draft");
@@ -343,14 +349,14 @@ export default function HeroAppMock() {
             </div>
 
             <div className="flex-1">
-              {active === "home" && <HomeView setActive={setActive} />}
-              {active === "customers" && <CustomersView />}
+              {active === "home" && <HomeView setActive={setActive} openTicket={openTicket} />}
+              {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} />}
               {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} />}
               {active === "tickets" && (
-                <TicketsView tags={tags} addTag={addTag} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} />
+                <TicketsView tags={tags} addTag={addTag} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} />
               )}
               {active === "schedule" && (
-                <ScheduleView day={day} setDay={setDay} weekOffset={weekOffset} setWeekOffset={setWeekOffset} extra={extra} addJob={addJob} />
+                <ScheduleView day={day} setDay={setDay} weekOffset={weekOffset} setWeekOffset={setWeekOffset} extra={extra} addJob={addJob} openTicket={openTicket} />
               )}
               {active === "team" && <TeamView assignedTech={assignedTech} />}
               {active === "catalog" && <CatalogView catalog={catalog} setCatalog={setCatalog} />}
@@ -604,6 +610,9 @@ function TicketsView({
   addNote,
   assignedTech,
   setAssignedTech,
+  sel,
+  setSel,
+  openCustomer,
 }: {
   tags: string[];
   addTag: () => void;
@@ -611,6 +620,9 @@ function TicketsView({
   addNote: (t: string) => void;
   assignedTech: string;
   setAssignedTech: (t: string) => void;
+  sel: string | null;
+  setSel: (s: string | null) => void;
+  openCustomer: (name: string) => void;
 }) {
   const [n, setN] = useState("");
   const [picking, setPicking] = useState(false);
@@ -646,7 +658,6 @@ function TicketsView({
     Logged: "Close the ticket",
   };
   const [flash, setFlash] = useState<string | null>(null);
-  const [sel, setSel] = useState<string | null>(null);
   const action = STAGE_ACTION[stages[stage]] ?? "Advance";
   const atEnd = stage >= stages.length - 1;
   const tk = TICKETS.find((t) => t.id === sel);
@@ -695,7 +706,7 @@ function TicketsView({
           {tk.urgent && <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[10px] font-bold uppercase text-warning">Urgent</span>}
         </div>
         <p className="mt-2 text-[0.95rem] font-semibold text-navy">{tk.issue}</p>
-        <p className="mt-1 text-sm text-muted">{tk.customer} · existing customer</p>
+        <p className="mt-1 text-sm text-muted"><button type="button" onClick={() => openCustomer(tk.customer)} className="font-semibold text-blue hover:underline">{tk.customer}</button> · existing customer</p>
 
         <div className="mt-3"><TagRow tags={tags} addTag={addTag} /></div>
 
@@ -827,10 +838,10 @@ function TagRow({ tags, addTag }: { tags: string[]; addTag: () => void }) {
 }
 
 function ScheduleView({
-  day, setDay, weekOffset, setWeekOffset, extra, addJob,
+  day, setDay, weekOffset, setWeekOffset, extra, addJob, openTicket,
 }: {
   day: number; setDay: (d: number) => void; weekOffset: number; setWeekOffset: (n: number) => void;
-  extra: Record<string, Job[]>; addJob: (key: string, job: Job) => void;
+  extra: Record<string, Job[]>; addJob: (key: string, job: Job) => void; openTicket: (id: string | null) => void;
 }) {
   const TECH_DOT: Record<string, string> = { "Luis R.": "bg-blue", "Sam K.": "bg-green", "Mia T.": "bg-warning" };
   const SCHED_TECHS = TEAM.filter((x) => x.role !== "Dispatch").map((x) => x.name);
@@ -886,8 +897,10 @@ function ScheduleView({
 
         <div className="mt-3 space-y-2">
           {jobs.length === 0 && <p className="py-3 text-center text-[0.8rem] text-faint">{tech === "All" ? "Nothing booked. Add a job below." : `Nothing booked for ${tech}.`}</p>}
-          {jobs.map((j, i) => (
-            <div key={`${j.time}-${i}`} className={`flex items-center gap-3 rounded-lg border px-3 py-2.5 ${j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"}`}>
+          {jobs.map((j, i) => {
+            const jt = TICKETS.find((t) => j.title.includes(t.customer.split(" ")[0]));
+            return (
+            <button key={`${j.time}-${i}`} type="button" onClick={() => openTicket(jt ? jt.id : null)} className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2.5 text-left transition-colors hover:border-blue ${j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"}`}>
               <span className="w-12 shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
@@ -897,8 +910,10 @@ function ScheduleView({
                 </p>
               </div>
               {j.hot && <CheckCircle2 size={16} className="shrink-0 text-green-600" />}
-            </div>
-          ))}
+              <ChevronRight size={15} className="shrink-0 text-faint" />
+            </button>
+            );
+          })}
         </div>
 
         <div className="mt-3 rounded-lg border border-line bg-canvas/40 p-2.5">
@@ -1244,7 +1259,7 @@ function EmailView() {
   );
 }
 
-function HomeView({ setActive }: { setActive: (m: ModId) => void }) {
+function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; openTicket: (id: string | null) => void }) {
   const stats: { label: string; value: string; icon: LucideIcon; tone: string; go: ModId }[] = [
     { label: "Jobs today", value: "7", icon: CalendarDays, tone: "bg-blue/10 text-blue", go: "schedule" },
     { label: "Calls caught", value: "12", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "live" },
@@ -1295,15 +1310,19 @@ function HomeView({ setActive }: { setActive: (m: ModId) => void }) {
       <div className="mt-4">
         <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Up next</p>
         <div className="space-y-2">
-          {upNext.map((j) => (
-            <div key={j.time} className="flex items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5">
+          {upNext.map((j) => {
+            const jt = TICKETS.find((t) => j.title.includes(t.customer.split(" ")[0]));
+            return (
+            <button key={j.time} type="button" onClick={() => openTicket(jt ? jt.id : null)} className="flex w-full items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5 text-left transition-colors hover:border-blue">
               <span className="w-12 shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
                 <p className="text-[0.72rem] text-muted">{j.tech}</p>
               </div>
-            </div>
-          ))}
+              <ChevronRight size={15} className="shrink-0 text-faint" />
+            </button>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -1339,9 +1358,8 @@ function custTimeline(c: Customer): TLEntry[] {
   ];
 }
 
-function CustomersView() {
+function CustomersView({ sel, setSel }: { sel: number | null; setSel: (n: number | null) => void }) {
   const [customers, setCustomers] = useState<Customer[]>(CUSTOMERS);
-  const [sel, setSel] = useState<number | null>(null);
   const [edit, setEdit] = useState(false);
   const [q, setQ] = useState("");
 
