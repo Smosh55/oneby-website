@@ -1014,6 +1014,8 @@ function BillingView({
   lines: Line[]; setLines: (l: Line[]) => void; editBill: boolean; setEditBill: (b: boolean) => void; catalog: Item[];
 }) {
   const [pick, setPick] = useState(false);
+  const [pdf, setPdf] = useState(false);
+  const ar = CUSTOMERS.reduce((n, c) => n + c.balance, 0);
   const total = lines.reduce((n, l) => n + l.qty * l.price, 0);
   const update = (i: number, field: "label" | "qty" | "price", v: string) =>
     setLines(lines.map((l, idx) => (idx === i ? { ...l, [field]: field === "label" ? v : Number(v) || 0 } : l)));
@@ -1031,6 +1033,15 @@ function BillingView({
   return (
     <div>
       <ModuleHeader title="Billing" sub={`Job #${JOB.ticket} · ${JOB.customer}`} />
+
+      <div className="mb-3 flex items-center gap-3 rounded-xl border border-warning/25 bg-warning/[0.06] px-3.5 py-2.5">
+        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-warning/15 text-warning"><DollarSign size={16} /></span>
+        <div className="min-w-0 flex-1">
+          <p className="text-[0.82rem] font-bold text-navy">${ar.toLocaleString()} outstanding</p>
+          <p className="truncate text-[0.72rem] text-muted">Across 3 customers · Sun City Diner $1,280 is 21 days overdue</p>
+        </div>
+      </div>
+
       <div className="mb-3 inline-flex rounded-lg border border-line bg-canvas p-0.5">
         {TABS.map((t) => (
           <button key={t.id} type="button" onClick={() => setTab(t.id)} className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[0.76rem] font-semibold transition-colors ${tab === t.id ? "bg-white text-navy shadow-sm" : "text-muted"}`}><t.icon size={13} /> {t.label}</button>
@@ -1042,9 +1053,14 @@ function BillingView({
           <>
             <div className="flex items-center justify-between">
               <span className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">Line items</span>
-              {editable && (
-                <button type="button" onClick={() => { setEditBill(!editBill); setPick(false); }} className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${editBill ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {editBill ? "Done" : "Edit"}</button>
-              )}
+              <div className="flex items-center gap-1.5">
+                {tab === "invoice" && (
+                  <button type="button" onClick={() => setPdf(!pdf)} className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${pdf ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><FileText size={11} /> PDF</button>
+                )}
+                {editable && (
+                  <button type="button" onClick={() => { setEditBill(!editBill); setPick(false); }} className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${editBill ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {editBill ? "Done" : "Edit"}</button>
+                )}
+              </div>
             </div>
 
             <div className="mt-2 space-y-1.5">
@@ -1093,6 +1109,29 @@ function BillingView({
               </div>
             </div>
 
+            {tab === "invoice" && pdf && (
+              <div className="animate-rise mt-3 rounded-lg border border-line bg-white p-4">
+                <div className="flex items-center justify-between border-b border-line pb-2">
+                  <span className="text-sm font-extrabold tracking-tight text-navy">INVOICE</span>
+                  <span className="text-[0.7rem] text-muted">#{JOB.ticket}</span>
+                </div>
+                <div className="mt-2 grid grid-cols-2 gap-2 text-[0.7rem]">
+                  <div><p className="font-bold uppercase text-faint">From</p><p className="text-navy">Summit HVAC</p></div>
+                  <div><p className="font-bold uppercase text-faint">Bill to</p><p className="text-navy">{JOB.customer}</p></div>
+                </div>
+                <div className="mt-2 space-y-1 border-t border-line pt-2 text-[0.72rem]">
+                  {lines.map((l, i) => (
+                    <div key={i} className="flex justify-between">
+                      <span className="text-ink">{l.label || "Untitled"}{l.qty > 1 ? ` (x${l.qty})` : ""}</span>
+                      <span className="text-navy">${(l.qty * l.price).toLocaleString()}</span>
+                    </div>
+                  ))}
+                  <div className="flex justify-between border-t border-line pt-1 font-bold"><span className="text-navy">Total</span><span className="text-navy">${total.toLocaleString()}</span></div>
+                </div>
+                <button type="button" onClick={() => toast("PDF downloaded")} className="mt-3 inline-flex items-center gap-1 text-[0.74rem] font-semibold text-blue hover:underline"><FileText size={12} /> Download PDF</button>
+              </div>
+            )}
+
             {tab === "quote" && quote === "draft" && <SendBtn label="Send quote for approval" onClick={() => setQuote("sent")} />}
             {tab === "quote" && quote === "sent" && (
               <div className="animate-rise mt-4">
@@ -1112,7 +1151,19 @@ function BillingView({
               </div>
             )}
             {tab === "invoice" && invoice === "paid" && (
-              <div className="animate-rise mt-4 flex items-center justify-center gap-2 rounded-lg border border-green/30 bg-green/[0.09] px-3 py-3 text-[0.9rem] font-bold text-green-600"><CheckCircle2 size={18} /> Paid ${total.toLocaleString()}</div>
+              <div className="animate-rise mt-4 rounded-xl border border-green/30 bg-green/[0.05] p-3.5">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-[0.85rem] font-bold text-green-600"><CheckCircle2 size={16} /> Paid in full</span>
+                  <span className="rounded-full border border-green/30 px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wide text-green-600">Receipt</span>
+                </div>
+                <div className="mt-2 space-y-0.5 text-[0.74rem] text-muted">
+                  <div className="flex justify-between"><span>Invoice</span><span className="font-semibold text-navy">#{JOB.ticket}</span></div>
+                  <div className="flex justify-between"><span>Paid by</span><span className="font-semibold text-navy">Visa ending 4242</span></div>
+                  <div className="flex justify-between"><span>Date</span><span className="font-semibold text-navy">Jun 23, 2026</span></div>
+                  <div className="flex justify-between border-t border-green/20 pt-1 text-[0.85rem]"><span className="font-bold text-navy">Total</span><span className="font-extrabold text-green-600">${total.toLocaleString()}</span></div>
+                </div>
+                <button type="button" onClick={() => toast("Receipt emailed to the customer")} className="mt-2.5 w-full rounded-lg border border-line bg-surface px-3 py-1.5 text-[0.78rem] font-semibold text-navy transition-colors hover:border-blue">Email receipt</button>
+              </div>
             )}
           </>
         )}
