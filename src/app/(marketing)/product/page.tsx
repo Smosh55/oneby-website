@@ -7,9 +7,9 @@ import Reveal from "@/components/Reveal";
 import HeroAppMock from "@/components/HeroAppMock";
 
 export const metadata: Metadata = {
-  title: "Product: A Full Communications Suite, Plus a Brain",
+  title: "Product: The All-in-One CRM for Service Businesses",
   description:
-    "Calling, desk phones, SMS, and fax, plus an AI layer that turns every call into a summary and an assigned task. Explore everything OneBy does.",
+    "OneBy answers every call, then turns it into a ticket, a scheduled job, an invoice, and a text, all in one place. A built-in phone system plus an AI layer that runs the whole job from first ring to paid.",
   alternates: { canonical: "/product" },
 };
 
@@ -25,12 +25,13 @@ export default function ProductHub() {
             The platform
           </span>
           <h1 className="mx-auto mt-5 max-w-3xl text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[3.25rem]">
-            A whole communications suite. Plus a brain.
+            Every call answered. Every job run. One platform.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-            Calling, desk phones, SMS, and fax come standard, so you can retire
-            the old phone system. The AI on top is what turns every call into a
-            summary, a task, and a resolved job.
+            A built-in business phone system, calling, desk phones, and SMS,
+            comes standard, so you can retire the old PBX. Then the AI turns
+            every call into a summary and an assigned task, and the job moves
+            from ticket to schedule to invoice without leaving the platform.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/demo" className="btn btn-primary text-base">

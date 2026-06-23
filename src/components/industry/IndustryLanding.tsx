@@ -356,9 +356,9 @@ export default function IndustryLanding({
               See it answer a real {industry.shortName} call.
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
-              Tell us about your shop and we&apos;ll show you OneBy turning your
-              next missed call into a booked job. Live in a day, and you keep
-              your number.
+              Tell us about your shop and we&apos;ll show you OneBy turn a call
+              into a summary, a ticket, a booked job, and an invoice. Live in a
+              day, and you keep your number.
             </p>
             <ul className="mt-6 space-y-3">
               {[
@@ -470,8 +470,9 @@ export default function IndustryLanding({
                   Stop letting the phone cost you {industry.shortName.toLowerCase()} jobs.
                 </h2>
                 <p className="mt-5 text-lg leading-relaxed text-white/70">
-                  See OneBy answer your next missed call and turn it into booked
-                  work. Live in a day, no new hardware.
+                  See OneBy answer every call and run the job from first ring to
+                  paid: ticketed, scheduled, and invoiced in one place. Live in a
+                  day, no new hardware.
                 </p>
                 <div className="mt-8 flex flex-wrap justify-center gap-3">
                   <Link href="/demo" className="btn btn-primary text-base">
