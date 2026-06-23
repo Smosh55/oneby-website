@@ -99,22 +99,22 @@ function dateFor(offset: number, i: number) {
 }
 
 const DAY_JOBS: Record<number, Job[]> = {
-  0: [{ time: "10:00", title: "No-cool · Ortiz", tech: "Sam K.", duration: "1h" }],
-  1: [{ time: "8:30", title: "Maintenance · Oak HOA", tech: "Luis R.", duration: "2h" }],
+  0: [{ time: "10:00 AM", title: "No-cool · Ortiz", tech: "Sam K.", duration: "1h" }],
+  1: [{ time: "8:30 AM", title: "Maintenance · Oak HOA", tech: "Luis R.", duration: "2h" }],
   2: [
-    { time: "9:00", title: "Tune-up · Garcia", tech: "Sam K.", duration: "1h" },
-    { time: "1:00", title: "Install · Lee", tech: "Luis R.", duration: "Half day" },
-    { time: "3:30", title: "A/C diagnostic · Maria G.", tech: "Luis R.", hot: true, duration: "1h" },
+    { time: "9:00 AM", title: "Tune-up · Garcia", tech: "Sam K.", duration: "1h" },
+    { time: "1:00 PM", title: "Install · Lee", tech: "Luis R.", duration: "Half day" },
+    { time: "3:30 PM", title: "A/C diagnostic · Maria G.", tech: "Luis R.", hot: true, duration: "1h" },
   ],
-  3: [{ time: "11:00", title: "Estimate · Park Ave", tech: "Sam K.", duration: "30m" }],
-  4: [{ time: "2:00", title: "Install · Reyes", tech: "Luis R.", duration: "Half day" }],
+  3: [{ time: "11:00 AM", title: "Estimate · Park Ave", tech: "Sam K.", duration: "30m" }],
+  4: [{ time: "2:00 PM", title: "Install · Reyes", tech: "Luis R.", duration: "Half day" }],
 };
 
 const TEAM = [
-  { name: "Luis R.", role: "Lead tech", status: "On a job", jobs: "3 today", dot: "bg-green", phone: "(602) 555-0171", skills: ["HVAC", "Install", "Refrigeration"] },
-  { name: "Sam K.", role: "Tech", status: "Available", jobs: "2 today", dot: "bg-blue", phone: "(602) 555-0182", skills: ["HVAC", "Maintenance"] },
+  { name: "Luis R.", role: "Lead tech", status: "On a job", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["HVAC", "Install", "Refrigeration"] },
+  { name: "Sam K.", role: "Tech", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["HVAC", "Maintenance"] },
   { name: "Dana P.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Dispatch", "Scheduling"] },
-  { name: "Mia T.", role: "Tech", status: "Off today", jobs: "0 today", dot: "bg-line", phone: "(602) 555-0166", skills: ["Plumbing", "HVAC"] },
+  { name: "Mia T.", role: "Tech", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Plumbing", "HVAC"] },
 ];
 
 const CATALOG_SEED: Item[] = [
@@ -180,7 +180,7 @@ export default function HeroAppMock() {
   const [tags, setTags] = useState<string[]>(["Existing customer", "HVAC", "Same-day"]);
   const [notes, setNotes] = useState<string[]>(["Prefers afternoon visits.", "Gate code 4417."]);
   const [msgs, setMsgs] = useState<{ me: boolean; text: string }[]>([
-    { me: true, text: `Hi Maria, this is OneBy for Summit HVAC. Luis is booked for your A/C diagnostic today at 3:30.` },
+    { me: true, text: `Hi Maria, this is OneBy for Summit HVAC. Luis is booked for your A/C diagnostic today at 3:30 PM.` },
     { me: false, text: "Perfect, thank you!" },
   ]);
   const [tasks, setTasks] = useState<Record<number, TaskState>>({ 1: "pending", 2: "pending", 3: "pending" });
@@ -674,6 +674,15 @@ function TicketsView({
   const atEnd = stage >= stages.length - 1;
   const tk = TICKETS.find((t) => t.id === sel);
 
+  // Each ticket opens to its own real status, and the workflow never leaks
+  // from one ticket to the next.
+  useEffect(() => {
+    const t = TICKETS.find((x) => x.id === sel);
+    const stageIdx: Record<string, number> = { New: 0, Scheduled: 1, "In progress": 2, Invoiced: 3, Done: 4 };
+    setFlow("Standard repair");
+    setStage(t ? stageIdx[t.status] ?? 1 : 1);
+  }, [sel]);
+
   if (!tk) {
     return (
       <div>
@@ -880,7 +889,18 @@ function ScheduleView({
   const [ntitle, setNtitle] = useState("");
   const [ntech, setNtech] = useState(SCHED_TECHS[0]);
   const [ndur, setNdur] = useState("1h");
-  const TIME_SLOTS = ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00"];
+  const TIME_SLOTS = (() => {
+    const out: string[] = [];
+    for (let h = 6; h <= 20; h++) {
+      for (const min of [0, 15, 30, 45]) {
+        if (h === 20 && min > 0) break;
+        const ampm = h < 12 ? "AM" : "PM";
+        const hr = h % 12 === 0 ? 12 : h % 12;
+        out.push(`${hr}:${String(min).padStart(2, "0")} ${ampm}`);
+      }
+    }
+    return out;
+  })();
   const key = `${weekOffset}:${day}`;
   const base = weekOffset === 0 ? DAY_JOBS[day] ?? [] : [];
   const allJobs = [...base, ...(extra[key] ?? [])];
@@ -932,7 +952,7 @@ function ScheduleView({
             const jt = TICKETS.find((t) => j.title.includes(t.customer.split(" ")[0]));
             return (
             <button key={`${j.time}-${i}`} type="button" onClick={() => openTicket(jt ? jt.id : null)} className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2.5 text-left transition-colors hover:border-blue ${j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"}`}>
-              <span className="w-12 shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
+              <span className="w-[4.75rem] shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
                 <p className="flex items-center gap-1.5 text-[0.72rem] text-muted">
@@ -976,7 +996,7 @@ function TeamView({ assignedTech, setActive }: { assignedTech: string; setActive
   if (!t) {
     return (
       <div>
-        <ModuleHeader title="Team" sub="3 techs · 7 jobs today" />
+        <ModuleHeader title="Team" sub="3 techs · 7 jobs this week" />
         <div className="space-y-2">
           {TEAM.map((m) => (
             <button key={m.name} type="button" onClick={() => setSel(m.name)} className={`flex w-full items-center gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-colors hover:border-blue ${m.name === assignedTech ? "border-blue/30 bg-blue/[0.04]" : "border-line bg-surface"}`}>
@@ -1031,7 +1051,7 @@ function TeamView({ assignedTech, setActive }: { assignedTech: string; setActive
             {todays.length === 0 && <p className="py-2 text-center text-[0.8rem] text-faint">No jobs scheduled today.</p>}
             {todays.map((j, i) => (
               <div key={i} className="flex items-center gap-3 rounded-lg border border-line bg-canvas px-3 py-2">
-                <span className="w-12 shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
+                <span className="w-[4.75rem] shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
                 <p className="min-w-0 flex-1 truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
                 {j.duration && <span className="shrink-0 text-[0.72rem] text-muted">{j.duration}</span>}
               </div>
@@ -1484,7 +1504,7 @@ function MessagesView({ msgs, setMsgs }: { msgs: Msg[]; setMsgs: (m: Msg[]) => v
 
 const TASKS: { id: number; icon: LucideIcon; title: string; meta: string; go: ModId; goLabel: string; options: string[]; acted: (o: string) => string }[] = [
   { id: 1, icon: Calendar, title: "Schedule A/C diagnostic", meta: "Dispatch · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Luis R.", "Today 4:30 PM · Luis R.", "Tomorrow 9:00 AM · Sam K."], acted: (o) => `Booked ${o}` },
-  { id: 2, icon: CornerUpRight, title: "Text Maria her arrival window", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Luis arriving 3:30", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
+  { id: 2, icon: CornerUpRight, title: "Text Maria her arrival window", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Luis arriving 3:30 PM", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
   { id: 3, icon: HelpCircle, title: "Confirm: upstairs unit, not downstairs?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Upstairs unit", "Downstairs unit", "Both units"], acted: (o) => `Confirmed: ${o}` },
 ];
 
@@ -1570,14 +1590,14 @@ function EmailView() {
 
 function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; openTicket: (id: string | null) => void }) {
   const stats: { label: string; value: string; icon: LucideIcon; tone: string; go: ModId }[] = [
-    { label: "Jobs today", value: "7", icon: CalendarDays, tone: "bg-blue/10 text-blue", go: "schedule" },
+    { label: "Jobs this week", value: "7", icon: CalendarDays, tone: "bg-blue/10 text-blue", go: "schedule" },
     { label: "Calls caught", value: "12", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "live" },
     { label: "Unbilled", value: "$2,480", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
     { label: "Collected this week", value: "$9,120", icon: DollarSign, tone: "bg-green/10 text-green-600", go: "billing" },
   ];
   const upNext = [
-    { time: "1:00", title: "Install · Lee", tech: "Luis R." },
-    { time: "3:30", title: "A/C diagnostic · Maria G.", tech: "Luis R." },
+    { time: "1:00 PM", title: "Install · Lee", tech: "Luis R." },
+    { time: "3:30 PM", title: "A/C diagnostic · Maria G.", tech: "Luis R." },
   ];
   const needs: { title: string; body: string; icon: LucideIcon; tone: string; go: ModId }[] = [
     { title: "$1,280 overdue · Sun City Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
@@ -1623,7 +1643,7 @@ function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; op
             const jt = TICKETS.find((t) => j.title.includes(t.customer.split(" ")[0]));
             return (
             <button key={j.time} type="button" onClick={() => openTicket(jt ? jt.id : null)} className="flex w-full items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5 text-left transition-colors hover:border-blue">
-              <span className="w-12 shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
+              <span className="w-[4.75rem] shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
                 <p className="text-[0.72rem] text-muted">{j.tech}</p>
@@ -1652,7 +1672,7 @@ const CUSTOMERS: Customer[] = [
 
 const MARIA_TIMELINE: TLEntry[] = [
   { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · A/C not cooling", body: "AI summarized, became Ticket #1042" },
-  { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Luis arriving 3:30" },
+  { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Luis arriving 3:30 PM" },
   { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
   { when: "Last summer", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · A/C install", body: "$4,200 · 12-month warranty" },
   { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
