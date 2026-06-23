@@ -55,8 +55,9 @@ const nextConfig: NextConfig = {
       { source: "/home", destination: "/", permanent: true },
       { source: "/index.php", destination: "/", permanent: true },
       { source: "/about-us", destination: "/about", permanent: true },
-      { source: "/contact", destination: "/demo", permanent: true },
-      { source: "/contact-us", destination: "/demo", permanent: true },
+      // NOTE: do not redirect /contact, it's a real page now. Only the legacy
+      // WordPress /contact-us path redirects.
+      { source: "/contact-us", destination: "/contact", permanent: true },
       { source: "/get-started", destination: "/demo", permanent: true },
       { source: "/features", destination: "/product", permanent: true },
       { source: "/services", destination: "/product", permanent: true },

@@ -36,7 +36,35 @@ const LIMITS: Record<string, number> = {
   message: 2000,
 };
 
+// Naive in-memory rate limit: a first line of defense against form spam and
+// abuse. On serverless this is per-instance, so for production-grade limiting
+// move it to a shared store (Vercel KV / Upstash).
+const WINDOW_MS = 60_000;
+const MAX_PER_WINDOW = 5;
+const hits = new Map<string, { count: number; resetAt: number }>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  if (hits.size > 5000) hits.clear(); // bound memory
+  const rec = hits.get(ip);
+  if (!rec || now > rec.resetAt) {
+    hits.set(ip, { count: 1, resetAt: now + WINDOW_MS });
+    return false;
+  }
+  rec.count += 1;
+  return rec.count > MAX_PER_WINDOW;
+}
+
 export async function POST(req: Request) {
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (rateLimited(ip)) {
+    return NextResponse.json(
+      { ok: false, error: "Too many requests. Please wait a moment and try again." },
+      { status: 429 }
+    );
+  }
+
   let lead: DemoLead;
   try {
     lead = (await req.json()) as DemoLead;
