@@ -126,6 +126,37 @@ const CATALOG_SEED: Item[] = [
   { id: 8, name: "Air filter", type: "Part", price: 25 },
 ];
 
+type ToastFn = (msg: string) => void;
+const toastListeners = new Set<ToastFn>();
+function toast(msg: string) {
+  toastListeners.forEach((f) => f(msg));
+}
+
+function ToastHost() {
+  const [items, setItems] = useState<{ id: number; msg: string }[]>([]);
+  useEffect(() => {
+    const fn: ToastFn = (msg) => {
+      const id = Date.now() + Math.random();
+      setItems((xs) => [...xs, { id, msg }]);
+      setTimeout(() => setItems((xs) => xs.filter((x) => x.id !== id)), 2600);
+    };
+    toastListeners.add(fn);
+    return () => {
+      toastListeners.delete(fn);
+    };
+  }, []);
+  if (items.length === 0) return null;
+  return (
+    <div className="pointer-events-none absolute bottom-3 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center gap-1.5">
+      {items.map((t) => (
+        <div key={t.id} className="animate-rise pointer-events-auto inline-flex items-center gap-2 rounded-lg bg-navy px-3 py-2 text-[0.78rem] font-semibold text-white shadow-[0_20px_45px_-15px_rgba(4,3,79,0.6)]">
+          <CheckCircle2 size={14} className="text-green" /> {t.msg}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function HeroAppMock() {
   const [active, setActive] = useState<ModId>("live");
   const [phase, setPhase] = useState<Phase>("transcribing");
@@ -231,7 +262,8 @@ export default function HeroAppMock() {
         </span>
       </div>
 
-      <div className="overflow-hidden rounded-[20px] border border-line bg-surface shadow-[0_40px_90px_-30px_rgba(4,3,79,0.35)]">
+      <div className="relative overflow-hidden rounded-[20px] border border-line bg-surface shadow-[0_40px_90px_-30px_rgba(4,3,79,0.35)]">
+        <ToastHost />
         {/* title bar */}
         <div className="flex items-center gap-2 border-b border-line bg-canvas/70 px-5 py-3">
           <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
@@ -703,7 +735,7 @@ function TicketsView({
             <span className="text-[0.8rem] font-medium text-navy">Assign this job to {pending}?</span>
             <span className="flex gap-1.5">
               <button type="button" onClick={() => { setPending(null); }} className="rounded-md border border-line bg-surface px-2 py-1 text-[0.72rem] font-semibold text-muted">Cancel</button>
-              <button type="button" onClick={() => { setAssignedTech(pending); setPending(null); setPicking(false); }} className="rounded-md bg-blue px-2 py-1 text-[0.72rem] font-semibold text-white">Confirm</button>
+              <button type="button" onClick={() => { setAssignedTech(pending); toast(`Assigned to ${pending}`); setPending(null); setPicking(false); }} className="rounded-md bg-blue px-2 py-1 text-[0.72rem] font-semibold text-white">Confirm</button>
             </span>
           </div>
         )}
@@ -743,7 +775,7 @@ function TicketsView({
           </div>
           <div className="mt-2 flex gap-2">
             <input value={nt} onChange={(e) => setNt(e.target.value)} placeholder="Add a task" className={`${inputCls} min-w-0 flex-1`} />
-            <button type="button" onClick={() => { if (nt.trim()) { setSubtasks([...subtasks, { id: Date.now(), label: nt.trim(), assignee: TEAM[0].name, done: false }]); setNt(""); } }} className="shrink-0 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90">Add</button>
+            <button type="button" onClick={() => { if (nt.trim()) { setSubtasks([...subtasks, { id: Date.now(), label: nt.trim(), assignee: TEAM[0].name, done: false }]); setNt(""); toast("Task added"); } }} className="shrink-0 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90">Add</button>
           </div>
         </div>
 
@@ -878,7 +910,7 @@ function ScheduleView({
           </div>
           <div className="mt-1.5 flex gap-1.5">
             <input value={ntitle} onChange={(e) => setNtitle(e.target.value)} placeholder="Job, e.g. A/C diagnostic" className={`${inputCls} min-w-0 flex-1`} />
-            <button type="button" onClick={() => { if (nt.trim()) { addJob(key, { time: nt.trim(), title: ntitle.trim() || "New job", tech: ntech, duration: ndur }); setNt(""); setNtitle(""); } }} className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90"><Plus size={13} /> Add</button>
+            <button type="button" onClick={() => { if (nt.trim()) { addJob(key, { time: nt.trim(), title: ntitle.trim() || "New job", tech: ntech, duration: ndur }); setNt(""); setNtitle(""); toast("Job added to the schedule"); } }} className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90"><Plus size={13} /> Add</button>
           </div>
         </div>
 
@@ -1057,7 +1089,7 @@ function BillingView({
               <div className="animate-rise mt-4 flex items-center justify-center gap-2 rounded-lg border border-green/30 bg-green/[0.09] px-3 py-3 text-[0.85rem] font-bold text-green-600"><CheckCircle2 size={17} /> Approved, ready to invoice</div>
             )}
 
-            {tab === "invoice" && invoice === "draft" && <SendBtn label="Send invoice + pay link" onClick={() => setInvoice("sent")} />}
+            {tab === "invoice" && invoice === "draft" && <SendBtn label="Send invoice + pay link" onClick={() => { setInvoice("sent"); toast("Invoice sent with pay link"); }} />}
             {tab === "invoice" && invoice === "sent" && (
               <div className="animate-rise mt-4">
                 <Banner title="Invoice sent" body={`Pay link texted to ${JOB.customer}. Tap to pay by card.`} />
@@ -1333,7 +1365,7 @@ function CustomersView() {
             <p className="text-[0.95rem] font-semibold text-navy">{c.name}{c.vip && <span className="ml-1.5 rounded-full bg-green/10 px-2 py-0.5 text-[10px] font-semibold text-green-600">VIP</span>}</p>
             <p className="text-xs text-muted">Customer since {c.since}{c.balance > 0 ? ` · $${c.balance} balance` : ""}</p>
           </div>
-          <button type="button" onClick={() => setEdit(!edit)} className={`ml-auto inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${edit ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {edit ? "Done" : "Edit"}</button>
+          <button type="button" onClick={() => { if (edit) toast("Customer saved"); setEdit(!edit); }} className={`ml-auto inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${edit ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {edit ? "Done" : "Edit"}</button>
         </div>
 
         <div className="mt-3 space-y-2">
