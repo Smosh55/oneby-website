@@ -670,7 +670,6 @@ function TicketsView({
     Paid: "Close the ticket",
     Logged: "Close the ticket",
   };
-  const [flash, setFlash] = useState<string | null>(null);
   const action = STAGE_ACTION[stages[stage]] ?? "Advance";
   const atEnd = stage >= stages.length - 1;
   const tk = TICKETS.find((t) => t.id === sel);
@@ -727,7 +726,6 @@ function TicketsView({
 
         {/* status + assignment */}
         <div className="mt-3 flex flex-wrap items-center gap-2 text-[0.78rem]">
-          <span className="inline-flex items-center gap-1 rounded-md bg-canvas-2 px-2 py-1 font-semibold text-navy"><Clock size={13} /> Status: {stages[stage]}</span>
           <button
             type="button"
             onClick={() => { setPicking(!picking); setPending(null); }}
@@ -764,20 +762,31 @@ function TicketsView({
           </div>
         )}
 
-        {/* workflow */}
-        <div className="mt-4 border-t border-line pt-3">
+        {/* next step - the one clear action once it is a ticket */}
+        <div className="mt-4 rounded-xl border border-blue/20 bg-blue/[0.05] p-3">
           <div className="flex items-center justify-between gap-2">
-            <p className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">Workflow</p>
-            <select value={flow} onChange={(e) => { setFlow(e.target.value); setStage(1); }} aria-label="Workflow" className={`${inputCls} py-1`}>
+            <div className="min-w-0">
+              <p className="text-[0.64rem] font-bold uppercase tracking-wide text-faint">Current stage</p>
+              <p className="text-[0.95rem] font-bold text-navy">{stages[stage]}</p>
+            </div>
+            {atEnd ? (
+              <span className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-green/10 px-3 py-2 text-[0.82rem] font-bold text-green-600"><CheckCircle2 size={15} /> Job complete</span>
+            ) : (
+              <button type="button" onClick={() => { const next = stages[stage + 1]; setStage(stage + 1); toast(`Ticket moved to ${next}`); }} className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-navy px-3.5 py-2.5 text-[0.84rem] font-semibold text-white transition-opacity hover:opacity-90">
+                {action} <ChevronRight size={15} />
+              </button>
+            )}
+          </div>
+          <div className="mt-3 flex items-center gap-1">
+            {stages.map((s, i) => (
+              <div key={s} title={s} className={`h-1.5 flex-1 rounded-full ${i <= stage ? "bg-blue" : "bg-line"}`} />
+            ))}
+          </div>
+          <div className="mt-1.5 flex items-center justify-between gap-2">
+            <span className="text-[0.7rem] text-muted">Step {stage + 1} of {stages.length} · {flow}</span>
+            <select value={flow} onChange={(e) => { setFlow(e.target.value); setStage(1); }} aria-label="Change workflow" className="shrink-0 rounded-md border border-line bg-canvas px-1.5 py-0.5 text-[0.7rem] font-medium text-muted">
               {Object.keys(FLOWS).map((f) => <option key={f} value={f}>{f}</option>)}
             </select>
-          </div>
-          <div className="mt-2 flex flex-wrap items-center gap-1">
-            {stages.map((s, i) => (
-              <button key={s} type="button" onClick={() => setStage(i)} className={`rounded-full px-2 py-0.5 text-[0.68rem] font-semibold transition-colors ${i < stage ? "bg-green/15 text-green-600" : i === stage ? "bg-blue text-white" : "bg-canvas-2 text-faint"}`}>
-                {s}
-              </button>
-            ))}
           </div>
         </div>
 
@@ -830,21 +839,6 @@ function TicketsView({
           </div>
         </div>
 
-        {/* contextual action, driven by the workflow stage */}
-        <div className="mt-4 border-t border-line pt-3">
-          {flash && (
-            <p className="animate-rise mb-2 inline-flex items-center gap-1.5 rounded-md bg-green/10 px-2.5 py-1 text-[0.74rem] font-semibold text-green-600"><CheckCircle2 size={13} /> {flash}</p>
-          )}
-          <button
-            type="button"
-            disabled={atEnd}
-            onClick={() => { if (!atEnd) { const next = stages[stage + 1]; setStage(stage + 1); setFlash(`Moved to ${next}`); } }}
-            className={`flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-[0.82rem] font-semibold transition-colors ${atEnd ? "cursor-default bg-canvas-2 text-faint" : "bg-navy text-white hover:opacity-90"}`}
-          >
-            {atEnd ? "Ticket complete" : (<><ChevronRight size={15} /> {action}</>)}
-          </button>
-          <p className="mt-1.5 text-center text-[0.68rem] text-faint">Next step for the {flow} workflow</p>
-        </div>
       </div>
     </div>
   );
