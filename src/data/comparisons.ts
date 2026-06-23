@@ -845,6 +845,155 @@ export const comparisons: Comparison[] = [
       },
     ],
   },
+  {
+    slug: "zoho",
+    competitor: "Zoho CRM",
+    category: "CRM",
+    metaTitle: "OneBy vs Zoho CRM: Honest Comparison",
+    metaDescription:
+      "Zoho CRM is a deep, affordable sales CRM. OneBy is the all-in-one for service businesses that answers your phone and runs the whole job. Compare them.",
+    keywords: ["OneBy vs Zoho", "Zoho CRM alternative", "Zoho for service business", "Zoho phone system"],
+    heroTitle: "OneBy vs Zoho CRM",
+    heroSub:
+      "Zoho CRM is a deep, budget-friendly sales CRM with a huge suite around it. OneBy is the opposite kind of tool: an all-in-one for service businesses that answers the phone and turns the call into a booked, invoiced job.",
+    theirStrengths: [
+      "Deep, customizable sales CRM at a low price",
+      "A huge connected suite (books, desk, campaigns)",
+      "Great for pipeline-driven sales teams",
+    ],
+    wins: [
+      { title: "It answers your phone", body: "Zoho stores the contact. OneBy is the phone system that answers the call with AI and turns it into a ticket on its own." },
+      { title: "One place, first ring to paid", body: "Calls, tickets, scheduling, invoicing, and payments live together, built for the trades, not a sales pipeline." },
+      { title: "Live in a day, no admin", body: "No consultant and no module configuration. Port your number and go." },
+    ],
+    matrix: [
+      { label: "Answers your phone with AI", oneby: true, them: false },
+      { label: "Turns calls into tickets", oneby: true, them: "Manual" },
+      { label: "Scheduling & dispatch", oneby: true, them: "Add-on" },
+      { label: "Invoicing & payments", oneby: true, them: "Via Zoho Books" },
+      { label: "Built for the trades", oneby: true, them: false },
+      { label: "Live in a day", oneby: true, them: "Varies" },
+    ],
+    pickThemIf:
+      "You're a sales-driven team that wants a deeply customizable CRM and already lives in the Zoho suite.",
+    pickOneByIf:
+      "You run a service business and want every call answered and turned into a booked, invoiced job in one place.",
+    faqs: [
+      { q: "Is OneBy a CRM?", a: "It's a communications-first platform with a customer timeline and jobs built in. It can also sync to a CRM you already use." },
+      { q: "Can OneBy replace Zoho?", a: "For service businesses that live on the phone, often yes. For complex sales pipelines, OneBy complements the CRM by feeding it calls and tasks." },
+    ],
+  },
+  {
+    slug: "pipedrive",
+    competitor: "Pipedrive",
+    category: "CRM",
+    metaTitle: "OneBy vs Pipedrive: Honest Comparison",
+    metaDescription:
+      "Pipedrive is a slick sales-pipeline CRM. OneBy is the all-in-one for service businesses that answers the phone and turns calls into booked, invoiced jobs.",
+    keywords: ["OneBy vs Pipedrive", "Pipedrive alternative", "Pipedrive for service business", "Pipedrive phone"],
+    heroTitle: "OneBy vs Pipedrive",
+    heroSub:
+      "Pipedrive is a clean, visual sales-pipeline CRM built for closing deals. OneBy is built for service businesses that run on the phone: it answers the call and turns it into a booked, scheduled, invoiced job.",
+    theirStrengths: [
+      "Simple, visual sales pipeline",
+      "Quick to set up for sales teams",
+      "Good deal tracking and reporting",
+    ],
+    wins: [
+      { title: "It answers your phone", body: "Pipedrive tracks deals. OneBy answers the call with AI and turns it into a ticket, even after hours." },
+      { title: "The whole job, not just the deal", body: "Tickets, scheduling, invoicing, and payments in one place, built for service work rather than a sales funnel." },
+      { title: "No pipeline to babysit", body: "You don't manage stages and deals. You answer calls and get jobs done." },
+    ],
+    matrix: [
+      { label: "Answers your phone with AI", oneby: true, them: false },
+      { label: "Turns calls into tickets", oneby: true, them: "Manual" },
+      { label: "Scheduling & dispatch", oneby: true, them: false },
+      { label: "Invoicing & payments", oneby: true, them: "Add-on" },
+      { label: "Built for the trades", oneby: true, them: false },
+      { label: "Live in a day", oneby: true, them: true },
+    ],
+    pickThemIf: "You're a sales team that lives in a deal pipeline and wants simple deal tracking.",
+    pickOneByIf:
+      "You run a service business and want calls answered and turned into booked, invoiced jobs, not deals tracked.",
+    faqs: [
+      { q: "Is OneBy a sales CRM?", a: "No. It's a communications-first platform for service businesses, with jobs and a customer timeline instead of a sales pipeline." },
+      { q: "Can they work together?", a: "Yes. OneBy can pass calls, summaries, and tasks into a sales CRM if you run one." },
+    ],
+  },
+  {
+    slug: "servicem8",
+    competitor: "ServiceM8",
+    category: "Field service software",
+    metaTitle: "OneBy vs ServiceM8: Honest Comparison",
+    metaDescription:
+      "ServiceM8 is tidy job management for small trades. OneBy adds the missing piece: it answers your phone with AI and turns every call into the job. Compare them.",
+    keywords: ["OneBy vs ServiceM8", "ServiceM8 alternative", "ServiceM8 phone", "field service software with phone"],
+    heroTitle: "OneBy vs ServiceM8",
+    heroSub:
+      "ServiceM8 is a tidy job-management app for small trades, with quoting, scheduling, and invoicing. OneBy does those too, and adds the part ServiceM8 doesn't: it answers your phone with AI and turns the call into the job.",
+    theirStrengths: [
+      "Clean job management for small trades",
+      "Quoting, scheduling, and invoicing",
+      "Good mobile app for the field",
+    ],
+    wins: [
+      { title: "It answers your phone", body: "ServiceM8 manages the job once it exists. OneBy answers the call that creates it, captures the details, and opens the ticket. ServiceM8 has no AI receptionist." },
+      { title: "Calls become jobs, in one place", body: "Calling, SMS, AI answering, tickets, scheduling, and invoicing live together, so the call that starts the job is captured." },
+      { title: "Simple, and live in a day", body: "Port your number, plug in, and go. The all-in-one that also runs your phone." },
+    ],
+    matrix: [
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Business calling + SMS", oneby: true, them: false },
+      { label: "Turns calls into tickets", oneby: true, them: "Manual" },
+      { label: "Scheduling & dispatch", oneby: true, them: true },
+      { label: "Invoicing & payments", oneby: true, them: true },
+      { label: "Simple, live in a day", oneby: true, them: true },
+    ],
+    pickThemIf: "You want a mature small-trade job app and you're happy keeping your phone system separate.",
+    pickOneByIf:
+      "You want the call answered and turned into a scheduled, invoiced job in one place, phone system included.",
+    faqs: [
+      { q: "Does ServiceM8 answer your phone?", a: "No, it's job-management software. OneBy is the all-in-one that includes the phone system and AI answering." },
+      { q: "Can OneBy do quoting and invoicing too?", a: "Yes. Quotes, invoices, milestone billing, and card payments are built in." },
+    ],
+  },
+  {
+    slug: "workiz",
+    competitor: "Workiz",
+    category: "Field service software",
+    metaTitle: "OneBy vs Workiz: Honest Comparison",
+    metaDescription:
+      "Workiz is field-service software with scheduling, invoicing, and some calling. OneBy is the all-in-one whose AI actually answers and turns calls into jobs.",
+    keywords: ["OneBy vs Workiz", "Workiz alternative", "Workiz phone", "field service software AI"],
+    heroTitle: "OneBy vs Workiz",
+    heroSub:
+      "Workiz is solid field-service software for trades, with scheduling, invoicing, and built-in calling. OneBy goes further on the phone: an AI receptionist that answers every call and turns it into a booked, invoiced job, in one place.",
+    theirStrengths: [
+      "Built for field-service trades",
+      "Scheduling, invoicing, and dispatch",
+      "Has its own calling and SMS",
+    ],
+    wins: [
+      { title: "AI that actually answers", body: "Workiz has calling, but you still have to pick up. OneBy's AI receptionist answers the overflow and after-hours calls and turns them into tickets on its own." },
+      { title: "Every call becomes a job", body: "The conversation flows straight into a ticket, a schedule, and an invoice, with the AI doing the data entry." },
+      { title: "Honest, faithful AI", body: "It captures what was said, asks when unsure instead of guessing, and never sends a caller to voicemail." },
+    ],
+    matrix: [
+      { label: "AI receptionist answers your calls", oneby: true, them: "Limited" },
+      { label: "Turns calls into tickets automatically", oneby: true, them: "Manual" },
+      { label: "Business calling + SMS", oneby: true, them: true },
+      { label: "Scheduling & dispatch", oneby: true, them: true },
+      { label: "Invoicing & payments", oneby: true, them: true },
+      { label: "Simple, live in a day", oneby: true, them: "Varies" },
+    ],
+    pickThemIf: "You want established field-service software and you'll staff the phones yourself.",
+    pickOneByIf:
+      "You want an AI that answers every call and turns it into a job, with scheduling and invoicing in the same place.",
+    faqs: [
+      { q: "Doesn't Workiz already have calling?", a: "It does, but a human still has to answer. OneBy adds an AI receptionist that catches the calls your team can't." },
+      { q: "Is OneBy a full field-service platform?", a: "It runs the call-to-cash loop: answering, tickets, scheduling, invoicing, and payments. For heavy dispatch or inventory, it integrates." },
+    ],
+  },
 ];
 
 export const comparisonsBySlug = Object.fromEntries(

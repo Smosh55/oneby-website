@@ -25,7 +25,9 @@
       "Bash(grep -n \"Pro\\\\|/user\\\\|/mo for\\\\|RetailMonthly}/\\\\|LockedMonthly}/\" page.tsx)",
       "Bash(rm -f .git/index .git/index-DESKTOP-90OI4FL .git/index-DESKTOP-90OI4FL-2)",
       "Bash(git read-tree *)",
-      "Bash(git reset *)"
+      "Bash(git reset *)",
+      "Bash(cd /c/dev/oneby-website *)",
+      "Bash(echo \"exit: $?\")"
     ]
   }
 }

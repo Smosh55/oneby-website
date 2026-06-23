@@ -8,6 +8,9 @@ import {
   Star,
   Phone,
   Calendar,
+  Bot,
+  Ticket,
+  Receipt,
 } from "lucide-react";
 import type { Industry } from "@/data/industries";
 import type { PostMeta } from "@/lib/blog";
@@ -282,6 +285,41 @@ export default function IndustryLanding({
                   <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">
                     {c.body}
                   </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* All-in-one loop */}
+      <section className="pb-18 lg:pb-24">
+        <div className="container-x">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <span className="eyebrow">One platform, not four</span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+              The whole {industry.shortName.toLowerCase()} job, in one place.
+            </h2>
+            <p className="mt-4 text-muted">
+              OneBy catches the call, then tickets, schedules, and invoices the
+              job, so it goes from first ring to paid without leaving the
+              platform.
+            </p>
+          </Reveal>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { icon: Bot, t: "AI answers every call", b: "Overflow and after-hours included, captured, never sent to voicemail." },
+              { icon: Ticket, t: "Tickets the job", b: `Every call becomes an assigned ${industry.shortName} ticket on its own.` },
+              { icon: Calendar, t: "Schedules the work", b: "Book a tech and a time, synced two-way with Google and Microsoft calendars." },
+              { icon: Receipt, t: "Invoices and gets paid", b: "Send a pay link, take a card, and close the job out." },
+            ].map((m, i) => (
+              <Reveal key={m.t} delay={i * 70}>
+                <div className="surface-card h-full rounded-2xl p-6">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-blue/10 text-blue">
+                    <m.icon size={20} />
+                  </span>
+                  <h3 className="mt-4 font-semibold text-navy">{m.t}</h3>
+                  <p className="mt-2 text-[0.9rem] leading-relaxed text-muted">{m.b}</p>
                 </div>
               </Reveal>
             ))}

@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE}/`, changeFrequency: "weekly", priority: 1 },
     { url: `${BASE}/product`, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/voip-crm`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/ai-receptionist`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/missed-call-calculator`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/pricing`, changeFrequency: "monthly", priority: 0.9 },
