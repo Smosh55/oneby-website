@@ -588,6 +588,24 @@ function TicketsView({
     { id: 3, label: "Collect payment on site", assignee: "Dana P.", done: false },
   ]);
   const stages = FLOWS[flow];
+  const STAGE_ACTION: Record<string, string> = {
+    New: "Schedule the job",
+    Due: "Schedule the visit",
+    Quoted: "Send quote for approval",
+    Approved: "Schedule the install",
+    Verified: "Schedule the repair",
+    Scheduled: "Start the job",
+    "In progress": "Create the invoice",
+    Installed: "Create the invoice",
+    Serviced: "Log the visit",
+    Resolved: "Close the ticket",
+    Invoiced: "Collect payment",
+    Paid: "Close the ticket",
+    Logged: "Close the ticket",
+  };
+  const [flash, setFlash] = useState<string | null>(null);
+  const action = STAGE_ACTION[stages[stage]] ?? "Advance";
+  const atEnd = stage >= stages.length - 1;
 
   return (
     <div>
@@ -694,6 +712,22 @@ function TicketsView({
             <input value={n} onChange={(e) => setN(e.target.value)} placeholder="Add a note for the tech" className={`${inputCls} flex-1`} />
             <button type="button" onClick={() => { if (n.trim()) { addNote(n.trim()); setN(""); } }} className="shrink-0 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90">Add</button>
           </div>
+        </div>
+
+        {/* contextual action, driven by the workflow stage */}
+        <div className="mt-4 border-t border-line pt-3">
+          {flash && (
+            <p className="animate-rise mb-2 inline-flex items-center gap-1.5 rounded-md bg-green/10 px-2.5 py-1 text-[0.74rem] font-semibold text-green-600"><CheckCircle2 size={13} /> {flash}</p>
+          )}
+          <button
+            type="button"
+            disabled={atEnd}
+            onClick={() => { if (!atEnd) { const next = stages[stage + 1]; setStage(stage + 1); setFlash(`Moved to ${next}`); } }}
+            className={`flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-[0.82rem] font-semibold transition-colors ${atEnd ? "cursor-default bg-canvas-2 text-faint" : "bg-navy text-white hover:opacity-90"}`}
+          >
+            {atEnd ? "Ticket complete" : (<><ChevronRight size={15} /> {action}</>)}
+          </button>
+          <p className="mt-1.5 text-center text-[0.68rem] text-faint">Next step for the {flow} workflow</p>
         </div>
       </div>
     </div>
