@@ -195,8 +195,16 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
   const [custSel, setCustSel] = useState<number | null>(null);
   const [customers, setCustomers] = useState<Customer[]>(CUSTOMERS);
   const [subtasks, setSubtasks] = useState<Subtask[]>(SUBTASK_SEED);
+  const [newTickets, setNewTickets] = useState<Ticket[]>([]);
   const openCustomer = (name: string) => { const c = CUSTOMERS.find((x) => x.name === name); setCustSel(c ? c.id : null); setActive("customers"); };
   const openTicket = (id: string | null) => { setTicketSel(id); setActive("tickets"); };
+  const addTicket = () => {
+    const id = String(Date.now()).slice(-4);
+    setNewTickets((xs) => [{ id, issue: "New ticket", customer: "New customer", status: "New", urgent: false, summary: "Created manually. Add the details, schedule it, and assign a tech.", relationship: "New", tech: TEAM[0].name, tags: [], notes: [], subtasks: [] }, ...xs]);
+    setTicketSel(id);
+    setActive("tickets");
+    toast("New ticket created");
+  };
 
   const rootRef = useRef<HTMLDivElement>(null);
   const wasVisible = useRef(false);
@@ -218,6 +226,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
           setWeekOffset(0);
           setExtra({});
           setTicketSel(null);
+          setNewTickets([]);
           setCustSel(null);
           setCustomers(CUSTOMERS);
           setSubtasks(SUBTASK_SEED);
@@ -386,7 +395,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
               {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} customers={customers} setCustomers={setCustomers} setActive={setActive} openTicket={openTicket} />}
               {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} openTicket={openTicket} />}
               {active === "tickets" && (
-                <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} addJob={addJob} setActive={setActive} />
+                <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} addJob={addJob} setActive={setActive} newTickets={newTickets} addTicket={addTicket} />
               )}
               {active === "schedule" && (
                 <ScheduleView day={day} setDay={setDay} weekOffset={weekOffset} setWeekOffset={setWeekOffset} extra={extra} addJob={addJob} openTicket={openTicket} />
@@ -700,6 +709,8 @@ function TicketsView({
   setSubtasks,
   addJob,
   setActive,
+  newTickets,
+  addTicket,
 }: {
   tags: string[];
   setTags: (t: string[]) => void;
@@ -715,6 +726,8 @@ function TicketsView({
   setSubtasks: SubtaskSetter;
   addJob: (key: string, job: Job) => void;
   setActive: (m: ModId) => void;
+  newTickets: Ticket[];
+  addTicket: () => void;
 }) {
   const [n, setN] = useState("");
   const [picking, setPicking] = useState(false);
@@ -767,12 +780,13 @@ function TicketsView({
   const action = STAGE_ACTION[stages[stage]] ?? "Advance";
   const atEnd = stage >= stages.length - 1;
   const isSchedAction = action.startsWith("Schedule");
-  const tk = TICKETS.find((t) => t.id === sel);
+  const allTickets = [...newTickets, ...TICKETS];
+  const tk = allTickets.find((t) => t.id === sel);
 
   // Each ticket opens to its own real status, and the workflow never leaks
   // from one ticket to the next.
   useEffect(() => {
-    const t = TICKETS.find((x) => x.id === sel);
+    const t = allTickets.find((x) => x.id === sel);
     const stageIdx: Record<string, number> = { New: 0, Scheduled: 1, "In progress": 2, Invoiced: 3, Done: 4 };
     setFlow("Standard repair");
     setStage(t ? stageIdx[t.status] ?? 1 : 1);
@@ -797,10 +811,10 @@ function TicketsView({
   if (!tk) {
     return (
       <div>
-        <ModuleHeader title="Tickets" sub={`${TICKETS.length} open jobs`} action={{ label: "New ticket", onClick: () => toast("New ticket created") }} />
+        <ModuleHeader title="Tickets" sub={`${allTickets.length} open jobs`} action={{ label: "New ticket", onClick: addTicket }} />
         <div className="space-y-4">
           {TICKET_STATUSES.map((s) => {
-            const inCol = TICKETS.filter((t) => t.status === s);
+            const inCol = allTickets.filter((t) => t.status === s);
             if (inCol.length === 0) return null;
             return (
               <div key={s}>
@@ -1050,7 +1064,7 @@ function ScheduleView({
 
   return (
     <div>
-      <ModuleHeader title="Schedule" sub="Book the crew, today or weeks out" action={{ label: "New job", onClick: () => toast("New job added") }} />
+      <ModuleHeader title="Schedule" sub="Book the crew, today or weeks out" action={{ label: "New job", onClick: () => { addJob(key, { time: "12:00 PM", title: "New job", tech: ntech, duration: ndur }); toast("Job added to the schedule"); } }} />
       <div className="rounded-xl border border-line bg-surface p-4">
         <div className="mb-3 flex items-center justify-between">
           <button type="button" onClick={() => setWeekOffset(weekOffset - 1)} className="grid h-7 w-7 place-items-center rounded-lg border border-line text-muted hover:border-blue hover:text-blue"><ChevronLeft size={15} /></button>
@@ -1142,14 +1156,21 @@ function ScheduleView({
 
 function TeamView({ assignedTech, setActive }: { assignedTech: string; setActive: (m: ModId) => void }) {
   const [sel, setSel] = useState<string | null>(null);
-  const t = TEAM.find((x) => x.name === sel);
+  const [newMembers, setNewMembers] = useState<typeof TEAM>([]);
+  const allTeam = [...TEAM, ...newMembers];
+  const t = allTeam.find((x) => x.name === sel);
+  const addMember = () => {
+    const n = newMembers.length + 1;
+    setNewMembers([...newMembers, { name: `New teammate ${n}`, role: "Technician", dot: "bg-green", status: "Available", jobs: "0 jobs today", skills: ["New"], phone: "(555) 000-0000" }]);
+    toast("Teammate added");
+  };
 
   if (!t) {
     return (
       <div>
-        <ModuleHeader title="Team" sub="3 techs · 7 jobs this week" action={{ label: "Add teammate", onClick: () => toast("Invite sent") }} />
+        <ModuleHeader title="Team" sub={`${allTeam.length} techs · 7 jobs this week`} action={{ label: "Add teammate", onClick: addMember }} />
         <div className="space-y-2">
-          {TEAM.map((m) => (
+          {allTeam.map((m) => (
             <button key={m.name} type="button" onClick={() => setSel(m.name)} className={`flex w-full items-center gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-colors hover:border-blue ${m.name === assignedTech ? "border-blue/30 bg-blue/[0.04]" : "border-line bg-surface"}`}>
               <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-[0.7rem] font-bold text-white">
                 {m.name.split(" ").map((p) => p[0]).join("")}
@@ -1229,7 +1250,7 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
 
   return (
     <div>
-      <ModuleHeader title="Catalog" sub="Your services and parts, priced once" action={{ label: "New item", onClick: () => toast("Item added") }} />
+      <ModuleHeader title="Catalog" sub="Your services and parts, priced once" action={{ label: "New item", onClick: () => { add(); setEdit(true); toast("Item added"); } }} />
       <div className="rounded-xl border border-line bg-surface p-4">
         <div className="mb-2 flex items-center justify-between">
           <span className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">{catalog.length} items</span>
@@ -1665,12 +1686,21 @@ const TASKS: { id: number; icon: LucideIcon; title: string; meta: string; go: Mo
 function TasksView({ tasks, setTasks, setActive }: { tasks: Record<number, TaskState>; setTasks: (t: Record<number, TaskState>) => void; setActive: (m: ModId) => void }) {
   const [confirming, setConfirming] = useState<number | null>(null);
   const [choices, setChoices] = useState<Record<number, string>>({});
+  const [newTasks, setNewTasks] = useState<{ id: number; title: string }[]>([]);
   const set = (id: number, s: TaskState) => setTasks({ ...tasks, [id]: s });
   const choiceFor = (it: (typeof TASKS)[number]) => choices[it.id] ?? it.options[0];
   return (
     <div>
-      <ModuleHeader title="Tasks" sub="Act on what the call needs" action={{ label: "New task", onClick: () => toast("Task added") }} />
+      <ModuleHeader title="Tasks" sub="Act on what the call needs" action={{ label: "New task", onClick: () => { setNewTasks([{ id: Date.now(), title: "New task" }, ...newTasks]); toast("Task added"); } }} />
       <div className="space-y-2">
+        {newTasks.map((t) => (
+          <div key={t.id} className="flex items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Check size={15} /></span>
+            <p className="min-w-0 flex-1 truncate text-[0.85rem] font-semibold text-navy">{t.title}</p>
+            <button type="button" onClick={() => { setNewTasks(newTasks.filter((x) => x.id !== t.id)); toast("Task done"); }} className="shrink-0 rounded-lg bg-blue px-2.5 py-1 text-[0.72rem] font-semibold text-white hover:opacity-90">Done</button>
+            <button type="button" onClick={() => setNewTasks(newTasks.filter((x) => x.id !== t.id))} className="shrink-0 text-[0.72rem] font-semibold text-muted hover:underline">Remove</button>
+          </div>
+        ))}
         {TASKS.map((it) => {
           const st = tasks[it.id];
           if (st === "ignored")
