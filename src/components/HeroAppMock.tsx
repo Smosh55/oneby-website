@@ -219,6 +219,13 @@ export default function HeroAppMock() {
 
   return (
     <div ref={rootRef} className="relative mx-auto w-full max-w-5xl">
+      {/* interactive cue */}
+      <div className="absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2">
+        <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-blue px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wide text-white shadow-[var(--shadow-lg)]">
+          <MousePointerClick size={13} className="animate-bounce" /> Live demo, click any module
+        </span>
+      </div>
+
       <div className="overflow-hidden rounded-[20px] border border-line bg-surface shadow-[0_40px_90px_-30px_rgba(4,3,79,0.35)]">
         {/* title bar */}
         <div className="flex items-center gap-2 border-b border-line bg-canvas/70 px-5 py-3">
