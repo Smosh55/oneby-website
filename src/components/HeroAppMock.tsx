@@ -186,12 +186,14 @@ export default function HeroAppMock() {
   const [tasks, setTasks] = useState<Record<number, TaskState>>({ 1: "pending", 2: "pending", 3: "pending" });
   const [ticketSel, setTicketSel] = useState<string | null>(null);
   const [custSel, setCustSel] = useState<number | null>(null);
+  const [customers, setCustomers] = useState<Customer[]>(CUSTOMERS);
   const [subtasks, setSubtasks] = useState<Subtask[]>(SUBTASK_SEED);
   const openCustomer = (name: string) => { const c = CUSTOMERS.find((x) => x.name === name); setCustSel(c ? c.id : null); setActive("customers"); };
   const openTicket = (id: string | null) => { setTicketSel(id); setActive("tickets"); };
 
   const rootRef = useRef<HTMLDivElement>(null);
   const wasVisible = useRef(false);
+  const interacted = useRef(false);
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
@@ -199,6 +201,9 @@ export default function HeroAppMock() {
       ([entry]) => {
         if (entry.isIntersecting && !wasVisible.current) {
           wasVisible.current = true;
+          // Only replay the intro for a passive scroller. Once someone has
+          // clicked into the demo, leave their place and state intact.
+          if (interacted.current) return;
           setActive("live");
           setPhase("transcribing");
           setTyped(0);
@@ -207,6 +212,7 @@ export default function HeroAppMock() {
           setExtra({});
           setTicketSel(null);
           setCustSel(null);
+          setCustomers(CUSTOMERS);
           setSubtasks(SUBTASK_SEED);
           setBillTab("quote");
           setQuote("draft");
@@ -260,7 +266,13 @@ export default function HeroAppMock() {
   const next = NEXT[active];
 
   return (
-    <div ref={rootRef} className="relative mx-auto w-full max-w-5xl">
+    <div
+      ref={rootRef}
+      onClickCapture={() => {
+        interacted.current = true;
+      }}
+      className="relative mx-auto w-full max-w-5xl"
+    >
       {/* interactive cue */}
       <div className="absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2">
         <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-blue px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wide text-white shadow-[var(--shadow-lg)]">
@@ -350,7 +362,7 @@ export default function HeroAppMock() {
 
             <div className="flex-1">
               {active === "home" && <HomeView setActive={setActive} openTicket={openTicket} />}
-              {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} />}
+              {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} customers={customers} setCustomers={setCustomers} />}
               {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} openTicket={openTicket} />}
               {active === "tickets" && (
                 <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} />
@@ -598,13 +610,41 @@ function VoicemailRow() {
   );
 }
 
-const TICKETS = [
-  { id: "1042", issue: "Upstairs A/C not cooling", customer: "Maria G.", status: "Scheduled", urgent: true, summary: "Existing customer, no cooling upstairs since this morning. Wants the earliest slot. Filter was clogged last visit, likely a capacitor or airflow issue." },
-  { id: "1041", issue: "Water heater leaking", customer: "James R.", status: "New", urgent: true, summary: "New caller, water heater leaking onto the garage floor. Not actively flooding. Wants someone out today, flexible on the time." },
-  { id: "1039", issue: "Annual maintenance, 12 units", customer: "Oak Street HOA", status: "Scheduled", urgent: false, summary: "Recurring maintenance contract. Twelve rooftop units, needs a half-day block and a COI on file before the crew arrives." },
-  { id: "1038", issue: "Thermostat replacement", customer: "Dana P.", status: "In progress", urgent: false, summary: "Smart thermostat install. Customer supplied the unit, just needs labor. Tech is on site now." },
-  { id: "1035", issue: "Full system install", customer: "Reyes Family", status: "Invoiced", urgent: false, summary: "New three-ton system installed Tuesday. Job complete, invoice sent, awaiting payment." },
-  { id: "1031", issue: "Walk-in cooler service", customer: "Sun City Diner", status: "Done", urgent: false, summary: "Walk-in cooler not holding temp. Replaced the fan motor, verified temps, signed off." },
+type Ticket = {
+  id: string; issue: string; customer: string; status: string; urgent: boolean; summary: string;
+  relationship: string; tech: string; tags: string[]; notes: string[]; subtasks: Subtask[];
+};
+const TICKETS: Ticket[] = [
+  { id: "1042", issue: "Upstairs A/C not cooling", customer: "Maria G.", status: "Scheduled", urgent: true, summary: "Existing customer, no cooling upstairs since this morning. Wants the earliest slot. Filter was clogged last visit, likely a capacitor or airflow issue.",
+    relationship: "existing customer", tech: "Luis R.", tags: ["Existing customer", "HVAC", "Same-day"], notes: ["Prefers afternoon visits.", "Gate code 4417."], subtasks: SUBTASK_SEED },
+  { id: "1041", issue: "Water heater leaking", customer: "James R.", status: "New", urgent: true, summary: "New caller, water heater leaking onto the garage floor. Not actively flooding. Wants someone out today, flexible on the time.",
+    relationship: "new caller", tech: "Sam K.", tags: ["New caller", "Plumbing", "Same-day"], notes: ["Heater is in the garage.", "Flexible on timing."], subtasks: [
+      { id: 411, label: "Confirm the leak is contained", assignee: "Sam K.", done: false },
+      { id: 412, label: "Photograph the unit and model number", assignee: "Sam K.", done: false },
+    ] },
+  { id: "1039", issue: "Annual maintenance, 12 units", customer: "Oak Street HOA", status: "Scheduled", urgent: false, summary: "Recurring maintenance contract. Twelve rooftop units, needs a half-day block and a COI on file before the crew arrives.",
+    relationship: "maintenance contract", tech: "Luis R.", tags: ["Commercial", "Maintenance plan", "12 units"], notes: ["COI required on file before arrival.", "Roof access via the north stairwell."], subtasks: [
+      { id: 391, label: "Confirm COI is on file", assignee: "Dana P.", done: true },
+      { id: 392, label: "Block a half day for the crew", assignee: "Dana P.", done: false },
+      { id: 393, label: "Load filters for 12 units", assignee: "Luis R.", done: false },
+    ] },
+  { id: "1038", issue: "Thermostat replacement", customer: "Dana P.", status: "In progress", urgent: false, summary: "Smart thermostat install. Customer supplied the unit, just needs labor. Tech is on site now.",
+    relationship: "repeat customer", tech: "Sam K.", tags: ["Repeat customer", "HVAC"], notes: ["Customer supplied the thermostat.", "Tech is on site."], subtasks: [
+      { id: 381, label: "Verify thermostat compatibility", assignee: "Sam K.", done: true },
+      { id: 382, label: "Test heating and cooling modes", assignee: "Sam K.", done: false },
+    ] },
+  { id: "1035", issue: "Full system install", customer: "Reyes Family", status: "Invoiced", urgent: false, summary: "New three-ton system installed Tuesday. Job complete, invoice sent, awaiting payment.",
+    relationship: "install customer", tech: "Luis R.", tags: ["Install", "HVAC", "Warranty"], notes: ["Three-ton system installed Tuesday.", "12-month labor warranty registered."], subtasks: [
+      { id: 351, label: "Register the warranty", assignee: "Dana P.", done: true },
+      { id: 352, label: "Send the invoice", assignee: "Dana P.", done: true },
+      { id: 353, label: "Follow up on payment", assignee: "Dana P.", done: false },
+    ] },
+  { id: "1031", issue: "Walk-in cooler service", customer: "Sun City Diner", status: "Done", urgent: false, summary: "Walk-in cooler not holding temp. Replaced the fan motor, verified temps, signed off.",
+    relationship: "commercial account", tech: "Sam K.", tags: ["Commercial", "Refrigeration"], notes: ["Replaced the fan motor.", "Temps verified and signed off."], subtasks: [
+      { id: 311, label: "Replace the fan motor", assignee: "Sam K.", done: true },
+      { id: 312, label: "Verify holding temperature", assignee: "Sam K.", done: true },
+      { id: 313, label: "Get customer sign-off", assignee: "Sam K.", done: true },
+    ] },
 ];
 const TICKET_STATUSES = ["New", "Scheduled", "In progress", "Invoiced", "Done"];
 
@@ -648,11 +688,18 @@ function TicketsView({
   const [stage, setStage] = useState(1);
   const [nt, setNt] = useState("");
   const [svcPick, setSvcPick] = useState(false);
+  // Edits to non-primary tickets live here, keyed by id, so they don't leak
+  // between tickets. The primary job (#1042) keeps using the lifted state that
+  // also feeds Live, Billing and Team.
+  const [tagsBy, setTagsBy] = useState<Record<string, string[]>>({});
+  const [notesBy, setNotesBy] = useState<Record<string, string[]>>({});
+  const [subsBy, setSubsBy] = useState<Record<string, Subtask[]>>({});
+  const [techBy, setTechBy] = useState<Record<string, string>>({});
   const applyService = (it: Item) => {
     const steps = it.tasks ?? [];
-    setSubtasks((xs) => [...xs, ...steps.map((label, k) => ({ id: Date.now() + k, label, assignee: assignedTech, done: false }))]);
+    setCurSubs((xs) => [...xs, ...steps.map((label, k) => ({ id: Date.now() + k, label, assignee: curTech, done: false }))]);
     setSvcPick(false);
-    toast(`${steps.length} tasks from ${it.name}, assigned to ${assignedTech}`);
+    toast(`${steps.length} tasks from ${it.name}, assigned to ${curTech}`);
   };
   const stages = FLOWS[flow];
   const STAGE_ACTION: Record<string, string> = {
@@ -682,6 +729,22 @@ function TicketsView({
     setFlow("Standard repair");
     setStage(t ? stageIdx[t.status] ?? 1 : 1);
   }, [sel]);
+
+  // Show the selected ticket's own data. #1042 stays wired to the lifted state
+  // (so its edits flow to Live/Billing/Team); other tickets use their own copy.
+  const sid = sel ?? "";
+  const isPrimary = sel === "1042";
+  const curTags = isPrimary ? tags : (tagsBy[sid] ?? tk?.tags ?? []);
+  const curNotes = isPrimary ? notes : (notesBy[sid] ?? tk?.notes ?? []);
+  const curSubs = isPrimary ? subtasks : (subsBy[sid] ?? tk?.subtasks ?? []);
+  const curTech = isPrimary ? assignedTech : (techBy[sid] ?? tk?.tech ?? TEAM[0].name);
+  const setCurTags = (t: string[]) => (isPrimary ? setTags(t) : setTagsBy((m) => ({ ...m, [sid]: t })));
+  const addCurNote = (t: string) => (isPrimary ? addNote(t) : setNotesBy((m) => ({ ...m, [sid]: [...(m[sid] ?? tk?.notes ?? []), t] })));
+  const setCurSubs: SubtaskSetter = (u) => {
+    if (isPrimary) { setSubtasks(u); return; }
+    setSubsBy((m) => { const cur = m[sid] ?? tk?.subtasks ?? []; return { ...m, [sid]: typeof u === "function" ? u(cur) : u }; });
+  };
+  const setCurTech = (t: string) => (isPrimary ? setAssignedTech(t) : setTechBy((m) => ({ ...m, [sid]: t })));
 
   if (!tk) {
     return (
@@ -727,9 +790,9 @@ function TicketsView({
           {tk.urgent && <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[10px] font-bold uppercase text-warning">Urgent</span>}
         </div>
         <p className="mt-2 text-[0.95rem] font-semibold text-navy">{tk.issue}</p>
-        <p className="mt-1 text-sm text-muted"><button type="button" onClick={() => openCustomer(tk.customer)} className="font-semibold text-blue hover:underline">{tk.customer}</button> · existing customer</p>
+        <p className="mt-1 text-sm text-muted"><button type="button" onClick={() => openCustomer(tk.customer)} className="font-semibold text-blue hover:underline">{tk.customer}</button> · {tk.relationship}</p>
 
-        <div className="mt-3"><TagRow tags={tags} setTags={setTags} /></div>
+        <div className="mt-3"><TagRow tags={curTags} setTags={setCurTags} /></div>
 
         <div className="mt-3 rounded-lg border border-blue/15 bg-blue/[0.04] px-3 py-2 text-[0.82rem] leading-relaxed text-ink">{tk.summary}</div>
 
@@ -740,7 +803,7 @@ function TicketsView({
             onClick={() => { setPicking(!picking); setPending(null); }}
             className="inline-flex items-center gap-1 rounded-md bg-canvas-2 px-2 py-1 font-semibold text-navy hover:ring-1 hover:ring-blue/40"
           >
-            Assigned: {assignedTech} <Pencil size={11} className="text-faint" />
+            Assigned: {curTech} <Pencil size={11} className="text-faint" />
           </button>
         </div>
 
@@ -766,7 +829,7 @@ function TicketsView({
             <span className="text-[0.8rem] font-medium text-navy">Assign this job to {pending}?</span>
             <span className="flex gap-1.5">
               <button type="button" onClick={() => { setPending(null); }} className="rounded-md border border-line bg-surface px-2 py-1 text-[0.72rem] font-semibold text-muted">Cancel</button>
-              <button type="button" onClick={() => { setAssignedTech(pending); toast(`Assigned to ${pending}`); setPending(null); setPicking(false); }} className="rounded-md bg-blue px-2 py-1 text-[0.72rem] font-semibold text-white">Confirm</button>
+              <button type="button" onClick={() => { setCurTech(pending); toast(`Assigned to ${pending}`); setPending(null); setPicking(false); }} className="rounded-md bg-blue px-2 py-1 text-[0.72rem] font-semibold text-white">Confirm</button>
             </span>
           </div>
         )}
@@ -803,13 +866,13 @@ function TicketsView({
         <div className="mt-4 border-t border-line pt-3">
           <p className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">Tasks</p>
           <div className="mt-2 space-y-1.5">
-            {subtasks.map((st) => (
+            {curSubs.map((st) => (
               <div key={st.id} className="flex items-center gap-2">
-                <button type="button" aria-label="Toggle done" onClick={() => setSubtasks(subtasks.map((x) => (x.id === st.id ? { ...x, done: !x.done } : x)))} className={`grid h-4 w-4 shrink-0 place-items-center rounded border ${st.done ? "border-green bg-green text-white" : "border-line"}`}>
+                <button type="button" aria-label="Toggle done" onClick={() => setCurSubs(curSubs.map((x) => (x.id === st.id ? { ...x, done: !x.done } : x)))} className={`grid h-4 w-4 shrink-0 place-items-center rounded border ${st.done ? "border-green bg-green text-white" : "border-line"}`}>
                   {st.done && <Check size={11} />}
                 </button>
                 <span className={`min-w-0 flex-1 truncate text-[0.8rem] ${st.done ? "text-faint line-through" : "text-ink"}`}>{st.label}</span>
-                <select value={st.assignee} onChange={(e) => setSubtasks(subtasks.map((x) => (x.id === st.id ? { ...x, assignee: e.target.value } : x)))} aria-label="Assignee" className={`${inputCls} shrink-0 py-1`}>
+                <select value={st.assignee} onChange={(e) => setCurSubs(curSubs.map((x) => (x.id === st.id ? { ...x, assignee: e.target.value } : x)))} aria-label="Assignee" className={`${inputCls} shrink-0 py-1`}>
                   {TEAM.map((t) => <option key={t.name} value={t.name}>{t.name}</option>)}
                 </select>
               </div>
@@ -817,7 +880,7 @@ function TicketsView({
           </div>
           <div className="mt-2 flex gap-2">
             <input value={nt} onChange={(e) => setNt(e.target.value)} placeholder="Add a task" className={`${inputCls} min-w-0 flex-1`} />
-            <button type="button" onClick={() => { if (nt.trim()) { setSubtasks([...subtasks, { id: Date.now(), label: nt.trim(), assignee: TEAM[0].name, done: false }]); setNt(""); toast("Task added"); } }} className="shrink-0 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90">Add</button>
+            <button type="button" onClick={() => { if (nt.trim()) { setCurSubs([...curSubs, { id: Date.now(), label: nt.trim(), assignee: TEAM[0].name, done: false }]); setNt(""); toast("Task added"); } }} className="shrink-0 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90">Add</button>
           </div>
           <div className="mt-2">
             <button type="button" onClick={() => setSvcPick(!svcPick)} className="inline-flex items-center gap-1 text-[0.76rem] font-semibold text-blue hover:underline"><Package size={12} /> Apply a service checklist</button>
@@ -838,13 +901,13 @@ function TicketsView({
         <div className="mt-4 border-t border-line pt-3">
           <p className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">Notes</p>
           <div className="mt-2 space-y-1.5">
-            {notes.map((note, i) => (
+            {curNotes.map((note, i) => (
               <p key={i} className="rounded-md bg-canvas px-2.5 py-1.5 text-[0.78rem] text-ink">{note}</p>
             ))}
           </div>
           <div className="mt-2 flex gap-2">
             <input value={n} onChange={(e) => setN(e.target.value)} placeholder="Add a note for the tech" className={`${inputCls} flex-1`} />
-            <button type="button" onClick={() => { if (n.trim()) { addNote(n.trim()); setN(""); } }} className="shrink-0 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90">Add</button>
+            <button type="button" onClick={() => { if (n.trim()) { addCurNote(n.trim()); setN(""); } }} className="shrink-0 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90">Add</button>
           </div>
         </div>
 
@@ -1687,8 +1750,7 @@ function custTimeline(c: Customer): TLEntry[] {
   ];
 }
 
-function CustomersView({ sel, setSel }: { sel: number | null; setSel: (n: number | null) => void }) {
-  const [customers, setCustomers] = useState<Customer[]>(CUSTOMERS);
+function CustomersView({ sel, setSel, customers, setCustomers }: { sel: number | null; setSel: (n: number | null) => void; customers: Customer[]; setCustomers: (c: Customer[]) => void }) {
   const [edit, setEdit] = useState(false);
   const [q, setQ] = useState("");
 

@@ -42,7 +42,8 @@ export default function Hero() {
             style={{ animationDelay: "120ms" }}
           >
             Your team answers the calls they can. OneBy's AI catches the rest,
-            and turns every call into a summary, a lead, and the next step.
+            then turns every call into a booked, scheduled, invoiced job. Calls,
+            tickets, scheduling, and billing in one place.
           </p>
 
           <div

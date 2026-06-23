@@ -10,6 +10,18 @@ const faqs = [
     a: "Nope. OneBy works on every call. Answered or missed, on your desk phone or the mobile app, after any call it transcribes the conversation, writes a summary, and creates and assigns the follow-up task. AI answering unanswered calls is just one piece of it.",
   },
   {
+    q: "Is OneBy really one app for calls, tickets, scheduling, and invoicing?",
+    a: "Yes. The phone system, the AI, customer records, tickets, scheduling, and invoicing all live in one place, so a call becomes a booked, scheduled, invoiced job without jumping between apps. It replaces your phone system, your answering service, your scheduler, and your invoicing tool.",
+  },
+  {
+    q: "Do I have to move everything over at once?",
+    a: "No. Most shops start with the phone and the AI, the part that's losing them jobs today, then turn on tickets, scheduling, and invoicing when they're ready. Keep your number and your current tools running in the meantime.",
+  },
+  {
+    q: "How does getting paid work?",
+    a: "Turn a finished job into an invoice and text the customer a pay link. They tap to pay by card, and it reconciles against the ticket automatically. You can also send quotes for approval and bill bigger jobs in milestones.",
+  },
+  {
     q: "Does OneBy replace my current phone number?",
     a: "Nope. Keep your existing business number. We port it over or forward to it, so there's no new hardware to buy and nothing to rip out.",
   },
@@ -31,7 +43,7 @@ const faqs = [
   },
   {
     q: "What happens during the free trial?",
-    a: "You get full access free, no credit card: AI receptionist, summaries, tasks, and the shared inbox. No contract, and you can cancel anytime.",
+    a: "You get full access free, no credit card: the AI receptionist, summaries, tickets, scheduling, invoicing, and the shared inbox. No contract, and you can cancel anytime.",
   },
 ];
 
