@@ -11,6 +11,9 @@ import {
   MessageSquare,
   ListChecks,
   Mail,
+  Users,
+  FileText,
+  Flag,
   Check,
   X,
   ArrowRight,
@@ -40,7 +43,8 @@ type ModId =
   | "live"
   | "tickets"
   | "schedule"
-  | "invoices"
+  | "team"
+  | "billing"
   | "messages"
   | "tasks"
   | "email";
@@ -49,7 +53,8 @@ const MODULES: { id: ModId; label: string; icon: LucideIcon; badge?: string; soo
   { id: "live", label: "Live", icon: Activity },
   { id: "tickets", label: "Tickets", icon: Ticket, badge: "1" },
   { id: "schedule", label: "Schedule", icon: CalendarDays },
-  { id: "invoices", label: "Invoices", icon: Receipt },
+  { id: "team", label: "Team", icon: Users },
+  { id: "billing", label: "Billing", icon: Receipt },
   { id: "messages", label: "Messages", icon: MessageSquare },
   { id: "tasks", label: "Tasks", icon: ListChecks, badge: "3" },
   { id: "email", label: "Email", icon: Mail, soon: true },
@@ -58,30 +63,57 @@ const MODULES: { id: ModId; label: string; icon: LucideIcon; badge?: string; soo
 const NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
   live: { id: "tickets", label: "See the ticket" },
   tickets: { id: "schedule", label: "Schedule it" },
-  schedule: { id: "invoices", label: "Invoice the job" },
-  invoices: { id: "messages", label: "Text the customer" },
+  schedule: { id: "team", label: "See the crew" },
+  team: { id: "billing", label: "Bill the job" },
+  billing: { id: "messages", label: "Text the customer" },
   messages: { id: "tasks", label: "See the tasks" },
 };
 
 type Phase = "transcribing" | "summarizing" | "typing" | "done";
-
-const SLOTS = ["1:00", "2:30", "3:30", "5:00"];
-
 type TaskState = "pending" | "acted" | "ignored";
+
+const WEEK = [
+  { d: "Mon", n: 9 },
+  { d: "Tue", n: 10 },
+  { d: "Wed", n: 11, today: true },
+  { d: "Thu", n: 12 },
+  { d: "Fri", n: 13 },
+];
+
+const DAY_JOBS: Record<number, { time: string; title: string; tech: string; hot?: boolean }[]> = {
+  0: [{ time: "10:00", title: "No-cool · Ortiz", tech: "Sam K." }],
+  1: [{ time: "8:30", title: "Maintenance · Oak HOA", tech: "Luis R." }],
+  2: [
+    { time: "9:00", title: "Tune-up · Garcia", tech: "Sam K." },
+    { time: "1:00", title: "Install · Lee", tech: "Luis R." },
+    { time: "3:30", title: "A/C diagnostic · Maria G.", tech: "Luis R.", hot: true },
+  ],
+  3: [{ time: "11:00", title: "Estimate · Park Ave", tech: "Sam K." }],
+  4: [{ time: "2:00", title: "Install · Reyes", tech: "Luis R." }],
+};
+
+const TEAM = [
+  { name: "Luis R.", role: "Lead tech", status: "On a job", jobs: "3 today", dot: "bg-green" },
+  { name: "Sam K.", role: "Tech", status: "Available", jobs: "2 today", dot: "bg-blue" },
+  { name: "Dana P.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green" },
+  { name: "Mia T.", role: "Tech", status: "Off today", jobs: "0 today", dot: "bg-line" },
+];
 
 export default function HeroAppMock() {
   const [active, setActive] = useState<ModId>("live");
   const [phase, setPhase] = useState<Phase>("transcribing");
   const [typed, setTyped] = useState(0);
-  const [slot, setSlot] = useState<string | null>(null);
+  const [day, setDay] = useState(2);
+  const [billTab, setBillTab] = useState<"quote" | "invoice" | "milestones">("quote");
+  const [quote, setQuote] = useState<"draft" | "sent" | "approved">("draft");
   const [invoice, setInvoice] = useState<"draft" | "sent" | "paid">("draft");
+  const [mile, setMile] = useState<"draft" | "sent">("draft");
   const [msgs, setMsgs] = useState<{ me: boolean; text: string }[]>([
     { me: true, text: `Hi Maria, this is OneBy for Summit HVAC. Luis is booked for your A/C diagnostic today at 3:30.` },
     { me: false, text: "Perfect, thank you!" },
   ]);
   const [tasks, setTasks] = useState<Record<number, TaskState>>({ 1: "pending", 2: "pending", 3: "pending" });
 
-  // replay the whole demo when it scrolls back into view
   const rootRef = useRef<HTMLDivElement>(null);
   const wasVisible = useRef(false);
   useEffect(() => {
@@ -94,8 +126,11 @@ export default function HeroAppMock() {
           setActive("live");
           setPhase("transcribing");
           setTyped(0);
-          setSlot(null);
+          setDay(2);
+          setBillTab("quote");
+          setQuote("draft");
           setInvoice("draft");
+          setMile("draft");
           setTasks({ 1: "pending", 2: "pending", 3: "pending" });
         } else if (!entry.isIntersecting) {
           wasVisible.current = false;
@@ -201,7 +236,7 @@ export default function HeroAppMock() {
           </aside>
 
           {/* main */}
-          <div className="flex min-h-[420px] flex-col p-4 sm:p-6">
+          <div className="flex min-h-[440px] flex-col p-4 sm:p-6">
             {/* mobile module pills */}
             <div className="mb-4 flex gap-1.5 overflow-x-auto pb-1 sm:hidden">
               {MODULES.filter((m) => !m.soon).map((m) => (
@@ -219,18 +254,27 @@ export default function HeroAppMock() {
             </div>
 
             <div className="flex-1">
-              {active === "live" && (
-                <LiveView phase={phase} typed={typed} />
-              )}
+              {active === "live" && <LiveView phase={phase} typed={typed} />}
               {active === "tickets" && <TicketsView />}
-              {active === "schedule" && <ScheduleView slot={slot} setSlot={setSlot} />}
-              {active === "invoices" && <InvoicesView state={invoice} setState={setInvoice} />}
+              {active === "schedule" && <ScheduleView day={day} setDay={setDay} />}
+              {active === "team" && <TeamView />}
+              {active === "billing" && (
+                <BillingView
+                  tab={billTab}
+                  setTab={setBillTab}
+                  quote={quote}
+                  setQuote={setQuote}
+                  invoice={invoice}
+                  setInvoice={setInvoice}
+                  mile={mile}
+                  setMile={setMile}
+                />
+              )}
               {active === "messages" && <MessagesView msgs={msgs} setMsgs={setMsgs} />}
               {active === "tasks" && <TasksView tasks={tasks} setTasks={setTasks} />}
               {active === "email" && <EmailView />}
             </div>
 
-            {/* next step */}
             {next && (active !== "live" || phase === "done") && (
               <button
                 type="button"
@@ -357,103 +401,243 @@ function TicketsView() {
   );
 }
 
-function ScheduleView({ slot, setSlot }: { slot: string | null; setSlot: (s: string) => void }) {
+function ScheduleView({ day, setDay }: { day: number; setDay: (d: number) => void }) {
+  const jobs = DAY_JOBS[day] ?? [];
   return (
     <div>
-      <ModuleHeader title="Schedule" sub="Today · drop the job on a slot" />
+      <ModuleHeader title="Schedule" sub="This week · drag the crew across the calendar" />
       <div className="rounded-xl border border-line bg-surface p-4">
-        <div className="flex items-center gap-2 text-sm font-semibold text-navy">
-          <Calendar size={15} className="text-blue" /> {JOB.tech}, today
-        </div>
-        <div className="mt-3 grid grid-cols-4 gap-2">
-          {SLOTS.map((s) => {
-            const on = slot === s;
+        {/* week strip */}
+        <div className="grid grid-cols-5 gap-1.5">
+          {WEEK.map((w, i) => {
+            const on = i === day;
             return (
               <button
-                key={s}
+                key={w.d}
                 type="button"
-                onClick={() => setSlot(s)}
-                className={`rounded-lg border px-2 py-3 text-center text-[0.8rem] font-semibold transition-colors ${
-                  on ? "border-green/40 bg-green/10 text-green-600" : "border-line bg-canvas text-ink/70 hover:border-blue"
+                onClick={() => setDay(i)}
+                className={`rounded-lg border px-1 py-2 text-center transition-colors ${
+                  on ? "border-blue/40 bg-blue/10 text-blue" : "border-line bg-canvas text-ink/70 hover:border-blue"
                 }`}
               >
-                {s}
-                {on && <Check size={13} className="mx-auto mt-1" />}
+                <span className="block text-[0.65rem] font-semibold uppercase">{w.d}</span>
+                <span className="block text-[0.95rem] font-bold">{w.n}</span>
+                {w.today && <span className="mx-auto mt-0.5 block h-1 w-1 rounded-full bg-green" />}
               </button>
             );
           })}
         </div>
-        {slot ? (
-          <div className="animate-rise mt-4 flex items-start gap-2.5 rounded-lg border border-green/25 bg-green/[0.07] px-3.5 py-3">
-            <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-green-600" />
-            <div>
-              <p className="text-[0.85rem] font-semibold text-navy">Booked: {JOB.tech}, {slot} PM</p>
-              <p className="text-[0.75rem] text-muted">Synced to Google Calendar · {JOB.customer} texted a confirmation</p>
+
+        {/* day agenda */}
+        <div className="mt-4 space-y-2">
+          {jobs.length === 0 && <p className="py-4 text-center text-[0.8rem] text-faint">Nothing booked. Tap a slot to add a job.</p>}
+          {jobs.map((j) => (
+            <div
+              key={j.time}
+              className={`flex items-center gap-3 rounded-lg border px-3 py-2.5 ${
+                j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"
+              }`}
+            >
+              <span className="w-12 shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
+                <p className="text-[0.72rem] text-muted">{j.tech}</p>
+              </div>
+              {j.hot && <CheckCircle2 size={16} className="shrink-0 text-green-600" />}
+            </div>
+          ))}
+        </div>
+        <p className="mt-3 inline-flex items-center gap-1.5 text-[0.72rem] text-faint">
+          <Calendar size={12} /> Synced two-way with Google and Microsoft calendars
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function TeamView() {
+  return (
+    <div>
+      <ModuleHeader title="Team" sub="3 techs · 7 jobs today" />
+      <div className="space-y-2">
+        {TEAM.map((t) => (
+          <div key={t.name} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5">
+            <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-[0.7rem] font-bold text-white">
+              {t.name.split(" ").map((p) => p[0]).join("")}
+              <span className={`absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-surface ${t.dot}`} />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[0.85rem] font-semibold text-navy">{t.name}</p>
+              <p className="text-[0.72rem] text-muted">{t.role}</p>
+            </div>
+            <div className="ml-auto text-right">
+              <p className="text-[0.74rem] font-semibold text-navy">{t.status}</p>
+              <p className="text-[0.68rem] text-faint">{t.jobs}</p>
             </div>
           </div>
-        ) : (
-          <p className="mt-4 text-[0.8rem] text-faint">Tap a time to book the diagnostic.</p>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const BILL_LINES = [
+  { label: "A/C diagnostic", amt: 89 },
+  { label: "Capacitor replacement", amt: 100 },
+];
+const BILL_TOTAL = BILL_LINES.reduce((n, l) => n + l.amt, 0);
+const MILESTONES = [
+  { label: "Deposit (30%)", amt: 1200 },
+  { label: "On completion (70%)", amt: 2800 },
+];
+
+function BillingView({
+  tab,
+  setTab,
+  quote,
+  setQuote,
+  invoice,
+  setInvoice,
+  mile,
+  setMile,
+}: {
+  tab: "quote" | "invoice" | "milestones";
+  setTab: (t: "quote" | "invoice" | "milestones") => void;
+  quote: "draft" | "sent" | "approved";
+  setQuote: (s: "draft" | "sent" | "approved") => void;
+  invoice: "draft" | "sent" | "paid";
+  setInvoice: (s: "draft" | "sent" | "paid") => void;
+  mile: "draft" | "sent";
+  setMile: (s: "draft" | "sent") => void;
+}) {
+  const TABS: { id: "quote" | "invoice" | "milestones"; label: string; icon: LucideIcon }[] = [
+    { id: "quote", label: "Quote", icon: FileText },
+    { id: "invoice", label: "Invoice", icon: Receipt },
+    { id: "milestones", label: "Milestones", icon: Flag },
+  ];
+  return (
+    <div>
+      <ModuleHeader title="Billing" sub={`Job #${JOB.ticket} · ${JOB.customer}`} />
+      <div className="mb-3 inline-flex rounded-lg border border-line bg-canvas p-0.5">
+        {TABS.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() => setTab(t.id)}
+            className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[0.76rem] font-semibold transition-colors ${
+              tab === t.id ? "bg-white text-navy shadow-sm" : "text-muted"
+            }`}
+          >
+            <t.icon size={13} /> {t.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="rounded-xl border border-line bg-surface p-4">
+        {tab === "quote" && (
+          <>
+            <LineItems />
+            {quote === "draft" && (
+              <SendBtn label="Send quote for approval" onClick={() => setQuote("sent")} />
+            )}
+            {quote === "sent" && (
+              <div className="animate-rise mt-4">
+                <Banner tone="blue" title="Quote sent" body={`Texted to ${JOB.customer}. She can approve with one tap.`} />
+                <button type="button" onClick={() => setQuote("approved")} className="mt-2 w-full rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600">
+                  Mark approved
+                </button>
+              </div>
+            )}
+            {quote === "approved" && (
+              <div className="animate-rise mt-4 flex items-center justify-center gap-2 rounded-lg border border-green/30 bg-green/[0.09] px-3 py-3 text-[0.85rem] font-bold text-green-600">
+                <CheckCircle2 size={17} /> Approved, ready to invoice
+              </div>
+            )}
+          </>
+        )}
+
+        {tab === "invoice" && (
+          <>
+            <LineItems />
+            {invoice === "draft" && <SendBtn label="Send invoice + pay link" onClick={() => setInvoice("sent")} />}
+            {invoice === "sent" && (
+              <div className="animate-rise mt-4">
+                <Banner tone="blue" title="Invoice sent" body={`Pay link texted to ${JOB.customer}. Tap to pay by card.`} />
+                <button type="button" onClick={() => setInvoice("paid")} className="mt-2 w-full rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600">
+                  Mark as paid
+                </button>
+              </div>
+            )}
+            {invoice === "paid" && (
+              <div className="animate-rise mt-4 flex items-center justify-center gap-2 rounded-lg border border-green/30 bg-green/[0.09] px-3 py-3 text-[0.9rem] font-bold text-green-600">
+                <CheckCircle2 size={18} /> Paid ${BILL_TOTAL}
+              </div>
+            )}
+          </>
+        )}
+
+        {tab === "milestones" && (
+          <>
+            <p className="mb-2 text-[0.78rem] text-muted">Full system install · $4,000</p>
+            <div className="space-y-1.5">
+              {MILESTONES.map((m) => (
+                <div key={m.label} className="flex items-center justify-between rounded-lg bg-canvas px-3 py-2 text-[0.82rem]">
+                  <span className="inline-flex items-center gap-1.5 text-ink"><Flag size={13} className="text-blue" /> {m.label}</span>
+                  <span className="font-semibold text-navy">${m.amt.toLocaleString()}</span>
+                </div>
+              ))}
+            </div>
+            {mile === "draft" ? (
+              <SendBtn label="Send milestone schedule" onClick={() => setMile("sent")} />
+            ) : (
+              <div className="animate-rise mt-4">
+                <Banner tone="blue" title="Milestones sent" body={`Deposit link texted to ${JOB.customer}. The rest bills on completion.`} />
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
   );
 }
 
-function InvoicesView({ state, setState }: { state: "draft" | "sent" | "paid"; setState: (s: "draft" | "sent" | "paid") => void }) {
-  const lines = [
-    { label: "A/C diagnostic", amt: 89 },
-    { label: "Capacitor replacement", amt: 100 },
-  ];
-  const total = lines.reduce((n, l) => n + l.amt, 0);
+function LineItems() {
   return (
-    <div>
-      <ModuleHeader title="Invoices" sub={`Job #${JOB.ticket} · ${JOB.customer}`} />
-      <div className="rounded-xl border border-line bg-surface p-4">
-        <div className="space-y-1.5">
-          {lines.map((l) => (
-            <div key={l.label} className="flex items-center justify-between text-[0.85rem]">
-              <span className="text-ink">{l.label}</span>
-              <span className="font-semibold text-navy">${l.amt}</span>
-            </div>
-          ))}
-          <div className="mt-2 flex items-center justify-between border-t border-line pt-2 text-[0.95rem]">
-            <span className="font-bold text-navy">Total</span>
-            <span className="font-extrabold text-navy">${total}</span>
-          </div>
+    <div className="space-y-1.5">
+      {BILL_LINES.map((l) => (
+        <div key={l.label} className="flex items-center justify-between text-[0.85rem]">
+          <span className="text-ink">{l.label}</span>
+          <span className="font-semibold text-navy">${l.amt}</span>
         </div>
+      ))}
+      <div className="mt-2 flex items-center justify-between border-t border-line pt-2 text-[0.95rem]">
+        <span className="font-bold text-navy">Total</span>
+        <span className="font-extrabold text-navy">${BILL_TOTAL}</span>
+      </div>
+    </div>
+  );
+}
 
-        {state === "draft" && (
-          <button
-            type="button"
-            onClick={() => setState("sent")}
-            className="mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-blue px-3 py-2.5 text-[0.85rem] font-semibold text-white transition-opacity hover:opacity-90"
-          >
-            <Send size={15} /> Send invoice + pay link
-          </button>
-        )}
-        {state === "sent" && (
-          <div className="animate-rise mt-4">
-            <div className="flex items-start gap-2.5 rounded-lg border border-blue/20 bg-blue/[0.05] px-3.5 py-3">
-              <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-blue" />
-              <div>
-                <p className="text-[0.85rem] font-semibold text-navy">Invoice sent</p>
-                <p className="text-[0.75rem] text-muted">Pay link texted to {JOB.customer}. Tap to pay by card.</p>
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={() => setState("paid")}
-              className="mt-2 inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600"
-            >
-              Mark as paid
-            </button>
-          </div>
-        )}
-        {state === "paid" && (
-          <div className="animate-rise mt-4 flex items-center justify-center gap-2 rounded-lg border border-green/30 bg-green/[0.09] px-3 py-3 text-[0.9rem] font-bold text-green-600">
-            <CheckCircle2 size={18} /> Paid ${total}
-          </div>
-        )}
+function SendBtn({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-blue px-3 py-2.5 text-[0.85rem] font-semibold text-white transition-opacity hover:opacity-90"
+    >
+      <Send size={15} /> {label}
+    </button>
+  );
+}
+
+function Banner({ tone, title, body }: { tone: "blue" | "green"; title: string; body: string }) {
+  const c = tone === "blue" ? "border-blue/20 bg-blue/[0.05] text-blue" : "border-green/25 bg-green/[0.07] text-green-600";
+  return (
+    <div className={`flex items-start gap-2.5 rounded-lg border px-3.5 py-3 ${c}`}>
+      <CheckCircle2 size={17} className="mt-0.5 shrink-0" />
+      <div>
+        <p className="text-[0.85rem] font-semibold text-navy">{title}</p>
+        <p className="text-[0.75rem] text-muted">{body}</p>
       </div>
     </div>
   );
@@ -468,11 +652,7 @@ function MessagesView({ msgs, setMsgs }: { msgs: { me: boolean; text: string }[]
         <div className="space-y-2">
           {msgs.map((m, i) => (
             <div key={i} className={`flex ${m.me ? "justify-end" : "justify-start"}`}>
-              <span
-                className={`max-w-[80%] rounded-2xl px-3 py-2 text-[0.82rem] leading-snug ${
-                  m.me ? "bg-blue text-white" : "bg-canvas-2 text-ink"
-                }`}
-              >
+              <span className={`max-w-[80%] rounded-2xl px-3 py-2 text-[0.82rem] leading-snug ${m.me ? "bg-blue text-white" : "bg-canvas-2 text-ink"}`}>
                 {m.text}
               </span>
             </div>
