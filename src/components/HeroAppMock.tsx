@@ -77,7 +77,7 @@ type Phase = "transcribing" | "summarizing" | "typing" | "done";
 type TaskState = "pending" | "acted" | "ignored";
 type Job = { time: string; title: string; tech: string; hot?: boolean; duration?: string };
 type Line = { label: string; qty: number; price: number };
-type Item = { id: number; name: string; type: "Service" | "Part"; price: number };
+type Item = { id: number; name: string; type: "Service" | "Part"; price: number; tasks?: string[] };
 
 const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -116,10 +116,10 @@ const MILESTONES = [
   { label: "On completion (70%)", amt: 2800 },
 ];
 const CATALOG_SEED: Item[] = [
-  { id: 1, name: "A/C diagnostic", type: "Service", price: 89 },
-  { id: 2, name: "System tune-up", type: "Service", price: 129 },
+  { id: 1, name: "A/C diagnostic", type: "Service", price: 89, tasks: ["Inspect unit and airflow", "Test capacitor and contactor", "Check refrigerant levels", "Review findings with customer"] },
+  { id: 2, name: "System tune-up", type: "Service", price: 129, tasks: ["Replace air filter", "Clean coils", "Test thermostat", "Log readings"] },
   { id: 3, name: "Labor (per hour)", type: "Service", price: 120 },
-  { id: 4, name: "Full system install", type: "Service", price: 4000 },
+  { id: 4, name: "Full system install", type: "Service", price: 4000, tasks: ["Confirm load calc and permit", "Remove old equipment", "Install and braze new unit", "Charge system and verify", "Walk through with customer"] },
   { id: 5, name: "Capacitor", type: "Part", price: 100 },
   { id: 6, name: "Contactor", type: "Part", price: 65 },
   { id: 7, name: "Refrigerant (per lb)", type: "Part", price: 85 },
@@ -353,7 +353,7 @@ export default function HeroAppMock() {
               {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} />}
               {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} />}
               {active === "tickets" && (
-                <TicketsView tags={tags} addTag={addTag} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} />
+                <TicketsView tags={tags} addTag={addTag} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} />
               )}
               {active === "schedule" && (
                 <ScheduleView day={day} setDay={setDay} weekOffset={weekOffset} setWeekOffset={setWeekOffset} extra={extra} addJob={addJob} openTicket={openTicket} />
@@ -613,6 +613,7 @@ function TicketsView({
   sel,
   setSel,
   openCustomer,
+  catalog,
 }: {
   tags: string[];
   addTag: () => void;
@@ -623,6 +624,7 @@ function TicketsView({
   sel: string | null;
   setSel: (s: string | null) => void;
   openCustomer: (name: string) => void;
+  catalog: Item[];
 }) {
   const [n, setN] = useState("");
   const [picking, setPicking] = useState(false);
@@ -636,11 +638,18 @@ function TicketsView({
   const [flow, setFlow] = useState("Standard repair");
   const [stage, setStage] = useState(1);
   const [nt, setNt] = useState("");
+  const [svcPick, setSvcPick] = useState(false);
   const [subtasks, setSubtasks] = useState<{ id: number; label: string; assignee: string; done: boolean }[]>([
     { id: 1, label: "Confirm arrival window", assignee: "Luis R.", done: true },
     { id: 2, label: "Bring a spare capacitor", assignee: "Luis R.", done: false },
     { id: 3, label: "Collect payment on site", assignee: "Dana P.", done: false },
   ]);
+  const applyService = (it: Item) => {
+    const steps = it.tasks ?? [];
+    setSubtasks((xs) => [...xs, ...steps.map((label, k) => ({ id: Date.now() + k, label, assignee: assignedTech, done: false }))]);
+    setSvcPick(false);
+    toast(`${steps.length} tasks from ${it.name}, assigned to ${assignedTech}`);
+  };
   const stages = FLOWS[flow];
   const STAGE_ACTION: Record<string, string> = {
     New: "Schedule the job",
@@ -787,6 +796,19 @@ function TicketsView({
           <div className="mt-2 flex gap-2">
             <input value={nt} onChange={(e) => setNt(e.target.value)} placeholder="Add a task" className={`${inputCls} min-w-0 flex-1`} />
             <button type="button" onClick={() => { if (nt.trim()) { setSubtasks([...subtasks, { id: Date.now(), label: nt.trim(), assignee: TEAM[0].name, done: false }]); setNt(""); toast("Task added"); } }} className="shrink-0 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90">Add</button>
+          </div>
+          <div className="mt-2">
+            <button type="button" onClick={() => setSvcPick(!svcPick)} className="inline-flex items-center gap-1 text-[0.76rem] font-semibold text-blue hover:underline"><Package size={12} /> Apply a service checklist</button>
+            {svcPick && (
+              <div className="animate-rise mt-1.5 rounded-lg border border-line bg-canvas p-1.5">
+                {catalog.filter((c) => c.type === "Service" && (c.tasks?.length ?? 0) > 0).map((c) => (
+                  <button key={c.id} type="button" onClick={() => applyService(c)} className="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-left text-[0.8rem] text-ink hover:bg-canvas-2">
+                    <span className="truncate">{c.name}</span>
+                    <span className="ml-2 shrink-0 text-[0.7rem] font-semibold text-faint">{c.tasks!.length} steps</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -965,8 +987,11 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
   const [edit, setEdit] = useState(false);
   const update = (i: number, field: "name" | "price", v: string) =>
     setCatalog(catalog.map((it, idx) => (idx === i ? { ...it, [field]: field === "price" ? Number(v) || 0 : v } : it)));
-  const add = () => setCatalog([...catalog, { id: Date.now(), name: "New item", type: "Service", price: 0 }]);
+  const add = () => setCatalog([...catalog, { id: Date.now(), name: "New item", type: "Service", price: 0, tasks: [] }]);
   const remove = (i: number) => setCatalog(catalog.filter((_, idx) => idx !== i));
+  const updTask = (i: number, ti: number, v: string) => setCatalog(catalog.map((it, idx) => (idx === i ? { ...it, tasks: (it.tasks ?? []).map((t, j) => (j === ti ? v : t)) } : it)));
+  const addTask = (i: number) => setCatalog(catalog.map((it, idx) => (idx === i ? { ...it, tasks: [...(it.tasks ?? []), "New step"] } : it)));
+  const removeTask = (i: number, ti: number) => setCatalog(catalog.map((it, idx) => (idx === i ? { ...it, tasks: (it.tasks ?? []).filter((_, j) => j !== ti) } : it)));
 
   return (
     <div>
@@ -978,20 +1003,44 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
         </div>
         <div className="space-y-1.5">
           {catalog.map((it, i) => (
-            <div key={it.id} className="flex items-center gap-2 rounded-lg bg-canvas px-2.5 py-1.5">
-              {edit && (
-                <button type="button" onClick={() => remove(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
-              )}
-              <span className={`shrink-0 rounded px-1.5 py-0.5 text-[0.6rem] font-bold uppercase ${it.type === "Service" ? "bg-blue/10 text-blue" : "bg-green/10 text-green-600"}`}>{it.type === "Service" ? "Svc" : "Part"}</span>
-              {edit ? (
-                <input value={it.name} onChange={(e) => update(i, "name", e.target.value)} className={`${inputCls} flex-1`} />
-              ) : (
-                <span className="min-w-0 flex-1 truncate text-[0.82rem] text-ink">{it.name}</span>
-              )}
-              {edit ? (
-                <span className="inline-flex items-center gap-0.5"><span className="text-[0.8rem] text-faint">$</span><input type="number" value={it.price} onChange={(e) => update(i, "price", e.target.value)} className={`${inputCls} w-16 text-right`} /></span>
-              ) : (
-                <span className="shrink-0 text-[0.82rem] font-semibold text-navy">${it.price.toLocaleString()}</span>
+            <div key={it.id} className="rounded-lg bg-canvas px-2.5 py-1.5">
+              <div className="flex items-center gap-2">
+                {edit && (
+                  <button type="button" onClick={() => remove(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
+                )}
+                <span className={`shrink-0 rounded px-1.5 py-0.5 text-[0.6rem] font-bold uppercase ${it.type === "Service" ? "bg-blue/10 text-blue" : "bg-green/10 text-green-600"}`}>{it.type === "Service" ? "Svc" : "Part"}</span>
+                {edit ? (
+                  <input value={it.name} onChange={(e) => update(i, "name", e.target.value)} className={`${inputCls} flex-1`} />
+                ) : (
+                  <span className="min-w-0 flex-1 truncate text-[0.82rem] text-ink">{it.name}</span>
+                )}
+                {edit ? (
+                  <span className="inline-flex items-center gap-0.5"><span className="text-[0.8rem] text-faint">$</span><input type="number" value={it.price} onChange={(e) => update(i, "price", e.target.value)} className={`${inputCls} w-16 text-right`} /></span>
+                ) : (
+                  <span className="shrink-0 text-[0.82rem] font-semibold text-navy">${it.price.toLocaleString()}</span>
+                )}
+              </div>
+              {it.type === "Service" && (edit || (it.tasks && it.tasks.length > 0)) && (
+                <div className="mt-1.5 border-t border-line/70 pt-1.5">
+                  <p className="mb-1 text-[0.6rem] font-bold uppercase tracking-wide text-faint">Job checklist, auto-added when used</p>
+                  {edit ? (
+                    <div className="space-y-1">
+                      {(it.tasks ?? []).map((t, ti) => (
+                        <div key={ti} className="flex items-center gap-1.5">
+                          <button type="button" onClick={() => removeTask(i, ti)} className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={9} /></button>
+                          <input value={t} onChange={(e) => updTask(i, ti, e.target.value)} className={`${inputCls} flex-1`} />
+                        </div>
+                      ))}
+                      <button type="button" onClick={() => addTask(i)} className="inline-flex items-center gap-1 text-[0.72rem] font-semibold text-blue hover:underline"><Plus size={11} /> Add step</button>
+                    </div>
+                  ) : (
+                    <div className="flex flex-wrap gap-1">
+                      {it.tasks!.map((t, ti) => (
+                        <span key={ti} className="inline-flex items-center gap-1 rounded bg-surface px-1.5 py-0.5 text-[0.66rem] text-muted"><Check size={9} className="text-faint" /> {t}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               )}
             </div>
           ))}
