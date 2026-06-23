@@ -111,10 +111,10 @@ const DAY_JOBS: Record<number, Job[]> = {
 };
 
 const TEAM = [
-  { name: "Luis R.", role: "Lead tech", status: "On a job", jobs: "3 today", dot: "bg-green" },
-  { name: "Sam K.", role: "Tech", status: "Available", jobs: "2 today", dot: "bg-blue" },
-  { name: "Dana P.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green" },
-  { name: "Mia T.", role: "Tech", status: "Off today", jobs: "0 today", dot: "bg-line" },
+  { name: "Luis R.", role: "Lead tech", status: "On a job", jobs: "3 today", dot: "bg-green", phone: "(602) 555-0171", skills: ["HVAC", "Install", "Refrigeration"] },
+  { name: "Sam K.", role: "Tech", status: "Available", jobs: "2 today", dot: "bg-blue", phone: "(602) 555-0182", skills: ["HVAC", "Maintenance"] },
+  { name: "Dana P.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Dispatch", "Scheduling"] },
+  { name: "Mia T.", role: "Tech", status: "Off today", jobs: "0 today", dot: "bg-line", phone: "(602) 555-0166", skills: ["Plumbing", "HVAC"] },
 ];
 
 const CATALOG_SEED: Item[] = [
@@ -358,7 +358,7 @@ export default function HeroAppMock() {
               {active === "schedule" && (
                 <ScheduleView day={day} setDay={setDay} weekOffset={weekOffset} setWeekOffset={setWeekOffset} extra={extra} addJob={addJob} openTicket={openTicket} />
               )}
-              {active === "team" && <TeamView assignedTech={assignedTech} />}
+              {active === "team" && <TeamView assignedTech={assignedTech} setActive={setActive} />}
               {active === "catalog" && <CatalogView catalog={catalog} setCatalog={setCatalog} />}
               {active === "billing" && (
                 <BillingView
@@ -973,27 +973,76 @@ function ScheduleView({
   );
 }
 
-function TeamView({ assignedTech }: { assignedTech: string }) {
+function TeamView({ assignedTech, setActive }: { assignedTech: string; setActive: (m: ModId) => void }) {
+  const [sel, setSel] = useState<string | null>(null);
+  const t = TEAM.find((x) => x.name === sel);
+
+  if (!t) {
+    return (
+      <div>
+        <ModuleHeader title="Team" sub="3 techs · 7 jobs today" />
+        <div className="space-y-2">
+          {TEAM.map((m) => (
+            <button key={m.name} type="button" onClick={() => setSel(m.name)} className={`flex w-full items-center gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-colors hover:border-blue ${m.name === assignedTech ? "border-blue/30 bg-blue/[0.04]" : "border-line bg-surface"}`}>
+              <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-[0.7rem] font-bold text-white">
+                {m.name.split(" ").map((p) => p[0]).join("")}
+                <span className={`absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-surface ${m.dot}`} />
+              </span>
+              <div className="min-w-0">
+                <p className="text-[0.85rem] font-semibold text-navy">{m.name}{m.name === assignedTech && <span className="ml-1.5 text-[0.68rem] font-bold text-blue">· on #{JOB.ticket}</span>}</p>
+                <p className="text-[0.72rem] text-muted">{m.role}</p>
+              </div>
+              <div className="ml-auto text-right">
+                <p className="text-[0.74rem] font-semibold text-navy">{m.status}</p>
+                <p className="text-[0.68rem] text-faint">{m.jobs}</p>
+              </div>
+              <ChevronRight size={16} className="shrink-0 text-faint" />
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  const todays = (DAY_JOBS[2] ?? []).filter((j) => j.tech === t.name);
   return (
     <div>
-      <ModuleHeader title="Team" sub="3 techs · 7 jobs today" />
-      <div className="space-y-2">
-        {TEAM.map((t) => (
-          <div key={t.name} className={`flex items-center gap-3 rounded-xl border px-3.5 py-2.5 ${t.name === assignedTech ? "border-blue/30 bg-blue/[0.04]" : "border-line bg-surface"}`}>
-            <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-[0.7rem] font-bold text-white">
-              {t.name.split(" ").map((p) => p[0]).join("")}
-              <span className={`absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-surface ${t.dot}`} />
-            </span>
-            <div className="min-w-0">
-              <p className="text-[0.85rem] font-semibold text-navy">{t.name}{t.name === assignedTech && <span className="ml-1.5 text-[0.68rem] font-bold text-blue">· on #{JOB.ticket}</span>}</p>
-              <p className="text-[0.72rem] text-muted">{t.role}</p>
-            </div>
-            <div className="ml-auto text-right">
-              <p className="text-[0.74rem] font-semibold text-navy">{t.status}</p>
-              <p className="text-[0.68rem] text-faint">{t.jobs}</p>
-            </div>
+      <ModuleHeader title="Team" sub={t.name} />
+      <button type="button" onClick={() => setSel(null)} className="mb-3 inline-flex items-center gap-1 text-[0.78rem] font-semibold text-blue hover:underline"><ChevronLeft size={14} /> All techs</button>
+      <div className="rounded-xl border border-line bg-surface p-4">
+        <div className="flex items-center gap-3">
+          <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-navy text-sm font-bold text-white">
+            {t.name.split(" ").map((p) => p[0]).join("")}
+            <span className={`absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-surface ${t.dot}`} />
+          </span>
+          <div className="min-w-0">
+            <p className="text-[0.95rem] font-bold text-navy">{t.name}</p>
+            <p className="text-[0.76rem] text-muted">{t.role} · {t.status}</p>
           </div>
-        ))}
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {t.skills.map((s) => (
+            <span key={s} className="rounded-md border border-line bg-canvas px-2 py-0.5 text-[0.7rem] font-medium text-ink/70">{s}</span>
+          ))}
+        </div>
+
+        <a href={`tel:${t.phone.replace(/[^0-9]/g, "")}`} className="mt-3 inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-blue hover:underline"><PhoneCall size={13} /> {t.phone}</a>
+
+        <div className="mt-4 border-t border-line pt-3">
+          <p className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">Today, {todays.length} {todays.length === 1 ? "job" : "jobs"}</p>
+          <div className="mt-2 space-y-1.5">
+            {todays.length === 0 && <p className="py-2 text-center text-[0.8rem] text-faint">No jobs scheduled today.</p>}
+            {todays.map((j, i) => (
+              <div key={i} className="flex items-center gap-3 rounded-lg border border-line bg-canvas px-3 py-2">
+                <span className="w-12 shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
+                <p className="min-w-0 flex-1 truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
+                {j.duration && <span className="shrink-0 text-[0.72rem] text-muted">{j.duration}</span>}
+              </div>
+            ))}
+          </div>
+          <button type="button" onClick={() => setActive("schedule")} className="mt-2 inline-flex items-center gap-1 text-[0.78rem] font-semibold text-blue hover:underline">View on the schedule <ChevronRight size={13} /></button>
+        </div>
       </div>
     </div>
   );
