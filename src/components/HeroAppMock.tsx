@@ -24,6 +24,11 @@ import {
   CheckCircle2,
   Send,
   Lock,
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+  Pencil,
+  Tag,
   type LucideIcon,
 } from "lucide-react";
 
@@ -36,8 +41,6 @@ const JOB = {
 
 const SUMMARY =
   "Existing customer, upstairs A/C not cooling since last night. Home after 3pm, wants a same-day visit.";
-
-const tags = ["Existing customer", "HVAC", "Same-day"];
 
 type ModId =
   | "live"
@@ -71,16 +74,27 @@ const NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
 
 type Phase = "transcribing" | "summarizing" | "typing" | "done";
 type TaskState = "pending" | "acted" | "ignored";
+type Job = { time: string; title: string; tech: string; hot?: boolean };
 
-const WEEK = [
-  { d: "Mon", n: 9 },
-  { d: "Tue", n: 10 },
-  { d: "Wed", n: 11, today: true },
-  { d: "Thu", n: 12 },
-  { d: "Fri", n: 13 },
-];
+const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const MLEN = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-const DAY_JOBS: Record<number, { time: string; title: string; tech: string; hot?: boolean }[]> = {
+function dateFor(offset: number, i: number) {
+  let m = 5; // June
+  let d = 9 + offset * 7 + i;
+  while (d > MLEN[m]) {
+    d -= MLEN[m];
+    m = (m + 1) % 12;
+  }
+  while (d < 1) {
+    m = (m + 11) % 12;
+    d += MLEN[m];
+  }
+  return { dow: DOW[i], d, m };
+}
+
+const DAY_JOBS: Record<number, Job[]> = {
   0: [{ time: "10:00", title: "No-cool · Ortiz", tech: "Sam K." }],
   1: [{ time: "8:30", title: "Maintenance · Oak HOA", tech: "Luis R." }],
   2: [
@@ -99,15 +113,35 @@ const TEAM = [
   { name: "Mia T.", role: "Tech", status: "Off today", jobs: "0 today", dot: "bg-line" },
 ];
 
+const TAG_POOL = ["Warranty", "Repeat customer", "Upsell: maintenance plan", "VIP"];
+const EXTRA_LINES = [
+  { label: "Labor (1 hr)", amt: 120 },
+  { label: "Service call fee", amt: 49 },
+  { label: "Refrigerant top-up", amt: 85 },
+];
+const MILESTONES = [
+  { label: "Deposit (30%)", amt: 1200 },
+  { label: "On completion (70%)", amt: 2800 },
+];
+
 export default function HeroAppMock() {
   const [active, setActive] = useState<ModId>("live");
   const [phase, setPhase] = useState<Phase>("transcribing");
   const [typed, setTyped] = useState(0);
   const [day, setDay] = useState(2);
+  const [weekOffset, setWeekOffset] = useState(0);
+  const [extra, setExtra] = useState<Record<string, Job[]>>({});
   const [billTab, setBillTab] = useState<"quote" | "invoice" | "milestones">("quote");
   const [quote, setQuote] = useState<"draft" | "sent" | "approved">("draft");
   const [invoice, setInvoice] = useState<"draft" | "sent" | "paid">("draft");
   const [mile, setMile] = useState<"draft" | "sent">("draft");
+  const [lines, setLines] = useState([
+    { label: "A/C diagnostic", amt: 89 },
+    { label: "Capacitor replacement", amt: 100 },
+  ]);
+  const [editBill, setEditBill] = useState(false);
+  const [tags, setTags] = useState<string[]>(["Existing customer", "HVAC", "Same-day"]);
+  const [notes, setNotes] = useState<string[]>(["Prefers afternoon visits.", "Gate code 4417."]);
   const [msgs, setMsgs] = useState<{ me: boolean; text: string }[]>([
     { me: true, text: `Hi Maria, this is OneBy for Summit HVAC. Luis is booked for your A/C diagnostic today at 3:30.` },
     { me: false, text: "Perfect, thank you!" },
@@ -127,10 +161,19 @@ export default function HeroAppMock() {
           setPhase("transcribing");
           setTyped(0);
           setDay(2);
+          setWeekOffset(0);
+          setExtra({});
           setBillTab("quote");
           setQuote("draft");
           setInvoice("draft");
           setMile("draft");
+          setLines([
+            { label: "A/C diagnostic", amt: 89 },
+            { label: "Capacitor replacement", amt: 100 },
+          ]);
+          setEditBill(false);
+          setTags(["Existing customer", "HVAC", "Same-day"]);
+          setNotes(["Prefers afternoon visits.", "Gate code 4417."]);
           setTasks({ 1: "pending", 2: "pending", 3: "pending" });
         } else if (!entry.isIntersecting) {
           wasVisible.current = false;
@@ -163,15 +206,18 @@ export default function HeroAppMock() {
     return () => clearTimeout(t);
   }, [phase, typed]);
 
+  const addJob = (key: string, time: string) =>
+    setExtra((e) => ({ ...e, [key]: [...(e[key] ?? []), { time, title: "New job", tech: "Unassigned" }] }));
+  const addTag = () => {
+    const avail = TAG_POOL.find((x) => !tags.includes(x));
+    if (avail) setTags([...tags, avail]);
+  };
+  const addNote = (text: string) => setNotes([...notes, text]);
+
   const next = NEXT[active];
 
   return (
     <div ref={rootRef} className="relative mx-auto w-full max-w-5xl">
-      <div className="absolute -left-4 top-1/3 z-10 hidden rounded-xl border border-line bg-white px-3.5 py-2.5 shadow-[var(--shadow-lg)] lg:block">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">AI answered</p>
-        <p className="text-sm font-semibold text-navy">In 2 rings ⚡</p>
-      </div>
-
       <div className="overflow-hidden rounded-[20px] border border-line bg-surface shadow-[0_40px_90px_-30px_rgba(4,3,79,0.35)]">
         {/* title bar */}
         <div className="flex items-center gap-2 border-b border-line bg-canvas/70 px-5 py-3">
@@ -236,8 +282,7 @@ export default function HeroAppMock() {
           </aside>
 
           {/* main */}
-          <div className="flex min-h-[440px] flex-col p-4 sm:p-6">
-            {/* mobile module pills */}
+          <div className="flex min-h-[460px] flex-col p-4 sm:p-6">
             <div className="mb-4 flex gap-1.5 overflow-x-auto pb-1 sm:hidden">
               {MODULES.filter((m) => !m.soon).map((m) => (
                 <button
@@ -254,9 +299,11 @@ export default function HeroAppMock() {
             </div>
 
             <div className="flex-1">
-              {active === "live" && <LiveView phase={phase} typed={typed} />}
-              {active === "tickets" && <TicketsView />}
-              {active === "schedule" && <ScheduleView day={day} setDay={setDay} />}
+              {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} />}
+              {active === "tickets" && <TicketsView tags={tags} addTag={addTag} notes={notes} addNote={addNote} />}
+              {active === "schedule" && (
+                <ScheduleView day={day} setDay={setDay} weekOffset={weekOffset} setWeekOffset={setWeekOffset} extra={extra} addJob={addJob} />
+              )}
               {active === "team" && <TeamView />}
               {active === "billing" && (
                 <BillingView
@@ -268,6 +315,10 @@ export default function HeroAppMock() {
                   setInvoice={setInvoice}
                   mile={mile}
                   setMile={setMile}
+                  lines={lines}
+                  setLines={setLines}
+                  editBill={editBill}
+                  setEditBill={setEditBill}
                 />
               )}
               {active === "messages" && <MessagesView msgs={msgs} setMsgs={setMsgs} />}
@@ -311,7 +362,26 @@ function Dots() {
   );
 }
 
-function LiveView({ phase, typed }: { phase: Phase; typed: number }) {
+function TagRow({ tags, addTag }: { tags: string[]; addTag: () => void }) {
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      {tags.map((t) => (
+        <span key={t} className="rounded-md border border-line bg-surface px-2 py-0.5 text-[0.7rem] font-medium text-ink/70">
+          {t}
+        </span>
+      ))}
+      <button
+        type="button"
+        onClick={addTag}
+        className="inline-flex items-center gap-0.5 rounded-md border border-dashed border-line px-2 py-0.5 text-[0.7rem] font-medium text-faint transition-colors hover:border-blue hover:text-blue"
+      >
+        <Tag size={11} /> Tag
+      </button>
+    </div>
+  );
+}
+
+function LiveView({ phase, typed, tags }: { phase: Phase; typed: number; tags: string[] }) {
   const done = phase === "done";
   const processing = phase === "transcribing" || phase === "summarizing";
   return (
@@ -324,7 +394,7 @@ function LiveView({ phase, typed }: { phase: Phase; typed: number }) {
           </span>
           <div className="min-w-0">
             <p className="text-[0.95rem] font-semibold text-navy">Call with {JOB.customer}</p>
-            <p className="truncate text-xs text-muted">Desk phone · 4:12 · completed</p>
+            <p className="truncate text-xs text-muted">Desk phone · answered in 2 rings · 4:12</p>
           </div>
           {done ? (
             <span className="ml-auto shrink-0 rounded-full bg-blue/10 px-2.5 py-1 text-[11px] font-semibold text-blue">AI summarized</span>
@@ -374,7 +444,8 @@ function LiveView({ phase, typed }: { phase: Phase; typed: number }) {
   );
 }
 
-function TicketsView() {
+function TicketsView({ tags, addTag, notes, addNote }: { tags: string[]; addTag: () => void; notes: string[]; addNote: (t: string) => void }) {
+  const [n, setN] = useState("");
   return (
     <div>
       <ModuleHeader title="Tickets" sub="One open job" />
@@ -385,9 +456,15 @@ function TicketsView() {
         </div>
         <p className="mt-2 text-[0.95rem] font-semibold text-navy">{JOB.issue}</p>
         <p className="mt-1 text-sm text-muted">{JOB.customer} · existing customer</p>
+
+        <div className="mt-3">
+          <TagRow tags={tags} addTag={addTag} />
+        </div>
+
         <div className="mt-3 rounded-lg border border-blue/15 bg-blue/[0.04] px-3 py-2 text-[0.82rem] leading-relaxed text-ink">
           {SUMMARY}
         </div>
+
         <div className="mt-3 flex flex-wrap items-center gap-2 text-[0.78rem]">
           <span className="inline-flex items-center gap-1 rounded-md bg-canvas-2 px-2 py-1 font-semibold text-navy">
             <Clock size={13} /> Status: New
@@ -396,47 +473,114 @@ function TicketsView() {
             Assigned: {JOB.tech}
           </span>
         </div>
+
+        {/* notes */}
+        <div className="mt-4 border-t border-line pt-3">
+          <p className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">Notes</p>
+          <div className="mt-2 space-y-1.5">
+            {notes.map((note, i) => (
+              <p key={i} className="rounded-md bg-canvas px-2.5 py-1.5 text-[0.78rem] text-ink">{note}</p>
+            ))}
+          </div>
+          <div className="mt-2 flex gap-2">
+            <input
+              value={n}
+              onChange={(e) => setN(e.target.value)}
+              placeholder="Add a note for the tech"
+              className="min-w-0 flex-1 rounded-lg border border-line bg-canvas px-2.5 py-1.5 text-[0.78rem] text-ink outline-none placeholder:text-faint focus:border-blue"
+            />
+            <button
+              type="button"
+              onClick={() => {
+                if (n.trim()) {
+                  addNote(n.trim());
+                  setN("");
+                }
+              }}
+              className="shrink-0 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90"
+            >
+              Add
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-function ScheduleView({ day, setDay }: { day: number; setDay: (d: number) => void }) {
-  const jobs = DAY_JOBS[day] ?? [];
+function ScheduleView({
+  day,
+  setDay,
+  weekOffset,
+  setWeekOffset,
+  extra,
+  addJob,
+}: {
+  day: number;
+  setDay: (d: number) => void;
+  weekOffset: number;
+  setWeekOffset: (n: number) => void;
+  extra: Record<string, Job[]>;
+  addJob: (key: string, time: string) => void;
+}) {
+  const [t, setT] = useState("");
+  const key = `${weekOffset}:${day}`;
+  const base = weekOffset === 0 ? DAY_JOBS[day] ?? [] : [];
+  const jobs = [...base, ...(extra[key] ?? [])];
+  const head = dateFor(weekOffset, 0);
+
   return (
     <div>
-      <ModuleHeader title="Schedule" sub="This week · drag the crew across the calendar" />
+      <ModuleHeader title="Schedule" sub="Book the crew, today or weeks out" />
       <div className="rounded-xl border border-line bg-surface p-4">
-        {/* week strip */}
+        {/* week nav */}
+        <div className="mb-3 flex items-center justify-between">
+          <button type="button" onClick={() => setWeekOffset(weekOffset - 1)} className="grid h-7 w-7 place-items-center rounded-lg border border-line text-muted hover:border-blue hover:text-blue">
+            <ChevronLeft size={15} />
+          </button>
+          <span className="text-[0.82rem] font-bold text-navy">{MONTHS[head.m]} 2026</span>
+          <div className="flex items-center gap-1.5">
+            {weekOffset !== 0 && (
+              <button type="button" onClick={() => { setWeekOffset(0); setDay(2); }} className="rounded-md bg-canvas-2 px-2 py-1 text-[0.7rem] font-semibold text-navy">
+                Today
+              </button>
+            )}
+            <button type="button" onClick={() => setWeekOffset(weekOffset + 1)} className="grid h-7 w-7 place-items-center rounded-lg border border-line text-muted hover:border-blue hover:text-blue">
+              <ChevronRight size={15} />
+            </button>
+          </div>
+        </div>
+
+        {/* days */}
         <div className="grid grid-cols-5 gap-1.5">
-          {WEEK.map((w, i) => {
+          {DOW.map((_, i) => {
+            const dt = dateFor(weekOffset, i);
             const on = i === day;
+            const today = weekOffset === 0 && i === 2;
             return (
               <button
-                key={w.d}
+                key={i}
                 type="button"
                 onClick={() => setDay(i)}
                 className={`rounded-lg border px-1 py-2 text-center transition-colors ${
                   on ? "border-blue/40 bg-blue/10 text-blue" : "border-line bg-canvas text-ink/70 hover:border-blue"
                 }`}
               >
-                <span className="block text-[0.65rem] font-semibold uppercase">{w.d}</span>
-                <span className="block text-[0.95rem] font-bold">{w.n}</span>
-                {w.today && <span className="mx-auto mt-0.5 block h-1 w-1 rounded-full bg-green" />}
+                <span className="block text-[0.65rem] font-semibold uppercase">{dt.dow}</span>
+                <span className="block text-[0.95rem] font-bold">{dt.d}</span>
+                {today && <span className="mx-auto mt-0.5 block h-1 w-1 rounded-full bg-green" />}
               </button>
             );
           })}
         </div>
 
-        {/* day agenda */}
+        {/* agenda */}
         <div className="mt-4 space-y-2">
-          {jobs.length === 0 && <p className="py-4 text-center text-[0.8rem] text-faint">Nothing booked. Tap a slot to add a job.</p>}
-          {jobs.map((j) => (
+          {jobs.length === 0 && <p className="py-3 text-center text-[0.8rem] text-faint">Nothing booked. Add a time below.</p>}
+          {jobs.map((j, i) => (
             <div
-              key={j.time}
-              className={`flex items-center gap-3 rounded-lg border px-3 py-2.5 ${
-                j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"
-              }`}
+              key={`${j.time}-${i}`}
+              className={`flex items-center gap-3 rounded-lg border px-3 py-2.5 ${j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"}`}
             >
               <span className="w-12 shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
               <div className="min-w-0 flex-1">
@@ -447,6 +591,24 @@ function ScheduleView({ day, setDay }: { day: number; setDay: (d: number) => voi
             </div>
           ))}
         </div>
+
+        {/* custom time */}
+        <div className="mt-3 flex gap-2">
+          <input
+            value={t}
+            onChange={(e) => setT(e.target.value)}
+            placeholder="Add a custom time, e.g. 4:45 PM"
+            className="min-w-0 flex-1 rounded-lg border border-line bg-canvas px-2.5 py-1.5 text-[0.78rem] text-ink outline-none placeholder:text-faint focus:border-blue"
+          />
+          <button
+            type="button"
+            onClick={() => { if (t.trim()) { addJob(key, t.trim()); setT(""); } }}
+            className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90"
+          >
+            <Plus size={13} /> Add
+          </button>
+        </div>
+
         <p className="mt-3 inline-flex items-center gap-1.5 text-[0.72rem] text-faint">
           <Calendar size={12} /> Synced two-way with Google and Microsoft calendars
         </p>
@@ -481,16 +643,6 @@ function TeamView() {
   );
 }
 
-const BILL_LINES = [
-  { label: "A/C diagnostic", amt: 89 },
-  { label: "Capacitor replacement", amt: 100 },
-];
-const BILL_TOTAL = BILL_LINES.reduce((n, l) => n + l.amt, 0);
-const MILESTONES = [
-  { label: "Deposit (30%)", amt: 1200 },
-  { label: "On completion (70%)", amt: 2800 },
-];
-
 function BillingView({
   tab,
   setTab,
@@ -500,6 +652,10 @@ function BillingView({
   setInvoice,
   mile,
   setMile,
+  lines,
+  setLines,
+  editBill,
+  setEditBill,
 }: {
   tab: "quote" | "invoice" | "milestones";
   setTab: (t: "quote" | "invoice" | "milestones") => void;
@@ -509,12 +665,23 @@ function BillingView({
   setInvoice: (s: "draft" | "sent" | "paid") => void;
   mile: "draft" | "sent";
   setMile: (s: "draft" | "sent") => void;
+  lines: { label: string; amt: number }[];
+  setLines: (l: { label: string; amt: number }[]) => void;
+  editBill: boolean;
+  setEditBill: (b: boolean) => void;
 }) {
+  const total = lines.reduce((n, l) => n + l.amt, 0);
+  const addLine = () => setLines([...lines, EXTRA_LINES[lines.length % EXTRA_LINES.length]]);
+  const removeLine = (i: number) => setLines(lines.filter((_, idx) => idx !== i));
+
   const TABS: { id: "quote" | "invoice" | "milestones"; label: string; icon: LucideIcon }[] = [
     { id: "quote", label: "Quote", icon: FileText },
     { id: "invoice", label: "Invoice", icon: Receipt },
     { id: "milestones", label: "Milestones", icon: Flag },
   ];
+
+  const editable = (tab === "quote" && quote === "draft") || (tab === "invoice" && invoice === "draft");
+
   return (
     <div>
       <ModuleHeader title="Billing" sub={`Job #${JOB.ticket} · ${JOB.customer}`} />
@@ -534,44 +701,66 @@ function BillingView({
       </div>
 
       <div className="rounded-xl border border-line bg-surface p-4">
-        {tab === "quote" && (
+        {(tab === "quote" || tab === "invoice") && (
           <>
-            <LineItems />
-            {quote === "draft" && (
-              <SendBtn label="Send quote for approval" onClick={() => setQuote("sent")} />
-            )}
-            {quote === "sent" && (
-              <div className="animate-rise mt-4">
-                <Banner tone="blue" title="Quote sent" body={`Texted to ${JOB.customer}. She can approve with one tap.`} />
-                <button type="button" onClick={() => setQuote("approved")} className="mt-2 w-full rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600">
-                  Mark approved
+            <div className="flex items-center justify-between">
+              <span className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">Line items</span>
+              {editable && (
+                <button
+                  type="button"
+                  onClick={() => setEditBill(!editBill)}
+                  className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${editBill ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}
+                >
+                  <Pencil size={11} /> {editBill ? "Done" : "Edit"}
                 </button>
-              </div>
-            )}
-            {quote === "approved" && (
-              <div className="animate-rise mt-4 flex items-center justify-center gap-2 rounded-lg border border-green/30 bg-green/[0.09] px-3 py-3 text-[0.85rem] font-bold text-green-600">
-                <CheckCircle2 size={17} /> Approved, ready to invoice
-              </div>
-            )}
-          </>
-        )}
+              )}
+            </div>
 
-        {tab === "invoice" && (
-          <>
-            <LineItems />
-            {invoice === "draft" && <SendBtn label="Send invoice + pay link" onClick={() => setInvoice("sent")} />}
-            {invoice === "sent" && (
-              <div className="animate-rise mt-4">
-                <Banner tone="blue" title="Invoice sent" body={`Pay link texted to ${JOB.customer}. Tap to pay by card.`} />
-                <button type="button" onClick={() => setInvoice("paid")} className="mt-2 w-full rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600">
-                  Mark as paid
+            <div className="mt-2 space-y-1.5">
+              {lines.map((l, i) => (
+                <div key={`${l.label}-${i}`} className="flex items-center justify-between text-[0.85rem]">
+                  <span className="flex items-center gap-2 text-ink">
+                    {editBill && (
+                      <button type="button" onClick={() => removeLine(i)} className="grid h-4 w-4 place-items-center rounded-full bg-warning/15 text-warning">
+                        <X size={11} />
+                      </button>
+                    )}
+                    {l.label}
+                  </span>
+                  <span className="font-semibold text-navy">${l.amt}</span>
+                </div>
+              ))}
+              {editBill && (
+                <button type="button" onClick={addLine} className="inline-flex items-center gap-1 text-[0.78rem] font-semibold text-blue hover:underline">
+                  <Plus size={12} /> Add line item
                 </button>
+              )}
+              <div className="mt-2 flex items-center justify-between border-t border-line pt-2 text-[0.95rem]">
+                <span className="font-bold text-navy">Total</span>
+                <span className="font-extrabold text-navy">${total}</span>
+              </div>
+            </div>
+
+            {tab === "quote" && quote === "draft" && <SendBtn label="Send quote for approval" onClick={() => setQuote("sent")} />}
+            {tab === "quote" && quote === "sent" && (
+              <div className="animate-rise mt-4">
+                <Banner title="Quote sent" body={`Texted to ${JOB.customer}. She can approve with one tap.`} />
+                <button type="button" onClick={() => setQuote("approved")} className="mt-2 w-full rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600">Mark approved</button>
               </div>
             )}
-            {invoice === "paid" && (
-              <div className="animate-rise mt-4 flex items-center justify-center gap-2 rounded-lg border border-green/30 bg-green/[0.09] px-3 py-3 text-[0.9rem] font-bold text-green-600">
-                <CheckCircle2 size={18} /> Paid ${BILL_TOTAL}
+            {tab === "quote" && quote === "approved" && (
+              <div className="animate-rise mt-4 flex items-center justify-center gap-2 rounded-lg border border-green/30 bg-green/[0.09] px-3 py-3 text-[0.85rem] font-bold text-green-600"><CheckCircle2 size={17} /> Approved, ready to invoice</div>
+            )}
+
+            {tab === "invoice" && invoice === "draft" && <SendBtn label="Send invoice + pay link" onClick={() => setInvoice("sent")} />}
+            {tab === "invoice" && invoice === "sent" && (
+              <div className="animate-rise mt-4">
+                <Banner title="Invoice sent" body={`Pay link texted to ${JOB.customer}. Tap to pay by card.`} />
+                <button type="button" onClick={() => setInvoice("paid")} className="mt-2 w-full rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600">Mark as paid</button>
               </div>
+            )}
+            {tab === "invoice" && invoice === "paid" && (
+              <div className="animate-rise mt-4 flex items-center justify-center gap-2 rounded-lg border border-green/30 bg-green/[0.09] px-3 py-3 text-[0.9rem] font-bold text-green-600"><CheckCircle2 size={18} /> Paid ${total}</div>
             )}
           </>
         )}
@@ -591,28 +780,11 @@ function BillingView({
               <SendBtn label="Send milestone schedule" onClick={() => setMile("sent")} />
             ) : (
               <div className="animate-rise mt-4">
-                <Banner tone="blue" title="Milestones sent" body={`Deposit link texted to ${JOB.customer}. The rest bills on completion.`} />
+                <Banner title="Milestones sent" body={`Deposit link texted to ${JOB.customer}. The rest bills on completion.`} />
               </div>
             )}
           </>
         )}
-      </div>
-    </div>
-  );
-}
-
-function LineItems() {
-  return (
-    <div className="space-y-1.5">
-      {BILL_LINES.map((l) => (
-        <div key={l.label} className="flex items-center justify-between text-[0.85rem]">
-          <span className="text-ink">{l.label}</span>
-          <span className="font-semibold text-navy">${l.amt}</span>
-        </div>
-      ))}
-      <div className="mt-2 flex items-center justify-between border-t border-line pt-2 text-[0.95rem]">
-        <span className="font-bold text-navy">Total</span>
-        <span className="font-extrabold text-navy">${BILL_TOTAL}</span>
       </div>
     </div>
   );
@@ -630,11 +802,10 @@ function SendBtn({ label, onClick }: { label: string; onClick: () => void }) {
   );
 }
 
-function Banner({ tone, title, body }: { tone: "blue" | "green"; title: string; body: string }) {
-  const c = tone === "blue" ? "border-blue/20 bg-blue/[0.05] text-blue" : "border-green/25 bg-green/[0.07] text-green-600";
+function Banner({ title, body }: { title: string; body: string }) {
   return (
-    <div className={`flex items-start gap-2.5 rounded-lg border px-3.5 py-3 ${c}`}>
-      <CheckCircle2 size={17} className="mt-0.5 shrink-0" />
+    <div className="flex items-start gap-2.5 rounded-lg border border-blue/20 bg-blue/[0.05] px-3.5 py-3">
+      <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-blue" />
       <div>
         <p className="text-[0.85rem] font-semibold text-navy">{title}</p>
         <p className="text-[0.75rem] text-muted">{body}</p>

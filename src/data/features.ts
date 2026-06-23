@@ -4,7 +4,7 @@
 export type Feature = {
   slug: string;
   name: string;
-  group: "AI & automation" | "Calling & devices" | "Collaboration";
+  group: "AI & automation" | "Jobs & billing" | "Calling & devices" | "Collaboration";
   icon: string;
   metaTitle: string;
   metaDescription: string;
@@ -349,6 +349,96 @@ export const features: Feature[] = [
     ],
     cardline: "Your business line, anywhere.",
   },
+  {
+    slug: "ticketing",
+    name: "Ticketing",
+    group: "Jobs & billing",
+    icon: "Ticket",
+    metaTitle: "Ticketing: Turn Every Call Into a Tracked Job",
+    metaDescription:
+      "Every call becomes a structured ticket on its own: who called, what they need, how urgent, assigned and ready. No more sticky notes or lost jobs.",
+    keywords: ["ticketing software", "service ticketing", "job ticketing", "turn calls into tickets"],
+    heroEyebrow: "Ticketing",
+    heroTitle: "Every call becomes a ticket, on its own.",
+    heroSub:
+      "The AI turns each conversation into a structured ticket with the customer, the problem, the urgency, and an owner. Nothing lives on a sticky note or in someone's memory.",
+    bullets: [
+      "Calls, texts, and voicemails become tickets automatically",
+      "Status, priority, assignee, and customer on every job",
+      "The call summary and full history attached",
+      "Nothing slips, because every job has a home",
+    ],
+    how: [
+      { step: "The call becomes a ticket", body: "The AI opens a ticket from the conversation, filled in with the details, the moment the call ends." },
+      { step: "It gets routed", body: "Priority and assignee are set, so the right person picks it up without a huddle." },
+      { step: "It moves to done", body: "Schedule it, work it, and invoice it, all from the same ticket." },
+    ],
+    faqs: [
+      { q: "Do I have to create tickets by hand?", a: "No. Every call turns into a ticket on its own. You just work them." },
+      { q: "Can tickets sync to my other tools?", a: "Yes. On the Pro plan, tickets and summaries flow into popular CRM and field-service tools." },
+    ],
+    cardline: "Every call becomes a tracked job.",
+  },
+  {
+    slug: "scheduling",
+    name: "Scheduling",
+    group: "Jobs & billing",
+    icon: "CalendarDays",
+    metaTitle: "Scheduling: Book the Job, Sync the Calendar",
+    metaDescription:
+      "Assign a job to a tech and a time, see your whole week, and sync two-way with Google and Microsoft calendars. Scheduling built right into the call.",
+    keywords: ["job scheduling software", "field service scheduling", "appointment scheduling", "dispatch scheduling"],
+    heroEyebrow: "Scheduling",
+    heroTitle: "Book the job before you hang up.",
+    heroSub:
+      "Assign a ticket to a tech and a time, see the whole week at a glance, and let it sync both ways with Google and Microsoft calendars. The job is on the books before the call ends.",
+    bullets: [
+      "Assign a tech and a time straight from the ticket",
+      "A week view, not just today",
+      "Two-way Google and Microsoft calendar sync",
+      "The customer gets a confirmation text automatically",
+    ],
+    how: [
+      { step: "Pick a slot", body: "Drop the job on a tech and a time from the ticket or the calendar." },
+      { step: "It syncs", body: "The booking lands on your calendar and theirs, both ways, instantly." },
+      { step: "Everyone knows", body: "The tech sees their day and the customer gets a heads-up text." },
+    ],
+    faqs: [
+      { q: "Does it sync with my calendar?", a: "Yes, two-way with Google Calendar and Microsoft 365, so nothing double-books." },
+      { q: "Is this a full dispatch board?", a: "It is lightweight scheduling for small teams: assign a tech and a time, see the week, and go. No bloated dispatch software to learn." },
+    ],
+    cardline: "Book the job, sync the calendar.",
+  },
+  {
+    slug: "invoicing",
+    name: "Invoicing & Payments",
+    group: "Jobs & billing",
+    icon: "Receipt",
+    metaTitle: "Invoicing and Payments: Quote, Bill, Get Paid",
+    metaDescription:
+      "Send a quote for approval, invoice the finished job, and text a pay link your customer taps to pay by card. Milestone billing for the big jobs, too.",
+    keywords: ["invoicing software", "contractor invoicing", "field service invoicing", "text to pay"],
+    heroEyebrow: "Invoicing & Payments",
+    heroTitle: "Quote it, bill it, get paid. One place.",
+    heroSub:
+      "Send a quote for approval, invoice the finished job, and text a pay link your customer taps to pay by card. For bigger jobs, bill by milestone. All from the same ticket.",
+    bullets: [
+      "Quotes the customer can approve with one tap",
+      "Invoice the finished job in a couple of taps",
+      "Text a pay link, take a card, get paid faster",
+      "Milestone billing for deposits and big installs",
+    ],
+    how: [
+      { step: "Send the quote", body: "Turn the job into a quote and text it over for one-tap approval." },
+      { step: "Invoice the work", body: "When it's done, the quote becomes an invoice with a pay link." },
+      { step: "Get paid", body: "The customer taps to pay by card, and it reconciles against the job." },
+    ],
+    faqs: [
+      { q: "Can customers pay by card?", a: "Yes. They tap the texted pay link and pay by card, no app or login needed." },
+      { q: "Can I bill big jobs in stages?", a: "Yes. Use milestone billing for a deposit up front and the balance on completion." },
+    ],
+    cardline: "Quote, bill, and get paid in one place.",
+  },
 ];
 
 export const featuresBySlug = Object.fromEntries(
@@ -357,6 +447,7 @@ export const featuresBySlug = Object.fromEntries(
 
 export const featureGroups: Array<{ group: Feature["group"]; items: Feature[] }> = [
   { group: "AI & automation", items: features.filter((f) => f.group === "AI & automation") },
+  { group: "Jobs & billing", items: features.filter((f) => f.group === "Jobs & billing") },
   { group: "Calling & devices", items: features.filter((f) => f.group === "Calling & devices") },
   { group: "Collaboration", items: features.filter((f) => f.group === "Collaboration") },
 ];

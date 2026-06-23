@@ -11,6 +11,9 @@ import {
   Smartphone,
   CreditCard,
   ShieldCheck,
+  Ticket,
+  CalendarDays,
+  Receipt,
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
@@ -28,6 +31,9 @@ export const featureIconMap: Record<string, LucideIcon> = {
   Smartphone,
   CreditCard,
   ShieldCheck,
+  Ticket,
+  CalendarDays,
+  Receipt,
 };
 
 export function getFeatureIcon(name: string): LucideIcon {
