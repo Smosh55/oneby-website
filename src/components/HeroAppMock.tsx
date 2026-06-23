@@ -74,7 +74,7 @@ const NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
 type Phase = "transcribing" | "summarizing" | "typing" | "done";
 type TaskState = "pending" | "acted" | "ignored";
 type Job = { time: string; title: string; tech: string; hot?: boolean };
-type Line = { label: string; amt: number };
+type Line = { label: string; qty: number; price: number };
 type Item = { id: number; name: string; type: "Service" | "Part"; price: number };
 
 const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri"];
@@ -136,8 +136,8 @@ export default function HeroAppMock() {
   const [invoice, setInvoice] = useState<"draft" | "sent" | "paid">("draft");
   const [mile, setMile] = useState<"draft" | "sent">("draft");
   const [lines, setLines] = useState<Line[]>([
-    { label: "A/C diagnostic", amt: 89 },
-    { label: "Capacitor replacement", amt: 100 },
+    { label: "A/C diagnostic", qty: 1, price: 89 },
+    { label: "Capacitor replacement", qty: 1, price: 100 },
   ]);
   const [editBill, setEditBill] = useState(false);
   const [catalog, setCatalog] = useState<Item[]>(CATALOG_SEED);
@@ -170,8 +170,8 @@ export default function HeroAppMock() {
           setInvoice("draft");
           setMile("draft");
           setLines([
-            { label: "A/C diagnostic", amt: 89 },
-            { label: "Capacitor replacement", amt: 100 },
+            { label: "A/C diagnostic", qty: 1, price: 89 },
+            { label: "Capacitor replacement", qty: 1, price: 100 },
           ]);
           setEditBill(false);
           setCatalog(CATALOG_SEED);
@@ -732,11 +732,11 @@ function BillingView({
   lines: Line[]; setLines: (l: Line[]) => void; editBill: boolean; setEditBill: (b: boolean) => void; catalog: Item[];
 }) {
   const [pick, setPick] = useState(false);
-  const total = lines.reduce((n, l) => n + l.amt, 0);
-  const update = (i: number, field: "label" | "amt", v: string) =>
-    setLines(lines.map((l, idx) => (idx === i ? { ...l, [field]: field === "amt" ? Number(v) || 0 : v } : l)));
-  const addCustom = () => setLines([...lines, { label: "", amt: 0 }]);
-  const addItem = (it: Item) => { setLines([...lines, { label: it.name, amt: it.price }]); setPick(false); };
+  const total = lines.reduce((n, l) => n + l.qty * l.price, 0);
+  const update = (i: number, field: "label" | "qty" | "price", v: string) =>
+    setLines(lines.map((l, idx) => (idx === i ? { ...l, [field]: field === "label" ? v : Number(v) || 0 } : l)));
+  const addCustom = () => setLines([...lines, { label: "", qty: 1, price: 0 }]);
+  const addItem = (it: Item) => { setLines([...lines, { label: it.name, qty: 1, price: it.price }]); setPick(false); };
   const removeLine = (i: number) => setLines(lines.filter((_, idx) => idx !== i));
 
   const TABS: { id: "quote" | "invoice" | "milestones"; label: string; icon: LucideIcon }[] = [
@@ -768,16 +768,21 @@ function BillingView({
             <div className="mt-2 space-y-1.5">
               {lines.map((l, i) =>
                 editBill ? (
-                  <div key={i} className="flex items-center gap-2">
+                  <div key={i} className="flex items-center gap-1.5">
                     <button type="button" onClick={() => removeLine(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
-                    <input value={l.label} onChange={(e) => update(i, "label", e.target.value)} placeholder="Item or service" className={`${inputCls} flex-1`} />
-                    <span className="text-[0.8rem] text-faint">$</span>
-                    <input type="number" value={l.amt} onChange={(e) => update(i, "amt", e.target.value)} className={`${inputCls} w-16 text-right`} />
+                    <input value={l.label} onChange={(e) => update(i, "label", e.target.value)} placeholder="Item or service" className={`${inputCls} min-w-0 flex-1`} />
+                    <input type="number" value={l.qty} onChange={(e) => update(i, "qty", e.target.value)} aria-label="Quantity" className={`${inputCls} w-9 text-center`} />
+                    <span className="text-[0.78rem] text-faint">×</span>
+                    <span className="text-[0.78rem] text-faint">$</span>
+                    <input type="number" value={l.price} onChange={(e) => update(i, "price", e.target.value)} aria-label="Price" className={`${inputCls} w-14 text-right`} />
                   </div>
                 ) : (
-                  <div key={i} className="flex items-center justify-between text-[0.85rem]">
-                    <span className="text-ink">{l.label || "Untitled"}</span>
-                    <span className="font-semibold text-navy">${l.amt}</span>
+                  <div key={i} className="flex items-center justify-between gap-2 text-[0.85rem]">
+                    <span className="min-w-0 truncate text-ink">
+                      {l.label || "Untitled"}
+                      {l.qty > 1 && <span className="text-faint"> · {l.qty} × ${l.price}</span>}
+                    </span>
+                    <span className="shrink-0 font-semibold text-navy">${(l.qty * l.price).toLocaleString()}</span>
                   </div>
                 )
               )}
