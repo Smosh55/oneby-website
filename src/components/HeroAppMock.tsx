@@ -383,7 +383,10 @@ function LiveView({ phase, typed, tags }: { phase: Phase; typed: number; tags: s
   const processing = phase === "transcribing" || phase === "summarizing";
   return (
     <div>
-      <ModuleHeader title="Live activity" sub="A call just came in" />
+      <ModuleHeader title="Live activity" sub="One call live, one just wrapped" />
+
+      <ActiveCallCard />
+
       <div className="rounded-xl border border-line bg-canvas px-4 py-3">
         <div className="flex items-center gap-3">
           <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-green/10 text-green-600"><PhoneCall size={18} /></span>
@@ -446,6 +449,56 @@ function LiveView({ phase, typed, tags }: { phase: Phase; typed: number; tags: s
             <span className="ml-auto shrink-0 rounded-full bg-green/10 px-2 py-0.5 text-[10px] font-semibold text-green-600">AI answered</span>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function ActiveCallCard() {
+  const lines = [
+    { ai: true, text: "Thanks for calling Summit HVAC, how can I help?" },
+    { ai: false, text: "My water heater is leaking all over the garage." },
+    { ai: true, text: "Sorry to hear that. Is it still actively leaking right now?" },
+    { ai: false, text: "Yeah, pretty bad." },
+    { ai: true, text: "Got it. I can get a tech out this afternoon. What's the address?" },
+  ];
+  const [shown, setShown] = useState(1);
+  useEffect(() => {
+    if (shown >= lines.length) return;
+    const t = setTimeout(() => setShown((n) => n + 1), 1300);
+    return () => clearTimeout(t);
+  }, [shown, lines.length]);
+
+  return (
+    <div className="mb-3 overflow-hidden rounded-xl border border-green/30 bg-green/[0.05]">
+      <div className="flex items-center gap-2 border-b border-green/20 bg-green/10 px-4 py-2">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-70" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-green" />
+        </span>
+        <span className="text-[0.7rem] font-bold uppercase tracking-wide text-green-600">Live call · AI answering</span>
+        <span className="ml-auto flex items-end gap-0.5">
+          {[3, 7, 4, 8, 5].map((h, i) => (
+            <span key={i} className="w-0.5 animate-pulse rounded-full bg-green" style={{ height: `${h}px`, animationDelay: `${i * 120}ms` }} />
+          ))}
+        </span>
+        <span className="text-[0.7rem] font-semibold text-green-600">0:{10 + shown}</span>
+      </div>
+      <div className="space-y-2 px-4 py-3">
+        <p className="text-[0.76rem] font-semibold text-navy">Incoming · James R. · (602) 555-0192</p>
+        {lines.slice(0, shown).map((l, i) => (
+          <div key={i} className={`flex ${l.ai ? "justify-start" : "justify-end"}`}>
+            <span className={`max-w-[82%] rounded-2xl px-3 py-1.5 text-[0.8rem] leading-snug ${l.ai ? "bg-blue/10 text-ink" : "bg-canvas-2 text-ink"}`}>
+              <span className={`mr-1 text-[0.6rem] font-bold uppercase ${l.ai ? "text-blue" : "text-faint"}`}>{l.ai ? "AI" : "Caller"}</span>
+              {l.text}
+            </span>
+          </div>
+        ))}
+        {shown < lines.length && (
+          <div className="flex justify-start">
+            <span className="rounded-2xl bg-blue/10 px-3 py-2"><Dots /></span>
+          </div>
+        )}
       </div>
     </div>
   );
