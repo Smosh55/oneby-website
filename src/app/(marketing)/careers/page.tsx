@@ -39,7 +39,7 @@ export default function CareersPage() {
             Careers
           </span>
           <h1 className="mt-5 text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[3.25rem]">
-            Come help us kill voicemail for good.
+            Come help us catch every call.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted">
             We're a small team building the AI Communications OS for the

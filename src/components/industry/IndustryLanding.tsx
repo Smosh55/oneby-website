@@ -113,7 +113,7 @@ export default function IndustryLanding({
                     </p>
                   </div>
                   <span className="ml-auto shrink-0 rounded-full bg-blue/10 px-2.5 py-1 text-[11px] font-semibold text-blue">
-                    AI answered
+                    AI summarized
                   </span>
                 </div>
 

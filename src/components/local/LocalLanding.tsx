@@ -186,7 +186,7 @@ export default function LocalLanding({
               <p className="mt-2 text-[0.92rem] leading-relaxed text-muted">
                 Yes. OneBy covers {city.name} and the wider {city.region}, from{" "}
                 {hoods[0]} and {hoods[1]} to {hoods[2]} and {hoods[3]}. Wherever
-                your crew is working, the AI answers every call.
+                your crew is working, the AI catches the calls they can't.
               </p>
             </div>
             <div className="surface-card rounded-2xl p-6">

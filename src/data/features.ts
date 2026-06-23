@@ -54,12 +54,12 @@ export const features: Feature[] = [
     name: "AI Voicemail Replacement",
     group: "AI & automation",
     icon: "Voicemail",
-    metaTitle: "AI Voicemail Replacement: Kill Voicemail for Good",
+    metaTitle: "AI Voicemail Replacement: Stop Losing Leads to Voicemail",
     metaDescription:
       "Voicemail records a message nobody listens to. OneBy replaces it with an AI that answers, understands, and turns the call into an assigned task.",
     keywords: ["voicemail replacement", "AI voicemail", "replace voicemail", "no more voicemail"],
     heroEyebrow: "AI Voicemail Replacement",
-    heroTitle: "We killed voicemail. You're welcome.",
+    heroTitle: "Stop losing leads to voicemail.",
     heroSub:
       "Voicemail is where leads go to die. A caller hits the beep, hangs up, and dials your competitor. OneBy replaces voicemail with an AI that actually answers and acts.",
     bullets: [

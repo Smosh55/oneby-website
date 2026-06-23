@@ -104,13 +104,13 @@ export default function VoipCrmPage() {
             The complete guide
           </span>
           <h1 className="mt-5 text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-6xl">
-            The VoIP CRM that answers your phone and runs the job.
+            The VoIP CRM that catches every call and runs the job.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted">
             A VoIP CRM is a phone system and a CRM in one. OneBy is the version
-            built for service businesses: the AI answers every call, then tickets,
-            schedules, and invoices the job. One platform, not four apps that
-            don't talk.
+            built for service businesses: your team answers what it can, the AI
+            catches the rest, and every call becomes a ticket, a schedule, and an
+            invoice. One platform, not four apps that don't talk.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/demo" className="btn btn-primary text-base">

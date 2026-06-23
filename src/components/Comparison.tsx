@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 import { Check, X } from "lucide-react";
 
 const rows = [
-  "Answers your phone with AI",
+  "Catches every call with AI",
   "Turns every call into a ticket",
   "Scheduling & dispatch",
   "Invoicing & payments",

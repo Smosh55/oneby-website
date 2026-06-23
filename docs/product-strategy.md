@@ -1,5 +1,12 @@
 # OneBy Product Strategy: The All-in-One for Small Service Shops
 
+> UPDATE (2026-06): The "walk before run" sequencing below is SUPERSEDED.
+> Ticketing, scheduling, invoicing, and SMS are now first-class CRM modules
+> built and launching with go-live, not deferred. Positioning is the VoIP-native
+> all-in-one CRM ("catch every call, win every job"), with a free CRM trial (no
+> credit card) and the paid VoIP line as the monetization. Treat the "THE WALK /
+> THE RUN" gating in this file as historical context only.
+
 Decision (2025): OneBy is **the all-in-one operating system for small service
 businesses** (HVAC, plumbing, roofing, property management, and similar trades).
 One tool to answer the phone, capture the job, ticket it, schedule it, invoice
