@@ -117,11 +117,6 @@ const TEAM = [
   { name: "Mia T.", role: "Tech", status: "Off today", jobs: "0 today", dot: "bg-line" },
 ];
 
-const TAG_POOL = ["Warranty", "Repeat customer", "Upsell: maintenance plan", "VIP"];
-const MILESTONES = [
-  { label: "Deposit (30%)", amt: 1200 },
-  { label: "On completion (70%)", amt: 2800 },
-];
 const CATALOG_SEED: Item[] = [
   { id: 1, name: "A/C diagnostic", type: "Service", price: 89, tasks: ["Inspect unit and airflow", "Test capacitor and contactor", "Check refrigerant levels", "Review findings with customer"] },
   { id: 2, name: "System tune-up", type: "Service", price: 129, tasks: ["Replace air filter", "Clean coils", "Test thermostat", "Log readings"] },
@@ -260,10 +255,6 @@ export default function HeroAppMock() {
 
   const addJob = (key: string, job: Job) =>
     setExtra((e) => ({ ...e, [key]: [...(e[key] ?? []), job] }));
-  const addTag = () => {
-    const avail = TAG_POOL.find((x) => !tags.includes(x));
-    if (avail) setTags([...tags, avail]);
-  };
   const addNote = (text: string) => setNotes([...notes, text]);
 
   const next = NEXT[active];
@@ -362,7 +353,7 @@ export default function HeroAppMock() {
               {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} />}
               {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} />}
               {active === "tickets" && (
-                <TicketsView tags={tags} addTag={addTag} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} />
+                <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} />
               )}
               {active === "schedule" && (
                 <ScheduleView day={day} setDay={setDay} weekOffset={weekOffset} setWeekOffset={setWeekOffset} extra={extra} addJob={addJob} openTicket={openTicket} />
@@ -617,7 +608,7 @@ const TICKET_STATUSES = ["New", "Scheduled", "In progress", "Invoiced", "Done"];
 
 function TicketsView({
   tags,
-  addTag,
+  setTags,
   notes,
   addNote,
   assignedTech,
@@ -630,7 +621,7 @@ function TicketsView({
   setSubtasks,
 }: {
   tags: string[];
-  addTag: () => void;
+  setTags: (t: string[]) => void;
   notes: string[];
   addNote: (t: string) => void;
   assignedTech: string;
@@ -728,7 +719,7 @@ function TicketsView({
         <p className="mt-2 text-[0.95rem] font-semibold text-navy">{tk.issue}</p>
         <p className="mt-1 text-sm text-muted"><button type="button" onClick={() => openCustomer(tk.customer)} className="font-semibold text-blue hover:underline">{tk.customer}</button> · existing customer</p>
 
-        <div className="mt-3"><TagRow tags={tags} addTag={addTag} /></div>
+        <div className="mt-3"><TagRow tags={tags} setTags={setTags} /></div>
 
         <div className="mt-3 rounded-lg border border-blue/15 bg-blue/[0.04] px-3 py-2 text-[0.82rem] leading-relaxed text-ink">{tk.summary}</div>
 
@@ -857,15 +848,25 @@ function TicketsView({
   );
 }
 
-function TagRow({ tags, addTag }: { tags: string[]; addTag: () => void }) {
+function TagRow({ tags, setTags }: { tags: string[]; setTags: (t: string[]) => void }) {
+  const [adding, setAdding] = useState(false);
+  const [val, setVal] = useState("");
+  const add = () => { const v = val.trim(); if (v && !tags.includes(v)) setTags([...tags, v]); setVal(""); setAdding(false); };
   return (
     <div className="flex flex-wrap items-center gap-1.5">
       {tags.map((t) => (
-        <span key={t} className="rounded-md border border-line bg-surface px-2 py-0.5 text-[0.7rem] font-medium text-ink/70">{t}</span>
+        <span key={t} className="inline-flex items-center gap-1 rounded-md border border-line bg-surface px-2 py-0.5 text-[0.7rem] font-medium text-ink/70">
+          {t}
+          <button type="button" aria-label={`Remove ${t}`} onClick={() => setTags(tags.filter((x) => x !== t))} className="text-faint transition-colors hover:text-warning"><X size={10} /></button>
+        </span>
       ))}
-      <button type="button" onClick={addTag} className="inline-flex items-center gap-0.5 rounded-md border border-dashed border-line px-2 py-0.5 text-[0.7rem] font-medium text-faint transition-colors hover:border-blue hover:text-blue">
-        <Tag size={11} /> Tag
-      </button>
+      {adding ? (
+        <input autoFocus value={val} onChange={(e) => setVal(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") add(); if (e.key === "Escape") { setAdding(false); setVal(""); } }} onBlur={add} placeholder="New tag" aria-label="New tag" className={`${inputCls} w-24 py-0.5`} />
+      ) : (
+        <button type="button" onClick={() => setAdding(true)} className="inline-flex items-center gap-0.5 rounded-md border border-dashed border-line px-2 py-0.5 text-[0.7rem] font-medium text-faint transition-colors hover:border-blue hover:text-blue">
+          <Tag size={11} /> Tag
+        </button>
+      )}
     </div>
   );
 }
@@ -883,6 +884,7 @@ function ScheduleView({
   const [ntitle, setNtitle] = useState("");
   const [ntech, setNtech] = useState(SCHED_TECHS[0]);
   const [ndur, setNdur] = useState("1h");
+  const TIME_SLOTS = ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00"];
   const key = `${weekOffset}:${day}`;
   const base = weekOffset === 0 ? DAY_JOBS[day] ?? [] : [];
   const allJobs = [...base, ...(extra[key] ?? [])];
@@ -952,7 +954,10 @@ function ScheduleView({
         <div className="mt-3 rounded-lg border border-line bg-canvas/40 p-2.5">
           <p className="mb-1.5 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Add a job</p>
           <div className="flex flex-wrap gap-1.5">
-            <input value={nt} onChange={(e) => setNt(e.target.value)} placeholder="Time" aria-label="Time" className={`${inputCls} w-16`} />
+            <select value={nt} onChange={(e) => setNt(e.target.value)} aria-label="Time" className={inputCls}>
+              <option value="">Time</option>
+              {TIME_SLOTS.map((t) => <option key={t} value={t}>{t}</option>)}
+            </select>
             <select value={ndur} onChange={(e) => setNdur(e.target.value)} aria-label="Duration" className={inputCls}>{["30m", "1h", "2h", "Half day"].map((d) => <option key={d} value={d}>{d}</option>)}</select>
             <select value={ntech} onChange={(e) => setNtech(e.target.value)} aria-label="Tech" className={inputCls}>{[...SCHED_TECHS, "Unassigned"].map((tn) => <option key={tn} value={tn}>{tn}</option>)}</select>
           </div>
@@ -1076,6 +1081,17 @@ function BillingView({
 }) {
   const [pick, setPick] = useState(false);
   const [pdf, setPdf] = useState(false);
+  const [editMile, setEditMile] = useState(false);
+  const [miles, setMiles] = useState<{ label: string; pct: number }[]>([
+    { label: "Deposit", pct: 30 },
+    { label: "On completion", pct: 70 },
+  ]);
+  const mileBase = 4000;
+  const pctTotal = miles.reduce((n, m) => n + m.pct, 0);
+  const updMile = (i: number, field: "label" | "pct", v: string) =>
+    setMiles(miles.map((m, idx) => (idx === i ? { ...m, [field]: field === "pct" ? Number(v) || 0 : v } : m)));
+  const addMile = () => setMiles([...miles, { label: "New milestone", pct: 0 }]);
+  const removeMile = (i: number) => setMiles(miles.filter((_, idx) => idx !== i));
   const ar = CUSTOMERS.reduce((n, c) => n + c.balance, 0);
   const total = lines.reduce((n, l) => n + l.qty * l.price, 0);
   const update = (i: number, field: "label" | "qty" | "price", v: string) =>
@@ -1143,11 +1159,11 @@ function BillingView({
                     <input type="number" value={l.price} onChange={(e) => update(i, "price", e.target.value)} aria-label="Price" className={`${inputCls} w-14 text-right`} />
                   </div>
                 ) : (
-                  <div key={i} className="flex items-center justify-between gap-2 text-[0.85rem]">
-                    <span className="min-w-0 truncate text-ink">
-                      {l.label || "Untitled"}
-                      {l.qty > 1 && <span className="text-faint"> · {l.qty} × ${l.price}</span>}
-                    </span>
+                  <div key={i} className="flex items-start justify-between gap-2 text-[0.85rem]">
+                    <div className="min-w-0">
+                      <p className="truncate text-ink">{l.label || "Untitled"}</p>
+                      <p className="text-[0.72rem] text-faint">Qty {l.qty} × ${l.price.toLocaleString()}</p>
+                    </div>
                     <span className="shrink-0 font-semibold text-navy">${(l.qty * l.price).toLocaleString()}</span>
                   </div>
                 )
@@ -1238,15 +1254,36 @@ function BillingView({
 
         {tab === "milestones" && (
           <>
-            <p className="mb-2 text-[0.78rem] text-muted">Full system install · $4,000</p>
+            <div className="mb-2 flex items-center justify-between">
+              <p className="text-[0.78rem] text-muted">Full system install · ${mileBase.toLocaleString()}</p>
+              <button type="button" onClick={() => setEditMile(!editMile)} className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${editMile ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {editMile ? "Done" : "Edit"}</button>
+            </div>
             <div className="space-y-1.5">
-              {MILESTONES.map((m) => (
-                <div key={m.label} className="flex items-center justify-between rounded-lg bg-canvas px-3 py-2 text-[0.82rem]">
-                  <span className="inline-flex items-center gap-1.5 text-ink"><Flag size={13} className="text-blue" /> {m.label}</span>
-                  <span className="font-semibold text-navy">${m.amt.toLocaleString()}</span>
+              {miles.map((m, i) => (
+                <div key={i} className="flex items-center gap-2 rounded-lg bg-canvas px-3 py-2 text-[0.82rem]">
+                  <Flag size={13} className="shrink-0 text-blue" />
+                  {editMile ? (
+                    <>
+                      <input value={m.label} onChange={(e) => updMile(i, "label", e.target.value)} className={`${inputCls} min-w-0 flex-1`} />
+                      <input type="number" value={m.pct} onChange={(e) => updMile(i, "pct", e.target.value)} aria-label="Percent" className={`${inputCls} w-12 text-right`} />
+                      <span className="text-faint">%</span>
+                      <button type="button" onClick={() => removeMile(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
+                    </>
+                  ) : (
+                    <>
+                      <span className="min-w-0 flex-1 truncate text-ink">{m.label} <span className="text-faint">· {m.pct}%</span></span>
+                      <span className="shrink-0 font-semibold text-navy">${Math.round((mileBase * m.pct) / 100).toLocaleString()}</span>
+                    </>
+                  )}
                 </div>
               ))}
             </div>
+            {editMile && (
+              <div className="mt-2 flex items-center justify-between">
+                <button type="button" onClick={addMile} className="inline-flex items-center gap-1 text-[0.78rem] font-semibold text-blue hover:underline"><Plus size={12} /> Add milestone</button>
+                <span className={`text-[0.72rem] font-bold ${pctTotal === 100 ? "text-green-600" : "text-warning"}`}>{pctTotal}% allocated</span>
+              </div>
+            )}
             {mile === "draft" ? (
               <SendBtn label="Send milestone schedule" onClick={() => setMile("sent")} />
             ) : (
@@ -1537,6 +1574,7 @@ function CustomersView({ sel, setSel }: { sel: number | null; setSel: (n: number
   const c = customers.find((x) => x.id === sel) || null;
   const upd = (field: "phone" | "email" | "address", v: string) =>
     setCustomers(customers.map((x) => (x.id === sel ? { ...x, [field]: v } : x)));
+  const setCustTags = (t: string[]) => setCustomers(customers.map((x) => (x.id === sel ? { ...x, tags: t } : x)));
 
   if (!c) {
     const filtered = customers.filter((x) => x.name.toLowerCase().includes(q.toLowerCase()));
@@ -1593,9 +1631,13 @@ function CustomersView({ sel, setSel }: { sel: number | null; setSel: (n: number
         </div>
 
         <div className="mt-3 flex flex-wrap gap-1.5">
-          {c.tags.map((t) => (
-            <span key={t} className="rounded-md border border-line bg-canvas px-2 py-0.5 text-[0.7rem] font-medium text-ink/70">{t}</span>
-          ))}
+          {edit ? (
+            <TagRow tags={c.tags} setTags={setCustTags} />
+          ) : (
+            c.tags.map((t) => (
+              <span key={t} className="rounded-md border border-line bg-canvas px-2 py-0.5 text-[0.7rem] font-medium text-ink/70">{t}</span>
+            ))
+          )}
         </div>
       </div>
 
