@@ -180,10 +180,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
   const [quote, setQuote] = useState<"draft" | "sent" | "approved">("draft");
   const [invoice, setInvoice] = useState<"draft" | "sent" | "paid">("draft");
   const [mile, setMile] = useState<"draft" | "sent">("draft");
-  const [lines, setLines] = useState<Line[]>([
-    { label: "A/C diagnostic", qty: 1, price: 89 },
-    { label: "Capacitor replacement", qty: 1, price: 100 },
-  ]);
+  const [linesBy, setLinesBy] = useState<Record<string, Line[]>>(LINES_SEED);
   const [editBill, setEditBill] = useState(false);
   const [catalog, setCatalog] = useState<Item[]>(CATALOG_SEED);
   const [assignedTech, setAssignedTech] = useState("Luis R.");
@@ -228,10 +225,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
           setQuote("draft");
           setInvoice("draft");
           setMile("draft");
-          setLines([
-            { label: "A/C diagnostic", qty: 1, price: 89 },
-            { label: "Capacitor replacement", qty: 1, price: 100 },
-          ]);
+          setLinesBy(LINES_SEED);
           setEditBill(false);
           setCatalog(CATALOG_SEED);
           setAssignedTech("Luis R.");
@@ -409,8 +403,8 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
                   setInvoice={setInvoice}
                   mile={mile}
                   setMile={setMile}
-                  lines={lines}
-                  setLines={setLines}
+                  linesBy={linesBy}
+                  setLinesBy={setLinesBy}
                   editBill={editBill}
                   setEditBill={setEditBill}
                   catalog={catalog}
@@ -675,6 +669,14 @@ const TICKETS: Ticket[] = [
     ] },
 ];
 const TICKET_STATUSES = ["New", "Scheduled", "In progress", "Invoiced", "Done"];
+const LINES_SEED: Record<string, Line[]> = {
+  "1042": [{ label: "A/C diagnostic", qty: 1, price: 89 }, { label: "Capacitor replacement", qty: 1, price: 100 }],
+  "1041": [{ label: "Water heater inspection", qty: 1, price: 89 }],
+  "1039": [{ label: "Rooftop unit tune-up", qty: 12, price: 75 }],
+  "1038": [{ label: "Thermostat install labor", qty: 1, price: 120 }],
+  "1035": [{ label: "Full system install", qty: 1, price: 4000 }],
+  "1031": [{ label: "Fan motor replacement", qty: 1, price: 240 }],
+};
 
 function TicketsView({
   tags,
@@ -1291,16 +1293,18 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
 }
 
 function BillingView({
-  tab, setTab, quote, setQuote, invoice, setInvoice, mile, setMile, lines, setLines, editBill, setEditBill, catalog, setCatalog, setSubtasks, assignedTech, ticketSel,
+  tab, setTab, quote, setQuote, invoice, setInvoice, mile, setMile, linesBy, setLinesBy, editBill, setEditBill, catalog, setCatalog, setSubtasks, assignedTech, ticketSel,
 }: {
   tab: "quote" | "invoice" | "milestones"; setTab: (t: "quote" | "invoice" | "milestones") => void;
   quote: "draft" | "sent" | "approved"; setQuote: (s: "draft" | "sent" | "approved") => void;
   invoice: "draft" | "sent" | "paid"; setInvoice: (s: "draft" | "sent" | "paid") => void;
   mile: "draft" | "sent"; setMile: (s: "draft" | "sent") => void;
-  lines: Line[]; setLines: (l: Line[]) => void; editBill: boolean; setEditBill: (b: boolean) => void; catalog: Item[]; setCatalog: (c: Item[]) => void;
+  linesBy: Record<string, Line[]>; setLinesBy: (m: Record<string, Line[]>) => void; editBill: boolean; setEditBill: (b: boolean) => void; catalog: Item[]; setCatalog: (c: Item[]) => void;
   subtasks: Subtask[]; setSubtasks: SubtaskSetter; assignedTech: string; ticketSel: string | null;
 }) {
   const billTicket = TICKETS.find((t) => t.id === ticketSel) ?? TICKETS[0];
+  const lines = linesBy[billTicket.id] ?? [];
+  const setLines = (l: Line[]) => setLinesBy({ ...linesBy, [billTicket.id]: l });
   const [pick, setPick] = useState(false);
   const [pickQ, setPickQ] = useState("");
   const [pdf, setPdf] = useState(false);
