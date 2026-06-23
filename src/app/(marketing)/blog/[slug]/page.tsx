@@ -165,6 +165,13 @@ export default async function BlogPost({
                 <ArrowRight size={16} className="text-faint transition-colors group-hover:text-blue" />
               </Link>
               <Link
+                href="/product"
+                className="group flex items-center justify-between py-3 font-semibold text-navy"
+              >
+                See the whole platform, from call to paid
+                <ArrowRight size={16} className="text-faint transition-colors group-hover:text-blue" />
+              </Link>
+              <Link
                 href="/missed-call-calculator"
                 className="group flex items-center justify-between py-3 font-semibold text-navy"
               >
@@ -198,8 +205,8 @@ export default async function BlogPost({
                 Never miss another customer.
               </h2>
               <p className="mx-auto mt-3 max-w-md text-white/70">
-                See how OneBy answers your calls, captures the details, and books
-                the job, automatically.
+                See how OneBy answers every call, then tickets, schedules, and
+                invoices the job, all in one place.
               </p>
               <div className="mt-7 flex flex-wrap justify-center gap-3">
                 <Link href="/demo" className="btn btn-primary text-base">
