@@ -382,7 +382,7 @@ export default function HeroAppMock() {
                 />
               )}
               {active === "messages" && <MessagesView msgs={msgs} setMsgs={setMsgs} />}
-              {active === "tasks" && <TasksView tasks={tasks} setTasks={setTasks} />}
+              {active === "tasks" && <TasksView tasks={tasks} setTasks={setTasks} setActive={setActive} />}
               {active === "email" && <EmailView />}
             </div>
 
@@ -1482,15 +1482,17 @@ function MessagesView({ msgs, setMsgs }: { msgs: Msg[]; setMsgs: (m: Msg[]) => v
   );
 }
 
-const TASKS = [
-  { id: 1, icon: Calendar, title: "Schedule A/C diagnostic", meta: "Dispatch · today", acted: "Added to today's schedule" },
-  { id: 2, icon: CornerUpRight, title: "Text Maria her arrival window", meta: "Follow-up", acted: "Text queued to Maria" },
-  { id: 3, icon: HelpCircle, title: "Confirm: upstairs unit, not downstairs?", meta: "Asks before assuming", acted: "Confirmed with the caller" },
+const TASKS: { id: number; icon: LucideIcon; title: string; meta: string; go: ModId; goLabel: string; options: string[]; acted: (o: string) => string }[] = [
+  { id: 1, icon: Calendar, title: "Schedule A/C diagnostic", meta: "Dispatch · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Luis R.", "Today 4:30 PM · Luis R.", "Tomorrow 9:00 AM · Sam K."], acted: (o) => `Booked ${o}` },
+  { id: 2, icon: CornerUpRight, title: "Text Maria her arrival window", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Luis arriving 3:30", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
+  { id: 3, icon: HelpCircle, title: "Confirm: upstairs unit, not downstairs?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Upstairs unit", "Downstairs unit", "Both units"], acted: (o) => `Confirmed: ${o}` },
 ];
 
-function TasksView({ tasks, setTasks }: { tasks: Record<number, TaskState>; setTasks: (t: Record<number, TaskState>) => void }) {
+function TasksView({ tasks, setTasks, setActive }: { tasks: Record<number, TaskState>; setTasks: (t: Record<number, TaskState>) => void; setActive: (m: ModId) => void }) {
   const [confirming, setConfirming] = useState<number | null>(null);
+  const [choices, setChoices] = useState<Record<number, string>>({});
   const set = (id: number, s: TaskState) => setTasks({ ...tasks, [id]: s });
+  const choiceFor = (it: (typeof TASKS)[number]) => choices[it.id] ?? it.options[0];
   return (
     <div>
       <ModuleHeader title="Tasks" sub="Act on what the call needs" />
@@ -1511,7 +1513,7 @@ function TasksView({ tasks, setTasks }: { tasks: Record<number, TaskState>; setT
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-green text-white"><Check size={16} /></span>
                 <div className="min-w-0">
                   <p className="truncate text-[0.85rem] font-semibold text-navy">{it.title}</p>
-                  <p className="text-[0.72rem] font-medium text-green-600">{it.acted}</p>
+                  <p className="text-[0.72rem] font-medium text-green-600">{it.acted(choiceFor(it))}</p>
                 </div>
                 <button type="button" onClick={() => set(it.id, "pending")} className="ml-auto shrink-0 text-[0.72rem] font-semibold text-muted hover:underline">Undo</button>
               </div>
@@ -1526,12 +1528,18 @@ function TasksView({ tasks, setTasks }: { tasks: Record<number, TaskState>; setT
                 </div>
               </div>
               {confirming === it.id ? (
-                <div className="mt-2 flex items-center justify-between rounded-lg bg-blue/[0.05] px-2.5 py-1.5">
-                  <span className="text-[0.74rem] font-medium text-navy">Add this to the schedule?</span>
-                  <span className="flex gap-1.5">
+                <div className="mt-2 rounded-lg bg-blue/[0.05] p-2.5">
+                  <p className="mb-1.5 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Refine, then act</p>
+                  <div className="flex items-center gap-1.5">
+                    <select value={choiceFor(it)} onChange={(e) => setChoices({ ...choices, [it.id]: e.target.value })} aria-label="Refine selection" className={`${inputCls} min-w-0 flex-1`}>
+                      {it.options.map((o) => <option key={o} value={o}>{o}</option>)}
+                    </select>
+                    <button type="button" onClick={() => setActive(it.go)} className="inline-flex shrink-0 items-center gap-1 rounded-lg border border-line bg-surface px-2 py-1.5 text-[0.72rem] font-semibold text-blue transition-colors hover:border-blue">Open {it.goLabel} <ChevronRight size={12} /></button>
+                  </div>
+                  <div className="mt-2 flex items-center justify-end gap-1.5">
                     <button type="button" onClick={() => setConfirming(null)} className="rounded-md border border-line bg-surface px-2 py-1 text-[0.72rem] font-semibold text-muted">Cancel</button>
-                    <button type="button" onClick={() => { set(it.id, "acted"); setConfirming(null); }} className="rounded-md bg-blue px-2 py-1 text-[0.72rem] font-semibold text-white">Confirm</button>
-                  </span>
+                    <button type="button" onClick={() => { set(it.id, "acted"); setConfirming(null); toast(it.acted(choiceFor(it))); }} className="rounded-md bg-blue px-2 py-1 text-[0.72rem] font-semibold text-white">Confirm</button>
+                  </div>
                 </div>
               ) : (
                 <div className="mt-2 flex items-center justify-end gap-2">
