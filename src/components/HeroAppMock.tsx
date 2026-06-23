@@ -555,6 +555,16 @@ function VoicemailRow() {
   );
 }
 
+const TICKETS = [
+  { id: "1042", issue: "Upstairs A/C not cooling", customer: "Maria G.", status: "Scheduled", urgent: true, summary: "Existing customer, no cooling upstairs since this morning. Wants the earliest slot. Filter was clogged last visit, likely a capacitor or airflow issue." },
+  { id: "1041", issue: "Water heater leaking", customer: "James R.", status: "New", urgent: true, summary: "New caller, water heater leaking onto the garage floor. Not actively flooding. Wants someone out today, flexible on the time." },
+  { id: "1039", issue: "Annual maintenance, 12 units", customer: "Oak Street HOA", status: "Scheduled", urgent: false, summary: "Recurring maintenance contract. Twelve rooftop units, needs a half-day block and a COI on file before the crew arrives." },
+  { id: "1038", issue: "Thermostat replacement", customer: "Dana P.", status: "In progress", urgent: false, summary: "Smart thermostat install. Customer supplied the unit, just needs labor. Tech is on site now." },
+  { id: "1035", issue: "Full system install", customer: "Reyes Family", status: "Invoiced", urgent: false, summary: "New three-ton system installed Tuesday. Job complete, invoice sent, awaiting payment." },
+  { id: "1031", issue: "Walk-in cooler service", customer: "Sun City Diner", status: "Done", urgent: false, summary: "Walk-in cooler not holding temp. Replaced the fan motor, verified temps, signed off." },
+];
+const TICKET_STATUSES = ["New", "Scheduled", "In progress", "Invoiced", "Done"];
+
 function TicketsView({
   tags,
   addTag,
@@ -604,27 +614,64 @@ function TicketsView({
     Logged: "Close the ticket",
   };
   const [flash, setFlash] = useState<string | null>(null);
+  const [sel, setSel] = useState<string | null>(null);
   const action = STAGE_ACTION[stages[stage]] ?? "Advance";
   const atEnd = stage >= stages.length - 1;
+  const tk = TICKETS.find((t) => t.id === sel);
+
+  if (!tk) {
+    return (
+      <div>
+        <ModuleHeader title="Tickets" sub={`${TICKETS.length} open jobs`} />
+        <div className="space-y-4">
+          {TICKET_STATUSES.map((s) => {
+            const inCol = TICKETS.filter((t) => t.status === s);
+            if (inCol.length === 0) return null;
+            return (
+              <div key={s}>
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">{s}</span>
+                  <span className="rounded-full bg-canvas-2 px-1.5 text-[0.66rem] font-bold text-muted">{inCol.length}</span>
+                </div>
+                <div className="space-y-2">
+                  {inCol.map((t) => (
+                    <button key={t.id} type="button" onClick={() => setSel(t.id)} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
+                      {t.urgent && <span className="h-2 w-2 shrink-0 rounded-full bg-warning" />}
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-[0.84rem] font-semibold text-navy">{t.issue}</p>
+                        <p className="truncate text-[0.72rem] text-muted">#{t.id} · {t.customer}</p>
+                      </div>
+                      <ChevronRight size={16} className="shrink-0 text-faint" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <ModuleHeader title="Tickets" sub="One open job" />
+      <ModuleHeader title="Tickets" sub={`Ticket #${tk.id}`} />
+      <button type="button" onClick={() => setSel(null)} className="mb-3 inline-flex items-center gap-1 text-[0.76rem] font-semibold text-muted transition-colors hover:text-navy"><ChevronLeft size={14} /> Board</button>
       <div className="rounded-xl border border-line bg-surface p-4">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-bold text-faint">#{JOB.ticket}</span>
-          <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[10px] font-bold uppercase text-warning">Urgent</span>
+          <span className="text-xs font-bold text-faint">#{tk.id}</span>
+          {tk.urgent && <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[10px] font-bold uppercase text-warning">Urgent</span>}
         </div>
-        <p className="mt-2 text-[0.95rem] font-semibold text-navy">{JOB.issue}</p>
-        <p className="mt-1 text-sm text-muted">{JOB.customer} · existing customer</p>
+        <p className="mt-2 text-[0.95rem] font-semibold text-navy">{tk.issue}</p>
+        <p className="mt-1 text-sm text-muted">{tk.customer} · existing customer</p>
 
         <div className="mt-3"><TagRow tags={tags} addTag={addTag} /></div>
 
-        <div className="mt-3 rounded-lg border border-blue/15 bg-blue/[0.04] px-3 py-2 text-[0.82rem] leading-relaxed text-ink">{SUMMARY}</div>
+        <div className="mt-3 rounded-lg border border-blue/15 bg-blue/[0.04] px-3 py-2 text-[0.82rem] leading-relaxed text-ink">{tk.summary}</div>
 
         {/* status + assignment */}
         <div className="mt-3 flex flex-wrap items-center gap-2 text-[0.78rem]">
-          <span className="inline-flex items-center gap-1 rounded-md bg-canvas-2 px-2 py-1 font-semibold text-navy"><Clock size={13} /> Status: New</span>
+          <span className="inline-flex items-center gap-1 rounded-md bg-canvas-2 px-2 py-1 font-semibold text-navy"><Clock size={13} /> Status: {stages[stage]}</span>
           <button
             type="button"
             onClick={() => { setPicking(!picking); setPending(null); }}
