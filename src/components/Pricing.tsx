@@ -14,7 +14,7 @@ export default function Pricing() {
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
             Cheap lines for the phones that just dial. AI seats only on the
-            lines that book jobs. Start free for 14 days, cancel anytime.
+            lines that book jobs. Start free, no credit card, cancel anytime.
           </p>
           <Link
             href="/pricing"

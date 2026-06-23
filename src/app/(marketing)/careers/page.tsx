@@ -5,7 +5,7 @@ import { ArrowRight, Heart, Zap, Users } from "lucide-react";
 export const metadata: Metadata = {
   title: "Careers at OneBy",
   description:
-    "We're a small team building the AI Communications OS for the businesses that keep the world running. No open roles posted right now, but we always want to meet great people.",
+    "We're a small team building the all-in-one CRM for the businesses that keep the world running. No open roles posted right now, but we always want to meet great people.",
   alternates: { canonical: "/careers" },
 };
 
@@ -42,7 +42,7 @@ export default function CareersPage() {
             Come help us catch every call.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted">
-            We're a small team building the AI Communications OS for the
+            We're a small team building the all-in-one CRM for the
             businesses that keep the world running. We don't have formal roles
             posted right now, but we're always happy to meet sharp, kind people
             who want to build something useful.

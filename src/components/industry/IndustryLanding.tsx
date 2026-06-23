@@ -21,7 +21,7 @@ import IndustryFAQ from "./IndustryFAQ";
 import DemoForm from "@/components/DemoForm";
 
 const trustChips = [
-  "14-day free trial",
+  "Free trial, no credit card",
   "Live in a day",
   "Keep your number",
   "No contract",
@@ -72,10 +72,10 @@ export default function IndustryLanding({
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link href="/demo" className="btn btn-primary text-base">
-                  Book a demo <ArrowRight size={18} />
+                  Start free, no credit card <ArrowRight size={18} />
                 </Link>
                 <Link href="/pricing" className="btn btn-ghost text-base">
-                  Start free trial
+                  See pricing
                 </Link>
               </div>
               <div className="mt-7 inline-flex items-baseline gap-2">

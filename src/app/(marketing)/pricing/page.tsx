@@ -10,7 +10,7 @@ import { jsonLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "Pricing: Cheap Lines, AI Only Where You Need It",
   description:
-    "Put a basic line on the phones that just dial, and AI seats on the lines that book jobs. Estimate your plan in seconds. Start free for 14 days, cancel anytime.",
+    "Put a basic line on the phones that just dial, and AI seats on the lines that book jobs. Estimate your plan in seconds. Start free, no credit card, cancel anytime.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -59,7 +59,7 @@ const productJsonLd = {
       "@type": "Product",
       name: "OneBy",
       description:
-        "The AI Communications OS: calling, desk phones, SMS, and fax, plus post-call automation that turns every call into a summary and an assigned task.",
+        "The all-in-one CRM: calling, desk phones, SMS, and fax, plus post-call automation that turns every call into a summary and an assigned task.",
       brand: { "@type": "Brand", name: "OneBy" },
       url: `${base}/pricing`,
       offers: plans

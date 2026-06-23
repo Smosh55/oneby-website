@@ -61,7 +61,7 @@ export default function Footer() {
               className="h-7 w-auto"
             />
             <p className="mt-5 text-[0.95rem] leading-relaxed text-white/60">
-              The AI Communications OS for small business. Never miss a customer
+              The all-in-one CRM for small business. Never miss a customer
               because you&apos;re busy.
             </p>
             <div className="mt-5 space-y-1 text-[0.9rem] text-white/70">

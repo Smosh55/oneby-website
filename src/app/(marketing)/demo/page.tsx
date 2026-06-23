@@ -70,7 +70,7 @@ export default function DemoPage() {
 
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted">
             <span className="inline-flex items-center gap-1.5">
-              <CheckCircle2 size={16} className="text-green" /> 14-day free trial
+              <CheckCircle2 size={16} className="text-green" /> Free trial, no credit card
             </span>
             <span className="inline-flex items-center gap-1.5">
               <CheckCircle2 size={16} className="text-green" /> Live in a day

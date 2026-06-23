@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "What happens during the free trial?",
-    a: "You get full access for 14 days: AI receptionist, summaries, tasks, and the shared inbox. No contract, and you can cancel anytime.",
+    a: "You get full access free, no credit card: AI receptionist, summaries, tasks, and the shared inbox. No contract, and you can cancel anytime.",
   },
 ];
 
