@@ -78,6 +78,13 @@ type TaskState = "pending" | "acted" | "ignored";
 type Job = { time: string; title: string; tech: string; hot?: boolean; duration?: string };
 type Line = { label: string; qty: number; price: number };
 type Item = { id: number; name: string; type: "Service" | "Part"; price: number; tasks?: string[] };
+type Subtask = { id: number; label: string; assignee: string; done: boolean };
+type SubtaskSetter = (u: Subtask[] | ((p: Subtask[]) => Subtask[])) => void;
+const SUBTASK_SEED: Subtask[] = [
+  { id: 1, label: "Confirm arrival window", assignee: "Luis R.", done: true },
+  { id: 2, label: "Bring a spare capacitor", assignee: "Luis R.", done: false },
+  { id: 3, label: "Collect payment on site", assignee: "Dana P.", done: false },
+];
 
 const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -184,6 +191,7 @@ export default function HeroAppMock() {
   const [tasks, setTasks] = useState<Record<number, TaskState>>({ 1: "pending", 2: "pending", 3: "pending" });
   const [ticketSel, setTicketSel] = useState<string | null>(null);
   const [custSel, setCustSel] = useState<number | null>(null);
+  const [subtasks, setSubtasks] = useState<Subtask[]>(SUBTASK_SEED);
   const openCustomer = (name: string) => { const c = CUSTOMERS.find((x) => x.name === name); setCustSel(c ? c.id : null); setActive("customers"); };
   const openTicket = (id: string | null) => { setTicketSel(id); setActive("tickets"); };
 
@@ -204,6 +212,7 @@ export default function HeroAppMock() {
           setExtra({});
           setTicketSel(null);
           setCustSel(null);
+          setSubtasks(SUBTASK_SEED);
           setBillTab("quote");
           setQuote("draft");
           setInvoice("draft");
@@ -353,7 +362,7 @@ export default function HeroAppMock() {
               {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} />}
               {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} />}
               {active === "tickets" && (
-                <TicketsView tags={tags} addTag={addTag} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} />
+                <TicketsView tags={tags} addTag={addTag} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} />
               )}
               {active === "schedule" && (
                 <ScheduleView day={day} setDay={setDay} weekOffset={weekOffset} setWeekOffset={setWeekOffset} extra={extra} addJob={addJob} openTicket={openTicket} />
@@ -375,6 +384,9 @@ export default function HeroAppMock() {
                   editBill={editBill}
                   setEditBill={setEditBill}
                   catalog={catalog}
+                  subtasks={subtasks}
+                  setSubtasks={setSubtasks}
+                  assignedTech={assignedTech}
                 />
               )}
               {active === "messages" && <MessagesView msgs={msgs} setMsgs={setMsgs} />}
@@ -614,6 +626,8 @@ function TicketsView({
   setSel,
   openCustomer,
   catalog,
+  subtasks,
+  setSubtasks,
 }: {
   tags: string[];
   addTag: () => void;
@@ -625,6 +639,8 @@ function TicketsView({
   setSel: (s: string | null) => void;
   openCustomer: (name: string) => void;
   catalog: Item[];
+  subtasks: Subtask[];
+  setSubtasks: SubtaskSetter;
 }) {
   const [n, setN] = useState("");
   const [picking, setPicking] = useState(false);
@@ -639,11 +655,6 @@ function TicketsView({
   const [stage, setStage] = useState(1);
   const [nt, setNt] = useState("");
   const [svcPick, setSvcPick] = useState(false);
-  const [subtasks, setSubtasks] = useState<{ id: number; label: string; assignee: string; done: boolean }[]>([
-    { id: 1, label: "Confirm arrival window", assignee: "Luis R.", done: true },
-    { id: 2, label: "Bring a spare capacitor", assignee: "Luis R.", done: false },
-    { id: 3, label: "Collect payment on site", assignee: "Dana P.", done: false },
-  ]);
   const applyService = (it: Item) => {
     const steps = it.tasks ?? [];
     setSubtasks((xs) => [...xs, ...steps.map((label, k) => ({ id: Date.now() + k, label, assignee: assignedTech, done: false }))]);
@@ -1054,13 +1065,14 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
 }
 
 function BillingView({
-  tab, setTab, quote, setQuote, invoice, setInvoice, mile, setMile, lines, setLines, editBill, setEditBill, catalog,
+  tab, setTab, quote, setQuote, invoice, setInvoice, mile, setMile, lines, setLines, editBill, setEditBill, catalog, setSubtasks, assignedTech,
 }: {
   tab: "quote" | "invoice" | "milestones"; setTab: (t: "quote" | "invoice" | "milestones") => void;
   quote: "draft" | "sent" | "approved"; setQuote: (s: "draft" | "sent" | "approved") => void;
   invoice: "draft" | "sent" | "paid"; setInvoice: (s: "draft" | "sent" | "paid") => void;
   mile: "draft" | "sent"; setMile: (s: "draft" | "sent") => void;
   lines: Line[]; setLines: (l: Line[]) => void; editBill: boolean; setEditBill: (b: boolean) => void; catalog: Item[];
+  subtasks: Subtask[]; setSubtasks: SubtaskSetter; assignedTech: string;
 }) {
   const [pick, setPick] = useState(false);
   const [pdf, setPdf] = useState(false);
@@ -1069,7 +1081,14 @@ function BillingView({
   const update = (i: number, field: "label" | "qty" | "price", v: string) =>
     setLines(lines.map((l, idx) => (idx === i ? { ...l, [field]: field === "label" ? v : Number(v) || 0 } : l)));
   const addCustom = () => setLines([...lines, { label: "", qty: 1, price: 0 }]);
-  const addItem = (it: Item) => { setLines([...lines, { label: it.name, qty: 1, price: it.price }]); setPick(false); };
+  const addItem = (it: Item) => {
+    setLines([...lines, { label: it.name, qty: 1, price: it.price }]);
+    if (it.type === "Service" && it.tasks && it.tasks.length > 0) {
+      setSubtasks((xs) => [...xs, ...it.tasks!.map((label, k) => ({ id: Date.now() + k, label, assignee: assignedTech, done: false }))]);
+      toast(`${it.tasks.length} tasks from ${it.name} added to the job, assigned to ${assignedTech}`);
+    }
+    setPick(false);
+  };
   const removeLine = (i: number) => setLines(lines.filter((_, idx) => idx !== i));
 
   const TABS: { id: "quote" | "invoice" | "milestones"; label: string; icon: LucideIcon }[] = [
