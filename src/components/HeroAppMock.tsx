@@ -1621,9 +1621,16 @@ function CustomersView({ sel, setSel }: { sel: number | null; setSel: (n: number
   const [q, setQ] = useState("");
 
   const c = customers.find((x) => x.id === sel) || null;
-  const upd = (field: "phone" | "email" | "address", v: string) =>
+  const upd = (field: "name" | "phone" | "email" | "address", v: string) =>
     setCustomers(customers.map((x) => (x.id === sel ? { ...x, [field]: v } : x)));
   const setCustTags = (t: string[]) => setCustomers(customers.map((x) => (x.id === sel ? { ...x, tags: t } : x)));
+  const newCustomer = () => {
+    const id = Date.now();
+    setCustomers([...customers, { id, name: "New customer", initials: "NC", phone: "", email: "", address: "", since: "2026", tags: [], balance: 0, last: "Added just now" }]);
+    setSel(id);
+    setEdit(true);
+    toast("Customer created");
+  };
 
   if (!c) {
     const filtered = customers.filter((x) => x.name.toLowerCase().includes(q.toLowerCase()));
@@ -1634,6 +1641,7 @@ function CustomersView({ sel, setSel }: { sel: number | null; setSel: (n: number
           <Search size={14} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-faint" />
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search customers" className={`${inputCls} w-full pl-8`} />
         </div>
+        <button type="button" onClick={newCustomer} className="mb-3 inline-flex items-center gap-1 rounded-lg border border-dashed border-line px-3 py-1.5 text-[0.78rem] font-semibold text-blue transition-colors hover:border-blue"><Plus size={13} /> New customer</button>
         <div className="space-y-1.5">
           {filtered.map((x) => (
             <button key={x.id} type="button" onClick={() => { setSel(x.id); setEdit(false); }} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
@@ -1659,9 +1667,13 @@ function CustomersView({ sel, setSel }: { sel: number | null; setSel: (n: number
       <div className="rounded-xl border border-line bg-surface p-4">
         <div className="flex items-center gap-3">
           <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy text-sm font-bold text-white">{c.initials}</span>
-          <div className="min-w-0">
-            <p className="text-[0.95rem] font-semibold text-navy">{c.name}{c.vip && <span className="ml-1.5 rounded-full bg-green/10 px-2 py-0.5 text-[10px] font-semibold text-green-600">VIP</span>}</p>
-            <p className="text-xs text-muted">Customer since {c.since}{c.balance > 0 ? ` · $${c.balance} balance` : ""}</p>
+          <div className="min-w-0 flex-1">
+            {edit ? (
+              <input value={c.name} onChange={(e) => upd("name", e.target.value)} aria-label="Customer name" className={`${inputCls} w-full font-semibold`} />
+            ) : (
+              <p className="text-[0.95rem] font-semibold text-navy">{c.name}{c.vip && <span className="ml-1.5 rounded-full bg-green/10 px-2 py-0.5 text-[10px] font-semibold text-green-600">VIP</span>}</p>
+            )}
+            <p className="mt-0.5 text-xs text-muted">Customer since {c.since}{c.balance > 0 ? ` · $${c.balance} balance` : ""}</p>
           </div>
           <button type="button" onClick={() => { if (edit) toast("Customer saved"); setEdit(!edit); }} className={`ml-auto inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${edit ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {edit ? "Done" : "Edit"}</button>
         </div>
