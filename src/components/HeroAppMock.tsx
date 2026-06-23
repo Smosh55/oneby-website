@@ -501,6 +501,21 @@ function TicketsView({
   const [n, setN] = useState("");
   const [picking, setPicking] = useState(false);
   const [pending, setPending] = useState<string | null>(null);
+  const FLOWS: Record<string, string[]> = {
+    "Standard repair": ["New", "Scheduled", "In progress", "Invoiced", "Paid"],
+    "New install": ["New", "Quoted", "Approved", "Scheduled", "Installed", "Paid"],
+    "Warranty claim": ["New", "Verified", "Scheduled", "Resolved"],
+    "Maintenance plan": ["Due", "Scheduled", "Serviced", "Logged"],
+  };
+  const [flow, setFlow] = useState("Standard repair");
+  const [stage, setStage] = useState(1);
+  const [nt, setNt] = useState("");
+  const [subtasks, setSubtasks] = useState<{ id: number; label: string; assignee: string; done: boolean }[]>([
+    { id: 1, label: "Confirm arrival window", assignee: "Luis R.", done: true },
+    { id: 2, label: "Bring a spare capacitor", assignee: "Luis R.", done: false },
+    { id: 3, label: "Collect payment on site", assignee: "Dana P.", done: false },
+  ]);
+  const stages = FLOWS[flow];
 
   return (
     <div>
@@ -555,6 +570,45 @@ function TicketsView({
             </span>
           </div>
         )}
+
+        {/* workflow */}
+        <div className="mt-4 border-t border-line pt-3">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">Workflow</p>
+            <select value={flow} onChange={(e) => { setFlow(e.target.value); setStage(1); }} aria-label="Workflow" className={`${inputCls} py-1`}>
+              {Object.keys(FLOWS).map((f) => <option key={f} value={f}>{f}</option>)}
+            </select>
+          </div>
+          <div className="mt-2 flex flex-wrap items-center gap-1">
+            {stages.map((s, i) => (
+              <button key={s} type="button" onClick={() => setStage(i)} className={`rounded-full px-2 py-0.5 text-[0.68rem] font-semibold transition-colors ${i < stage ? "bg-green/15 text-green-600" : i === stage ? "bg-blue text-white" : "bg-canvas-2 text-faint"}`}>
+                {s}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* tasks with assignees */}
+        <div className="mt-4 border-t border-line pt-3">
+          <p className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">Tasks</p>
+          <div className="mt-2 space-y-1.5">
+            {subtasks.map((st) => (
+              <div key={st.id} className="flex items-center gap-2">
+                <button type="button" aria-label="Toggle done" onClick={() => setSubtasks(subtasks.map((x) => (x.id === st.id ? { ...x, done: !x.done } : x)))} className={`grid h-4 w-4 shrink-0 place-items-center rounded border ${st.done ? "border-green bg-green text-white" : "border-line"}`}>
+                  {st.done && <Check size={11} />}
+                </button>
+                <span className={`min-w-0 flex-1 truncate text-[0.8rem] ${st.done ? "text-faint line-through" : "text-ink"}`}>{st.label}</span>
+                <select value={st.assignee} onChange={(e) => setSubtasks(subtasks.map((x) => (x.id === st.id ? { ...x, assignee: e.target.value } : x)))} aria-label="Assignee" className={`${inputCls} shrink-0 py-1`}>
+                  {TEAM.map((t) => <option key={t.name} value={t.name}>{t.name}</option>)}
+                </select>
+              </div>
+            ))}
+          </div>
+          <div className="mt-2 flex gap-2">
+            <input value={nt} onChange={(e) => setNt(e.target.value)} placeholder="Add a task" className={`${inputCls} min-w-0 flex-1`} />
+            <button type="button" onClick={() => { if (nt.trim()) { setSubtasks([...subtasks, { id: Date.now(), label: nt.trim(), assignee: TEAM[0].name, done: false }]); setNt(""); } }} className="shrink-0 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90">Add</button>
+          </div>
+        </div>
 
         {/* notes */}
         <div className="mt-4 border-t border-line pt-3">
