@@ -85,7 +85,7 @@ const CORE_NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
 
 type Phase = "transcribing" | "summarizing" | "typing" | "done";
 type TaskState = "pending" | "acted" | "ignored";
-type Job = { time: string; title: string; tech: string; hot?: boolean; duration?: string };
+type Job = { time: string; title: string; tech: string; hot?: boolean; duration?: string; ticket?: string };
 type Line = { label: string; qty: number; price: number };
 type Item = { id: number; name: string; type: "Service" | "Part"; price: number; tasks?: string[] };
 type Subtask = { id: number; label: string; assignee: string; done: boolean };
@@ -110,14 +110,14 @@ function dateFor(offset: number, i: number) {
 
 const DAY_JOBS: Record<number, Job[]> = {
   0: [{ time: "10:00 AM", title: "No-cool · Ortiz", tech: "Sam K.", duration: "1h" }],
-  1: [{ time: "8:30 AM", title: "Maintenance · Oak HOA", tech: "Luis R.", duration: "2h" }],
+  1: [{ time: "8:30 AM", title: "Maintenance · Oak HOA", tech: "Luis R.", duration: "2h", ticket: "1039" }],
   2: [
     { time: "9:00 AM", title: "Tune-up · Garcia", tech: "Sam K.", duration: "1h" },
     { time: "1:00 PM", title: "Install · Lee", tech: "Luis R.", duration: "Half day" },
-    { time: "3:30 PM", title: "A/C diagnostic · Maria G.", tech: "Luis R.", hot: true, duration: "1h" },
+    { time: "3:30 PM", title: "A/C diagnostic · Maria G.", tech: "Luis R.", hot: true, duration: "1h", ticket: "1042" },
   ],
   3: [{ time: "11:00 AM", title: "Estimate · Park Ave", tech: "Sam K.", duration: "30m" }],
-  4: [{ time: "2:00 PM", title: "Install · Reyes", tech: "Luis R.", duration: "Half day" }],
+  4: [{ time: "2:00 PM", title: "Install · Reyes", tech: "Luis R.", duration: "Half day", ticket: "1035" }],
 };
 
 const TEAM = [
@@ -919,7 +919,7 @@ function TicketsView({
                 <button type="button" onClick={() => setActive("schedule")} className="inline-flex items-center gap-1 text-[0.74rem] font-semibold text-blue hover:underline">Open the full schedule <ChevronRight size={12} /></button>
                 <button type="button" disabled={!schTime} onClick={() => {
                   const tech = schTech || curTech;
-                  addJob(`0:${schDay}`, { time: schTime, title: `${tk.issue} · ${tk.customer}`, tech, duration: "1h" });
+                  addJob(`0:${schDay}`, { time: schTime, title: `${tk.issue} · ${tk.customer}`, tech, duration: "1h", ticket: tk.id });
                   setCurTech(tech);
                   const si = stages.indexOf("Scheduled");
                   if (si >= 0 && si > stage) setStage(si);
@@ -1081,20 +1081,30 @@ function ScheduleView({
         <div className="mt-3 space-y-2">
           {jobs.length === 0 && <p className="py-3 text-center text-[0.8rem] text-faint">{tech === "All" ? "Nothing booked. Add a job below." : `Nothing booked for ${tech}.`}</p>}
           {jobs.map((j, i) => {
-            const jt = TICKETS.find((t) => j.title.includes(t.customer.split(" ")[0]));
-            return (
-            <button key={`${j.time}-${i}`} type="button" onClick={() => openTicket(jt ? jt.id : null)} className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2.5 text-left transition-colors hover:border-blue ${j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"}`}>
-              <span className="w-[4.75rem] shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
-                <p className="flex items-center gap-1.5 text-[0.72rem] text-muted">
-                  <span className={`h-1.5 w-1.5 rounded-full ${TECH_DOT[j.tech] ?? "bg-line"}`} />
-                  {j.tech}{j.duration ? ` · ${j.duration}` : ""}
-                </p>
+            const linked = !!j.ticket && TICKETS.some((t) => t.id === j.ticket);
+            const content = (
+              <>
+                <span className="w-[4.75rem] shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
+                  <p className="flex items-center gap-1.5 text-[0.72rem] text-muted">
+                    <span className={`h-1.5 w-1.5 rounded-full ${TECH_DOT[j.tech] ?? "bg-line"}`} />
+                    {j.tech}{j.duration ? ` · ${j.duration}` : ""}
+                  </p>
+                </div>
+                {j.hot && <CheckCircle2 size={16} className="shrink-0 text-green-600" />}
+              </>
+            );
+            const cls = `flex w-full items-center gap-3 rounded-lg border px-3 py-2.5 text-left ${j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"}`;
+            return linked ? (
+              <button key={`${j.time}-${i}`} type="button" onClick={() => openTicket(j.ticket!)} className={`${cls} transition-colors hover:border-blue`}>
+                {content}
+                <ChevronRight size={15} className="shrink-0 text-faint" />
+              </button>
+            ) : (
+              <div key={`${j.time}-${i}`} className={cls}>
+                {content}
               </div>
-              {j.hot && <CheckCircle2 size={16} className="shrink-0 text-green-600" />}
-              <ChevronRight size={15} className="shrink-0 text-faint" />
-            </button>
             );
           })}
         </div>
@@ -1730,9 +1740,9 @@ function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; op
     { label: "Open balance", value: `$${openBal.toLocaleString()}`, icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
     { label: "Collected this week", value: "$9,120", icon: DollarSign, tone: "bg-green/10 text-green-600", go: "billing" },
   ];
-  const upNext = [
+  const upNext: { time: string; title: string; tech: string; ticket?: string }[] = [
     { time: "1:00 PM", title: "Install · Lee", tech: "Luis R." },
-    { time: "3:30 PM", title: "A/C diagnostic · Maria G.", tech: "Luis R." },
+    { time: "3:30 PM", title: "A/C diagnostic · Maria G.", tech: "Luis R.", ticket: "1042" },
   ];
   const needs: { title: string; body: string; icon: LucideIcon; tone: string; go: ModId }[] = [
     { title: "$1,280 overdue · Sun City Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
@@ -1775,16 +1785,23 @@ function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; op
         <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Up next</p>
         <div className="space-y-2">
           {upNext.map((j) => {
-            const jt = TICKETS.find((t) => j.title.includes(t.customer.split(" ")[0]));
-            return (
-            <button key={j.time} type="button" onClick={() => openTicket(jt ? jt.id : null)} className="flex w-full items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5 text-left transition-colors hover:border-blue">
-              <span className="w-[4.75rem] shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
-                <p className="text-[0.72rem] text-muted">{j.tech}</p>
-              </div>
-              <ChevronRight size={15} className="shrink-0 text-faint" />
-            </button>
+            const content = (
+              <>
+                <span className="w-[4.75rem] shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
+                  <p className="text-[0.72rem] text-muted">{j.tech}</p>
+                </div>
+              </>
+            );
+            const cls = "flex w-full items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5 text-left";
+            return j.ticket ? (
+              <button key={j.time} type="button" onClick={() => openTicket(j.ticket!)} className={`${cls} transition-colors hover:border-blue`}>
+                {content}
+                <ChevronRight size={15} className="shrink-0 text-faint" />
+              </button>
+            ) : (
+              <div key={j.time} className={cls}>{content}</div>
             );
           })}
         </div>
