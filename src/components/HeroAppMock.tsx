@@ -1255,6 +1255,11 @@ function HomeView({ setActive }: { setActive: (m: ModId) => void }) {
     { time: "1:00", title: "Install · Lee", tech: "Luis R." },
     { time: "3:30", title: "A/C diagnostic · Maria G.", tech: "Luis R." },
   ];
+  const needs: { title: string; body: string; icon: LucideIcon; tone: string; go: ModId }[] = [
+    { title: "$1,280 overdue · Sun City Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent ticket unassigned", body: "#1041 water heater leaking · James R.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "2 voicemails to review", body: "Transcribed, waiting on you", icon: Voicemail, tone: "bg-blue/10 text-blue", go: "live" },
+  ];
   return (
     <div>
       <ModuleHeader title="Today" sub="Your whole shop at a glance" />
@@ -1270,6 +1275,23 @@ function HomeView({ setActive }: { setActive: (m: ModId) => void }) {
       <p className="mt-3 inline-flex items-center gap-1 text-[0.72rem] font-semibold text-green-600">
         <TrendingUp size={12} /> Revenue up 18% vs last month
       </p>
+
+      <div className="mt-4">
+        <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Needs attention</p>
+        <div className="space-y-2">
+          {needs.map((n) => (
+            <button key={n.title} type="button" onClick={() => setActive(n.go)} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
+              <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${n.tone}`}><n.icon size={15} /></span>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-[0.82rem] font-semibold text-navy">{n.title}</p>
+                <p className="truncate text-[0.72rem] text-muted">{n.body}</p>
+              </div>
+              <ChevronRight size={16} className="shrink-0 text-faint" />
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="mt-4">
         <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Up next</p>
         <div className="space-y-2">
