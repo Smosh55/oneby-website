@@ -35,6 +35,9 @@ import {
   MousePointerClick,
   LayoutDashboard,
   UserRound,
+  PhoneIncoming,
+  PhoneOutgoing,
+  PhoneMissed,
   Play,
   Pause,
   DollarSign,
@@ -47,11 +50,12 @@ const JOB = { customer: "Maria G.", issue: "Upstairs A/C not cooling", ticket: "
 const SUMMARY =
   "Existing customer, upstairs A/C not cooling since last night. Home after 3pm, wants a same-day visit.";
 
-type ModId = "home" | "live" | "tickets" | "schedule" | "customers" | "team" | "catalog" | "billing" | "messages" | "tasks" | "email";
+type ModId = "home" | "live" | "calls" | "tickets" | "schedule" | "customers" | "team" | "catalog" | "billing" | "messages" | "tasks" | "email";
 
 const MODULES: { id: ModId; label: string; icon: LucideIcon; badge?: string; soon?: boolean }[] = [
   { id: "home", label: "Home", icon: LayoutDashboard },
   { id: "live", label: "Live", icon: Activity },
+  { id: "calls", label: "Calls", icon: PhoneCall },
   { id: "tickets", label: "Tickets", icon: Ticket, badge: "1" },
   { id: "schedule", label: "Schedule", icon: CalendarDays },
   { id: "customers", label: "Customers", icon: UserRound },
@@ -74,7 +78,7 @@ const NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
 
 // Compact (homepage hero) variant: just the core loop. The full 11-module
 // workspace renders on /product.
-const CORE: ModId[] = ["live", "tickets", "schedule", "billing", "messages", "tasks"];
+const CORE: ModId[] = ["live", "calls", "tickets", "schedule", "billing", "messages", "tasks"];
 const CORE_NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
   live: { id: "tickets", label: "See the ticket" },
   tickets: { id: "schedule", label: "Schedule it" },
@@ -404,7 +408,8 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
             <div className="flex-1">
               {active === "home" && <HomeView setActive={setActive} openTicket={openTicket} />}
               {active === "customers" && <CustomersView sel={custSel} setSel={setCustSel} customers={customers} setCustomers={setCustomers} setActive={setActive} openTicket={openTicket} />}
-              {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} openTicket={openTicket} />}
+              {active === "live" && <LiveView phase={phase} typed={typed} tags={tags} openTicket={openTicket} openCalls={() => setActive("calls")} />}
+              {active === "calls" && <CallsView openTicket={openTicket} />}
               {active === "tickets" && (
                 <TicketsView tags={tags} setTags={setTags} notes={notes} addNote={addNote} assignedTech={assignedTech} setAssignedTech={setAssignedTech} sel={ticketSel} setSel={setTicketSel} openCustomer={openCustomer} catalog={catalog} subtasks={subtasks} setSubtasks={setSubtasks} addJob={addJob} setActive={setActive} newTickets={newTickets} addTicket={addTicket} tagsBy={tagsBy} setTagsBy={setTagsBy} notesBy={notesBy} setNotesBy={setNotesBy} subsBy={subsBy} setSubsBy={setSubsBy} techBy={techBy} setTechBy={setTechBy} />
               )}
@@ -486,7 +491,7 @@ function Dots() {
 const inputCls = "min-w-0 rounded-lg border border-line bg-canvas px-2.5 py-1.5 text-[0.8rem] text-ink outline-none placeholder:text-faint focus:border-blue";
 const numCls = `${inputCls} [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`;
 
-function LiveView({ phase, typed, tags, openTicket }: { phase: Phase; typed: number; tags: string[]; openTicket: (id: string | null) => void }) {
+function LiveView({ phase, typed, tags, openTicket, openCalls }: { phase: Phase; typed: number; tags: string[]; openTicket: (id: string | null) => void; openCalls: () => void }) {
   const done = phase === "done";
   const processing = phase === "transcribing" || phase === "summarizing";
   return (
@@ -543,21 +548,11 @@ function LiveView({ phase, typed, tags, openTicket }: { phase: Phase; typed: num
         </button>
       )}
 
-      {/* recent calls / phone log */}
-      <div className="mt-5">
-        <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">Earlier today</p>
-        <div className="space-y-2">
-          <AnsweredCallRow />
-          <div className="flex items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-green/10 text-green-600"><PhoneCall size={16} /></span>
-            <div className="min-w-0">
-              <p className="text-[0.84rem] font-semibold text-navy">Missed call, caught by AI</p>
-              <p className="truncate text-[0.72rem] text-muted">New lead · roof leak · details captured</p>
-            </div>
-            <span className="ml-auto shrink-0 rounded-full bg-green/10 px-2 py-0.5 text-[10px] font-semibold text-green-600">AI answered</span>
-          </div>
-        </div>
-      </div>
+      {done && (
+        <button type="button" onClick={() => openCalls()} className="animate-rise mt-3 ml-2 inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-[0.8rem] font-semibold text-blue transition-colors hover:bg-blue/10">
+          <PhoneCall size={15} /> See call history <ChevronRight size={14} />
+        </button>
+      )}
     </div>
   );
 }
@@ -655,6 +650,95 @@ function AnsweredCallRow() {
         <span className="font-semibold text-green-600">AI captured: </span>
         Dana&apos;s A/C is grinding and not blowing cold; she wants someone out this week. Picked up on the second ring, no voicemail.
       </p>
+    </div>
+  );
+}
+
+type CallEntry = {
+  id: number;
+  dir: "in" | "out" | "missed";
+  name: string;
+  meta: string;
+  dur: string;
+  tag: string;
+  tone: "green" | "blue" | "warning" | "muted";
+  ticket?: string;
+  recording?: boolean; // render the playable AI-answered card
+};
+
+const CALL_GROUPS: { group: string; calls: CallEntry[] }[] = [
+  {
+    group: "Earlier today",
+    calls: [
+      { id: 1, dir: "in", name: "Maria G.", meta: "Upstairs A/C not cooling · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+      { id: 2, dir: "in", name: "Dana P.", meta: "A/C grinding, not cooling", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+      { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · roof leak · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+    ],
+  },
+  {
+    group: "Yesterday",
+    calls: [
+      { id: 4, dir: "in", name: "Oak Street HOA", meta: "Annual maintenance · COI requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+      { id: 5, dir: "out", name: "Reyes Family", meta: "Payment reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+      { id: 6, dir: "in", name: "Sun City Diner", meta: "Walk-in cooler follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+    ],
+  },
+];
+
+const TONE_CLS: Record<CallEntry["tone"], string> = {
+  green: "bg-green/10 text-green-600",
+  blue: "bg-blue/10 text-blue",
+  warning: "bg-warning/15 text-warning",
+  muted: "bg-canvas-2 text-muted",
+};
+
+function CallRow({ c, openTicket }: { c: CallEntry; openTicket: (id: string | null) => void }) {
+  const DirIcon = c.dir === "out" ? PhoneOutgoing : c.dir === "missed" ? PhoneMissed : PhoneIncoming;
+  const dirTone = c.dir === "missed" ? "bg-warning/10 text-warning" : c.dir === "out" ? "bg-blue/10 text-blue" : "bg-green/10 text-green-600";
+  const clickable = !!c.ticket;
+  const inner = (
+    <>
+      <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${dirTone}`}><DirIcon size={16} /></span>
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-[0.84rem] font-semibold text-navy">{c.name}</p>
+        <p className="truncate text-[0.72rem] text-muted">{c.meta}</p>
+      </div>
+      <span className="shrink-0 text-[0.72rem] text-faint">{c.dur}</span>
+      <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${TONE_CLS[c.tone]}`}>{c.tag}</span>
+      {clickable && <ChevronRight size={15} className="shrink-0 text-faint" />}
+    </>
+  );
+  if (clickable) {
+    return (
+      <button type="button" onClick={() => openTicket(c.ticket!)} className="flex w-full items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5 text-left transition-colors hover:border-blue">
+        {inner}
+      </button>
+    );
+  }
+  return <div className="flex items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-2.5">{inner}</div>;
+}
+
+function CallsView({ openTicket }: { openTicket: (id: string | null) => void }) {
+  const stats: [string, string][] = [["Calls today", "14"], ["Answered by AI", "9"], ["Turned into tickets", "4"]];
+  return (
+    <div>
+      <ModuleHeader title="Call history" sub="Every call logged, recorded, and summarized" action={{ label: "Log call", onClick: () => toast("Call logged") }} />
+      <div className="mb-4 grid grid-cols-3 gap-2">
+        {stats.map(([label, val]) => (
+          <div key={label} className="rounded-xl border border-line bg-canvas px-3 py-2.5">
+            <p className="text-lg font-bold text-navy">{val}</p>
+            <p className="text-[0.68rem] font-medium text-faint">{label}</p>
+          </div>
+        ))}
+      </div>
+      {CALL_GROUPS.map((g) => (
+        <div key={g.group} className="mb-4">
+          <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">{g.group}</p>
+          <div className="space-y-2">
+            {g.calls.map((c) => (c.recording ? <AnsweredCallRow key={c.id} /> : <CallRow key={c.id} c={c} openTicket={openTicket} />))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
