@@ -81,15 +81,14 @@ const NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
   messages: { id: "tasks", label: "See the tasks" },
 };
 
-// Compact (homepage hero) variant: just the core loop. The full 11-module
-// workspace renders on /product.
-const CORE: ModId[] = ["live", "calls", "tickets", "schedule", "billing", "messages", "tasks", "automations", "receptionist"];
+// Compact (homepage hero) variant: the core loop plus the two differentiators
+// (Automations, Receptionist). The full 14-module workspace renders on /product.
+const CORE: ModId[] = ["live", "calls", "tickets", "schedule", "billing", "messages", "automations", "receptionist"];
 const CORE_NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
   live: { id: "tickets", label: "See the ticket" },
   tickets: { id: "schedule", label: "Schedule it" },
   schedule: { id: "billing", label: "Bill the job" },
   billing: { id: "messages", label: "Text the customer" },
-  messages: { id: "tasks", label: "See the tasks" },
 };
 
 type Phase = "transcribing" | "summarizing" | "typing" | "done";
@@ -1553,7 +1552,7 @@ function BillingView({
 
   return (
     <div>
-      <ModuleHeader title="Billing" sub={`Job #${billTicket.id} · ${billTicket.customer}`} action={{ label: "New invoice", onClick: () => toast("Invoice drafted") }} />
+      <ModuleHeader title="Billing" sub={`Job #${billTicket.id} · ${billTicket.customer}`} action={{ label: "New invoice", onClick: () => { setTab("invoice"); setInvoice("draft"); setEditBill(true); toast("New invoice drafted"); } }} />
 
       <div className="mb-3 flex items-center gap-3 rounded-xl border border-warning/25 bg-warning/[0.06] px-3.5 py-2.5">
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-warning/15 text-warning"><DollarSign size={16} /></span>
@@ -2024,6 +2023,14 @@ const AUTOMATION_SEED: Rule[] = [
 const TRIGGERS = ["a call is missed", "a call wraps", "a job is booked", "a job is marked done", "an invoice is unpaid for 3 days", "a new lead comes in after hours"];
 const ACTIONS = ["text the caller back", "create a ticket", "assign the right tech", "send a confirmation text", "send the invoice", "notify the on-call tech", "add a follow-up task"];
 
+function Toggle({ on, onClick, label }: { on: boolean; onClick: () => void; label: string }) {
+  return (
+    <button type="button" role="switch" aria-checked={on} aria-label={label} onClick={onClick} className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${on ? "bg-green" : "bg-line"}`}>
+      <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${on ? "left-[1.125rem]" : "left-0.5"}`} />
+    </button>
+  );
+}
+
 type Channel = { id: string; icon: LucideIcon; name: string; sub: string; on: boolean; soon?: boolean };
 
 function ReceptionistView() {
@@ -2046,11 +2053,6 @@ function ReceptionistView() {
   ]);
   const toggleCh = (id: string) =>
     setChannels(channels.map((c) => (c.id === id ? { ...c, on: !c.on } : c)));
-  const Toggle = ({ on, onClick, label }: { on: boolean; onClick: () => void; label: string }) => (
-    <button type="button" role="switch" aria-checked={on} aria-label={label} onClick={onClick} className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${on ? "bg-green" : "bg-line"}`}>
-      <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${on ? "left-[1.125rem]" : "left-0.5"}`} />
-    </button>
-  );
   return (
     <div>
       <ModuleHeader title="AI Receptionist" sub="How OneBy answers when you can't" />
@@ -2096,7 +2098,7 @@ function ReceptionistView() {
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Clock size={16} /></span>
         <div className="min-w-0 flex-1">
           <p className="text-[0.82rem] font-semibold text-navy">Answer after hours</p>
-          <p className="truncate text-[0.72rem] text-muted">Open Mon&ndash;Fri, 8:00 AM&ndash;6:00 PM · after that, AI books the job</p>
+          <p className="truncate text-[0.72rem] text-muted">Open Mon to Fri, 8:00 AM to 6:00 PM · after that, AI books the job</p>
         </div>
         <Toggle on={afterHours} onClick={() => setAfterHours(!afterHours)} label="Toggle after-hours answering" />
       </div>
@@ -2180,9 +2182,7 @@ function AutomationsView() {
               <p className="truncate text-[0.76rem] text-muted"><span className="text-faint">then</span> {r.action}</p>
             </div>
             <div className="flex shrink-0 flex-col items-end gap-1">
-              <button type="button" role="switch" aria-checked={r.on} aria-label={`Toggle: when ${r.trigger}`} onClick={() => toggle(r.id)} className={`relative h-5 w-9 rounded-full transition-colors ${r.on ? "bg-green" : "bg-line"}`}>
-                <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${r.on ? "left-[1.125rem]" : "left-0.5"}`} />
-              </button>
+              <Toggle on={r.on} onClick={() => toggle(r.id)} label={`Toggle: when ${r.trigger}`} />
               <span className="text-[0.62rem] font-medium text-faint">{r.runs}</span>
             </div>
           </div>
@@ -2212,7 +2212,7 @@ function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; op
   const openBal = CUSTOMERS.reduce((n, c) => n + c.balance, 0);
   const stats: { label: string; value: string; icon: LucideIcon; tone: string; go: ModId }[] = [
     { label: "Jobs this week", value: String(jobsWeek), icon: CalendarDays, tone: "bg-blue/10 text-blue", go: "schedule" },
-    { label: "Calls caught", value: "12", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "live" },
+    { label: "Calls caught", value: "14", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
     { label: "Open balance", value: `$${openBal.toLocaleString()}`, icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
     { label: "Collected this week", value: "$9,120", icon: DollarSign, tone: "bg-green/10 text-green-600", go: "billing" },
   ];
@@ -2222,12 +2222,12 @@ function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; op
   ];
   const needs: { title: string; body: string; icon: LucideIcon; tone: string; go: ModId }[] = [
     { title: "$1,280 overdue · Sun City Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
-    { title: "Urgent ticket unassigned", body: "#1041 water heater leaking · James R.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
-    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "live" },
+    { title: "Urgent ticket needs scheduling", body: "#1041 water heater leaking · James R.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
   ];
   return (
     <div>
-      <ModuleHeader title="Today" sub="Your whole shop at a glance" action={{ label: "Quick add", onClick: () => toast("Created") }} />
+      <ModuleHeader title="Today" sub="Your whole shop at a glance" />
       <div className="grid grid-cols-2 gap-2.5">
         {stats.map((s) => (
           <button key={s.label} type="button" onClick={() => setActive(s.go)} className="rounded-xl border border-line bg-surface p-3.5 text-left transition-colors hover:border-blue">
