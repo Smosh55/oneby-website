@@ -1480,6 +1480,11 @@ function BillingView({
   const [pick, setPick] = useState(false);
   const [pickQ, setPickQ] = useState("");
   const [pdf, setPdf] = useState(false);
+  const [discPct, setDiscPct] = useState(0);
+  const [taxPct, setTaxPct] = useState(0);
+  const [showAdj, setShowAdj] = useState(false);
+  const [payMethod, setPayMethod] = useState("Card");
+  const [deposit, setDeposit] = useState(0);
   const [editMile, setEditMile] = useState(false);
   const [miles, setMiles] = useState<{ label: string; pct: number }[]>([
     { label: "Deposit", pct: 30 },
@@ -1493,7 +1498,12 @@ function BillingView({
   const addMile = () => setMiles([...miles, { label: "New milestone", pct: 0 }]);
   const removeMile = (i: number) => setMiles(miles.filter((_, idx) => idx !== i));
   const ar = CUSTOMERS.reduce((n, c) => n + c.balance, 0);
-  const total = lines.reduce((n, l) => n + l.qty * l.price, 0);
+  const subtotal = lines.reduce((n, l) => n + l.qty * l.price, 0);
+  const discAmt = Math.round((subtotal * discPct) / 100);
+  const taxAmt = Math.round(((subtotal - discAmt) * taxPct) / 100);
+  const total = subtotal - discAmt + taxAmt;
+  const due = Math.max(total - deposit, 0);
+  const PAY_LABEL: Record<string, string> = { Card: "Visa ending 4242", ACH: "Bank transfer (ACH)", Cash: "Cash", Check: "Check #1042" };
   const update = (i: number, field: "label" | "qty" | "price", v: string) =>
     setLines(lines.map((l, idx) => (idx === i ? { ...l, [field]: field === "label" ? v : Number(v) || 0 } : l)));
   const addCustom = () => setLines([...lines, { label: "", qty: 1, price: 0 }]);
@@ -1611,10 +1621,51 @@ function BillingView({
                 </div>
               )}
 
-              <div className="mt-2 flex items-center justify-between border-t border-line pt-2 text-[0.95rem]">
-                <span className="font-bold text-navy">Total</span>
-                <span className="font-extrabold text-navy">${total.toLocaleString()}</span>
-              </div>
+              {discPct > 0 || taxPct > 0 || deposit > 0 ? (
+                <div className="mt-2 space-y-1 border-t border-line pt-2 text-[0.82rem]">
+                  <div className="flex items-center justify-between text-muted"><span>Subtotal</span><span>${subtotal.toLocaleString()}</span></div>
+                  {discPct > 0 && <div className="flex items-center justify-between text-green-600"><span>Discount {discPct}%</span><span>-${discAmt.toLocaleString()}</span></div>}
+                  {taxPct > 0 && <div className="flex items-center justify-between text-muted"><span>Tax {taxPct}%</span><span>+${taxAmt.toLocaleString()}</span></div>}
+                  <div className="flex items-center justify-between border-t border-line pt-1 text-[0.95rem]"><span className="font-bold text-navy">Total</span><span className="font-extrabold text-navy">${total.toLocaleString()}</span></div>
+                  {deposit > 0 && (
+                    <>
+                      <div className="flex items-center justify-between text-green-600"><span>Deposit paid</span><span>-${deposit.toLocaleString()}</span></div>
+                      <div className="flex items-center justify-between font-bold text-navy"><span>Balance due</span><span>${due.toLocaleString()}</span></div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div className="mt-2 flex items-center justify-between border-t border-line pt-2 text-[0.95rem]">
+                  <span className="font-bold text-navy">Total</span>
+                  <span className="font-extrabold text-navy">${total.toLocaleString()}</span>
+                </div>
+              )}
+
+              {editable && (
+                <div className="mt-2">
+                  <button type="button" onClick={() => setShowAdj(!showAdj)} className="inline-flex items-center gap-1 text-[0.74rem] font-semibold text-blue hover:underline"><Pencil size={11} /> Discount &amp; tax</button>
+                  {showAdj && (
+                    <div className="animate-rise mt-1.5 space-y-1.5 rounded-lg border border-line bg-canvas p-2.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[0.74rem] font-semibold text-muted">Discount</span>
+                        <div className="flex gap-1">
+                          {[0, 5, 10, 15].map((p) => (
+                            <button key={p} type="button" onClick={() => setDiscPct(p)} className={`rounded-md px-2 py-0.5 text-[0.72rem] font-semibold transition-colors ${discPct === p ? "bg-blue text-white" : "bg-canvas-2 text-ink/70"}`}>{p === 0 ? "None" : `${p}%`}</button>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[0.74rem] font-semibold text-muted">Tax</span>
+                        <div className="flex gap-1">
+                          {[0, 7.5, 8.5].map((p) => (
+                            <button key={p} type="button" onClick={() => setTaxPct(p)} className={`rounded-md px-2 py-0.5 text-[0.72rem] font-semibold transition-colors ${taxPct === p ? "bg-blue text-white" : "bg-canvas-2 text-ink/70"}`}>{p === 0 ? "None" : `${p}%`}</button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {tab === "invoice" && pdf && (
@@ -1654,8 +1705,22 @@ function BillingView({
             {tab === "invoice" && invoice === "draft" && <SendBtn label="Send invoice + pay link" onClick={() => { setInvoice("sent"); toast("Invoice sent with pay link"); }} />}
             {tab === "invoice" && invoice === "sent" && (
               <div className="animate-rise mt-4">
-                <Banner title="Invoice sent" body={`Pay link texted to ${billTicket.customer}. Tap to pay by card.`} />
-                <button type="button" onClick={() => setInvoice("paid")} className="mt-2 w-full rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600">Mark as paid</button>
+                <Banner title="Invoice sent" body={`Pay link texted to ${billTicket.customer}. They can pay by card or bank.`} />
+                <div className="mt-3 rounded-lg border border-line bg-canvas p-2.5">
+                  <p className="mb-1.5 text-[0.66rem] font-bold uppercase tracking-wide text-faint">How did they pay?</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {["Card", "ACH", "Cash", "Check"].map((m) => (
+                      <button key={m} type="button" onClick={() => setPayMethod(m)} className={`rounded-full px-2.5 py-1 text-[0.74rem] font-semibold transition-colors ${payMethod === m ? "bg-blue text-white" : "bg-canvas-2 text-ink/70"}`}>{m}</button>
+                    ))}
+                  </div>
+                  {deposit > 0 && <p className="mt-2 text-[0.72rem] font-medium text-green-600">Deposit of ${deposit.toLocaleString()} collected · ${due.toLocaleString()} still due</p>}
+                  <div className="mt-2.5 flex gap-1.5">
+                    {deposit === 0 && (
+                      <button type="button" onClick={() => { setDeposit(Math.round(total * 0.3)); toast(`30% deposit collected by ${payMethod}`); }} className="flex-1 rounded-lg border border-blue/30 bg-blue/[0.06] px-3 py-2 text-[0.78rem] font-semibold text-blue transition-colors hover:bg-blue/10">Take 30% deposit</button>
+                    )}
+                    <button type="button" onClick={() => { setInvoice("paid"); toast(`Marked paid by ${payMethod}`); }} className="flex-1 rounded-lg border border-green/30 bg-green/10 px-3 py-2 text-[0.82rem] font-semibold text-green-600">Mark paid in full</button>
+                  </div>
+                </div>
               </div>
             )}
             {tab === "invoice" && invoice === "paid" && (
@@ -1666,7 +1731,8 @@ function BillingView({
                 </div>
                 <div className="mt-2 space-y-0.5 text-[0.74rem] text-muted">
                   <div className="flex justify-between"><span>Invoice</span><span className="font-semibold text-navy">#{billTicket.id}</span></div>
-                  <div className="flex justify-between"><span>Paid by</span><span className="font-semibold text-navy">Visa ending 4242</span></div>
+                  <div className="flex justify-between"><span>Paid by</span><span className="font-semibold text-navy">{PAY_LABEL[payMethod]}</span></div>
+                  {deposit > 0 && <div className="flex justify-between"><span>Deposit (prior)</span><span className="font-semibold text-navy">${deposit.toLocaleString()}</span></div>}
                   <div className="flex justify-between"><span>Date</span><span className="font-semibold text-navy">Jun 23, 2026</span></div>
                   <div className="flex justify-between border-t border-green/20 pt-1 text-[0.85rem]"><span className="font-bold text-navy">Total</span><span className="font-extrabold text-green-600">${total.toLocaleString()}</span></div>
                 </div>
