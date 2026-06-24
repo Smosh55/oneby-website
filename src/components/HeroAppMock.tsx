@@ -93,7 +93,7 @@ const CORE_NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
 };
 
 type Phase = "transcribing" | "summarizing" | "typing" | "done";
-type TaskState = "pending" | "acted" | "ignored";
+type TaskState = "pending" | "acted" | "ignored" | "snoozed";
 type Job = { time: string; title: string; tech: string; hot?: boolean; duration?: string; ticket?: string };
 type Line = { label: string; qty: number; price: number };
 type Item = { id: number; name: string; type: "Service" | "Part"; price: number; tasks?: string[] };
@@ -1152,6 +1152,8 @@ function ScheduleView({
   const TECH_DOT: Record<string, string> = { "Luis R.": "bg-blue", "Sam K.": "bg-green", "Mia T.": "bg-warning" };
   const SCHED_TECHS = TEAM.filter((x) => x.role !== "Dispatch").map((x) => x.name);
   const [tech, setTech] = useState("All");
+  const [reassign, setReassign] = useState<Record<string, string>>({});
+  const [reassignKey, setReassignKey] = useState<string | null>(null);
   const [nt, setNt] = useState("");
   const [ntitle, setNtitle] = useState("");
   const [ntech, setNtech] = useState(SCHED_TECHS[0]);
@@ -1171,7 +1173,9 @@ function ScheduleView({
   const key = `${weekOffset}:${day}`;
   const base = weekOffset === 0 ? DAY_JOBS[day] ?? [] : [];
   const allJobs = [...base, ...(extra[key] ?? [])];
-  const jobs = tech === "All" ? allJobs : allJobs.filter((j) => j.tech === tech);
+  const jobKeyOf = (j: Job) => `${key}|${j.time}|${j.title}`;
+  const techOf = (j: Job) => reassign[jobKeyOf(j)] ?? j.tech;
+  const jobs = tech === "All" ? allJobs : allJobs.filter((j) => techOf(j) === tech);
   const head = dateFor(weekOffset, 0);
   const addDt = dateFor(weekOffset, day);
   const suggestSlot = () => {
@@ -1231,28 +1235,41 @@ function ScheduleView({
           {jobs.length === 0 && <p className="py-3 text-center text-[0.8rem] text-faint">{tech === "All" ? "Nothing booked. Add a job below." : `Nothing booked for ${tech}.`}</p>}
           {jobs.map((j, i) => {
             const linked = !!j.ticket && TICKETS.some((t) => t.id === j.ticket);
-            const content = (
-              <>
-                <span className="w-[4.75rem] shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
-                  <p className="flex items-center gap-1.5 text-[0.72rem] text-muted">
-                    <span className={`h-1.5 w-1.5 rounded-full ${TECH_DOT[j.tech] ?? "bg-line"}`} />
-                    {j.tech}{j.duration ? ` · ${j.duration}` : ""}
-                  </p>
+            const jk = jobKeyOf(j);
+            const jt = techOf(j);
+            const reassigning = reassignKey === jk;
+            return (
+              <div key={`${j.time}-${i}`} className={`rounded-lg border px-3 py-2.5 ${j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"}`}>
+                <div className="flex items-center gap-3">
+                  <span className="w-[4.75rem] shrink-0 text-[0.78rem] font-bold text-navy">{j.time}</span>
+                  {linked ? (
+                    <button type="button" onClick={() => openTicket(j.ticket!)} className="min-w-0 flex-1 text-left">
+                      <p className="truncate text-[0.82rem] font-semibold text-navy transition-colors hover:text-blue">{j.title}</p>
+                    </button>
+                  ) : (
+                    <p className="min-w-0 flex-1 truncate text-[0.82rem] font-semibold text-navy">{j.title}</p>
+                  )}
+                  {j.hot && <CheckCircle2 size={16} className="shrink-0 text-green-600" />}
+                  {linked && <ChevronRight size={15} className="shrink-0 text-faint" />}
                 </div>
-                {j.hot && <CheckCircle2 size={16} className="shrink-0 text-green-600" />}
-              </>
-            );
-            const cls = `flex w-full items-center gap-3 rounded-lg border px-3 py-2.5 text-left ${j.hot ? "border-green/30 bg-green/[0.07]" : "border-line bg-canvas"}`;
-            return linked ? (
-              <button key={`${j.time}-${i}`} type="button" onClick={() => openTicket(j.ticket!)} className={`${cls} transition-colors hover:border-blue`}>
-                {content}
-                <ChevronRight size={15} className="shrink-0 text-faint" />
-              </button>
-            ) : (
-              <div key={`${j.time}-${i}`} className={cls}>
-                {content}
+                <div className="mt-1 pl-[4.75rem]">
+                  <button type="button" onClick={() => setReassignKey(reassigning ? null : jk)} className="inline-flex items-center gap-1.5 rounded-full bg-canvas-2 px-2 py-0.5 text-[0.72rem] font-medium text-muted transition-colors hover:text-navy">
+                    <span className={`h-1.5 w-1.5 rounded-full ${TECH_DOT[jt] ?? "bg-line"}`} />
+                    {jt}{j.duration ? ` · ${j.duration}` : ""}
+                    <Pencil size={10} className="text-faint" />
+                  </button>
+                  {reassigning && (
+                    <div className="animate-rise mt-1.5 w-44 rounded-lg border border-line bg-canvas p-1.5">
+                      <p className="px-1 pb-1 text-[0.64rem] font-bold uppercase tracking-wide text-faint">Reassign to</p>
+                      {SCHED_TECHS.map((tn) => (
+                        <button key={tn} type="button" onClick={() => { setReassign({ ...reassign, [jk]: tn }); setReassignKey(null); toast(`Reassigned to ${tn}`); }} className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[0.8rem] text-ink hover:bg-canvas-2">
+                          <span className={`h-1.5 w-1.5 rounded-full ${TECH_DOT[tn] ?? "bg-line"}`} />{tn}
+                          {tn === jt && <Check size={12} className="ml-auto text-blue" />}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             );
           })}
@@ -1901,8 +1918,10 @@ function TasksView({ tasks, setTasks, setActive }: { tasks: Record<number, TaskS
   const [confirming, setConfirming] = useState<number | null>(null);
   const [choices, setChoices] = useState<Record<number, string>>({});
   const [newTasks, setNewTasks] = useState<{ id: number; title: string }[]>([]);
+  const [assignees, setAssignees] = useState<Record<number, string>>({});
   const set = (id: number, s: TaskState) => setTasks({ ...tasks, [id]: s });
   const choiceFor = (it: (typeof TASKS)[number]) => choices[it.id] ?? it.options[0];
+  const who = (id: number) => assignees[id] ?? TEAM[0].name;
   return (
     <div>
       <ModuleHeader title="Tasks" sub="Act on what the call needs" action={{ label: "New task", onClick: () => { setNewTasks([{ id: Date.now(), title: "New task" }, ...newTasks]); toast("Task added"); } }} />
@@ -1923,6 +1942,17 @@ function TasksView({ tasks, setTasks, setActive }: { tasks: Record<number, TaskS
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-line/60 text-faint"><X size={15} /></span>
                 <p className="min-w-0 truncate text-[0.85rem] font-medium text-faint line-through">{it.title}</p>
                 <button type="button" onClick={() => set(it.id, "pending")} className="ml-auto shrink-0 text-[0.72rem] font-semibold text-blue hover:underline">Undo</button>
+              </div>
+            );
+          if (st === "snoozed")
+            return (
+              <div key={it.id} className="flex items-center gap-3 rounded-xl border border-line bg-canvas/60 px-3.5 py-2.5">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-warning/15 text-warning"><Clock size={15} /></span>
+                <div className="min-w-0">
+                  <p className="truncate text-[0.85rem] font-medium text-muted">{it.title}</p>
+                  <p className="text-[0.72rem] text-faint">Snoozed til tomorrow · {who(it.id)}</p>
+                </div>
+                <button type="button" onClick={() => set(it.id, "pending")} className="ml-auto shrink-0 text-[0.72rem] font-semibold text-blue hover:underline">Wake</button>
               </div>
             );
           if (st === "acted")
@@ -1960,9 +1990,18 @@ function TasksView({ tasks, setTasks, setActive }: { tasks: Record<number, TaskS
                   </div>
                 </div>
               ) : (
-                <div className="mt-2 flex items-center justify-end gap-2">
-                  <button type="button" onClick={() => set(it.id, "ignored")} className="rounded-lg border border-line bg-surface px-2.5 py-1 text-[0.72rem] font-semibold text-muted hover:bg-canvas">Ignore</button>
-                  <button type="button" onClick={() => setConfirming(it.id)} className="inline-flex items-center gap-1 rounded-lg bg-blue px-2.5 py-1 text-[0.72rem] font-semibold text-white hover:opacity-90"><Check size={13} /> Act</button>
+                <div className="mt-2 flex items-center justify-between gap-2">
+                  <div className="flex min-w-0 items-center gap-1.5">
+                    <span className="shrink-0 text-[0.7rem] text-faint">To</span>
+                    <select value={who(it.id)} onChange={(e) => { setAssignees({ ...assignees, [it.id]: e.target.value }); toast(`Assigned to ${e.target.value}`); }} aria-label="Assign task to" className={`${inputCls} min-w-0 py-1`}>
+                      {TEAM.map((t) => <option key={t.name} value={t.name}>{t.name}</option>)}
+                    </select>
+                  </div>
+                  <div className="flex shrink-0 items-center gap-1.5">
+                    <button type="button" onClick={() => { set(it.id, "snoozed"); toast("Snoozed til tomorrow"); }} className="inline-flex items-center gap-1 rounded-lg border border-line bg-surface px-2 py-1 text-[0.72rem] font-semibold text-muted hover:bg-canvas"><Clock size={12} /> Snooze</button>
+                    <button type="button" onClick={() => set(it.id, "ignored")} className="rounded-lg border border-line bg-surface px-2.5 py-1 text-[0.72rem] font-semibold text-muted hover:bg-canvas">Ignore</button>
+                    <button type="button" onClick={() => setConfirming(it.id)} className="inline-flex items-center gap-1 rounded-lg bg-blue px-2.5 py-1 text-[0.72rem] font-semibold text-white hover:opacity-90"><Check size={13} /> Act</button>
+                  </div>
                 </div>
               )}
             </div>
