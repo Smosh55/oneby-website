@@ -39,6 +39,8 @@ import {
   PhoneOutgoing,
   PhoneMissed,
   Zap,
+  Bot,
+  Globe,
   Play,
   Pause,
   DollarSign,
@@ -51,7 +53,7 @@ const JOB = { customer: "Maria G.", issue: "Upstairs A/C not cooling", ticket: "
 const SUMMARY =
   "Existing customer, upstairs A/C not cooling since last night. Home after 3pm, wants a same-day visit.";
 
-type ModId = "home" | "live" | "calls" | "tickets" | "schedule" | "customers" | "team" | "catalog" | "billing" | "messages" | "tasks" | "automations" | "email";
+type ModId = "home" | "live" | "calls" | "tickets" | "schedule" | "customers" | "team" | "catalog" | "billing" | "messages" | "tasks" | "automations" | "receptionist" | "email";
 
 const MODULES: { id: ModId; label: string; icon: LucideIcon; badge?: string; soon?: boolean }[] = [
   { id: "home", label: "Home", icon: LayoutDashboard },
@@ -66,6 +68,7 @@ const MODULES: { id: ModId; label: string; icon: LucideIcon; badge?: string; soo
   { id: "messages", label: "Messages", icon: MessageSquare },
   { id: "tasks", label: "Tasks", icon: ListChecks, badge: "3" },
   { id: "automations", label: "Automations", icon: Zap },
+  { id: "receptionist", label: "Receptionist", icon: Bot },
   { id: "email", label: "Email", icon: Mail, soon: true },
 ];
 
@@ -80,7 +83,7 @@ const NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
 
 // Compact (homepage hero) variant: just the core loop. The full 11-module
 // workspace renders on /product.
-const CORE: ModId[] = ["live", "calls", "tickets", "schedule", "billing", "messages", "tasks", "automations"];
+const CORE: ModId[] = ["live", "calls", "tickets", "schedule", "billing", "messages", "tasks", "automations", "receptionist"];
 const CORE_NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
   live: { id: "tickets", label: "See the ticket" },
   tickets: { id: "schedule", label: "Schedule it" },
@@ -445,6 +448,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
               {active === "messages" && <MessagesView msgs={msgs} setMsgs={setMsgs} />}
               {active === "tasks" && <TasksView tasks={tasks} setTasks={setTasks} setActive={setActive} />}
               {active === "automations" && <AutomationsView />}
+              {active === "receptionist" && <ReceptionistView />}
               {active === "email" && <EmailView />}
             </div>
 
@@ -1980,6 +1984,107 @@ const AUTOMATION_SEED: Rule[] = [
 ];
 const TRIGGERS = ["a call is missed", "a call wraps", "a job is booked", "a job is marked done", "an invoice is unpaid for 3 days", "a new lead comes in after hours"];
 const ACTIONS = ["text the caller back", "create a ticket", "assign the right tech", "send a confirmation text", "send the invoice", "notify the on-call tech", "add a follow-up task"];
+
+type Channel = { id: string; icon: LucideIcon; name: string; sub: string; on: boolean; soon?: boolean };
+
+function ReceptionistView() {
+  const [answering, setAnswering] = useState(true);
+  const [afterHours, setAfterHours] = useState(true);
+  const [voice, setVoice] = useState("Ava");
+  const [greeting, setGreeting] = useState("Thanks for calling Summit HVAC! This is Ava. How can I help today?");
+  const [editGreeting, setEditGreeting] = useState(false);
+  const VOICES: { id: string; desc: string }[] = [
+    { id: "Ava", desc: "Warm, friendly" },
+    { id: "Marcus", desc: "Calm, professional" },
+    { id: "Sky", desc: "Neutral, clear" },
+  ];
+  const [channels, setChannels] = useState<Channel[]>([
+    { id: "phone", icon: PhoneCall, name: "Phone calls", sub: "AI answers and books the job", on: true },
+    { id: "missed", icon: PhoneMissed, name: "Missed-call text-back", sub: "Texts the caller back in seconds", on: true },
+    { id: "web", icon: Globe, name: "Website form", sub: "Form submissions become tickets", on: true },
+    { id: "sms", icon: MessageSquare, name: "Inbound SMS", sub: "Texts land in the same inbox", on: true },
+    { id: "wa", icon: Send, name: "WhatsApp", sub: "Same loop, one more channel", on: false, soon: true },
+  ]);
+  const toggleCh = (id: string) =>
+    setChannels(channels.map((c) => (c.id === id ? { ...c, on: !c.on } : c)));
+  const Toggle = ({ on, onClick, label }: { on: boolean; onClick: () => void; label: string }) => (
+    <button type="button" role="switch" aria-checked={on} aria-label={label} onClick={onClick} className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${on ? "bg-green" : "bg-line"}`}>
+      <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${on ? "left-[1.125rem]" : "left-0.5"}`} />
+    </button>
+  );
+  return (
+    <div>
+      <ModuleHeader title="AI Receptionist" sub="How OneBy answers when you can't" />
+
+      <div className={`mb-3 flex items-center gap-3 rounded-xl border px-4 py-3 ${answering ? "border-green/25 bg-green/[0.05]" : "border-line bg-canvas/40"}`}>
+        <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${answering ? "bg-green/10 text-green-600" : "bg-canvas-2 text-faint"}`}><Bot size={18} /></span>
+        <div className="min-w-0 flex-1">
+          <p className="text-[0.9rem] font-bold text-navy">{answering ? "Answering now · 24/7" : "Paused"}</p>
+          <p className="truncate text-[0.74rem] text-muted">{answering ? "Picks up on the second ring, every time" : "Calls ring through to the team only"}</p>
+        </div>
+        <Toggle on={answering} onClick={() => { setAnswering(!answering); toast(answering ? "Receptionist paused" : "Receptionist answering"); }} label="Toggle receptionist" />
+      </div>
+
+      {/* voice */}
+      <div className="mb-3 rounded-xl border border-line bg-surface p-3.5">
+        <p className="mb-2 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Voice</p>
+        <div className="grid grid-cols-3 gap-2">
+          {VOICES.map((v) => (
+            <button key={v.id} type="button" onClick={() => setVoice(v.id)} className={`rounded-lg border px-2 py-2 text-center transition-colors ${voice === v.id ? "border-blue/40 bg-blue/[0.06]" : "border-line bg-canvas hover:border-blue"}`}>
+              <p className={`text-[0.82rem] font-bold ${voice === v.id ? "text-blue" : "text-navy"}`}>{v.id}</p>
+              <p className="text-[0.66rem] text-faint">{v.desc}</p>
+            </button>
+          ))}
+        </div>
+        <button type="button" onClick={() => toast(`Playing a sample of ${voice}`)} className="mt-2 inline-flex items-center gap-1.5 text-[0.74rem] font-semibold text-blue hover:underline"><Play size={12} /> Preview {voice}</button>
+      </div>
+
+      {/* greeting */}
+      <div className="mb-3 rounded-xl border border-line bg-surface p-3.5">
+        <div className="mb-1.5 flex items-center justify-between">
+          <p className="text-[0.66rem] font-bold uppercase tracking-wide text-faint">Greeting</p>
+          <button type="button" onClick={() => setEditGreeting(!editGreeting)} className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${editGreeting ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {editGreeting ? "Done" : "Edit"}</button>
+        </div>
+        {editGreeting ? (
+          <textarea value={greeting} onChange={(e) => setGreeting(e.target.value)} rows={2} aria-label="Greeting" className={`${inputCls} w-full resize-none`} />
+        ) : (
+          <p className="rounded-lg bg-canvas px-3 py-2 text-[0.82rem] italic leading-relaxed text-ink">&ldquo;{greeting}&rdquo;</p>
+        )}
+      </div>
+
+      {/* hours */}
+      <div className="mb-3 flex items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-3">
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Clock size={16} /></span>
+        <div className="min-w-0 flex-1">
+          <p className="text-[0.82rem] font-semibold text-navy">Answer after hours</p>
+          <p className="truncate text-[0.72rem] text-muted">Open Mon&ndash;Fri, 8:00 AM&ndash;6:00 PM · after that, AI books the job</p>
+        </div>
+        <Toggle on={afterHours} onClick={() => setAfterHours(!afterHours)} label="Toggle after-hours answering" />
+      </div>
+
+      {/* channels */}
+      <p className="mb-2 px-1 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Answers on these channels</p>
+      <div className="space-y-2">
+        {channels.map((c) => (
+          <div key={c.id} className={`flex items-center gap-3 rounded-xl border px-3.5 py-2.5 ${c.on ? "border-line bg-canvas" : "border-line bg-canvas/40"}`}>
+            <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg ${c.on ? "bg-blue/10 text-blue" : "bg-canvas-2 text-faint"}`}><c.icon size={16} /></span>
+            <div className="min-w-0 flex-1">
+              <p className="text-[0.82rem] font-semibold text-navy">{c.name}</p>
+              <p className="truncate text-[0.72rem] text-muted">{c.sub}</p>
+            </div>
+            {c.soon ? (
+              <span className="shrink-0 rounded-full bg-canvas-2 px-2 py-0.5 text-[9px] font-bold uppercase text-faint">Soon</span>
+            ) : (
+              <Toggle on={c.on} onClick={() => toggleCh(c.id)} label={`Toggle ${c.name}`} />
+            )}
+          </div>
+        ))}
+      </div>
+
+      <p className="mt-3 inline-flex items-center gap-1.5 text-[0.72rem] text-faint"><Sparkles size={12} /> However it comes in, the summary and ticket land after the call ends</p>
+    </div>
+  );
+}
 
 function AutomationsView() {
   const [rules, setRules] = useState<Rule[]>(AUTOMATION_SEED);
