@@ -27,6 +27,7 @@ import {
   Lock,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   Search,
   Bell,
   Plus,
@@ -179,6 +180,7 @@ function ToastHost() {
 
 export default function HeroAppMock({ compact = false }: { compact?: boolean }) {
   const [active, setActive] = useState<ModId>("live");
+  const [pickerOpen, setPickerOpen] = useState(false);
   const [phase, setPhase] = useState<Phase>("transcribing");
   const [typed, setTyped] = useState(0);
   const [day, setDay] = useState(2);
@@ -365,10 +367,10 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
                     <m.icon size={16} />
                     {m.label}
                     {m.badge && (
-                      <span className="ml-auto rounded-full bg-blue px-1.5 py-0.5 text-[10px] font-bold text-white">{m.badge}</span>
+                      <span className="ml-auto rounded-full bg-blue px-1.5 py-0.5 text-[11px] sm:text-[10px] font-bold text-white">{m.badge}</span>
                     )}
                     {m.soon && (
-                      <span className="ml-auto rounded-full bg-canvas-2 px-1.5 py-0.5 text-[9px] font-bold uppercase text-faint">Soon</span>
+                      <span className="ml-auto rounded-full bg-canvas-2 px-1.5 py-0.5 text-[11px] sm:text-[9px] font-bold uppercase text-faint">Soon</span>
                     )}
                   </button>
                 );
@@ -386,28 +388,55 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
 
           {/* main */}
           <div className="flex min-h-[460px] flex-col p-4 sm:p-6">
-            <div className="mb-4 flex gap-1.5 overflow-x-auto pb-1 sm:hidden">
-              {mods.filter((m) => !m.soon).map((m) => (
-                <button
-                  key={m.id}
-                  type="button"
-                  onClick={() => setActive(m.id)}
-                  className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold ${
-                    m.id === active ? "bg-blue text-white" : "bg-canvas-2 text-ink/70"
-                  }`}
-                >
-                  {m.label}
-                </button>
-              ))}
-              {compact && (
-                <a
-                  href="/product"
-                  className="inline-flex shrink-0 items-center gap-1 rounded-full bg-blue/10 px-3 py-1.5 text-xs font-semibold text-blue"
-                >
-                  Full workspace <ArrowRight size={12} />
-                </a>
-              )}
-            </div>
+            {(() => {
+              const activeMod = MODULES.find((m) => m.id === active);
+              return (
+                <div className="relative mb-4 sm:hidden">
+                  <button
+                    type="button"
+                    onClick={() => setPickerOpen((v) => !v)}
+                    aria-haspopup="menu"
+                    aria-expanded={pickerOpen}
+                    className="flex w-full items-center gap-2.5 rounded-xl border border-line bg-canvas px-3.5 py-2.5 text-left"
+                  >
+                    {activeMod && <activeMod.icon size={18} className="shrink-0 text-blue" />}
+                    <span className="flex-1 text-[0.92rem] font-bold text-navy">{activeMod?.label ?? "Menu"}</span>
+                    {activeMod?.badge && <span className="rounded-full bg-blue px-1.5 py-0.5 text-[11px] sm:text-[10px] font-bold text-white">{activeMod.badge}</span>}
+                    <ChevronDown size={18} className={`shrink-0 text-faint transition-transform ${pickerOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {pickerOpen && (
+                    <>
+                      <button type="button" aria-label="Close menu" onClick={() => setPickerOpen(false)} className="fixed inset-0 z-30 cursor-default" />
+                      <div role="menu" className="animate-rise absolute left-0 right-0 top-full z-40 mt-1.5 max-h-[19rem] overflow-y-auto rounded-xl border border-line bg-surface p-1.5 shadow-[var(--shadow-lg)]">
+                        {mods.map((m) => {
+                          const on = m.id === active;
+                          return (
+                            <button
+                              key={m.id}
+                              type="button"
+                              disabled={m.soon}
+                              onClick={() => { if (!m.soon) { setActive(m.id); setPickerOpen(false); } }}
+                              className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[0.92rem] font-medium ${on ? "bg-blue/10 text-blue" : m.soon ? "text-faint" : "text-ink/80"}`}
+                            >
+                              <m.icon size={18} className="shrink-0" />
+                              <span className="flex-1">{m.label}</span>
+                              {m.badge && <span className="rounded-full bg-blue px-1.5 py-0.5 text-[11px] sm:text-[10px] font-bold text-white">{m.badge}</span>}
+                              {m.soon && <span className="rounded-full bg-canvas-2 px-1.5 py-0.5 text-[11px] sm:text-[9px] font-bold uppercase text-faint">Soon</span>}
+                              {on && !m.badge && <Check size={16} className="shrink-0 text-blue" />}
+                            </button>
+                          );
+                        })}
+                        {compact && (
+                          <a href="/product" className="mt-1 flex items-center gap-2.5 rounded-lg border-t border-line px-3 py-2.5 text-[0.92rem] font-semibold text-blue">
+                            <ArrowRight size={16} className="shrink-0" /> Full workspace
+                          </a>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })()}
 
             <div className="flex-1">
               {active === "home" && <HomeView setActive={setActive} openTicket={openTicket} />}
@@ -583,13 +612,13 @@ function TopBarActions() {
         </button>
         {notif && (
           <div className="absolute right-0 top-8 z-30 w-60 rounded-xl border border-line bg-surface p-1.5 shadow-[var(--shadow-lg)]">
-            <p className="px-2 py-1 text-[0.64rem] font-bold uppercase tracking-wide text-faint">Notifications</p>
+            <p className="px-2 py-1 text-[0.7rem] sm:text-[0.64rem] font-bold uppercase tracking-wide text-faint">Notifications</p>
             {items.map((it, i) => (
               <div key={i} className="flex items-start gap-2 rounded-lg px-2 py-1.5 hover:bg-canvas-2">
                 <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-md ${it.tone}`}><it.icon size={12} /></span>
                 <div className="min-w-0 flex-1">
                   <p className="text-[0.74rem] font-medium text-navy">{it.title}</p>
-                  <p className="text-[0.64rem] text-faint">{it.time} ago</p>
+                  <p className="text-[0.7rem] sm:text-[0.64rem] text-faint">{it.time} ago</p>
                 </div>
               </div>
             ))}
@@ -710,7 +739,7 @@ function CallRow({ c, openTicket }: { c: CallEntry; openTicket: (id: string | nu
         <p className="truncate text-[0.72rem] text-muted">{c.meta}</p>
       </div>
       <span className="shrink-0 text-[0.72rem] text-faint">{c.dur}</span>
-      <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${TONE_CLS[c.tone]}`}>{c.tag}</span>
+      <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] sm:text-[10px] font-semibold ${TONE_CLS[c.tone]}`}>{c.tag}</span>
       {clickable && <ChevronRight size={15} className="shrink-0 text-faint" />}
     </>
   );
@@ -733,7 +762,7 @@ function CallsView({ openTicket }: { openTicket: (id: string | null) => void }) 
         {stats.map(([label, val]) => (
           <div key={label} className="rounded-xl border border-line bg-canvas px-3 py-2.5">
             <p className="text-lg font-bold text-navy">{val}</p>
-            <p className="text-[0.68rem] font-medium text-faint">{label}</p>
+            <p className="text-[0.7rem] sm:text-[0.68rem] font-medium text-faint">{label}</p>
           </div>
         ))}
       </div>
@@ -931,7 +960,7 @@ function TicketsView({
               <div key={s}>
                 <div className="mb-2 flex items-center gap-2">
                   <span className="text-[0.7rem] font-bold uppercase tracking-wide text-faint">{s}</span>
-                  <span className="rounded-full bg-canvas-2 px-1.5 text-[0.66rem] font-bold text-muted">{inCol.length}</span>
+                  <span className="rounded-full bg-canvas-2 px-1.5 text-[0.7rem] sm:text-[0.66rem] font-bold text-muted">{inCol.length}</span>
                 </div>
                 <div className="space-y-2">
                   {inCol.map((t) => (
@@ -960,7 +989,7 @@ function TicketsView({
       <div className="rounded-xl border border-line bg-surface p-4">
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold text-faint">#{tk.id}</span>
-          {tk.urgent && <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[10px] font-bold uppercase text-warning">Urgent</span>}
+          {tk.urgent && <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[11px] sm:text-[10px] font-bold uppercase text-warning">Urgent</span>}
         </div>
         <p className="mt-2 text-[0.95rem] font-semibold text-navy">{tk.issue}</p>
         <p className="mt-1 text-sm text-muted"><button type="button" onClick={() => openCustomer(tk.customer)} className="font-semibold text-blue hover:underline">{tk.customer}</button> · {tk.relationship}</p>
@@ -982,7 +1011,7 @@ function TicketsView({
 
         {picking && !pending && (
           <div className="animate-rise mt-2 rounded-lg border border-line bg-canvas p-2">
-            <p className="px-1 pb-1 text-[0.68rem] font-bold uppercase text-faint">Reassign to</p>
+            <p className="px-1 pb-1 text-[0.7rem] sm:text-[0.68rem] font-bold uppercase text-faint">Reassign to</p>
             {TEAM.filter((t) => t.role !== "Dispatch").map((t) => (
               <button
                 key={t.name}
@@ -991,7 +1020,7 @@ function TicketsView({
                 className="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[0.8rem] text-ink hover:bg-canvas-2"
               >
                 {t.name}
-                <span className="text-[0.68rem] text-faint">{t.status}</span>
+                <span className="text-[0.7rem] sm:text-[0.68rem] text-faint">{t.status}</span>
               </button>
             ))}
           </div>
@@ -1011,7 +1040,7 @@ function TicketsView({
         <div className="mt-4 rounded-xl border border-blue/20 bg-blue/[0.05] p-3">
           <div className="flex items-center justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-[0.64rem] font-bold uppercase tracking-wide text-faint">Current stage</p>
+              <p className="text-[0.7rem] sm:text-[0.64rem] font-bold uppercase tracking-wide text-faint">Current stage</p>
               <p className="text-[0.95rem] font-bold text-navy">{stages[stage]}</p>
             </div>
             {atEnd ? (
@@ -1036,7 +1065,7 @@ function TicketsView({
 
           {!atEnd && isSchedAction && sched && (
             <div className="animate-rise mt-3 rounded-lg border border-line bg-canvas p-2.5">
-              <p className="mb-1.5 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Pick a slot and tech</p>
+              <p className="mb-1.5 text-[0.7rem] sm:text-[0.66rem] font-bold uppercase tracking-wide text-faint">Pick a slot and tech</p>
               <div className="flex flex-wrap gap-1.5">
                 <select value={schDay} onChange={(e) => setSchDay(Number(e.target.value))} aria-label="Day" className={inputCls}>
                   {DOW.map((d, i) => <option key={d} value={i}>{d}</option>)}
@@ -1259,7 +1288,7 @@ function ScheduleView({
                   </button>
                   {reassigning && (
                     <div className="animate-rise mt-1.5 w-44 rounded-lg border border-line bg-canvas p-1.5">
-                      <p className="px-1 pb-1 text-[0.64rem] font-bold uppercase tracking-wide text-faint">Reassign to</p>
+                      <p className="px-1 pb-1 text-[0.7rem] sm:text-[0.64rem] font-bold uppercase tracking-wide text-faint">Reassign to</p>
                       {SCHED_TECHS.map((tn) => (
                         <button key={tn} type="button" onClick={() => { setReassign({ ...reassign, [jk]: tn }); setReassignKey(null); toast(`Reassigned to ${tn}`); }} className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[0.8rem] text-ink hover:bg-canvas-2">
                           <span className={`h-1.5 w-1.5 rounded-full ${TECH_DOT[tn] ?? "bg-line"}`} />{tn}
@@ -1277,7 +1306,7 @@ function ScheduleView({
         <div className="mt-4 rounded-xl border border-line bg-gradient-to-b from-canvas to-transparent p-3.5">
           <div className="mb-2.5 flex items-center justify-between gap-2">
             <p className="inline-flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wide text-faint"><Plus size={12} className="text-blue" /> Add a job</p>
-            <span className="inline-flex items-center gap-1 rounded-full bg-canvas-2 px-2 py-0.5 text-[0.68rem] font-semibold text-muted"><CalendarDays size={11} /> {addDt.dow} · {MONTHS[addDt.m].slice(0, 3)} {addDt.d}</span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-canvas-2 px-2 py-0.5 text-[0.7rem] sm:text-[0.68rem] font-semibold text-muted"><CalendarDays size={11} /> {addDt.dow} · {MONTHS[addDt.m].slice(0, 3)} {addDt.d}</span>
           </div>
 
           <div className="relative">
@@ -1287,7 +1316,7 @@ function ScheduleView({
 
           <div className="mt-2 grid grid-cols-3 gap-2">
             <div>
-              <label className="mb-1 block text-[0.62rem] font-bold uppercase tracking-wide text-faint">Time</label>
+              <label className="mb-1 block text-[0.7rem] sm:text-[0.62rem] font-bold uppercase tracking-wide text-faint">Time</label>
               <div className="relative">
                 <Clock size={13} className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-faint" />
                 <select value={nt} onChange={(e) => setNt(e.target.value)} aria-label="Time" className={`${inputCls} w-full pl-7 ${nt ? "text-ink" : "text-faint"}`}>
@@ -1297,11 +1326,11 @@ function ScheduleView({
               </div>
             </div>
             <div>
-              <label className="mb-1 block text-[0.62rem] font-bold uppercase tracking-wide text-faint">Length</label>
+              <label className="mb-1 block text-[0.7rem] sm:text-[0.62rem] font-bold uppercase tracking-wide text-faint">Length</label>
               <select value={ndur} onChange={(e) => setNdur(e.target.value)} aria-label="Duration" className={`${inputCls} w-full`}>{["30m", "1h", "2h", "Half day"].map((d) => <option key={d} value={d}>{d}</option>)}</select>
             </div>
             <div>
-              <label className="mb-1 block text-[0.62rem] font-bold uppercase tracking-wide text-faint">Assign to</label>
+              <label className="mb-1 block text-[0.7rem] sm:text-[0.62rem] font-bold uppercase tracking-wide text-faint">Assign to</label>
               <select value={ntech} onChange={(e) => setNtech(e.target.value)} aria-label="Tech" className={`${inputCls} w-full`}>{[...SCHED_TECHS, "Unassigned"].map((tn) => <option key={tn} value={tn}>{tn}</option>)}</select>
             </div>
           </div>
@@ -1341,12 +1370,12 @@ function TeamView({ assignedTech, setActive }: { assignedTech: string; setActive
                 <span className={`absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-surface ${m.dot}`} />
               </span>
               <div className="min-w-0">
-                <p className="text-[0.85rem] font-semibold text-navy">{m.name}{m.name === assignedTech && <span className="ml-1.5 text-[0.68rem] font-bold text-blue">· on #{JOB.ticket}</span>}</p>
+                <p className="text-[0.85rem] font-semibold text-navy">{m.name}{m.name === assignedTech && <span className="ml-1.5 text-[0.7rem] sm:text-[0.68rem] font-bold text-blue">· on #{JOB.ticket}</span>}</p>
                 <p className="text-[0.72rem] text-muted">{m.role}</p>
               </div>
               <div className="ml-auto text-right">
                 <p className="text-[0.74rem] font-semibold text-navy">{m.status}</p>
-                <p className="text-[0.68rem] text-faint">{m.jobs}</p>
+                <p className="text-[0.7rem] sm:text-[0.68rem] text-faint">{m.jobs}</p>
               </div>
               <ChevronRight size={16} className="shrink-0 text-faint" />
             </button>
@@ -1466,7 +1495,7 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
                   ) : (
                     <div className="flex flex-wrap gap-1">
                       {it.tasks!.map((t, ti) => (
-                        <span key={ti} className="inline-flex items-center gap-1 rounded bg-surface px-1.5 py-0.5 text-[0.66rem] text-muted"><Check size={9} className="text-faint" /> {t}</span>
+                        <span key={ti} className="inline-flex items-center gap-1 rounded bg-surface px-1.5 py-0.5 text-[0.7rem] sm:text-[0.66rem] text-muted"><Check size={9} className="text-faint" /> {t}</span>
                       ))}
                     </div>
                   )}
@@ -1630,7 +1659,7 @@ function BillingView({
                   <div className="max-h-32 overflow-y-auto">
                     {catalog.filter((it) => it.name.toLowerCase().includes(pickQ.toLowerCase())).map((it) => (
                       <button key={it.id} type="button" onClick={() => addItem(it)} className="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[0.78rem] text-ink hover:bg-canvas-2">
-                        <span className="truncate">{it.name}{it.type === "Service" && it.tasks && it.tasks.length > 0 ? <span className="ml-1 text-[0.66rem] text-faint">· {it.tasks.length} steps</span> : ""}</span>
+                        <span className="truncate">{it.name}{it.type === "Service" && it.tasks && it.tasks.length > 0 ? <span className="ml-1 text-[0.7rem] sm:text-[0.66rem] text-faint">· {it.tasks.length} steps</span> : ""}</span>
                         <span className="ml-2 shrink-0 font-semibold text-navy">${it.price.toLocaleString()}</span>
                       </button>
                     ))}
@@ -1727,7 +1756,7 @@ function BillingView({
               <div className="animate-rise mt-4">
                 <Banner title="Invoice sent" body={`Pay link texted to ${billTicket.customer}. They can pay by card or bank.`} />
                 <div className="mt-3 rounded-lg border border-line bg-canvas p-2.5">
-                  <p className="mb-1.5 text-[0.66rem] font-bold uppercase tracking-wide text-faint">How did they pay?</p>
+                  <p className="mb-1.5 text-[0.7rem] sm:text-[0.66rem] font-bold uppercase tracking-wide text-faint">How did they pay?</p>
                   <div className="flex flex-wrap gap-1.5">
                     {["Card", "ACH", "Cash", "Check"].map((m) => (
                       <button key={m} type="button" onClick={() => setPayMethod(m)} className={`rounded-full px-2.5 py-1 text-[0.74rem] font-semibold transition-colors ${payMethod === m ? "bg-blue text-white" : "bg-canvas-2 text-ink/70"}`}>{m}</button>
@@ -1872,7 +1901,7 @@ function MessagesView({ msgs, setMsgs }: { msgs: Msg[]; setMsgs: (m: Msg[]) => v
                   <p className="truncate text-[0.84rem] font-semibold text-navy">{t.name}</p>
                   <p className="truncate text-[0.74rem] text-muted">{last ? (last.me ? "You: " : "") + last.text : "No messages"}</p>
                 </div>
-                {t.unread ? <span className="grid h-5 min-w-[1.25rem] shrink-0 place-items-center rounded-full bg-blue px-1 text-[0.66rem] font-bold text-white">{t.unread}</span> : <ChevronRight size={16} className="shrink-0 text-faint" />}
+                {t.unread ? <span className="grid h-5 min-w-[1.25rem] shrink-0 place-items-center rounded-full bg-blue px-1 text-[0.7rem] sm:text-[0.66rem] font-bold text-white">{t.unread}</span> : <ChevronRight size={16} className="shrink-0 text-faint" />}
               </button>
             );
           })}
@@ -1976,7 +2005,7 @@ function TasksView({ tasks, setTasks, setActive }: { tasks: Record<number, TaskS
               </div>
               {confirming === it.id ? (
                 <div className="mt-2 rounded-lg bg-blue/[0.05] p-2.5">
-                  <p className="mb-1.5 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Refine, then act</p>
+                  <p className="mb-1.5 text-[0.7rem] sm:text-[0.66rem] font-bold uppercase tracking-wide text-faint">Refine, then act</p>
                   <div className="flex items-center gap-1.5">
                     <select value={choiceFor(it)} onChange={(e) => setChoices({ ...choices, [it.id]: e.target.value })} aria-label="Refine selection" className={`${inputCls} min-w-0 flex-1`}>
                       {it.options.map((o) => <option key={o} value={o}>{o}</option>)}
@@ -2025,8 +2054,8 @@ const ACTIONS = ["text the caller back", "create a ticket", "assign the right te
 
 function Toggle({ on, onClick, label }: { on: boolean; onClick: () => void; label: string }) {
   return (
-    <button type="button" role="switch" aria-checked={on} aria-label={label} onClick={onClick} className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${on ? "bg-green" : "bg-line"}`}>
-      <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${on ? "left-[1.125rem]" : "left-0.5"}`} />
+    <button type="button" role="switch" aria-checked={on} aria-label={label} onClick={onClick} className={`relative h-6 w-11 shrink-0 rounded-full transition-colors sm:h-5 sm:w-9 ${on ? "bg-green" : "bg-line"}`}>
+      <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-all sm:h-4 sm:w-4 ${on ? "left-[1.375rem] sm:left-[1.125rem]" : "left-0.5"}`} />
     </button>
   );
 }
@@ -2068,12 +2097,12 @@ function ReceptionistView() {
 
       {/* voice */}
       <div className="mb-3 rounded-xl border border-line bg-surface p-3.5">
-        <p className="mb-2 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Voice</p>
+        <p className="mb-2 text-[0.7rem] sm:text-[0.66rem] font-bold uppercase tracking-wide text-faint">Voice</p>
         <div className="grid grid-cols-3 gap-2">
           {VOICES.map((v) => (
             <button key={v.id} type="button" onClick={() => setVoice(v.id)} className={`rounded-lg border px-2 py-2 text-center transition-colors ${voice === v.id ? "border-blue/40 bg-blue/[0.06]" : "border-line bg-canvas hover:border-blue"}`}>
               <p className={`text-[0.82rem] font-bold ${voice === v.id ? "text-blue" : "text-navy"}`}>{v.id}</p>
-              <p className="text-[0.66rem] text-faint">{v.desc}</p>
+              <p className="text-[0.7rem] sm:text-[0.66rem] text-faint">{v.desc}</p>
             </button>
           ))}
         </div>
@@ -2083,7 +2112,7 @@ function ReceptionistView() {
       {/* greeting */}
       <div className="mb-3 rounded-xl border border-line bg-surface p-3.5">
         <div className="mb-1.5 flex items-center justify-between">
-          <p className="text-[0.66rem] font-bold uppercase tracking-wide text-faint">Greeting</p>
+          <p className="text-[0.7rem] sm:text-[0.66rem] font-bold uppercase tracking-wide text-faint">Greeting</p>
           <button type="button" onClick={() => setEditGreeting(!editGreeting)} className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[0.7rem] font-semibold ${editGreeting ? "bg-blue/10 text-blue" : "text-muted hover:text-blue"}`}><Pencil size={11} /> {editGreeting ? "Done" : "Edit"}</button>
         </div>
         {editGreeting ? (
@@ -2104,7 +2133,7 @@ function ReceptionistView() {
       </div>
 
       {/* channels */}
-      <p className="mb-2 px-1 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Answers on these channels</p>
+      <p className="mb-2 px-1 text-[0.7rem] sm:text-[0.66rem] font-bold uppercase tracking-wide text-faint">Answers on these channels</p>
       <div className="space-y-2">
         {channels.map((c) => (
           <div key={c.id} className={`flex items-center gap-3 rounded-xl border px-3.5 py-2.5 ${c.on ? "border-line bg-canvas" : "border-line bg-canvas/40"}`}>
@@ -2114,7 +2143,7 @@ function ReceptionistView() {
               <p className="truncate text-[0.72rem] text-muted">{c.sub}</p>
             </div>
             {c.soon ? (
-              <span className="shrink-0 rounded-full bg-canvas-2 px-2 py-0.5 text-[9px] font-bold uppercase text-faint">Soon</span>
+              <span className="shrink-0 rounded-full bg-canvas-2 px-2 py-0.5 text-[11px] sm:text-[9px] font-bold uppercase text-faint">Soon</span>
             ) : (
               <Toggle on={c.on} onClick={() => toggleCh(c.id)} label={`Toggle ${c.name}`} />
             )}
@@ -2155,7 +2184,7 @@ function AutomationsView() {
 
       {building && (
         <div className="animate-rise mb-3 rounded-xl border border-blue/25 bg-blue/[0.04] p-3">
-          <p className="mb-2 text-[0.66rem] font-bold uppercase tracking-wide text-faint">New automation</p>
+          <p className="mb-2 text-[0.7rem] sm:text-[0.66rem] font-bold uppercase tracking-wide text-faint">New automation</p>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <span className="w-10 shrink-0 text-[0.72rem] font-bold text-faint">When</span>
@@ -2183,7 +2212,7 @@ function AutomationsView() {
             </div>
             <div className="flex shrink-0 flex-col items-end gap-1">
               <Toggle on={r.on} onClick={() => toggle(r.id)} label={`Toggle: when ${r.trigger}`} />
-              <span className="text-[0.62rem] font-medium text-faint">{r.runs}</span>
+              <span className="text-[0.7rem] sm:text-[0.62rem] font-medium text-faint">{r.runs}</span>
             </div>
           </div>
         ))}
@@ -2346,7 +2375,7 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
             <button key={x.id} type="button" onClick={() => { setSel(x.id); setEdit(false); }} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
               <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-[0.7rem] font-bold text-white">{x.initials}</span>
               <div className="min-w-0 flex-1">
-                <p className="text-[0.85rem] font-semibold text-navy">{x.name}{x.vip && <span className="ml-1.5 rounded bg-green/10 px-1 py-0.5 text-[9px] font-bold text-green-600">VIP</span>}</p>
+                <p className="text-[0.85rem] font-semibold text-navy">{x.name}{x.vip && <span className="ml-1.5 rounded bg-green/10 px-1 py-0.5 text-[11px] sm:text-[9px] font-bold text-green-600">VIP</span>}</p>
                 <p className="truncate text-[0.72rem] text-muted">{x.phone} · {x.last}</p>
               </div>
               {x.balance > 0 && <span className="shrink-0 rounded-md bg-warning/15 px-2 py-0.5 text-[0.7rem] font-semibold text-warning">${x.balance} due</span>}
@@ -2416,7 +2445,7 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
             {edit ? (
               <input value={c.name} onChange={(e) => upd("name", e.target.value)} aria-label="Customer name" className={`${inputCls} w-full font-semibold`} />
             ) : (
-              <p className="text-[0.95rem] font-semibold text-navy">{c.name}{c.vip && <span className="ml-1.5 rounded-full bg-green/10 px-2 py-0.5 text-[10px] font-semibold text-green-600">VIP</span>}</p>
+              <p className="text-[0.95rem] font-semibold text-navy">{c.name}{c.vip && <span className="ml-1.5 rounded-full bg-green/10 px-2 py-0.5 text-[11px] sm:text-[10px] font-semibold text-green-600">VIP</span>}</p>
             )}
             <p className="mt-0.5 text-xs text-muted">Customer since {c.since}{c.balance > 0 ? ` · $${c.balance} balance` : ""}</p>
           </div>
@@ -2426,7 +2455,7 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
         <div className="mt-3 space-y-2">
           {([["phone", "Phone"], ["email", "Email"], ["address", "Address"]] as const).map(([f, label]) => (
             <div key={f} className="flex items-center gap-2">
-              <span className="w-14 shrink-0 text-[0.66rem] font-bold uppercase text-faint">{label}</span>
+              <span className="w-14 shrink-0 text-[0.7rem] sm:text-[0.66rem] font-bold uppercase text-faint">{label}</span>
               {edit ? (
                 <input value={c[f]} onChange={(e) => upd(f, e.target.value)} className={`${inputCls} min-w-0 flex-1`} />
               ) : (
@@ -2456,15 +2485,15 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
       {/* source of truth: value + records */}
       <div className="mt-4 grid grid-cols-3 gap-2">
         <div className="rounded-xl border border-line bg-canvas px-3 py-2.5">
-          <p className="text-[0.62rem] font-bold uppercase tracking-wide text-faint">Lifetime</p>
+          <p className="text-[0.7rem] sm:text-[0.62rem] font-bold uppercase tracking-wide text-faint">Lifetime</p>
           <p className="mt-0.5 text-[0.95rem] font-extrabold text-navy">${lifetime.toLocaleString()}</p>
         </div>
         <div className="rounded-xl border border-line bg-canvas px-3 py-2.5">
-          <p className="text-[0.62rem] font-bold uppercase tracking-wide text-faint">Open balance</p>
+          <p className="text-[0.7rem] sm:text-[0.62rem] font-bold uppercase tracking-wide text-faint">Open balance</p>
           <p className={`mt-0.5 text-[0.95rem] font-extrabold ${c.balance > 0 ? "text-warning" : "text-navy"}`}>${c.balance}</p>
         </div>
         <div className="rounded-xl border border-line bg-canvas px-3 py-2.5">
-          <p className="text-[0.62rem] font-bold uppercase tracking-wide text-faint">Jobs</p>
+          <p className="text-[0.7rem] sm:text-[0.62rem] font-bold uppercase tracking-wide text-faint">Jobs</p>
           <p className="mt-0.5 text-[0.95rem] font-extrabold text-navy">{rec.jobs.length}</p>
         </div>
       </div>
@@ -2484,7 +2513,7 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
                 <div className="min-w-0 flex-1 border-b border-line pb-2.5">
                   <div className="flex items-center justify-between gap-2">
                     <p className="truncate text-[0.82rem] font-semibold text-navy">{e.title}</p>
-                    <span className="shrink-0 text-[0.68rem] text-faint">{e.when}</span>
+                    <span className="shrink-0 text-[0.7rem] sm:text-[0.68rem] text-faint">{e.when}</span>
                   </div>
                   <p className="text-[0.74rem] text-muted">{e.body}</p>
                 </div>
@@ -2498,7 +2527,7 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
               <button type="button" key={j.title} onClick={() => setActive("schedule")} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><CalendarDays size={15} /></span>
                 <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{j.title}</p><p className="text-[0.72rem] text-muted">{j.when}</p></div>
-                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${pill(j.status)}`}>{j.status}</span>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.7rem] sm:text-[0.66rem] font-semibold ${pill(j.status)}`}>{j.status}</span>
                 <span className="shrink-0 text-[0.82rem] font-semibold text-navy">${j.amount}</span>
                 <ChevronRight size={14} className="shrink-0 text-faint" />
               </button>
@@ -2511,7 +2540,7 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
               <button type="button" key={t.id} onClick={() => openTicket(t.id)} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Ticket size={15} /></span>
                 <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{t.issue}</p><p className="text-[0.72rem] text-muted">#{t.id}</p></div>
-                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${pill(t.status)}`}>{t.status}</span>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.7rem] sm:text-[0.66rem] font-semibold ${pill(t.status)}`}>{t.status}</span>
                 <ChevronRight size={14} className="shrink-0 text-faint" />
               </button>
             ))}
@@ -2523,7 +2552,7 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
               <button type="button" key={iv.id} onClick={() => setActive("billing")} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Receipt size={15} /></span>
                 <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{iv.id}</p></div>
-                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${pill(iv.status)}`}>{iv.status}</span>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.7rem] sm:text-[0.66rem] font-semibold ${pill(iv.status)}`}>{iv.status}</span>
                 <span className="shrink-0 text-[0.82rem] font-semibold text-navy">${iv.amount.toLocaleString()}</span>
                 <ChevronRight size={14} className="shrink-0 text-faint" />
               </button>
@@ -2536,7 +2565,7 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
               <button type="button" key={i} onClick={() => setActive(m.kind === "Call" ? "live" : "messages")} className="flex w-full gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-green/10 text-green-600">{m.kind === "Call" ? <PhoneCall size={15} /> : <MessageSquare size={15} />}</span>
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-2"><p className="text-[0.8rem] font-semibold text-navy">{m.kind}</p><span className="shrink-0 text-[0.68rem] text-faint">{m.when}</span></div>
+                  <div className="flex items-center justify-between gap-2"><p className="text-[0.8rem] font-semibold text-navy">{m.kind}</p><span className="shrink-0 text-[0.7rem] sm:text-[0.68rem] text-faint">{m.when}</span></div>
                   <p className="text-[0.74rem] leading-relaxed text-muted">{m.text}</p>
                 </div>
               </button>
@@ -2549,7 +2578,7 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
               <button type="button" key={a.name} onClick={() => toast("Opening equipment record")} className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-blue">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue"><Package size={15} /></span>
                 <div className="min-w-0 flex-1"><p className="truncate text-[0.84rem] font-semibold text-navy">{a.name}</p><p className="truncate text-[0.72rem] text-muted">{a.meta}</p></div>
-                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.66rem] font-semibold ${a.warranty === "Under warranty" ? "bg-green/10 text-green-600" : "bg-canvas-2 text-faint"}`}>{a.warranty}</span>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[0.7rem] sm:text-[0.66rem] font-semibold ${a.warranty === "Under warranty" ? "bg-green/10 text-green-600" : "bg-canvas-2 text-faint"}`}>{a.warranty}</span>
               </button>
             ))}
           </div>
