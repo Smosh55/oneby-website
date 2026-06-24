@@ -4,7 +4,7 @@ import { ArrowRight, Phone, Sparkles, Target, HeartHandshake } from "lucide-reac
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "About OneBy: The Communications OS for Real Businesses",
+  title: "About OneBy: The All-in-One CRM for Service Businesses",
   description:
     "We built OneBy because the phone is still where business happens, and most of it was getting lost. Here's what we believe and who we build for.",
   alternates: { canonical: "/about" },
