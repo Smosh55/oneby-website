@@ -38,6 +38,7 @@ import {
   PhoneIncoming,
   PhoneOutgoing,
   PhoneMissed,
+  Zap,
   Play,
   Pause,
   DollarSign,
@@ -50,7 +51,7 @@ const JOB = { customer: "Maria G.", issue: "Upstairs A/C not cooling", ticket: "
 const SUMMARY =
   "Existing customer, upstairs A/C not cooling since last night. Home after 3pm, wants a same-day visit.";
 
-type ModId = "home" | "live" | "calls" | "tickets" | "schedule" | "customers" | "team" | "catalog" | "billing" | "messages" | "tasks" | "email";
+type ModId = "home" | "live" | "calls" | "tickets" | "schedule" | "customers" | "team" | "catalog" | "billing" | "messages" | "tasks" | "automations" | "email";
 
 const MODULES: { id: ModId; label: string; icon: LucideIcon; badge?: string; soon?: boolean }[] = [
   { id: "home", label: "Home", icon: LayoutDashboard },
@@ -64,6 +65,7 @@ const MODULES: { id: ModId; label: string; icon: LucideIcon; badge?: string; soo
   { id: "billing", label: "Billing", icon: Receipt },
   { id: "messages", label: "Messages", icon: MessageSquare },
   { id: "tasks", label: "Tasks", icon: ListChecks, badge: "3" },
+  { id: "automations", label: "Automations", icon: Zap },
   { id: "email", label: "Email", icon: Mail, soon: true },
 ];
 
@@ -78,7 +80,7 @@ const NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
 
 // Compact (homepage hero) variant: just the core loop. The full 11-module
 // workspace renders on /product.
-const CORE: ModId[] = ["live", "calls", "tickets", "schedule", "billing", "messages", "tasks"];
+const CORE: ModId[] = ["live", "calls", "tickets", "schedule", "billing", "messages", "tasks", "automations"];
 const CORE_NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
   live: { id: "tickets", label: "See the ticket" },
   tickets: { id: "schedule", label: "Schedule it" },
@@ -442,6 +444,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
               )}
               {active === "messages" && <MessagesView msgs={msgs} setMsgs={setMsgs} />}
               {active === "tasks" && <TasksView tasks={tasks} setTasks={setTasks} setActive={setActive} />}
+              {active === "automations" && <AutomationsView />}
               {active === "email" && <EmailView />}
             </div>
 
@@ -1166,6 +1169,20 @@ function ScheduleView({
   const allJobs = [...base, ...(extra[key] ?? [])];
   const jobs = tech === "All" ? allJobs : allJobs.filter((j) => j.tech === tech);
   const head = dateFor(weekOffset, 0);
+  const addDt = dateFor(weekOffset, day);
+  const suggestSlot = () => {
+    const taken = new Set(allJobs.map((j) => j.time));
+    const free = TIME_SLOTS.find((t) => !taken.has(t)) ?? TIME_SLOTS[0];
+    setNt(free);
+    toast(`${free} is the first opening`);
+  };
+  const addJobNow = () => {
+    if (!nt) return;
+    addJob(key, { time: nt, title: ntitle.trim() || "New job", tech: ntech, duration: ndur });
+    setNt("");
+    setNtitle("");
+    toast(`Booked ${addDt.dow} ${nt}${ntech !== "Unassigned" ? ` with ${ntech}` : ""}`);
+  };
 
   return (
     <div>
@@ -1237,19 +1254,41 @@ function ScheduleView({
           })}
         </div>
 
-        <div className="mt-3 rounded-lg border border-line bg-canvas/40 p-2.5">
-          <p className="mb-1.5 text-[0.66rem] font-bold uppercase tracking-wide text-faint">Add a job</p>
-          <div className="flex flex-wrap gap-1.5">
-            <select value={nt} onChange={(e) => setNt(e.target.value)} aria-label="Time" className={inputCls}>
-              <option value="">Time</option>
-              {TIME_SLOTS.map((t) => <option key={t} value={t}>{t}</option>)}
-            </select>
-            <select value={ndur} onChange={(e) => setNdur(e.target.value)} aria-label="Duration" className={inputCls}>{["30m", "1h", "2h", "Half day"].map((d) => <option key={d} value={d}>{d}</option>)}</select>
-            <select value={ntech} onChange={(e) => setNtech(e.target.value)} aria-label="Tech" className={inputCls}>{[...SCHED_TECHS, "Unassigned"].map((tn) => <option key={tn} value={tn}>{tn}</option>)}</select>
+        <div className="mt-4 rounded-xl border border-line bg-gradient-to-b from-canvas to-transparent p-3.5">
+          <div className="mb-2.5 flex items-center justify-between gap-2">
+            <p className="inline-flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wide text-faint"><Plus size={12} className="text-blue" /> Add a job</p>
+            <span className="inline-flex items-center gap-1 rounded-full bg-canvas-2 px-2 py-0.5 text-[0.68rem] font-semibold text-muted"><CalendarDays size={11} /> {addDt.dow} · {MONTHS[addDt.m].slice(0, 3)} {addDt.d}</span>
           </div>
-          <div className="mt-1.5 flex gap-1.5">
-            <input value={ntitle} onChange={(e) => setNtitle(e.target.value)} placeholder="Job, e.g. A/C diagnostic" className={`${inputCls} min-w-0 flex-1`} />
-            <button type="button" onClick={() => { if (nt.trim()) { addJob(key, { time: nt.trim(), title: ntitle.trim() || "New job", tech: ntech, duration: ndur }); setNt(""); setNtitle(""); toast("Job added to the schedule"); } }} className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-blue px-2.5 py-1.5 text-[0.76rem] font-semibold text-white hover:opacity-90"><Plus size={13} /> Add</button>
+
+          <div className="relative">
+            <Ticket size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-faint" />
+            <input value={ntitle} onChange={(e) => setNtitle(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") addJobNow(); }} placeholder="What's the job? e.g. A/C diagnostic for Maria G." className={`${inputCls} w-full py-2 pl-9`} />
+          </div>
+
+          <div className="mt-2 grid grid-cols-3 gap-2">
+            <div>
+              <label className="mb-1 block text-[0.62rem] font-bold uppercase tracking-wide text-faint">Time</label>
+              <div className="relative">
+                <Clock size={13} className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-faint" />
+                <select value={nt} onChange={(e) => setNt(e.target.value)} aria-label="Time" className={`${inputCls} w-full pl-7 ${nt ? "text-ink" : "text-faint"}`}>
+                  <option value="">Pick</option>
+                  {TIME_SLOTS.map((t) => <option key={t} value={t}>{t}</option>)}
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="mb-1 block text-[0.62rem] font-bold uppercase tracking-wide text-faint">Length</label>
+              <select value={ndur} onChange={(e) => setNdur(e.target.value)} aria-label="Duration" className={`${inputCls} w-full`}>{["30m", "1h", "2h", "Half day"].map((d) => <option key={d} value={d}>{d}</option>)}</select>
+            </div>
+            <div>
+              <label className="mb-1 block text-[0.62rem] font-bold uppercase tracking-wide text-faint">Assign to</label>
+              <select value={ntech} onChange={(e) => setNtech(e.target.value)} aria-label="Tech" className={`${inputCls} w-full`}>{[...SCHED_TECHS, "Unassigned"].map((tn) => <option key={tn} value={tn}>{tn}</option>)}</select>
+            </div>
+          </div>
+
+          <div className="mt-2.5 flex items-center justify-between gap-2">
+            <button type="button" onClick={suggestSlot} className="inline-flex items-center gap-1.5 rounded-lg border border-blue/30 bg-blue/[0.06] px-2.5 py-1.5 text-[0.74rem] font-semibold text-blue transition-colors hover:bg-blue/10"><Sparkles size={13} /> Next open slot</button>
+            <button type="button" disabled={!nt} onClick={addJobNow} className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg px-4 py-2 text-[0.8rem] font-bold text-white transition-opacity ${nt ? "bg-blue hover:opacity-90" : "cursor-not-allowed bg-line"}`}><Plus size={15} /> Add job</button>
           </div>
         </div>
 
@@ -1860,6 +1899,87 @@ function TasksView({ tasks, setTasks, setActive }: { tasks: Record<number, TaskS
           );
         })}
       </div>
+    </div>
+  );
+}
+
+type Rule = { id: number; icon: LucideIcon; trigger: string; action: string; on: boolean; runs: string };
+const AUTOMATION_SEED: Rule[] = [
+  { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+  { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a ticket", on: true, runs: "38 this week" },
+  { id: 3, icon: Users, trigger: "a ticket is created", action: "assign the tech with the right skills", on: true, runs: "31 this week" },
+  { id: 4, icon: CalendarDays, trigger: "a job is booked", action: "text the customer a confirmation and reminder", on: true, runs: "27 this week" },
+  { id: 5, icon: Receipt, trigger: "a job is marked done", action: "send the invoice automatically", on: true, runs: "19 this week" },
+  { id: 6, icon: Clock, trigger: "an invoice is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
+];
+const TRIGGERS = ["a call is missed", "a call wraps", "a job is booked", "a job is marked done", "an invoice is unpaid for 3 days", "a new lead comes in after hours"];
+const ACTIONS = ["text the caller back", "create a ticket", "assign the right tech", "send a confirmation text", "send the invoice", "notify the on-call tech", "add a follow-up task"];
+
+function AutomationsView() {
+  const [rules, setRules] = useState<Rule[]>(AUTOMATION_SEED);
+  const [building, setBuilding] = useState(false);
+  const [trg, setTrg] = useState(TRIGGERS[0]);
+  const [act, setAct] = useState(ACTIONS[0]);
+  const onCount = rules.filter((r) => r.on).length;
+  const totalRuns = rules.filter((r) => r.on).reduce((n, r) => n + (parseInt(r.runs) || 0), 0);
+  const toggle = (id: number) =>
+    setRules(rules.map((r) => (r.id === id ? { ...r, on: !r.on, runs: !r.on ? "Just turned on" : "Paused" } : r)));
+  const addRule = () => {
+    setRules([...rules, { id: Date.now(), icon: Zap, trigger: trg, action: act, on: true, runs: "Just turned on" }]);
+    setBuilding(false);
+    toast("Automation turned on");
+  };
+  return (
+    <div>
+      <ModuleHeader title="Automations" sub="Rules that run the busywork for you" action={{ label: "New automation", onClick: () => setBuilding((v) => !v) }} />
+
+      <div className="mb-4 flex items-center gap-3 rounded-xl border border-blue/15 bg-blue/[0.04] px-4 py-3">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue/10 text-blue"><Zap size={18} /></span>
+        <div className="min-w-0">
+          <p className="text-[0.9rem] font-bold text-navy">{onCount} automations running</p>
+          <p className="text-[0.74rem] text-muted">{totalRuns} actions handled for you this week, no clicks</p>
+        </div>
+      </div>
+
+      {building && (
+        <div className="animate-rise mb-3 rounded-xl border border-blue/25 bg-blue/[0.04] p-3">
+          <p className="mb-2 text-[0.66rem] font-bold uppercase tracking-wide text-faint">New automation</p>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="w-10 shrink-0 text-[0.72rem] font-bold text-faint">When</span>
+              <select value={trg} onChange={(e) => setTrg(e.target.value)} aria-label="Trigger" className={`${inputCls} min-w-0 flex-1`}>{TRIGGERS.map((t) => <option key={t} value={t}>{t}</option>)}</select>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-10 shrink-0 text-[0.72rem] font-bold text-faint">Then</span>
+              <select value={act} onChange={(e) => setAct(e.target.value)} aria-label="Action" className={`${inputCls} min-w-0 flex-1`}>{ACTIONS.map((a) => <option key={a} value={a}>{a}</option>)}</select>
+            </div>
+          </div>
+          <div className="mt-2.5 flex justify-end gap-1.5">
+            <button type="button" onClick={() => setBuilding(false)} className="rounded-lg border border-line bg-surface px-2.5 py-1.5 text-[0.74rem] font-semibold text-muted">Cancel</button>
+            <button type="button" onClick={addRule} className="inline-flex items-center gap-1.5 rounded-lg bg-blue px-3 py-1.5 text-[0.78rem] font-bold text-white hover:opacity-90"><Zap size={13} /> Turn it on</button>
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-2">
+        {rules.map((r) => (
+          <div key={r.id} className={`flex items-center gap-3 rounded-xl border px-3.5 py-3 transition-colors ${r.on ? "border-line bg-canvas" : "border-line bg-canvas/40"}`}>
+            <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg ${r.on ? "bg-blue/10 text-blue" : "bg-canvas-2 text-faint"}`}><r.icon size={16} /></span>
+            <div className="min-w-0 flex-1">
+              <p className="text-[0.82rem] font-semibold text-navy"><span className="text-faint">When</span> {r.trigger}</p>
+              <p className="truncate text-[0.76rem] text-muted"><span className="text-faint">then</span> {r.action}</p>
+            </div>
+            <div className="flex shrink-0 flex-col items-end gap-1">
+              <button type="button" role="switch" aria-checked={r.on} aria-label={`Toggle: when ${r.trigger}`} onClick={() => toggle(r.id)} className={`relative h-5 w-9 rounded-full transition-colors ${r.on ? "bg-green" : "bg-line"}`}>
+                <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${r.on ? "left-[1.125rem]" : "left-0.5"}`} />
+              </button>
+              <span className="text-[0.62rem] font-medium text-faint">{r.runs}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p className="mt-3 inline-flex items-center gap-1.5 text-[0.72rem] text-faint"><Sparkles size={12} /> Every rule runs after the call, never on a live one</p>
     </div>
   );
 }
