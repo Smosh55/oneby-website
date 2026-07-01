@@ -1,5 +1,5 @@
 import { Sparkles, CheckCircle2, ArrowRight, Star } from "lucide-react";
-import HeroAppMock from "./HeroAppMock";
+import DemoSwitcher from "./DemoSwitcher";
 
 export default function Hero() {
   return (
@@ -86,9 +86,9 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Oversized, interactive app mock */}
+        {/* Oversized, interactive app mock with an industry switcher */}
         <div className="animate-rise mt-14 lg:mt-16" style={{ animationDelay: "220ms" }}>
-          <HeroAppMock compact />
+          <DemoSwitcher />
         </div>
       </div>
     </section>

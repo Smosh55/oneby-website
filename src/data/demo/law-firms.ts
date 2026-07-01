@@ -1,0 +1,222 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Run a conflict check", assignee: "Alex R.", done: true },
+  { id: 2, label: "Send the intake questionnaire", assignee: "Alex R.", done: false },
+  { id: 3, label: "Collect the consult fee", assignee: "Grace L.", done: false },
+];
+
+export const lawFirmsDemo: DemoData = {
+  slug: "law-firms",
+  company: "Hale & Associates",
+  primaryCustomer: "Nora F.",
+  primaryIssue: "Auto accident — seeking representation",
+  primaryTicket: "1042",
+  summary:
+    "Prospective client, rear-ended two weeks ago, other driver at fault. Available after 3pm, wants a consultation this week.",
+  liveTags: ["New client", "Personal injury", "Consultation"],
+  liveNotes: ["Prefers afternoon calls.", "Has the police report on hand."],
+  primaryTech: "Alex R.",
+  primaryMessages: [
+    { me: true, text: `Hi Nora, this is OneBy for Hale & Associates. Alex has your intake consultation booked today at 3:30 PM.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Consult · Sloan", tech: "Owen B.", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "Estate signing · Whitman Trust", tech: "Alex R.", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "Consult · Bishop", tech: "Owen B.", duration: "1h" },
+      { time: "1:00 PM", title: "Mediation · Nolan", tech: "Alex R.", duration: "Half day" },
+      { time: "3:30 PM", title: "Intake consult · Nora F.", tech: "Alex R.", hot: true, duration: "1h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Case review · Delmar", tech: "Owen B.", duration: "30m" }],
+    4: [{ time: "2:00 PM", title: "Closing · Calder", tech: "Alex R.", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Alex R.", role: "Lead attorney", status: "In a consult", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["Personal injury", "Litigation", "Negotiation"] },
+    { name: "Owen B.", role: "Associate attorney", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["Family law", "Estate planning"] },
+    { name: "Grace L.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Intake", "Scheduling"] },
+    { name: "Lila V.", role: "Paralegal", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Document prep", "Filings"] },
+  ],
+  techDot: { "Alex R.": "bg-blue", "Owen B.": "bg-green", "Lila V.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "Initial consultation", type: "Service", price: 150, tasks: ["Run a conflict check", "Review the facts and timeline", "Assess the matter type and merits", "Outline next steps with the client"] },
+    { id: 2, name: "Document preparation", type: "Service", price: 350, tasks: ["Gather the required documents", "Draft the filing", "Review with the attorney", "Prepare for signature"] },
+    { id: 3, name: "Legal work (per hour)", type: "Service", price: 300 },
+    { id: 4, name: "PI representation retainer", type: "Service", price: 5000, tasks: ["Confirm the engagement scope", "Send the fee agreement", "Open the matter file", "Run the conflict check", "Schedule the strategy session"] },
+    { id: 5, name: "Court filing fee", type: "Part", price: 435 },
+    { id: 6, name: "Records request fee", type: "Part", price: 75 },
+    { id: 7, name: "Process service", type: "Part", price: 95 },
+    { id: 8, name: "Notary & copies", type: "Part", price: 40 },
+  ],
+  tickets: [
+    { id: "1042", issue: "Auto accident — seeking representation", customer: "Nora F.", status: "Scheduled", urgent: true, summary: "Prospective client, rear-ended two weeks ago, other driver cited at fault. Wants the earliest consultation. Has the police report and photos ready, likely a PI matter.",
+      relationship: "prospective client", tech: "Alex R.", tags: ["New client", "Personal injury", "Consultation"], notes: ["Prefers afternoon calls.", "Has the police report on hand."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "Divorce filing — urgent", customer: "Daniel W.", status: "New", urgent: true, summary: "New caller, wants to file for divorce and asks about a temporary custody order. Time-sensitive, flexible on the consult time.",
+      relationship: "new caller", tech: "Owen B.", tags: ["New caller", "Family law", "Consultation"], notes: ["Two minor children involved.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Run a conflict check", assignee: "Owen B.", done: false },
+        { id: 412, label: "Note jurisdiction and residency", assignee: "Owen B.", done: false },
+      ] },
+    { id: "1039", issue: "Estate plan for a family trust", customer: "Whitman Family Trust", status: "Scheduled", urgent: false, summary: "Existing client, updating a family trust and wills. Needs a signing appointment and a witness/notary block set aside.",
+      relationship: "existing client", tech: "Alex R.", tags: ["Estate planning", "Existing client", "Signing"], notes: ["Notary required at signing.", "Bring photo ID for all signers."], subtasks: [
+        { id: 391, label: "Confirm the signers and IDs", assignee: "Grace L.", done: true },
+        { id: 392, label: "Block a signing appointment", assignee: "Grace L.", done: false },
+        { id: 393, label: "Prepare the trust documents", assignee: "Alex R.", done: false },
+      ] },
+    { id: "1038", issue: "Will amendment", customer: "Grace L.", status: "In progress", urgent: false, summary: "Repeat client, minor amendment to an existing will. Client supplied the changes, just needs drafting and signature. Paralegal is on it now.",
+      relationship: "repeat client", tech: "Owen B.", tags: ["Repeat client", "Estate planning"], notes: ["Client supplied the changes.", "Draft in progress."], subtasks: [
+        { id: 381, label: "Confirm the amendment scope", assignee: "Owen B.", done: true },
+        { id: 382, label: "Draft and route for signature", assignee: "Owen B.", done: false },
+      ] },
+    { id: "1035", issue: "Personal injury settlement", customer: "Calder Family", status: "Invoiced", urgent: false, summary: "PI matter settled Tuesday. Work complete, invoice sent for the fee balance, awaiting payment.",
+      relationship: "settled matter", tech: "Alex R.", tags: ["Personal injury", "Settlement", "Closed"], notes: ["Settled Tuesday.", "Disbursement statement sent."], subtasks: [
+        { id: 351, label: "Finalize the disbursement", assignee: "Grace L.", done: true },
+        { id: 352, label: "Send the invoice", assignee: "Grace L.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Grace L.", done: false },
+      ] },
+    { id: "1031", issue: "Contract review", customer: "Vernon Bakery", status: "Done", urgent: false, summary: "Business client, commercial lease review. Redlined the lease, walked the client through the changes, signed off.",
+      relationship: "business account", tech: "Owen B.", tags: ["Business", "Contract review"], notes: ["Redlined the commercial lease.", "Client signed off."], subtasks: [
+        { id: 311, label: "Redline the lease", assignee: "Owen B.", done: true },
+        { id: 312, label: "Review changes with the client", assignee: "Owen B.", done: true },
+        { id: 313, label: "Get client sign-off", assignee: "Owen B.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Initial consultation", qty: 1, price: 150 }, { label: "Records request fee", qty: 1, price: 75 }],
+    "1041": [{ label: "Initial consultation", qty: 1, price: 150 }],
+    "1039": [{ label: "Estate document preparation", qty: 3, price: 350 }],
+    "1038": [{ label: "Will amendment (drafting)", qty: 1, price: 300 }],
+    "1035": [{ label: "PI representation retainer", qty: 1, price: 5000 }],
+    "1031": [{ label: "Contract review", qty: 1, price: 240 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Nora F.", meta: "Auto accident — seeking representation · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Grace L.", meta: "Question on the will amendment", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · slip and fall · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Whitman Family Trust", meta: "Estate plan · signing requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Calder Family", meta: "Payment reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Vernon Bakery", meta: "Contract review follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Nora F.", initials: "NF", phone: "(602) 555-0148", email: "nora.f@email.com", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["Personal injury", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Daniel W.", initials: "DW", phone: "(602) 555-0192", email: "dwilkins@email.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Family law"], balance: 240, last: "Invoice sent Jun 18" },
+    { id: 3, name: "Whitman Family Trust", initials: "WT", phone: "(480) 555-0110", email: "trustee@whitmantrust.com", address: "Larchmont Rd, Tempe AZ", since: "2022", tags: ["Estate planning", "Existing client"], balance: 0, last: "Signing Jun 10" },
+    { id: 4, name: "Grace L.", initials: "GL", phone: "(623) 555-0177", email: "grace.l@email.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
+    { id: 5, name: "Calder Family", initials: "CF", phone: "(480) 555-0143", email: "calder.home@email.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["Personal injury", "Settlement"], balance: 0, last: "Settled Apr 3" },
+    { id: 6, name: "Vernon Bakery", initials: "VB", phone: "(602) 555-0166", email: "office@vernonbakery.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Business"], balance: 1280, vip: true, last: "Retainer sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · auto accident intake", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · consult time sent", body: "Alex, 3:30 PM today" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
+    { when: "Last summer", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Matter · prior PI claim", body: "$4,200 recovered · closed" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "Intake consultation", when: "Today", status: "Scheduled", amount: 189 },
+      { title: "Document preparation", when: "Mar 2026", status: "Done", amount: 350 },
+      { title: "PI representation", when: "Jul 2025", status: "Done", amount: 4200 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Auto accident — seeking representation", status: "Open" },
+      { id: "0987", issue: "Prior injury claim", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 189, status: "Due" },
+      { id: "INV-0987", amount: 350, status: "Paid" },
+      { id: "INV-0820", amount: 4200, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "Rear-ended two weeks ago, other driver at fault, wants representation." },
+      { kind: "Text", when: "Today 4:13", text: "Consultation time texted: Alex, 3:30 PM today." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the document prep appointment." },
+    ],
+    assets: [
+      { name: "Police report", meta: "Uploaded Jul 2025 · Case #PHX-24-0912 · Accident intake", warranty: "On file" },
+      { name: "Fee agreement", meta: "Signed Jul 2025 · Contingency 33% · PI matter", warranty: "Executed" },
+      { name: "Medical records set", meta: "Received Jul 2025 · 4 providers", warranty: "On file" },
+    ],
+    files: [
+      { name: "Accident photos", meta: "3 photos · Jul 2025" },
+      { name: "Signed fee agreement.pdf", meta: "PDF · Jul 2025" },
+      { name: "Demand letter.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "daniel", name: "Daniel W.", unread: 2, msgs: [{ me: false, text: "Is my consultation still on for today?" }, { me: false, text: "The custody situation is getting worse." }] },
+    { id: "whitman", name: "Whitman Family Trust", msgs: [{ me: true, text: "The signing is booked for Thursday at 8:30, notary confirmed." }, { me: false, text: "Great, all signers will bring photo ID." }] },
+    { id: "grace", name: "Grace L.", unread: 1, msgs: [{ me: false, text: "Is the will amendment ready to sign yet?" }] },
+  ],
+  messageTemplates: ["Confirming your consultation", "Running 10 min behind", "All set, invoice sent", "We received your documents"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Schedule intake consultation", meta: "Intake · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Alex R.", "Today 4:30 PM · Alex R.", "Tomorrow 9:00 AM · Owen B."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Nora her consult time", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Alex, 3:30 PM today", "Running 15 min behind", "We're ready for you now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: personal injury, not property damage only?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Personal injury", "Property damage only", "Both"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a matter intake", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a matter is created", action: "assign the attorney with the right practice area", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "a consultation is booked", action: "text the client a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a matter is marked done", action: "send the invoice automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "an invoice is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling Hale & Associates! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "New matter intake": ["New", "Scheduled", "In progress", "Invoiced", "Paid"],
+    "Retained representation": ["New", "Consulted", "Retained", "Scheduled", "Filed", "Paid"],
+    "Estate signing": ["New", "Prepared", "Scheduled", "Signed"],
+    "Contract review": ["Requested", "Scheduled", "Reviewed", "Logged"],
+  },
+  schedulePlaceholder: "What's the matter? e.g. Intake consultation for Nora F.",
+  mileItem: "PI representation retainer",
+  mileBase: 5000,
+  billingAlertNote: "Across 3 clients · Vernon Bakery $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Revenue up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Mediation · Nolan", tech: "Alex R." },
+    { time: "3:30 PM", title: "Intake consult · Nora F.", tech: "Alex R.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Vernon Bakery", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent matter needs scheduling", body: "#1041 divorce filing · Daniel W.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, I was in a car accident a couple weeks ago and I need a lawyer." },
+    { who: "OneBy", line: "I'm sorry that happened. I can get you a consultation this week. Was the other driver found at fault?" },
+    { who: "Caller", line: "Yes, they got the ticket." },
+    { who: "OneBy", line: "Got it. Are you free this afternoon? Alex can meet with you between 3 and 5." },
+    { who: "Caller", line: "Yep, that works." },
+    { who: "OneBy", line: "Perfect, you're booked for 3 to 5 today. I'll text you the details." },
+  ],
+};

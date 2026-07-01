@@ -1,0 +1,222 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm arrival window", assignee: "Rafa M.", done: true },
+  { id: 2, label: "Load extractor and air movers", assignee: "Rafa M.", done: false },
+  { id: 3, label: "Document the loss for the claim", assignee: "Nora V.", done: false },
+];
+
+export const restorationDemo: DemoData = {
+  slug: "restoration",
+  company: "Restore First",
+  primaryCustomer: "Elena R.",
+  primaryIssue: "Basement flooded from a supply line break",
+  primaryTicket: "1042",
+  summary:
+    "Existing customer, supply line broke and there's standing water in the basement. Wants emergency mitigation now, first call of the night.",
+  liveTags: ["Existing customer", "Water loss", "Emergency"],
+  liveNotes: ["Water shut off at the main.", "Gate code 4417."],
+  primaryTech: "Rafa M.",
+  primaryMessages: [
+    { me: true, text: `Hi Elena, this is OneBy for Restore First. Rafa is on his way for emergency water mitigation, ETA 30 minutes.` },
+    { me: false, text: "Thank you, please hurry!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Drying check · Delgado", tech: "Tyler B.", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "Mold remediation · Lakeside HOA", tech: "Rafa M.", duration: "Half day", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "Moisture reading · Nguyen", tech: "Tyler B.", duration: "1h" },
+      { time: "1:00 PM", title: "Fire cleanup · Foster", tech: "Rafa M.", duration: "Full day" },
+      { time: "3:30 PM", title: "Water mitigation · Elena R.", tech: "Rafa M.", hot: true, duration: "3h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Loss estimate · Brookline", tech: "Tyler B.", duration: "45m" }],
+    4: [{ time: "2:00 PM", title: "Reconstruction · Okafor", tech: "Rafa M.", duration: "Full day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Rafa M.", role: "Project manager", status: "On a job", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["Water", "Fire", "Mitigation"] },
+    { name: "Tyler B.", role: "Technician", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["Extraction", "Drying"] },
+    { name: "Nora V.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Dispatch", "Claims intake"] },
+    { name: "Priya K.", role: "Technician", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Mold", "Drying"] },
+  ],
+  techDot: { "Rafa M.": "bg-blue", "Tyler B.": "bg-green", "Priya K.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "Emergency mitigation", type: "Service", price: 950, tasks: ["Assess the loss and safety", "Stop the water source", "Extract standing water", "Set drying equipment", "Document for the claim"] },
+    { id: 2, name: "Water extraction", type: "Service", price: 450, tasks: ["Extract standing water", "Remove wet materials", "Take moisture readings", "Log findings"] },
+    { id: 3, name: "Labor (per hour)", type: "Service", price: 110 },
+    { id: 4, name: "Full mitigation and reconstruction", type: "Service", price: 8000, tasks: ["Confirm scope with adjuster", "Demo damaged materials", "Dry and treat the structure", "Rebuild affected areas", "Final walkthrough with customer"] },
+    { id: 5, name: "Air mover (per day)", type: "Part", price: 35 },
+    { id: 6, name: "Dehumidifier (per day)", type: "Part", price: 95 },
+    { id: 7, name: "Antimicrobial (per gal)", type: "Part", price: 55 },
+    { id: 8, name: "Containment poly (per roll)", type: "Part", price: 40 },
+  ],
+  tickets: [
+    { id: "1042", issue: "Basement flooded from a supply line break", customer: "Elena R.", status: "Scheduled", urgent: true, summary: "Existing customer, supply line broke and there's standing water in the basement. Wants the earliest crew tonight. Likely an insurance claim.",
+      relationship: "existing customer", tech: "Rafa M.", tags: ["Existing customer", "Water loss", "Emergency"], notes: ["Water shut off at the main.", "Gate code 4417."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "Kitchen fire smoke and soot cleanup", customer: "Marcus W.", status: "New", urgent: true, summary: "New caller, small kitchen fire left smoke and soot through the first floor. Fire is out. Wants someone out today, flexible on the time.",
+      relationship: "new caller", tech: "Tyler B.", tags: ["New caller", "Fire loss", "Same-day"], notes: ["Fire department has cleared the home.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Confirm the structure is safe to enter", assignee: "Tyler B.", done: false },
+        { id: 412, label: "Photograph the soot and smoke damage", assignee: "Tyler B.", done: false },
+      ] },
+    { id: "1039", issue: "Mold remediation, 12 units", customer: "Lakeside HOA", status: "Scheduled", urgent: false, summary: "Recurring service contract. Twelve units with bathroom mold, needs a half-day block and a COI on file before the crew arrives.",
+      relationship: "maintenance contract", tech: "Rafa M.", tags: ["Commercial", "Maintenance plan", "12 units"], notes: ["COI required on file before arrival.", "Access via the north stairwell."], subtasks: [
+        { id: 391, label: "Confirm COI is on file", assignee: "Nora V.", done: true },
+        { id: 392, label: "Block a half day for the crew", assignee: "Nora V.", done: false },
+        { id: 393, label: "Load containment for 12 units", assignee: "Rafa M.", done: false },
+      ] },
+    { id: "1038", issue: "Drying equipment pickup", customer: "Nora V.", status: "In progress", urgent: false, summary: "Structure is dry and the readings are good. Crew is pulling air movers and dehumidifiers now.",
+      relationship: "repeat customer", tech: "Tyler B.", tags: ["Repeat customer", "Drying"], notes: ["Final moisture readings passed.", "Crew is on site."], subtasks: [
+        { id: 381, label: "Verify the final moisture readings", assignee: "Tyler B.", done: true },
+        { id: 382, label: "Pull and inventory the equipment", assignee: "Tyler B.", done: false },
+      ] },
+    { id: "1035", issue: "Full mitigation and reconstruction", customer: "Okafor Family", status: "Invoiced", urgent: false, summary: "Water loss dried and rebuilt Tuesday. Job complete, invoice sent to the adjuster, awaiting payment.",
+      relationship: "reconstruction customer", tech: "Rafa M.", tags: ["Reconstruction", "Water loss", "Warranty"], notes: ["Structure rebuilt Tuesday.", "Workmanship warranty registered."], subtasks: [
+        { id: 351, label: "Register the warranty", assignee: "Nora V.", done: true },
+        { id: 352, label: "Send the invoice to the adjuster", assignee: "Nora V.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Nora V.", done: false },
+      ] },
+    { id: "1031", issue: "Commercial kitchen water loss", customer: "Harbor Diner", status: "Done", urgent: false, summary: "Line break flooded the kitchen. Extracted, dried, and cleared the readings, signed off.",
+      relationship: "commercial account", tech: "Tyler B.", tags: ["Commercial", "Water loss"], notes: ["Extracted and dried the kitchen.", "Readings cleared and signed off."], subtasks: [
+        { id: 311, label: "Extract the standing water", assignee: "Tyler B.", done: true },
+        { id: 312, label: "Verify dry readings", assignee: "Tyler B.", done: true },
+        { id: 313, label: "Get customer sign-off", assignee: "Tyler B.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Emergency mitigation", qty: 1, price: 950 }, { label: "Water extraction", qty: 1, price: 450 }],
+    "1041": [{ label: "Fire and soot assessment", qty: 1, price: 350 }],
+    "1039": [{ label: "Mold remediation", qty: 12, price: 250 }],
+    "1038": [{ label: "Drying equipment (per day)", qty: 1, price: 130 }],
+    "1035": [{ label: "Full mitigation and reconstruction", qty: 1, price: 8000 }],
+    "1031": [{ label: "Kitchen water extraction", qty: 1, price: 240 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Elena R.", meta: "Basement flooding · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Nora V.", meta: "Drying equipment ready for pickup", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · water loss · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Lakeside HOA", meta: "Mold remediation · COI requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Okafor Family", meta: "Payment reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Harbor Diner", meta: "Kitchen water loss follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Elena R.", initials: "ER", phone: "(602) 555-0148", email: "elena.r@email.com", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["Water loss", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Marcus W.", initials: "MW", phone: "(602) 555-0192", email: "mwells@email.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Fire loss"], balance: 240, last: "Invoice sent Jun 18" },
+    { id: 3, name: "Lakeside HOA", initials: "LH", phone: "(480) 555-0110", email: "manager@lakesidehoa.com", address: "Oak St, Tempe AZ", since: "2022", tags: ["Commercial", "Maintenance plan"], balance: 0, last: "Remediation Jun 10" },
+    { id: 4, name: "Nora V.", initials: "NV", phone: "(623) 555-0177", email: "nora.v@email.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
+    { id: 5, name: "Okafor Family", initials: "OF", phone: "(480) 555-0143", email: "okafor.home@email.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["Water loss", "Reconstruction"], balance: 0, last: "Rebuild Apr 3" },
+    { id: 6, name: "Harbor Diner", initials: "HD", phone: "(602) 555-0166", email: "book@harbordiner.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Commercial"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · basement flooding", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · crew ETA sent", body: "Rafa arriving in 30 min" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $1,400", body: "Paid by card" },
+    { when: "Last winter", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · water mitigation", body: "$3,800 · claim approved" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "Emergency mitigation", when: "Today", status: "Scheduled", amount: 1400 },
+      { title: "Water extraction", when: "Mar 2026", status: "Done", amount: 450 },
+      { title: "Full mitigation and reconstruction", when: "Jul 2025", status: "Done", amount: 8600 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Basement flooded from a supply line break", status: "Open" },
+      { id: "0987", issue: "Attic mold remediation", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 1400, status: "Due" },
+      { id: "INV-0987", amount: 450, status: "Paid" },
+      { id: "INV-0820", amount: 8600, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "Supply line break, standing water in the basement, wants mitigation now." },
+      { kind: "Text", when: "Today 4:13", text: "Crew ETA texted: Rafa, 30 minutes out." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the water extraction after a washer overflow." },
+    ],
+    assets: [
+      { name: "Basement sump pump", meta: "Installed Jul 2025 · Model SP-33 · Basement", warranty: "Under warranty" },
+      { name: "Whole-home dehumidifier", meta: "Installed Jul 2025 · Model DH-70 · Utility room", warranty: "Under warranty" },
+      { name: "Water main shutoff valve", meta: "Installed Jul 2025 · Main line", warranty: "Out of warranty" },
+    ],
+    files: [
+      { name: "Loss photos", meta: "3 photos · Jul 2025" },
+      { name: "Signed work authorization.pdf", meta: "PDF · Jul 2025" },
+      { name: "Certificate of completion.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "james", name: "Marcus W.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "The smoke smell is getting worse." }] },
+    { id: "oak", name: "Lakeside HOA", msgs: [{ me: true, text: "Crew is booked for the 12-unit mold remediation Thursday at 8:30." }, { me: false, text: "Great, the COI is on file." }] },
+    { id: "dana", name: "Nora V.", unread: 1, msgs: [{ me: false, text: "Are the readings dry enough to pull the equipment?" }] },
+  ],
+  messageTemplates: ["On our way 🚐", "Running 10 min late", "All done, invoice sent", "Confirming your appointment"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Dispatch emergency mitigation", meta: "Dispatch · now", go: "schedule", goLabel: "Schedule", options: ["Now · Rafa M.", "In 1 hour · Rafa M.", "Tomorrow 9:00 AM · Tyler B."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Elena her crew ETA", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Rafa arriving in 30 min", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: water shut off at the main?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Water shut off", "Still running", "Not sure yet"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a ticket", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a ticket is created", action: "assign the crew with the right skills", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "a job is booked", action: "text the customer a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a job is marked done", action: "send the invoice automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "an invoice is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling Restore First! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "Emergency mitigation": ["New", "Dispatched", "On site", "Drying", "Cleared"],
+    "Full reconstruction": ["New", "Quoted", "Approved", "Scheduled", "Rebuilt", "Paid"],
+    "Insurance claim": ["New", "Documented", "Adjuster review", "Approved"],
+    "Maintenance plan": ["Due", "Scheduled", "Serviced", "Logged"],
+  },
+  schedulePlaceholder: "What's the job? e.g. Water mitigation for Elena R.",
+  mileItem: "Full mitigation and reconstruction",
+  mileBase: 8000,
+  billingAlertNote: "Across 3 customers · Harbor Diner $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Revenue up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Fire cleanup · Foster", tech: "Rafa M." },
+    { time: "3:30 PM", title: "Water mitigation · Elena R.", tech: "Rafa M.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Harbor Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent ticket needs scheduling", body: "#1041 kitchen fire cleanup · Marcus W.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, a pipe burst and my basement is flooding right now." },
+    { who: "OneBy", line: "I'm sorry, let's get a crew moving. Have you been able to shut the water off at the main?" },
+    { who: "Caller", line: "Yes, I just shut it off." },
+    { who: "OneBy", line: "Great, that helps a lot. Rafa can be there in about 30 minutes to start mitigation." },
+    { who: "Caller", line: "Please, as fast as you can." },
+    { who: "OneBy", line: "You're all set, Rafa is on his way. I'll text you his ETA and updates." },
+  ],
+};

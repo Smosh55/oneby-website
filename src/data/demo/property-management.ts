@@ -1,0 +1,222 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm access window with tenant", assignee: "Miguel A.", done: true },
+  { id: 2, label: "Bring a spare thermocouple", assignee: "Miguel A.", done: false },
+  { id: 3, label: "Log the fix on the owner report", assignee: "Rosa T.", done: false },
+];
+
+export const propertyManagementDemo: DemoData = {
+  slug: "property-management",
+  company: "Cornerstone PM",
+  primaryCustomer: "Unit 4B — Alicia M.",
+  primaryIssue: "No hot water since this morning",
+  primaryTicket: "1042",
+  summary:
+    "Tenant in Unit 4B, no hot water since this morning. Home all day, wants a same-day maintenance visit.",
+  liveTags: ["Existing tenant", "Plumbing", "Same-day"],
+  liveNotes: ["Available all day for access.", "Building entry code 4417."],
+  primaryTech: "Miguel A.",
+  primaryMessages: [
+    { me: true, text: `Hi Alicia, this is OneBy for Cornerstone PM. Miguel is booked for your Unit 4B hot water visit today at 3:30 PM.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Lockout · Cedar Court 12", tech: "Priya D.", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "HVAC service · Oak Ridge Apts", tech: "Miguel A.", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "Appliance repair · Unit 7C", tech: "Priya D.", duration: "1h" },
+      { time: "1:00 PM", title: "Make-ready · Unit 2A", tech: "Miguel A.", duration: "Half day" },
+      { time: "3:30 PM", title: "No hot water · Unit 4B", tech: "Miguel A.", hot: true, duration: "1h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Walkthrough · Maple Flats", tech: "Priya D.", duration: "30m" }],
+    4: [{ time: "2:00 PM", title: "Turn · Unit 9D", tech: "Miguel A.", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Miguel A.", role: "Lead maintenance tech", status: "On a job", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["Plumbing", "HVAC", "Electrical"] },
+    { name: "Priya D.", role: "Maintenance tech", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["Appliances", "Turns"] },
+    { name: "Rosa T.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Coordination", "Scheduling"] },
+    { name: "Nadia F.", role: "Maintenance tech", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Locks", "Plumbing"] },
+  ],
+  techDot: { "Miguel A.": "bg-blue", "Priya D.": "bg-green", "Nadia F.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "Plumbing call-out", type: "Service", price: 89, tasks: ["Inspect the fixture and supply", "Check water heater and valves", "Confirm hot water is restored", "Log the fix for the owner"] },
+    { id: 2, name: "HVAC service", type: "Service", price: 129, tasks: ["Replace air filter", "Test heating and cooling", "Check thermostat", "Log readings"] },
+    { id: 3, name: "Labor (per hour)", type: "Service", price: 95 },
+    { id: 4, name: "Unit turn / make-ready", type: "Service", price: 1200, tasks: ["Walk the unit and note damage", "Patch and paint", "Deep clean and replace filters", "Test all fixtures and appliances", "Sign off with property manager"] },
+    { id: 5, name: "Lock change", type: "Service", price: 140 },
+    { id: 6, name: "Appliance repair", type: "Service", price: 110 },
+    { id: 7, name: "Thermocouple", type: "Part", price: 35 },
+    { id: 8, name: "Air filter", type: "Part", price: 25 },
+  ],
+  tickets: [
+    { id: "1042", issue: "No hot water since this morning", customer: "Unit 4B — Alicia M.", status: "Scheduled", urgent: true, summary: "Existing tenant, no hot water in Unit 4B since this morning. Wants the earliest slot. Pilot light was flagged last visit, likely a thermocouple or the water heater.",
+      relationship: "existing tenant", tech: "Miguel A.", tags: ["Existing tenant", "Plumbing", "Same-day"], notes: ["Available all day for access.", "Building entry code 4417."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "Ceiling leak in the bathroom", customer: "Unit 6A — Trevor B.", status: "New", urgent: true, summary: "New request, water staining the bathroom ceiling from the unit above. Not actively pouring. Wants someone out today, flexible on the time.",
+      relationship: "new request", tech: "Priya D.", tags: ["Plumbing", "Water damage", "Same-day"], notes: ["Leak appears to come from Unit 7A above.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Confirm the leak source upstairs", assignee: "Priya D.", done: false },
+        { id: 412, label: "Photograph the ceiling and stain", assignee: "Priya D.", done: false },
+      ] },
+    { id: "1039", issue: "Quarterly HVAC service, 12 units", customer: "Oak Ridge Apartments", status: "Scheduled", urgent: false, summary: "Recurring maintenance for the property. Twelve rooftop units, needs a half-day block and vendor COI on file before the crew arrives.",
+      relationship: "managed property", tech: "Miguel A.", tags: ["Property-wide", "Maintenance plan", "12 units"], notes: ["COI required on file before arrival.", "Roof access via the north stairwell."], subtasks: [
+        { id: 391, label: "Confirm COI is on file", assignee: "Rosa T.", done: true },
+        { id: 392, label: "Block a half day for the crew", assignee: "Rosa T.", done: false },
+        { id: 393, label: "Load filters for 12 units", assignee: "Miguel A.", done: false },
+      ] },
+    { id: "1038", issue: "Dishwasher not draining", customer: "Unit 3C — Renee C.", status: "In progress", urgent: false, summary: "Appliance repair. Dishwasher won't drain, standing water in the tub. Tech is on site now.",
+      relationship: "repeat tenant", tech: "Priya D.", tags: ["Repeat tenant", "Appliances"], notes: ["Standing water in the tub.", "Tech is on site."], subtasks: [
+        { id: 381, label: "Clear the drain hose and filter", assignee: "Priya D.", done: true },
+        { id: 382, label: "Run a full cycle to confirm", assignee: "Priya D.", done: false },
+      ] },
+    { id: "1035", issue: "Full unit turn", customer: "Unit 9D — Halvorsen Ownership", status: "Invoiced", urgent: false, summary: "Make-ready completed Tuesday. Unit turned and ready to list, invoice sent to owner, awaiting payment.",
+      relationship: "owner charge", tech: "Miguel A.", tags: ["Make-ready", "Turn", "Owner"], notes: ["Unit turned Tuesday.", "Owner charge sent for approval."], subtasks: [
+        { id: 351, label: "Complete the make-ready checklist", assignee: "Rosa T.", done: true },
+        { id: 352, label: "Send the owner invoice", assignee: "Rosa T.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Rosa T.", done: false },
+      ] },
+    { id: "1031", issue: "Building lobby door won't lock", customer: "Cedar Court HOA", status: "Done", urgent: false, summary: "Lobby entry door not latching. Replaced the strike plate, verified the lock, signed off.",
+      relationship: "association account", tech: "Priya D.", tags: ["Common area", "Locks"], notes: ["Replaced the strike plate.", "Lock verified and signed off."], subtasks: [
+        { id: 311, label: "Replace the strike plate", assignee: "Priya D.", done: true },
+        { id: 312, label: "Verify the door latches", assignee: "Priya D.", done: true },
+        { id: 313, label: "Get property manager sign-off", assignee: "Priya D.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Plumbing call-out", qty: 1, price: 89 }, { label: "Thermocouple replacement", qty: 1, price: 100 }],
+    "1041": [{ label: "Leak inspection", qty: 1, price: 89 }],
+    "1039": [{ label: "Rooftop unit service", qty: 12, price: 75 }],
+    "1038": [{ label: "Dishwasher repair labor", qty: 1, price: 110 }],
+    "1035": [{ label: "Full unit turn", qty: 1, price: 1200 }],
+    "1031": [{ label: "Lock hardware repair", qty: 1, price: 240 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Unit 4B — Alicia M.", meta: "No hot water since this morning · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Unit 3C — Renee C.", meta: "Dishwasher backing up, standing water", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New request · bathroom ceiling leak · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Oak Ridge Apartments", meta: "Quarterly HVAC · COI requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Halvorsen Ownership", meta: "Owner charge reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Cedar Court HOA", meta: "Lobby door lock follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Unit 4B — Alicia M.", initials: "AM", phone: "(602) 555-0148", email: "alicia.m@email.com", address: "1420 N 3rd Ave, Unit 4B, Phoenix AZ", since: "2023", tags: ["Tenant", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Unit 6A — Trevor B.", initials: "TB", phone: "(602) 555-0192", email: "tbrooks@email.com", address: "1420 N 3rd Ave, Unit 6A, Phoenix AZ", since: "2024", tags: ["Tenant"], balance: 240, last: "Charge sent Jun 18" },
+    { id: 3, name: "Oak Ridge Apartments", initials: "OR", phone: "(480) 555-0110", email: "manager@oakridgeapts.com", address: "Oak Ridge Rd, Tempe AZ", since: "2022", tags: ["Property", "Maintenance plan"], balance: 0, last: "Service Jun 10" },
+    { id: 4, name: "Unit 3C — Renee C.", initials: "RC", phone: "(623) 555-0177", email: "renee.c@email.com", address: "45 W Glendale Ln, Unit 3C, Glendale AZ", since: "2025", tags: ["Tenant"], balance: 89, last: "First call Jun 20" },
+    { id: 5, name: "Halvorsen Ownership", initials: "HO", phone: "(480) 555-0143", email: "owner@halvorsenproperties.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["Owner", "Turn"], balance: 0, last: "Turn Apr 3" },
+    { id: 6, name: "Cedar Court HOA", initials: "CC", phone: "(602) 555-0166", email: "board@cedarcourthoa.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Association"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · no hot water", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · access window sent", body: "Miguel arriving 3:30 PM" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Owner charge · $189", body: "Approved and paid" },
+    { when: "Last spring", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · unit turn", body: "$1,200 · make-ready complete" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "Move-in", body: "Lease started, added to portal" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "Plumbing call-out", when: "Today", status: "Scheduled", amount: 189 },
+      { title: "HVAC service", when: "Mar 2026", status: "Done", amount: 129 },
+      { title: "Full unit turn", when: "Jul 2025", status: "Done", amount: 1200 },
+    ],
+    tickets: [
+      { id: "1042", issue: "No hot water since this morning", status: "Open" },
+      { id: "0987", issue: "Quarterly HVAC service", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 189, status: "Due" },
+      { id: "INV-0987", amount: 129, status: "Paid" },
+      { id: "INV-0820", amount: 1200, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "No hot water since this morning, wants a same-day visit." },
+      { kind: "Text", when: "Today 4:13", text: "Access window texted: Miguel, 3 to 5pm." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the quarterly HVAC service." },
+    ],
+    assets: [
+      { name: "Rheem water heater", meta: "Installed Jul 2025 · Model XE40 · Unit closet", warranty: "Under warranty" },
+      { name: "Goodman HVAC unit", meta: "Installed Jul 2025 · Model GSX14 · Rooftop", warranty: "Under warranty" },
+      { name: "Whirlpool dishwasher", meta: "Installed Jul 2025 · Kitchen", warranty: "Out of warranty" },
+    ],
+    files: [
+      { name: "Move-in inspection", meta: "6 photos · Jul 2025" },
+      { name: "Signed lease.pdf", meta: "PDF · Jul 2025" },
+      { name: "Appliance warranty.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "james", name: "Unit 6A — Trevor B.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "The ceiling stain is getting bigger." }] },
+    { id: "oak", name: "Oak Ridge Apartments", msgs: [{ me: true, text: "Crew is booked for the 12-unit HVAC service Thursday at 8:30." }, { me: false, text: "Great, the COI is on file." }] },
+    { id: "dana", name: "Unit 3C — Renee C.", unread: 1, msgs: [{ me: false, text: "Is the dishwasher still backing up after the visit?" }] },
+  ],
+  messageTemplates: ["On our way 🚐", "Running 10 min late", "All done, ticket closed", "Confirming your maintenance visit"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Schedule Unit 4B hot water visit", meta: "Dispatch · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Miguel A.", "Today 4:30 PM · Miguel A.", "Tomorrow 9:00 AM · Priya D."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Alicia her access window", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Miguel arriving 3:30 PM", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: no hot water building-wide or just 4B?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Just Unit 4B", "Whole building", "The riser stack"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a ticket", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a ticket is created", action: "route it to the right tech or vendor", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "a visit is booked", action: "text the tenant a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a job is marked done", action: "send the owner charge automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "an owner charge is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling Cornerstone PM! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "Standard repair": ["New", "Scheduled", "In progress", "Invoiced", "Paid"],
+    "Unit turn": ["New", "Quoted", "Approved", "Scheduled", "Turned", "Paid"],
+    "Warranty claim": ["New", "Verified", "Scheduled", "Resolved"],
+    "Maintenance plan": ["Due", "Scheduled", "Serviced", "Logged"],
+  },
+  schedulePlaceholder: "What's the request? e.g. No hot water for Unit 4B",
+  mileItem: "Full unit turn",
+  mileBase: 1200,
+  billingAlertNote: "Across 3 owners · Cedar Court HOA $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Owner billing up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Make-ready · Unit 2A", tech: "Miguel A." },
+    { time: "3:30 PM", title: "No hot water · Unit 4B", tech: "Miguel A.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Cedar Court HOA", body: "Owner charge 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent ticket needs scheduling", body: "#1041 bathroom ceiling leak · Unit 6A", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, there's no hot water in my unit and I've got two kids to get ready." },
+    { who: "OneBy", line: "Sorry about that, I can get a tech out today. Is it just your unit or the whole building?" },
+    { who: "Caller", line: "Just mine, 4B." },
+    { who: "OneBy", line: "Got it. Are you home after 3? Miguel can be there between 3 and 5." },
+    { who: "Caller", line: "Yep, I'm home all day." },
+    { who: "OneBy", line: "Perfect, you're booked for 3 to 5 today. I'll text you the access window." },
+  ],
+};

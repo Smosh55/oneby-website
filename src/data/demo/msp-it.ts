@@ -1,0 +1,222 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm the outage scope with the site", assignee: "Priya N.", done: true },
+  { id: 2, label: "Check mail server and DNS records", assignee: "Priya N.", done: false },
+  { id: 3, label: "Update the client on the ticket", assignee: "Rosa T.", done: false },
+];
+
+export const mspItDemo: DemoData = {
+  slug: "msp-it",
+  company: "Northgate IT",
+  primaryCustomer: "Northwind Co.",
+  primaryIssue: "Office-wide email outage",
+  primaryTicket: "1042",
+  summary:
+    "Managed client, office-wide email outage since 9am affecting all staff. Priority incident, needs an engineer now.",
+  liveTags: ["Managed client", "P1 incident", "Email"],
+  liveNotes: ["Affects all 40 staff.", "Primary contact is the office manager."],
+  primaryTech: "Priya N.",
+  primaryMessages: [
+    { me: true, text: `Hi, this is OneBy for Northgate IT. Priya is on the Northwind email outage now, remote session opening at 3:30 PM.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Password resets · Ortiz Legal", tech: "Deon W.", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "Server patching · Oakline Group", tech: "Priya N.", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "Onboarding setup · Garcia Dental", tech: "Deon W.", duration: "1h" },
+      { time: "1:00 PM", title: "Firewall install · Lee Realty", tech: "Priya N.", duration: "Half day" },
+      { time: "3:30 PM", title: "Email outage · Northwind Co.", tech: "Priya N.", hot: true, duration: "1h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Network audit · Park Ave Clinic", tech: "Deon W.", duration: "30m" }],
+    4: [{ time: "2:00 PM", title: "Server setup · Reyes Logistics", tech: "Priya N.", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Priya N.", role: "Lead engineer", status: "On a ticket", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["Networking", "Security", "Servers"] },
+    { name: "Deon W.", role: "Support engineer", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["Help desk", "Endpoints"] },
+    { name: "Rosa T.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Triage", "Scheduling"] },
+    { name: "Aisha K.", role: "Support engineer", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Cloud", "Help desk"] },
+  ],
+  techDot: { "Priya N.": "bg-blue", "Deon W.": "bg-green", "Aisha K.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "Remote support hour", type: "Service", price: 125, tasks: ["Confirm the issue and scope", "Diagnose over a remote session", "Apply the fix and verify", "Document the resolution on the ticket"] },
+    { id: 2, name: "Onsite visit", type: "Service", price: 175, tasks: ["Travel to the site", "Diagnose on the hardware", "Resolve and test", "Log the visit notes"] },
+    { id: 3, name: "Labor (per hour)", type: "Service", price: 150 },
+    { id: 4, name: "Server setup", type: "Service", price: 2400, tasks: ["Scope the build and licensing", "Rack and image the server", "Configure roles and backups", "Migrate data and verify", "Walk through with the client"] },
+    { id: 5, name: "Security audit", type: "Service", price: 900 },
+    { id: 6, name: "Managed plan (per seat)", type: "Service", price: 65 },
+    { id: 7, name: "SSD (1TB)", type: "Part", price: 120 },
+    { id: 8, name: "RAM (16GB)", type: "Part", price: 70 },
+  ],
+  tickets: [
+    { id: "1042", issue: "Office-wide email outage", customer: "Northwind Co.", status: "Scheduled", urgent: true, summary: "Managed client, no email office-wide since 9am. All staff affected. Wants the earliest slot. Mail flow stopped after a filtering change last night, likely DNS or the mail server.",
+      relationship: "managed client", tech: "Priya N.", tags: ["Managed client", "P1 incident", "Email"], notes: ["Affects all 40 staff.", "Primary contact is the office manager."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "Ransomware alert on a workstation", customer: "Harbor Freight Forwarding", status: "New", urgent: true, summary: "New alert, endpoint flagged suspicious encryption activity. Machine isolated but staff worried. Wants an engineer on it today, flexible on the time.",
+      relationship: "managed client", tech: "Deon W.", tags: ["Security", "P1 incident", "Endpoint"], notes: ["Workstation already isolated from the network.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Confirm the endpoint is isolated", assignee: "Deon W.", done: false },
+        { id: 412, label: "Pull logs and the alert detail", assignee: "Deon W.", done: false },
+      ] },
+    { id: "1039", issue: "Quarterly server patching, 12 servers", customer: "Oakline Group", status: "Scheduled", urgent: false, summary: "Recurring managed-plan maintenance. Twelve servers, needs a half-day window and a change approval on file before the work starts.",
+      relationship: "managed plan", tech: "Priya N.", tags: ["Managed plan", "Patching", "12 servers"], notes: ["Change approval required before start.", "Maintenance window is after hours."], subtasks: [
+        { id: 391, label: "Confirm change approval is on file", assignee: "Rosa T.", done: true },
+        { id: 392, label: "Block a half-day maintenance window", assignee: "Rosa T.", done: false },
+        { id: 393, label: "Stage patches for 12 servers", assignee: "Priya N.", done: false },
+      ] },
+    { id: "1038", issue: "New laptop onboarding", customer: "Garcia Dental", status: "In progress", urgent: false, summary: "Endpoint setup. Client supplied the laptop, just needs imaging and account setup. Engineer is on it now.",
+      relationship: "managed client", tech: "Deon W.", tags: ["Onboarding", "Endpoint"], notes: ["Client supplied the laptop.", "Engineer is on the session."], subtasks: [
+        { id: 381, label: "Image the laptop and join the domain", assignee: "Deon W.", done: true },
+        { id: 382, label: "Set up email and MFA", assignee: "Deon W.", done: false },
+      ] },
+    { id: "1035", issue: "New server setup", customer: "Reyes Logistics", status: "Invoiced", urgent: false, summary: "New file server deployed Tuesday. Work complete, invoice sent, awaiting payment.",
+      relationship: "project client", tech: "Priya N.", tags: ["Project", "Server", "Warranty"], notes: ["File server deployed Tuesday.", "12-month support warranty registered."], subtasks: [
+        { id: 351, label: "Register the support warranty", assignee: "Rosa T.", done: true },
+        { id: 352, label: "Send the invoice", assignee: "Rosa T.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Rosa T.", done: false },
+      ] },
+    { id: "1031", issue: "Wi-Fi dropping in the warehouse", customer: "Sun City Distributors", status: "Done", urgent: false, summary: "Warehouse Wi-Fi dropping intermittently. Replaced the failing access point, verified coverage, signed off.",
+      relationship: "managed client", tech: "Deon W.", tags: ["Networking", "Wireless"], notes: ["Replaced the failing access point.", "Coverage verified and signed off."], subtasks: [
+        { id: 311, label: "Replace the failing access point", assignee: "Deon W.", done: true },
+        { id: 312, label: "Verify coverage across the floor", assignee: "Deon W.", done: true },
+        { id: 313, label: "Get client sign-off", assignee: "Deon W.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Remote support hour", qty: 1, price: 125 }, { label: "Mail server fix", qty: 1, price: 100 }],
+    "1041": [{ label: "Security incident triage", qty: 1, price: 125 }],
+    "1039": [{ label: "Server patching", qty: 12, price: 75 }],
+    "1038": [{ label: "Laptop onboarding labor", qty: 1, price: 150 }],
+    "1035": [{ label: "New server setup", qty: 1, price: 2400 }],
+    "1031": [{ label: "Access point replacement", qty: 1, price: 240 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Northwind Co.", meta: "Office-wide email outage · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Garcia Dental", meta: "New laptop won't join email", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New client · ransomware alert · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Oakline Group", meta: "Quarterly patching · change approval requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Reyes Logistics", meta: "Payment reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Sun City Distributors", meta: "Warehouse Wi-Fi follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Northwind Co.", initials: "NC", phone: "(602) 555-0148", email: "it@northwind.co", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["Managed", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Harbor Freight Forwarding", initials: "HF", phone: "(602) 555-0192", email: "ops@harborffw.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Managed"], balance: 240, last: "Invoice sent Jun 18" },
+    { id: 3, name: "Oakline Group", initials: "OG", phone: "(480) 555-0110", email: "admin@oaklinegroup.com", address: "Oak St, Tempe AZ", since: "2022", tags: ["Managed", "Managed plan"], balance: 0, last: "Patching Jun 10" },
+    { id: 4, name: "Garcia Dental", initials: "GD", phone: "(623) 555-0177", email: "office@garciadental.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
+    { id: 5, name: "Reyes Logistics", initials: "RL", phone: "(480) 555-0143", email: "it@reyeslogistics.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["Project", "Server"], balance: 0, last: "Deploy Apr 3" },
+    { id: 6, name: "Sun City Distributors", initials: "SC", phone: "(602) 555-0166", email: "support@suncitydist.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Managed"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · email outage", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · engineer ETA sent", body: "Priya on it, 3:30 PM" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
+    { when: "Last year", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Project · server refresh", body: "$2,400 · 12-month support" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "Remote support session", when: "Today", status: "Scheduled", amount: 189 },
+      { title: "Security audit", when: "Mar 2026", status: "Done", amount: 900 },
+      { title: "Server setup", when: "Jul 2025", status: "Done", amount: 2400 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Office-wide email outage", status: "Open" },
+      { id: "0987", issue: "Quarterly patching visit", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 189, status: "Due" },
+      { id: "INV-0987", amount: 900, status: "Paid" },
+      { id: "INV-0820", amount: 2400, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "Office-wide email down since 9am, wants an engineer now." },
+      { kind: "Text", when: "Today 4:13", text: "ETA texted: Priya, remote session 3 to 5pm." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the annual security audit." },
+    ],
+    assets: [
+      { name: "Dell PowerEdge server", meta: "Deployed Jul 2025 · Model R650 · Server room", warranty: "Under warranty" },
+      { name: "SonicWall firewall", meta: "Deployed Jul 2025 · Model TZ470 · Edge", warranty: "Under warranty" },
+      { name: "Microsoft 365 tenant", meta: "Onboarded Jul 2025 · 40 seats", warranty: "Managed plan" },
+    ],
+    files: [
+      { name: "Network diagram", meta: "3 files · Jul 2025" },
+      { name: "Signed SOW.pdf", meta: "PDF · Jul 2025" },
+      { name: "Support agreement.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "james", name: "Harbor Freight Forwarding", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "The alert is worrying our staff." }] },
+    { id: "oak", name: "Oakline Group", msgs: [{ me: true, text: "Engineer is booked for the 12-server patching Thursday at 8:30." }, { me: false, text: "Great, the change approval is on file." }] },
+    { id: "dana", name: "Garcia Dental", unread: 1, msgs: [{ me: false, text: "Is the new laptop's email working after the setup?" }] },
+  ],
+  messageTemplates: ["Working on it now 💻", "Running 10 min late", "All done, ticket resolved", "Confirming your session time"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Schedule Northwind email fix", meta: "Dispatch · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Priya N.", "Today 4:30 PM · Priya N.", "Tomorrow 9:00 AM · Deon W."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Northwind their engineer ETA", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Priya on it, 3:30 PM", "Running 15 min late", "Remote session opening now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: all staff affected, not just one?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["All staff", "One department", "One user"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a ticket", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a ticket is created", action: "assign the engineer with the right skills", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "a session is booked", action: "text the client a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a ticket is resolved", action: "send the invoice automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "an SLA is 30 minutes from breach", action: "send a friendly escalation reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling Northgate IT! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "Standard ticket": ["New", "Scheduled", "In progress", "Invoiced", "Paid"],
+    "New project": ["New", "Quoted", "Approved", "Scheduled", "Deployed", "Paid"],
+    "Warranty claim": ["New", "Verified", "Scheduled", "Resolved"],
+    "Managed plan": ["Due", "Scheduled", "Serviced", "Logged"],
+  },
+  schedulePlaceholder: "What's the issue? e.g. Email outage for Northwind Co.",
+  mileItem: "New server setup",
+  mileBase: 2400,
+  billingAlertNote: "Across 3 clients · Sun City Distributors $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Revenue up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Firewall install · Lee Realty", tech: "Priya N." },
+    { time: "3:30 PM", title: "Email outage · Northwind Co.", tech: "Priya N.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Sun City Distributors", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent ticket needs scheduling", body: "#1041 ransomware alert · Harbor Freight Forwarding", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, nobody in the office can get email and it's been down since nine." },
+    { who: "OneBy", line: "Sorry to hear that, I can get an engineer on it today. Is it everyone or just one department?" },
+    { who: "Caller", line: "Everyone." },
+    { who: "OneBy", line: "Got it. Can someone give access this afternoon? Priya can start a remote session between 3 and 5." },
+    { who: "Caller", line: "Yep, that works." },
+    { who: "OneBy", line: "Perfect, you're booked for 3 to 5 today. I'll text you the engineer's ETA." },
+  ],
+};

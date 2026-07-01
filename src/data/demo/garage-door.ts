@@ -1,0 +1,222 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm arrival window", assignee: "Rick M.", done: true },
+  { id: 2, label: "Load a matched torsion spring set", assignee: "Rick M.", done: false },
+  { id: 3, label: "Collect payment on site", assignee: "Trevor H.", done: false },
+];
+
+export const garageDoorDemo: DemoData = {
+  slug: "garage-door",
+  company: "ClearPath Garage Doors",
+  primaryCustomer: "Nadia F.",
+  primaryIssue: "Broken spring, door won't open",
+  primaryTicket: "1042",
+  summary:
+    "Existing customer, torsion spring snapped this morning and the car is trapped inside. Home all day, wants the earliest same-day slot.",
+  liveTags: ["Existing customer", "Broken spring", "Same-day"],
+  liveNotes: ["Car trapped in the garage.", "Gate code 4417."],
+  primaryTech: "Rick M.",
+  primaryMessages: [
+    { me: true, text: `Hi Nadia, this is OneBy for ClearPath Garage Doors. Rick is booked for your spring repair today at 3:30 PM.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Off-track door · Malone", tech: "Andre P.", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "Opener install · Ironwood HOA", tech: "Rick M.", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "Roller replacement · Vance", tech: "Andre P.", duration: "1h" },
+      { time: "1:00 PM", title: "New door install · Brooks", tech: "Rick M.", duration: "Half day" },
+      { time: "3:30 PM", title: "Spring repair · Nadia F.", tech: "Rick M.", hot: true, duration: "1h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Estimate · Willow Ct", tech: "Andre P.", duration: "30m" }],
+    4: [{ time: "2:00 PM", title: "New door install · Delgado", tech: "Rick M.", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Rick M.", role: "Lead tech", status: "On a job", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["Springs", "Openers", "Install"] },
+    { name: "Andre P.", role: "Tech", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["Repairs", "Rollers", "Cables"] },
+    { name: "Trevor H.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Dispatch", "Scheduling"] },
+    { name: "Kayla V.", role: "Installer", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Install", "Panels"] },
+  ],
+  techDot: { "Rick M.": "bg-blue", "Andre P.": "bg-green", "Kayla V.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "Service call", type: "Service", price: 89, tasks: ["Inspect door balance and tracks", "Test springs and cables", "Check opener and safety sensors", "Review findings with customer"] },
+    { id: 2, name: "Spring replacement", type: "Service", price: 249, tasks: ["Release tension safely", "Swap the matched spring set", "Balance and cycle the door", "Test opener and safety reverse"] },
+    { id: 3, name: "Labor (per hour)", type: "Service", price: 120 },
+    { id: 4, name: "New door install", type: "Service", price: 1500, tasks: ["Confirm measurements and color", "Remove the old door and hardware", "Install panels, track, and rollers", "Set springs and opener", "Walk through with customer"] },
+    { id: 5, name: "Torsion spring", type: "Part", price: 90 },
+    { id: 6, name: "Roller set", type: "Part", price: 55 },
+    { id: 7, name: "Cable set", type: "Part", price: 40 },
+    { id: 8, name: "Opener remote", type: "Part", price: 35 },
+  ],
+  tickets: [
+    { id: "1042", issue: "Broken spring, door won't open", customer: "Nadia F.", status: "Scheduled", urgent: true, summary: "Existing customer, torsion spring snapped this morning and the car is trapped inside. Wants the earliest slot. Double-car door, likely a matched spring set.",
+      relationship: "existing customer", tech: "Rick M.", tags: ["Existing customer", "Broken spring", "Same-day"], notes: ["Car trapped in the garage.", "Gate code 4417."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "Door off the track", customer: "Curtis B.", status: "New", urgent: true, summary: "New caller, door came off the track and is hanging crooked. Not safe to operate. Wants someone out today, flexible on the time.",
+      relationship: "new caller", tech: "Andre P.", tags: ["New caller", "Off-track", "Same-day"], notes: ["Door is stuck half-open.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Confirm the door is secured open", assignee: "Andre P.", done: false },
+        { id: 412, label: "Photograph the track and rollers", assignee: "Andre P.", done: false },
+      ] },
+    { id: "1039", issue: "Opener install, 12 doors", customer: "Ironwood HOA", status: "Scheduled", urgent: false, summary: "Recurring service contract. Twelve garages need new openers, needs a half-day block and a COI on file before the crew arrives.",
+      relationship: "service contract", tech: "Rick M.", tags: ["Commercial", "Service plan", "12 doors"], notes: ["COI required on file before arrival.", "Access via the north gate."], subtasks: [
+        { id: 391, label: "Confirm COI is on file", assignee: "Trevor H.", done: true },
+        { id: 392, label: "Block a half day for the crew", assignee: "Trevor H.", done: false },
+        { id: 393, label: "Load 12 opener kits", assignee: "Rick M.", done: false },
+      ] },
+    { id: "1038", issue: "Opener remote reprogram", customer: "Trevor H.", status: "In progress", urgent: false, summary: "Smart opener remote reprogram. Customer supplied the remote, just needs labor. Tech is on site now.",
+      relationship: "repeat customer", tech: "Andre P.", tags: ["Repeat customer", "Opener"], notes: ["Customer supplied the remote.", "Tech is on site."], subtasks: [
+        { id: 381, label: "Verify remote compatibility", assignee: "Andre P.", done: true },
+        { id: 382, label: "Test open and close cycles", assignee: "Andre P.", done: false },
+      ] },
+    { id: "1035", issue: "New door install", customer: "Delgado Family", status: "Invoiced", urgent: false, summary: "New insulated double door installed Tuesday. Job complete, invoice sent, awaiting payment.",
+      relationship: "install customer", tech: "Rick M.", tags: ["Install", "New door", "Warranty"], notes: ["Insulated double door installed Tuesday.", "12-month labor warranty registered."], subtasks: [
+        { id: 351, label: "Register the warranty", assignee: "Trevor H.", done: true },
+        { id: 352, label: "Send the invoice", assignee: "Trevor H.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Trevor H.", done: false },
+      ] },
+    { id: "1031", issue: "Cable and roller service", customer: "Copper Grill", status: "Done", urgent: false, summary: "Loading-dock door binding and noisy. Replaced the frayed cables and worn rollers, cycled and signed off.",
+      relationship: "commercial account", tech: "Andre P.", tags: ["Commercial", "Repair"], notes: ["Replaced cables and rollers.", "Door cycled and signed off."], subtasks: [
+        { id: 311, label: "Replace the frayed cables", assignee: "Andre P.", done: true },
+        { id: 312, label: "Swap the worn rollers", assignee: "Andre P.", done: true },
+        { id: 313, label: "Get customer sign-off", assignee: "Andre P.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Spring replacement", qty: 1, price: 249 }, { label: "Torsion spring", qty: 2, price: 90 }],
+    "1041": [{ label: "Service call", qty: 1, price: 89 }],
+    "1039": [{ label: "Opener install", qty: 12, price: 220 }],
+    "1038": [{ label: "Remote reprogram labor", qty: 1, price: 120 }],
+    "1035": [{ label: "New door install", qty: 1, price: 1500 }],
+    "1031": [{ label: "Cable and roller service", qty: 1, price: 240 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Nadia F.", meta: "Broken spring, car trapped · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Trevor H.", meta: "Opener remote not working", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · door off track · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Ironwood HOA", meta: "Opener install · COI requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Delgado Family", meta: "Payment reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Copper Grill", meta: "Dock door follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Nadia F.", initials: "NF", phone: "(602) 555-0148", email: "nadia.f@email.com", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["Garage Door", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Curtis B.", initials: "CB", phone: "(602) 555-0192", email: "cbrooks@email.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Off-track"], balance: 240, last: "Invoice sent Jun 18" },
+    { id: 3, name: "Ironwood HOA", initials: "IH", phone: "(480) 555-0110", email: "manager@ironwoodhoa.com", address: "Oak St, Tempe AZ", since: "2022", tags: ["Commercial", "Service plan"], balance: 0, last: "Repair Jun 10" },
+    { id: 4, name: "Trevor H.", initials: "TH", phone: "(623) 555-0177", email: "trevor.h@email.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
+    { id: 5, name: "Delgado Family", initials: "DF", phone: "(480) 555-0143", email: "delgado.home@email.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["Garage Door", "Install"], balance: 0, last: "Install Apr 3" },
+    { id: 6, name: "Copper Grill", initials: "CG", phone: "(602) 555-0166", email: "book@coppergrill.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Commercial"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · broken spring, car trapped", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Rick arriving 3:30 PM" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
+    { when: "Last spring", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · new door install", body: "$1,850 · 12-month warranty" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "Spring repair", when: "Today", status: "Scheduled", amount: 189 },
+      { title: "Tune-up and lube", when: "Mar 2026", status: "Done", amount: 129 },
+      { title: "New door install", when: "Jul 2025", status: "Done", amount: 1850 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Broken spring, door won't open", status: "Open" },
+      { id: "0987", issue: "Annual door tune-up", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 189, status: "Due" },
+      { id: "INV-0987", amount: 129, status: "Paid" },
+      { id: "INV-0820", amount: 1850, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "Spring snapped this morning, car trapped, wants a same-day visit." },
+      { kind: "Text", when: "Today 4:13", text: "Arrival window texted: Rick, 3 to 5pm." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the annual door tune-up." },
+    ],
+    assets: [
+      { name: "Amarr insulated double door", meta: "Installed Jul 2025 · Model 3000 · Main garage", warranty: "Under warranty" },
+      { name: "LiftMaster belt-drive opener", meta: "Installed Jul 2025 · Model 8550W · Main garage", warranty: "Under warranty" },
+      { name: "Torsion spring set", meta: "Installed Jul 2025 · Dual spring", warranty: "Out of warranty" },
+    ],
+    files: [
+      { name: "Install photos", meta: "3 photos · Jul 2025" },
+      { name: "Signed estimate.pdf", meta: "PDF · Jul 2025" },
+      { name: "Warranty certificate.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "curtis", name: "Curtis B.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "My door is stuck half-open." }] },
+    { id: "oak", name: "Ironwood HOA", msgs: [{ me: true, text: "Crew is booked for the 12-opener install Thursday at 8:30." }, { me: false, text: "Great, the COI is on file." }] },
+    { id: "trevor", name: "Trevor H.", unread: 1, msgs: [{ me: false, text: "Is the remote still not pairing after the reprogram?" }] },
+  ],
+  messageTemplates: ["On our way 🚐", "Running 10 min late", "All done, invoice sent", "Confirming your appointment"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Schedule spring repair", meta: "Dispatch · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Rick M.", "Today 4:30 PM · Rick M.", "Tomorrow 9:00 AM · Andre P."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Nadia her arrival window", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Rick arriving 3:30 PM", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: double-car door, not single?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Double-car door", "Single-car door", "Two separate doors"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a ticket", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a ticket is created", action: "assign the tech with the right skills", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "a job is booked", action: "text the customer a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a job is marked done", action: "send the invoice automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "an invoice is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling ClearPath Garage Doors! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "Standard repair": ["New", "Scheduled", "In progress", "Invoiced", "Paid"],
+    "New install": ["New", "Quoted", "Approved", "Scheduled", "Installed", "Paid"],
+    "Warranty claim": ["New", "Verified", "Scheduled", "Resolved"],
+    "Service plan": ["Due", "Scheduled", "Serviced", "Logged"],
+  },
+  schedulePlaceholder: "What's the job? e.g. Spring repair for Nadia F.",
+  mileItem: "New door install",
+  mileBase: 1500,
+  billingAlertNote: "Across 3 customers · Copper Grill $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Revenue up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "New door install · Brooks", tech: "Rick M." },
+    { time: "3:30 PM", title: "Spring repair · Nadia F.", tech: "Rick M.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Copper Grill", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent ticket needs scheduling", body: "#1041 door off the track · Curtis B.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, my garage door spring just snapped and my car's stuck inside." },
+    { who: "OneBy", line: "Sorry to hear that, I can get a tech out today. Is it a single or double-car door?" },
+    { who: "Caller", line: "Double." },
+    { who: "OneBy", line: "Got it. Is someone home after 3? Rick can be there between 3 and 5." },
+    { who: "Caller", line: "Yep, that works." },
+    { who: "OneBy", line: "Perfect, you're booked for 3 to 5 today. I'll text you the arrival window." },
+  ],
+};

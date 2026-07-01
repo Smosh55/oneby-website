@@ -1,0 +1,222 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm arrival window", assignee: "Marco V.", done: true },
+  { id: 2, label: "Load wasp gear and a ladder", assignee: "Marco V.", done: false },
+  { id: 3, label: "Collect payment on site", assignee: "Colette R.", done: false },
+];
+
+export const pestControlDemo: DemoData = {
+  slug: "pest-control",
+  company: "Sentry Pest",
+  primaryCustomer: "Priya S.",
+  primaryIssue: "Active wasp nest by the front door",
+  primaryTicket: "1042",
+  summary:
+    "Existing customer, active wasp nest at the front entry and a household member is allergic. Home all day, wants a same-day treatment.",
+  liveTags: ["Existing customer", "Wasps", "Same-day"],
+  liveNotes: ["Household member is allergic.", "Gate code 4417."],
+  primaryTech: "Marco V.",
+  primaryMessages: [
+    { me: true, text: `Hi Priya, this is OneBy for Sentry Pest. Marco is booked for your wasp treatment today at 3:30 PM.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Ant treatment · Whitfield", tech: "Diego M.", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "Quarterly service · Larkspur HOA", tech: "Marco V.", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "Inspection · Nguyen", tech: "Diego M.", duration: "1h" },
+      { time: "1:00 PM", title: "Bed bug treatment · Boone", tech: "Marco V.", duration: "Half day" },
+      { time: "3:30 PM", title: "Wasp treatment · Priya S.", tech: "Marco V.", hot: true, duration: "1h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Inspection · Aspen Way", tech: "Diego M.", duration: "30m" }],
+    4: [{ time: "2:00 PM", title: "Rodent exclusion · Okafor", tech: "Marco V.", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Marco V.", role: "Lead route tech", status: "On a job", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["Wasps", "Rodents", "Termites"] },
+    { name: "Diego M.", role: "Route tech", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["General pest", "Inspection"] },
+    { name: "Colette R.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Dispatch", "Scheduling"] },
+    { name: "Renee C.", role: "Route tech", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Bed bugs", "General pest"] },
+  ],
+  techDot: { "Marco V.": "bg-blue", "Diego M.": "bg-green", "Renee C.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "Inspection", type: "Service", price: 89, tasks: ["Walk the property", "Identify the pest and entry points", "Assess severity and risk", "Review findings with customer"] },
+    { id: 2, name: "General treatment", type: "Service", price: 129, tasks: ["Treat interior and exterior", "Seal accessible entry points", "Set monitors where needed", "Log readings and notes"] },
+    { id: 3, name: "Labor (per hour)", type: "Service", price: 120 },
+    { id: 4, name: "Bed bug treatment", type: "Service", price: 650, tasks: ["Inspect and confirm activity", "Prep and treat affected rooms", "Apply follow-up materials", "Schedule the re-treatment", "Walk through with customer"] },
+    { id: 5, name: "Rodent exclusion", type: "Service", price: 320, tasks: ["Locate entry points", "Seal and exclude", "Set traps and bait stations"] },
+    { id: 6, name: "Quarterly plan", type: "Service", price: 99 },
+    { id: 7, name: "Bait stations (each)", type: "Part", price: 18 },
+    { id: 8, name: "Monitor traps (pack)", type: "Part", price: 25 },
+  ],
+  tickets: [
+    { id: "1042", issue: "Active wasp nest by the front door", customer: "Priya S.", status: "Scheduled", urgent: true, summary: "Existing customer, active wasp nest at the front entry and a household member is allergic. Wants the earliest slot. Nest is up under the eave, needs a ladder.",
+      relationship: "existing customer", tech: "Marco V.", tags: ["Existing customer", "Wasps", "Same-day"], notes: ["Household member is allergic.", "Gate code 4417."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "Rats in the attic", customer: "Wesley T.", status: "New", urgent: true, summary: "New caller, hearing scratching in the attic at night and found droppings. Wants someone out today, flexible on the time.",
+      relationship: "new caller", tech: "Diego M.", tags: ["New caller", "Rodents", "Same-day"], notes: ["Noise is worst at night.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Confirm attic access is clear", assignee: "Diego M.", done: false },
+        { id: 412, label: "Photograph the droppings and entry area", assignee: "Diego M.", done: false },
+      ] },
+    { id: "1039", issue: "Quarterly service, 12 units", customer: "Larkspur HOA", status: "Scheduled", urgent: false, summary: "Recurring quarterly plan. Twelve units on the property, needs a half-day block and a COI on file before the crew arrives.",
+      relationship: "quarterly plan", tech: "Marco V.", tags: ["Commercial", "Quarterly plan", "12 units"], notes: ["COI required on file before arrival.", "Access via the north gate."], subtasks: [
+        { id: 391, label: "Confirm COI is on file", assignee: "Colette R.", done: true },
+        { id: 392, label: "Block a half day for the crew", assignee: "Colette R.", done: false },
+        { id: 393, label: "Load materials for 12 units", assignee: "Marco V.", done: false },
+      ] },
+    { id: "1038", issue: "Ant follow-up treatment", customer: "Colette R.", status: "In progress", urgent: false, summary: "Repeat ant activity in the kitchen. Follow-up treatment under the plan, just needs labor. Tech is on site now.",
+      relationship: "repeat customer", tech: "Diego M.", tags: ["Repeat customer", "Ants"], notes: ["Under quarterly plan.", "Tech is on site."], subtasks: [
+        { id: 381, label: "Verify the trail and source", assignee: "Diego M.", done: true },
+        { id: 382, label: "Treat and set fresh monitors", assignee: "Diego M.", done: false },
+      ] },
+    { id: "1035", issue: "Rodent exclusion", customer: "Okafor Family", status: "Invoiced", urgent: false, summary: "Full rodent exclusion completed Tuesday. Job complete, invoice sent, awaiting payment.",
+      relationship: "install customer", tech: "Marco V.", tags: ["Exclusion", "Rodents", "Warranty"], notes: ["Exclusion completed Tuesday.", "90-day service warranty registered."], subtasks: [
+        { id: 351, label: "Register the warranty", assignee: "Colette R.", done: true },
+        { id: 352, label: "Send the invoice", assignee: "Colette R.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Colette R.", done: false },
+      ] },
+    { id: "1031", issue: "Commercial kitchen treatment", customer: "Harbor Kitchen", status: "Done", urgent: false, summary: "Roach activity in the kitchen. Treated, sealed entry points, verified and signed off.",
+      relationship: "commercial account", tech: "Diego M.", tags: ["Commercial", "Roaches"], notes: ["Treated and sealed entry points.", "Verified and signed off."], subtasks: [
+        { id: 311, label: "Treat the affected zones", assignee: "Diego M.", done: true },
+        { id: 312, label: "Seal the entry points", assignee: "Diego M.", done: true },
+        { id: 313, label: "Get customer sign-off", assignee: "Diego M.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Wasp nest treatment", qty: 1, price: 149 }, { label: "Exterior perimeter spray", qty: 1, price: 90 }],
+    "1041": [{ label: "Rodent inspection", qty: 1, price: 89 }],
+    "1039": [{ label: "Quarterly service", qty: 12, price: 75 }],
+    "1038": [{ label: "Ant follow-up labor", qty: 1, price: 120 }],
+    "1035": [{ label: "Rodent exclusion", qty: 1, price: 320 }],
+    "1031": [{ label: "Commercial kitchen treatment", qty: 1, price: 240 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Priya S.", meta: "Wasp nest, allergy in home · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Colette R.", meta: "Ants back in the kitchen", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · rats in attic · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Larkspur HOA", meta: "Quarterly service · COI requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Okafor Family", meta: "Payment reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Harbor Kitchen", meta: "Kitchen treatment follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Priya S.", initials: "PS", phone: "(602) 555-0148", email: "priya.s@email.com", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["Pest Control", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Wesley T.", initials: "WT", phone: "(602) 555-0192", email: "wtorres@email.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Rodents"], balance: 240, last: "Invoice sent Jun 18" },
+    { id: 3, name: "Larkspur HOA", initials: "LH", phone: "(480) 555-0110", email: "manager@larkspurhoa.com", address: "Oak St, Tempe AZ", since: "2022", tags: ["Commercial", "Quarterly plan"], balance: 0, last: "Service Jun 10" },
+    { id: 4, name: "Colette R.", initials: "CR", phone: "(623) 555-0177", email: "colette.r@email.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
+    { id: 5, name: "Okafor Family", initials: "OF", phone: "(480) 555-0143", email: "okafor.home@email.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["Pest Control", "Exclusion"], balance: 0, last: "Exclusion Apr 3" },
+    { id: 6, name: "Harbor Kitchen", initials: "HK", phone: "(602) 555-0166", email: "book@harborkitchen.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Commercial"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · wasp nest, allergy in home", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Marco arriving 3:30 PM" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $129", body: "Paid by card" },
+    { when: "Last quarter", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · quarterly plan renewal", body: "$396/yr · plan active" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "Wasp treatment", when: "Today", status: "Scheduled", amount: 149 },
+      { title: "General treatment", when: "Mar 2026", status: "Done", amount: 129 },
+      { title: "Quarterly plan renewal", when: "Jul 2025", status: "Done", amount: 396 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Active wasp nest by the front door", status: "Open" },
+      { id: "0987", issue: "Quarterly service visit", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 149, status: "Due" },
+      { id: "INV-0987", amount: 129, status: "Paid" },
+      { id: "INV-0820", amount: 396, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "Wasp nest at the front door, someone's allergic, wants a same-day visit." },
+      { kind: "Text", when: "Today 4:13", text: "Arrival window texted: Marco, 3 to 5pm." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the quarterly service visit." },
+    ],
+    assets: [
+      { name: "Quarterly service plan", meta: "Active since Jul 2025 · Renews quarterly · Whole home", warranty: "Plan active" },
+      { name: "Exterior bait stations", meta: "Installed Jul 2025 · 4 stations · Perimeter", warranty: "Under plan" },
+      { name: "Attic rodent monitors", meta: "Installed Jul 2025 · 6 monitors", warranty: "Out of plan" },
+    ],
+    files: [
+      { name: "Service photos", meta: "3 photos · Jul 2025" },
+      { name: "Signed plan agreement.pdf", meta: "PDF · Jul 2025" },
+      { name: "Service warranty.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "wesley", name: "Wesley T.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "The scratching in the attic is getting worse." }] },
+    { id: "oak", name: "Larkspur HOA", msgs: [{ me: true, text: "Crew is booked for the 12-unit quarterly service Thursday at 8:30." }, { me: false, text: "Great, the COI is on file." }] },
+    { id: "colette", name: "Colette R.", unread: 1, msgs: [{ me: false, text: "Are the ants still showing up after the follow-up?" }] },
+  ],
+  messageTemplates: ["On our way 🚐", "Running 10 min late", "All done, invoice sent", "Confirming your appointment"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Schedule wasp treatment", meta: "Dispatch · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Marco V.", "Today 4:30 PM · Marco V.", "Tomorrow 9:00 AM · Diego M."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Priya her arrival window", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Marco arriving 3:30 PM", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: nest at the front entry?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Front entry", "Back patio", "Under the eaves"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a ticket", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a ticket is created", action: "assign the tech with the right skills", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "a job is booked", action: "text the customer a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a job is marked done", action: "send the invoice automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "a plan is due for renewal", action: "text a friendly renewal reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling Sentry Pest! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "Standard treatment": ["New", "Scheduled", "In progress", "Invoiced", "Paid"],
+    "New plan": ["New", "Quoted", "Approved", "Scheduled", "Serviced", "Paid"],
+    "Warranty claim": ["New", "Verified", "Scheduled", "Resolved"],
+    "Quarterly plan": ["Due", "Scheduled", "Serviced", "Logged"],
+  },
+  schedulePlaceholder: "What's the job? e.g. Wasp treatment for Priya S.",
+  mileItem: "Annual quarterly plan",
+  mileBase: 1500,
+  billingAlertNote: "Across 3 customers · Harbor Kitchen $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Revenue up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Bed bug treatment · Boone", tech: "Marco V." },
+    { time: "3:30 PM", title: "Wasp treatment · Priya S.", tech: "Marco V.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Harbor Kitchen", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent ticket needs scheduling", body: "#1041 rats in the attic · Wesley T.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, there's a wasp nest right by my front door and my son is allergic." },
+    { who: "OneBy", line: "Sorry to hear that, I can get a tech out today. Is the nest at the front entry or somewhere else?" },
+    { who: "Caller", line: "Right at the front door, up under the eave." },
+    { who: "OneBy", line: "Got it. Is someone home after 3? Marco can be there between 3 and 5." },
+    { who: "Caller", line: "Yep, that works." },
+    { who: "OneBy", line: "Perfect, you're booked for 3 to 5 today. I'll text you the arrival window." },
+  ],
+};

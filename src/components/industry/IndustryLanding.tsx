@@ -19,6 +19,8 @@ import { getIcon } from "./iconMap";
 import Reveal from "@/components/Reveal";
 import IndustryFAQ from "./IndustryFAQ";
 import DemoForm from "@/components/DemoForm";
+import IndustryDemo from "@/components/IndustryDemo";
+import { industryAccentStyle } from "@/data/industryThemes";
 
 const trustChips = [
   "Free trial, no credit card",
@@ -37,11 +39,11 @@ export default function IndustryLanding({
   const Icon = getIcon(industry.icon);
 
   return (
-    <>
+    <div style={industryAccentStyle(industry.slug)}>
       {/* Hero */}
       <section className="relative overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-20">
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[520px] w-[1000px] rounded-full bg-[radial-gradient(closest-side,rgba(0,143,224,0.14),transparent)]" />
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[520px] w-[1000px] rounded-full bg-[radial-gradient(closest-side,rgba(var(--accent-rgb),0.14),transparent)]" />
           <div className="absolute top-16 right-[10%] h-64 w-64 rounded-full bg-[radial-gradient(closest-side,rgba(28,219,150,0.16),transparent)]" />
         </div>
 
@@ -179,6 +181,24 @@ export default function IndustryLanding({
               </span>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Live interactive demo, loaded with this industry's data */}
+      <section className="py-16 lg:py-20">
+        <div className="container-x">
+          <Reveal className="mx-auto mb-10 max-w-2xl text-center">
+            <span className="eyebrow">Live demo</span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+              See OneBy run a real {industry.shortName.toLowerCase()} call.
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted">
+              This is the real workspace, loaded with{" "}
+              {industry.shortName.toLowerCase()} calls, tickets, and jobs. Click
+              into anything.
+            </p>
+          </Reveal>
+          <IndustryDemo slug={industry.slug} />
         </div>
       </section>
 
@@ -462,7 +482,7 @@ export default function IndustryLanding({
           <Reveal>
             <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-navy via-navy to-navy-700 px-7 py-14 text-center sm:px-16">
               <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,rgba(0,143,224,0.35),transparent)]" />
+                <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,rgba(var(--accent-rgb),0.35),transparent)]" />
                 <div className="absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,rgba(28,219,150,0.3),transparent)]" />
               </div>
               <div className="relative mx-auto max-w-2xl">
@@ -500,6 +520,6 @@ export default function IndustryLanding({
           Book a demo
         </a>
       </div>
-    </>
+    </div>
   );
 }

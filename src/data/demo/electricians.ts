@@ -1,0 +1,222 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm panel size and location", assignee: "Owen D.", done: true },
+  { id: 2, label: "Bring a 60A breaker and whip", assignee: "Owen D.", done: false },
+  { id: 3, label: "Collect payment on site", assignee: "Priya S.", done: false },
+];
+
+export const electriciansDemo: DemoData = {
+  slug: "electricians",
+  company: "Apex Electric",
+  primaryCustomer: "Amara D.",
+  primaryIssue: "EV charger install estimate",
+  primaryTicket: "1042",
+  summary:
+    "Existing customer, wants a quote to add a Level 2 EV charger in the garage on a 200A panel. Home after 3pm, wants a same-day estimate.",
+  liveTags: ["Existing customer", "EV charger", "Estimate"],
+  liveNotes: ["Prefers afternoon visits.", "Gate code 4417."],
+  primaryTech: "Owen D.",
+  primaryMessages: [
+    { me: true, text: `Hi Amara, this is OneBy for Apex Electric. Owen is booked for your EV charger estimate today at 3:30 PM.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Dead circuit · Hollis", tech: "Grace L.", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "Panel upgrade · Oak HOA", tech: "Owen D.", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "Outlet install · Sandoval", tech: "Grace L.", duration: "1h" },
+      { time: "1:00 PM", title: "Rewire · Pemberton", tech: "Owen D.", duration: "Half day" },
+      { time: "3:30 PM", title: "EV charger estimate · Amara D.", tech: "Owen D.", hot: true, duration: "1h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Estimate · Union Square", tech: "Grace L.", duration: "30m" }],
+    4: [{ time: "2:00 PM", title: "Panel upgrade · Okafor", tech: "Owen D.", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Owen D.", role: "Lead electrician", status: "On a job", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["Electrical", "Panels", "EV chargers"] },
+    { name: "Grace L.", role: "Electrician", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["Electrical", "Troubleshooting"] },
+    { name: "Priya S.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Dispatch", "Scheduling"] },
+    { name: "Marco V.", role: "Estimator", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Estimating", "Electrical"] },
+  ],
+  techDot: { "Owen D.": "bg-blue", "Grace L.": "bg-green", "Marco V.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "Service call", type: "Service", price: 89, tasks: ["Inspect the panel and circuit", "Test voltage and breakers", "Trace the fault", "Review findings with customer"] },
+    { id: 2, name: "EV charger install", type: "Service", price: 1200, tasks: ["Confirm panel capacity and permit", "Run the dedicated circuit", "Mount and wire the charger", "Test charging and log readings"] },
+    { id: 3, name: "Labor (per hour)", type: "Service", price: 120 },
+    { id: 4, name: "Panel upgrade to 200A", type: "Service", price: 3200, tasks: ["Confirm load calc and permit", "Coordinate utility disconnect", "Install new panel and breakers", "Label circuits and verify", "Walk through with customer"] },
+    { id: 5, name: "Breaker", type: "Part", price: 40 },
+    { id: 6, name: "GFCI outlet", type: "Part", price: 22 },
+    { id: 7, name: "Romex (per ft)", type: "Part", price: 2 },
+    { id: 8, name: "EV charger unit", type: "Part", price: 550 },
+  ],
+  tickets: [
+    { id: "1042", issue: "EV charger install estimate", customer: "Amara D.", status: "Scheduled", urgent: true, summary: "Existing customer, wants a quote for a Level 2 EV charger in the garage. Existing 200A panel. Wants the earliest slot, likely a 60A circuit run.",
+      relationship: "existing customer", tech: "Owen D.", tags: ["Existing customer", "EV charger", "Estimate"], notes: ["Prefers afternoon visits.", "Gate code 4417."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "Dead circuit, half the kitchen out", customer: "Wesley F.", status: "New", urgent: true, summary: "New caller, half the kitchen has no power and a breaker keeps tripping. Wants someone out today, flexible on the time.",
+      relationship: "new caller", tech: "Grace L.", tags: ["New caller", "Troubleshooting", "Same-day"], notes: ["Breaker trips when reset.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Confirm no burning smell at the panel", assignee: "Grace L.", done: false },
+        { id: 412, label: "Photograph the panel and breaker", assignee: "Grace L.", done: false },
+      ] },
+    { id: "1039", issue: "Panel upgrades, 12 units", customer: "Birchwood HOA", status: "Scheduled", urgent: false, summary: "Recurring maintenance contract. Twelve units on undersized panels, needs a half-day block and a COI on file before the crew arrives.",
+      relationship: "maintenance contract", tech: "Owen D.", tags: ["Commercial", "Maintenance plan", "12 units"], notes: ["COI required on file before arrival.", "Utility coordination via the north meter room."], subtasks: [
+        { id: 391, label: "Confirm COI is on file", assignee: "Priya S.", done: true },
+        { id: 392, label: "Block a half day for the crew", assignee: "Priya S.", done: false },
+        { id: 393, label: "Load panels and breakers for 12 units", assignee: "Owen D.", done: false },
+      ] },
+    { id: "1038", issue: "Outlet and switch replacement", customer: "Corinne L.", status: "In progress", urgent: false, summary: "Outlet and switch swap. Customer supplied the devices, just needs labor. Tech is on site now.",
+      relationship: "repeat customer", tech: "Grace L.", tags: ["Repeat customer", "Devices"], notes: ["Customer supplied the outlets.", "Tech is on site."], subtasks: [
+        { id: 381, label: "Verify device ratings match the circuit", assignee: "Grace L.", done: true },
+        { id: 382, label: "Test outlets and switches", assignee: "Grace L.", done: false },
+      ] },
+    { id: "1035", issue: "Panel upgrade to 200A", customer: "Okafor Family", status: "Invoiced", urgent: false, summary: "New 200A panel installed Tuesday. Job complete, invoice sent, awaiting payment.",
+      relationship: "install customer", tech: "Owen D.", tags: ["Install", "Panel", "Warranty"], notes: ["200A panel installed Tuesday.", "12-month labor warranty registered."], subtasks: [
+        { id: 351, label: "Register the warranty", assignee: "Priya S.", done: true },
+        { id: 352, label: "Send the invoice", assignee: "Priya S.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Priya S.", done: false },
+      ] },
+    { id: "1031", issue: "Restaurant lighting circuit repair", customer: "Lakeside Diner", status: "Done", urgent: false, summary: "Kitchen lighting circuit tripping. Replaced the failed breaker, verified load, signed off.",
+      relationship: "commercial account", tech: "Grace L.", tags: ["Commercial", "Lighting"], notes: ["Replaced the failed breaker.", "Load verified and signed off."], subtasks: [
+        { id: 311, label: "Replace the failed breaker", assignee: "Grace L.", done: true },
+        { id: 312, label: "Verify the circuit load", assignee: "Grace L.", done: true },
+        { id: 313, label: "Get customer sign-off", assignee: "Grace L.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Service call", qty: 1, price: 89 }, { label: "60A circuit run", qty: 1, price: 100 }],
+    "1041": [{ label: "Service call", qty: 1, price: 89 }],
+    "1039": [{ label: "Unit panel upgrade", qty: 12, price: 75 }],
+    "1038": [{ label: "Device install labor", qty: 1, price: 120 }],
+    "1035": [{ label: "Panel upgrade to 200A", qty: 1, price: 3200 }],
+    "1031": [{ label: "Breaker replacement", qty: 1, price: 240 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Amara D.", meta: "EV charger estimate · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Corinne L.", meta: "Outlet sparked, needs a swap", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · partial outage · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Birchwood HOA", meta: "Panel upgrades · COI requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Okafor Family", meta: "Payment reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Lakeside Diner", meta: "Lighting circuit follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Amara D.", initials: "AD", phone: "(602) 555-0148", email: "amara.d@email.com", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["Electrical", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Wesley F.", initials: "WF", phone: "(602) 555-0192", email: "wfoster@email.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Troubleshooting"], balance: 240, last: "Invoice sent Jun 18" },
+    { id: 3, name: "Birchwood HOA", initials: "BH", phone: "(480) 555-0110", email: "manager@birchwoodhoa.com", address: "Birch Ln, Tempe AZ", since: "2022", tags: ["Commercial", "Maintenance plan"], balance: 0, last: "Panel upgrade Jun 10" },
+    { id: 4, name: "Corinne L.", initials: "CL", phone: "(623) 555-0177", email: "corinne.l@email.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
+    { id: 5, name: "Okafor Family", initials: "OF", phone: "(480) 555-0143", email: "okafor.home@email.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["Electrical", "Install"], balance: 0, last: "Install Apr 3" },
+    { id: 6, name: "Lakeside Diner", initials: "LD", phone: "(602) 555-0166", email: "book@lakesidediner.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Commercial"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · EV charger estimate", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Owen arriving 3:30 PM" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
+    { when: "Last spring", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · panel upgrade", body: "$3,200 · 12-month warranty" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "EV charger estimate", when: "Today", status: "Scheduled", amount: 189 },
+      { title: "Outlet install", when: "Mar 2026", status: "Done", amount: 129 },
+      { title: "200A panel upgrade", when: "Jul 2025", status: "Done", amount: 3200 },
+    ],
+    tickets: [
+      { id: "1042", issue: "EV charger install estimate", status: "Open" },
+      { id: "0987", issue: "Annual safety inspection", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 189, status: "Due" },
+      { id: "INV-0987", amount: 129, status: "Paid" },
+      { id: "INV-0820", amount: 3200, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "Wants a quote to add an EV charger, home after 3pm." },
+      { kind: "Text", when: "Today 4:13", text: "Arrival window texted: Owen, 3 to 5pm." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the outlet install." },
+    ],
+    assets: [
+      { name: "Square D 200A panel", meta: "Installed Jul 2025 · Model QO142M200 · Garage", warranty: "Under warranty" },
+      { name: "Whole-home surge protector", meta: "Installed Jul 2025 · Type 2 · Panel", warranty: "Under warranty" },
+      { name: "Nest thermostat", meta: "Installed Jul 2025 · 2nd gen", warranty: "Out of warranty" },
+    ],
+    files: [
+      { name: "Install photos", meta: "3 photos · Jul 2025" },
+      { name: "Signed estimate.pdf", meta: "PDF · Jul 2025" },
+      { name: "Warranty certificate.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "james", name: "Wesley F.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "Half my kitchen still has no power." }] },
+    { id: "oak", name: "Birchwood HOA", msgs: [{ me: true, text: "Crew is booked for the 12-unit panel upgrades Thursday at 8:30." }, { me: false, text: "Great, the COI is on file." }] },
+    { id: "dana", name: "Corinne L.", unread: 1, msgs: [{ me: false, text: "Is the new outlet still sparking after the swap?" }] },
+  ],
+  messageTemplates: ["On our way 🚐", "Running 10 min late", "All done, invoice sent", "Confirming your appointment"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Schedule EV charger estimate", meta: "Dispatch · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Owen D.", "Today 4:30 PM · Owen D.", "Tomorrow 9:00 AM · Grace L."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Amara her arrival window", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Owen arriving 3:30 PM", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: 200A panel, not 100A?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["200A panel", "100A panel", "Not sure yet"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a ticket", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a ticket is created", action: "assign the tech with the right skills", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "a job is booked", action: "text the customer a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a job is marked done", action: "send the invoice automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "an invoice is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling Apex Electric! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "Service call": ["New", "Scheduled", "In progress", "Invoiced", "Paid"],
+    "Panel upgrade": ["New", "Quoted", "Approved", "Scheduled", "Installed", "Paid"],
+    "Warranty claim": ["New", "Verified", "Scheduled", "Resolved"],
+    "Maintenance plan": ["Due", "Scheduled", "Serviced", "Logged"],
+  },
+  schedulePlaceholder: "What's the job? e.g. EV charger estimate for Amara D.",
+  mileItem: "Panel upgrade to 200A",
+  mileBase: 3200,
+  billingAlertNote: "Across 3 customers · Lakeside Diner $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Revenue up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Rewire · Pemberton", tech: "Owen D." },
+    { time: "3:30 PM", title: "EV charger estimate · Amara D.", tech: "Owen D.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Lakeside Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent ticket needs scheduling", body: "#1041 dead circuit · Wesley F.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, half my kitchen just lost power and the breaker keeps tripping." },
+    { who: "OneBy", line: "Sorry to hear that, I can get an electrician out today. Is there any burning smell near the panel?" },
+    { who: "Caller", line: "No, no smell." },
+    { who: "OneBy", line: "Good. Is someone home after 3? Grace can be there between 3 and 5." },
+    { who: "Caller", line: "Yep, that works." },
+    { who: "OneBy", line: "Perfect, you're booked for 3 to 5 today. I'll text you the arrival window." },
+  ],
+};

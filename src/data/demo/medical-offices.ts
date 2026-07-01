@@ -1,0 +1,222 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm the new appointment time", assignee: "Priya S.", done: true },
+  { id: 2, label: "Route the refill request to the provider", assignee: "Priya S.", done: false },
+  { id: 3, label: "Verify insurance on file", assignee: "Rosa V.", done: false },
+];
+
+export const medicalOfficesDemo: DemoData = {
+  slug: "medical-offices",
+  company: "Cedar Family Care",
+  primaryCustomer: "Elena T.",
+  primaryIssue: "Reschedule appointment + refill",
+  primaryTicket: "1042",
+  summary:
+    "Existing patient, wants to move Thursday's follow-up and requests a prescription refill. Available after 3pm, prefers a callback.",
+  liveTags: ["Existing patient", "Scheduling", "Refill"],
+  liveNotes: ["Prefers afternoon callbacks.", "Refill routed to provider, not clinical advice."],
+  primaryTech: "Priya S.",
+  primaryMessages: [
+    { me: true, text: `Hi Elena, this is OneBy for Cedar Family Care. We moved your follow-up to today at 3:30 PM and sent your refill request to the provider.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Follow-up · Bauer", tech: "Dr. Kim", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "Physicals · Pine Ridge School", tech: "Priya S.", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "New patient · Sato", tech: "Dr. Kim", duration: "1h" },
+      { time: "1:00 PM", title: "Procedure · Malik", tech: "Priya S.", duration: "Half day" },
+      { time: "3:30 PM", title: "Follow-up · Elena T.", tech: "Priya S.", hot: true, duration: "1h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Telehealth · Riverton", tech: "Dr. Kim", duration: "30m" }],
+    4: [{ time: "2:00 PM", title: "Annual physical · Whitfield", tech: "Priya S.", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Priya S.", role: "Front desk lead", status: "On a call", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["Scheduling", "Insurance", "Intake"] },
+    { name: "Dr. Kim", role: "Provider", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["Family medicine", "Telehealth"] },
+    { name: "Rosa V.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Front desk", "Scheduling"] },
+    { name: "Nadia P.", role: "Medical assistant", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Rooming", "Billing"] },
+  ],
+  techDot: { "Priya S.": "bg-blue", "Dr. Kim": "bg-green", "Nadia P.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "New patient visit", type: "Service", price: 180, tasks: ["Collect intake forms", "Verify insurance", "Confirm reason for visit", "Room the patient for the provider"] },
+    { id: 2, name: "Follow-up visit", type: "Service", price: 120, tasks: ["Pull the chart", "Confirm the reason for the visit", "Update contact and insurance", "Check the patient in"] },
+    { id: 3, name: "Telehealth visit", type: "Service", price: 90 },
+    { id: 4, name: "In-office procedure", type: "Service", price: 450, tasks: ["Confirm the order and consent", "Verify insurance and prior auth", "Prep the room", "Schedule the follow-up", "Check the patient out"] },
+    { id: 5, name: "Copay", type: "Part", price: 40 },
+    { id: 6, name: "Lab draw fee", type: "Part", price: 35 },
+    { id: 7, name: "Records request fee", type: "Part", price: 25 },
+    { id: 8, name: "Forms & paperwork", type: "Part", price: 20 },
+  ],
+  tickets: [
+    { id: "1042", issue: "Reschedule appointment + refill", customer: "Elena T.", status: "Scheduled", urgent: true, summary: "Existing patient wants to move Thursday's follow-up to the earliest slot and requests a refill. Refill request routed to the provider, not handled as clinical advice.",
+      relationship: "existing patient", tech: "Priya S.", tags: ["Existing patient", "Scheduling", "Refill"], notes: ["Prefers afternoon callbacks.", "Refill routed to provider for review."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "Billing question — statement balance", customer: "Marcus D.", status: "New", urgent: true, summary: "New caller with a question about a statement balance and whether insurance was applied. Wants a callback today, flexible on timing.",
+      relationship: "new caller", tech: "Dr. Kim", tags: ["New caller", "Billing", "Callback"], notes: ["Asking why a balance is due.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Pull the statement and claim", assignee: "Priya S.", done: false },
+        { id: 412, label: "Confirm insurance was applied", assignee: "Priya S.", done: false },
+      ] },
+    { id: "1039", issue: "Sports physicals, school group", customer: "Pine Ridge School", status: "Scheduled", urgent: false, summary: "Recurring school account. Needs a block for a group of sports physicals and forms sent ahead of the visit.",
+      relationship: "school account", tech: "Priya S.", tags: ["Group booking", "Physicals", "School"], notes: ["Consent forms required before the visit.", "Group of 12 students."], subtasks: [
+        { id: 391, label: "Confirm consent forms are in", assignee: "Rosa V.", done: true },
+        { id: 392, label: "Block a half day for the group", assignee: "Rosa V.", done: false },
+        { id: 393, label: "Send intake forms to the school", assignee: "Priya S.", done: false },
+      ] },
+    { id: "1038", issue: "Telehealth appointment request", customer: "Rosa V.", status: "In progress", urgent: false, summary: "Repeat patient requesting a telehealth follow-up. Insurance verified, front desk is sending the video link.",
+      relationship: "repeat patient", tech: "Dr. Kim", tags: ["Repeat patient", "Telehealth"], notes: ["Patient prefers video visits.", "Front desk is setting it up."], subtasks: [
+        { id: 381, label: "Verify telehealth eligibility", assignee: "Priya S.", done: true },
+        { id: 382, label: "Send the video visit link", assignee: "Priya S.", done: false },
+      ] },
+    { id: "1035", issue: "Annual physical", customer: "Whitfield Family", status: "Invoiced", urgent: false, summary: "Annual physical completed Tuesday. Visit done, statement sent for the patient balance, awaiting payment.",
+      relationship: "established patient", tech: "Priya S.", tags: ["Physical", "Wellness", "Closed"], notes: ["Physical completed Tuesday.", "Statement sent to the patient."], subtasks: [
+        { id: 351, label: "Submit the claim", assignee: "Rosa V.", done: true },
+        { id: 352, label: "Send the statement", assignee: "Rosa V.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Rosa V.", done: false },
+      ] },
+    { id: "1031", issue: "Records transfer request", customer: "Lakeside Clinic", status: "Done", urgent: false, summary: "Partner clinic requested a records transfer. Verified the authorization, sent the records, confirmed receipt.",
+      relationship: "partner clinic", tech: "Dr. Kim", tags: ["Records", "Referral"], notes: ["Authorization verified.", "Records sent and confirmed."], subtasks: [
+        { id: 311, label: "Verify the release authorization", assignee: "Dr. Kim", done: true },
+        { id: 312, label: "Send the records securely", assignee: "Dr. Kim", done: true },
+        { id: 313, label: "Confirm receipt", assignee: "Dr. Kim", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Follow-up visit", qty: 1, price: 120 }, { label: "Copay", qty: 1, price: 40 }],
+    "1041": [{ label: "Billing review", qty: 1, price: 0 }],
+    "1039": [{ label: "Sports physical", qty: 12, price: 45 }],
+    "1038": [{ label: "Telehealth visit", qty: 1, price: 90 }],
+    "1035": [{ label: "Annual physical", qty: 1, price: 200 }],
+    "1031": [{ label: "Records transfer fee", qty: 1, price: 25 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Elena T.", meta: "Reschedule + refill request · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Rosa V.", meta: "Question about the telehealth link", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New patient · scheduling · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Pine Ridge School", meta: "Sports physicals · forms requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Whitfield Family", meta: "Payment reminder · statement sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Lakeside Clinic", meta: "Records transfer follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Elena T.", initials: "ET", phone: "(602) 555-0148", email: "elena.t@email.com", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["Established patient", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Marcus D.", initials: "MD", phone: "(602) 555-0192", email: "mdean@email.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Billing"], balance: 240, last: "Statement sent Jun 18" },
+    { id: 3, name: "Pine Ridge School", initials: "PR", phone: "(480) 555-0110", email: "nurse@pineridgeschool.org", address: "Larkspur Dr, Tempe AZ", since: "2022", tags: ["School account", "Physicals"], balance: 0, last: "Physicals Jun 10" },
+    { id: 4, name: "Rosa V.", initials: "RV", phone: "(623) 555-0177", email: "rosa.v@email.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
+    { id: 5, name: "Whitfield Family", initials: "WF", phone: "(480) 555-0143", email: "whitfield.home@email.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["Established patient", "Wellness"], balance: 0, last: "Physical Apr 3" },
+    { id: 6, name: "Lakeside Clinic", initials: "LC", phone: "(602) 555-0166", email: "records@lakesideclinic.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Partner clinic"], balance: 1280, vip: true, last: "Statement sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · reschedule + refill", body: "AI summarized, became Task #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · new time confirmed", body: "Follow-up moved to 3:30 PM" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Statement · $189", body: "Paid by card" },
+    { when: "Last summer", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Visit · annual physical", body: "$200 · records on file" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "Follow-up visit", when: "Today", status: "Scheduled", amount: 189 },
+      { title: "Telehealth visit", when: "Mar 2026", status: "Done", amount: 90 },
+      { title: "Annual physical", when: "Jul 2025", status: "Done", amount: 200 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Reschedule appointment + refill", status: "Open" },
+      { id: "0987", issue: "New patient scheduling", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 189, status: "Due" },
+      { id: "INV-0987", amount: 90, status: "Paid" },
+      { id: "INV-0820", amount: 200, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "Wants to move Thursday's follow-up and requests a refill, routed to the provider." },
+      { kind: "Text", when: "Today 4:13", text: "New time confirmed: follow-up moved to 3:30 PM today." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the telehealth follow-up." },
+    ],
+    assets: [
+      { name: "Patient chart", meta: "Established 2023 · Family medicine · Dr. Kim", warranty: "Active" },
+      { name: "Insurance on file", meta: "Verified Jul 2025 · PPO · Member #A0912", warranty: "Active" },
+      { name: "Consent & intake forms", meta: "Signed Jul 2025 · HIPAA acknowledgment", warranty: "On file" },
+    ],
+    files: [
+      { name: "Intake forms", meta: "3 forms · Jul 2025" },
+      { name: "Insurance card.pdf", meta: "PDF · Jul 2025" },
+      { name: "After-visit summary.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "marcus", name: "Marcus D.", unread: 2, msgs: [{ me: false, text: "Is someone able to look at my statement today?" }, { me: false, text: "I thought insurance covered this visit." }] },
+    { id: "pineridge", name: "Pine Ridge School", msgs: [{ me: true, text: "The group physicals are booked for Thursday at 8:30." }, { me: false, text: "Great, the consent forms are all in." }] },
+    { id: "rosa", name: "Rosa V.", unread: 1, msgs: [{ me: false, text: "Did the telehealth link get sent for my visit?" }] },
+  ],
+  messageTemplates: ["Confirming your appointment", "Running 10 min behind", "All set, statement sent", "We received your forms"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Reschedule follow-up appointment", meta: "Front desk · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Priya S.", "Today 4:30 PM · Priya S.", "Tomorrow 9:00 AM · Dr. Kim"], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Elena her new appointment time", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Follow-up moved to 3:30 PM", "Running 15 min behind", "We're ready for you now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: route the refill to the provider?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Route to provider", "Ask patient for pharmacy", "Front desk callback"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a front-desk task", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a task is created", action: "route it to the right front-desk staff", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "an appointment is booked", action: "text the patient a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a visit is marked done", action: "send the statement automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "a statement is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling Cedar Family Care! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "Appointment request": ["New", "Scheduled", "Checked in", "Seen", "Billed"],
+    "New patient": ["New", "Forms sent", "Verified", "Scheduled", "Seen", "Billed"],
+    "Refill request": ["New", "Routed to provider", "Reviewed", "Closed"],
+    "Billing question": ["Received", "Reviewed", "Explained", "Logged"],
+  },
+  schedulePlaceholder: "What's the request? e.g. Reschedule follow-up for Elena T.",
+  mileItem: "In-office procedure",
+  mileBase: 450,
+  billingAlertNote: "Across 3 patients · Lakeside Clinic $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Collections up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Procedure · Malik", tech: "Priya S." },
+    { time: "3:30 PM", title: "Follow-up · Elena T.", tech: "Priya S.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Lakeside Clinic", body: "Statement 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent task needs a callback", body: "#1041 billing question · Marcus D.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, I need to move my appointment on Thursday and I'm out of one of my prescriptions." },
+    { who: "OneBy", line: "I can help with the scheduling. I'll pass the refill request to your provider to review. Would today at 3:30 work for the visit?" },
+    { who: "Caller", line: "Yes, that's better for me." },
+    { who: "OneBy", line: "Great. Should I have the front desk call you back to confirm the refill details?" },
+    { who: "Caller", line: "Yes, please." },
+    { who: "OneBy", line: "Perfect, your follow-up is moved to 3:30 today and the refill is with your provider. I'll text you a confirmation." },
+  ],
+};

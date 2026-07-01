@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
   PhoneCall,
   Sparkles,
@@ -19,8 +19,6 @@ import {
   X,
   ArrowRight,
   Clock,
-  CornerUpRight,
-  HelpCircle,
   Calendar,
   CheckCircle2,
   Send,
@@ -49,12 +47,29 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-const JOB = { customer: "Maria G.", issue: "Upstairs A/C not cooling", ticket: "1042" };
+import type {
+  ModId,
+  Job,
+  Line,
+  Item,
+  Subtask,
+  SubtaskSetter,
+  Ticket as TicketData,
+  CallEntry,
+  Msg,
+  Thread,
+  Rule,
+  Customer,
+  TLEntry,
+  TaskItem,
+  DemoData,
+} from "@/data/demo/types";
+import { hvacDemo } from "@/data/demo/hvac";
 
-const SUMMARY =
-  "Existing customer, upstairs A/C not cooling since last night. Home after 3pm, wants a same-day visit.";
-
-type ModId = "home" | "live" | "calls" | "tickets" | "schedule" | "customers" | "team" | "catalog" | "billing" | "messages" | "tasks" | "automations" | "receptionist" | "email";
+const DemoContext = createContext<DemoData>(hvacDemo);
+function useDemo() {
+  return useContext(DemoContext);
+}
 
 const MODULES: { id: ModId; label: string; icon: LucideIcon; badge?: string; soon?: boolean }[] = [
   { id: "home", label: "Home", icon: LayoutDashboard },
@@ -94,16 +109,6 @@ const CORE_NEXT: Partial<Record<ModId, { id: ModId; label: string }>> = {
 
 type Phase = "transcribing" | "summarizing" | "typing" | "done";
 type TaskState = "pending" | "acted" | "ignored" | "snoozed";
-type Job = { time: string; title: string; tech: string; hot?: boolean; duration?: string; ticket?: string };
-type Line = { label: string; qty: number; price: number };
-type Item = { id: number; name: string; type: "Service" | "Part"; price: number; tasks?: string[] };
-type Subtask = { id: number; label: string; assignee: string; done: boolean };
-type SubtaskSetter = (u: Subtask[] | ((p: Subtask[]) => Subtask[])) => void;
-const SUBTASK_SEED: Subtask[] = [
-  { id: 1, label: "Confirm arrival window", assignee: "Luis R.", done: true },
-  { id: 2, label: "Bring a spare capacitor", assignee: "Luis R.", done: false },
-  { id: 3, label: "Collect payment on site", assignee: "Dana P.", done: false },
-];
 
 const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -116,36 +121,6 @@ function dateFor(offset: number, i: number) {
   while (d < 1) { m = (m + 11) % 12; d += MLEN[m]; }
   return { dow: DOW[i], d, m };
 }
-
-const DAY_JOBS: Record<number, Job[]> = {
-  0: [{ time: "10:00 AM", title: "No-cool · Ortiz", tech: "Sam K.", duration: "1h" }],
-  1: [{ time: "8:30 AM", title: "Maintenance · Oak HOA", tech: "Luis R.", duration: "2h", ticket: "1039" }],
-  2: [
-    { time: "9:00 AM", title: "Tune-up · Garcia", tech: "Sam K.", duration: "1h" },
-    { time: "1:00 PM", title: "Install · Lee", tech: "Luis R.", duration: "Half day" },
-    { time: "3:30 PM", title: "A/C diagnostic · Maria G.", tech: "Luis R.", hot: true, duration: "1h", ticket: "1042" },
-  ],
-  3: [{ time: "11:00 AM", title: "Estimate · Park Ave", tech: "Sam K.", duration: "30m" }],
-  4: [{ time: "2:00 PM", title: "Install · Reyes", tech: "Luis R.", duration: "Half day", ticket: "1035" }],
-};
-
-const TEAM = [
-  { name: "Luis R.", role: "Lead tech", status: "On a job", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["HVAC", "Install", "Refrigeration"] },
-  { name: "Sam K.", role: "Tech", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["HVAC", "Maintenance"] },
-  { name: "Dana P.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Dispatch", "Scheduling"] },
-  { name: "Mia T.", role: "Tech", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Plumbing", "HVAC"] },
-];
-
-const CATALOG_SEED: Item[] = [
-  { id: 1, name: "A/C diagnostic", type: "Service", price: 89, tasks: ["Inspect unit and airflow", "Test capacitor and contactor", "Check refrigerant levels", "Review findings with customer"] },
-  { id: 2, name: "System tune-up", type: "Service", price: 129, tasks: ["Replace air filter", "Clean coils", "Test thermostat", "Log readings"] },
-  { id: 3, name: "Labor (per hour)", type: "Service", price: 120 },
-  { id: 4, name: "Full system install", type: "Service", price: 4000, tasks: ["Confirm load calc and permit", "Remove old equipment", "Install and braze new unit", "Charge system and verify", "Walk through with customer"] },
-  { id: 5, name: "Capacitor", type: "Part", price: 100 },
-  { id: 6, name: "Contactor", type: "Part", price: 65 },
-  { id: 7, name: "Refrigerant (per lb)", type: "Part", price: 85 },
-  { id: 8, name: "Air filter", type: "Part", price: 25 },
-];
 
 type ToastFn = (msg: string) => void;
 const toastListeners = new Set<ToastFn>();
@@ -178,7 +153,7 @@ function ToastHost() {
   );
 }
 
-export default function HeroAppMock({ compact = false }: { compact?: boolean }) {
+export default function HeroAppMock({ compact = false, data = hvacDemo }: { compact?: boolean; data?: DemoData }) {
   const [active, setActive] = useState<ModId>("live");
   const [pickerOpen, setPickerOpen] = useState(false);
   const [phase, setPhase] = useState<Phase>("transcribing");
@@ -190,22 +165,19 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
   const [quote, setQuote] = useState<"draft" | "sent" | "approved">("draft");
   const [invoice, setInvoice] = useState<"draft" | "sent" | "paid">("draft");
   const [mile, setMile] = useState<"draft" | "sent">("draft");
-  const [linesBy, setLinesBy] = useState<Record<string, Line[]>>(LINES_SEED);
+  const [linesBy, setLinesBy] = useState<Record<string, Line[]>>(data.linesSeed);
   const [editBill, setEditBill] = useState(false);
-  const [catalog, setCatalog] = useState<Item[]>(CATALOG_SEED);
-  const [assignedTech, setAssignedTech] = useState("Luis R.");
-  const [tags, setTags] = useState<string[]>(["Existing customer", "HVAC", "Same-day"]);
-  const [notes, setNotes] = useState<string[]>(["Prefers afternoon visits.", "Gate code 4417."]);
-  const [msgs, setMsgs] = useState<{ me: boolean; text: string }[]>([
-    { me: true, text: `Hi Maria, this is OneBy for Summit HVAC. Luis is booked for your A/C diagnostic today at 3:30 PM.` },
-    { me: false, text: "Perfect, thank you!" },
-  ]);
+  const [catalog, setCatalog] = useState<Item[]>(data.catalog);
+  const [assignedTech, setAssignedTech] = useState(data.primaryTech);
+  const [tags, setTags] = useState<string[]>(data.liveTags);
+  const [notes, setNotes] = useState<string[]>(data.liveNotes);
+  const [msgs, setMsgs] = useState<{ me: boolean; text: string }[]>(data.primaryMessages);
   const [tasks, setTasks] = useState<Record<number, TaskState>>({ 1: "pending", 2: "pending", 3: "pending" });
   const [ticketSel, setTicketSel] = useState<string | null>(null);
   const [custSel, setCustSel] = useState<number | null>(null);
-  const [customers, setCustomers] = useState<Customer[]>(CUSTOMERS);
-  const [subtasks, setSubtasks] = useState<Subtask[]>(SUBTASK_SEED);
-  const [newTickets, setNewTickets] = useState<Ticket[]>([]);
+  const [customers, setCustomers] = useState<Customer[]>(data.customers);
+  const [subtasks, setSubtasks] = useState<Subtask[]>(data.subtaskSeed);
+  const [newTickets, setNewTickets] = useState<TicketData[]>([]);
   // Edits to non-primary tickets, keyed by id, lifted here so they survive
   // leaving and re-entering the Tickets module. #1042 keeps using the shared
   // state above (tags/notes/subtasks/assignedTech) that also feeds Live/Billing/Team.
@@ -213,11 +185,11 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
   const [notesBy, setNotesBy] = useState<Record<string, string[]>>({});
   const [subsBy, setSubsBy] = useState<Record<string, Subtask[]>>({});
   const [techBy, setTechBy] = useState<Record<string, string>>({});
-  const openCustomer = (name: string) => { const c = CUSTOMERS.find((x) => x.name === name); setCustSel(c ? c.id : null); setActive("customers"); };
+  const openCustomer = (name: string) => { const c = data.customers.find((x) => x.name === name); setCustSel(c ? c.id : null); setActive("customers"); };
   const openTicket = (id: string | null) => { setTicketSel(id); setActive("tickets"); };
   const addTicket = () => {
     const id = String(Date.now()).slice(-4);
-    setNewTickets((xs) => [{ id, issue: "New ticket", customer: "New customer", status: "New", urgent: false, summary: "Created manually. Add the details, schedule it, and assign a tech.", relationship: "New", tech: TEAM[0].name, tags: [], notes: [], subtasks: [] }, ...xs]);
+    setNewTickets((xs) => [{ id, issue: "New ticket", customer: "New customer", status: "New", urgent: false, summary: "Created manually. Add the details, schedule it, and assign a tech.", relationship: "New", tech: data.team[0].name, tags: [], notes: [], subtasks: [] }, ...xs]);
     setTicketSel(id);
     setActive("tickets");
     toast("New ticket created");
@@ -249,18 +221,18 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
           setSubsBy({});
           setTechBy({});
           setCustSel(null);
-          setCustomers(CUSTOMERS);
-          setSubtasks(SUBTASK_SEED);
+          setCustomers(data.customers);
+          setSubtasks(data.subtaskSeed);
           setBillTab("quote");
           setQuote("draft");
           setInvoice("draft");
           setMile("draft");
-          setLinesBy(LINES_SEED);
+          setLinesBy(data.linesSeed);
           setEditBill(false);
-          setCatalog(CATALOG_SEED);
-          setAssignedTech("Luis R.");
-          setTags(["Existing customer", "HVAC", "Same-day"]);
-          setNotes(["Prefers afternoon visits.", "Gate code 4417."]);
+          setCatalog(data.catalog);
+          setAssignedTech(data.primaryTech);
+          setTags(data.liveTags);
+          setNotes(data.liveNotes);
           setTasks({ 1: "pending", 2: "pending", 3: "pending" });
         } else if (!entry.isIntersecting) {
           wasVisible.current = false;
@@ -270,7 +242,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     if (phase === "transcribing") {
@@ -285,13 +257,13 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
 
   useEffect(() => {
     if (phase !== "typing") return;
-    if (typed >= SUMMARY.length) {
+    if (typed >= data.summary.length) {
       const t = setTimeout(() => setPhase("done"), 250);
       return () => clearTimeout(t);
     }
-    const t = setTimeout(() => setTyped((n) => Math.min(n + 3, SUMMARY.length)), 26);
+    const t = setTimeout(() => setTyped((n) => Math.min(n + 3, data.summary.length)), 26);
     return () => clearTimeout(t);
-  }, [phase, typed]);
+  }, [phase, typed, data.summary]);
 
   const addJob = (key: string, job: Job) =>
     setExtra((e) => ({ ...e, [key]: [...(e[key] ?? []), job] }));
@@ -301,6 +273,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
   const next = (compact ? CORE_NEXT : NEXT)[active];
 
   return (
+    <DemoContext.Provider value={data}>
     <div
       ref={rootRef}
       onClickCapture={() => {
@@ -494,6 +467,7 @@ export default function HeroAppMock({ compact = false }: { compact?: boolean }) 
         </div>
       </div>
     </div>
+    </DemoContext.Provider>
   );
 }
 
@@ -527,6 +501,9 @@ const inputCls = "min-w-0 rounded-lg border border-line bg-canvas px-2.5 py-1.5 
 const numCls = `${inputCls} [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`;
 
 function LiveView({ phase, typed, tags, openTicket, openCalls }: { phase: Phase; typed: number; tags: string[]; openTicket: (id: string | null) => void; openCalls: () => void }) {
+  const demo = useDemo();
+  const JOB = { customer: demo.primaryCustomer, issue: demo.primaryIssue, ticket: demo.primaryTicket };
+  const SUMMARY = demo.summary;
   const done = phase === "done";
   const processing = phase === "transcribing" || phase === "summarizing";
   return (
@@ -689,37 +666,6 @@ function AnsweredCallRow() {
   );
 }
 
-type CallEntry = {
-  id: number;
-  dir: "in" | "out" | "missed";
-  name: string;
-  meta: string;
-  dur: string;
-  tag: string;
-  tone: "green" | "blue" | "warning" | "muted";
-  ticket?: string;
-  recording?: boolean; // render the playable AI-answered card
-};
-
-const CALL_GROUPS: { group: string; calls: CallEntry[] }[] = [
-  {
-    group: "Earlier today",
-    calls: [
-      { id: 1, dir: "in", name: "Maria G.", meta: "Upstairs A/C not cooling · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
-      { id: 2, dir: "in", name: "Dana P.", meta: "A/C grinding, not cooling", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
-      { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · roof leak · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
-    ],
-  },
-  {
-    group: "Yesterday",
-    calls: [
-      { id: 4, dir: "in", name: "Oak Street HOA", meta: "Annual maintenance · COI requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
-      { id: 5, dir: "out", name: "Reyes Family", meta: "Payment reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
-      { id: 6, dir: "in", name: "Sun City Diner", meta: "Walk-in cooler follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
-    ],
-  },
-];
-
 const TONE_CLS: Record<CallEntry["tone"], string> = {
   green: "bg-green/10 text-green-600",
   blue: "bg-blue/10 text-blue",
@@ -754,6 +700,8 @@ function CallRow({ c, openTicket }: { c: CallEntry; openTicket: (id: string | nu
 }
 
 function CallsView({ openTicket }: { openTicket: (id: string | null) => void }) {
+  const demo = useDemo();
+  const CALL_GROUPS = demo.callGroups;
   const stats: [string, string][] = [["Calls today", "14"], ["Answered by AI", "9"], ["Turned into tickets", "4"]];
   return (
     <div>
@@ -778,51 +726,7 @@ function CallsView({ openTicket }: { openTicket: (id: string | null) => void }) 
   );
 }
 
-type Ticket = {
-  id: string; issue: string; customer: string; status: string; urgent: boolean; summary: string;
-  relationship: string; tech: string; tags: string[]; notes: string[]; subtasks: Subtask[];
-};
-const TICKETS: Ticket[] = [
-  { id: "1042", issue: "Upstairs A/C not cooling", customer: "Maria G.", status: "Scheduled", urgent: true, summary: "Existing customer, no cooling upstairs since this morning. Wants the earliest slot. Filter was clogged last visit, likely a capacitor or airflow issue.",
-    relationship: "existing customer", tech: "Luis R.", tags: ["Existing customer", "HVAC", "Same-day"], notes: ["Prefers afternoon visits.", "Gate code 4417."], subtasks: SUBTASK_SEED },
-  { id: "1041", issue: "Water heater leaking", customer: "James R.", status: "New", urgent: true, summary: "New caller, water heater leaking onto the garage floor. Not actively flooding. Wants someone out today, flexible on the time.",
-    relationship: "new caller", tech: "Sam K.", tags: ["New caller", "Plumbing", "Same-day"], notes: ["Heater is in the garage.", "Flexible on timing."], subtasks: [
-      { id: 411, label: "Confirm the leak is contained", assignee: "Sam K.", done: false },
-      { id: 412, label: "Photograph the unit and model number", assignee: "Sam K.", done: false },
-    ] },
-  { id: "1039", issue: "Annual maintenance, 12 units", customer: "Oak Street HOA", status: "Scheduled", urgent: false, summary: "Recurring maintenance contract. Twelve rooftop units, needs a half-day block and a COI on file before the crew arrives.",
-    relationship: "maintenance contract", tech: "Luis R.", tags: ["Commercial", "Maintenance plan", "12 units"], notes: ["COI required on file before arrival.", "Roof access via the north stairwell."], subtasks: [
-      { id: 391, label: "Confirm COI is on file", assignee: "Dana P.", done: true },
-      { id: 392, label: "Block a half day for the crew", assignee: "Dana P.", done: false },
-      { id: 393, label: "Load filters for 12 units", assignee: "Luis R.", done: false },
-    ] },
-  { id: "1038", issue: "Thermostat replacement", customer: "Dana P.", status: "In progress", urgent: false, summary: "Smart thermostat install. Customer supplied the unit, just needs labor. Tech is on site now.",
-    relationship: "repeat customer", tech: "Sam K.", tags: ["Repeat customer", "HVAC"], notes: ["Customer supplied the thermostat.", "Tech is on site."], subtasks: [
-      { id: 381, label: "Verify thermostat compatibility", assignee: "Sam K.", done: true },
-      { id: 382, label: "Test heating and cooling modes", assignee: "Sam K.", done: false },
-    ] },
-  { id: "1035", issue: "Full system install", customer: "Reyes Family", status: "Invoiced", urgent: false, summary: "New three-ton system installed Tuesday. Job complete, invoice sent, awaiting payment.",
-    relationship: "install customer", tech: "Luis R.", tags: ["Install", "HVAC", "Warranty"], notes: ["Three-ton system installed Tuesday.", "12-month labor warranty registered."], subtasks: [
-      { id: 351, label: "Register the warranty", assignee: "Dana P.", done: true },
-      { id: 352, label: "Send the invoice", assignee: "Dana P.", done: true },
-      { id: 353, label: "Follow up on payment", assignee: "Dana P.", done: false },
-    ] },
-  { id: "1031", issue: "Walk-in cooler service", customer: "Sun City Diner", status: "Done", urgent: false, summary: "Walk-in cooler not holding temp. Replaced the fan motor, verified temps, signed off.",
-    relationship: "commercial account", tech: "Sam K.", tags: ["Commercial", "Refrigeration"], notes: ["Replaced the fan motor.", "Temps verified and signed off."], subtasks: [
-      { id: 311, label: "Replace the fan motor", assignee: "Sam K.", done: true },
-      { id: 312, label: "Verify holding temperature", assignee: "Sam K.", done: true },
-      { id: 313, label: "Get customer sign-off", assignee: "Sam K.", done: true },
-    ] },
-];
 const TICKET_STATUSES = ["New", "Scheduled", "In progress", "Invoiced", "Done"];
-const LINES_SEED: Record<string, Line[]> = {
-  "1042": [{ label: "A/C diagnostic", qty: 1, price: 89 }, { label: "Capacitor replacement", qty: 1, price: 100 }],
-  "1041": [{ label: "Water heater inspection", qty: 1, price: 89 }],
-  "1039": [{ label: "Rooftop unit tune-up", qty: 12, price: 75 }],
-  "1038": [{ label: "Thermostat install labor", qty: 1, price: 120 }],
-  "1035": [{ label: "Full system install", qty: 1, price: 4000 }],
-  "1031": [{ label: "Fan motor replacement", qty: 1, price: 240 }],
-};
 
 function TicketsView({
   tags,
@@ -864,7 +768,7 @@ function TicketsView({
   setSubtasks: SubtaskSetter;
   addJob: (key: string, job: Job) => void;
   setActive: (m: ModId) => void;
-  newTickets: Ticket[];
+  newTickets: TicketData[];
   addTicket: () => void;
   tagsBy: Record<string, string[]>;
   setTagsBy: (m: Record<string, string[]>) => void;
@@ -875,15 +779,13 @@ function TicketsView({
   techBy: Record<string, string>;
   setTechBy: (m: Record<string, string>) => void;
 }) {
+  const demo = useDemo();
+  const TICKETS = demo.tickets;
+  const TEAM = demo.team;
   const [n, setN] = useState("");
   const [picking, setPicking] = useState(false);
   const [pending, setPending] = useState<string | null>(null);
-  const FLOWS: Record<string, string[]> = {
-    "Standard repair": ["New", "Scheduled", "In progress", "Invoiced", "Paid"],
-    "New install": ["New", "Quoted", "Approved", "Scheduled", "Installed", "Paid"],
-    "Warranty claim": ["New", "Verified", "Scheduled", "Resolved"],
-    "Maintenance plan": ["Due", "Scheduled", "Serviced", "Logged"],
-  };
+  const FLOWS = demo.scheduleFlows;
   const [flow, setFlow] = useState("Standard repair");
   const [stage, setStage] = useState(1);
   const [nt, setNt] = useState("");
@@ -934,7 +836,7 @@ function TicketsView({
   // Show the selected ticket's own data. #1042 stays wired to the lifted state
   // (so its edits flow to Live/Billing/Team); other tickets use their own copy.
   const sid = sel ?? "";
-  const isPrimary = sel === "1042";
+  const isPrimary = sel === demo.primaryTicket;
   const curTags = isPrimary ? tags : (tagsBy[sid] ?? tk?.tags ?? []);
   const curNotes = isPrimary ? notes : (notesBy[sid] ?? tk?.notes ?? []);
   const curSubs = isPrimary ? subtasks : (subsBy[sid] ?? tk?.subtasks ?? []);
@@ -1177,7 +1079,11 @@ function ScheduleView({
   day: number; setDay: (d: number) => void; weekOffset: number; setWeekOffset: (n: number) => void;
   extra: Record<string, Job[]>; addJob: (key: string, job: Job) => void; openTicket: (id: string | null) => void;
 }) {
-  const TECH_DOT: Record<string, string> = { "Luis R.": "bg-blue", "Sam K.": "bg-green", "Mia T.": "bg-warning" };
+  const demo = useDemo();
+  const TEAM = demo.team;
+  const DAY_JOBS = demo.dayJobs;
+  const TICKETS = demo.tickets;
+  const TECH_DOT = demo.techDot;
   const SCHED_TECHS = TEAM.filter((x) => x.role !== "Dispatch").map((x) => x.name);
   const [tech, setTech] = useState("All");
   const [reassign, setReassign] = useState<Record<string, string>>({});
@@ -1311,7 +1217,7 @@ function ScheduleView({
 
           <div className="relative">
             <Ticket size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-faint" />
-            <input value={ntitle} onChange={(e) => setNtitle(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") addJobNow(); }} placeholder="What's the job? e.g. A/C diagnostic for Maria G." className={`${inputCls} w-full py-2 pl-9`} />
+            <input value={ntitle} onChange={(e) => setNtitle(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") addJobNow(); }} placeholder={demo.schedulePlaceholder} className={`${inputCls} w-full py-2 pl-9`} />
           </div>
 
           <div className="mt-2 grid grid-cols-3 gap-2">
@@ -1348,6 +1254,10 @@ function ScheduleView({
 }
 
 function TeamView({ assignedTech, setActive }: { assignedTech: string; setActive: (m: ModId) => void }) {
+  const demo = useDemo();
+  const TEAM = demo.team;
+  const DAY_JOBS = demo.dayJobs;
+  const JOB = { ticket: demo.primaryTicket };
   const [sel, setSel] = useState<string | null>(null);
   const [newMembers, setNewMembers] = useState<typeof TEAM>([]);
   const allTeam = [...TEAM, ...newMembers];
@@ -1523,6 +1433,9 @@ function BillingView({
   linesBy: Record<string, Line[]>; setLinesBy: (m: Record<string, Line[]>) => void; editBill: boolean; setEditBill: (b: boolean) => void; catalog: Item[]; setCatalog: (c: Item[]) => void;
   subtasks: Subtask[]; setSubtasks: SubtaskSetter; assignedTech: string; ticketSel: string | null;
 }) {
+  const demo = useDemo();
+  const TICKETS = demo.tickets;
+  const CUSTOMERS = demo.customers;
   const billTicket = TICKETS.find((t) => t.id === ticketSel) ?? TICKETS[0];
   const lines = linesBy[billTicket.id] ?? [];
   const setLines = (l: Line[]) => setLinesBy({ ...linesBy, [billTicket.id]: l });
@@ -1539,8 +1452,8 @@ function BillingView({
     { label: "Deposit", pct: 30 },
     { label: "On completion", pct: 70 },
   ]);
-  const [mileItem, setMileItem] = useState("Full system install");
-  const [mileBase, setMileBase] = useState(4000);
+  const [mileItem, setMileItem] = useState(demo.mileItem);
+  const [mileBase, setMileBase] = useState(demo.mileBase);
   const pctTotal = miles.reduce((n, m) => n + m.pct, 0);
   const updMile = (i: number, field: "label" | "pct", v: string) =>
     setMiles(miles.map((m, idx) => (idx === i ? { ...m, [field]: field === "pct" ? Number(v) || 0 : v } : m)));
@@ -1587,7 +1500,7 @@ function BillingView({
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-warning/15 text-warning"><DollarSign size={16} /></span>
         <div className="min-w-0 flex-1">
           <p className="text-[0.82rem] font-bold text-navy">${ar.toLocaleString()} outstanding</p>
-          <p className="truncate text-[0.72rem] text-muted">Across 3 customers · Sun City Diner $1,280 is 21 days overdue</p>
+          <p className="truncate text-[0.72rem] text-muted">{demo.billingAlertNote}</p>
         </div>
       </div>
 
@@ -1724,7 +1637,7 @@ function BillingView({
                   <span className="text-[0.7rem] text-muted">#{billTicket.id}</span>
                 </div>
                 <div className="mt-2 grid grid-cols-2 gap-2 text-[0.7rem]">
-                  <div><p className="font-bold uppercase text-faint">From</p><p className="text-navy">Summit HVAC</p></div>
+                  <div><p className="font-bold uppercase text-faint">From</p><p className="text-navy">{demo.company}</p></div>
                   <div><p className="font-bold uppercase text-faint">Bill to</p><p className="text-navy">{billTicket.customer}</p></div>
                 </div>
                 <div className="mt-2 space-y-1 border-t border-line pt-2 text-[0.72rem]">
@@ -1861,20 +1774,14 @@ function Banner({ title, body }: { title: string; body: string }) {
   );
 }
 
-type Msg = { me: boolean; text: string };
-type Thread = { id: string; name: string; unread?: number; msgs: Msg[] };
-
 function MessagesView({ msgs, setMsgs }: { msgs: Msg[]; setMsgs: (m: Msg[]) => void }) {
-  const TEMPLATES = ["On our way 🚐", "Running 10 min late", "All done, invoice sent", "Confirming your appointment"];
-  const [others, setOthers] = useState<Thread[]>([
-    { id: "james", name: "James R.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "My water heater is getting worse." }] },
-    { id: "oak", name: "Oak Street HOA", msgs: [{ me: true, text: "Crew is booked for the 12-unit maintenance Thursday at 8:30." }, { me: false, text: "Great, the COI is on file." }] },
-    { id: "dana", name: "Dana P.", unread: 1, msgs: [{ me: false, text: "Is the thermostat still blinking after the install?" }] },
-  ]);
+  const demo = useDemo();
+  const TEMPLATES = demo.messageTemplates;
+  const [others, setOthers] = useState<Thread[]>(demo.messageThreads);
   const [sel, setSel] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
 
-  const mariaThread: Thread = { id: "maria", name: JOB.customer, msgs };
+  const mariaThread: Thread = { id: "maria", name: demo.primaryCustomer, msgs };
   const allThreads = [mariaThread, ...others];
   const cur = allThreads.find((t) => t.id === sel);
 
@@ -1936,19 +1843,16 @@ function MessagesView({ msgs, setMsgs }: { msgs: Msg[]; setMsgs: (m: Msg[]) => v
   );
 }
 
-const TASKS: { id: number; icon: LucideIcon; title: string; meta: string; go: ModId; goLabel: string; options: string[]; acted: (o: string) => string }[] = [
-  { id: 1, icon: Calendar, title: "Schedule A/C diagnostic", meta: "Dispatch · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Luis R.", "Today 4:30 PM · Luis R.", "Tomorrow 9:00 AM · Sam K."], acted: (o) => `Booked ${o}` },
-  { id: 2, icon: CornerUpRight, title: "Text Maria her arrival window", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Luis arriving 3:30 PM", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
-  { id: 3, icon: HelpCircle, title: "Confirm: upstairs unit, not downstairs?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Upstairs unit", "Downstairs unit", "Both units"], acted: (o) => `Confirmed: ${o}` },
-];
-
 function TasksView({ tasks, setTasks, setActive }: { tasks: Record<number, TaskState>; setTasks: (t: Record<number, TaskState>) => void; setActive: (m: ModId) => void }) {
+  const demo = useDemo();
+  const TASKS = demo.tasks;
+  const TEAM = demo.team;
   const [confirming, setConfirming] = useState<number | null>(null);
   const [choices, setChoices] = useState<Record<number, string>>({});
   const [newTasks, setNewTasks] = useState<{ id: number; title: string }[]>([]);
   const [assignees, setAssignees] = useState<Record<number, string>>({});
   const set = (id: number, s: TaskState) => setTasks({ ...tasks, [id]: s });
-  const choiceFor = (it: (typeof TASKS)[number]) => choices[it.id] ?? it.options[0];
+  const choiceFor = (it: TaskItem) => choices[it.id] ?? it.options[0];
   const who = (id: number) => assignees[id] ?? TEAM[0].name;
   return (
     <div>
@@ -2040,15 +1944,6 @@ function TasksView({ tasks, setTasks, setActive }: { tasks: Record<number, TaskS
   );
 }
 
-type Rule = { id: number; icon: LucideIcon; trigger: string; action: string; on: boolean; runs: string };
-const AUTOMATION_SEED: Rule[] = [
-  { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
-  { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a ticket", on: true, runs: "38 this week" },
-  { id: 3, icon: Users, trigger: "a ticket is created", action: "assign the tech with the right skills", on: true, runs: "31 this week" },
-  { id: 4, icon: CalendarDays, trigger: "a job is booked", action: "text the customer a confirmation and reminder", on: true, runs: "27 this week" },
-  { id: 5, icon: Receipt, trigger: "a job is marked done", action: "send the invoice automatically", on: true, runs: "19 this week" },
-  { id: 6, icon: Clock, trigger: "an invoice is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
-];
 const TRIGGERS = ["a call is missed", "a call wraps", "a job is booked", "a job is marked done", "an invoice is unpaid for 3 days", "a new lead comes in after hours"];
 const ACTIONS = ["text the caller back", "create a ticket", "assign the right tech", "send a confirmation text", "send the invoice", "notify the on-call tech", "add a follow-up task"];
 
@@ -2063,10 +1958,11 @@ function Toggle({ on, onClick, label }: { on: boolean; onClick: () => void; labe
 type Channel = { id: string; icon: LucideIcon; name: string; sub: string; on: boolean; soon?: boolean };
 
 function ReceptionistView() {
+  const demo = useDemo();
   const [answering, setAnswering] = useState(true);
   const [afterHours, setAfterHours] = useState(true);
   const [voice, setVoice] = useState("Ava");
-  const [greeting, setGreeting] = useState("Thanks for calling Summit HVAC! This is Ava. How can I help today?");
+  const [greeting, setGreeting] = useState(demo.greeting);
   const [editGreeting, setEditGreeting] = useState(false);
   const VOICES: { id: string; desc: string }[] = [
     { id: "Ava", desc: "Warm, friendly" },
@@ -2157,6 +2053,8 @@ function ReceptionistView() {
 }
 
 function AutomationsView() {
+  const demo = useDemo();
+  const AUTOMATION_SEED = demo.automations;
   const [rules, setRules] = useState<Rule[]>(AUTOMATION_SEED);
   const [building, setBuilding] = useState(false);
   const [trg, setTrg] = useState(TRIGGERS[0]);
@@ -2237,23 +2135,19 @@ function EmailView() {
 }
 
 function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; openTicket: (id: string | null) => void }) {
+  const demo = useDemo();
+  const DAY_JOBS = demo.dayJobs;
+  const CUSTOMERS = demo.customers;
   const jobsWeek = Object.values(DAY_JOBS).flat().length;
   const openBal = CUSTOMERS.reduce((n, c) => n + c.balance, 0);
   const stats: { label: string; value: string; icon: LucideIcon; tone: string; go: ModId }[] = [
     { label: "Jobs this week", value: String(jobsWeek), icon: CalendarDays, tone: "bg-blue/10 text-blue", go: "schedule" },
-    { label: "Calls caught", value: "14", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+    { label: "Calls caught", value: demo.homeCallsCaught, icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
     { label: "Open balance", value: `$${openBal.toLocaleString()}`, icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
-    { label: "Collected this week", value: "$9,120", icon: DollarSign, tone: "bg-green/10 text-green-600", go: "billing" },
+    { label: "Collected this week", value: demo.homeCollected, icon: DollarSign, tone: "bg-green/10 text-green-600", go: "billing" },
   ];
-  const upNext: { time: string; title: string; tech: string; ticket?: string }[] = [
-    { time: "1:00 PM", title: "Install · Lee", tech: "Luis R." },
-    { time: "3:30 PM", title: "A/C diagnostic · Maria G.", tech: "Luis R.", ticket: "1042" },
-  ];
-  const needs: { title: string; body: string; icon: LucideIcon; tone: string; go: ModId }[] = [
-    { title: "$1,280 overdue · Sun City Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
-    { title: "Urgent ticket needs scheduling", body: "#1041 water heater leaking · James R.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
-    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
-  ];
+  const upNext = demo.homeUpNext;
+  const needs = demo.homeNeeds;
   return (
     <div>
       <ModuleHeader title="Today" sub="Your whole shop at a glance" />
@@ -2267,7 +2161,7 @@ function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; op
         ))}
       </div>
       <p className="mt-3 inline-flex items-center gap-1 text-[0.72rem] font-semibold text-green-600">
-        <TrendingUp size={12} /> Revenue up 18% vs last month
+        <TrendingUp size={12} /> {demo.homeRevenueNote}
       </p>
 
       <div className="mt-4">
@@ -2315,36 +2209,16 @@ function HomeView({ setActive, openTicket }: { setActive: (m: ModId) => void; op
   );
 }
 
-type Customer = { id: number; name: string; initials: string; phone: string; email: string; address: string; since: string; tags: string[]; balance: number; vip?: boolean; last: string };
-type TLEntry = { when: string; icon: LucideIcon; tone: string; title: string; body: string };
-
-const CUSTOMERS: Customer[] = [
-  { id: 1, name: "Maria G.", initials: "MG", phone: "(602) 555-0148", email: "maria.g@email.com", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["HVAC", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
-  { id: 2, name: "James R.", initials: "JR", phone: "(602) 555-0192", email: "jrowe@email.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Plumbing"], balance: 240, last: "Invoice sent Jun 18" },
-  { id: 3, name: "Oak Street HOA", initials: "OH", phone: "(480) 555-0110", email: "manager@oakstreethoa.com", address: "Oak St, Tempe AZ", since: "2022", tags: ["Commercial", "Maintenance plan"], balance: 0, last: "Tune-up Jun 10" },
-  { id: 4, name: "Dana P.", initials: "DP", phone: "(623) 555-0177", email: "dana.p@email.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
-  { id: 5, name: "Reyes Family", initials: "RF", phone: "(480) 555-0143", email: "reyes.home@email.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["HVAC", "Install"], balance: 0, last: "Install Apr 3" },
-  { id: 6, name: "Sun City Diner", initials: "SD", phone: "(602) 555-0166", email: "book@suncitydiner.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Commercial"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
-];
-
-const MARIA_TIMELINE: TLEntry[] = [
-  { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · A/C not cooling", body: "AI summarized, became Ticket #1042" },
-  { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Luis arriving 3:30 PM" },
-  { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
-  { when: "Last summer", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · A/C install", body: "$4,200 · 12-month warranty" },
-  { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
-];
-
-function custTimeline(c: Customer): TLEntry[] {
-  if (c.id === 1) return MARIA_TIMELINE;
-  return [
-    { when: c.last.replace(/^[A-Za-z ]+/, "").trim() || "Recent", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: c.last, body: "Logged to the customer timeline" },
-    { when: c.since, icon: Receipt, tone: "bg-blue/10 text-blue", title: c.balance > 0 ? `Open balance · $${c.balance}` : "All invoices paid", body: c.balance > 0 ? "Reminder scheduled" : "No outstanding balance" },
-    { when: c.since, icon: UserRound, tone: "bg-canvas-2 text-muted", title: `Customer since ${c.since}`, body: c.tags.join(" · ") },
-  ];
-}
-
 function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTicket }: { sel: number | null; setSel: (n: number | null) => void; customers: Customer[]; setCustomers: (c: Customer[]) => void; setActive: (m: ModId) => void; openTicket: (id: string | null) => void }) {
+  const demo = useDemo();
+  const custTimeline = (c: Customer): TLEntry[] => {
+    if (c.id === 1) return demo.primaryTimeline;
+    return [
+      { when: c.last.replace(/^[A-Za-z ]+/, "").trim() || "Recent", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: c.last, body: "Logged to the customer timeline" },
+      { when: c.since, icon: Receipt, tone: "bg-blue/10 text-blue", title: c.balance > 0 ? `Open balance · $${c.balance}` : "All invoices paid", body: c.balance > 0 ? "Reminder scheduled" : "No outstanding balance" },
+      { when: c.since, icon: UserRound, tone: "bg-canvas-2 text-muted", title: `Customer since ${c.since}`, body: c.tags.join(" · ") },
+    ];
+  };
   const [edit, setEdit] = useState(false);
   const [q, setQ] = useState("");
   const [tab, setTab] = useState<"activity" | "jobs" | "tickets" | "invoices" | "messages" | "assets" | "files">("activity");
@@ -2390,35 +2264,10 @@ function CustomersView({ sel, setSel, customers, setCustomers, setActive, openTi
 
   const tl = custTimeline(c);
   const rec = {
-    jobs: [
-      { title: "A/C diagnostic", when: "Today", status: "Scheduled", amount: 189 },
-      { title: "System tune-up", when: "Mar 2026", status: "Done", amount: 129 },
-      { title: "Full A/C install", when: "Jul 2025", status: "Done", amount: 4200 },
-    ],
-    tickets: [
-      { id: "1042", issue: "Upstairs A/C not cooling", status: "Open" },
-      { id: "0987", issue: "Annual maintenance visit", status: "Closed" },
-    ],
-    invoices: [
-      { id: "INV-1042", amount: 189, status: c.balance > 0 ? "Due" : "Paid" },
-      { id: "INV-0987", amount: 129, status: "Paid" },
-      { id: "INV-0820", amount: 4200, status: "Paid" },
-    ],
-    convos: [
-      { kind: "Call", when: "Today 4:12", text: "A/C not cooling since last night, wants a same-day visit." },
-      { kind: "Text", when: "Today 4:13", text: "Arrival window texted: Luis, 3 to 5pm." },
-      { kind: "Call", when: "Mar 2026", text: "Booked the annual maintenance tune-up." },
-    ],
-    assets: [
-      { name: "Carrier 3-ton A/C", meta: "Installed Jul 2025 · Model 24ABC6 · Upstairs", warranty: "Under warranty" },
-      { name: "Carrier gas furnace", meta: "Installed Jul 2025 · Model 59TP6 · Basement", warranty: "Under warranty" },
-      { name: "Nest thermostat", meta: "Installed Jul 2025 · 2nd gen", warranty: "Out of warranty" },
-    ],
-    files: [
-      { name: "Install photos", meta: "3 photos · Jul 2025" },
-      { name: "Signed estimate.pdf", meta: "PDF · Jul 2025" },
-      { name: "Warranty certificate.pdf", meta: "PDF · Jul 2025" },
-    ],
+    ...demo.custRecords,
+    invoices: demo.custRecords.invoices.map((iv, i) =>
+      i === 0 ? { ...iv, status: c.balance > 0 ? "Due" : "Paid" } : iv
+    ),
   };
   const lifetime = rec.invoices.reduce((n, i) => n + i.amount, 0);
   const TABS = [

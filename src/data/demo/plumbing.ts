@@ -1,0 +1,222 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm shutoff valve is closed", assignee: "Diego M.", done: true },
+  { id: 2, label: "Bring a replacement drain valve", assignee: "Diego M.", done: false },
+  { id: 3, label: "Collect payment on site", assignee: "Rosa T.", done: false },
+];
+
+export const plumbingDemo: DemoData = {
+  slug: "plumbing",
+  company: "BlueLine Plumbing",
+  primaryCustomer: "Olivia S.",
+  primaryIssue: "Water heater leaking in the garage",
+  primaryTicket: "1042",
+  summary:
+    "Existing customer, water heater leaking onto the garage floor since this morning. Shutoff is closed, wants a same-day visit.",
+  liveTags: ["Existing customer", "Plumbing", "Same-day"],
+  liveNotes: ["Prefers afternoon visits.", "Gate code 4417."],
+  primaryTech: "Diego M.",
+  primaryMessages: [
+    { me: true, text: `Hi Olivia, this is OneBy for BlueLine Plumbing. Diego is booked for your water heater today at 3:30 PM.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Clog · Brennan", tech: "Nina B.", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "Repipe · Oak HOA", tech: "Diego M.", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "Drain cleaning · Whitfield", tech: "Nina B.", duration: "1h" },
+      { time: "1:00 PM", title: "Repipe · Nakamura", tech: "Diego M.", duration: "Half day" },
+      { time: "3:30 PM", title: "Water heater · Olivia S.", tech: "Diego M.", hot: true, duration: "1h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Estimate · Cedar Plaza", tech: "Nina B.", duration: "30m" }],
+    4: [{ time: "2:00 PM", title: "Heater install · Delgado", tech: "Diego M.", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Diego M.", role: "Lead plumber", status: "On a job", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["Plumbing", "Water heaters", "Repipe"] },
+    { name: "Nina B.", role: "Plumber", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["Plumbing", "Drain cleaning"] },
+    { name: "Rosa T.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Dispatch", "Scheduling"] },
+    { name: "Cole W.", role: "Plumber", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Gas lines", "Plumbing"] },
+  ],
+  techDot: { "Diego M.": "bg-blue", "Nina B.": "bg-green", "Cole W.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "Drain cleaning", type: "Service", price: 149, tasks: ["Inspect the line and cleanout", "Snake or hydro-jet the drain", "Test flow and check for backups", "Review findings with customer"] },
+    { id: 2, name: "Leak diagnostic", type: "Service", price: 89, tasks: ["Locate the leak source", "Check shutoff and pressure", "Assess water damage", "Log readings"] },
+    { id: 3, name: "Labor (per hour)", type: "Service", price: 120 },
+    { id: 4, name: "Water heater install", type: "Service", price: 2200, tasks: ["Confirm size and permit", "Drain and remove old unit", "Set and connect new heater", "Fill, purge, and verify", "Walk through with customer"] },
+    { id: 5, name: "Shutoff valve", type: "Part", price: 45 },
+    { id: 6, name: "Wax ring", type: "Part", price: 12 },
+    { id: 7, name: "PEX (per ft)", type: "Part", price: 3 },
+    { id: 8, name: "Supply line", type: "Part", price: 18 },
+  ],
+  tickets: [
+    { id: "1042", issue: "Water heater leaking in the garage", customer: "Olivia S.", status: "Scheduled", urgent: true, summary: "Existing customer, water heater leaking onto the garage floor since this morning. Shutoff is closed. Wants the earliest slot, likely a failed tank or a drain valve.",
+      relationship: "existing customer", tech: "Diego M.", tags: ["Existing customer", "Plumbing", "Same-day"], notes: ["Prefers afternoon visits.", "Gate code 4417."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "Kitchen drain fully clogged", customer: "Trevor B.", status: "New", urgent: true, summary: "New caller, kitchen sink completely backed up. Water not draining at all. Wants someone out today, flexible on the time.",
+      relationship: "new caller", tech: "Nina B.", tags: ["New caller", "Drain", "Same-day"], notes: ["Backup started overnight.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Confirm the sink isn't overflowing", assignee: "Nina B.", done: false },
+        { id: 412, label: "Photograph the cleanout access", assignee: "Nina B.", done: false },
+      ] },
+    { id: "1039", issue: "Common-area repipe, 12 units", customer: "Maple Court HOA", status: "Scheduled", urgent: false, summary: "Recurring maintenance contract. Twelve units on aging galvanized pipe, needs a half-day block and a COI on file before the crew arrives.",
+      relationship: "maintenance contract", tech: "Diego M.", tags: ["Commercial", "Maintenance plan", "12 units"], notes: ["COI required on file before arrival.", "Water shutoff via the north mechanical room."], subtasks: [
+        { id: 391, label: "Confirm COI is on file", assignee: "Rosa T.", done: true },
+        { id: 392, label: "Block a half day for the crew", assignee: "Rosa T.", done: false },
+        { id: 393, label: "Load PEX and fittings for 12 units", assignee: "Diego M.", done: false },
+      ] },
+    { id: "1038", issue: "Faucet replacement", customer: "Renee K.", status: "In progress", urgent: false, summary: "Kitchen faucet swap. Customer supplied the fixture, just needs labor. Tech is on site now.",
+      relationship: "repeat customer", tech: "Nina B.", tags: ["Repeat customer", "Fixture"], notes: ["Customer supplied the faucet.", "Tech is on site."], subtasks: [
+        { id: 381, label: "Verify faucet fits the sink", assignee: "Nina B.", done: true },
+        { id: 382, label: "Test hot and cold, check for leaks", assignee: "Nina B.", done: false },
+      ] },
+    { id: "1035", issue: "Water heater install", customer: "Delgado Family", status: "Invoiced", urgent: false, summary: "New 50-gallon heater installed Tuesday. Job complete, invoice sent, awaiting payment.",
+      relationship: "install customer", tech: "Diego M.", tags: ["Install", "Water heater", "Warranty"], notes: ["50-gallon heater installed Tuesday.", "12-month labor warranty registered."], subtasks: [
+        { id: 351, label: "Register the warranty", assignee: "Rosa T.", done: true },
+        { id: 352, label: "Send the invoice", assignee: "Rosa T.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Rosa T.", done: false },
+      ] },
+    { id: "1031", issue: "Restaurant grease line service", customer: "Riverside Diner", status: "Done", urgent: false, summary: "Kitchen grease line backing up. Hydro-jetted the line, verified flow, signed off.",
+      relationship: "commercial account", tech: "Nina B.", tags: ["Commercial", "Drain"], notes: ["Hydro-jetted the grease line.", "Flow verified and signed off."], subtasks: [
+        { id: 311, label: "Hydro-jet the grease line", assignee: "Nina B.", done: true },
+        { id: 312, label: "Verify full flow", assignee: "Nina B.", done: true },
+        { id: 313, label: "Get customer sign-off", assignee: "Nina B.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Leak diagnostic", qty: 1, price: 89 }, { label: "Drain valve replacement", qty: 1, price: 100 }],
+    "1041": [{ label: "Drain cleaning", qty: 1, price: 89 }],
+    "1039": [{ label: "Unit repipe", qty: 12, price: 75 }],
+    "1038": [{ label: "Faucet install labor", qty: 1, price: 120 }],
+    "1035": [{ label: "Water heater install", qty: 1, price: 2200 }],
+    "1031": [{ label: "Grease line hydro-jet", qty: 1, price: 240 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Olivia S.", meta: "Water heater leaking · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Renee K.", meta: "Faucet dripping, needs a swap", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · slab leak · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Maple Court HOA", meta: "Common-area repipe · COI requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Delgado Family", meta: "Payment reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Riverside Diner", meta: "Grease line follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Olivia S.", initials: "OS", phone: "(602) 555-0148", email: "olivia.s@email.com", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["Plumbing", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Trevor B.", initials: "TB", phone: "(602) 555-0192", email: "tbrooks@email.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Drain"], balance: 240, last: "Invoice sent Jun 18" },
+    { id: 3, name: "Maple Court HOA", initials: "MC", phone: "(480) 555-0110", email: "manager@maplecourthoa.com", address: "Maple Ct, Tempe AZ", since: "2022", tags: ["Commercial", "Maintenance plan"], balance: 0, last: "Repipe Jun 10" },
+    { id: 4, name: "Renee K.", initials: "RK", phone: "(623) 555-0177", email: "renee.k@email.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
+    { id: 5, name: "Delgado Family", initials: "DF", phone: "(480) 555-0143", email: "delgado.home@email.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["Plumbing", "Install"], balance: 0, last: "Install Apr 3" },
+    { id: 6, name: "Riverside Diner", initials: "RD", phone: "(602) 555-0166", email: "book@riversidediner.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Commercial"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · water heater leaking", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Diego arriving 3:30 PM" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
+    { when: "Last spring", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · repipe", body: "$3,400 · 12-month warranty" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "Leak diagnostic", when: "Today", status: "Scheduled", amount: 189 },
+      { title: "Drain cleaning", when: "Mar 2026", status: "Done", amount: 149 },
+      { title: "Whole-home repipe", when: "Jul 2025", status: "Done", amount: 3400 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Water heater leaking in the garage", status: "Open" },
+      { id: "0987", issue: "Annual drain maintenance", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 189, status: "Due" },
+      { id: "INV-0987", amount: 149, status: "Paid" },
+      { id: "INV-0820", amount: 3400, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "Water heater leaking since this morning, wants a same-day visit." },
+      { kind: "Text", when: "Today 4:13", text: "Arrival window texted: Diego, 3 to 5pm." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the annual drain maintenance." },
+    ],
+    assets: [
+      { name: "Rheem 50-gal water heater", meta: "Installed Jul 2025 · Model XE50 · Garage", warranty: "Under warranty" },
+      { name: "Moen kitchen faucet", meta: "Installed Jul 2025 · Model 7594 · Kitchen", warranty: "Under warranty" },
+      { name: "Pressure regulator", meta: "Installed Jul 2025 · 3/4 in", warranty: "Out of warranty" },
+    ],
+    files: [
+      { name: "Install photos", meta: "3 photos · Jul 2025" },
+      { name: "Signed estimate.pdf", meta: "PDF · Jul 2025" },
+      { name: "Warranty certificate.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "james", name: "Trevor B.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "My kitchen sink is completely backed up." }] },
+    { id: "oak", name: "Maple Court HOA", msgs: [{ me: true, text: "Crew is booked for the 12-unit repipe Thursday at 8:30." }, { me: false, text: "Great, the COI is on file." }] },
+    { id: "dana", name: "Renee K.", unread: 1, msgs: [{ me: false, text: "Is the new faucet still dripping after the swap?" }] },
+  ],
+  messageTemplates: ["On our way 🚐", "Running 10 min late", "All done, invoice sent", "Confirming your appointment"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Schedule water heater visit", meta: "Dispatch · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Diego M.", "Today 4:30 PM · Diego M.", "Tomorrow 9:00 AM · Nina B."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Olivia her arrival window", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Diego arriving 3:30 PM", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: garage heater, not the utility closet?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Garage heater", "Utility closet heater", "Both units"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a ticket", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a ticket is created", action: "assign the tech with the right skills", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "a job is booked", action: "text the customer a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a job is marked done", action: "send the invoice automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "an invoice is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling BlueLine Plumbing! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "Standard repair": ["New", "Scheduled", "In progress", "Invoiced", "Paid"],
+    "Water heater install": ["New", "Quoted", "Approved", "Scheduled", "Installed", "Paid"],
+    "Warranty claim": ["New", "Verified", "Scheduled", "Resolved"],
+    "Maintenance plan": ["Due", "Scheduled", "Serviced", "Logged"],
+  },
+  schedulePlaceholder: "What's the job? e.g. water heater for Olivia S.",
+  mileItem: "Water heater install",
+  mileBase: 2200,
+  billingAlertNote: "Across 3 customers · Riverside Diner $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Revenue up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Repipe · Nakamura", tech: "Diego M." },
+    { time: "3:30 PM", title: "Water heater · Olivia S.", tech: "Diego M.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Riverside Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent ticket needs scheduling", body: "#1041 kitchen drain clogged · Trevor B.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, my water heater is leaking all over the garage floor." },
+    { who: "OneBy", line: "Sorry to hear that, I can get a plumber out today. Have you been able to shut the water off?" },
+    { who: "Caller", line: "Yeah, I closed the valve." },
+    { who: "OneBy", line: "Perfect. Is someone home after 3? Diego can be there between 3 and 5." },
+    { who: "Caller", line: "Yep, that works." },
+    { who: "OneBy", line: "Great, you're booked for 3 to 5 today. I'll text you the arrival window." },
+  ],
+};

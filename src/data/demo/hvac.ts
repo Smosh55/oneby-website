@@ -1,0 +1,222 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm arrival window", assignee: "Luis R.", done: true },
+  { id: 2, label: "Bring a spare capacitor", assignee: "Luis R.", done: false },
+  { id: 3, label: "Collect payment on site", assignee: "Dana P.", done: false },
+];
+
+export const hvacDemo: DemoData = {
+  slug: "hvac",
+  company: "Summit HVAC",
+  primaryCustomer: "Maria G.",
+  primaryIssue: "Upstairs A/C not cooling",
+  primaryTicket: "1042",
+  summary:
+    "Existing customer, upstairs A/C not cooling since last night. Home after 3pm, wants a same-day visit.",
+  liveTags: ["Existing customer", "HVAC", "Same-day"],
+  liveNotes: ["Prefers afternoon visits.", "Gate code 4417."],
+  primaryTech: "Luis R.",
+  primaryMessages: [
+    { me: true, text: `Hi Maria, this is OneBy for Summit HVAC. Luis is booked for your A/C diagnostic today at 3:30 PM.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "No-cool · Ortiz", tech: "Sam K.", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "Maintenance · Oak HOA", tech: "Luis R.", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "Tune-up · Garcia", tech: "Sam K.", duration: "1h" },
+      { time: "1:00 PM", title: "Install · Lee", tech: "Luis R.", duration: "Half day" },
+      { time: "3:30 PM", title: "A/C diagnostic · Maria G.", tech: "Luis R.", hot: true, duration: "1h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Estimate · Park Ave", tech: "Sam K.", duration: "30m" }],
+    4: [{ time: "2:00 PM", title: "Install · Reyes", tech: "Luis R.", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Luis R.", role: "Lead tech", status: "On a job", jobs: "4 this week", dot: "bg-green", phone: "(602) 555-0171", skills: ["HVAC", "Install", "Refrigeration"] },
+    { name: "Sam K.", role: "Tech", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(602) 555-0182", skills: ["HVAC", "Maintenance"] },
+    { name: "Dana P.", role: "Dispatch", status: "Online", jobs: "Routing", dot: "bg-green", phone: "(602) 555-0190", skills: ["Dispatch", "Scheduling"] },
+    { name: "Mia T.", role: "Tech", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(623) 555-0166", skills: ["Plumbing", "HVAC"] },
+  ],
+  techDot: { "Luis R.": "bg-blue", "Sam K.": "bg-green", "Mia T.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "A/C diagnostic", type: "Service", price: 89, tasks: ["Inspect unit and airflow", "Test capacitor and contactor", "Check refrigerant levels", "Review findings with customer"] },
+    { id: 2, name: "System tune-up", type: "Service", price: 129, tasks: ["Replace air filter", "Clean coils", "Test thermostat", "Log readings"] },
+    { id: 3, name: "Labor (per hour)", type: "Service", price: 120 },
+    { id: 4, name: "Full system install", type: "Service", price: 4000, tasks: ["Confirm load calc and permit", "Remove old equipment", "Install and braze new unit", "Charge system and verify", "Walk through with customer"] },
+    { id: 5, name: "Capacitor", type: "Part", price: 100 },
+    { id: 6, name: "Contactor", type: "Part", price: 65 },
+    { id: 7, name: "Refrigerant (per lb)", type: "Part", price: 85 },
+    { id: 8, name: "Air filter", type: "Part", price: 25 },
+  ],
+  tickets: [
+    { id: "1042", issue: "Upstairs A/C not cooling", customer: "Maria G.", status: "Scheduled", urgent: true, summary: "Existing customer, no cooling upstairs since this morning. Wants the earliest slot. Filter was clogged last visit, likely a capacitor or airflow issue.",
+      relationship: "existing customer", tech: "Luis R.", tags: ["Existing customer", "HVAC", "Same-day"], notes: ["Prefers afternoon visits.", "Gate code 4417."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "Water heater leaking", customer: "James R.", status: "New", urgent: true, summary: "New caller, water heater leaking onto the garage floor. Not actively flooding. Wants someone out today, flexible on the time.",
+      relationship: "new caller", tech: "Sam K.", tags: ["New caller", "Plumbing", "Same-day"], notes: ["Heater is in the garage.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Confirm the leak is contained", assignee: "Sam K.", done: false },
+        { id: 412, label: "Photograph the unit and model number", assignee: "Sam K.", done: false },
+      ] },
+    { id: "1039", issue: "Annual maintenance, 12 units", customer: "Oak Street HOA", status: "Scheduled", urgent: false, summary: "Recurring maintenance contract. Twelve rooftop units, needs a half-day block and a COI on file before the crew arrives.",
+      relationship: "maintenance contract", tech: "Luis R.", tags: ["Commercial", "Maintenance plan", "12 units"], notes: ["COI required on file before arrival.", "Roof access via the north stairwell."], subtasks: [
+        { id: 391, label: "Confirm COI is on file", assignee: "Dana P.", done: true },
+        { id: 392, label: "Block a half day for the crew", assignee: "Dana P.", done: false },
+        { id: 393, label: "Load filters for 12 units", assignee: "Luis R.", done: false },
+      ] },
+    { id: "1038", issue: "Thermostat replacement", customer: "Dana P.", status: "In progress", urgent: false, summary: "Smart thermostat install. Customer supplied the unit, just needs labor. Tech is on site now.",
+      relationship: "repeat customer", tech: "Sam K.", tags: ["Repeat customer", "HVAC"], notes: ["Customer supplied the thermostat.", "Tech is on site."], subtasks: [
+        { id: 381, label: "Verify thermostat compatibility", assignee: "Sam K.", done: true },
+        { id: 382, label: "Test heating and cooling modes", assignee: "Sam K.", done: false },
+      ] },
+    { id: "1035", issue: "Full system install", customer: "Reyes Family", status: "Invoiced", urgent: false, summary: "New three-ton system installed Tuesday. Job complete, invoice sent, awaiting payment.",
+      relationship: "install customer", tech: "Luis R.", tags: ["Install", "HVAC", "Warranty"], notes: ["Three-ton system installed Tuesday.", "12-month labor warranty registered."], subtasks: [
+        { id: 351, label: "Register the warranty", assignee: "Dana P.", done: true },
+        { id: 352, label: "Send the invoice", assignee: "Dana P.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Dana P.", done: false },
+      ] },
+    { id: "1031", issue: "Walk-in cooler service", customer: "Sun City Diner", status: "Done", urgent: false, summary: "Walk-in cooler not holding temp. Replaced the fan motor, verified temps, signed off.",
+      relationship: "commercial account", tech: "Sam K.", tags: ["Commercial", "Refrigeration"], notes: ["Replaced the fan motor.", "Temps verified and signed off."], subtasks: [
+        { id: 311, label: "Replace the fan motor", assignee: "Sam K.", done: true },
+        { id: 312, label: "Verify holding temperature", assignee: "Sam K.", done: true },
+        { id: 313, label: "Get customer sign-off", assignee: "Sam K.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "A/C diagnostic", qty: 1, price: 89 }, { label: "Capacitor replacement", qty: 1, price: 100 }],
+    "1041": [{ label: "Water heater inspection", qty: 1, price: 89 }],
+    "1039": [{ label: "Rooftop unit tune-up", qty: 12, price: 75 }],
+    "1038": [{ label: "Thermostat install labor", qty: 1, price: 120 }],
+    "1035": [{ label: "Full system install", qty: 1, price: 4000 }],
+    "1031": [{ label: "Fan motor replacement", qty: 1, price: 240 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Maria G.", meta: "Upstairs A/C not cooling · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Dana P.", meta: "A/C grinding, not cooling", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · roof leak · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Oak Street HOA", meta: "Annual maintenance · COI requested", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Reyes Family", meta: "Payment reminder · invoice sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Sun City Diner", meta: "Walk-in cooler follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Maria G.", initials: "MG", phone: "(602) 555-0148", email: "maria.g@email.com", address: "1420 N 3rd Ave, Phoenix AZ", since: "2023", tags: ["HVAC", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "James R.", initials: "JR", phone: "(602) 555-0192", email: "jrowe@email.com", address: "88 E Camelback Rd, Phoenix AZ", since: "2024", tags: ["Plumbing"], balance: 240, last: "Invoice sent Jun 18" },
+    { id: 3, name: "Oak Street HOA", initials: "OH", phone: "(480) 555-0110", email: "manager@oakstreethoa.com", address: "Oak St, Tempe AZ", since: "2022", tags: ["Commercial", "Maintenance plan"], balance: 0, last: "Tune-up Jun 10" },
+    { id: 4, name: "Dana P.", initials: "DP", phone: "(623) 555-0177", email: "dana.p@email.com", address: "45 W Glendale Ln, Glendale AZ", since: "2025", tags: ["New"], balance: 89, last: "First call Jun 20" },
+    { id: 5, name: "Reyes Family", initials: "RF", phone: "(480) 555-0143", email: "reyes.home@email.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["HVAC", "Install"], balance: 0, last: "Install Apr 3" },
+    { id: 6, name: "Sun City Diner", initials: "SD", phone: "(602) 555-0166", email: "book@suncitydiner.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Commercial"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · A/C not cooling", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · arrival window sent", body: "Luis arriving 3:30 PM" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Invoice · $189", body: "Paid by card" },
+    { when: "Last summer", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Job · A/C install", body: "$4,200 · 12-month warranty" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "A/C diagnostic", when: "Today", status: "Scheduled", amount: 189 },
+      { title: "System tune-up", when: "Mar 2026", status: "Done", amount: 129 },
+      { title: "Full A/C install", when: "Jul 2025", status: "Done", amount: 4200 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Upstairs A/C not cooling", status: "Open" },
+      { id: "0987", issue: "Annual maintenance visit", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 189, status: "Due" },
+      { id: "INV-0987", amount: 129, status: "Paid" },
+      { id: "INV-0820", amount: 4200, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "A/C not cooling since last night, wants a same-day visit." },
+      { kind: "Text", when: "Today 4:13", text: "Arrival window texted: Luis, 3 to 5pm." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the annual maintenance tune-up." },
+    ],
+    assets: [
+      { name: "Carrier 3-ton A/C", meta: "Installed Jul 2025 · Model 24ABC6 · Upstairs", warranty: "Under warranty" },
+      { name: "Carrier gas furnace", meta: "Installed Jul 2025 · Model 59TP6 · Basement", warranty: "Under warranty" },
+      { name: "Nest thermostat", meta: "Installed Jul 2025 · 2nd gen", warranty: "Out of warranty" },
+    ],
+    files: [
+      { name: "Install photos", meta: "3 photos · Jul 2025" },
+      { name: "Signed estimate.pdf", meta: "PDF · Jul 2025" },
+      { name: "Warranty certificate.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "james", name: "James R.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "My water heater is getting worse." }] },
+    { id: "oak", name: "Oak Street HOA", msgs: [{ me: true, text: "Crew is booked for the 12-unit maintenance Thursday at 8:30." }, { me: false, text: "Great, the COI is on file." }] },
+    { id: "dana", name: "Dana P.", unread: 1, msgs: [{ me: false, text: "Is the thermostat still blinking after the install?" }] },
+  ],
+  messageTemplates: ["On our way 🚐", "Running 10 min late", "All done, invoice sent", "Confirming your appointment"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Schedule A/C diagnostic", meta: "Dispatch · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Luis R.", "Today 4:30 PM · Luis R.", "Tomorrow 9:00 AM · Sam K."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Maria her arrival window", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Luis arriving 3:30 PM", "Running 15 min late", "On our way now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: upstairs unit, not downstairs?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Upstairs unit", "Downstairs unit", "Both units"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a ticket", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a ticket is created", action: "assign the tech with the right skills", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "a job is booked", action: "text the customer a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a job is marked done", action: "send the invoice automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "an invoice is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling Summit HVAC! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "Standard repair": ["New", "Scheduled", "In progress", "Invoiced", "Paid"],
+    "New install": ["New", "Quoted", "Approved", "Scheduled", "Installed", "Paid"],
+    "Warranty claim": ["New", "Verified", "Scheduled", "Resolved"],
+    "Maintenance plan": ["Due", "Scheduled", "Serviced", "Logged"],
+  },
+  schedulePlaceholder: "What's the job? e.g. A/C diagnostic for Maria G.",
+  mileItem: "Full system install",
+  mileBase: 4000,
+  billingAlertNote: "Across 3 customers · Sun City Diner $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Revenue up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Install · Lee", tech: "Luis R." },
+    { time: "3:30 PM", title: "A/C diagnostic · Maria G.", tech: "Luis R.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Sun City Diner", body: "Invoice 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent ticket needs scheduling", body: "#1041 water heater leaking · James R.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, my A/C just quit and it's 95 in the house." },
+    { who: "OneBy", line: "Sorry to hear that, I can get a tech out today. Is it the upstairs or downstairs unit?" },
+    { who: "Caller", line: "Upstairs." },
+    { who: "OneBy", line: "Got it. Is someone home after 3? Luis can be there between 3 and 5." },
+    { who: "Caller", line: "Yep, that works." },
+    { who: "OneBy", line: "Perfect, you're booked for 3 to 5 today. I'll text you the arrival window." },
+  ],
+};

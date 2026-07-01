@@ -10,15 +10,8 @@ import {
   Headphones,
   ArrowRight,
 } from "lucide-react";
-
-const transcript = [
-  { who: "Caller", line: "Hi, my A/C just quit and it's 95 in the house." },
-  { who: "OneBy", line: "Sorry to hear that, I can get a tech out today. Is it the upstairs or downstairs unit?" },
-  { who: "Caller", line: "Upstairs." },
-  { who: "OneBy", line: "Got it. Is someone home after 3? Luis can be there between 3 and 5." },
-  { who: "Caller", line: "Yep, that works." },
-  { who: "OneBy", line: "Perfect, you're booked for 3 to 5 today. I'll text you the arrival window." },
-];
+import type { DemoData } from "@/data/demo/types";
+import { hvacDemo } from "@/data/demo/hvac";
 
 const trust = [
   { icon: ShieldCheck, title: "It asks when it's unsure", body: "It asked which unit instead of guessing. It never invents an answer or makes a promise you can't keep." },
@@ -26,8 +19,9 @@ const trust = [
   { icon: Headphones, title: "You can hear every call", body: "Every call is recorded, transcribed, and summarized. Nothing happens on your line that you can't review." },
 ];
 
-export default function HearItWork() {
+export default function HearItWork({ data = hvacDemo }: { data?: DemoData }) {
   const [playing, setPlaying] = useState(false);
+  const transcript = data.hearTranscript;
 
   return (
     <section className="border-y border-line bg-canvas/50 py-20 lg:py-28">
@@ -59,7 +53,7 @@ export default function HearItWork() {
                   {playing ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
                 </button>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-navy">Inbound call · Summit HVAC</p>
+                  <p className="text-sm font-semibold text-navy">Inbound call · {data.company}</p>
                   <p className="text-xs text-faint">AI answered · 0:38</p>
                 </div>
                 {/* waveform */}
