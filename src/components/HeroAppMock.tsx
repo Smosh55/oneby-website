@@ -786,7 +786,8 @@ function TicketsView({
   const [picking, setPicking] = useState(false);
   const [pending, setPending] = useState<string | null>(null);
   const FLOWS = demo.scheduleFlows;
-  const [flow, setFlow] = useState("Standard repair");
+  const flowKeys = Object.keys(FLOWS);
+  const [flow, setFlow] = useState(() => flowKeys[0]);
   const [stage, setStage] = useState(1);
   const [nt, setNt] = useState("");
   const [svcPick, setSvcPick] = useState(false);
@@ -802,7 +803,7 @@ function TicketsView({
     setSvcPick(false);
     toast(`${steps.length} tasks from ${it.name}, assigned to ${curTech}`);
   };
-  const stages = FLOWS[flow];
+  const stages = FLOWS[flow] ?? FLOWS[flowKeys[0]] ?? [];
   const STAGE_ACTION: Record<string, string> = {
     New: "Schedule the job",
     Due: "Schedule the visit",
@@ -829,8 +830,10 @@ function TicketsView({
   useEffect(() => {
     const t = allTickets.find((x) => x.id === sel);
     const stageIdx: Record<string, number> = { New: 0, Scheduled: 1, "In progress": 2, Invoiced: 3, Done: 4 };
-    setFlow("Standard repair");
-    setStage(t ? stageIdx[t.status] ?? 1 : 1);
+    const firstFlow = flowKeys[0];
+    setFlow(firstFlow);
+    const idx = t ? stageIdx[t.status] ?? 1 : 1;
+    setStage(Math.min(idx, (FLOWS[firstFlow]?.length ?? 5) - 1));
   }, [sel]);
 
   // Show the selected ticket's own data. #1042 stays wired to the lifted state
