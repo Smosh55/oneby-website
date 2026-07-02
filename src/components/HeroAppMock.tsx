@@ -153,7 +153,7 @@ function ToastHost() {
   );
 }
 
-export default function HeroAppMock({ compact = false, data = hvacDemo }: { compact?: boolean; data?: DemoData }) {
+export default function HeroAppMock({ compact = false, data = hvacDemo, showCue = true }: { compact?: boolean; data?: DemoData; showCue?: boolean }) {
   const [active, setActive] = useState<ModId>("live");
   const [pickerOpen, setPickerOpen] = useState(false);
   const [phase, setPhase] = useState<Phase>("transcribing");
@@ -282,11 +282,13 @@ export default function HeroAppMock({ compact = false, data = hvacDemo }: { comp
       className="relative mx-auto w-full max-w-5xl"
     >
       {/* interactive cue */}
-      <div className="absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2">
-        <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-blue px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wide text-white shadow-[var(--shadow-lg)]">
-          <MousePointerClick size={13} className="animate-bounce" /> Live demo, edit anything
-        </span>
-      </div>
+      {showCue && (
+        <div className="absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2">
+          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-blue px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wide text-white shadow-[var(--shadow-lg)]">
+            <MousePointerClick size={13} className="animate-bounce" /> Live demo, edit anything
+          </span>
+        </div>
+      )}
 
       <div className="relative overflow-hidden rounded-[20px] border border-line bg-surface shadow-[0_40px_90px_-30px_rgba(4,3,79,0.35)]">
         <ToastHost />
