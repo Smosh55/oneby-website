@@ -88,7 +88,7 @@ export default async function IndustryPage({
       />
       <IndustryLanding
         industry={industry}
-        relatedPosts={getPostsForIndustry(industry.slug)}
+        relatedPosts={getPostsForIndustry(industry.slug, 6)}
       />
     </>
   );

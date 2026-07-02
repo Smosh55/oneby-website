@@ -83,14 +83,21 @@ export function getRelatedPosts(slug: string, category: string, limit = 3): Post
   return [...sameCat, ...rest].slice(0, limit);
 }
 
-// Posts linked to an industry pillar, newest first. Falls back to the most
-// recent posts so every industry page still gets a "related reading" cluster.
+// Posts linked to an industry pillar, newest first. When a pillar has fewer
+// than `limit` posts, fill with general (untagged) posts — which apply to every
+// trade — before ever borrowing another industry's niche posts.
 export function getPostsForIndustry(slug: string, limit = 3): PostMeta[] {
   const all = getAllPosts();
   const matched = all.filter((p) => p.industry === slug);
   if (matched.length >= limit) return matched.slice(0, limit);
-  const fill = all.filter((p) => p.industry !== slug);
-  return [...matched, ...fill].slice(0, limit);
+  const general = all.filter((p) => !p.industry);
+  const otherIndustry = all.filter((p) => p.industry && p.industry !== slug);
+  return [...matched, ...general, ...otherIndustry].slice(0, limit);
+}
+
+// Every post tied to an industry pillar (no fill), newest first.
+export function getIndustryPosts(slug: string): PostMeta[] {
+  return getAllPosts().filter((p) => p.industry === slug);
 }
 
 export function getCategories(): string[] {

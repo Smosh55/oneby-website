@@ -34,7 +34,7 @@ export default function Home() {
     return (
       <IndustryLanding
         industry={focus}
-        relatedPosts={getPostsForIndustry(focus.slug)}
+        relatedPosts={getPostsForIndustry(focus.slug, 6)}
         asHome
       />
     );
