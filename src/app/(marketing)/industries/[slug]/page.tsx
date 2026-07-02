@@ -4,9 +4,13 @@ import { industries, industriesBySlug } from "@/data/industries";
 import IndustryLanding from "@/components/industry/IndustryLanding";
 import { getPostsForIndustry } from "@/lib/blog";
 import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
+import { focusedIndustrySlug } from "@/config/site";
 
 export function generateStaticParams() {
-  return industries.map((i) => ({ slug: i.slug }));
+  const list = focusedIndustrySlug
+    ? industries.filter((i) => i.slug === focusedIndustrySlug)
+    : industries;
+  return list.map((i) => ({ slug: i.slug }));
 }
 
 export const dynamicParams = false;

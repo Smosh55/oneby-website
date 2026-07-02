@@ -4,9 +4,13 @@ import { industries, industriesBySlug } from "@/data/industries";
 import { cities, citiesBySlug } from "@/data/locations";
 import LocalLanding from "@/components/local/LocalLanding";
 import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
+import { focusedIndustrySlug } from "@/config/site";
 
 export function generateStaticParams() {
-  return industries.flatMap((i) =>
+  const list = focusedIndustrySlug
+    ? industries.filter((i) => i.slug === focusedIndustrySlug)
+    : industries;
+  return list.flatMap((i) =>
     cities.map((c) => ({ slug: i.slug, city: c.slug }))
   );
 }

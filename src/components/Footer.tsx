@@ -1,4 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { cities } from "@/data/locations";
+import { useSiteIndustry } from "@/lib/useSiteIndustry";
+import { isFocusedSite } from "@/config/site";
 
 type FooterLink = { label: string; href: string };
 
@@ -49,6 +54,30 @@ const groups: { title: string; links: FooterLink[] }[] = [
 ];
 
 export default function Footer() {
+  // In a single-industry context, replace the cross-industry column with links
+  // scoped to that trade (overview + local service areas) so the footer doesn't
+  // advertise every other vertical.
+  const industry = useSiteIndustry();
+  const displayGroups = !industry
+    ? groups
+    : groups.map((g) =>
+        g.title !== "Industries"
+          ? g
+          : {
+              title: industry.shortName,
+              links: [
+                {
+                  label: "Overview",
+                  href: isFocusedSite ? "/" : `/industries/${industry.slug}`,
+                },
+                ...cities.slice(0, 4).map((c) => ({
+                  label: `${c.name}, ${c.state}`,
+                  href: `/industries/${industry.slug}/${c.slug}`,
+                })),
+              ],
+            }
+      );
+
   return (
     <footer className="bg-navy text-white">
       <div className="container-x py-16">
@@ -74,7 +103,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {groups.map((g) => (
+          {displayGroups.map((g) => (
             <div key={g.title}>
               <h4 className="text-[0.8rem] font-bold uppercase tracking-wide text-white/40">
                 {g.title}

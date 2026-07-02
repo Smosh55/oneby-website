@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Loader2, CalendarCheck } from "lucide-react";
 import { industries } from "@/data/industries";
 import { track, getSource } from "@/lib/analytics";
+import { useSiteIndustry } from "@/lib/useSiteIndustry";
 
 type Fields = {
   name: string;
@@ -41,7 +42,13 @@ const providers = [
 ];
 
 export default function DemoForm() {
-  const [f, setF] = useState<Fields>(empty);
+  // On a single-industry page, the industry is implied — pre-fill it so the
+  // lead is still tagged, and drop the "which industry?" picker.
+  const siteIndustry = useSiteIndustry();
+  const [f, setF] = useState<Fields>(() => ({
+    ...empty,
+    industry: siteIndustry?.shortName ?? "",
+  }));
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">(
     "idle"
@@ -176,13 +183,15 @@ export default function DemoForm() {
           error={errors.company}
           autoComplete="organization"
         />
-        <Select
-          label="Industry"
-          value={f.industry}
-          onChange={(v) => set("industry", v)}
-          options={[...industries.map((i) => i.shortName), "Other"]}
-          placeholder="Pick one"
-        />
+        {!siteIndustry && (
+          <Select
+            label="Industry"
+            value={f.industry}
+            onChange={(v) => set("industry", v)}
+            options={[...industries.map((i) => i.shortName), "Other"]}
+            placeholder="Pick one"
+          />
+        )}
         <Select
           label="Team size"
           value={f.teamSize}

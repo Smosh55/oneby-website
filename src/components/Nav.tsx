@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Menu, X, ChevronDown, Gift } from "lucide-react";
 import { industryGroups } from "@/data/industries";
 import { getIcon } from "@/components/industry/iconMap";
+import { useSiteIndustry } from "@/lib/useSiteIndustry";
+import { isFocusedSite } from "@/config/site";
 
 const links = [
   { label: "Product", href: "/product" },
@@ -17,6 +19,12 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [mobileIndustries, setMobileIndustries] = useState(false);
+
+  // When the visitor is in a single-industry context (a dedicated deployment or
+  // an /industries/<slug> page), drop the cross-industry chrome so it reads as a
+  // business that only serves that trade.
+  const industry = useSiteIndustry();
+  const homeHref = !industry ? "/" : isFocusedSite ? "/" : `/industries/${industry.slug}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -34,13 +42,14 @@ export default function Nav() {
       }`}
     >
       <nav className="container-x flex h-16 items-center justify-between gap-6">
-        <Link href="/" className="flex items-center shrink-0" aria-label="OneBy home">
+        <Link href={homeHref} className="flex items-center shrink-0" aria-label="OneBy home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/oneby-logo.svg" alt="OneBy" className="h-7 w-auto" />
         </Link>
 
         <div className="hidden lg:flex items-center gap-1">
-          {/* Industries mega-dropdown */}
+          {/* Industries mega-dropdown — hidden in single-industry context */}
+          {!industry && (
           <div className="group relative">
             <Link
               href="/industries"
@@ -85,6 +94,7 @@ export default function Nav() {
               </div>
             </div>
           </div>
+          )}
 
           {links.map((l) => (
             <Link
@@ -128,6 +138,7 @@ export default function Nav() {
       {open && (
         <div className="lg:hidden border-t border-line bg-white max-h-[calc(100vh-4rem)] overflow-y-auto">
           <div className="container-x py-4 flex flex-col gap-1">
+            {!industry && (<>
             <button
               onClick={() => setMobileIndustries((v) => !v)}
               className="flex items-center justify-between px-3 py-3 rounded-lg text-[0.95rem] font-medium text-ink hover:bg-canvas-2"
@@ -155,6 +166,7 @@ export default function Nav() {
                 ))}
               </div>
             )}
+            </>)}
 
             {links.map((l) => (
               <Link

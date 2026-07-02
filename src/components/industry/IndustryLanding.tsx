@@ -32,9 +32,11 @@ const trustChips = [
 export default function IndustryLanding({
   industry,
   relatedPosts = [],
+  asHome = false,
 }: {
   industry: Industry;
   relatedPosts?: PostMeta[];
+  asHome?: boolean;
 }) {
   const Icon = getIcon(industry.icon);
 
@@ -48,18 +50,20 @@ export default function IndustryLanding({
         </div>
 
         <div className="container-x">
-          {/* breadcrumb */}
-          <nav className="mb-6 flex items-center gap-1.5 text-sm text-muted">
-            <Link href="/" className="hover:text-navy">
-              Home
-            </Link>
-            <ChevronRight size={14} className="text-faint" />
-            <Link href="/industries" className="hover:text-navy">
-              Industries
-            </Link>
-            <ChevronRight size={14} className="text-faint" />
-            <span className="font-medium text-navy">{industry.shortName}</span>
-          </nav>
+          {/* breadcrumb — omitted when this landing is the site root */}
+          {!asHome && (
+            <nav className="mb-6 flex items-center gap-1.5 text-sm text-muted">
+              <Link href="/" className="hover:text-navy">
+                Home
+              </Link>
+              <ChevronRight size={14} className="text-faint" />
+              <Link href="/industries" className="hover:text-navy">
+                Industries
+              </Link>
+              <ChevronRight size={14} className="text-faint" />
+              <span className="font-medium text-navy">{industry.shortName}</span>
+            </nav>
+          )}
 
           <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
             <div className="max-w-xl min-w-0">

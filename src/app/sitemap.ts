@@ -4,6 +4,7 @@ import { comparisons } from "@/data/comparisons";
 import { features } from "@/data/features";
 import { cities } from "@/data/locations";
 import { getAllPosts } from "@/lib/blog";
+import { focusedIndustrySlug } from "@/config/site";
 
 const BASE = "https://oneby.ai";
 
@@ -15,7 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/ai-receptionist`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/missed-call-calculator`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/pricing`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE}/industries`, changeFrequency: "monthly", priority: 0.8 },
+    // The /industries hub is only part of the multi-industry master site.
+    ...(focusedIndustrySlug
+      ? []
+      : [{ url: `${BASE}/industries`, changeFrequency: "monthly" as const, priority: 0.8 }]),
     { url: `${BASE}/compare`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/founders`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/blog`, changeFrequency: "weekly", priority: 0.8 },
@@ -33,19 +37,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const industryRoutes: MetadataRoute.Sitemap = industries.map((i) => ({
-    url: `${BASE}/industries/${i.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+  // On a focused deployment the industry lives at the root and every
+  // /industries/* URL redirects there, so none are listed in the sitemap.
+  const industryRoutes: MetadataRoute.Sitemap = focusedIndustrySlug
+    ? []
+    : industries.map((i) => ({
+        url: `${BASE}/industries/${i.slug}`,
+        changeFrequency: "monthly",
+        priority: 0.7,
+      }));
 
-  const localRoutes: MetadataRoute.Sitemap = industries.flatMap((i) =>
-    cities.map((c) => ({
-      url: `${BASE}/industries/${i.slug}/${c.slug}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.5,
-    }))
-  );
+  const localRoutes: MetadataRoute.Sitemap = focusedIndustrySlug
+    ? []
+    : industries.flatMap((i) =>
+        cities.map((c) => ({
+          url: `${BASE}/industries/${i.slug}/${c.slug}`,
+          changeFrequency: "monthly" as const,
+          priority: 0.5,
+        }))
+      );
 
   const compareRoutes: MetadataRoute.Sitemap = comparisons.map((c) => ({
     url: `${BASE}/compare/${c.slug}`,
