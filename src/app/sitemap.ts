@@ -57,24 +57,39 @@ export default function sitemap(): MetadataRoute.Sitemap {
         }))
       );
 
+  // Per-industry blog hubs (master site only; redirected in focused mode).
+  const hubRoutes: MetadataRoute.Sitemap = focusedIndustrySlug
+    ? []
+    : industries.map((i) => ({
+        url: `${BASE}/industries/${i.slug}/blog`,
+        changeFrequency: "weekly" as const,
+        priority: 0.6,
+      }));
+
   const compareRoutes: MetadataRoute.Sitemap = comparisons.map((c) => ({
     url: `${BASE}/compare/${c.slug}`,
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const postRoutes: MetadataRoute.Sitemap = getAllPosts().map((p) => ({
-    url: `${BASE}/blog/${p.slug}`,
-    lastModified: new Date(`${p.date}T00:00:00Z`),
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+  // On a focused deployment only the trade's own + general posts are served.
+  const postRoutes: MetadataRoute.Sitemap = getAllPosts()
+    .filter(
+      (p) => !focusedIndustrySlug || p.industry === focusedIndustrySlug || !p.industry
+    )
+    .map((p) => ({
+      url: `${BASE}/blog/${p.slug}`,
+      lastModified: new Date(`${p.date}T00:00:00Z`),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
 
   return [
     ...staticRoutes,
     ...featureRoutes,
     ...industryRoutes,
     ...localRoutes,
+    ...hubRoutes,
     ...compareRoutes,
     ...postRoutes,
   ];

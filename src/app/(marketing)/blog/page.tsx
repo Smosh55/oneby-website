@@ -1,18 +1,35 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight, Clock } from "lucide-react";
-import { getAllPosts, formatDate } from "@/lib/blog";
+import { ArrowRight, Clock } from "lucide-react";
+import { getAllPosts, getIndustryPosts, formatDate } from "@/lib/blog";
+import { focusedIndustry } from "@/config/site";
+import PostCard from "@/components/blog/PostCard";
 import Reveal from "@/components/Reveal";
 
-export const metadata: Metadata = {
-  title: "Blog: Playbooks for Capturing Every Customer",
-  description:
-    "Practical guides on call answering, lead capture, AI receptionists, and workflow automation for home service and small businesses.",
-  alternates: { canonical: "/blog" },
-};
+export function generateMetadata(): Metadata {
+  const focus = focusedIndustry();
+  if (focus) {
+    return {
+      title: `${focus.shortName} Insights & Playbooks`,
+      description: `Practical guides on call answering, lead capture, and workflow automation for ${focus.name.toLowerCase()}.`,
+      alternates: { canonical: "/blog" },
+    };
+  }
+  return {
+    title: "Blog: Playbooks for Capturing Every Customer",
+    description:
+      "Practical guides on call answering, lead capture, AI receptionists, and workflow automation for home service and small businesses.",
+    alternates: { canonical: "/blog" },
+  };
+}
 
 export default function BlogIndex() {
-  const posts = getAllPosts();
+  // On a single-industry deployment, the blog is that trade's cluster plus the
+  // general (untagged) posts that apply to every business.
+  const focus = focusedIndustry();
+  const posts = focus
+    ? [...getIndustryPosts(focus.slug), ...getAllPosts().filter((p) => !p.industry)]
+    : getAllPosts();
   const featured = posts.find((p) => p.featured) ?? posts[0];
   const rest = posts.filter((p) => p.slug !== featured?.slug);
 
@@ -25,10 +42,12 @@ export default function BlogIndex() {
         </div>
         <div className="container-x">
           <span className="eyebrow rounded-full border border-blue/20 bg-blue/5 px-3 py-1.5">
-            The OneBy Blog
+            {focus ? `${focus.shortName} Insights` : "The OneBy Blog"}
           </span>
           <h1 className="mt-5 max-w-3xl text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[3.25rem]">
-            Playbooks for turning every call into a customer.
+            {focus
+              ? `${focus.shortName} playbooks for turning every call into a customer.`
+              : "Playbooks for turning every call into a customer."}
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
             Practical, no-fluff guides on call answering, lead capture, AI, and
@@ -100,32 +119,7 @@ export default function BlogIndex() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((post, i) => (
               <Reveal key={post.slug} delay={(i % 3) * 60}>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="group surface-card flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue/30 hover:shadow-[var(--shadow-md)]"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-canvas-2 px-2.5 py-1 text-[11px] font-semibold text-navy">
-                      {post.category}
-                    </span>
-                    <ArrowUpRight
-                      size={16}
-                      className="text-faint transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    />
-                  </div>
-                  <h3 className="mt-4 text-lg font-semibold leading-snug text-navy">
-                    {post.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-[0.9rem] leading-relaxed text-muted">
-                    {post.excerpt}
-                  </p>
-                  <div className="mt-5 flex items-center gap-3 border-t border-line pt-4 text-xs text-faint">
-                    <span>{formatDate(post.date)}</span>
-                    <span className="inline-flex items-center gap-1">
-                      <Clock size={12} /> {post.readingMinutes} min
-                    </span>
-                  </div>
-                </Link>
+                <PostCard post={post} />
               </Reveal>
             ))}
           </div>

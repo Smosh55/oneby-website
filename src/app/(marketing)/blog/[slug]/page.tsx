@@ -6,13 +6,24 @@ import {
   getPostBySlug,
   getPostSlugs,
   getRelatedPosts,
+  getAllPosts,
+  getPostsForIndustry,
   formatDate,
 } from "@/lib/blog";
 import Prose from "@/components/blog/Prose";
+import PostCard from "@/components/blog/PostCard";
 import { industriesBySlug } from "@/data/industries";
+import { focusedIndustrySlug } from "@/config/site";
 import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
+  // A focused deployment only serves its own pillar + general posts; other
+  // verticals' posts 404 (dynamicParams is false).
+  if (focusedIndustrySlug) {
+    return getAllPosts()
+      .filter((p) => p.industry === focusedIndustrySlug || !p.industry)
+      .map((p) => ({ slug: p.slug }));
+  }
   return getPostSlugs().map((slug) => ({ slug }));
 }
 
@@ -51,7 +62,11 @@ export default async function BlogPost({
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = getRelatedPosts(post.slug, post.category);
+  // In focused mode, keep related links within the served set (pillar + general)
+  // so none point at a post that 404s on this domain.
+  const related = focusedIndustrySlug
+    ? getPostsForIndustry(focusedIndustrySlug, 4).filter((r) => r.slug !== post.slug).slice(0, 3)
+    : getRelatedPosts(post.slug, post.category);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -233,28 +248,7 @@ export default async function BlogPost({
             </div>
             <div className="grid gap-5 sm:grid-cols-3">
               {related.map((r) => (
-                <Link
-                  key={r.slug}
-                  href={`/blog/${r.slug}`}
-                  className="group surface-card flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue/30 hover:shadow-[var(--shadow-md)]"
-                >
-                  <span className="w-fit rounded-full bg-canvas-2 px-2.5 py-1 text-[11px] font-semibold text-navy">
-                    {r.category}
-                  </span>
-                  <h3 className="mt-4 text-[1.05rem] font-semibold leading-snug text-navy">
-                    {r.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-[0.875rem] leading-relaxed text-muted">
-                    {r.excerpt}
-                  </p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-blue">
-                    Read
-                    <ArrowRight
-                      size={14}
-                      className="transition-transform group-hover:translate-x-0.5"
-                    />
-                  </span>
-                </Link>
+                <PostCard key={r.slug} post={r} />
               ))}
             </div>
           </div>

@@ -21,6 +21,7 @@ import IndustryFAQ from "./IndustryFAQ";
 import DemoForm from "@/components/DemoForm";
 import IndustryDemo from "@/components/IndustryDemo";
 import IndustryHeroArt from "./IndustryHeroArt";
+import PostCard from "@/components/blog/PostCard";
 import { getDemo } from "@/data/demo";
 import { industryAccentStyle } from "@/data/industryThemes";
 
@@ -49,7 +50,7 @@ export default function IndustryLanding({
       {/* Hero */}
       <section className="relative overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-20">
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <IndustryHeroArt icon={industry.icon} />
+          <IndustryHeroArt slug={industry.slug} icon={industry.icon} />
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[520px] w-[1000px] rounded-full bg-[radial-gradient(closest-side,rgba(var(--accent-rgb),0.14),transparent)]" />
           <div className="absolute top-16 right-[10%] h-64 w-64 rounded-full bg-[radial-gradient(closest-side,rgba(28,219,150,0.16),transparent)]" />
         </div>
@@ -510,29 +511,17 @@ export default function IndustryLanding({
             </Reveal>
             <div className="grid gap-5 sm:grid-cols-3">
               {relatedPosts.map((p) => (
-                <Link
-                  key={p.slug}
-                  href={`/blog/${p.slug}`}
-                  className="group surface-card flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue/30 hover:shadow-[var(--shadow-md)]"
-                >
-                  <span className="w-fit rounded-full bg-canvas-2 px-2.5 py-1 text-[11px] font-semibold text-navy">
-                    {p.category}
-                  </span>
-                  <h3 className="mt-4 text-[1.05rem] font-semibold leading-snug text-navy">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-[0.875rem] leading-relaxed text-muted">
-                    {p.excerpt}
-                  </p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-blue">
-                    Read
-                    <ArrowRight
-                      size={14}
-                      className="transition-transform group-hover:translate-x-0.5"
-                    />
-                  </span>
-                </Link>
+                <PostCard key={p.slug} post={p} />
               ))}
+            </div>
+            <div className="mt-8">
+              <Link
+                href={`/industries/${industry.slug}/blog`}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue hover:underline"
+              >
+                See all {industry.shortName} articles
+                <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
+              </Link>
             </div>
           </div>
         </section>
