@@ -20,6 +20,8 @@ import Reveal from "@/components/Reveal";
 import IndustryFAQ from "./IndustryFAQ";
 import DemoForm from "@/components/DemoForm";
 import IndustryDemo from "@/components/IndustryDemo";
+import IndustryHeroArt from "./IndustryHeroArt";
+import { getDemo } from "@/data/demo";
 import { industryAccentStyle } from "@/data/industryThemes";
 
 const trustChips = [
@@ -39,12 +41,15 @@ export default function IndustryLanding({
   asHome?: boolean;
 }) {
   const Icon = getIcon(industry.icon);
+  // Real, industry-specific jobs pulled from this vertical's demo workspace.
+  const useCases = getDemo(industry.slug).tickets.slice(0, 3);
 
   return (
     <div style={industryAccentStyle(industry.slug)}>
       {/* Hero */}
       <section className="relative overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-20">
         <div className="pointer-events-none absolute inset-0 -z-10">
+          <IndustryHeroArt icon={industry.icon} />
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[520px] w-[1000px] rounded-full bg-[radial-gradient(closest-side,rgba(var(--accent-rgb),0.14),transparent)]" />
           <div className="absolute top-16 right-[10%] h-64 w-64 rounded-full bg-[radial-gradient(closest-side,rgba(28,219,150,0.16),transparent)]" />
         </div>
@@ -309,6 +314,59 @@ export default function IndustryLanding({
                   <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">
                     {c.body}
                   </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Real jobs — use cases pulled from this vertical's workspace */}
+      <section className="pb-18 lg:pb-24">
+        <div className="container-x">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <span className="eyebrow">Real {industry.shortName.toLowerCase()} jobs</span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+              See how a {industry.shortName} job runs, start to finish.
+            </h2>
+            <p className="mt-4 text-muted">
+              Straight from the workspace above: real calls captured, ticketed,
+              scheduled, and billed, without anyone chained to the phone.
+            </p>
+          </Reveal>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {useCases.map((t, i) => (
+              <Reveal key={t.id} delay={i * 80}>
+                <div className="surface-card flex h-full flex-col rounded-2xl p-6">
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-full bg-blue/10 px-2.5 py-1 text-[11px] font-semibold text-blue">
+                      {t.status}
+                    </span>
+                    {t.urgent && (
+                      <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-warning">
+                        Urgent
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="mt-4 text-[1.05rem] font-semibold leading-snug text-navy">
+                    {t.issue}
+                  </h3>
+                  <p className="mt-1 text-[0.78rem] font-medium text-faint">
+                    {t.customer} · {t.relationship}
+                  </p>
+                  <p className="mt-3 flex-1 text-[0.9rem] leading-relaxed text-muted">
+                    {t.summary}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {t.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-md border border-line bg-canvas px-2 py-0.5 text-[0.7rem] font-medium text-ink/70"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </Reveal>
             ))}

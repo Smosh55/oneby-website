@@ -5,27 +5,43 @@ import { featureGroups } from "@/data/features";
 import { getFeatureIcon } from "@/components/feature/iconMap";
 import Reveal from "@/components/Reveal";
 import HeroAppMock from "@/components/HeroAppMock";
+import IndustryDemo from "@/components/IndustryDemo";
+import { focusedIndustry } from "@/config/site";
+import { industryAccentStyle } from "@/data/industryThemes";
 
-export const metadata: Metadata = {
-  title: "Product: The All-in-One CRM for Service Businesses",
-  description:
-    "OneBy answers every call, then turns it into a ticket, a scheduled job, an invoice, and a text, all in one place. A built-in phone system plus an AI layer that runs the whole job from first ring to paid.",
-  alternates: { canonical: "/product" },
-};
+export function generateMetadata(): Metadata {
+  const focus = focusedIndustry();
+  if (focus) {
+    return {
+      title: `The all-in-one platform for ${focus.name}`,
+      description: focus.metaDescription,
+      alternates: { canonical: "/product" },
+    };
+  }
+  return {
+    title: "Product: The All-in-One CRM for Service Businesses",
+    description:
+      "OneBy answers every call, then turns it into a ticket, a scheduled job, an invoice, and a text, all in one place. A built-in phone system plus an AI layer that runs the whole job from first ring to paid.",
+    alternates: { canonical: "/product" },
+  };
+}
 
 export default function ProductHub() {
+  const focus = focusedIndustry();
   return (
-    <>
+    <div style={focus ? industryAccentStyle(focus.slug) : undefined}>
       <section className="relative overflow-hidden pt-28 pb-12 lg:pt-32">
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[460px] w-[900px] rounded-full bg-[radial-gradient(closest-side,rgba(0,143,224,0.13),transparent)]" />
         </div>
         <div className="container-x text-center">
           <span className="eyebrow rounded-full border border-blue/20 bg-blue/5 px-3 py-1.5">
-            The platform
+            {focus ? `Built for ${focus.shortName}` : "The platform"}
           </span>
           <h1 className="mx-auto mt-5 max-w-3xl text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[3.25rem]">
-            Every call answered. Every job run. One platform.
+            {focus
+              ? `Run your whole ${focus.shortName.toLowerCase()} business on one platform.`
+              : "Every call answered. Every job run. One platform."}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             A built-in business phone system, calling, desk phones, and SMS,
@@ -57,7 +73,7 @@ export default function ProductHub() {
               it, schedule it, bill it, and more.
             </p>
           </Reveal>
-          <HeroAppMock />
+          {focus ? <IndustryDemo slug={focus.slug} compact={false} /> : <HeroAppMock />}
         </div>
       </section>
 
@@ -132,6 +148,6 @@ export default function ProductHub() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
