@@ -32,7 +32,7 @@ export async function generateMetadata({
       title: `${industry.metaTitle} · OneBy`,
       description: industry.metaDescription,
       type: "website",
-      url: `https://oneby.ai/industries/${industry.slug}`,
+      url: `/industries/${industry.slug}`,
     },
   };
 }

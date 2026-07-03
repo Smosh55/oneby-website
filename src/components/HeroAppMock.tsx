@@ -143,7 +143,7 @@ function ToastHost() {
   }, []);
   if (items.length === 0) return null;
   return (
-    <div className="pointer-events-none absolute bottom-3 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center gap-1.5">
+    <div role="status" aria-live="polite" className="pointer-events-none absolute bottom-3 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center gap-1.5">
       {items.map((t) => (
         <div key={t.id} className="animate-rise pointer-events-auto inline-flex items-center gap-2 rounded-lg bg-navy px-3 py-2 text-[0.78rem] font-semibold text-white shadow-[0_20px_45px_-15px_rgba(4,3,79,0.6)]">
           <CheckCircle2 size={14} className="text-green" /> {t.msg}
@@ -188,7 +188,8 @@ export default function HeroAppMock({ compact = false, data = hvacDemo, showCue 
   const openCustomer = (name: string) => { const c = data.customers.find((x) => x.name === name); setCustSel(c ? c.id : null); setActive("customers"); };
   const openTicket = (id: string | null) => { setTicketSel(id); setActive("tickets"); };
   const addTicket = () => {
-    const id = String(Date.now()).slice(-4);
+    // "T" prefix so a generated id can never collide with the seeded numeric ids.
+    const id = `T${String(Date.now()).slice(-4)}`;
     setNewTickets((xs) => [{ id, issue: "New ticket", customer: "New customer", status: "New", urgent: false, summary: "Created manually. Add the details, schedule it, and assign a tech.", relationship: "New", tech: data.team[0].name, tags: [], notes: [], subtasks: [] }, ...xs]);
     setTicketSel(id);
     setActive("tickets");
@@ -233,6 +234,7 @@ export default function HeroAppMock({ compact = false, data = hvacDemo, showCue 
           setAssignedTech(data.primaryTech);
           setTags(data.liveTags);
           setNotes(data.liveNotes);
+          setMsgs(data.primaryMessages);
           setTasks({ 1: "pending", 2: "pending", 3: "pending" });
         } else if (!entry.isIntersecting) {
           wasVisible.current = false;
@@ -277,6 +279,9 @@ export default function HeroAppMock({ compact = false, data = hvacDemo, showCue 
     <div
       ref={rootRef}
       onClickCapture={() => {
+        interacted.current = true;
+      }}
+      onKeyDownCapture={() => {
         interacted.current = true;
       }}
       className="relative mx-auto w-full max-w-5xl"
@@ -334,6 +339,8 @@ export default function HeroAppMock({ compact = false, data = hvacDemo, showCue 
                   <button
                     key={m.id}
                     type="button"
+                    disabled={m.soon}
+                    aria-disabled={m.soon}
                     onClick={() => !m.soon && setActive(m.id)}
                     className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-[0.85rem] font-medium transition-colors ${
                       on ? "bg-blue/10 text-blue" : m.soon ? "text-faint" : "text-ink/70 hover:bg-canvas-2"
@@ -389,6 +396,7 @@ export default function HeroAppMock({ compact = false, data = hvacDemo, showCue 
                             <button
                               key={m.id}
                               type="button"
+                              role="menuitem"
                               disabled={m.soon}
                               onClick={() => { if (!m.soon) { setActive(m.id); setPickerOpen(false); } }}
                               className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[0.92rem] font-medium ${on ? "bg-blue/10 text-blue" : m.soon ? "text-faint" : "text-ink/80"}`}
@@ -442,7 +450,6 @@ export default function HeroAppMock({ compact = false, data = hvacDemo, showCue 
                   setEditBill={setEditBill}
                   catalog={catalog}
                   setCatalog={setCatalog}
-                  subtasks={subtasks}
                   setSubtasks={setSubtasks}
                   assignedTech={assignedTech}
                   ticketSel={ticketSel}
@@ -519,7 +526,7 @@ function LiveView({ phase, typed, tags, openTicket, openCalls }: { phase: Phase;
           <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-green/10 text-green-600"><PhoneCall size={18} /></span>
           <div className="min-w-0">
             <p className="text-[0.95rem] font-semibold text-navy">Call with {JOB.customer}</p>
-            <p className="truncate text-xs text-muted">Answered by Dana · desk phone · 4:12</p>
+            <p className="truncate text-xs text-muted">Answered by {demo.team[2].name.split(" ")[0]} · desk phone · 4:12</p>
           </div>
           {done ? (
             <span className="ml-auto shrink-0 rounded-full bg-blue/10 px-2.5 py-1 text-[11px] font-semibold text-blue">AI summarized</span>
@@ -572,11 +579,12 @@ function LiveView({ phase, typed, tags, openTicket, openCalls }: { phase: Phase;
 }
 
 function TopBarActions() {
+  const demo = useDemo();
   const [notif, setNotif] = useState(false);
   const items = [
     { icon: PhoneCall, tone: "text-green-600 bg-green/10", title: "Missed call caught by AI", time: "2m" },
-    { icon: Receipt, tone: "text-blue bg-blue/10", title: "James R. paid invoice, $240", time: "18m" },
-    { icon: Clock, tone: "text-warning bg-warning/15", title: "Luis is running 10 min late", time: "33m" },
+    { icon: Receipt, tone: "text-blue bg-blue/10", title: `${demo.customers[1].name} paid invoice, $${demo.customers[1].balance}`, time: "18m" },
+    { icon: Clock, tone: "text-warning bg-warning/15", title: `${demo.team[0].name.split(" ")[0]} is running 10 min late`, time: "33m" },
   ];
   return (
     <div className="flex items-center gap-2">
@@ -610,6 +618,8 @@ function TopBarActions() {
 }
 
 function ActiveCallCard() {
+  const demo = useDemo();
+  const caller = demo.customers[1];
   return (
     <div className="mb-3 overflow-hidden rounded-xl border border-green/30 bg-green/[0.05]">
       <div className="flex items-center gap-2 border-b border-green/20 bg-green/10 px-4 py-2">
@@ -628,7 +638,7 @@ function ActiveCallCard() {
       <div className="flex items-center gap-3 px-4 py-3">
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-green/10 text-green-600"><PhoneCall size={18} /></span>
         <div className="min-w-0 flex-1">
-          <p className="text-[0.85rem] font-semibold text-navy">Incoming · James R. · (602) 555-0192</p>
+          <p className="text-[0.85rem] font-semibold text-navy">Incoming · {caller.name} · {caller.phone}</p>
           <p className="text-[0.74rem] text-muted">The AI is handling it. The summary, transcript, and ticket land the moment the call wraps.</p>
         </div>
       </div>
@@ -636,13 +646,14 @@ function ActiveCallCard() {
   );
 }
 
-function AnsweredCallRow() {
+function AnsweredCallRow({ c }: { c: CallEntry }) {
   const [playing, setPlaying] = useState(false);
   return (
     <div className="rounded-xl border border-line bg-canvas px-3.5 py-3">
       <div className="flex items-center gap-3">
         <button
           type="button"
+          aria-label={playing ? "Pause recording" : "Play recording"}
           onClick={() => setPlaying((p) => !p)}
           className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-green text-white transition-opacity hover:opacity-90"
         >
@@ -651,8 +662,8 @@ function AnsweredCallRow() {
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
             <PhoneCall size={13} className="text-green-600" />
-            <p className="text-[0.84rem] font-semibold text-navy">AI answered · Dana P.</p>
-            <span className="ml-auto text-[0.72rem] text-faint">0:42</span>
+            <p className="text-[0.84rem] font-semibold text-navy">AI answered · {c.name}</p>
+            <span className="ml-auto text-[0.72rem] text-faint">{c.dur}</span>
           </div>
           {/* progress bar */}
           <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-line">
@@ -662,7 +673,7 @@ function AnsweredCallRow() {
       </div>
       <p className="mt-2.5 rounded-lg bg-surface px-3 py-2 text-[0.78rem] leading-relaxed text-ink">
         <span className="font-semibold text-green-600">AI captured: </span>
-        Dana&apos;s A/C is grinding and not blowing cold; she wants someone out this week. Picked up on the second ring, no voicemail.
+        {c.captured ?? `${c.meta}. Picked up on the second ring, no voicemail.`}
       </p>
     </div>
   );
@@ -720,7 +731,7 @@ function CallsView({ openTicket }: { openTicket: (id: string | null) => void }) 
         <div key={g.group} className="mb-4">
           <p className="px-1 pb-2 text-[11px] font-bold uppercase tracking-wide text-faint">{g.group}</p>
           <div className="space-y-2">
-            {g.calls.map((c) => (c.recording ? <AnsweredCallRow key={c.id} /> : <CallRow key={c.id} c={c} openTicket={openTicket} />))}
+            {g.calls.map((c) => (c.recording ? <AnsweredCallRow key={c.id} c={c} /> : <CallRow key={c.id} c={c} openTicket={openTicket} />))}
           </div>
         </div>
       ))}
@@ -1007,7 +1018,7 @@ function TicketsView({
           <div className="mt-2 space-y-1.5">
             {curSubs.map((st) => (
               <div key={st.id} className="flex items-center gap-2">
-                <button type="button" aria-label="Toggle done" onClick={() => setCurSubs(curSubs.map((x) => (x.id === st.id ? { ...x, done: !x.done } : x)))} className={`grid h-4 w-4 shrink-0 place-items-center rounded border ${st.done ? "border-green bg-green text-white" : "border-line"}`}>
+                <button type="button" aria-label={`Toggle done: ${st.label}`} onClick={() => setCurSubs(curSubs.map((x) => (x.id === st.id ? { ...x, done: !x.done } : x)))} className={`grid h-4 w-4 shrink-0 place-items-center rounded border ${st.done ? "border-green bg-green text-white" : "border-line"}`}>
                   {st.done && <Check size={11} />}
                 </button>
                 <span className={`min-w-0 flex-1 truncate text-[0.8rem] ${st.done ? "text-faint line-through" : "text-ink"}`}>{st.label}</span>
@@ -1276,7 +1287,7 @@ function TeamView({ assignedTech, setActive }: { assignedTech: string; setActive
   if (!t) {
     return (
       <div>
-        <ModuleHeader title="Team" sub={`${allTeam.length} techs · 7 jobs this week`} action={{ label: "Add teammate", onClick: addMember }} />
+        <ModuleHeader title="Team" sub={`${allTeam.length} techs · ${Object.values(DAY_JOBS).flat().length} jobs this week`} action={{ label: "Add teammate", onClick: addMember }} />
         <div className="space-y-2">
           {allTeam.map((m) => (
             <button key={m.name} type="button" onClick={() => setSel(m.name)} className={`flex w-full items-center gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-colors hover:border-blue ${m.name === assignedTech ? "border-blue/30 bg-blue/[0.04]" : "border-line bg-surface"}`}>
@@ -1376,7 +1387,7 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
             <div key={it.id} className="rounded-lg bg-canvas px-2.5 py-1.5">
               <div className="flex items-center gap-2">
                 {edit && (
-                  <button type="button" onClick={() => remove(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
+                  <button type="button" aria-label={`Remove ${it.name}`} onClick={() => remove(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
                 )}
                 {edit ? (
                   <button type="button" onClick={() => toggleType(i)} aria-label="Toggle type" className={`shrink-0 rounded px-1.5 py-0.5 text-[0.6rem] font-bold uppercase ${it.type === "Service" ? "bg-blue/10 text-blue" : "bg-green/10 text-green-600"}`}>{it.type === "Service" ? "Svc" : "Part"}</button>
@@ -1401,7 +1412,7 @@ function CatalogView({ catalog, setCatalog }: { catalog: Item[]; setCatalog: (c:
                     <div className="space-y-1">
                       {(it.tasks ?? []).map((t, ti) => (
                         <div key={ti} className="flex items-center gap-1.5">
-                          <button type="button" onClick={() => removeTask(i, ti)} className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={9} /></button>
+                          <button type="button" aria-label="Remove step" onClick={() => removeTask(i, ti)} className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={9} /></button>
                           <input value={t} onChange={(e) => updTask(i, ti, e.target.value)} className={`${inputCls} flex-1`} />
                         </div>
                       ))}
@@ -1436,7 +1447,7 @@ function BillingView({
   invoice: "draft" | "sent" | "paid"; setInvoice: (s: "draft" | "sent" | "paid") => void;
   mile: "draft" | "sent"; setMile: (s: "draft" | "sent") => void;
   linesBy: Record<string, Line[]>; setLinesBy: (m: Record<string, Line[]>) => void; editBill: boolean; setEditBill: (b: boolean) => void; catalog: Item[]; setCatalog: (c: Item[]) => void;
-  subtasks: Subtask[]; setSubtasks: SubtaskSetter; assignedTech: string; ticketSel: string | null;
+  setSubtasks: SubtaskSetter; assignedTech: string; ticketSel: string | null;
 }) {
   const demo = useDemo();
   const TICKETS = demo.tickets;
@@ -1732,7 +1743,7 @@ function BillingView({
                       <input value={m.label} onChange={(e) => updMile(i, "label", e.target.value)} className={`${inputCls} min-w-0 flex-1`} />
                       <input type="number" value={m.pct} onChange={(e) => updMile(i, "pct", e.target.value)} aria-label="Percent" className={`${numCls} w-12 text-right`} />
                       <span className="shrink-0 text-faint">%</span>
-                      <button type="button" onClick={() => removeMile(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
+                      <button type="button" aria-label={`Remove milestone ${m.label}`} onClick={() => removeMile(i)} className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-warning/15 text-warning"><X size={11} /></button>
                     </>
                   ) : (
                     <>

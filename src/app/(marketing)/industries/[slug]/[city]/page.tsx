@@ -40,7 +40,7 @@ export async function generateMetadata({
       title: `${title} · OneBy`,
       description: `AI call answering for ${place.name} ${industry.shortName.toLowerCase()} businesses.`,
       type: "website",
-      url: `https://oneby.ai/industries/${slug}/${city}`,
+      url: `/industries/${slug}/${city}`,
     },
   };
 }

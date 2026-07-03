@@ -46,7 +46,7 @@ export async function generateMetadata({
       title: post.seoTitle,
       description: post.seoDescription,
       type: "article",
-      url: `https://oneby.ai/blog/${post.slug}`,
+      url: `/blog/${post.slug}`,
       publishedTime: post.date,
       authors: [post.author],
     },
@@ -65,9 +65,10 @@ export default async function BlogPost({
   // In focused mode, keep related links within the served set (pillar + general)
   // so none point at a post that 404s on this domain.
   const related = focusedIndustrySlug
-    ? getPostsForIndustry(focusedIndustrySlug, 4).filter((r) => r.slug !== post.slug).slice(0, 3)
+    ? getPostsForIndustry(focusedIndustrySlug, 4, false).filter((r) => r.slug !== post.slug).slice(0, 3)
     : getRelatedPosts(post.slug, post.category);
 
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -81,10 +82,10 @@ export default async function BlogPost({
       name: "OneBy",
       logo: {
         "@type": "ImageObject",
-        url: "https://oneby.ai/brand/oneby-logo.svg",
+        url: `${base}/brand/oneby-logo.svg`,
       },
     },
-    mainEntityOfPage: `https://oneby.ai/blog/${post.slug}`,
+    mainEntityOfPage: `${base}/blog/${post.slug}`,
     keywords: post.keywords.join(", "),
   };
 

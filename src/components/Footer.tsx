@@ -70,10 +70,14 @@ export default function Footer() {
                   label: "Overview",
                   href: isFocusedSite ? "/" : `/industries/${industry.slug}`,
                 },
-                ...cities.slice(0, 4).map((c) => ({
-                  label: `${c.name}, ${c.state}`,
-                  href: `/industries/${industry.slug}/${c.slug}`,
-                })),
+                // City pages aren't served on focused deployments (they
+                // redirect to the root), so link the trade's insights instead.
+                ...(isFocusedSite
+                  ? [{ label: `${industry.shortName} insights`, href: "/blog" }]
+                  : cities.slice(0, 4).map((c) => ({
+                      label: `${c.name}, ${c.state}`,
+                      href: `/industries/${industry.slug}/${c.slug}`,
+                    }))),
               ],
             }
       );

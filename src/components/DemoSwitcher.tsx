@@ -1,18 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MousePointerClick } from "lucide-react";
 import HeroAppMock from "./HeroAppMock";
 import { getIcon } from "./industry/iconMap";
 import { industries } from "@/data/industries";
-import { getDemo } from "@/data/demo";
+import type { DemoData } from "@/data/demo/types";
+import { hvacDemo } from "@/data/demo/hvac";
+import { loadDemo } from "@/data/demo/loaders";
+import { useHomeDemo } from "./HomeDemoContext";
 import { industryAccentStyle } from "@/data/industryThemes";
 
-// Homepage demo with an industry switcher. Picking a vertical swaps the demo's
-// data and accent. HeroAppMock seeds its state from `data` on mount, so we key
-// it by slug to force a fresh mount (and re-seed) on every switch.
+// Homepage demo with an industry switcher. Picking a vertical lazy-loads that
+// industry's data chunk and swaps the demo's data + accent. HeroAppMock seeds
+// its state from `data` on mount, so we key it by slug to force a fresh mount
+// (and re-seed) on every switch. Selection is shared via HomeDemoContext so
+// HearItWork further down the page follows along.
 export default function DemoSwitcher() {
+  const shared = useHomeDemo();
+  const [localData, setLocalData] = useState<DemoData>(hvacDemo);
+  const data = shared?.data ?? localData;
+  const setData = shared?.setData ?? setLocalData;
   const [slug, setSlug] = useState(industries[0].slug);
+  const latest = useRef(slug);
+
+  const pick = (s: string) => {
+    latest.current = s;
+    setSlug(s);
+    // Guard against out-of-order chunk loads on rapid clicks.
+    loadDemo(s).then((d) => {
+      if (latest.current === s) setData(d);
+    });
+  };
 
   return (
     <div style={industryAccentStyle(slug)}>
@@ -24,7 +43,7 @@ export default function DemoSwitcher() {
             <button
               key={ind.slug}
               type="button"
-              onClick={() => setSlug(ind.slug)}
+              onClick={() => pick(ind.slug)}
               aria-pressed={on}
               className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[0.82rem] font-semibold transition-colors ${
                 on
@@ -52,7 +71,7 @@ export default function DemoSwitcher() {
           aria-hidden
           className="pointer-events-none absolute -inset-4 -z-10 rounded-[32px] bg-[radial-gradient(60%_60%_at_50%_40%,rgba(var(--accent-rgb),0.18),transparent)] blur-2xl"
         />
-        <HeroAppMock key={slug} compact showCue={false} data={getDemo(slug)} />
+        <HeroAppMock key={data.slug} compact showCue={false} data={data} />
       </div>
     </div>
   );

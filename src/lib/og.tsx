@@ -96,7 +96,7 @@ export function OgShell({
           }}
         />
         <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "26px" }}>
-          oneby.ai
+          {new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai").host}
         </span>
       </div>
     </div>

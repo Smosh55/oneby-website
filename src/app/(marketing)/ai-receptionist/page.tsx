@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description:
       "Answer every call, capture the details, and book the job, without hiring a front desk.",
     type: "article",
-    url: "https://oneby.ai/ai-receptionist",
+    url: "/ai-receptionist",
   },
 };
 

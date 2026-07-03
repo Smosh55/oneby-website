@@ -21,7 +21,7 @@ export default function IndustryHeroArt({
       {motif ? (
         <svg
           viewBox="0 0 200 200"
-          className="absolute -right-6 top-0 h-[340px] w-[340px] text-blue/[0.09]"
+          className="absolute -right-6 top-0 h-[220px] w-[220px] text-blue/[0.09] sm:h-[340px] sm:w-[340px]"
           xmlns="http://www.w3.org/2000/svg"
         >
           {motif}

@@ -2,12 +2,16 @@ import { ImageResponse } from "next/og";
 import { OgShell, ogSize, ogContentType } from "@/lib/og";
 import { industries, industriesBySlug } from "@/data/industries";
 import { cities, citiesBySlug } from "@/data/locations";
+import { focusedIndustrySlug } from "@/config/site";
 
 export const size = ogSize;
 export const contentType = ogContentType;
 export const alt = "OneBy local answering service";
 
 export function generateStaticParams() {
+  // Focused deployments redirect every /industries/* URL to the root, so
+  // there's nothing to generate images for.
+  if (focusedIndustrySlug) return [];
   return industries.flatMap((i) =>
     cities.map((c) => ({ slug: i.slug, city: c.slug }))
   );

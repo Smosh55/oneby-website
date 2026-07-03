@@ -13,6 +13,7 @@ import FoundersBanner from "@/components/FoundersBanner";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import IndustryLanding from "@/components/industry/IndustryLanding";
+import { HomeDemoProvider } from "@/components/HomeDemoContext";
 import { focusedIndustry } from "@/config/site";
 import { getPostsForIndustry } from "@/lib/blog";
 
@@ -34,14 +35,14 @@ export default function Home() {
     return (
       <IndustryLanding
         industry={focus}
-        relatedPosts={getPostsForIndustry(focus.slug, 6)}
+        relatedPosts={getPostsForIndustry(focus.slug, 6, false)}
         asHome
       />
     );
   }
 
   return (
-    <>
+    <HomeDemoProvider>
       <Hero />
       <LogoCloud />
       <Problem />
@@ -55,6 +56,6 @@ export default function Home() {
       <FoundersBanner />
       <FAQ />
       <CTA />
-    </>
+    </HomeDemoProvider>
   );
 }

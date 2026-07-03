@@ -12,14 +12,19 @@ import {
 } from "lucide-react";
 import type { DemoData } from "@/data/demo/types";
 import { hvacDemo } from "@/data/demo/hvac";
+import { useHomeDemo } from "./HomeDemoContext";
 
 const trust = [
-  { icon: ShieldCheck, title: "It asks when it's unsure", body: "It asked which unit instead of guessing. It never invents an answer or makes a promise you can't keep." },
+  { icon: ShieldCheck, title: "It asks when it's unsure", body: "It asks a clarifying question instead of guessing. It never invents an answer or makes a promise you can't keep." },
   { icon: UserCheck, title: "It hands off to a human", body: "Anything unusual or sensitive routes straight to your on-call person, with the details already captured." },
   { icon: Headphones, title: "You can hear every call", body: "Every call is recorded, transcribed, and summarized. Nothing happens on your line that you can't review." },
 ];
 
-export default function HearItWork({ data = hvacDemo }: { data?: DemoData }) {
+export default function HearItWork({ data: dataProp }: { data?: DemoData }) {
+  // On the homepage this follows the hero switcher's selection (shared via
+  // HomeDemoContext); elsewhere it uses the prop or falls back to HVAC.
+  const shared = useHomeDemo();
+  const data = shared?.data ?? dataProp ?? hvacDemo;
   const [playing, setPlaying] = useState(false);
   const transcript = data.hearTranscript;
 

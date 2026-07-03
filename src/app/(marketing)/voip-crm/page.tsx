@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     description:
       "Answer the call, ticket it, schedule it, invoice it, get paid. One platform, built around the phone.",
     type: "article",
-    url: "https://oneby.ai/voip-crm",
+    url: "/voip-crm",
   },
 };
 

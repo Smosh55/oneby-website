@@ -8,7 +8,10 @@ import { focusedIndustrySlug } from "@/config/site";
 export function middleware(req: NextRequest) {
   if (!focusedIndustrySlug) return NextResponse.next();
   if (req.nextUrl.pathname.startsWith("/industries")) {
-    return NextResponse.redirect(new URL("/", req.url), 308);
+    // Clone so query strings (utm_*, gclid, …) survive the redirect.
+    const url = req.nextUrl.clone();
+    url.pathname = "/";
+    return NextResponse.redirect(url, 308);
   }
   return NextResponse.next();
 }

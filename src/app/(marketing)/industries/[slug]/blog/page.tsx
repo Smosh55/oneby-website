@@ -32,6 +32,12 @@ export async function generateMetadata({
     title: `${industry.shortName} Insights & Playbooks`,
     description: `Guides on call answering, lead capture, and workflow automation for ${industry.name.toLowerCase()}.`,
     alternates: { canonical: `/industries/${industry.slug}/blog` },
+    openGraph: {
+      title: `${industry.shortName} Insights & Playbooks · OneBy`,
+      description: `Guides on call answering, lead capture, and workflow automation for ${industry.name.toLowerCase()}.`,
+      type: "website",
+      url: `/industries/${industry.slug}/blog`,
+    },
   };
 }
 

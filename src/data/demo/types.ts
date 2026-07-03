@@ -56,6 +56,8 @@ export type CallEntry = {
   tone: "green" | "blue" | "warning" | "muted";
   ticket?: string;
   recording?: boolean;
+  // "AI captured: …" sentence for recording rows; falls back to `meta`.
+  captured?: string;
 };
 
 export type CallGroup = { group: string; calls: CallEntry[] };

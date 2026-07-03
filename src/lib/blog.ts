@@ -53,13 +53,19 @@ function parseFile(file: string): Post {
   };
 }
 
+// Content is immutable within a build, so parse the directory once. The slug
+// tiebreaker keeps ordering deterministic when several posts share a date.
+let postsCache: Post[] | null = null;
+
 export function getAllPosts(): Post[] {
+  if (postsCache) return postsCache;
   if (!fs.existsSync(BLOG_DIR)) return [];
-  return fs
+  postsCache = fs
     .readdirSync(BLOG_DIR)
     .filter((f) => f.endsWith(".md"))
     .map(parseFile)
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+    .sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
+  return postsCache;
 }
 
 export function getPostSlugs(): string[] {
@@ -85,13 +91,21 @@ export function getRelatedPosts(slug: string, category: string, limit = 3): Post
 
 // Posts linked to an industry pillar, newest first. When a pillar has fewer
 // than `limit` posts, fill with general (untagged) posts — which apply to every
-// trade — before ever borrowing another industry's niche posts.
-export function getPostsForIndustry(slug: string, limit = 3): PostMeta[] {
+// trade — before ever borrowing another industry's niche posts. Pass
+// borrowOtherIndustries=false on focused single-industry deployments, where
+// other verticals' posts aren't served and would 404.
+export function getPostsForIndustry(
+  slug: string,
+  limit = 3,
+  borrowOtherIndustries = true
+): PostMeta[] {
   const all = getAllPosts();
   const matched = all.filter((p) => p.industry === slug);
   if (matched.length >= limit) return matched.slice(0, limit);
   const general = all.filter((p) => !p.industry);
-  const otherIndustry = all.filter((p) => p.industry && p.industry !== slug);
+  const otherIndustry = borrowOtherIndustries
+    ? all.filter((p) => p.industry && p.industry !== slug)
+    : [];
   return [...matched, ...general, ...otherIndustry].slice(0, limit);
 }
 

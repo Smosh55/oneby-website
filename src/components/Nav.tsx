@@ -115,7 +115,7 @@ export default function Nav() {
             <Gift size={14} /> Founders
           </Link>
           <Link
-            href="/#demo"
+            href={isFocusedSite ? "/#demo-form" : "/#demo"}
             className="px-3.5 py-2 rounded-lg text-[0.9375rem] font-medium text-ink/80 hover:text-navy transition-colors"
           >
             Sign in
@@ -187,7 +187,7 @@ export default function Nav() {
             </Link>
             <div className="flex flex-col gap-2 pt-3">
               <Link
-                href="/#demo"
+                href={isFocusedSite ? "/#demo-form" : "/#demo"}
                 onClick={() => setOpen(false)}
                 className="btn btn-ghost w-full"
               >

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description:
       "See exactly what missed calls cost your business per week, month, and year.",
     type: "website",
-    url: "https://oneby.ai/missed-call-calculator",
+    url: "/missed-call-calculator",
   },
 };
 

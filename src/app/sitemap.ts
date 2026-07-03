@@ -6,7 +6,8 @@ import { cities } from "@/data/locations";
 import { getAllPosts } from "@/lib/blog";
 import { focusedIndustrySlug } from "@/config/site";
 
-const BASE = "https://oneby.ai";
+// Per-deployment base so focused (single-industry) domains emit their own URLs.
+const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [

@@ -477,27 +477,30 @@ export default function IndustryLanding({
         </div>
       </section>
 
-      {/* Local areas served */}
-      <section className="pb-4">
-        <div className="container-x">
-          <div className="rounded-2xl border border-line bg-canvas px-6 py-7 sm:px-8">
-            <h2 className="text-sm font-bold uppercase tracking-wide text-faint">
-              {industry.shortName} answering service by city
-            </h2>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {cities.map((c) => (
-                <Link
-                  key={c.slug}
-                  href={`/industries/${industry.slug}/${c.slug}`}
-                  className="rounded-full border border-line bg-white px-3 py-1.5 text-[0.85rem] font-medium text-ink/80 transition-colors hover:border-blue/40 hover:text-blue"
-                >
-                  {c.name}, {c.state}
-                </Link>
-              ))}
+      {/* Local areas served — hidden on focused deployments, where the city
+          pages aren't served (every /industries/* URL redirects to the root) */}
+      {!asHome && (
+        <section className="pb-4">
+          <div className="container-x">
+            <div className="rounded-2xl border border-line bg-canvas px-6 py-7 sm:px-8">
+              <h2 className="text-sm font-bold uppercase tracking-wide text-faint">
+                {industry.shortName} answering service by city
+              </h2>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {cities.map((c) => (
+                  <Link
+                    key={c.slug}
+                    href={`/industries/${industry.slug}/${c.slug}`}
+                    className="rounded-full border border-line bg-white px-3 py-1.5 text-[0.85rem] font-medium text-ink/80 transition-colors hover:border-blue/40 hover:text-blue"
+                  >
+                    {c.name}, {c.state}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Related reading (pillar -> cluster) */}
       {relatedPosts.length > 0 && (
@@ -516,8 +519,8 @@ export default function IndustryLanding({
             </div>
             <div className="mt-8">
               <Link
-                href={`/industries/${industry.slug}/blog`}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue hover:underline"
+                href={asHome ? "/blog" : `/industries/${industry.slug}/blog`}
+                className="group inline-flex items-center gap-1.5 text-sm font-semibold text-blue hover:underline"
               >
                 See all {industry.shortName} articles
                 <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />

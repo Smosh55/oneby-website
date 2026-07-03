@@ -27,7 +27,7 @@ export async function generateMetadata({
       title: `${f.metaTitle} · OneBy`,
       description: f.metaDescription,
       type: "website",
-      url: `https://oneby.ai/features/${f.slug}`,
+      url: `/features/${f.slug}`,
     },
   };
 }

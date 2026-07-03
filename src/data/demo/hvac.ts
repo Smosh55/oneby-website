@@ -110,7 +110,7 @@ export const hvacDemo: DemoData = {
       group: "Earlier today",
       calls: [
         { id: 1, dir: "in", name: "Maria G.", meta: "Upstairs A/C not cooling · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
-        { id: 2, dir: "in", name: "Dana P.", meta: "A/C grinding, not cooling", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 2, dir: "in", name: "Dana P.", meta: "A/C grinding, not cooling", dur: "0:42", tag: "AI answered", tone: "green", recording: true, captured: "Dana's A/C is grinding and not blowing cold; she wants someone out this week. Picked up on the second ring, no voicemail." },
         { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · roof leak · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
       ],
     },

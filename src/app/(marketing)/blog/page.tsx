@@ -28,7 +28,9 @@ export default function BlogIndex() {
   // general (untagged) posts that apply to every business.
   const focus = focusedIndustry();
   const posts = focus
-    ? [...getIndustryPosts(focus.slug), ...getAllPosts().filter((p) => !p.industry)]
+    ? [...getIndustryPosts(focus.slug), ...getAllPosts().filter((p) => !p.industry)].sort(
+        (a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug)
+      )
     : getAllPosts();
   const featured = posts.find((p) => p.featured) ?? posts[0];
   const rest = posts.filter((p) => p.slug !== featured?.slug);
