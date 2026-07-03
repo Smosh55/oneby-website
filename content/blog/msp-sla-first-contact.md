@@ -9,7 +9,7 @@ tags: ["msp-it", "SLA management", "ticket intake"]
 industry: "msp-it"
 featured: false
 seoTitle: "MSP SLA Management: Never Miss First-Contact"
-seoDescription: "MSP SLAs live or die on first response. See how an AI receptionist logs the inbound call, timestamps it, and starts the ticket so you never blow the first-contact clock."
+seoDescription: "MSP SLAs live or die on first response. See how an AI receptionist logs the call, timestamps it, and opens the ticket so you never miss first contact."
 keywords:
   - "MSP SLA management"
   - "MSP first response time"

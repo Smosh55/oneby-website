@@ -9,7 +9,7 @@ tags: ["electricians", "scheduling software", "dispatch software"]
 industry: "electricians"
 featured: false
 seoTitle: "Scheduling & Dispatch Software for Electrical Contractors"
-seoDescription: "What electrical contractors should look for in scheduling and dispatch software, plus the one feature most roundups forget: answering the call that fills the schedule."
+seoDescription: "What electrical contractors should look for in scheduling and dispatch software, plus the one feature most roundups forget: answering the call."
 keywords:
   - "electrician scheduling software"
   - "electrical contractor dispatch software"

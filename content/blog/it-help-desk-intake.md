@@ -9,7 +9,7 @@ tags: ["msp-it", "help desk", "ticket intake"]
 industry: "msp-it"
 featured: false
 seoTitle: "IT Help Desk Intake: Better Support Tickets"
-seoDescription: "Turn IT support calls into tickets with real context: account, system, and symptom captured on the first call. Stop the callback loop and shorten time to resolution."
+seoDescription: "Turn IT support calls into tickets with real context: account, system, and symptom captured on the first call. Stop the callback loop and resolve faster."
 keywords:
   - "IT help desk intake"
   - "IT support ticket intake"

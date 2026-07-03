@@ -8,7 +8,7 @@ category: "Home Services"
 tags: ["restoration", "24/7 answering", "emergency dispatch"]
 industry: "restoration"
 featured: false
-seoTitle: "24/7 Answering for Restoration Companies: Every Minute Counts"
+seoTitle: "24/7 Answering for Restoration: Every Minute Counts"
 seoDescription: "Why 24/7 answering matters for restoration companies. Fire, water, and mold losses come at all hours — here is how to answer every one and dispatch fast."
 keywords:
   - "24/7 answering service for restoration"

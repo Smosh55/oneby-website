@@ -9,7 +9,7 @@ tags: ["law-firms", "client intake", "matter intake"]
 industry: "law-firms"
 featured: false
 seoTitle: "Law Firm Intake Without a Full-Time Receptionist"
-seoDescription: "Capture and qualify new matters even when you are in court. See how a small law firm handles client intake without a full-time receptionist, and never loses a caller to the next firm."
+seoDescription: "Capture and qualify new matters even when you are in court. See how a small law firm handles intake without a full-time receptionist and never loses a caller."
 keywords:
   - "law firm intake"
   - "law firm matter intake"

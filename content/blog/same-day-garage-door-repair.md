@@ -9,7 +9,7 @@ tags: ["garage-door", "same-day repair", "emergency calls"]
 industry: "garage-door"
 featured: false
 seoTitle: "Same-Day Garage Door Repair: Capture the Broken-Spring Call"
-seoDescription: "Broken springs and trapped cars are same-day garage door emergencies. Here is how to capture every one with an AI receptionist that answers and books on the spot."
+seoDescription: "Broken springs and trapped cars are same-day garage door emergencies. Here is how to capture every one with an AI receptionist that books on the spot."
 keywords:
   - "same day garage door repair"
   - "broken garage door spring"

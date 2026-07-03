@@ -9,7 +9,7 @@ tags: ["medical-offices", "after-hours answering", "patient calls"]
 industry: "medical-offices"
 featured: false
 seoTitle: "After-Hours Answering for Medical & Dental Practices"
-seoDescription: "After-hours answering for medical and dental practices that captures the reason for each call and creates a front-desk task, without giving medical advice, and points emergencies to appropriate care."
+seoDescription: "After-hours answering for medical and dental practices: captures each call's reason, creates a front-desk task, and points emergencies to care. No medical advice."
 keywords:
   - "medical after-hours answering"
   - "dental after-hours answering service"

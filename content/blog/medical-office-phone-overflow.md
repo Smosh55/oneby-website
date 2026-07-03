@@ -9,7 +9,7 @@ tags: ["medical-offices", "phone overflow", "patient calls"]
 industry: "medical-offices"
 featured: false
 seoTitle: "Medical Office Phone Overflow: Handle Peak Volume"
-seoDescription: "Handle peak-hour call volume at your medical or dental office so patients are not stuck in voicemail. See how overflow answering captures every call and creates front-desk tasks."
+seoDescription: "Handle peak-hour call volume so no patient is stuck in voicemail. Overflow answering captures every call and creates front-desk tasks, no medical advice given."
 keywords:
   - "medical office phone overflow"
   - "medical office call handling"
@@ -56,7 +56,7 @@ An [AI receptionist](/ai-receptionist) built for medical offices catches the ove
 
 > Ten calls hitting at 9 a.m. all get answered at once. Your front desk is not choosing which patient to ignore. It is working a clean list of tasks after the rush, instead of a voicemail box full of half-messages.
 
-To be clear about scope: this is patient intake and routing, not clinical work. It captures why the patient called and gets it to the right person. It does not give medical advice. You can see how it fits a practice on the [medical office page](/industries/medical-offices).
+To be clear about scope: this is patient intake and routing, not clinical work. It captures the reason for the call and creates a task for your front desk to work. It does not give medical advice and does not attempt clinical triage. And for anything that sounds like a genuine emergency, it does the one responsible thing, pointing the patient to appropriate care, an emergency room or the number your practice designates, rather than trying to assess or advise. You can see how it fits a practice on the [medical office page](/industries/medical-offices).
 
 ### The front desk gets a clean queue, not a pile of voicemails
 

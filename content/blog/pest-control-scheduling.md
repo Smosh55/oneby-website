@@ -9,7 +9,7 @@ tags: ["pest-control", "scheduling", "recurring revenue"]
 industry: "pest-control"
 featured: false
 seoTitle: "Pest Control Scheduling: Protect Plans and Routes"
-seoDescription: "Pest control scheduling done right protects recurring plans, prevents renewal lapses, and keeps routes efficient. See how to stop the phone from wrecking your calendar."
+seoDescription: "Pest control scheduling done right protects recurring plans, prevents renewal lapses, and keeps routes efficient. Stop the phone wrecking your calendar."
 keywords:
   - "pest control scheduling"
   - "pest control recurring plans"

@@ -9,7 +9,7 @@ tags: ["garage-door", "new door installs", "lead generation"]
 industry: "garage-door"
 featured: false
 seoTitle: "How Garage Door Companies Book More New-Door Installs"
-seoDescription: "New-door installs are the highest-ticket jobs in the garage door business. Here is how to capture and close more install leads instead of losing them to voicemail."
+seoDescription: "New-door installs are the highest-ticket jobs in the garage door business. Here is how to capture and close more install leads instead of losing them."
 keywords:
   - "garage door install leads"
   - "new garage door sales"

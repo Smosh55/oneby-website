@@ -9,7 +9,7 @@ tags: ["property-management", "maintenance requests", "ticketing"]
 industry: "property-management"
 featured: false
 seoTitle: "Tenant Maintenance Requests: Call to Closed Ticket"
-seoDescription: "Turn every tenant maintenance request into a tracked, routed, closed ticket across your portfolio. A guide to fixing the handoff that loses requests and angers tenants."
+seoDescription: "Turn every tenant maintenance request into a tracked, routed, closed ticket across your portfolio. Fix the handoff that loses requests and angers tenants."
 keywords:
   - "tenant maintenance requests"
   - "maintenance ticket tracking"
@@ -21,9 +21,9 @@ A tenant in unit 4B calls on a Tuesday. The bathroom fan died and the room is ge
 
 Multiply that by a portfolio of a few hundred units and the pattern is not an occasional slip. It is a leak in your operation. The call is the easy part. The hard part, the part that actually protects your tenants and your reputation, is the journey from that call to a closed, documented ticket. This guide is about fixing that journey.
 
-## The request is not the problem, the handoff is
+## Every request is a chain, and chains break at the links
 
-Most property managers are not bad at fixing things. The vendors are competent, the budget is there, the work gets done. What breaks is the handoff, the fragile chain between "a tenant told us something" and "someone with a wrench showed up."
+Most property managers are not bad at fixing things. The vendors are competent, the budget is there, the work gets done. What breaks is the chain between "a tenant told us something" and "someone with a wrench showed up." Every request has to survive a whole series of handoffs, and it only takes one weak link to lose it.
 
 That chain has a lot of links. The call has to be captured. The details have to be written down accurately, which unit, what is broken, how urgent. It has to become a ticket, not a sticky note. The ticket has to reach the right person, in-house tech or outside vendor. Somebody has to confirm the work happened. And the tenant has to be told it is done.
 

@@ -9,7 +9,7 @@ tags: ["property-management", "after-hours", "emergency calls"]
 industry: "property-management"
 featured: false
 seoTitle: "After-Hours Property Management Emergency Calls"
-seoDescription: "Handle after-hours property management emergencies like burst pipes and no-heat calls without a live answering service. A guide to catching every 2 a.m. call and routing it right."
+seoDescription: "Handle after-hours property emergencies like burst pipes and no-heat calls without a live answering service. Catch every 2 a.m. call and route it right."
 keywords:
   - "after-hours property management"
   - "property management emergency line"
