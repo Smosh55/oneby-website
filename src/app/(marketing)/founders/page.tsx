@@ -11,6 +11,7 @@ import {
   Gift,
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import WaitlistForm from "@/components/WaitlistForm";
 import {
   founderTiers,
   stretchGoals,
@@ -341,17 +342,18 @@ export default function FoundersPage() {
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/70">
             Lock the lowest price OneBy will ever offer and help shape what we
-            build next. Reserve your spot and we'll bring you in first.
+            build next. Pick a tier above — or at least save your spot in line,
+            free.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="/demo" className="btn btn-white text-base">
-              Reserve your founder spot <ArrowRight size={18} />
-            </Link>
+          <div className="mt-8">
+            <WaitlistForm />
+          </div>
+          <div className="mt-6">
             <a
               href="#tiers"
               className="btn border border-white/25 text-base text-white hover:bg-white/10"
             >
-              Compare tiers
+              Compare founder tiers
             </a>
           </div>
         </div>

@@ -22,6 +22,7 @@ import DemoForm from "@/components/DemoForm";
 import IndustryDemo from "@/components/IndustryDemo";
 import IndustryHeroArt from "./IndustryHeroArt";
 import PostCard from "@/components/blog/PostCard";
+import WaitlistForm from "@/components/WaitlistForm";
 import { getDemo } from "@/data/demo";
 import { industryAccentStyle } from "@/data/industryThemes";
 
@@ -209,6 +210,30 @@ export default function IndustryLanding({
             </p>
           </Reveal>
           <IndustryDemo slug={industry.slug} />
+        </div>
+      </section>
+
+      {/* Early-access capture — the low-friction ask for cold (ad) traffic */}
+      <section className="pb-18 lg:pb-24">
+        <div className="container-x">
+          <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-navy via-navy to-navy-700 px-7 py-12 text-center sm:px-12">
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute -left-16 top-0 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,rgba(var(--accent-rgb),0.35),transparent)]" />
+              <div className="absolute -right-12 bottom-0 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,rgba(28,219,150,0.3),transparent)]" />
+            </div>
+            <div className="relative mx-auto max-w-2xl">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-green/40 bg-green/10 px-3.5 py-1.5 text-[0.8rem] font-bold uppercase tracking-wide text-green">
+                Launching August 2026
+              </span>
+              <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+                Be the first {industry.shortName.toLowerCase()} shop in your
+                market on OneBy.
+              </h2>
+              <div className="mt-6">
+                <WaitlistForm />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
