@@ -2,10 +2,14 @@ import { NextResponse } from "next/server";
 
 // Lead-capture endpoint for the /demo form.
 //
-// Right now this validates the submission and acknowledges it (the lead is
-// logged server-side). To actually deliver leads, wire the marked spot below
-// to one of: an email send (Resend/SendGrid), a CRM (HubSpot/Salesforce), a
-// Slack webhook, or a database. Nothing here sends data to a third party yet.
+// Delivery is env-driven and layered — configure either or both:
+//   LEAD_WEBHOOK_URL   POST the lead to any webhook (Slack incoming webhooks
+//                      get a formatted message; anything else gets raw JSON —
+//                      Zapier/Make/Discord/CRM all work).
+//   RESEND_API_KEY +   Email the lead via Resend's REST API (no SDK needed).
+//   LEAD_EMAIL_TO      Optional LEAD_EMAIL_FROM (defaults to Resend's
+//                      onboarding sender, fine until your domain is verified).
+// If neither is configured, the lead is logged server-side as a last resort.
 
 type DemoLead = {
   name?: string;
@@ -110,8 +114,7 @@ export async function POST(req: Request) {
     );
   }
 
-  // ----- Wire your lead destination here (email / CRM / Slack / DB) -----
-  console.log("[oneby demo request]", {
+  const clean = {
     name,
     email,
     phone,
@@ -122,8 +125,98 @@ export async function POST(req: Request) {
     source: lead.source ?? "",
     message: lead.message?.trim() ?? "",
     receivedAt: new Date().toISOString(),
-  });
-  // ----------------------------------------------------------------------
+  };
+
+  const delivered = await deliverLead(clean);
+  if (!delivered) {
+    // Last resort so the lead is at least recoverable from server logs.
+    console.log("[oneby demo request]", clean);
+  }
 
   return NextResponse.json({ ok: true });
+}
+
+type CleanLead = {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  industry: string;
+  teamSize: string;
+  provider: string;
+  source: string;
+  message: string;
+  receivedAt: string;
+};
+
+function leadText(l: CleanLead): string {
+  return [
+    `New demo request — ${l.name} (${l.company})`,
+    ``,
+    `Email:     ${l.email}`,
+    `Phone:     ${l.phone}`,
+    `Industry:  ${l.industry || "—"}`,
+    `Team size: ${l.teamSize || "—"}`,
+    `Provider:  ${l.provider || "—"}`,
+    `Source:    ${l.source || "—"}`,
+    l.message ? `\nMessage:\n${l.message}` : ``,
+    ``,
+    `Received ${l.receivedAt}`,
+  ].join("\n");
+}
+
+// Sends the lead to every configured destination. Returns true if at least one
+// delivery succeeded. Failures are logged, never thrown — the visitor already
+// did their part.
+async function deliverLead(l: CleanLead): Promise<boolean> {
+  const results = await Promise.allSettled([sendWebhook(l), sendEmail(l)]);
+  let delivered = false;
+  for (const r of results) {
+    if (r.status === "fulfilled" && r.value) delivered = true;
+    if (r.status === "rejected") console.error("[lead delivery]", r.reason);
+  }
+  return delivered;
+}
+
+async function sendWebhook(l: CleanLead): Promise<boolean> {
+  const url = process.env.LEAD_WEBHOOK_URL;
+  if (!url) return false;
+  const isSlack = url.includes("hooks.slack.com");
+  const body = isSlack ? { text: leadText(l) } : l;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    console.error("[lead webhook] failed:", res.status, await res.text().catch(() => ""));
+    return false;
+  }
+  return true;
+}
+
+async function sendEmail(l: CleanLead): Promise<boolean> {
+  const key = process.env.RESEND_API_KEY;
+  const to = process.env.LEAD_EMAIL_TO;
+  if (!key || !to) return false;
+  const from = process.env.LEAD_EMAIL_FROM || "OneBy Leads <onboarding@resend.dev>";
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${key}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to,
+      reply_to: l.email,
+      subject: `Demo request: ${l.name} — ${l.company}${l.industry ? ` (${l.industry})` : ""}`,
+      text: leadText(l),
+    }),
+  });
+  if (!res.ok) {
+    console.error("[lead email] failed:", res.status, await res.text().catch(() => ""));
+    return false;
+  }
+  return true;
 }
