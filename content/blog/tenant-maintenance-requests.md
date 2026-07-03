@@ -46,7 +46,7 @@ Running one building, a sharp manager can hold the whole thing in their head. Ru
 
 At scale you have multiple properties, multiple managers, a roster of vendors, and tenants who all think their request is the only one that matters. Without a system, every manager invents their own tracking, half of it in their memory. Requests fall between properties. Nobody can answer "what is the status of the leak in 4B" without three phone calls. Owners ask for a report and you cobble it together from six inboxes.
 
-The businesses that scale cleanly are the ones that made the request-to-close workflow a system instead of a personal talent. That is what turns [property management](/industries/property-management) from firefighting into operations.
+The businesses that scale cleanly are the ones that made the request-to-close workflow a system instead of a personal talent. That is what turns [property management](/property-management) from firefighting into operations.
 
 ## What a broken workflow actually costs
 

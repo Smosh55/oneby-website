@@ -59,7 +59,7 @@ Run the numbers on your own shop sometime. If you miss even five emergency calls
 
 ## "Just hire an answering service"
 
-Sure, you can. And a traditional [restoration answering service](/industries/restoration) is better than voicemail. But most of them are generic call centers reading off a script. They take a message. They don't know the difference between a slab leak and a sump pump failure, they can't tell an active flood from a follow-up, and they definitely can't dispatch.
+Sure, you can. And a traditional [restoration answering service](/restoration) is better than voicemail. But most of them are generic call centers reading off a script. They take a message. They don't know the difference between a slab leak and a sump pump failure, they can't tell an active flood from a follow-up, and they definitely can't dispatch.
 
 So the message lands in someone's inbox, and you're back to calling people in the morning. You've added a middleman without adding speed.
 

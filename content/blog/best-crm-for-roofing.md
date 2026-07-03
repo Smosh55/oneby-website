@@ -72,7 +72,7 @@ Curious what your own leak looks like? The [missed call calculator](/missed-call
 
 We are not going to pretend to be a full storm-restoration production suite. If you need aerial measurement automation and multi-state material ordering, buy the battleship.
 
-What OneBy does is close the gap the others leave open. An [AI receptionist](/ai-receptionist) answers every call, day or night, qualifies it like someone who knows roofing, and turns it into a tracked lead automatically. Then the [CRM](/industries/roofing) side keeps that lead moving with follow-up tasks, a customer timeline, and a shared inbox so nothing dies in a voicemail box.
+What OneBy does is close the gap the others leave open. An [AI receptionist](/ai-receptionist) answers every call, day or night, qualifies it like someone who knows roofing, and turns it into a tracked lead automatically. Then the [CRM](/roofing) side keeps that lead moving with follow-up tasks, a customer timeline, and a shared inbox so nothing dies in a voicemail box.
 
 It is an all-in-one built from the phone forward instead of the pipeline backward. The lead gets captured because the call got answered. Then it gets worked because it landed on someone's board with a next step, not on a truck seat.
 

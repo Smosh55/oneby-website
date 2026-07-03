@@ -27,12 +27,12 @@ export async function generateMetadata({
     title: industry.metaTitle,
     description: industry.metaDescription,
     keywords: industry.keywords,
-    alternates: { canonical: `/industries/${industry.slug}` },
+    alternates: { canonical: `/${industry.slug}` },
     openGraph: {
       title: `${industry.metaTitle} · OneBy`,
       description: industry.metaDescription,
       type: "website",
-      url: `/industries/${industry.slug}`,
+      url: `/${industry.slug}`,
     },
   };
 }
@@ -72,7 +72,7 @@ export default async function IndustryPage({
             "@type": "ListItem",
             position: 3,
             name: industry.shortName,
-            item: `${base}/industries/${industry.slug}`,
+            item: `${base}/${industry.slug}`,
           },
         ],
       },

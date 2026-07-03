@@ -65,7 +65,7 @@ That last part is where most electricians feel the difference. It is one thing t
 
 Not every call is a fire drill, and not every call is a tire-kicker. The trick is knowing which is which before you even look at your phone.
 
-A good [electrical business phone system](/industries/electricians) tags the urgent stuff. A panel sparking and smoke in the wall? That gets flagged as an emergency and pinged to you immediately, even routed to whoever is on call. A "can you come look at my outlet sometime next month" call? That waits in the queue where it belongs.
+A good [electrical business phone system](/electricians) tags the urgent stuff. A panel sparking and smoke in the wall? That gets flagged as an emergency and pinged to you immediately, even routed to whoever is on call. A "can you come look at my outlet sometime next month" call? That waits in the queue where it belongs.
 
 You stop treating every buzz in your pocket like a 911 call. And you stop missing the actual 911 calls because you were ignoring your phone after the tenth spam warranty call of the day.
 

@@ -74,7 +74,7 @@ That is the difference between an after-hours line that protects your portfolio 
 
 The quiet benefit is documentation. When every after-hours call is captured, triaged, and time-stamped as a ticket, you have a record. You can show an owner exactly how fast their emergency was handled. You can show that the tenant was contacted and the vendor dispatched. In a business where liability is real, that paper trail is worth as much as the fast response itself.
 
-And it scales. A personal cell phone covers a few units. An automated after-hours system covers a portfolio of hundreds, across every property, without burning out a single human. See how the coverage and escalation fit together on the [property management page](/industries/property-management).
+And it scales. A personal cell phone covers a few units. An automated after-hours system covers a portfolio of hundreds, across every property, without burning out a single human. See how the coverage and escalation fit together on the [property management page](/property-management).
 
 ## You do not have to choose between sleep and coverage
 

@@ -44,7 +44,7 @@ For an MSP, "structured record" means:
 - **A clean ticket in your stack.** Caller, company, the actual issue in plain language, and an urgency read. Not "client called, call them back."
 - **Triage that routes itself.** Server down at a 40-seat client goes to your on-call queue. A password reset waits politely for business hours.
 
-This is the whole idea behind [call handling for MSPs](/industries/msp-it): the phone stops being a black hole and becomes another clean intake channel, just like email and the portal.
+This is the whole idea behind [call handling for MSPs](/msp-it): the phone stops being a black hole and becomes another clean intake channel, just like email and the portal.
 
 > A call your tech doesn't remember is a call you can't bill, can't trend, and can't prove you handled. The ticket is the receipt.
 

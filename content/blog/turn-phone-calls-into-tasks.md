@@ -48,7 +48,7 @@ Good assignment also routes by who should actually handle it. Office stuff to th
 
 ## What this looks like on a normal day
 
-Say you run a [roofing](/industries/roofing) crew. A homeowner calls about a leak after last week's storm. You're up a ladder, so it goes to voicemail, except most callers don't leave one. They just hang up and try the next roofer.
+Say you run a [roofing](/roofing) crew. A homeowner calls about a leak after last week's storm. You're up a ladder, so it goes to voicemail, except most callers don't leave one. They just hang up and try the next roofer.
 
 With a call-to-task setup, that missed call still becomes a task: "Call back storm-leak lead, 555-0199, before end of day." Someone in the office sees it, calls back within the hour, and books the inspection. The competitor who relied on voicemail never even knew the lead existed.
 

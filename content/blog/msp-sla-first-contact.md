@@ -63,7 +63,7 @@ Not every call is a P1, and treating them all as emergencies is its own kind of 
 
 A proper intake flow tags severity as the call comes in. A full outage at a client site gets flagged critical and pushed to whoever is on call immediately, with the SLA timer visible. A "my Outlook is being slow" call gets logged as a normal-priority ticket that waits its turn. Your on-call tech stops treating every after-hours ring like a disaster, and stops sleeping through the ones that actually are.
 
-You can see how the whole flow maps to managed-services work on the [MSP intake page](/industries/msp-it).
+You can see how the whole flow maps to managed-services work on the [MSP intake page](/msp-it).
 
 ## Every call becomes a ticket with context, not a callback note
 

@@ -59,7 +59,7 @@ Then it does the part that actually books installs. It writes the lead up and dr
 
 > Every install inquiry becomes a tracked lead with the door style, the measurements request, the budget, and a scheduled follow-up — not a quote you meant to chase and forgot.
 
-That is the fix for the second leak. The one that matters most. When every install lead lands on someone's board with a next action and a due date, the follow-up stops depending on you remembering. The [garage door CRM](/industries/garage-door) side keeps the customer timeline, the quote status, and the next touch all in one place, so the considering buyer gets a call at the right moment instead of silence.
+That is the fix for the second leak. The one that matters most. When every install lead lands on someone's board with a next action and a due date, the follow-up stops depending on you remembering. The [garage door CRM](/garage-door) side keeps the customer timeline, the quote status, and the next touch all in one place, so the considering buyer gets a call at the right moment instead of silence.
 
 ### Nurturing higher-ticket leads without dropping them
 

@@ -37,7 +37,7 @@ If you're replacing an old desk-phone setup and you want one vendor for calls, v
 
 OneBy isn't competing for the dial tone. It's built around one stubborn problem that phone systems mostly don't solve: the call ends, and then what? A great call that nobody acts on is a lost job. A phone system can route the call beautifully and still leave you with a voicemail nobody follows up on.
 
-OneBy turns the conversation itself into next steps. After every call, answered or missed, on a desk phone or a tech's mobile out in the field, you get a clean summary and an assigned task. Not a recording you have to listen to later. An actual to-do on the right person's list. That's the gap a [RingCentral alternative](/industries/hvac) shopper is usually trying to close, and it's a different gap than "I need better call routing."
+OneBy turns the conversation itself into next steps. After every call, answered or missed, on a desk phone or a tech's mobile out in the field, you get a clean summary and an assigned task. Not a recording you have to listen to later. An actual to-do on the right person's list. That's the gap a [RingCentral alternative](/hvac) shopper is usually trying to close, and it's a different gap than "I need better call routing."
 
 > A phone system asks "did the call connect?" OneBy asks "did the call turn into action?" Those are different questions, and the second one is where revenue leaks.
 
@@ -62,7 +62,7 @@ Ask yourself what's broken right now.
 
 If your problem is "our phones are old, calls drop, we have no real routing," you want a phone system, and RingCentral is a reasonable place to look. That's the right tool for that job.
 
-If your problem is "we get plenty of calls but jobs still slip because nobody follows up," a new phone system won't fix that. Better routing doesn't create the callback task or remember the quote you promised. That's an after-the-call problem, and that's exactly what OneBy is for, across [HVAC](/industries/hvac), [plumbing](/industries/plumbing), [property management](/industries/property-management), and the rest.
+If your problem is "we get plenty of calls but jobs still slip because nobody follows up," a new phone system won't fix that. Better routing doesn't create the callback task or remember the quote you promised. That's an after-the-call problem, and that's exactly what OneBy is for, across [HVAC](/hvac), [plumbing](/plumbing), [property management](/property-management), and the rest.
 
 Plenty of service businesses keep their phone system and add OneBy on top, because the two aren't fighting over the same job. The phone system carries the call. OneBy makes sure the call becomes action.
 

@@ -45,7 +45,7 @@ It runs an actual intake. It asks the matter type, the key dates, the court date
 
 > An answering service hands you a message. An AI receptionist hands you a qualified matter. For a small firm, that gap is the difference between more phone tag and less.
 
-You can see how the intake flow is built for legal work on the [law firm intake page](/industries/law-firms).
+You can see how the intake flow is built for legal work on the [law firm intake page](/law-firms).
 
 ### Where the AI genuinely wins
 

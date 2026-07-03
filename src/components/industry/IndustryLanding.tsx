@@ -490,7 +490,7 @@ export default function IndustryLanding({
                 {cities.map((c) => (
                   <Link
                     key={c.slug}
-                    href={`/industries/${industry.slug}/${c.slug}`}
+                    href={`/${industry.slug}/${c.slug}`}
                     className="rounded-full border border-line bg-white px-3 py-1.5 text-[0.85rem] font-medium text-ink/80 transition-colors hover:border-blue/40 hover:text-blue"
                   >
                     {c.name}, {c.state}
@@ -519,7 +519,7 @@ export default function IndustryLanding({
             </div>
             <div className="mt-8">
               <Link
-                href={asHome ? "/blog" : `/industries/${industry.slug}/blog`}
+                href={asHome ? "/blog" : `/${industry.slug}/blog`}
                 className="group inline-flex items-center gap-1.5 text-sm font-semibold text-blue hover:underline"
               >
                 See all {industry.shortName} articles

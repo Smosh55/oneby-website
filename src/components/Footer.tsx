@@ -25,10 +25,10 @@ const groups: { title: string; links: FooterLink[] }[] = [
   {
     title: "Industries",
     links: [
-      { label: "HVAC", href: "/industries/hvac" },
-      { label: "Plumbing", href: "/industries/plumbing" },
-      { label: "Roofing", href: "/industries/roofing" },
-      { label: "Property Management", href: "/industries/property-management" },
+      { label: "HVAC", href: "/hvac" },
+      { label: "Plumbing", href: "/plumbing" },
+      { label: "Roofing", href: "/roofing" },
+      { label: "Property Management", href: "/property-management" },
       { label: "All industries", href: "/industries" },
     ],
   },
@@ -68,7 +68,7 @@ export default function Footer() {
               links: [
                 {
                   label: "Overview",
-                  href: isFocusedSite ? "/" : `/industries/${industry.slug}`,
+                  href: isFocusedSite ? "/" : `/${industry.slug}`,
                 },
                 // City pages aren't served on focused deployments (they
                 // redirect to the root), so link the trade's insights instead.
@@ -76,7 +76,7 @@ export default function Footer() {
                   ? [{ label: `${industry.shortName} insights`, href: "/blog" }]
                   : cities.slice(0, 4).map((c) => ({
                       label: `${c.name}, ${c.state}`,
-                      href: `/industries/${industry.slug}/${c.slug}`,
+                      href: `/${industry.slug}/${c.slug}`,
                     }))),
               ],
             }

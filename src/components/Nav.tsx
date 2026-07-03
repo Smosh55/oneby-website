@@ -24,7 +24,7 @@ export default function Nav() {
   // an /industries/<slug> page), drop the cross-industry chrome so it reads as a
   // business that only serves that trade.
   const industry = useSiteIndustry();
-  const homeHref = !industry ? "/" : isFocusedSite ? "/" : `/industries/${industry.slug}`;
+  const homeHref = !industry ? "/" : isFocusedSite ? "/" : `/${industry.slug}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -74,7 +74,7 @@ export default function Nav() {
                         return (
                           <Link
                             key={ind.slug}
-                            href={`/industries/${ind.slug}`}
+                            href={`/${ind.slug}`}
                             className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[0.875rem] font-medium text-ink/80 hover:bg-canvas-2 hover:text-navy"
                           >
                             <Icon size={16} className="text-blue" />
@@ -157,7 +157,7 @@ export default function Nav() {
                 {industryGroups.flatMap((g) => g.items).map((ind) => (
                   <Link
                     key={ind.slug}
-                    href={`/industries/${ind.slug}`}
+                    href={`/${ind.slug}`}
                     onClick={() => setOpen(false)}
                     className="rounded-lg px-3 py-2 text-[0.85rem] text-ink/75 hover:bg-canvas-2"
                   >

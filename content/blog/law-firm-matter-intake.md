@@ -57,7 +57,7 @@ Then it does the part that saves you hours: it writes the intake up cleanly and 
 
 > You walk out of court to a qualified matter waiting for you, not a voicemail light and a note that says "call back." The intake is already done. All that is left is the part only you can do.
 
-You can see how this maps to legal practice on the [law firm intake page](/industries/law-firms).
+You can see how this maps to legal practice on the [law firm intake page](/law-firms).
 
 ### Screening happens before your time is spent
 

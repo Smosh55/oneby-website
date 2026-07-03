@@ -218,7 +218,7 @@ export default function AiReceptionistPage() {
             {industries.map((i) => (
               <Link
                 key={i.slug}
-                href={`/industries/${i.slug}`}
+                href={`/${i.slug}`}
                 className="group flex items-center justify-between rounded-xl border border-line bg-surface px-4 py-3 text-sm font-medium text-navy transition-colors hover:border-blue"
               >
                 {i.shortName}

@@ -21,7 +21,7 @@ Speed isn't a nice-to-have in this trade. It's the whole game. And the cruel par
 
 Homeowners in a plumbing emergency aren't comparison shopping. They've got water on the floor. They want a human who says "I can be there this afternoon." That reassurance is worth more to them in that moment than fifty bucks off the invoice.
 
-So the math is brutal but simple. A plumber who answers on the second ring beats a cheaper plumber who answers on the fifth callback. Better [plumber lead response](/industries/plumbing) wins jobs that pricing never could. The trouble is you can't always answer, because you're under a sink with a wrench in one hand.
+So the math is brutal but simple. A plumber who answers on the second ring beats a cheaper plumber who answers on the fifth callback. Better [plumber lead response](/plumbing) wins jobs that pricing never could. The trouble is you can't always answer, because you're under a sink with a wrench in one hand.
 
 ## You can't answer every call, and that's fine
 

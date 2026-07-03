@@ -21,7 +21,7 @@ Across a single building that's manageable. Across a portfolio of twenty, it's p
 
 Most maintenance failures aren't about a slow plumber or a missing part. They're about the handoff. A tenant reports something, and the report lives in someone's memory, a sticky note, or a half-finished text instead of in a system. The work doesn't get done because the request never fully landed anywhere.
 
-Good [maintenance request management](/industries/property-management) starts the second the phone rings. The call itself has to become structured information automatically, or your team spends its day re-collecting details tenants already gave you once.
+Good [maintenance request management](/property-management) starts the second the phone rings. The call itself has to become structured information automatically, or your team spends its day re-collecting details tenants already gave you once.
 
 ## Every call becomes a ticket, not a memory
 

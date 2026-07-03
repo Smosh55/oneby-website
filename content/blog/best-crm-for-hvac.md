@@ -81,6 +81,6 @@ Second, how big are you and where are you headed? A solo operator and a 30-truck
 
 Third, will your techs use it? Pull up each option on a phone and pretend you're standing in a hot attic. If it's clunky there, your crew will quietly go back to texting you, and you'll be paying for software nobody opens.
 
-There's no single best CRM for HVAC that wins for everybody. The big platforms win on depth. The simple tools win on speed and ease. And if your biggest problem is the phone ringing while you're under a unit, an all-in-one that answers, books, and bills is worth a hard look. See how OneBy handles real [HVAC](/industries/hvac) workflows and decide for yourself.
+There's no single best CRM for HVAC that wins for everybody. The big platforms win on depth. The simple tools win on speed and ease. And if your biggest problem is the phone ringing while you're under a unit, an all-in-one that answers, books, and bills is worth a hard look. See how OneBy handles real [HVAC](/hvac) workflows and decide for yourself.
 
 *Want to see your phone get answered and the job run all the way to a paid invoice? [Book a quick OneBy demo](/demo) and watch it work.*

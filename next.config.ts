@@ -52,6 +52,15 @@ const nextConfig: NextConfig = {
     // The entries below are PLAUSIBLE WordPress/Divi defaults, safe because the
     // new site doesn't use these paths. Verify before launch.
     return [
+      // Industries moved from /industries/<slug> to top-level /<slug> short
+      // URLs (keyword right after the domain; the /industries hub remains).
+      // Order matters: the deeper pattern first.
+      {
+        source: "/industries/:slug/:path*",
+        destination: "/:slug/:path*",
+        permanent: true,
+      },
+      { source: "/industries/:slug", destination: "/:slug", permanent: true },
       { source: "/home", destination: "/", permanent: true },
       { source: "/index.php", destination: "/", permanent: true },
       { source: "/about-us", destination: "/about", permanent: true },

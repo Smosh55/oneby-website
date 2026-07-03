@@ -57,7 +57,7 @@ Then it writes the ticket. Account, system, symptom, urgency, callback number, a
 
 > The tech's first read is the whole story, not the first question. That is the difference between resolution starting now and resolution starting after two more phone calls.
 
-You can see how this maps onto managed-services and internal-IT workflows on the [IT support intake page](/industries/msp-it).
+You can see how this maps onto managed-services and internal-IT workflows on the [IT support intake page](/msp-it).
 
 ### Routing gets smarter when the ticket is complete
 

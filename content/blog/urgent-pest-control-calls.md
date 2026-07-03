@@ -73,7 +73,7 @@ That is the difference between a phone that rings and a phone that books. The em
 
 ## The urgent job is the front door to a recurring account
 
-Here is the part owners miss. That one-time panic job is often the start of something bigger. The homeowner you saved from a wasp nest is the one who signs up for [quarterly service](/industries/pest-control) once they trust you. But you never get to make that pitch if you never answered the first call.
+Here is the part owners miss. That one-time panic job is often the start of something bigger. The homeowner you saved from a wasp nest is the one who signs up for [quarterly service](/pest-control) once they trust you. But you never get to make that pitch if you never answered the first call.
 
 Win the emergency, do good work fast, and you have earned a shot at recurring revenue that pays for years. Miss the emergency and you never even enter the conversation.
 

@@ -64,7 +64,7 @@ That's what an [AI receptionist](/ai-receptionist) does for a pest control phone
 
 Then the part that actually saves your route: after the call, you get a clean summary. Who called, what they've got, the address, how urgent. No squinting at a missed-call number wondering if it was a sales pitch or a $400 termite job.
 
-A purpose-built [pest control answering service](/industries/pest-control) goes one step further. Every call becomes an assigned task, not a sticky note that falls off the dash. The yellow jacket emergency gets flagged urgent and lands on whoever's closest. The quarterly reschedule gets logged so it doesn't slip. You stop running your business out of a missed-call log and a shaky memory.
+A purpose-built [pest control answering service](/pest-control) goes one step further. Every call becomes an assigned task, not a sticky note that falls off the dash. The yellow jacket emergency gets flagged urgent and lands on whoever's closest. The quarterly reschedule gets logged so it doesn't slip. You stop running your business out of a missed-call log and a shaky memory.
 
 ### What it captures for you
 

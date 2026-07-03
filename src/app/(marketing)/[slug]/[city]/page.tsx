@@ -35,12 +35,12 @@ export async function generateMetadata({
       `${industry.shortName} AI receptionist ${place.name}`,
       `${place.name} ${industry.shortName.toLowerCase()} call answering`,
     ],
-    alternates: { canonical: `/industries/${slug}/${city}` },
+    alternates: { canonical: `/${slug}/${city}` },
     openGraph: {
       title: `${title} · OneBy`,
       description: `AI call answering for ${place.name} ${industry.shortName.toLowerCase()} businesses.`,
       type: "website",
-      url: `/industries/${slug}/${city}`,
+      url: `/${slug}/${city}`,
     },
   };
 }
@@ -65,7 +65,7 @@ export default async function LocalPage({
       { "@type": "City", name: `${place.name}, ${place.state}` },
       ...place.neighborhoods.map((n) => ({ "@type": "Place", name: n })),
     ],
-    url: `${base}/industries/${slug}/${city}`,
+    url: `${base}/${slug}/${city}`,
   };
 
   return (

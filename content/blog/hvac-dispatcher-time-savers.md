@@ -29,7 +29,7 @@ When every call gets captured, transcribed, and summarized the second it ends, y
 
 You know the sticky note. You know the half-sentence text from a tech. "Mrs. Alvarez called, something about the unit, call her back." About what? The install from last week? A new no-cool? A bill question? Your dispatcher has no idea, so they call, get voicemail, and now they're guessing in a callback message too.
 
-Vague messages force everyone to redo the discovery the caller already did once. It's pure waste. A proper [HVAC dispatch](/industries/hvac) workflow should hand your dispatcher the actual content of the call, not a rumor about it.
+Vague messages force everyone to redo the discovery the caller already did once. It's pure waste. A proper [HVAC dispatch](/hvac) workflow should hand your dispatcher the actual content of the call, not a rumor about it.
 
 With OneBy, that sticky note becomes a real summary:
 

@@ -113,7 +113,7 @@ export default async function BlogPost({
             </span>
             {post.industry && industriesBySlug[post.industry] && (
               <Link
-                href={`/industries/${post.industry}`}
+                href={`/${post.industry}`}
                 className="rounded-full bg-canvas-2 px-2.5 py-1 text-navy transition-colors hover:bg-line"
               >
                 For {industriesBySlug[post.industry].shortName} →
@@ -196,7 +196,7 @@ export default async function BlogPost({
               </Link>
               {post.industry && industriesBySlug[post.industry] && (
                 <Link
-                  href={`/industries/${post.industry}`}
+                  href={`/${post.industry}`}
                   className="group flex items-center justify-between py-3 font-semibold text-navy"
                 >
                   OneBy for {industriesBySlug[post.industry].shortName}

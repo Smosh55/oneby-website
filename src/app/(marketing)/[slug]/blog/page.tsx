@@ -31,12 +31,12 @@ export async function generateMetadata({
   return {
     title: `${industry.shortName} Insights & Playbooks`,
     description: `Guides on call answering, lead capture, and workflow automation for ${industry.name.toLowerCase()}.`,
-    alternates: { canonical: `/industries/${industry.slug}/blog` },
+    alternates: { canonical: `/${industry.slug}/blog` },
     openGraph: {
       title: `${industry.shortName} Insights & Playbooks · OneBy`,
       description: `Guides on call answering, lead capture, and workflow automation for ${industry.name.toLowerCase()}.`,
       type: "website",
-      url: `/industries/${industry.slug}/blog`,
+      url: `/${industry.slug}/blog`,
     },
   };
 }
@@ -64,7 +64,7 @@ export default async function IndustryBlogHub({
         </div>
         <div className="container-x">
           <nav className="mb-6 flex items-center gap-1.5 text-sm text-muted">
-            <Link href={`/industries/${industry.slug}`} className="hover:text-navy">
+            <Link href={`/${industry.slug}`} className="hover:text-navy">
               {industry.shortName}
             </Link>
             <ChevronRight size={14} className="text-faint" />
@@ -121,7 +121,7 @@ export default async function IndustryBlogHub({
             </div>
             <div className="mt-8">
               <Link
-                href={`/industries/${industry.slug}`}
+                href={`/${industry.slug}`}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue hover:underline"
               >
                 Back to {industry.shortName} <ArrowRight size={15} />

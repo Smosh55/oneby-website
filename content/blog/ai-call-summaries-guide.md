@@ -56,7 +56,7 @@ The obvious win is speed. But watch how this changes the way a team works.
 
 ## Where this pays off most
 
-If your business runs on the phone, you feel the absence of this every day, you just call it "being busy." Service teams across [industries](/industries) live in this loop: answer call, half-remember it, scramble later. Trades like [plumbing](/industries/plumbing) and roofing especially, where one call has six details and five of them matter.
+If your business runs on the phone, you feel the absence of this every day, you just call it "being busy." Service teams across [industries](/industries) live in this loop: answer call, half-remember it, scramble later. Trades like [plumbing](/plumbing) and roofing especially, where one call has six details and five of them matter.
 
 The math is simple. Every call has roughly a couple of facts you'll need again. Multiply by your call volume. That's a lot of facts currently living in people's short-term memory, which is to say, mostly gone by lunch.
 

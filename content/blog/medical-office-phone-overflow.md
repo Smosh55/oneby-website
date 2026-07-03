@@ -56,7 +56,7 @@ An [AI receptionist](/ai-receptionist) built for medical offices catches the ove
 
 > Ten calls hitting at 9 a.m. all get answered at once. Your front desk is not choosing which patient to ignore. It is working a clean list of tasks after the rush, instead of a voicemail box full of half-messages.
 
-To be clear about scope: this is patient intake and routing, not clinical work. It captures the reason for the call and creates a task for your front desk to work. It does not give medical advice and does not attempt clinical triage. And for anything that sounds like a genuine emergency, it does the one responsible thing, pointing the patient to appropriate care, an emergency room or the number your practice designates, rather than trying to assess or advise. You can see how it fits a practice on the [medical office page](/industries/medical-offices).
+To be clear about scope: this is patient intake and routing, not clinical work. It captures the reason for the call and creates a task for your front desk to work. It does not give medical advice and does not attempt clinical triage. And for anything that sounds like a genuine emergency, it does the one responsible thing, pointing the patient to appropriate care, an emergency room or the number your practice designates, rather than trying to assess or advise. You can see how it fits a practice on the [medical office page](/medical-offices).
 
 ### The front desk gets a clean queue, not a pile of voicemails
 

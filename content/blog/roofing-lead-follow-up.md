@@ -67,7 +67,7 @@ That is the difference between hoping you remember to call the Hendersons back a
 
 Signed roofing jobs usually take more than one touch. The homeowner is waiting on the adjuster. The spouse needs a night to think. The estimate needs a second look.
 
-A real [roofing lead system](/industries/roofing) keeps the thread alive. It logs where each lead is in the pipeline, reminds you when it is time for the next touch, and makes sure the "waiting on adjuster" leads do not vanish into the pile. You stop leaking the slow-moving deals, which in roofing are most of them.
+A real [roofing lead system](/roofing) keeps the thread alive. It logs where each lead is in the pipeline, reminds you when it is time for the next touch, and makes sure the "waiting on adjuster" leads do not vanish into the pile. You stop leaking the slow-moving deals, which in roofing are most of them.
 
 Persistence is what wins insurance work. Most roofers quit after one call. The system does not get tired, does not forget, and does not lose the note.
 

@@ -45,7 +45,7 @@ Two things decide most intake races, and neither is your billboard.
 
 The first is speed to answer. A live, helpful voice in the first few rings tells a nervous caller they came to the right place. The second is routing. A call that gets answered but then floats in a voicemail purgatory for two days is barely better than a missed one.
 
-A good [legal intake](/industries/law-firms) process does both. Somebody friendly picks up, gathers the basics, and the right case gets to the right person fast, with notes attached so nobody asks the caller to repeat their whole story.
+A good [legal intake](/law-firms) process does both. Somebody friendly picks up, gathers the basics, and the right case gets to the right person fast, with notes attached so nobody asks the caller to repeat their whole story.
 
 > A caller who feels heard in the first minute will wait. A caller who feels handled like paperwork is already dialing someone else.
 
@@ -71,7 +71,7 @@ If you're a solo attorney, you are the lawyer, the rainmaker, and the front desk
 
 For a small firm with an office manager juggling six things, the math is similar. The phone is going to ring during the worst possible moment, again and again. The question isn't whether you'll be busy when a hot lead calls. You will be. The question is whether that call gets caught anyway.
 
-A capable [answering service for lawyers](/industries/law-firms) takes the impossible choice off the table. Every call gets answered and logged, whether you're in court, in a meeting, or asleep.
+A capable [answering service for lawyers](/law-firms) takes the impossible choice off the table. Every call gets answered and logged, whether you're in court, in a meeting, or asleep.
 
 ## "Can't I just hire an answering service?"
 

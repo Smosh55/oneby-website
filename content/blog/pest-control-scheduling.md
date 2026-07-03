@@ -45,7 +45,7 @@ Even when the plans hold, sloppy scheduling costs you on the road. Pest control 
 
 Take one call handled badly. A customer across town wants a Thursday morning slot, and whoever answered just said yes without looking at where the truck already was Thursday morning. Now your tech drives forty minutes out of the way for one stop, and the whole day runs late. Do that a few times a week and you have burned hours of paid time on windshield instead of treatments.
 
-Good [route efficiency](/industries/pest-control) is not luck. It comes from booking each new appointment into a slot that fits the day that is already forming, not just the first open time on the calendar. That takes a scheduling process that actually looks at the whole picture, every time, even when the person answering the phone is stretched thin.
+Good [route efficiency](/pest-control) is not luck. It comes from booking each new appointment into a slot that fits the day that is already forming, not just the first open time on the calendar. That takes a scheduling process that actually looks at the whole picture, every time, even when the person answering the phone is stretched thin.
 
 ## What a missed scheduling call actually costs
 

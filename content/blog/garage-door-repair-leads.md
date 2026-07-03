@@ -60,7 +60,7 @@ Voicemail has the same problem. Most people under fifty will not leave one. They
 
 So the fix is simple to say and hard to do with a small crew. Answer every call. The first ring, the third callback of the day, the 9 p.m. panic call, the one that comes in while you are wrist-deep in a torsion spring.
 
-You can't physically do that yourself. Neither can one office person who also handles scheduling, parts, and your invoicing. That's where a [garage door answering service](/industries/garage-door) earns its keep, except the modern version isn't a call center reading from a script in another state.
+You can't physically do that yourself. Neither can one office person who also handles scheduling, parts, and your invoicing. That's where a [garage door answering service](/garage-door) earns its keep, except the modern version isn't a call center reading from a script in another state.
 
 OneBy is an [AI receptionist](/ai-receptionist) that picks up every single call on the first ring, day or night. It talks like a normal person, not a robot. It asks the right questions for a garage door call:
 

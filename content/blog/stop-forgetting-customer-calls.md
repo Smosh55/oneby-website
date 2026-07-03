@@ -51,7 +51,7 @@ Summaries are great. A timeline of them is better. When every call with a custom
 
 Customer calls in and you can see: first call about the estimate, second call adding the garage, the time they pushed the date, the complaint about the crew running late. You walk into every conversation already knowing the history. So does anyone else on your team who picks up.
 
-This is what ends the "let me pull up your account, can you remind me what we discussed" routine. Across [industries](/industries), from [property management](/industries/property-management) to electrical, the businesses that feel organized aren't smarter. They just have the history in front of them instead of in their heads.
+This is what ends the "let me pull up your account, can you remind me what we discussed" routine. Across [industries](/industries), from [property management](/property-management) to electrical, the businesses that feel organized aren't smarter. They just have the history in front of them instead of in their heads.
 
 ## Remembering becomes the default
 

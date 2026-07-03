@@ -67,7 +67,7 @@ The homeowner stops calling other companies because you already answered. That i
 
 There is a second reason speed matters in restoration, and it is not just competitive. It is the claim.
 
-Insurance carriers care about mitigation happening fast to limit the loss. The sooner your crew is on site extracting water and setting air movers, the cleaner the claim and the better the outcome for everyone. When your [restoration intake](/industries/restoration) captures the loss details and dispatches immediately, you are not just beating a competitor. You are starting the mitigation clock in the homeowner's favor, which is exactly what wins referrals and adjuster relationships down the line.
+Insurance carriers care about mitigation happening fast to limit the loss. The sooner your crew is on site extracting water and setting air movers, the cleaner the claim and the better the outcome for everyone. When your [restoration intake](/restoration) captures the loss details and dispatches immediately, you are not just beating a competitor. You are starting the mitigation clock in the homeowner's favor, which is exactly what wins referrals and adjuster relationships down the line.
 
 ## What a normal 2 a.m. looks like now
 

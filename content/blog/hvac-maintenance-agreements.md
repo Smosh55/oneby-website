@@ -62,7 +62,7 @@ The point is not that a robot closes deals. The point is that the call gets hand
 
 Answering is half of it. The other half is that every call becomes an actual scheduled tune-up on the board, not a sticky note that says "call back Henderson re: membership."
 
-When the AI books the spring visit while the member is still on the line, the value gets delivered, and delivered value is what makes people renew next year. The whole [HVAC phone system](/industries/hvac) exists to close that loop: call comes in, visit goes on the calendar, tech shows up, agreement renews itself.
+When the AI books the spring visit while the member is still on the line, the value gets delivered, and delivered value is what makes people renew next year. The whole [HVAC phone system](/hvac) exists to close that loop: call comes in, visit goes on the calendar, tech shows up, agreement renews itself.
 
 ## Enroll new members at the two moments that matter
 

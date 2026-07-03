@@ -65,7 +65,7 @@ And it handles volume that would break a single on-call person. During a freeze 
 
 ### Triage is the part a script cannot do
 
-The value is not just picking up. It is picking up with judgment. A good [restoration intake system](/industries/restoration) knows the difference between "there is a little water under the sink" and "the whole first floor is flooded and the power is still on." It flags the true emergencies for immediate dispatch and queues the non-urgent ones appropriately.
+The value is not just picking up. It is picking up with judgment. A good [restoration intake system](/restoration) knows the difference between "there is a little water under the sink" and "the whole first floor is flooded and the power is still on." It flags the true emergencies for immediate dispatch and queues the non-urgent ones appropriately.
 
 That means your on-call tech gets woken up for the losses that matter and not for a question that could wait until morning. You protect your crew's sleep and your response time at the same time.
 

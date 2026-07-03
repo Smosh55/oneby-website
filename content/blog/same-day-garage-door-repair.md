@@ -67,7 +67,7 @@ That is the whole game with same-day work. The customer's problem is solved the 
 
 Not every call is a trapped car. Some are "my remote stopped working" or "I want a quote on a new door someday." The trick is telling them apart instantly.
 
-A [garage door intake system](/industries/garage-door) flags the true same-day emergencies — broken springs, trapped cars, doors stuck open leaving a house unsecured — and routes them to whoever can go now. The routine stuff queues up without eating your attention. You stop treating every buzz like a fire and stop missing the actual fires.
+A [garage door intake system](/garage-door) flags the true same-day emergencies — broken springs, trapped cars, doors stuck open leaving a house unsecured — and routes them to whoever can go now. The routine stuff queues up without eating your attention. You stop treating every buzz like a fire and stop missing the actual fires.
 
 ## What a normal busy day looks like now
 

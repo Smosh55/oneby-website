@@ -65,7 +65,7 @@ The scheduling setup that actually moves the needle for an electrical contractor
 
 An [AI receptionist](/ai-receptionist) picks up every call on the first ring, gets the job details, and books it straight onto the dispatch board. The emergency gets flagged and slotted now. The service call gets a real appointment. The commercial bid becomes a tracked opportunity with a callback window. Nobody had to be by the phone, and nothing got lost between the call and the calendar.
 
-That is the difference. A stand-alone scheduling tool manages the middle of the job. An [all-in-one system](/industries/electricians) built for electrical contractors captures the call, schedules the work, dispatches the truck, and tracks it to invoice, with no seam for jobs to fall through.
+That is the difference. A stand-alone scheduling tool manages the middle of the job. An [all-in-one system](/electricians) built for electrical contractors captures the call, schedules the work, dispatches the truck, and tracks it to invoice, with no seam for jobs to fall through.
 
 ## How to choose without getting sold
 

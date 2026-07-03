@@ -68,7 +68,7 @@ So the fix sounds simple: answer every call. The catch is you can't clone yourse
 
 This is exactly the gap an [AI receptionist](/ai-receptionist) fills. It picks up on the first ring, every time, whether it's noon on a sunny Tuesday or the middle of a hail emergency with twelve people calling at once. It doesn't get overwhelmed. It doesn't go to lunch. It doesn't put the panicked homeowner on hold while it finds a pen.
 
-Here's what good [roofing call answering](/industries/roofing) actually does for you:
+Here's what good [roofing call answering](/roofing) actually does for you:
 
 - Greets the caller like a real person and gets the basics: name, address, what's wrong with the roof
 - Flags the urgent stuff (active leak, storm damage, insurance claim) so you know who to call back first

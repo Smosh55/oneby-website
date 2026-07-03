@@ -49,7 +49,7 @@ export default function IndustriesHub() {
                 return (
                   <Reveal key={ind.slug} delay={(i % 3) * 60}>
                     <Link
-                      href={`/industries/${ind.slug}`}
+                      href={`/${ind.slug}`}
                       className="group surface-card flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue/30 hover:shadow-[var(--shadow-md)]"
                     >
                       <div className="flex items-center justify-between">

@@ -61,7 +61,7 @@ Then it books the callback window automatically, so the GC hangs up already sche
 
 Here is where it closes. Every commercial call becomes a clean summary and a task on your board: the project, the scope, the deadline, the contact, the callback window. Not a half-legible note under a coffee cup, not a voicemail you decode three days after the GC already picked someone else.
 
-The whole [electrical business phone system](/industries/electricians) is built so a bid call turns into a tracked opportunity you actually follow up on. Because the second way electricians lose commercial work is not missing the call. It is answering it and then dropping the follow-up because it lived in your head instead of on a board.
+The whole [electrical business phone system](/electricians) is built so a bid call turns into a tracked opportunity you actually follow up on. Because the second way electricians lose commercial work is not missing the call. It is answering it and then dropping the follow-up because it lived in your head instead of on a board.
 
 ## Follow-up is where the relationship gets sealed
 

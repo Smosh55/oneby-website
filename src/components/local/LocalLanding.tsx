@@ -43,7 +43,7 @@ export default function LocalLanding({
               Industries
             </Link>
             <ChevronRight size={14} className="text-faint" />
-            <Link href={`/industries/${industry.slug}`} className="hover:text-navy">
+            <Link href={`/${industry.slug}`} className="hover:text-navy">
               {industry.shortName}
             </Link>
             <ChevronRight size={14} className="text-faint" />
@@ -69,7 +69,7 @@ export default function LocalLanding({
               <Link href="/demo" className="btn btn-primary text-base">
                 Book a demo <ArrowRight size={18} />
               </Link>
-              <Link href={`/industries/${industry.slug}`} className="btn btn-ghost text-base">
+              <Link href={`/${industry.slug}`} className="btn btn-ghost text-base">
                 See the {industry.shortName} playbook
               </Link>
             </div>
@@ -221,7 +221,7 @@ export default function LocalLanding({
               {nearby.map((c) => (
                 <Link
                   key={c.slug}
-                  href={`/industries/${industry.slug}/${c.slug}`}
+                  href={`/${industry.slug}/${c.slug}`}
                   className="group flex items-center justify-between rounded-xl border border-line bg-surface px-4 py-3 text-sm font-medium text-navy transition-colors hover:border-blue"
                 >
                   <span>

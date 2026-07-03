@@ -43,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const industryRoutes: MetadataRoute.Sitemap = focusedIndustrySlug
     ? []
     : industries.map((i) => ({
-        url: `${BASE}/industries/${i.slug}`,
+        url: `${BASE}/${i.slug}`,
         changeFrequency: "monthly",
         priority: 0.7,
       }));
@@ -52,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ? []
     : industries.flatMap((i) =>
         cities.map((c) => ({
-          url: `${BASE}/industries/${i.slug}/${c.slug}`,
+          url: `${BASE}/${i.slug}/${c.slug}`,
           changeFrequency: "monthly" as const,
           priority: 0.5,
         }))
@@ -62,7 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const hubRoutes: MetadataRoute.Sitemap = focusedIndustrySlug
     ? []
     : industries.map((i) => ({
-        url: `${BASE}/industries/${i.slug}/blog`,
+        url: `${BASE}/${i.slug}/blog`,
         changeFrequency: "weekly" as const,
         priority: 0.6,
       }));

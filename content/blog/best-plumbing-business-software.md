@@ -41,7 +41,7 @@ But they are point solutions. Your customer info lives in one place, your schedu
 
 The third category is newer, and it starts from a different question. Instead of "how do we manage jobs you already have," it asks "how do we make sure no job ever gets lost in the first place." That means the phone is part of the software, not separate from it.
 
-An [all-in-one system](/industries/plumbing) that answers calls, captures the customer, triages the emergency, books the job, and tracks it through to invoice closes the loop that the other two categories leave open. The call becomes a task, the task becomes a job, the job becomes an invoice, and none of it depends on someone remembering to type it in.
+An [all-in-one system](/plumbing) that answers calls, captures the customer, triages the emergency, books the job, and tracks it through to invoice closes the loop that the other two categories leave open. The call becomes a task, the task becomes a job, the job becomes an invoice, and none of it depends on someone remembering to type it in.
 
 ## The problem the listicles never mention
 

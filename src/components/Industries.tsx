@@ -22,26 +22,26 @@ const industries = [
     icon: Building2,
     title: "Property Management",
     body: "Turn every tenant call into a tracked maintenance ticket, routed to the right vendor on its own.",
-    href: "/industries/property-management",
+    href: "/property-management",
     featured: true,
   },
   {
     icon: Server,
     title: "MSPs & IT Services",
     body: "Triage support calls into tickets with context, so SLAs are never missed.",
-    href: "/industries/msp-it",
+    href: "/msp-it",
   },
   {
     icon: Scale,
     title: "Law Firms",
     body: "Intake new matters and qualify callers without paying for an answering service.",
-    href: "/industries/law-firms",
+    href: "/law-firms",
   },
   {
     icon: Stethoscope,
     title: "Medical Offices",
     body: "Handle overflow and after-hours calls with summaries your front desk can act on.",
-    href: "/industries/medical-offices",
+    href: "/medical-offices",
   },
 ];
 

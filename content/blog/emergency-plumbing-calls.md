@@ -61,7 +61,7 @@ An [AI receptionist](/ai-receptionist) built for plumbing runs that triage on ev
 
 Here is where triage pays off. When it is a real flood, the AI flags it as an emergency and pings your on-call plumber immediately, with the address, the problem, and the callback number already written up. Your guy wakes up to a clean job ticket, not a garbled voicemail he has to decode at 2 a.m.
 
-When it is not urgent, the call gets booked into the morning schedule and nobody's night gets wrecked. The whole [plumbing phone system](/industries/plumbing) is built to sort the flood from the drip so your emergency response goes to the calls that actually need it.
+When it is not urgent, the call gets booked into the morning schedule and nobody's night gets wrecked. The whole [plumbing phone system](/plumbing) is built to sort the flood from the drip so your emergency response goes to the calls that actually need it.
 
 ## Every call becomes a job, not a mystery
 

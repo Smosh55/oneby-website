@@ -57,7 +57,7 @@ What it does not do is just as important:
 
 > It does not give medical advice. It does not attempt clinical triage or tell a patient whether a symptom is serious. For anything that sounds like an emergency, it points the patient to appropriate care and records that the call happened. It captures and routes. It does not diagnose.
 
-That boundary is not a limitation to apologize for. It is the entire point. Clinical judgment belongs to your clinical team, in daylight, with the chart in front of them. The after-hours job is to make sure the call is heard, the reason is recorded, emergencies are directed to real care, and your front desk starts the day with a task instead of a mystery. You can see how it fits a practice on the [medical office page](/industries/medical-offices).
+That boundary is not a limitation to apologize for. It is the entire point. Clinical judgment belongs to your clinical team, in daylight, with the chart in front of them. The after-hours job is to make sure the call is heard, the reason is recorded, emergencies are directed to real care, and your front desk starts the day with a task instead of a mystery. You can see how it fits a practice on the [medical office page](/medical-offices).
 
 ### Your team wakes up to a queue, not a voicemail pile
 

@@ -45,7 +45,7 @@ Notes also don't get shared. They live in your notebook, your head, or a text th
 
 Automated summaries fix the handoff. Anyone on the team can pull up the call, see exactly what was said, and pick up right where the last person left off. No "let me check with my colleague and call you back."
 
-And let's talk about the calls you don't answer. Most callers won't leave a voicemail. They'll just call the next number on their list. Post-call automation catches the missed call, logs who it was, and spins up a callback task before that lead gets cold. For service businesses like [HVAC](/industries/hvac) and plumbing, where one booked job can be worth hundreds, that's not a nice-to-have.
+And let's talk about the calls you don't answer. Most callers won't leave a voicemail. They'll just call the next number on their list. Post-call automation catches the missed call, logs who it was, and spins up a callback task before that lead gets cold. For service businesses like [HVAC](/hvac) and plumbing, where one booked job can be worth hundreds, that's not a nice-to-have.
 
 ## Who actually needs this
 

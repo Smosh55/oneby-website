@@ -82,7 +82,7 @@ Plenty of practices already use a traditional medical answering service for afte
 
 The difference with an AI-based setup is that the call comes back to you already organized. Summary written, task created, owner assigned. You're reviewing decisions, not transcribing voicemails.
 
-If you want the version built specifically for clinics, look at [phone handling for medical offices](/industries/medical-offices). It's shaped around the calls you actually get: bookings, reschedules, refills, and the "is the doctor in today" questions.
+If you want the version built specifically for clinics, look at [phone handling for medical offices](/medical-offices). It's shaped around the calls you actually get: bookings, reschedules, refills, and the "is the doctor in today" questions.
 
 ## Keeping it simple and careful
 
