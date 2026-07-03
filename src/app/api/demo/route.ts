@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { deliverLead } from "@/lib/leads";
 
 // Lead-capture endpoint for the /demo form.
 //
@@ -115,6 +116,7 @@ export async function POST(req: Request) {
   }
 
   const clean = {
+    kind: "demo" as const,
     name,
     email,
     phone,
@@ -136,89 +138,3 @@ export async function POST(req: Request) {
   return NextResponse.json({ ok: true });
 }
 
-type CleanLead = {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  industry: string;
-  teamSize: string;
-  provider: string;
-  source: string;
-  message: string;
-  receivedAt: string;
-};
-
-function leadText(l: CleanLead): string {
-  return [
-    `New demo request — ${l.name} (${l.company})`,
-    ``,
-    `Email:     ${l.email}`,
-    `Phone:     ${l.phone}`,
-    `Industry:  ${l.industry || "—"}`,
-    `Team size: ${l.teamSize || "—"}`,
-    `Provider:  ${l.provider || "—"}`,
-    `Source:    ${l.source || "—"}`,
-    l.message ? `\nMessage:\n${l.message}` : ``,
-    ``,
-    `Received ${l.receivedAt}`,
-  ].join("\n");
-}
-
-// Sends the lead to every configured destination. Returns true if at least one
-// delivery succeeded. Failures are logged, never thrown — the visitor already
-// did their part.
-async function deliverLead(l: CleanLead): Promise<boolean> {
-  const results = await Promise.allSettled([sendWebhook(l), sendEmail(l)]);
-  let delivered = false;
-  for (const r of results) {
-    if (r.status === "fulfilled" && r.value) delivered = true;
-    if (r.status === "rejected") console.error("[lead delivery]", r.reason);
-  }
-  return delivered;
-}
-
-async function sendWebhook(l: CleanLead): Promise<boolean> {
-  const url = process.env.LEAD_WEBHOOK_URL;
-  if (!url) return false;
-  const isSlack = url.includes("hooks.slack.com");
-  const body = isSlack ? { text: leadText(l) } : l;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) {
-    console.error("[lead webhook] failed:", res.status, await res.text().catch(() => ""));
-    return false;
-  }
-  return true;
-}
-
-async function sendEmail(l: CleanLead): Promise<boolean> {
-  const key = process.env.RESEND_API_KEY;
-  const to = process.env.LEAD_EMAIL_TO;
-  if (!key || !to) return false;
-  // Defaults to the verified oneby.ai sender so delivery works without any extra
-  // env var; override with LEAD_EMAIL_FROM if you ever change domains.
-  const from = process.env.LEAD_EMAIL_FROM || "OneBy Leads <leads@oneby.ai>";
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to,
-      reply_to: l.email,
-      subject: `Demo request: ${l.name} — ${l.company}${l.industry ? ` (${l.industry})` : ""}`,
-      text: leadText(l),
-    }),
-  });
-  if (!res.ok) {
-    console.error("[lead email] failed:", res.status, await res.text().catch(() => ""));
-    return false;
-  }
-  return true;
-}

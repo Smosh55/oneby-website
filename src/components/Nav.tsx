@@ -120,8 +120,11 @@ export default function Nav() {
           >
             Sign in
           </Link>
-          <Link href="/demo" className="btn btn-primary text-[0.9375rem]">
-            Start free
+          <Link
+            href={isFocusedSite ? "/#demo-form" : "/#waitlist"}
+            className="btn btn-primary text-[0.9375rem]"
+          >
+            Join waitlist
           </Link>
         </div>
 
@@ -194,11 +197,11 @@ export default function Nav() {
                 Sign in
               </Link>
               <Link
-                href="/demo"
+                href={isFocusedSite ? "/#demo-form" : "/#waitlist"}
                 onClick={() => setOpen(false)}
                 className="btn btn-primary w-full"
               >
-                Start free
+                Join waitlist
               </Link>
             </div>
           </div>

@@ -9,7 +9,7 @@ import { jsonLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "Pricing: Simple Plans for the Whole Platform",
   description:
-    "Put a basic line on the phones that just dial, and AI seats on the lines that book jobs. Estimate your plan in seconds. Start free, no credit card, cancel anytime.",
+    "Put a basic line on the phones that just dial, and AI seats on the lines that book jobs. Estimate your plan in seconds, then lock founding pricing before launch.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -106,8 +106,8 @@ export default function PricingPage() {
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             Every plan includes the full CRM: AI receptionist, ticketing,
             scheduling, invoicing, and SMS. Put a cheap Line on the phones that
-            just dial, and an AI seat where the jobs come in. Start free, no
-            credit card.
+            just dial, and an AI seat where the jobs come in. Launching August
+            2026 — founding members lock these rates for life.
           </p>
         </div>
       </section>
@@ -345,8 +345,8 @@ export default function PricingPage() {
                 <Link href="/demo" className="btn btn-primary text-base">
                   Book a demo <ArrowRight size={18} />
                 </Link>
-                <Link href="/demo" className="btn btn-white text-base">
-                  Start free trial
+                <Link href="/founders" className="btn btn-white text-base">
+                  See founding offers
                 </Link>
               </div>
             </div>

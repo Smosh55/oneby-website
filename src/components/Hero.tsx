@@ -50,11 +50,11 @@ export default function Hero() {
             className="animate-rise mt-8 flex flex-wrap items-center justify-center gap-3"
             style={{ animationDelay: "180ms" }}
           >
-            <a href="/demo" className="btn btn-primary text-base">
-              Start free, no credit card <ArrowRight size={18} />
+            <a href="#waitlist" className="btn btn-primary text-base">
+              Join the waitlist <ArrowRight size={18} />
             </a>
-            <a href="/pricing" className="btn btn-ghost text-base">
-              See pricing
+            <a href="/founders" className="btn btn-ghost text-base">
+              Lock founding pricing
             </a>
           </div>
 
@@ -63,7 +63,7 @@ export default function Hero() {
             className="animate-rise mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium text-muted"
             style={{ animationDelay: "240ms" }}
           >
-            {["No credit card", "No contract", "Keep your number", "Live in a day"].map(
+            {["Launching August 2026", "Founding pricing locked for life", "Keep your number", "No contract"].map(
               (r) => (
                 <span key={r} className="inline-flex items-center gap-1.5">
                   <CheckCircle2 size={16} className="text-green" /> {r}

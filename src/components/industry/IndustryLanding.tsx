@@ -83,11 +83,11 @@ export default function IndustryLanding({
                 {industry.heroSub}
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link href="/demo" className="btn btn-primary text-base">
-                  Start free, no credit card <ArrowRight size={18} />
-                </Link>
-                <Link href="/pricing" className="btn btn-ghost text-base">
-                  See pricing
+                <a href="#demo-form" className="btn btn-primary text-base">
+                  Get early access <ArrowRight size={18} />
+                </a>
+                <Link href="/founders" className="btn btn-ghost text-base">
+                  Lock founding pricing
                 </Link>
               </div>
               <div className="mt-7 inline-flex items-baseline gap-2">
@@ -549,11 +549,11 @@ export default function IndustryLanding({
                   day, no new hardware.
                 </p>
                 <div className="mt-8 flex flex-wrap justify-center gap-3">
-                  <Link href="/demo" className="btn btn-primary text-base">
-                    Book a demo <ArrowRight size={18} />
-                  </Link>
-                  <Link href="/pricing" className="btn btn-white text-base">
-                    Start free trial
+                  <a href="#demo-form" className="btn btn-primary text-base">
+                    Get early access <ArrowRight size={18} />
+                  </a>
+                  <Link href="/founders" className="btn btn-white text-base">
+                    See founding offers
                   </Link>
                 </div>
               </div>

@@ -228,8 +228,8 @@ export default async function BlogPost({
                 <Link href="/demo" className="btn btn-primary text-base">
                   Book a demo <ArrowRight size={18} />
                 </Link>
-                <Link href="/#pricing" className="btn btn-white text-base">
-                  Start free trial
+                <Link href="/founders" className="btn btn-white text-base">
+                  See founding offers
                 </Link>
               </div>
             </div>

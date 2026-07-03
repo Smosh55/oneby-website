@@ -1,10 +1,11 @@
 import Reveal from "./Reveal";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
+import WaitlistForm from "./WaitlistForm";
 
 export default function CTA() {
   return (
     <section id="demo" className="py-20 lg:py-28">
-      <div className="container-x">
+      <div id="waitlist" className="container-x">
         <Reveal>
           <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-navy via-navy to-navy-700 px-7 py-16 text-center sm:px-16">
             {/* glow accents */}
@@ -14,24 +15,22 @@ export default function CTA() {
             </div>
 
             <div className="relative mx-auto max-w-2xl">
-              <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-[2.75rem] sm:leading-[1.1]">
-                Your phone should book jobs, not lose them.
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-green/40 bg-green/10 px-3.5 py-1.5 text-[0.8rem] font-bold uppercase tracking-wide text-green">
+                Launching August 2026
+              </span>
+              <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-[2.75rem] sm:leading-[1.1]">
+                Be first in line when doors open.
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-white/70">
-                Start free with a trial number, see OneBy catch the calls you'd
-                miss and turn every call into a booked, invoiced job, then add
-                your line when you're ready. No credit card to start.
+                Join the waitlist and get first access at launch — plus the
+                chance to lock founding-member pricing before it&apos;s gone
+                for good.
               </p>
-              <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <a href="/demo" className="btn btn-primary text-base">
-                  Start free, no credit card <ArrowRight size={18} />
-                </a>
-                <a href="/pricing" className="btn btn-white text-base">
-                  See pricing
-                </a>
+              <div className="mt-8">
+                <WaitlistForm />
               </div>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/60">
-                {["No credit card", "No contract", "Keep your number", "Live in a day"].map(
+                {["Founding pricing, locked for life", "Keep your number", "No contract"].map(
                   (t) => (
                     <span key={t} className="inline-flex items-center gap-1.5">
                       <CheckCircle2 size={16} className="text-green" /> {t}

@@ -114,7 +114,7 @@ export default function VoipCrmPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/demo" className="btn btn-primary text-base">
-              Start free, no credit card <ArrowRight size={18} />
+              Get early access <ArrowRight size={18} />
             </Link>
             <Link href="/missed-call-calculator" className="btn btn-ghost text-base">
               What missed calls cost you
@@ -239,19 +239,19 @@ export default function VoipCrmPage() {
             One platform, from the first ring to paid.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/70">
-            Start free with a trial number, watch the AI catch a call and turn it
+            Join the waitlist and, at launch, watch the AI catch a call and turn it
             into a job, then add your line when you're ready.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/demo" className="btn btn-white text-base">
-              Start free, no credit card <ArrowRight size={18} />
+              Get early access <ArrowRight size={18} />
             </Link>
             <Link href="/ai-receptionist" className="btn border border-white/25 text-base text-white hover:bg-white/10">
               How the AI works
             </Link>
           </div>
           <p className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-white/60">
-            {["No credit card", "Keep your number", "Live in a day"].map((r) => (
+            {["Launching August 2026", "Founding pricing locked for life", "Keep your number"].map((r) => (
               <span key={r} className="inline-flex items-center gap-1.5">
                 <Check size={15} className="text-green" /> {r}
               </span>

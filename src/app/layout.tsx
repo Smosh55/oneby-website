@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s · OneBy",
   },
   description:
-    "OneBy is the all-in-one CRM for service businesses. Catch every call, then ticket, schedule, and invoice the job, all in one place. Start free, no credit card.",
+    "OneBy is the all-in-one CRM for service businesses. Catch every call, then ticket, schedule, and invoice the job, all in one place. Launching August 2026 — join the waitlist.",
   keywords: [
     "VoIP CRM",
     "all-in-one CRM for service business",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "OneBy: Catch Every Call. Win Every Job.",
     description:
-      "The all-in-one CRM for service businesses: calls, tickets, scheduling, and invoicing in one place. Start free, no credit card.",
+      "The all-in-one CRM for service businesses: calls, tickets, scheduling, and invoicing in one place. Launching August 2026 — join the waitlist.",
     type: "website",
     url: SITE_URL,
     siteName: "OneBy",
