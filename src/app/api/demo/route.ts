@@ -199,7 +199,9 @@ async function sendEmail(l: CleanLead): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.LEAD_EMAIL_TO;
   if (!key || !to) return false;
-  const from = process.env.LEAD_EMAIL_FROM || "OneBy Leads <onboarding@resend.dev>";
+  // Defaults to the verified oneby.ai sender so delivery works without any extra
+  // env var; override with LEAD_EMAIL_FROM if you ever change domains.
+  const from = process.env.LEAD_EMAIL_FROM || "OneBy Leads <leads@oneby.ai>";
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
