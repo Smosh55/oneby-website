@@ -18,6 +18,11 @@ export default function CTA() {
               <span className="inline-flex items-center gap-1.5 rounded-full border border-green/40 bg-green/10 px-3.5 py-1.5 text-[0.8rem] font-bold uppercase tracking-wide text-green">
                 Launching August 2026
               </span>
+              <p className="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-sm font-medium text-white/70">
+                <CheckCircle2 size={16} className="shrink-0 text-green" />
+                Don&apos;t take our word for it — the full product is live on
+                this page. Click through it above.
+              </p>
               <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-[2.75rem] sm:leading-[1.1]">
                 Be first in line when doors open.
               </h2>

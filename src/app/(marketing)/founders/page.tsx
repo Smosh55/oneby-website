@@ -109,6 +109,10 @@ export default function FoundersPage() {
               rate we will ever offer, plus an optional phone that works the
               second you plug it in.
             </p>
+            <p className="mt-3 text-sm font-semibold text-navy">
+              Founder rates end at launch in August — after that, standard
+              pricing applies.
+            </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a href="#tiers" className="btn btn-primary text-base">
                 See the tiers <ArrowRight size={18} />
