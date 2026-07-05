@@ -91,6 +91,17 @@ export default function IndustryLanding({
                   Lock founding pricing
                 </Link>
               </div>
+              {/* price anchor */}
+              <p className="mt-4 text-sm font-medium text-muted">
+                <Link
+                  href="/founders"
+                  className="transition-colors hover:text-navy"
+                >
+                  Founders pricing from{" "}
+                  <span className="font-bold text-navy">$29/mo</span> — locked
+                  for life
+                </Link>
+              </p>
               <div className="mt-7 inline-flex items-baseline gap-2">
                 <span className="text-3xl font-extrabold tracking-tight text-blue">
                   {industry.heroStat.stat}
