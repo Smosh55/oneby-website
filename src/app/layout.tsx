@@ -51,6 +51,10 @@ export const metadata: Metadata = {
   verification: process.env.GOOGLE_SITE_VERIFICATION
     ? { google: process.env.GOOGLE_SITE_VERIFICATION }
     : undefined,
+  // Meta (Facebook) Business Manager domain verification for oneby.ai.
+  other: {
+    "facebook-domain-verification": "98pwsneyc6v0jmlkb16k25amaeg49n",
+  },
 };
 
 const orgJsonLd = {
