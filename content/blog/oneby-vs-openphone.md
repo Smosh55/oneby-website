@@ -1,74 +1,93 @@
 ---
-title: "OneBy vs OpenPhone: An Honest, Practical Comparison"
-excerpt: "OpenPhone is a slick business phone app. OneBy adds the part that happens after you hang up: a summary and an assigned task, every time."
-date: "2026-03-06"
+title: "OneBy vs Quo (formerly OpenPhone): 2026 Comparison"
+excerpt: "OpenPhone rebranded to Quo and added a metered AI agent. Here's the honest math on what it really costs, where their AI stops, and where OneBy picks up."
+date: "2026-07-05"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"
-tags: ["comparisons", "business phone", "call automation", "openphone alternative"]
+tags: ["comparisons", "business phone", "ai receptionist", "quo alternative", "openphone alternative"]
 featured: false
-seoTitle: "OneBy vs OpenPhone: Honest Comparison"
-seoDescription: "Looking for an OpenPhone alternative? Here's a fair, practical comparison of OpenPhone vs OneBy, the AI Communications OS that turns calls into tasks."
-keywords: ["OpenPhone alternative", "OneBy vs OpenPhone", "business phone system", "call automation software", "AI call summary"]
+seoTitle: "OneBy vs Quo (formerly OpenPhone): 2026 Comparison"
+seoDescription: "Quo (formerly OpenPhone) is a polished phone system with a separately metered AI agent. OneBy answers the call and runs the whole job at one flat price. Honest comparison."
+keywords: ["Quo alternative", "OpenPhone vs Quo", "Quo pricing", "OpenPhone alternative", "OneBy vs Quo", "Sona AI cost", "AI receptionist pricing"]
 ---
 
-If you're shopping for a modern business phone and you've landed on OpenPhone, good instinct. It's a genuinely nice product. But before you commit, it's worth knowing where it stops and what happens to all those calls after you hang up. That's the gap we built OneBy to fill, so let's lay it out honestly.
+First, housekeeping: if you're searching for OpenPhone and keep landing on something called Quo, you're not lost. OpenPhone rebranded to **Quo** in September 2025, keeping the same product and team and adding a bigger AI story around their agent, **Sona**. Same company, new name, new ambitions.
 
-## What OpenPhone Is Great At
+We updated this comparison for 2026 because the pricing model changed in a way that really matters for a small service business. Quo's numbers below are as of July 2026, per quo.com. OneBy launches in August 2026, and founders pricing is live now, so we'll compare like-for-like and show our math.
 
-Let's give credit where it's due. OpenPhone is a clean, modern phone and texting app that lives on your devices instead of a dusty handset on the wall. Shared numbers, team inboxes, texting from a business line, decent call routing. If your old setup was a personal cell and a prayer, OpenPhone is a real upgrade.
+## What Quo Is Great At
 
-It does the "phone" part well. Calls in, calls out, texts back and forth, a tidy app your whole team can use. For a lot of small teams, that alone is reason enough to switch.
+Credit where it's due, because there's real credit to give. Quo makes genuinely polished apps: iOS, Android, macOS, Windows, web. Shared numbers, team inboxes, texting from a business line, clean call routing. Their G2 rating is strong (4.7 stars across thousands of reviews, per G2 as of July 2026), they say they serve 90,000+ businesses, and the integration catalog is wide: Salesforce, HubSpot, Slack, Jobber, and more.
 
-## Where The Story Usually Ends
+If your team is spread across ten cities and lives inside a laptop, Quo is a very good phone system. That was true when it was OpenPhone, and it's still true now.
 
-Here's the thing nobody tells you when you buy a phone app: the phone call isn't the work. The work is what comes after. Somebody promised to send a quote. Somebody needs a callback Tuesday. Somebody mentioned they're moving and need a bigger job done in spring.
+For balance: their Trustpilot rating sits notably lower (3.7 as of July 2026), with complaints clustering around billing and support. Worth reading both before you decide.
 
-A phone app records that conversation happened. It doesn't pull out what was said, write it down in plain English, or make sure a human actually does the thing that was promised. That part still lives in your head, on a sticky note, or nowhere at all. And "nowhere at all" is where revenue goes to die.
+## The Pricing Math Nobody Shows You
 
-## Where OneBy Picks Up
+Here's the part that gets glossed over. Quo's headline price is "starting at $15 per user/month." True, but that's the phone. **The AI is a separate meter.**
 
-OneBy isn't trying to be a prettier dial pad. It's the layer that turns conversations into action. After every call, answered or missed, desk phone or mobile, OneBy:
+Per quo.com as of July 2026:
 
-- Records and transcribes the call so you have the actual words, not your fuzzy memory
-- Writes a clean summary you can skim in ten seconds
-- Creates the follow-up task and assigns it to a real person
-- Drops it all onto a customer timeline so nothing gets re-explained
+- **Seats:** Starter $15, Business $23, Scale $35 per user/month (billed annually; monthly billing runs higher)
+- **Sona, the AI agent, billed separately:** $25/mo for 40 calls, $49/mo for 100 calls, $99/mo for 250 calls, $199/mo for 600 calls
+- **Overage:** $0.45 to $1.00 per call beyond your credit tier
 
-That last part is the quiet superpower. The task doesn't just appear, it lands on someone's plate with their name on it. No "I thought you were calling them back." Read more about how that works on [the blog](/blog).
+So what does a real service business actually pay? An example, using their published numbers:
 
-> A phone app tells you a call happened. OneBy tells you what to do about it, and who's doing it.
+| Monthly cost (example) | Quo (Business tier, 1 seat) | OneBy |
+| --- | --- | --- |
+| Phone seat | $23 | Included |
+| AI answering, ~100 calls/mo | $49 (Sona tier) | Included |
+| **Total, normal month** | **≈ $72/mo** | **$29/mo founders ($39 retail)** |
+| **Total, busy month (~250 AI calls)** | **≈ $122/mo** | **Still $29/mo founders** |
+
+Add a second seat and Quo's number climbs again. And because Sona is credit-metered, your best month, the one where the phone won't stop ringing, is also your most expensive one. That's exactly backwards for a business that wants every call answered.
+
+OneBy is one flat price. Founders pricing is $29/mo for Solo, locked for life ($39 retail after launch). Busy season doesn't change your bill.
+
+## Where Sona Stops, and Where OneBy Keeps Going
+
+The deeper difference isn't price. It's where the AI's job ends.
+
+Sona's scope, per Quo's own site: answer the call, take a message, answer FAQs, capture the lead, transfer to a human. All useful. But then it hands off, and someone on your team still has to create the job, book the visit, and send the invoice. Quo's own home-services page describes logging calls into Jobber, which tells you everything: they need someone else's software to finish the work.
+
+OneBy is that other software, plus the phone. One system, one flow:
+
+- The AI answers the call, day or night, and captures the details
+- The call becomes a summary and a ticket, assigned to a real person
+- The job gets scheduled
+- The invoice goes out and the payment comes in
+- Everything lands on one customer timeline
+
+> Quo answers the phone. OneBy runs the job.
 
 ## A Side-By-Side Look
 
-Here's the honest layout. Both tools are good. They're just built to solve different ends of the same problem.
+Both products are good. They're built for different businesses.
 
-| Capability | OpenPhone | OneBy |
+| Capability | Quo | OneBy |
 | --- | --- | --- |
-| Modern app for calls and texts | Yes | Works with your existing phones |
-| Shared numbers and team inbox | Yes | Focused on the after-call layer |
-| Call recording | Yes | Yes |
-| Auto transcription of every call | Partial | Yes, every call |
-| Plain-English call summary | No | Yes |
-| Auto-created follow-up task | No | Yes |
-| Task assigned to a specific person | No | Yes |
-| Unified customer timeline | No | Yes |
-| Captures missed and after-hours calls into tasks | No | Yes |
-
-If you want a great business phone, OpenPhone earns its spot. If you want the follow-ups to actually happen without anyone babysitting them, that's OneBy's whole job.
+| Polished apps on every platform | Yes | Web + mobile |
+| Established reviews at scale | Yes (G2 4.7, per G2, July 2026) | Pre-launch, founders program |
+| Big integration catalog | Yes | Core set at launch |
+| AI receptionist included in flat price | No, metered add-on ($25–$199/mo) | Yes |
+| Predictable bill in a busy month | No, per-call credits | Yes, flat |
+| Turns calls into tickets automatically | No, message + handoff | Yes |
+| Scheduling, invoicing, payments built in | No, via integrations like Jobber | Yes |
+| Built specifically for the trades | Broad SMB, 11 verticals | Yes, trade-deep |
 
 ## So Which One Do You Need
 
-Honestly? Plenty of teams could use both. Keep the phone setup you like and let OneBy handle the part where calls become summaries and assigned tasks. You don't have to rip anything out to stop dropping the ball.
+Honest answer: if you're a distributed team that mostly needs a beautiful phone app, shared numbers, and deep integrations into a CRM you already run, pick Quo. It's a mature product with years of reviews behind it, and OneBy doesn't launch until August 2026.
 
-But if you're choosing where to spend your attention, ask yourself a simple question: is your problem making calls, or is it everything that's supposed to happen after them? If your team is fine on the phone but follow-ups keep slipping, a fancier dial pad won't fix that. A system that turns every call into action will.
-
-OneBy works for businesses of every size, across a bunch of different [industries](/industries), because the after-call mess is universal. Plumber, clinic, agency, dealership. Everybody's got promised callbacks dying in someone's head.
+But if you're a plumber, electrician, HVAC shop, or any business where the phone call *is* the job, ask what happens after the AI takes the message. With Quo, the answer is: you (or another subscription) do the rest. With OneBy, the call becomes the ticket, the ticket becomes the schedule, the schedule becomes the invoice, and the invoice becomes money, without leaving one system or watching a credit meter.
 
 ## The Short Version
 
-OpenPhone moves your phone into this decade. OneBy makes sure the calls you take on it actually turn into done work. One handles the conversation. One handles what the conversation was supposed to produce. Pick based on which gap is bleeding you money.
+Quo is a polished phone system with an AI add-on that's billed by the call. OneBy is an AI receptionist plus the whole job behind it, at one flat price an owner can actually budget. Pick based on where your work ends: at the message, or at the payment.
 
-Want to see your own calls turn into clean summaries and assigned tasks in real time? [book a demo](/#demo) and watch it happen with a live call.
+Want in before launch? [See the founding offers](/founders) — founders pricing is locked for life, and spots are limited. Or explore how OneBy works for your trade across our [industries](/industries).
 
-*Competitor names mentioned here are trademarks of their respective owners. We're fans, not foes.*
+*Quo, OpenPhone, Sona, and other names mentioned are trademarks of their respective owners. Competitor pricing and figures cited as of July 2026, per quo.com and public review sites; check their site for current numbers. We're fans, not foes.*

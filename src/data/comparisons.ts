@@ -148,6 +148,80 @@ export const comparisons: Comparison[] = [
     ],
   },
   {
+    slug: "quo",
+    competitor: "Quo",
+    category: "Phone system",
+    metaTitle: "OneBy vs Quo (formerly OpenPhone): Honest Comparison",
+    metaDescription:
+      "Quo (formerly OpenPhone) is a polished phone system with a separately metered AI agent. OneBy includes the AI receptionist flat and runs the whole job: tickets, scheduling, invoicing. Compare them.",
+    keywords: [
+      "OneBy vs Quo",
+      "Quo alternative",
+      "OpenPhone vs Quo",
+      "Quo pricing",
+      "Sona AI cost",
+    ],
+    heroTitle: "OneBy vs Quo (formerly OpenPhone)",
+    heroSub:
+      "Quo, the rebranded OpenPhone, is a polished business phone with an AI agent (Sona) that's metered separately in call credits. OneBy includes the AI receptionist in one flat price, and keeps going after the call: ticket, schedule, invoice, payment, in one place.",
+    theirStrengths: [
+      "Polished apps on every platform, with strong reviews (G2 4.7, per G2, July 2026)",
+      "Established at scale: 90,000+ businesses, per their site",
+      "Big integration catalog (Salesforce, HubSpot, Slack, Jobber)",
+    ],
+    wins: [
+      {
+        title: "AI included, one flat price",
+        body: "Quo's Sona agent is a separate credit meter: $25 to $199/mo by call volume, with $0.45 to $1.00 per-call overage (per quo.com, July 2026). OneBy's AI receptionist is included in the flat monthly price, so a busy month never spikes your bill.",
+      },
+      {
+        title: "It runs the whole job",
+        body: "Sona answers, takes a message, captures the lead, and transfers, then hands the rest to your CRM. Their own home-services page points to Jobber to finish the work. OneBy turns the call into a ticket, schedules it, invoices it, and collects payment in one system.",
+      },
+      {
+        title: "Trade-deep, not vertical-wide",
+        body: "Quo serves everyone from startups to law firms. OneBy is built specifically for service businesses, with per-trade setups, emergency flagging, and dispatch that fit how a shop actually runs.",
+      },
+    ],
+    matrix: [
+      { label: "Polished apps on every platform", oneby: "Web + mobile", them: true },
+      { label: "Established review corpus", oneby: "Pre-launch", them: "G2 4.7 (July 2026)" },
+      { label: "Big integration catalog", oneby: "Core set", them: true },
+      { label: "AI receptionist included in flat price", oneby: true, them: "Metered ($25–$199/mo)" },
+      { label: "Turns calls into tickets automatically", oneby: true, them: "Message + handoff" },
+      { label: "Scheduling, invoicing & payments built in", oneby: true, them: "Via integrations" },
+      { label: "Built specifically for the trades", oneby: true, them: "Broad SMB" },
+      {
+        label: "Example: 1 seat + AI on ~100 calls/mo",
+        oneby: "$29 flat (founders)",
+        them: "≈ $72/mo",
+      },
+      {
+        label: "Example: busy month, ~250 AI calls",
+        oneby: "$29 flat (founders)",
+        them: "≈ $122/mo",
+      },
+    ],
+    pickThemIf:
+      "You're a distributed SMB team that mainly wants a beautiful phone app with deep integrations into a CRM you already run, and per-call AI credits fit your volume. Quo is mature today; OneBy launches August 2026.",
+    pickOneByIf:
+      "You run a service business and want every call answered by AI and turned into a scheduled, invoiced job, at one flat price you can budget in busy season.",
+    faqs: [
+      {
+        q: "Is Quo the same as OpenPhone?",
+        a: "Yes. OpenPhone rebranded to Quo in September 2025. Same product and team, with a bigger push behind their AI agent, Sona.",
+      },
+      {
+        q: "Isn't Quo cheaper than OneBy?",
+        a: "The seat is, the total often isn't. Per quo.com as of July 2026, plans run $15 to $35 per user/month (annual), and Sona AI is metered separately at $25 to $199/mo with $0.45 to $1.00 per-call overage. One seat plus AI on about 100 calls a month lands near $72/mo. OneBy founders pricing is $29/mo flat, AI included ($39 retail at launch).",
+      },
+      {
+        q: "Does Quo's AI run the job like OneBy does?",
+        a: "No. Sona answers, takes messages, answers FAQs, captures leads, and transfers, then hands off to your CRM or job software. OneBy carries the same call through to a ticket, a schedule slot, an invoice, and a payment in one system.",
+      },
+    ],
+  },
+  {
     slug: "dialpad",
     competitor: "Dialpad",
     category: "Phone system",
