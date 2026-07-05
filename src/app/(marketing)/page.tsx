@@ -13,9 +13,12 @@ import FoundersBanner from "@/components/FoundersBanner";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import IndustryLanding from "@/components/industry/IndustryLanding";
+import StickyWaitlistCTA from "@/components/StickyWaitlistCTA";
 import { HomeDemoProvider } from "@/components/HomeDemoContext";
 import { focusedIndustry } from "@/config/site";
 import { getPostsForIndustry } from "@/lib/blog";
+import { homeFaqs } from "@/data/homeFaqs";
+import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
 
 export function generateMetadata(): Metadata {
   const focus = focusedIndustry();
@@ -41,21 +44,39 @@ export default function Home() {
     );
   }
 
+  const homeJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: homeFaqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
-    <HomeDemoProvider>
-      <Hero />
-      <LogoCloud />
-      <Problem />
-      <Solution />
-      <HearItWork />
-      <Stories />
-      <Industries />
-      <Comparison />
-      <Features />
-      <Pricing />
-      <FoundersBanner />
-      <FAQ />
-      <CTA />
-    </HomeDemoProvider>
+    <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeJsonLd) }}
+      />
+      <HomeDemoProvider>
+        <Hero />
+        <LogoCloud />
+        <Problem />
+        <Solution />
+        <HearItWork />
+        <Stories />
+        <Industries />
+        <Comparison />
+        <Features />
+        <Pricing />
+        <FoundersBanner />
+        <FAQ />
+        <CTA />
+        <StickyWaitlistCTA />
+      </HomeDemoProvider>
+    </>
   );
 }

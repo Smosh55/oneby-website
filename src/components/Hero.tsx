@@ -41,9 +41,9 @@ export default function Hero() {
             className="animate-rise mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted"
             style={{ animationDelay: "120ms" }}
           >
-            Your team answers the calls they can. OneBy's AI catches the rest,
-            then turns every call into a booked, scheduled, invoiced job. Calls,
-            tickets, scheduling, and billing in one place.
+            Your team answers what it can. OneBy's AI catches the rest and
+            turns it into booked, invoiced jobs — so the call you miss at 7pm
+            is still money in the bank.
           </p>
 
           <div
@@ -57,6 +57,18 @@ export default function Hero() {
               Lock founding pricing
             </a>
           </div>
+
+          {/* price anchor */}
+          <p
+            className="animate-rise mt-4 text-sm font-medium text-muted"
+            style={{ animationDelay: "210ms" }}
+          >
+            <a href="/founders" className="transition-colors hover:text-navy">
+              Founders pricing from{" "}
+              <span className="font-bold text-navy">$29/mo</span> — locked for
+              life
+            </a>
+          </p>
 
           {/* risk reversal */}
           <div
