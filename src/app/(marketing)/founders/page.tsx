@@ -26,18 +26,18 @@ const base = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
 export const metadata: Metadata = {
   title: "Become a OneBy Founding Member",
   description:
-    "Back OneBy early and lock the lowest price we will ever offer, for life. Get a year of service, an optional plug-and-play phone, and an honest founder rate that never jumps.",
+    "Back OneBy early and lock a founder rate we hold for two years. Get a year of service, an optional plug-and-play phone, and an honest price that will not jump the day we launch.",
   alternates: { canonical: "/founders" },
 };
 
 const faqs = [
   {
-    q: "What does \"founder rate locked for life\" actually mean?",
-    a: `You pay your pledge today, which covers your first full year. After that, your plan renews at your locked founder rate ($${founderPricing.soloLockedMonthly}/mo for Solo, $${founderPricing.proLockedMonthly}/user for Pro), and that rate is frozen for as long as you stay subscribed. Standard pricing will go up over time. Yours won't.`,
+    q: "What does \"founder rate locked for two years\" actually mean?",
+    a: `You pay your pledge today, which covers your first full year. After that, your plan renews at your locked founder rate ($${founderPricing.soloLockedMonthly}/mo for Solo, $${founderPricing.proLockedMonthly}/user for Pro) and stays there for two more years. Standard pricing will climb over that window. Yours won't. When the two years are up you roll to standard pricing, and we will always tell you before anything changes.`,
   },
   {
     q: "Why isn't it free forever after I pay?",
-    a: "Because running your line costs us real money every single month: the AI that answers and writes things up, and the actual phone calls. A \"pay once, free forever\" promise would force us to cut corners later or go out of business, and then you'd have nothing. A fair locked rate keeps OneBy healthy and your bill flat. That's a deal we can both keep for years.",
+    a: "Because running your line costs us real money every single month: the AI that answers and writes things up, and the actual phone calls. A \"pay once, free forever\" promise would force us to cut corners later or go out of business, and then you'd have nothing. A fair founder rate, locked for two years, keeps OneBy healthy and your price honest. That's a deal we can both keep.",
   },
   {
     q: "When do I get it?",
@@ -100,17 +100,17 @@ export default function FoundersPage() {
               <Gift size={14} /> Founding member pre-sale, launching soon
             </span>
             <h1 className="mt-5 text-[2.5rem] leading-[1.05] font-extrabold tracking-tight text-navy sm:text-6xl">
-              Get in early. Lock the{" "}
-              <span className="text-gradient">lowest price for life.</span>
+              Get in early. Lock your{" "}
+              <span className="text-gradient">rate for two years.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
               OneBy answers your calls, writes the summary, and turns each one
-              into the next thing to do. Back us now and you lock the cheapest
-              rate we will ever offer, plus an optional phone that works the
+              into the next thing to do. Back us now and you lock a founder rate
+              we hold for two full years, plus an optional phone that works the
               second you plug it in.
             </p>
             <p className="mt-3 text-sm font-semibold text-navy">
-              Founder rates end at launch in August — after that, standard
+              Founder rates end at launch in August. After that, standard
               pricing applies.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -123,7 +123,7 @@ export default function FoundersPage() {
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted">
               <span className="inline-flex items-center gap-1.5">
-                <Lock size={16} className="text-green" /> Price frozen for life
+                <Lock size={16} className="text-green" /> Rate locked for two years
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <ShieldCheck size={16} className="text-green" /> No contract, cancel anytime
@@ -145,11 +145,11 @@ export default function FoundersPage() {
               <Lock size={14} /> Founder pricing, in plain numbers
             </span>
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              The lowest price we will ever offer, and it never moves.
+              Your founder rate, frozen for two years.
             </h2>
             <p className="mt-4 text-muted">
               No fine print, no bait and switch. Here is exactly what you pay,
-              now and later.
+              now and through the lock.
             </p>
           </div>
 
@@ -165,13 +165,13 @@ export default function FoundersPage() {
               foot="What everyone else pays after launch."
             />
             <PriceCard
-              label="Your founder rate (locked for life)"
+              label="Your founder rate (locked 2 years)"
               tone="primary"
               rows={[
                 ["Solo", `$${founderPricing.soloLockedMonthly}/mo`],
                 ["Pro", `$${founderPricing.proLockedMonthly}/user`],
               ]}
-              foot="Frozen for as long as you stay. It never goes up."
+              foot="Held for two years past your first year. Then standard pricing."
             />
           </div>
 
@@ -190,8 +190,8 @@ export default function FoundersPage() {
               },
               {
                 n: "3",
-                t: "That price is frozen, for good",
-                b: "As long as you stay subscribed, your rate never increases. Standard prices climb. Yours doesn't.",
+                t: "Your rate holds for two years",
+                b: "Your founder rate stays locked for two years. Standard prices climb in that window. Yours doesn't, until the lock ends and we give you fair notice.",
               },
             ].map((s) => (
               <div
@@ -217,9 +217,9 @@ export default function FoundersPage() {
               Every line costs real money to run each month: the AI that answers
               and writes things up, and the actual phone calls. A pay-once,
               free-forever deal would force us to cut corners later or fold, and
-              then you'd be left with nothing. A fair, locked rate keeps OneBy
-              healthy and keeps your bill flat. We would rather both still be
-              here in five years.
+              then you'd be left with nothing. A fair founder rate, locked for
+              two years, keeps OneBy healthy and keeps your price honest. We
+              would rather both still be here in five years.
             </p>
           </div>
         </div>
@@ -233,7 +233,7 @@ export default function FoundersPage() {
               <Sparkles size={14} /> Pick your founding tier
             </span>
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              Every tier locks your founder rate for life.
+              Every tier locks your founder rate for two years.
             </h2>
             <p className="mt-4 text-muted">
               Start with what you have, or grab a phone that works out of the box.
@@ -345,8 +345,8 @@ export default function FoundersPage() {
             Be a founder, not a follower.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/70">
-            Lock the lowest price OneBy will ever offer and help shape what we
-            build next. Pick a tier above — or at least save your spot in line,
+            Lock a founder rate OneBy holds for two years and help shape what we
+            build next. Pick a tier above, or at least save your spot in line,
             free.
           </p>
           <div className="mt-8">
@@ -450,7 +450,7 @@ function TierCard({ tier }: { tier: FounderTier }) {
 
       {tier.locked ? (
         <div className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-md bg-green/10 px-2 py-1 text-[0.78rem] font-semibold text-green-600">
-          <Lock size={12} /> then {tier.locked}, locked for life
+          <Lock size={12} /> then {tier.locked}, locked 2 years
         </div>
       ) : (
         <div className="mt-2 text-[0.78rem] font-medium text-faint">
@@ -484,7 +484,7 @@ function PhoneArt() {
       {/* floating price lock badge */}
       <div className="absolute -right-2 top-6 z-10 rounded-xl border border-line bg-white px-3.5 py-2.5 shadow-[var(--shadow-lg)]">
         <p className="flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
-          <Lock size={11} /> Locked for life
+          <Lock size={11} /> Locked 2 years
         </p>
         <p className="text-sm font-extrabold text-navy">
           ${founderPricing.soloLockedMonthly}/mo

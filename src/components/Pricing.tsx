@@ -14,7 +14,7 @@ export default function Pricing() {
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
             Cheap lines for the phones that just dial. AI seats only on the
-            lines that book jobs. Founding members lock these rates for life.
+            lines that book jobs. Founding members lock these rates for two years.
           </p>
           <Link
             href="/pricing"

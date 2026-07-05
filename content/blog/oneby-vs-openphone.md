@@ -45,7 +45,7 @@ So what does a real service business actually pay? An example, using their publi
 
 Add a second seat and Quo's number climbs again. And because Sona is credit-metered, your best month, the one where the phone won't stop ringing, is also your most expensive one. That's exactly backwards for a business that wants every call answered.
 
-OneBy is one flat price. Founders pricing is $29/mo for Solo, locked for life ($39 retail after launch). Busy season doesn't change your bill.
+OneBy is one flat price. Founders pricing is $29/mo for Solo, locked for two years ($39 retail after launch). Busy season doesn't change your bill.
 
 ## Where Sona Stops, and Where OneBy Keeps Going
 
@@ -88,6 +88,6 @@ But if you're a plumber, electrician, HVAC shop, or any business where the phone
 
 Quo is a polished phone system with an AI add-on that's billed by the call. OneBy is an AI receptionist plus the whole job behind it, at one flat price an owner can actually budget. Pick based on where your work ends: at the message, or at the payment.
 
-Want in before launch? [See the founding offers](/founders) — founders pricing is locked for life, and spots are limited. Or explore how OneBy works for your trade across our [industries](/industries).
+Want in before launch? [See the founding offers](/founders). Founders pricing is locked for two years, and spots are limited. Or explore how OneBy works for your trade across our [industries](/industries).
 
 *Quo, OpenPhone, Sona, and other names mentioned are trademarks of their respective owners. Competitor pricing and figures cited as of July 2026, per quo.com and public review sites; check their site for current numbers. We're fans, not foes.*

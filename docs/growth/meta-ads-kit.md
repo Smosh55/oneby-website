@@ -122,17 +122,17 @@ Swap the bracketed trade tokens; HVAC wording shown, plumbing swap noted.
 CTA button on all: **Sign Up**. Destination: oneby.ai/founders.
 
 **F1 — the straight offer**
-- Headline: $29/mo. Locked for life. Ends at launch.
+- Headline: $29/mo. Locked for 2 years. Ends at launch.
 - Primary text: OneBy answers your calls with AI, writes the summary, and turns it
-  into a task — phone system and CRM in one. Back us before the August launch and
-  your rate locks at $29/mo for as long as you stay. Standard pricing will be higher
-  and will keep climbing. Yours won't.
+  into a task: phone system and CRM in one. Back us before the August launch and
+  your rate locks at $29/mo for two years. Standard pricing will be higher and will
+  keep climbing. Yours won't.
 
 **F2 — why not free forever (honesty as the hook)**
 - Headline: We won't sell you "pay once, free forever"
 - Primary text: Answering your calls costs us real money every month, so a
   free-forever deal would mean cutting corners later. Instead: back OneBy now, get
-  a full year, then a locked founder rate that never goes up. A deal we can both
+  a full year, then a locked founder rate held for two years. A deal we can both
   keep. That's the whole pitch.
 
 **F3 — the phone tier**

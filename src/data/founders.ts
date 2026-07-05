@@ -3,8 +3,10 @@
 //
 // Cost basis (per Solo): ~$60/yr AI + ~$15/yr calls = ~$75/yr to serve, plus
 // ~$50 one-time per phone. Locked renewal rates below sit well above that, so a
-// founding member is profitable every year. We never sell "pay once, free
-// forever" because the per-year cost never goes away.
+// founding member is profitable every year. The founder rate is held for two
+// years past the first (prepaid) year, then rolls to standard pricing: a
+// bounded promise we can always keep. We never sell "pay once, free forever"
+// because the per-year cost never goes away.
 
 export const founderPricing = {
   soloRetailMonthly: 39,
@@ -43,7 +45,7 @@ export const founderTiers: FounderTier[] = [
     id: "founding-solo",
     name: "Founding Solo",
     price: 129,
-    tagline: "A full year of OneBy, then the lowest price we will ever offer, locked for good.",
+    tagline: "A full year of OneBy, then your founder rate, locked for two years.",
     highlight: true,
     badge: "Most popular",
     includes: [
@@ -107,7 +109,7 @@ export const founderTiers: FounderTier[] = [
       "A branded AI voice for your business",
       "White-glove setup, done with you",
       "A one-on-one call with the founder",
-      "Your founder rate, locked for life",
+      "Your founder rate, locked for two years",
     ],
   },
 ];

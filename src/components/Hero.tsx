@@ -65,8 +65,8 @@ export default function Hero() {
           >
             <a href="/founders" className="transition-colors hover:text-navy">
               Founders pricing from{" "}
-              <span className="font-bold text-navy">$29/mo</span> — locked for
-              life
+              <span className="font-bold text-navy">$29/mo</span>, locked for two
+              years
             </a>
           </p>
 
@@ -75,7 +75,7 @@ export default function Hero() {
             className="animate-rise mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium text-muted"
             style={{ animationDelay: "240ms" }}
           >
-            {["Launching August 2026", "Founding pricing locked for life", "Keep your number", "No contract"].map(
+            {["Launching August 2026", "Founder rate locked 2 years", "Keep your number", "No contract"].map(
               (r) => (
                 <span key={r} className="inline-flex items-center gap-1.5">
                   <CheckCircle2 size={16} className="text-green" /> {r}

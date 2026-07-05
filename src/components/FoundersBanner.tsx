@@ -12,14 +12,14 @@ export default function FoundersBanner() {
               <Gift size={14} /> Founding member pre-sale
             </span>
             <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-              Get in early and lock the lowest price for life.
+              Get in early and lock your rate for two years.
             </h2>
             <p className="mt-3 leading-relaxed text-muted">
-              Back OneBy now, lock a founder rate that never goes up, and grab an
-              optional phone that works the second you plug it in.
+              Back OneBy now, lock a founder rate we hold for two years, and grab
+              an optional phone that works the second you plug it in.
             </p>
             <p className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-green-600">
-              <Lock size={14} /> Price frozen for life, no contract
+              <Lock size={14} /> Rate locked for two years, no contract
             </p>
           </div>
           <Link href="/founders" className="btn btn-primary shrink-0 text-base">

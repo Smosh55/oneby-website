@@ -59,12 +59,12 @@ scheduled → invoiced. That's the whole pitch.
 ## 4 — Founders (day 8)
 **Subject:** The founder rate, in plain numbers
 
-Solo will cost $39/mo at launch. Founding members lock $29/mo — for life.
-Pledge $129 today, get your entire first year, and your renewal price never
-moves again. No contract; straightforward refund window.
+Solo will cost $39/mo at launch. Founding members lock $29/mo for two years.
+Pledge $129 today, get your entire first year, and your renewal price holds at
+$29/mo for two more. No contract; straightforward refund window.
 
 We're doing this because early believers fund the launch, and in return they
-get the best deal we will ever offer: oneby.ai/founders
+get the best deal we will offer before launch: oneby.ai/founders
 
 ## 5 — Scarcity (day 14 — ONLY send with a real number)
 **Subject:** {N} founder spots left

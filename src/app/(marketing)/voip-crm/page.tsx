@@ -251,7 +251,7 @@ export default function VoipCrmPage() {
             </Link>
           </div>
           <p className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-white/60">
-            {["Launching August 2026", "Founding pricing locked for life", "Keep your number"].map((r) => (
+            {["Launching August 2026", "Founder rate locked 2 years", "Keep your number"].map((r) => (
               <span key={r} className="inline-flex items-center gap-1.5">
                 <Check size={15} className="text-green" /> {r}
               </span>
