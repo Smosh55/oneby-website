@@ -47,7 +47,7 @@ You know the calls come at night. So you have probably tried to cover them. Here
 
 - **Voicemail.** A homeowner ankle-deep in water does not leave a voicemail. They hang up mid-greeting and dial the next company. Voicemail on a water loss is a lost job, full stop.
 - **The on-call cell forwarded to whoever.** Sometimes the tech answers. Sometimes he is asleep, in a crawlspace, or already on a loss with gloves on. Coverage that is only sometimes there is the same as no coverage on the call you miss.
-- **A generic answering service.** They pick up, but they read a script. They cannot triage a Category 3 loss from a slow drip, they do not gather what your crew needs, and you get a garbled message an hour later — long after the homeowner called someone else.
+- **A generic answering service.** They pick up, but they read a script. They cannot triage a Category 3 loss from a slow drip, they do not gather what your crew needs, and you get a garbled message an hour later, long after the homeowner called someone else.
 
 The common failure: either nobody answers, or somebody answers who cannot handle a loss and cannot get your crew moving.
 
@@ -59,7 +59,7 @@ An [AI receptionist](/ai-receptionist) built for restoration answers like a disp
 
 It reassures the homeowner that help is coming, captures everything, and pushes the loss straight to your on-call crew as an urgent, ready-to-dispatch ticket.
 
-> Every emergency call becomes a triaged loss on your board — category, address, cause, and callback — pinged to your on-call tech instantly, not a voicemail found at 7 a.m.
+> Every emergency call becomes a triaged loss on your board (category, address, cause, and callback) pinged to your on-call tech instantly, not a voicemail found at 7 a.m.
 
 The homeowner stops calling other companies because you already answered. That is the entire first-call advantage, and it happens whether you are asleep, on another loss, or slammed with five calls at once.
 

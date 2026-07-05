@@ -61,7 +61,7 @@ export default function DemoSwitcher() {
       <div className="mb-4 flex justify-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-blue/30 bg-blue/10 px-4 py-1.5 text-[0.78rem] font-bold uppercase tracking-wide text-blue">
           <MousePointerClick size={14} className="animate-bounce" />
-          Live demo — click anything inside
+          Live demo · click anything inside
         </span>
       </div>
 

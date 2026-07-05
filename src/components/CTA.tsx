@@ -20,7 +20,7 @@ export default function CTA() {
               </span>
               <p className="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-sm font-medium text-white/70">
                 <CheckCircle2 size={16} className="shrink-0 text-green" />
-                Don&apos;t take our word for it — the full product is live on
+                Don&apos;t take our word for it. The full product is live on
                 this page. Click through it above.
               </p>
               <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-[2.75rem] sm:leading-[1.1]">

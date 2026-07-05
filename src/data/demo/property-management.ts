@@ -24,7 +24,7 @@ const SUBTASK_SEED = [
 export const propertyManagementDemo: DemoData = {
   slug: "property-management",
   company: "Cornerstone PM",
-  primaryCustomer: "Unit 4B — Alicia M.",
+  primaryCustomer: "Unit 4B, Alicia M.",
   primaryIssue: "No hot water since this morning",
   primaryTicket: "1042",
   summary:
@@ -66,9 +66,9 @@ export const propertyManagementDemo: DemoData = {
     { id: 8, name: "Air filter", type: "Part", price: 25 },
   ],
   tickets: [
-    { id: "1042", issue: "No hot water since this morning", customer: "Unit 4B — Alicia M.", status: "Scheduled", urgent: true, summary: "Existing tenant, no hot water in Unit 4B since this morning. Wants the earliest slot. Pilot light was flagged last visit, likely a thermocouple or the water heater.",
+    { id: "1042", issue: "No hot water since this morning", customer: "Unit 4B, Alicia M.", status: "Scheduled", urgent: true, summary: "Existing tenant, no hot water in Unit 4B since this morning. Wants the earliest slot. Pilot light was flagged last visit, likely a thermocouple or the water heater.",
       relationship: "existing tenant", tech: "Miguel A.", tags: ["Existing tenant", "Plumbing", "Same-day"], notes: ["Available all day for access.", "Building entry code 4417."], subtasks: SUBTASK_SEED },
-    { id: "1041", issue: "Ceiling leak in the bathroom", customer: "Unit 6A — Trevor B.", status: "New", urgent: true, summary: "New request, water staining the bathroom ceiling from the unit above. Not actively pouring. Wants someone out today, flexible on the time.",
+    { id: "1041", issue: "Ceiling leak in the bathroom", customer: "Unit 6A, Trevor B.", status: "New", urgent: true, summary: "New request, water staining the bathroom ceiling from the unit above. Not actively pouring. Wants someone out today, flexible on the time.",
       relationship: "new request", tech: "Priya D.", tags: ["Plumbing", "Water damage", "Same-day"], notes: ["Leak appears to come from Unit 7A above.", "Flexible on timing."], subtasks: [
         { id: 411, label: "Confirm the leak source upstairs", assignee: "Priya D.", done: false },
         { id: 412, label: "Photograph the ceiling and stain", assignee: "Priya D.", done: false },
@@ -79,12 +79,12 @@ export const propertyManagementDemo: DemoData = {
         { id: 392, label: "Block a half day for the crew", assignee: "Rosa T.", done: false },
         { id: 393, label: "Load filters for 12 units", assignee: "Miguel A.", done: false },
       ] },
-    { id: "1038", issue: "Dishwasher not draining", customer: "Unit 3C — Renee C.", status: "In progress", urgent: false, summary: "Appliance repair. Dishwasher won't drain, standing water in the tub. Tech is on site now.",
+    { id: "1038", issue: "Dishwasher not draining", customer: "Unit 3C, Renee C.", status: "In progress", urgent: false, summary: "Appliance repair. Dishwasher won't drain, standing water in the tub. Tech is on site now.",
       relationship: "repeat tenant", tech: "Priya D.", tags: ["Repeat tenant", "Appliances"], notes: ["Standing water in the tub.", "Tech is on site."], subtasks: [
         { id: 381, label: "Clear the drain hose and filter", assignee: "Priya D.", done: true },
         { id: 382, label: "Run a full cycle to confirm", assignee: "Priya D.", done: false },
       ] },
-    { id: "1035", issue: "Full unit turn", customer: "Unit 9D — Halvorsen Ownership", status: "Invoiced", urgent: false, summary: "Make-ready completed Tuesday. Unit turned and ready to list, invoice sent to owner, awaiting payment.",
+    { id: "1035", issue: "Full unit turn", customer: "Unit 9D, Halvorsen Ownership", status: "Invoiced", urgent: false, summary: "Make-ready completed Tuesday. Unit turned and ready to list, invoice sent to owner, awaiting payment.",
       relationship: "owner charge", tech: "Miguel A.", tags: ["Make-ready", "Turn", "Owner"], notes: ["Unit turned Tuesday.", "Owner charge sent for approval."], subtasks: [
         { id: 351, label: "Complete the make-ready checklist", assignee: "Rosa T.", done: true },
         { id: 352, label: "Send the owner invoice", assignee: "Rosa T.", done: true },
@@ -109,8 +109,8 @@ export const propertyManagementDemo: DemoData = {
     {
       group: "Earlier today",
       calls: [
-        { id: 1, dir: "in", name: "Unit 4B — Alicia M.", meta: "No hot water since this morning · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
-        { id: 2, dir: "in", name: "Unit 3C — Renee C.", meta: "Dishwasher backing up, standing water", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 1, dir: "in", name: "Unit 4B, Alicia M.", meta: "No hot water since this morning · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Unit 3C, Renee C.", meta: "Dishwasher backing up, standing water", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
         { id: 3, dir: "missed", name: "Unknown caller", meta: "New request · bathroom ceiling leak · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
       ],
     },
@@ -124,10 +124,10 @@ export const propertyManagementDemo: DemoData = {
     },
   ],
   customers: [
-    { id: 1, name: "Unit 4B — Alicia M.", initials: "AM", phone: "(602) 555-0148", email: "alicia.m@email.com", address: "1420 N 3rd Ave, Unit 4B, Phoenix AZ", since: "2023", tags: ["Tenant", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
-    { id: 2, name: "Unit 6A — Trevor B.", initials: "TB", phone: "(602) 555-0192", email: "tbrooks@email.com", address: "1420 N 3rd Ave, Unit 6A, Phoenix AZ", since: "2024", tags: ["Tenant"], balance: 240, last: "Charge sent Jun 18" },
+    { id: 1, name: "Unit 4B, Alicia M.", initials: "AM", phone: "(602) 555-0148", email: "alicia.m@email.com", address: "1420 N 3rd Ave, Unit 4B, Phoenix AZ", since: "2023", tags: ["Tenant", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Unit 6A, Trevor B.", initials: "TB", phone: "(602) 555-0192", email: "tbrooks@email.com", address: "1420 N 3rd Ave, Unit 6A, Phoenix AZ", since: "2024", tags: ["Tenant"], balance: 240, last: "Charge sent Jun 18" },
     { id: 3, name: "Oak Ridge Apartments", initials: "OR", phone: "(480) 555-0110", email: "manager@oakridgeapts.com", address: "Oak Ridge Rd, Tempe AZ", since: "2022", tags: ["Property", "Maintenance plan"], balance: 0, last: "Service Jun 10" },
-    { id: 4, name: "Unit 3C — Renee C.", initials: "RC", phone: "(623) 555-0177", email: "renee.c@email.com", address: "45 W Glendale Ln, Unit 3C, Glendale AZ", since: "2025", tags: ["Tenant"], balance: 89, last: "First call Jun 20" },
+    { id: 4, name: "Unit 3C, Renee C.", initials: "RC", phone: "(623) 555-0177", email: "renee.c@email.com", address: "45 W Glendale Ln, Unit 3C, Glendale AZ", since: "2025", tags: ["Tenant"], balance: 89, last: "First call Jun 20" },
     { id: 5, name: "Halvorsen Ownership", initials: "HO", phone: "(480) 555-0143", email: "owner@halvorsenproperties.com", address: "7 S Mesa Dr, Mesa AZ", since: "2021", tags: ["Owner", "Turn"], balance: 0, last: "Turn Apr 3" },
     { id: 6, name: "Cedar Court HOA", initials: "CC", phone: "(602) 555-0166", email: "board@cedarcourthoa.com", address: "900 W Grand Ave, Phoenix AZ", since: "2023", tags: ["Association"], balance: 1280, vip: true, last: "Quote sent Jun 21" },
   ],
@@ -170,9 +170,9 @@ export const propertyManagementDemo: DemoData = {
     ],
   },
   messageThreads: [
-    { id: "james", name: "Unit 6A — Trevor B.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "The ceiling stain is getting bigger." }] },
+    { id: "james", name: "Unit 6A, Trevor B.", unread: 2, msgs: [{ me: false, text: "Is someone still coming today?" }, { me: false, text: "The ceiling stain is getting bigger." }] },
     { id: "oak", name: "Oak Ridge Apartments", msgs: [{ me: true, text: "Crew is booked for the 12-unit HVAC service Thursday at 8:30." }, { me: false, text: "Great, the COI is on file." }] },
-    { id: "dana", name: "Unit 3C — Renee C.", unread: 1, msgs: [{ me: false, text: "Is the dishwasher still backing up after the visit?" }] },
+    { id: "dana", name: "Unit 3C, Renee C.", unread: 1, msgs: [{ me: false, text: "Is the dishwasher still backing up after the visit?" }] },
   ],
   messageTemplates: ["On our way 🚐", "Running 10 min late", "All done, ticket closed", "Confirming your maintenance visit"],
   tasks: [

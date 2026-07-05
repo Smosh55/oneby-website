@@ -19,7 +19,7 @@ keywords:
 
 A homeowner finally decides the ugly, dented, twenty-year-old garage door has to go. Maybe they are selling. Maybe they just backed into it one too many times. They pick up the phone to price a new one.
 
-That call is worth five or ten times an average repair. And it is exactly the kind of call most garage door companies fumble — because installs do not close on the first ring the way a broken spring does.
+That call is worth five or ten times an average repair. And it is exactly the kind of call most garage door companies fumble, because installs do not close on the first ring the way a broken spring does.
 
 ## Installs are a different animal than repairs
 
@@ -27,7 +27,7 @@ If you run a garage door company, your instincts are built around repairs. Someo
 
 New-door installs break every one of those instincts, and that is precisely why they slip through the cracks.
 
-An install lead is not an emergency. The door still works, mostly. The homeowner is not panicking; they are considering. They want to see styles, ask about insulation and windows, compare a couple of quotes, and talk it over with their spouse. The decision unfolds over days or weeks, not minutes. So the tools and habits that win repairs — speed, same-day dispatch — do not close installs. Installs are won on responsiveness plus patient, organized follow-up.
+An install lead is not an emergency. The door still works, mostly. The homeowner is not panicking; they are considering. They want to see styles, ask about insulation and windows, compare a couple of quotes, and talk it over with their spouse. The decision unfolds over days or weeks, not minutes. So the tools and habits that win repairs (speed, same-day dispatch) do not close installs. Installs are won on responsiveness plus patient, organized follow-up.
 
 And here is the kicker: because installs are your highest-ticket job, every one you lose costs you the most.
 
@@ -43,27 +43,27 @@ Run your own install ticket through the [missed call calculator](/missed-call-ca
 
 Install leads die in two places, and both are fixable.
 
-**Place one: the missed call.** The homeowner calls to price a door while you are on a repair. It rolls to voicemail. They do not leave one — they just call the next company, who picks up and books the in-home measure. You never knew a $2,500 job called.
+**Place one: the missed call.** The homeowner calls to price a door while you are on a repair. It rolls to voicemail. They do not leave one, they just call the next company, who picks up and books the in-home measure. You never knew a $2,500 job called.
 
 **Place two: the follow-up that never happens.** This one is worse, because you actually got the lead and then lost it. You took the call, maybe even did the measure, quoted it, and then... got busy. Repairs kept coming. Nobody called the homeowner back to see if they had questions or were ready to order. Two weeks later they signed with the company that stayed in touch.
 
-- The install caller wants information, not just a slot — styles, materials, insulation, windows, pricing ranges.
+- The install caller wants information, not just a slot, styles, materials, insulation, windows, pricing ranges.
 - The decision takes multiple touches, and each un-chased lead cools a little more.
 - Without the lead written down and assigned a next step, "I'll follow up" never happens.
 
 ## What capturing every install lead looks like
 
-Start with the call. An [AI receptionist](/ai-receptionist) answers every install inquiry on the first ring, even when you are winding a spring across town. It handles the questions a considering buyer asks — insulated or not, single or double, window options, rough timeline, budget range — and it captures the details that make the follow-up easy.
+Start with the call. An [AI receptionist](/ai-receptionist) answers every install inquiry on the first ring, even when you are winding a spring across town. It handles the questions a considering buyer asks (insulated or not, single or double, window options, rough timeline, budget range) and it captures the details that make the follow-up easy.
 
 Then it does the part that actually books installs. It writes the lead up and drops it on your board as a tracked opportunity, not a name on a sticky note.
 
-> Every install inquiry becomes a tracked lead with the door style, the measurements request, the budget, and a scheduled follow-up — not a quote you meant to chase and forgot.
+> Every install inquiry becomes a tracked lead with the door style, the measurements request, the budget, and a scheduled follow-up, not a quote you meant to chase and forgot.
 
 That is the fix for the second leak. The one that matters most. When every install lead lands on someone's board with a next action and a due date, the follow-up stops depending on you remembering. The [garage door CRM](/garage-door) side keeps the customer timeline, the quote status, and the next touch all in one place, so the considering buyer gets a call at the right moment instead of silence.
 
 ### Nurturing higher-ticket leads without dropping them
 
-Installs reward persistence the way repairs reward speed. The homeowner who said "let me think about it" is not a dead lead — they are a lead that needs a well-timed follow-up. Most garage door companies never make it, because they are buried in same-day repairs.
+Installs reward persistence the way repairs reward speed. The homeowner who said "let me think about it" is not a dead lead, they are a lead that needs a well-timed follow-up. Most garage door companies never make it, because they are buried in same-day repairs.
 
 A system that tracks each install lead through quote-sent, follow-up-due, and ready-to-order means you stop leaking the slow deals. And the slow deals are your biggest ones. You can see how this kind of tracked follow-up works across trades in our piece on [follow-up without dropping the ball](/blog/follow-up-without-dropping-the-ball).
 
@@ -71,7 +71,7 @@ A system that tracks each install lead through quote-sent, follow-up-due, and re
 
 You are booked with repairs, which is good, but three install inquiries come in while you are out. All three get answered.
 
-The first is a homeowner selling their house who wants a clean modern door fast — captured with style preferences and a measure request, dropped on your board flagged as ready to move. The second is a couple comparing insulated options for a detached garage — questions answered, budget noted, follow-up scheduled for after they talk it over. The third wants a custom carriage-house door and a firm quote — logged with photos requested and a callback set.
+The first is a homeowner selling their house who wants a clean modern door fast, captured with style preferences and a measure request, dropped on your board flagged as ready to move. The second is a couple comparing insulated options for a detached garage, questions answered, budget noted, follow-up scheduled for after they talk it over. The third wants a custom carriage-house door and a firm quote, logged with photos requested and a callback set.
 
 None of them hit voicemail. None of them get forgotten next week. Your board shows exactly who to call, when, and what they care about. The two installs you used to lose to slow follow-up close instead.
 

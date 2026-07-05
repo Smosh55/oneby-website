@@ -49,7 +49,7 @@ You are not missing these calls because you do not care. You are missing them fo
 - **You are between stops.** Driving across town, hands not free, and the call comes in during the twenty minutes you are unreachable.
 - **Voicemail kills the urgent ones.** A homeowner with a trapped car does not leave a message. They hang up and dial the next listing before you have even finished the job you are on.
 
-The cruel part is that the jobs you miss this way are disproportionately the good ones — the urgent same-day repairs — because urgency is exactly what makes someone hang up and redial instead of waiting.
+The cruel part is that the jobs you miss this way are disproportionately the good ones, the urgent same-day repairs, because urgency is exactly what makes someone hang up and redial instead of waiting.
 
 ## What capturing every call looks like
 
@@ -59,7 +59,7 @@ An [AI receptionist](/ai-receptionist) picks up like a dispatcher who knows gara
 
 It books the same-day slot or writes up the job and drops it on your board, right then, while the customer is still on the line.
 
-> Every broken-spring call becomes a booked same-day job with the address, the door type, and the problem — dispatched to your available tech, not lost to voicemail while you finish a wind.
+> Every broken-spring call becomes a booked same-day job with the address, the door type, and the problem, dispatched to your available tech, not lost to voicemail while you finish a wind.
 
 That is the whole game with same-day work. The customer's problem is solved the moment they hear "we can have someone out this afternoon." An AI that can actually gather the details and put it on the schedule closes that loop before your competitor's phone even rings.
 
@@ -67,19 +67,19 @@ That is the whole game with same-day work. The customer's problem is solved the 
 
 Not every call is a trapped car. Some are "my remote stopped working" or "I want a quote on a new door someday." The trick is telling them apart instantly.
 
-A [garage door intake system](/garage-door) flags the true same-day emergencies — broken springs, trapped cars, doors stuck open leaving a house unsecured — and routes them to whoever can go now. The routine stuff queues up without eating your attention. You stop treating every buzz like a fire and stop missing the actual fires.
+A [garage door intake system](/garage-door) flags the true same-day emergencies (broken springs, trapped cars, doors stuck open leaving a house unsecured) and routes them to whoever can go now. The routine stuff queues up without eating your attention. You stop treating every buzz like a fire and stop missing the actual fires.
 
 ## What a normal busy day looks like now
 
 You are on a job, elbow-deep in a torsion spring. Three calls come in during the wind. Every one gets answered.
 
-The first is a snapped spring with a car trapped inside — flagged same-day, address captured, slotted into your afternoon. The second is a door off its track, also same-day, written up and queued. The third is a homeowner pricing a future opener replacement, handled and dropped on your board for a callback. You finish your wind, glance at your phone, and there they are: three jobs sorted, nothing lost, the urgent ones already scheduled.
+The first is a snapped spring with a car trapped inside, flagged same-day, address captured, slotted into your afternoon. The second is a door off its track, also same-day, written up and queued. The third is a homeowner pricing a future opener replacement, handled and dropped on your board for a callback. You finish your wind, glance at your phone, and there they are: three jobs sorted, nothing lost, the urgent ones already scheduled.
 
 Before, at least one of those trapped-car callers would have been long gone to a competitor. Now they are on your calendar.
 
 ## Stop losing the easy same-day money
 
-The broken-spring call is the best lead you get. It closes itself — if you answer it. The only reason these jobs walk is that the phone rings while both your hands are busy, and the customer will not wait.
+The broken-spring call is the best lead you get. It closes itself, if you answer it. The only reason these jobs walk is that the phone rings while both your hands are busy, and the customer will not wait.
 
 An intake setup built for garage door companies catches every call, flags the same-day emergencies, and books them while the customer is still on the line. You stop handing your easiest jobs to the company that happened to pick up.
 

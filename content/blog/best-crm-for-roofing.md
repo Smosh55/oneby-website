@@ -28,7 +28,7 @@ Before comparing tools, get clear on the job. A roofing operation is not a SaaS 
 Realistically you need it to do a handful of things well:
 
 - **Capture every lead**, whether it came from a door knock, a yard sign, a referral, or the phone ringing at 7 a.m. after a storm.
-- **Track the job through a long, messy pipeline** — inspection, claim, supplement, approval, build, final invoice.
+- **Track the job through a long, messy pipeline**, inspection, claim, supplement, approval, build, final invoice.
 - **Handle insurance work**, because a huge share of roofing revenue runs through adjusters and supplements.
 - **Keep the follow-up alive**, since roofing deals take multiple touches over weeks.
 
@@ -42,7 +42,7 @@ Most tools marketed to roofers fall into one of three buckets. Knowing which buc
 
 These are the big, roofing-specific suites. They do measurements, aerial reports, supplement automation, production boards, material orders, the whole thing. If you are a large storm-chasing operation running crews across multiple states, this is genuinely powerful software.
 
-The catch: they are expensive, they take months to roll out, and they are wildly over-built for a shop doing residential roofs in one metro. Owners routinely pay for a battleship and use it like a canoe. And here is the quiet part — most of them still assume a human is answering your phone and typing leads in. The intake gap is yours to solve.
+The catch: they are expensive, they take months to roll out, and they are wildly over-built for a shop doing residential roofs in one metro. Owners routinely pay for a battleship and use it like a canoe. And here is the quiet part, most of them still assume a human is answering your phone and typing leads in. The intake gap is yours to solve.
 
 ### 2. The generic sales CRMs
 
@@ -54,15 +54,15 @@ The catch: they know nothing about roofing and nothing about your phone. No insu
 
 Scheduling, dispatch, invoicing, and a CRM bolted together. Good for the operational side once a job is sold.
 
-The catch: they are built around the work you have already won. The front of the funnel — the call that comes in while you are on a roof — is usually an afterthought. You can read more on where these differ in our [CRM vs field service software](/blog/crm-vs-field-service-software) breakdown.
+The catch: they are built around the work you have already won. The front of the funnel, the call that comes in while you are on a roof, is usually an afterthought. You can read more on where these differ in our [CRM vs field service software](/blog/crm-vs-field-service-software) breakdown.
 
 ## The gap almost none of them close
 
-Here is the thread running through all three. They all assume the lead has already made it into the system. They are great at managing pipeline. They are terrible at the moment before pipeline — the phone ringing when nobody can pick up.
+Here is the thread running through all three. They all assume the lead has already made it into the system. They are great at managing pipeline. They are terrible at the moment before pipeline, the phone ringing when nobody can pick up.
 
 And in roofing, that moment is everything. Let me put a number on it, framed as an example so nobody accuses me of inventing stats.
 
-Say your shop gets 30 inbound calls in a busy storm week and misses 12 while everyone is on roofs. Say 6 of those were real inspection leads and 2 would have signed at $11,000 average. That is $22,000 walking to the competitor who answered — and a fancy CRM does nothing about it, because the lead never reached the CRM.
+Say your shop gets 30 inbound calls in a busy storm week and misses 12 while everyone is on roofs. Say 6 of those were real inspection leads and 2 would have signed at $11,000 average. That is $22,000 walking to the competitor who answered, and a fancy CRM does nothing about it, because the lead never reached the CRM.
 
 Curious what your own leak looks like? The [missed call calculator](/missed-call-calculator) will show you fast.
 

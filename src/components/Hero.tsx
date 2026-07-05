@@ -42,7 +42,7 @@ export default function Hero() {
             style={{ animationDelay: "120ms" }}
           >
             Your team answers what it can. OneBy's AI catches the rest and
-            turns it into booked, invoiced jobs — so the call you miss at 7pm
+            turns it into booked, invoiced jobs, so the call you miss at 7pm
             is still money in the bank.
           </p>
 

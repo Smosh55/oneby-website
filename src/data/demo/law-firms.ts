@@ -25,7 +25,7 @@ export const lawFirmsDemo: DemoData = {
   slug: "law-firms",
   company: "Hale & Associates",
   primaryCustomer: "Nora F.",
-  primaryIssue: "Auto accident — seeking representation",
+  primaryIssue: "Auto accident, seeking representation",
   primaryTicket: "1042",
   summary:
     "Prospective client, rear-ended two weeks ago, other driver at fault. Available after 3pm, wants a consultation this week.",
@@ -66,9 +66,9 @@ export const lawFirmsDemo: DemoData = {
     { id: 8, name: "Notary & copies", type: "Part", price: 40 },
   ],
   tickets: [
-    { id: "1042", issue: "Auto accident — seeking representation", customer: "Nora F.", status: "Scheduled", urgent: true, summary: "Prospective client, rear-ended two weeks ago, other driver cited at fault. Wants the earliest consultation. Has the police report and photos ready, likely a PI matter.",
+    { id: "1042", issue: "Auto accident, seeking representation", customer: "Nora F.", status: "Scheduled", urgent: true, summary: "Prospective client, rear-ended two weeks ago, other driver cited at fault. Wants the earliest consultation. Has the police report and photos ready, likely a PI matter.",
       relationship: "prospective client", tech: "Alex R.", tags: ["New client", "Personal injury", "Consultation"], notes: ["Prefers afternoon calls.", "Has the police report on hand."], subtasks: SUBTASK_SEED },
-    { id: "1041", issue: "Divorce filing — urgent", customer: "Daniel W.", status: "New", urgent: true, summary: "New caller, wants to file for divorce and asks about a temporary custody order. Time-sensitive, flexible on the consult time.",
+    { id: "1041", issue: "Divorce filing, urgent", customer: "Daniel W.", status: "New", urgent: true, summary: "New caller, wants to file for divorce and asks about a temporary custody order. Time-sensitive, flexible on the consult time.",
       relationship: "new caller", tech: "Owen B.", tags: ["New caller", "Family law", "Consultation"], notes: ["Two minor children involved.", "Flexible on timing."], subtasks: [
         { id: 411, label: "Run a conflict check", assignee: "Owen B.", done: false },
         { id: 412, label: "Note jurisdiction and residency", assignee: "Owen B.", done: false },
@@ -109,7 +109,7 @@ export const lawFirmsDemo: DemoData = {
     {
       group: "Earlier today",
       calls: [
-        { id: 1, dir: "in", name: "Nora F.", meta: "Auto accident — seeking representation · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 1, dir: "in", name: "Nora F.", meta: "Auto accident, seeking representation · (602) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
         { id: 2, dir: "in", name: "Grace L.", meta: "Question on the will amendment", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
         { id: 3, dir: "missed", name: "Unknown caller", meta: "New lead · slip and fall · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
       ],
@@ -145,7 +145,7 @@ export const lawFirmsDemo: DemoData = {
       { title: "PI representation", when: "Jul 2025", status: "Done", amount: 4200 },
     ],
     tickets: [
-      { id: "1042", issue: "Auto accident — seeking representation", status: "Open" },
+      { id: "1042", issue: "Auto accident, seeking representation", status: "Open" },
       { id: "0987", issue: "Prior injury claim", status: "Closed" },
     ],
     invoices: [

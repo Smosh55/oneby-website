@@ -68,7 +68,7 @@ export const medicalOfficesDemo: DemoData = {
   tickets: [
     { id: "1042", issue: "Reschedule appointment + refill", customer: "Elena T.", status: "Scheduled", urgent: true, summary: "Existing patient wants to move Thursday's follow-up to the earliest slot and requests a refill. Refill request routed to the provider, not handled as clinical advice.",
       relationship: "existing patient", tech: "Priya S.", tags: ["Existing patient", "Scheduling", "Refill"], notes: ["Prefers afternoon callbacks.", "Refill routed to provider for review."], subtasks: SUBTASK_SEED },
-    { id: "1041", issue: "Billing question — statement balance", customer: "Marcus D.", status: "New", urgent: true, summary: "New caller with a question about a statement balance and whether insurance was applied. Wants a callback today, flexible on timing.",
+    { id: "1041", issue: "Billing question, statement balance", customer: "Marcus D.", status: "New", urgent: true, summary: "New caller with a question about a statement balance and whether insurance was applied. Wants a callback today, flexible on timing.",
       relationship: "new caller", tech: "Dr. Kim", tags: ["New caller", "Billing", "Callback"], notes: ["Asking why a balance is due.", "Flexible on timing."], subtasks: [
         { id: 411, label: "Pull the statement and claim", assignee: "Priya S.", done: false },
         { id: 412, label: "Confirm insurance was applied", assignee: "Priya S.", done: false },

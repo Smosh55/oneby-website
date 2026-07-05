@@ -7,7 +7,7 @@ export default function StickyWaitlistCTA() {
       style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
     >
       <a href="#waitlist" className="btn btn-primary w-full">
-        Join the waitlist — from $29/mo
+        Join the waitlist, from $29/mo
       </a>
     </div>
   );
