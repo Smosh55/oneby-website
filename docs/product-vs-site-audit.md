@@ -32,6 +32,20 @@ ships by August.
 - Forms: 16 field types incl. signature, photo, video, location; attach to
   jobs/tasks/customers/surveys; live mobile/desktop preview; autosave.
 - Users and roles: role-scoped invites, local logins, extensions, pending state.
+- RBAC: Roles & Permissions with a permission matrix, custom roles, Owner role
+  carrying 105 granular permissions, roles scoped to business or location.
+- Schedule Board view: day columns for the week, per-person capacity (6h/8h
+  booked), drag to reschedule/assign/unassign, Lock Day, unassigned lane with
+  1d/2d/3d aging filters, week totals (7 scheduled, 0 unassigned, 29h est).
+- Dispatch: open jobs across customers by next visit, status chips (In
+  progress, Scheduled, Quoted, Inspection), multi-visit jobs ("2 visits").
+- Business texting setup: a guided A2P/10DLC carrier registration wizard
+  (legal name + tax ID, use-case declaration, number selection, carrier review
+  in 1 to 3 days with failure guidance). This is real carrier compliance
+  machinery, strong evidence the SMS/telephony backbone is genuinely wired.
+- Invoices list: live and empty for the real tenant ($0.00, 0 invoices, "First
+  month" badge, status filters, smart sort). Live-wired module, unlike the
+  estimates screen which is badged Mock.
 - Modules: business-type presets (General, HVAC, Plumbing/electrical,
   Legal/professional, General contractor) that rename vocabulary app-wide,
   plus Customize Words. Text messaging toggle; eFax as a $10/mo add-on.
@@ -79,6 +93,14 @@ downside of overpromising. Decision owner: Moshe + partner.
    "Calendar sync at $25k" is stale (it already exists) and should be replaced
    with something bigger.
 5. Multi-location: mention for the property-management and MSP verticals.
+6. Guided texting compliance: A2P/10DLC registration is a notorious pain point
+   (blocked texts, opaque carrier rejections). "We walk you through carrier
+   registration in 3 steps" is a marketable bullet and a blog post ("Why your
+   business texts get blocked, and how to fix registration").
+7. Scheduling depth: capacity per tech, Lock Day, aging unassigned-job filters.
+   Worth a line on trade pages that dispatch-heavy buyers will notice.
+8. RBAC: "owner, admin, member, plus custom roles with 105 granular
+   permissions" reassures the office-manager buyer; a trust bullet on pricing.
 
 ## Product punch list (pre-beta)
 
