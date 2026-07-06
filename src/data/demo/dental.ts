@@ -209,7 +209,7 @@ export const dentalDemo: DemoData = {
   ],
   homeNeeds: [
     { title: "$1,280 overdue · Lakeside Spa", body: "Statement 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
-    { title: "Urgent emergency needs scheduling", body: "#1041 new patient exam · Marcus D.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "New patient exam to schedule", body: "#1041 new patient exam · Marcus D.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
     { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
   ],
   hearTranscript: [

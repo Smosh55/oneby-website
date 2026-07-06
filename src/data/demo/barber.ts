@@ -209,7 +209,7 @@ export const barberDemo: DemoData = {
   ],
   homeNeeds: [
     { title: "$90 overdue · Copper Club", body: "Membership 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
-    { title: "No-show to rebook", body: "#1041 first cut · Curtis B.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "New client first cut to confirm", body: "#1041 first cut · Curtis B.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
     { title: "1 AI-answered booking call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
   ],
   hearTranscript: [
