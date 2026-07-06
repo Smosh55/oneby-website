@@ -19,6 +19,9 @@ export const accentBySlug: Record<string, Accent> = {
   "msp-it": { base: "#0ea5e9", dark: "#0284c7" },
   "law-firms": { base: "#a3324d", dark: "#872943" },
   "medical-offices": { base: "#0e9db0", dark: "#0b7f8e" },
+  dental: { base: "#00a5b5", dark: "#00838f" },
+  barber: { base: "#2f4a7a", dark: "#243a61" },
+  landscaping: { base: "#4d7c0f", dark: "#3f6608" },
 };
 
 const DEFAULT: Accent = { base: "#008fe0", dark: "#007acc" };

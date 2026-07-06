@@ -34,10 +34,11 @@ export type Industry = {
   outcomes: Outcome[];
   // Why OneBy for this trade
   capabilities: Capability[];
-  // Social proof
-  quote: string;
-  quoteName: string;
-  quoteRole: string;
+  // Social proof (optional; omitted pre-launch to avoid any fabricated
+  // testimonials, so the section only renders when a real quote exists)
+  quote?: string;
+  quoteName?: string;
+  quoteRole?: string;
   // Industry FAQ
   faqs: FAQ[];
 };
@@ -103,10 +104,6 @@ export const industries: Industry[] = [
         body: "After-hours and overflow calls turn into morning tasks, already triaged and ready to dispatch.",
       },
     ],
-    quote:
-      "We were bleeding 15 to 20 calls a week to voicemail every summer. OneBy answers them now and books the job before my tech is even off the roof.",
-    quoteName: "Marcus T.",
-    quoteRole: "Owner, Summit HVAC",
     faqs: [
       {
         q: "Can OneBy handle emergency no-cool and no-heat calls?",
@@ -186,10 +183,6 @@ export const industries: Industry[] = [
         body: "Every call, text, and job for an address sits in one place, so repeat customers never have to re-explain a thing.",
       },
     ],
-    quote:
-      "The summaries are the magic. My techs read one line and know exactly what they're walking into. Nobody replays voicemails anymore.",
-    quoteName: "Priya N.",
-    quoteRole: "Ops Manager, BlueLine Plumbing",
     faqs: [
       {
         q: "Can it tell an emergency from a routine call?",
@@ -267,10 +260,6 @@ export const industries: Industry[] = [
         body: "Every lead becomes an assigned task with context, so your estimates go out before the competition's.",
       },
     ],
-    quote:
-      "Half our jobs start as a quote call. OneBy makes sure we never miss one, even when the whole crew is out on a site.",
-    quoteName: "Tomás R.",
-    quoteRole: "Owner, Apex Electric",
     faqs: [
       {
         q: "Can it qualify quote requests?",
@@ -350,10 +339,6 @@ export const industries: Industry[] = [
         body: "Owners and estimators get notified instantly, so you reach storm leads before competitors do.",
       },
     ],
-    quote:
-      "We were losing 15 to 20 calls a week to voicemail. OneBy answers them now and books the inspection before I'm even off the roof. It paid for itself the first weekend.",
-    quoteName: "Marcus T.",
-    quoteRole: "Owner, Ridgeway Roofing",
     faqs: [
       {
         q: "Can it handle a sudden storm call surge?",
@@ -431,10 +416,6 @@ export const industries: Industry[] = [
         body: "Your crew gets alerted the second a loss is logged, so trucks roll faster.",
       },
     ],
-    quote:
-      "In our business, whoever answers the 2am call gets the job. OneBy means that's always us now.",
-    quoteName: "Karen W.",
-    quoteRole: "GM, Restore First",
     faqs: [
       {
         q: "Is the answering truly 24/7?",
@@ -512,10 +493,6 @@ export const industries: Industry[] = [
         body: "Calls you can't get to turn into scheduled jobs instead of missed revenue.",
       },
     ],
-    quote:
-      "Every missed call used to be a job we handed straight to a competitor. Now OneBy answers and books it before we'd even have seen the voicemail.",
-    quoteName: "Dave L.",
-    quoteRole: "Owner, ClearPath Garage Doors",
     faqs: [
       {
         q: "Does it capture the door and part details?",
@@ -593,10 +570,6 @@ export const industries: Industry[] = [
         body: "Every call about quarterly or annual plans becomes a tracked task, so renewals don't slip away.",
       },
     ],
-    quote:
-      "People who call about bugs want to talk to someone right now. OneBy makes sure they always can.",
-    quoteName: "Sandra B.",
-    quoteRole: "Owner, Sentry Pest",
     faqs: [
       {
         q: "Can it prioritize urgent pests?",
@@ -675,10 +648,6 @@ export const industries: Industry[] = [
         body: "Every call, text, and request for an address in one place, ready for audits and owner reports.",
       },
     ],
-    quote:
-      "I manage 600 units. OneBy catches every tenant call and turns it into a ticket on its own. Nothing slips through anymore.",
-    quoteName: "Derek S.",
-    quoteRole: "Director, Cornerstone PM",
     faqs: [
       {
         q: "Can it route tickets by property or vendor?",
@@ -756,10 +725,6 @@ export const industries: Industry[] = [
         body: "Every call becomes a structured ticket, ready to drop into your PSA on Solo and Pro plans.",
       },
     ],
-    quote:
-      "Inbound calls used to either yank a tech off task or hit voicemail. Now every one becomes a ticket with context, and our SLAs are safe.",
-    quoteName: "Alan P.",
-    quoteRole: "Service Manager, Northgate IT",
     faqs: [
       {
         q: "Can it identify which client is calling?",
@@ -837,10 +802,6 @@ export const industries: Industry[] = [
         body: "Each new matter becomes a structured task on the client timeline, ready for your intake team.",
       },
     ],
-    quote:
-      "I used to lose new clients every single time I stepped into court. Now OneBy captures the matter and books the consult before I'm back at my desk.",
-    quoteName: "Rebecca H.",
-    quoteRole: "Managing Partner, Hale & Associates",
     faqs: [
       {
         q: "Can it qualify a potential matter?",
@@ -918,10 +879,6 @@ export const industries: Industry[] = [
         body: "Context-rich tasks mean fewer rounds of callbacks and a faster response for the patient.",
       },
     ],
-    quote:
-      "Our front desk was drowning at peak hours. OneBy scoops up the overflow and turns it into tidy tasks we clear in minutes.",
-    quoteName: "Dr. Lena M.",
-    quoteRole: "Practice Owner, Cedar Family Care",
     faqs: [
       {
         q: "Is OneBy a substitute for clinical triage?",
@@ -938,6 +895,240 @@ export const industries: Industry[] = [
       {
         q: "Can we keep our current phone system?",
         a: "Yep. Keep your number and route overflow and after-hours calls to OneBy.",
+      },
+    ],
+  },
+  {
+    slug: "dental",
+    name: "Dental Practices",
+    shortName: "Dental",
+    group: "More Verticals",
+    icon: "Smile",
+    metaTitle: "AI Receptionist & Call Answering for Dental Practices",
+    metaDescription:
+      "OneBy answers the calls your front desk can't, captures why the patient is calling, and books the visit, so no new patient lands in voicemail.",
+    keywords: [
+      "dental answering service",
+      "dental AI receptionist",
+      "dental office call answering",
+      "new patient phone calls",
+      "dental appointment scheduling",
+    ],
+    heroEyebrow: "Built for dental",
+    heroTitle: "Never send a new patient to voicemail.",
+    heroSub:
+      "Your front desk can only hold so many lines at once. When the phones stack up at lunch or after close, OneBy's AI answers, captures why the patient is calling, and books or routes the visit, so a new patient never hangs up and calls the practice down the street. The same platform schedules the chair, sends the reminder, and keeps every call on the patient's record.",
+    heroStat: { stat: "+30%", label: "more new patients booked" },
+    pains: [
+      {
+        title: "Peak hours bury the front desk",
+        body: "Mondays and lunch breaks stack the lines. A new patient who hits hold music just dials the next office on their list.",
+      },
+      {
+        title: "New patients are worth too much to miss",
+        body: "A single new patient can be worth thousands over the years. Losing that call to voicemail is the most expensive miss in the practice.",
+      },
+      {
+        title: "After-hours calls go cold",
+        body: "A cracked tooth on a Friday night becomes a Monday patient for whoever picks up. If your line just rings, that visit walks.",
+      },
+    ],
+    scenarioCaller:
+      "New patient chipped a front tooth, in mild pain, wants to be seen today, has PPO insurance.",
+    scenarioSummary:
+      "New patient chipped a front tooth, mild pain, wants the earliest same-day visit. Has PPO coverage and will bring insurance details.",
+    scenarioTask: "Book emergency exam (new patient, same day, verify PPO benefits)",
+    outcomes: [
+      { stat: "0", label: "new patients lost to voicemail" },
+      { stat: "24/7", label: "overflow & after-hours coverage" },
+      { stat: "8 sec", label: "from missed call to front-desk task" },
+    ],
+    capabilities: [
+      {
+        title: "Catches overflow and after-hours",
+        body: "When every line is busy or the office is closed, OneBy answers instead of dropping the patient into hold or voicemail.",
+      },
+      {
+        title: "Captures the reason for the call",
+        body: "New patient, emergency, reschedule, or an insurance question. Each becomes a clear task your front desk can clear fast.",
+      },
+      {
+        title: "Protects new-patient calls",
+        body: "First-time callers get a warm, professional answer and a booked or routed visit, not a beep.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does OneBy give dental or medical advice?",
+        a: "No. OneBy captures why the patient is calling and creates a task for your team. It does not provide clinical advice or triage, and it points true emergencies to urgent or emergency care.",
+      },
+      {
+        q: "Can it handle scheduling and reschedules?",
+        a: "Yes. It captures the request as a clear task (new patient, reschedule, emergency, billing question) so your front desk can act quickly, and on Solo and Pro it plugs into popular practice tools.",
+      },
+      {
+        q: "Does it help during the lunch rush?",
+        a: "Yes. OneBy answers the overflow when every line is busy, so patients are never stranded in hold music or voicemail.",
+      },
+      {
+        q: "Can we keep our current phone number?",
+        a: "Yep. Keep your number and route overflow and after-hours calls to OneBy.",
+      },
+    ],
+  },
+  {
+    slug: "barber",
+    name: "Barbershops & Salons",
+    shortName: "Barber",
+    group: "More Verticals",
+    icon: "Scissors",
+    metaTitle: "AI Receptionist & Booking Line for Barbershops & Salons",
+    metaDescription:
+      "When your barbers are cutting, OneBy answers the phone, books the chair, and captures the service and preferred barber, so no booking rings out.",
+    keywords: [
+      "barbershop answering service",
+      "barbershop booking software",
+      "salon AI receptionist",
+      "barber appointment scheduling",
+      "barbershop missed calls",
+    ],
+    heroEyebrow: "Built for barbershops",
+    heroTitle: "Every missed call is a chair someone else filled.",
+    heroSub:
+      "When your hands are in a fade, you can't grab the phone. OneBy answers, books the chair, and captures the service and the barber they want, so the booking lands on your calendar instead of the shop down the block. The same platform confirms the appointment, sends the reminder, and rebooks the cancellations that would have gone empty.",
+    heroStat: { stat: "+22%", label: "more bookings captured" },
+    pains: [
+      {
+        title: "You can't cut hair and answer the phone",
+        body: "Every barber is mid-cut when the phone rings. That call rolls to voicemail, and most people don't leave one, they just book somewhere else.",
+      },
+      {
+        title: "No-shows leave chairs empty",
+        body: "A forgotten appointment is money you can't get back. Without confirmations and reminders, the gaps add up fast.",
+      },
+      {
+        title: "Cancellations go unfilled",
+        body: "A late cancel is a chance to rebook, but only if someone catches it and works the waitlist before the slot goes cold.",
+      },
+    ],
+    scenarioCaller:
+      "Regular client wants a skin fade and beard trim before an event Friday, wants his usual barber.",
+    scenarioSummary:
+      "Regular client, skin fade and beard trim, wants his usual barber before an event Friday. Flexible on the exact time.",
+    scenarioTask: "Book fade + beard with preferred barber (Friday, confirm the time)",
+    outcomes: [
+      { stat: "0", label: "bookings lost while you're cutting" },
+      { stat: "24/7", label: "booking line, even after close" },
+      { stat: "Fewer", label: "no-shows with auto confirmations" },
+    ],
+    capabilities: [
+      {
+        title: "Books the chair while you work",
+        body: "The AI answers every call, captures the service and preferred barber, and puts the appointment on your calendar.",
+      },
+      {
+        title: "Cuts down no-shows",
+        body: "Automatic confirmations and reminders keep appointments, and a late cancellation becomes a task to rebook the slot.",
+      },
+      {
+        title: "One place for every client",
+        body: "Calls, texts, and visits for each client sit together, so regulars never have to re-explain what they want.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can it book with a specific barber?",
+        a: "Yes. OneBy captures the service and the barber the client wants and creates the booking task, so the right chair gets filled.",
+      },
+      {
+        q: "Will it help with no-shows?",
+        a: "Yes. Automatic confirmations and reminders reduce no-shows, and a late cancellation becomes a task to rebook the slot.",
+      },
+      {
+        q: "Can clients text to book?",
+        a: "Yep. OneBy includes a shared business SMS inbox, so texts and calls live in one place instead of one person's phone.",
+      },
+      {
+        q: "Do we keep our number?",
+        a: "Of course. Keep your number and forward unanswered and after-hours calls to OneBy.",
+      },
+    ],
+  },
+  {
+    slug: "landscaping",
+    name: "Landscaping & Lawn Care",
+    shortName: "Landscaping",
+    group: "Home Services",
+    icon: "Sprout",
+    metaTitle: "AI Receptionist & Call Answering for Landscaping & Lawn Care",
+    metaDescription:
+      "Your crews are on mowers, not phones. OneBy answers every call, captures the property and the service, and books the estimate, so spring leads never hit voicemail.",
+    keywords: [
+      "landscaping answering service",
+      "lawn care AI receptionist",
+      "landscaping lead capture",
+      "lawn care scheduling",
+      "landscaping estimate calls",
+    ],
+    heroEyebrow: "Built for landscaping",
+    heroTitle: "Win the spring rush instead of missing it.",
+    heroSub:
+      "When the season hits, the phone rings faster than your crew can answer from behind a mower. OneBy picks up every call, captures the property details and the service they want, and books the estimate, so leads fill your schedule instead of your voicemail. The same platform routes the crew, invoices the job, and texts the customer, start to finish in one place.",
+    heroStat: { stat: "+33%", label: "more estimates booked in season" },
+    pains: [
+      {
+        title: "Crews can't answer from the field",
+        body: "Your team is on mowers and behind blowers, not by the phone. Every call they can't take is an estimate someone else books.",
+      },
+      {
+        title: "Spring buries the office",
+        body: "The first warm week can triple your call volume. The leads you miss in that rush are the season's easiest revenue, gone.",
+      },
+      {
+        title: "Recurring clients slip away",
+        body: "A missed call about renewals or an add-on quietly churns the maintenance revenue your route depends on.",
+      },
+    ],
+    scenarioCaller:
+      "Homeowner wants a quote for weekly mowing plus a spring cleanup, wants someone to walk the property this week.",
+    scenarioSummary:
+      "Homeowner wants weekly mowing plus a spring cleanup. Wants a property walk this week for a quote. Flexible on the day.",
+    scenarioTask: "Book estimate visit (weekly mowing + spring cleanup, this week)",
+    outcomes: [
+      { stat: "100%", label: "of estimate calls captured" },
+      { stat: "8 sec", label: "from missed call to team notification" },
+      { stat: "24/7", label: "coverage through the busy season" },
+    ],
+    capabilities: [
+      {
+        title: "Answers when the crew can't",
+        body: "Every call gets picked up, even when the whole team is out on routes, so no estimate request slips away.",
+      },
+      {
+        title: "Captures the property details",
+        body: "Service type, property size, and access notes, all ready for the estimator or the route.",
+      },
+      {
+        title: "Protects recurring revenue",
+        body: "Renewals, add-ons, and maintenance requests become tracked tasks, so route density and repeat work hold.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can it handle the spring call surge?",
+        a: "Yes. The AI answers unlimited calls at once, so a busy first warm week never dumps leads into voicemail.",
+      },
+      {
+        q: "Does it capture what the estimator needs?",
+        a: "Yes. Service type, property details, and access notes are captured on the first call, so the estimate or the visit is ready to go.",
+      },
+      {
+        q: "Can it help with recurring maintenance?",
+        a: "Every call about renewals or an add-on becomes a tracked task on the customer timeline, so recurring work does not slip.",
+      },
+      {
+        q: "Do we keep our number?",
+        a: "Yep. Keep your line and route unanswered and after-hours calls to OneBy.",
       },
     ],
   },

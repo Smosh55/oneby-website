@@ -25,6 +25,6 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/industries/:path*",
-    "/:slug(hvac|plumbing|electricians|roofing|restoration|garage-door|pest-control|property-management|msp-it|law-firms|medical-offices)/:path*",
+    "/:slug(hvac|plumbing|electricians|roofing|restoration|garage-door|pest-control|property-management|msp-it|law-firms|medical-offices|dental|barber|landscaping)/:path*",
   ],
 };

@@ -1,0 +1,223 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm the same-day appointment time", assignee: "Sofia M.", done: true },
+  { id: 2, label: "Verify PPO benefits and coverage", assignee: "Sofia M.", done: false },
+  { id: 3, label: "Collect any copay at check-in", assignee: "Grace T.", done: false },
+];
+
+export const dentalDemo: DemoData = {
+  slug: "dental",
+  company: "Bright Smiles Dental",
+  primaryCustomer: "Alicia R.",
+  primaryIssue: "Chipped front tooth, wants to be seen today",
+  primaryTicket: "1042",
+  summary:
+    "New patient chipped a front tooth this morning with mild pain, wants the earliest same-day visit. Has PPO insurance, prefers a callback.",
+  liveTags: ["New patient", "Chipped tooth", "Same-day"],
+  liveNotes: ["PPO insurance, benefits to verify.", "Mild pain, no medical advice given."],
+  primaryTech: "Dr. Nguyen",
+  primaryMessages: [
+    { me: true, text: `Hi Alicia, this is OneBy for Bright Smiles Dental. Dr. Nguyen can see you today at 3:30 PM for your chipped front tooth.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Cleaning · Barrett", tech: "Grace T.", duration: "1h" }],
+    1: [{ time: "8:30 AM", title: "Crown seat · Okafor", tech: "Dr. Nguyen", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "New patient exam · Sato", tech: "Dr. Nguyen", duration: "1h" },
+      { time: "1:00 PM", title: "Root canal · Malik", tech: "Dr. Nguyen", duration: "Half day" },
+      { time: "3:30 PM", title: "Emergency exam · Alicia R.", tech: "Dr. Nguyen", hot: true, duration: "1h", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Whitening consult · Reyes", tech: "Grace T.", duration: "30m" }],
+    4: [{ time: "2:00 PM", title: "Filling · Whitfield", tech: "Dr. Nguyen", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Dr. Nguyen", role: "Lead dentist", status: "With a patient", jobs: "4 this week", dot: "bg-green", phone: "(303) 555-0171", skills: ["Exams", "Crowns", "Fillings"] },
+    { name: "Grace T.", role: "Hygienist", status: "Available", jobs: "3 this week", dot: "bg-blue", phone: "(303) 555-0182", skills: ["Hygiene", "Whitening", "Exams"] },
+    { name: "Sofia M.", role: "Front desk coordinator", status: "Online", jobs: "Scheduling", dot: "bg-green", phone: "(720) 555-0190", skills: ["Front desk", "Insurance"] },
+    { name: "Dana K.", role: "Office manager", status: "Off today", jobs: "0 this week", dot: "bg-line", phone: "(720) 555-0166", skills: ["Insurance", "Front desk"] },
+  ],
+  techDot: { "Dr. Nguyen": "bg-blue", "Grace T.": "bg-green", "Dana K.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "New patient exam + X-rays", type: "Service", price: 149, tasks: ["Collect intake forms", "Verify insurance benefits", "Take X-rays", "Complete the exam with the dentist"] },
+    { id: 2, name: "Cleaning", type: "Service", price: 120, tasks: ["Review patient history", "Scale and polish", "Check gum health", "Recommend recall interval"] },
+    { id: 3, name: "Filling", type: "Service", price: 210, tasks: ["Confirm the treatment plan", "Numb the area", "Place the filling", "Check the bite"] },
+    { id: 4, name: "Crown", type: "Service", price: 1200, tasks: ["Confirm the treatment plan and benefits", "Prep the tooth", "Take the impression", "Place the temporary", "Schedule the seat visit"] },
+    { id: 5, name: "Root canal", type: "Service", price: 950 },
+    { id: 6, name: "Teeth whitening", type: "Service", price: 350 },
+    { id: 7, name: "Emergency exam", type: "Service", price: 95 },
+    { id: 8, name: "Night guard", type: "Part", price: 300 },
+    { id: 9, name: "Whitening kit", type: "Part", price: 120 },
+  ],
+  tickets: [
+    { id: "1042", issue: "Chipped front tooth, wants to be seen today", customer: "Alicia R.", status: "Scheduled", urgent: true, summary: "New patient chipped a front tooth this morning with mild pain. Wants the earliest same-day slot. Has PPO insurance, benefits to verify before the visit.",
+      relationship: "new patient", tech: "Dr. Nguyen", tags: ["New patient", "Chipped tooth", "Same-day"], notes: ["PPO insurance, benefits to verify.", "Mild pain, no clinical advice given."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "New patient exam request", customer: "Marcus D.", status: "New", urgent: true, summary: "New caller wants to establish care and book a first exam and cleaning. Asking whether the practice takes his plan. Flexible on timing.",
+      relationship: "new caller", tech: "Grace T.", tags: ["New caller", "New patient", "Insurance"], notes: ["Wants to confirm in-network status.", "Flexible on timing."], subtasks: [
+        { id: 411, label: "Confirm the plan is in-network", assignee: "Sofia M.", done: false },
+        { id: 412, label: "Send new patient intake forms", assignee: "Sofia M.", done: false },
+      ] },
+    { id: "1039", issue: "Crown seat appointment", customer: "Okafor Family", status: "Scheduled", urgent: false, summary: "Returning patient, permanent crown is back from the lab. Needs a block to seat the crown and check the bite.",
+      relationship: "returning patient", tech: "Dr. Nguyen", tags: ["Crown", "Lab back", "Seat visit"], notes: ["Crown returned from the lab.", "Confirm shade match before seating."], subtasks: [
+        { id: 391, label: "Confirm the crown is back from the lab", assignee: "Sofia M.", done: true },
+        { id: 392, label: "Block time for the seat visit", assignee: "Sofia M.", done: false },
+        { id: 393, label: "Pull the prep notes and shade", assignee: "Dr. Nguyen", done: false },
+      ] },
+    { id: "1038", issue: "Hygiene recall due", customer: "Sofia M.", status: "In progress", urgent: false, summary: "Established patient due for a six-month cleaning. Insurance verified, front desk is offering recall slots.",
+      relationship: "established patient", tech: "Grace T.", tags: ["Recall", "Cleaning"], notes: ["Six-month recall due.", "Front desk is offering times."], subtasks: [
+        { id: 381, label: "Confirm recall benefits reset", assignee: "Sofia M.", done: true },
+        { id: 382, label: "Offer recall appointment times", assignee: "Sofia M.", done: false },
+      ] },
+    { id: "1035", issue: "Completed filling awaiting payment", customer: "Whitfield Family", status: "Invoiced", urgent: false, summary: "Filling completed Tuesday. Treatment done, claim filed, patient balance invoiced, awaiting payment.",
+      relationship: "established patient", tech: "Dr. Nguyen", tags: ["Filling", "Billing", "Closed"], notes: ["Filling completed Tuesday.", "Statement sent for the patient balance."], subtasks: [
+        { id: 351, label: "Submit the insurance claim", assignee: "Dana K.", done: true },
+        { id: 352, label: "Send the statement", assignee: "Dana K.", done: true },
+        { id: 353, label: "Follow up on payment", assignee: "Dana K.", done: false },
+      ] },
+    { id: "1031", issue: "Whitening consult", customer: "Lakeside Spa", status: "Done", urgent: false, summary: "Corporate account referral asked about whitening options. Reviewed in-office and take-home whitening, sent the estimate, confirmed interest.",
+      relationship: "referral account", tech: "Grace T.", tags: ["Whitening", "Consult"], notes: ["Reviewed whitening options.", "Estimate sent and confirmed."], subtasks: [
+        { id: 311, label: "Review whitening options", assignee: "Grace T.", done: true },
+        { id: 312, label: "Send the whitening estimate", assignee: "Grace T.", done: true },
+        { id: 313, label: "Confirm patient interest", assignee: "Grace T.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Emergency exam", qty: 1, price: 95 }, { label: "New patient exam + X-rays", qty: 1, price: 149 }],
+    "1041": [{ label: "New patient exam + X-rays", qty: 1, price: 149 }],
+    "1039": [{ label: "Crown", qty: 1, price: 1200 }],
+    "1038": [{ label: "Cleaning", qty: 1, price: 120 }],
+    "1035": [{ label: "Filling", qty: 1, price: 210 }],
+    "1031": [{ label: "Teeth whitening", qty: 1, price: 350 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Alicia R.", meta: "Chipped front tooth, wants same-day · (303) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Sofia M.", meta: "Question about a recall appointment", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New patient · exam request · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Okafor Family", meta: "Crown seat · lab back", dur: "1:30", tag: "Scheduled", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Whitfield Family", meta: "Payment reminder · statement sent", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Lakeside Spa", meta: "Whitening consult follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Alicia R.", initials: "AR", phone: "(303) 555-0148", email: "alicia.r@email.com", address: "1420 Larimer St, Denver CO", since: "2026", tags: ["New patient", "PPO"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Marcus D.", initials: "MD", phone: "(303) 555-0192", email: "mdean@email.com", address: "88 E Colfax Ave, Denver CO", since: "2026", tags: ["New caller"], balance: 0, last: "First call Jun 20" },
+    { id: 3, name: "Okafor Family", initials: "OF", phone: "(720) 555-0110", email: "okafor.home@email.com", address: "300 Cherry St, Denver CO", since: "2022", tags: ["Established patient", "Crown"], balance: 0, last: "Crown prep Jun 10" },
+    { id: 4, name: "Sofia M.", initials: "SM", phone: "(720) 555-0177", email: "sofia.m@email.com", address: "45 W Alameda Ave, Denver CO", since: "2024", tags: ["Recall"], balance: 60, last: "Cleaning Jun 20" },
+    { id: 5, name: "Whitfield Family", initials: "WF", phone: "(720) 555-0143", email: "whitfield.home@email.com", address: "7 S Broadway, Denver CO", since: "2021", tags: ["Established patient", "Filling"], balance: 0, last: "Filling Apr 3" },
+    { id: 6, name: "Lakeside Spa", initials: "LS", phone: "(303) 555-0166", email: "front@lakesidespa.com", address: "900 W Evans Ave, Denver CO", since: "2023", tags: ["Referral account"], balance: 1280, vip: true, last: "Estimate sent Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · chipped front tooth, same-day", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · appointment time sent", body: "Dr. Nguyen at 3:30 PM" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Statement · $95", body: "Paid by card" },
+    { when: "Last summer", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Visit · new patient exam", body: "$149 · X-rays on file" },
+    { when: "2026", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "Emergency exam", when: "Today", status: "Scheduled", amount: 95 },
+      { title: "Cleaning", when: "Mar 2026", status: "Done", amount: 120 },
+      { title: "New patient exam + X-rays", when: "Jul 2025", status: "Done", amount: 149 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Chipped front tooth, wants to be seen today", status: "Open" },
+      { id: "0987", issue: "New patient scheduling", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 95, status: "Due" },
+      { id: "INV-0987", amount: 120, status: "Paid" },
+      { id: "INV-0820", amount: 149, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "Chipped a front tooth this morning, mild pain, wants a same-day visit. Has PPO." },
+      { kind: "Text", when: "Today 4:13", text: "Appointment time texted: Dr. Nguyen, 3:30 PM today." },
+      { kind: "Call", when: "Mar 2026", text: "Booked the six-month cleaning." },
+    ],
+    assets: [
+      { name: "Patient chart", meta: "Established 2026 · General dentistry · Dr. Nguyen", warranty: "Active" },
+      { name: "Insurance on file", meta: "Verified Jul 2025 · PPO · Member #B0912", warranty: "Active" },
+      { name: "Consent & intake forms", meta: "Signed Jul 2025 · HIPAA acknowledgment", warranty: "On file" },
+    ],
+    files: [
+      { name: "Intake forms", meta: "3 forms · Jul 2025" },
+      { name: "Insurance card.pdf", meta: "PDF · Jul 2025" },
+      { name: "X-ray images", meta: "4 images · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "marcus", name: "Marcus D.", unread: 2, msgs: [{ me: false, text: "Do you take my insurance for a first visit?" }, { me: false, text: "I'd like to book a cleaning too." }] },
+    { id: "okafor", name: "Okafor Family", msgs: [{ me: true, text: "Your crown is back from the lab, we booked the seat visit for Thursday at 8:30." }, { me: false, text: "Great, see you then." }] },
+    { id: "sofia", name: "Sofia M.", unread: 1, msgs: [{ me: false, text: "Is my six-month cleaning due to be booked yet?" }] },
+  ],
+  messageTemplates: ["Confirming your appointment", "Running 10 min behind", "All set, statement sent", "We received your forms 🦷"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Schedule same-day emergency exam", meta: "Front desk · today", go: "schedule", goLabel: "Schedule", options: ["Today 3:30 PM · Dr. Nguyen", "Today 4:30 PM · Dr. Nguyen", "Tomorrow 9:00 AM · Grace T."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Alicia her appointment time", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Dr. Nguyen at 3:30 PM", "Running 15 min behind", "We're ready for you now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: verify PPO benefits before the visit?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Verify PPO benefits", "Ask patient for card", "Front desk callback"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a front-desk ticket", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a ticket is created", action: "route it to the right team member", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "an appointment is booked", action: "text the patient a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a visit is marked done", action: "send the statement automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "a statement is unpaid for 3 days", action: "send a friendly payment reminder", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling Bright Smiles Dental! This is Ava. How can I help today?",
+  scheduleFlows: {
+    "New patient": ["New", "Scheduled", "Seen", "Treatment planned", "Billed"],
+    "Hygiene recall": ["Due", "Scheduled", "Seen", "Logged"],
+    "Emergency": ["New", "Triaged", "Scheduled", "Treated"],
+    "Treatment plan": ["Proposed", "Accepted", "Scheduled", "Completed", "Billed"],
+  },
+  schedulePlaceholder: "What's the request? e.g. Emergency exam for Alicia R.",
+  mileItem: "Crown",
+  mileBase: 1200,
+  billingAlertNote: "Across 3 patients · Lakeside Spa $1,280 is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$9,120",
+  homeRevenueNote: "Collections up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Root canal · Malik", tech: "Dr. Nguyen" },
+    { time: "3:30 PM", title: "Emergency exam · Alicia R.", tech: "Dr. Nguyen", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$1,280 overdue · Lakeside Spa", body: "Statement 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "Urgent emergency needs scheduling", body: "#1041 new patient exam · Marcus D.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hi, I chipped my front tooth this morning and it's a little sore. Can I be seen today?" },
+    { who: "OneBy", line: "I'm sorry to hear that. I can get you on the schedule today. Are you a new patient with us?" },
+    { who: "Caller", line: "Yes, first time. I have PPO insurance." },
+    { who: "OneBy", line: "Got it, I'll have the front desk verify your benefits. Would today at 3:30 with Dr. Nguyen work?" },
+    { who: "Caller", line: "That works." },
+    { who: "OneBy", line: "Perfect, you're booked for 3:30 today. If the pain becomes severe before then, please seek urgent or emergency care. I'll text you a confirmation." },
+  ],
+};

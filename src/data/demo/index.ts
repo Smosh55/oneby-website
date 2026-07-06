@@ -10,6 +10,9 @@ import { propertyManagementDemo } from "./property-management";
 import { mspItDemo } from "./msp-it";
 import { lawFirmsDemo } from "./law-firms";
 import { medicalOfficesDemo } from "./medical-offices";
+import { dentalDemo } from "./dental";
+import { barberDemo } from "./barber";
+import { landscapingDemo } from "./landscaping";
 
 export const demoBySlug: Record<string, DemoData> = {
   hvac: hvacDemo,
@@ -23,6 +26,9 @@ export const demoBySlug: Record<string, DemoData> = {
   "msp-it": mspItDemo,
   "law-firms": lawFirmsDemo,
   "medical-offices": medicalOfficesDemo,
+  dental: dentalDemo,
+  barber: barberDemo,
+  landscaping: landscapingDemo,
 };
 
 export function getDemo(slug?: string): DemoData {

@@ -19,6 +19,9 @@ const loaders: Record<string, () => Promise<DemoData>> = {
   "law-firms": () => import("./law-firms").then((m) => m.lawFirmsDemo),
   "medical-offices": () =>
     import("./medical-offices").then((m) => m.medicalOfficesDemo),
+  dental: () => import("./dental").then((m) => m.dentalDemo),
+  barber: () => import("./barber").then((m) => m.barberDemo),
+  landscaping: () => import("./landscaping").then((m) => m.landscapingDemo),
 };
 
 export function loadDemo(slug?: string): Promise<DemoData> {

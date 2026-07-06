@@ -1,0 +1,223 @@
+import {
+  PhoneCall,
+  PhoneMissed,
+  Sparkles,
+  Users,
+  CalendarDays,
+  Receipt,
+  Clock,
+  MessageSquare,
+  Ticket,
+  UserRound,
+  Calendar,
+  CornerUpRight,
+  HelpCircle,
+} from "lucide-react";
+import type { DemoData } from "./types";
+
+const SUBTASK_SEED = [
+  { id: 1, label: "Confirm chair time with Andre", assignee: "Andre W.", done: true },
+  { id: 2, label: "Block 45 min for the fade + beard", assignee: "Andre W.", done: false },
+  { id: 3, label: "Text Marcus his confirmation", assignee: "Bianca R.", done: false },
+];
+
+export const barberDemo: DemoData = {
+  slug: "barber",
+  company: "The Sharp Chair",
+  primaryCustomer: "Marcus D.",
+  primaryIssue: "Skin fade + beard, wants his usual barber Friday",
+  primaryTicket: "1042",
+  summary:
+    "Regular client, wants a skin fade and beard trim before an event Friday and asked for his usual barber. Booked into Andre's chair, flexible earlier in the day.",
+  liveTags: ["Regular client", "Skin fade + beard", "Wants Andre"],
+  liveNotes: ["Has an event Friday night.", "Always books with Andre."],
+  primaryTech: "Andre W.",
+  primaryMessages: [
+    { me: true, text: `Hi Marcus, this is OneBy for The Sharp Chair. You're booked with Andre this Friday at 3:30 PM for a skin fade and beard.` },
+    { me: false, text: "Perfect, thank you!" },
+  ],
+  subtaskSeed: SUBTASK_SEED,
+  dayJobs: {
+    0: [{ time: "10:00 AM", title: "Beard trim · Malone", tech: "Devon T.", duration: "30m" }],
+    1: [{ time: "8:30 AM", title: "Color service · Reyes", tech: "Bianca R.", duration: "2h", ticket: "1039" }],
+    2: [
+      { time: "9:00 AM", title: "First cut · Sato", tech: "Devon T.", duration: "45m" },
+      { time: "1:00 PM", title: "Groom party (5 cuts) · Brooks", tech: "Andre W.", duration: "Half day" },
+      { time: "3:30 PM", title: "Skin fade + beard · Marcus D.", tech: "Andre W.", hot: true, duration: "45m", ticket: "1042" },
+    ],
+    3: [{ time: "11:00 AM", title: "Line-up · Willow Ct", tech: "Devon T.", duration: "20m" }],
+    4: [{ time: "2:00 PM", title: "Color correction · Delgado", tech: "Bianca R.", duration: "Half day", ticket: "1035" }],
+  },
+  team: [
+    { name: "Andre W.", role: "Lead barber / owner", status: "In a chair", jobs: "4 today", dot: "bg-green", phone: "(312) 555-0171", skills: ["Fades", "Beard work", "Straight razor"] },
+    { name: "Devon T.", role: "Barber", status: "Available", jobs: "3 today", dot: "bg-blue", phone: "(312) 555-0182", skills: ["Fades", "Kids cuts", "Line-up"] },
+    { name: "Bianca R.", role: "Stylist", status: "Online", jobs: "Booking", dot: "bg-green", phone: "(773) 555-0190", skills: ["Color", "Beard work"] },
+    { name: "Renata P.", role: "Shop manager", status: "Off today", jobs: "0 today", dot: "bg-line", phone: "(773) 555-0166", skills: ["Front desk", "Booking"] },
+  ],
+  techDot: { "Andre W.": "bg-blue", "Devon T.": "bg-green", "Renata P.": "bg-warning" },
+  catalog: [
+    { id: 1, name: "Haircut", type: "Service", price: 35, tasks: ["Consult on the look", "Cut and shape", "Clean up the neck and edges", "Style and finish"] },
+    { id: 2, name: "Skin fade", type: "Service", price: 40, tasks: ["Consult on the fade height", "Blend the guards down to skin", "Detail the line-up", "Style and finish"] },
+    { id: 3, name: "Beard trim", type: "Service", price: 20 },
+    { id: 4, name: "Hot towel shave", type: "Service", price: 45, tasks: ["Warm towel prep", "Lather and straight razor pass", "Second pass and cool towel", "Aftershave and finish"] },
+    { id: 5, name: "Line-up", type: "Service", price: 20 },
+    { id: 6, name: "Kids cut", type: "Service", price: 25 },
+    { id: 7, name: "Color", type: "Service", price: 60, tasks: ["Consult on the shade", "Mix and apply color", "Process and rinse", "Style and finish"] },
+    { id: 8, name: "Pomade", type: "Part", price: 18 },
+    { id: 9, name: "Beard oil", type: "Part", price: 22 },
+  ],
+  tickets: [
+    { id: "1042", issue: "Skin fade + beard, wants his usual barber Friday", customer: "Marcus D.", status: "Confirmed", urgent: true, summary: "Regular client, wants a skin fade and beard before an event Friday and asked for Andre. Booked into Andre's chair for 3:30 PM, flexible earlier in the day.",
+      relationship: "regular client", tech: "Andre W.", tags: ["Regular client", "Skin fade + beard", "Wants Andre"], notes: ["Has an event Friday night.", "Always books with Andre."], subtasks: SUBTASK_SEED },
+    { id: "1041", issue: "First cut, new client", customer: "Curtis B.", status: "Booked", urgent: false, summary: "New client booking his first cut with the shop. Wants a mid fade, open on which barber, flexible on timing this week.",
+      relationship: "new client", tech: "Devon T.", tags: ["New client", "First cut", "Mid fade"], notes: ["Found the shop on Instagram.", "Open on the barber."], subtasks: [
+        { id: 411, label: "Set up the new client profile", assignee: "Devon T.", done: false },
+        { id: 412, label: "Text the intake and directions", assignee: "Devon T.", done: false },
+      ] },
+    { id: "1039", issue: "Groom party, 5 cuts Saturday", customer: "Brooks Party", status: "Confirmed", urgent: true, summary: "Wedding party group booking. Five cuts needed Saturday morning before the ceremony, wants them back to back in one block.",
+      relationship: "group booking", tech: "Andre W.", tags: ["Group booking", "Groom party", "5 cuts"], notes: ["Ceremony is Saturday afternoon.", "Wants all five back to back."], subtasks: [
+        { id: 391, label: "Confirm the party of five", assignee: "Renata P.", done: true },
+        { id: 392, label: "Block a half day across two chairs", assignee: "Renata P.", done: false },
+        { id: 393, label: "Text the group the arrival time", assignee: "Bianca R.", done: false },
+      ] },
+    { id: "1038", issue: "Walk-in waiting for a line-up", customer: "Bianca R.", status: "Waiting", urgent: false, summary: "Walk-in checked in and waiting for a quick line-up. Next available chair, front desk is watching the wait time.",
+      relationship: "walk-in", tech: "Devon T.", tags: ["Walk-in", "Line-up"], notes: ["Checked in at the front desk.", "Waiting on the next chair."], subtasks: [
+        { id: 381, label: "Add to the walk-in list", assignee: "Devon T.", done: true },
+        { id: 382, label: "Call them to the chair", assignee: "Devon T.", done: false },
+      ] },
+    { id: "1035", issue: "Color correction", customer: "Delgado", status: "Done", urgent: false, summary: "Color correction finished Tuesday. Service complete, tab settled at the chair, product added on.",
+      relationship: "returning client", tech: "Bianca R.", tags: ["Color", "Correction", "Closed"], notes: ["Correction completed Tuesday.", "Beard oil added to the tab."], subtasks: [
+        { id: 351, label: "Finish the color correction", assignee: "Bianca R.", done: true },
+        { id: 352, label: "Ring up the tab and product", assignee: "Bianca R.", done: true },
+        { id: 353, label: "Book the next touch-up", assignee: "Bianca R.", done: false },
+      ] },
+    { id: "1031", issue: "Membership renewal", customer: "Copper Club", status: "Active", urgent: false, summary: "Monthly cut membership up for renewal. Card on file charged, next chair time booked, client confirmed.",
+      relationship: "member", tech: "Andre W.", tags: ["Membership", "Renewal"], notes: ["Card on file charged.", "Next cut booked."], subtasks: [
+        { id: 311, label: "Charge the membership on file", assignee: "Renata P.", done: true },
+        { id: 312, label: "Book the next chair time", assignee: "Andre W.", done: true },
+        { id: 313, label: "Confirm with the member", assignee: "Andre W.", done: true },
+      ] },
+  ],
+  linesSeed: {
+    "1042": [{ label: "Skin fade", qty: 1, price: 40 }, { label: "Beard trim", qty: 1, price: 20 }],
+    "1041": [{ label: "Haircut", qty: 1, price: 35 }],
+    "1039": [{ label: "Haircut", qty: 5, price: 35 }],
+    "1038": [{ label: "Line-up", qty: 1, price: 20 }],
+    "1035": [{ label: "Color", qty: 1, price: 60 }],
+    "1031": [{ label: "Membership renewal", qty: 1, price: 45 }],
+  },
+  callGroups: [
+    {
+      group: "Earlier today",
+      calls: [
+        { id: 1, dir: "in", name: "Marcus D.", meta: "Fade + beard, wants Andre Friday · (312) 555-0148", dur: "4:12", tag: "AI summarized", tone: "blue", ticket: "1042" },
+        { id: 2, dir: "in", name: "Bianca R.", meta: "Checking the walk-in wait time", dur: "0:42", tag: "AI answered", tone: "green", recording: true },
+        { id: 3, dir: "missed", name: "Unknown caller", meta: "New client · first cut · details captured", dur: "0:36", tag: "AI answered", tone: "green" },
+      ],
+    },
+    {
+      group: "Yesterday",
+      calls: [
+        { id: 4, dir: "in", name: "Brooks Party", meta: "Groom party · 5 cuts Saturday", dur: "1:30", tag: "Booked", tone: "blue", ticket: "1039" },
+        { id: 5, dir: "out", name: "Delgado", meta: "Tab reminder · product added", dur: "2:05", tag: "Logged", tone: "muted", ticket: "1035" },
+        { id: 6, dir: "in", name: "Copper Club", meta: "Membership renewal follow-up", dur: "3:48", tag: "Closed", tone: "muted", ticket: "1031" },
+      ],
+    },
+  ],
+  customers: [
+    { id: 1, name: "Marcus D.", initials: "MD", phone: "(312) 555-0148", email: "marcus.d@email.com", address: "1420 N Milwaukee Ave, Chicago IL", since: "2023", tags: ["Regular", "VIP"], balance: 0, vip: true, last: "Call today, 4:12" },
+    { id: 2, name: "Curtis B.", initials: "CB", phone: "(312) 555-0192", email: "cbrooks@email.com", address: "88 W Division St, Chicago IL", since: "2026", tags: ["New client"], balance: 35, last: "Booked Jun 18" },
+    { id: 3, name: "Brooks Party", initials: "BP", phone: "(773) 555-0110", email: "brooks.wedding@email.com", address: "Wicker Park, Chicago IL", since: "2026", tags: ["Group booking", "Groom party"], balance: 0, last: "Booked Jun 10" },
+    { id: 4, name: "Bianca R.", initials: "BR", phone: "(773) 555-0177", email: "bianca.r@email.com", address: "45 N Ashland Ave, Chicago IL", since: "2025", tags: ["Walk-in"], balance: 20, last: "First visit Jun 20" },
+    { id: 5, name: "Delgado", initials: "DL", phone: "(773) 555-0143", email: "delgado.j@email.com", address: "7 S Halsted St, Chicago IL", since: "2021", tags: ["Regular", "Color"], balance: 0, last: "Color Apr 3" },
+    { id: 6, name: "Copper Club", initials: "CC", phone: "(312) 555-0166", email: "hello@copperclub.com", address: "900 W Randolph St, Chicago IL", since: "2023", tags: ["Member"], balance: 90, vip: true, last: "Renewal Jun 21" },
+  ],
+  primaryTimeline: [
+    { when: "Today, 4:12", icon: PhoneCall, tone: "bg-green/10 text-green-600", title: "Call · fade + beard, wants Andre", body: "AI summarized, became Ticket #1042" },
+    { when: "Today, 4:13", icon: MessageSquare, tone: "bg-blue/10 text-blue", title: "Text · chair time confirmed", body: "Andre, Friday 3:30 PM" },
+    { when: "Jun 2", icon: Receipt, tone: "bg-green/10 text-green-600", title: "Tab · $55", body: "Paid by card" },
+    { when: "Last spring", icon: Ticket, tone: "bg-blue/10 text-blue", title: "Visit · fade + hot towel shave", body: "$85 · always books Andre" },
+    { when: "2023", icon: UserRound, tone: "bg-canvas-2 text-muted", title: "First call", body: "Found you on Google" },
+  ],
+  custRecords: {
+    jobs: [
+      { title: "Skin fade + beard", when: "Today", status: "Confirmed", amount: 60 },
+      { title: "Haircut", when: "Mar 2026", status: "Done", amount: 35 },
+      { title: "Fade + hot towel shave", when: "Jul 2025", status: "Done", amount: 85 },
+    ],
+    tickets: [
+      { id: "1042", issue: "Skin fade + beard, wants his usual barber Friday", status: "Open" },
+      { id: "0987", issue: "Standing biweekly fade", status: "Closed" },
+    ],
+    invoices: [
+      { id: "INV-1042", amount: 60, status: "Due" },
+      { id: "INV-0987", amount: 35, status: "Paid" },
+      { id: "INV-0820", amount: 85, status: "Paid" },
+    ],
+    convos: [
+      { kind: "Call", when: "Today 4:12", text: "Wants a skin fade and beard with Andre before his event Friday." },
+      { kind: "Text", when: "Today 4:13", text: "Chair time confirmed: Andre, Friday 3:30 PM." },
+      { kind: "Call", when: "Mar 2026", text: "Booked his usual biweekly fade." },
+    ],
+    assets: [
+      { name: "Preferred barber", meta: "Andre W. · always requests · since 2023", warranty: "Regular" },
+      { name: "Usual service", meta: "Skin fade + beard · biweekly cadence", warranty: "On file" },
+      { name: "Card on file", meta: "Added Jul 2025 · Visa ending 4417", warranty: "Active" },
+    ],
+    files: [
+      { name: "Style reference photos", meta: "3 photos · Jul 2025" },
+      { name: "Membership agreement.pdf", meta: "PDF · Jul 2025" },
+      { name: "Receipt history.pdf", meta: "PDF · Jul 2025" },
+    ],
+  },
+  messageThreads: [
+    { id: "curtis", name: "Curtis B.", unread: 2, msgs: [{ me: false, text: "Can I still get in this week for my first cut?" }, { me: false, text: "Any barber is fine with me." }] },
+    { id: "brooks", name: "Brooks Party", msgs: [{ me: true, text: "The five cuts are booked for Saturday at 9 AM, back to back." }, { me: false, text: "Perfect, we'll all be there early." }] },
+    { id: "bianca", name: "Bianca R.", unread: 1, msgs: [{ me: false, text: "About how long is the walk-in wait right now?" }] },
+  ],
+  messageTemplates: ["Your chair is ready 💈", "Running 10 min behind", "All done, thanks for coming in", "Confirming your appointment"],
+  tasks: [
+    { id: 1, icon: Calendar, title: "Book the fade + beard with Andre", meta: "Front desk · today", go: "schedule", goLabel: "Schedule", options: ["Fri 3:30 PM · Andre W.", "Fri 4:30 PM · Andre W.", "Fri 10:00 AM · Devon T."], acted: (o) => `Booked ${o}` },
+    { id: 2, icon: CornerUpRight, title: "Text Marcus his chair time", meta: "Follow-up", go: "messages", goLabel: "Messages", options: ["Andre, Friday 3:30 PM", "Running 15 min behind", "Your chair is ready now"], acted: (o) => `Texted: ${o}` },
+    { id: 3, icon: HelpCircle, title: "Confirm: with Andre, not the next open chair?", meta: "Asks before assuming", go: "tickets", goLabel: "Ticket", options: ["Book with Andre", "Next available barber", "Ask the client"], acted: (o) => `Confirmed: ${o}` },
+  ],
+  automations: [
+    { id: 1, icon: PhoneMissed, trigger: "a call is missed", action: "text the caller back within seconds", on: true, runs: "12 this week" },
+    { id: 2, icon: Sparkles, trigger: "a call wraps", action: "write the summary and open a booking ticket", on: true, runs: "38 this week" },
+    { id: 3, icon: Users, trigger: "a booking is created", action: "assign the barber the client asked for", on: true, runs: "31 this week" },
+    { id: 4, icon: CalendarDays, trigger: "an appointment is booked", action: "text the client a confirmation and reminder", on: true, runs: "27 this week" },
+    { id: 5, icon: Receipt, trigger: "a cut is marked done", action: "send the receipt automatically", on: true, runs: "19 this week" },
+    { id: 6, icon: Clock, trigger: "a client no-shows", action: "text a friendly rebooking link", on: false, runs: "Paused" },
+  ],
+  greeting: "Thanks for calling The Sharp Chair! This is Ava. Looking to book a cut today?",
+  scheduleFlows: {
+    "Appointment": ["Booked", "Confirmed", "In chair", "Done", "Paid"],
+    "Walk-in": ["Waiting", "In chair", "Done", "Paid"],
+    "Membership": ["Active", "Booked", "Done"],
+    "No-show follow-up": ["Missed", "Rebooked", "Confirmed"],
+  },
+  schedulePlaceholder: "What's the booking? e.g. Skin fade + beard for Marcus D.",
+  mileItem: "Groom party (5 cuts)",
+  mileBase: 200,
+  billingAlertNote: "Across 3 clients · Copper Club $90 membership is 21 days overdue",
+  homeCallsCaught: "14",
+  homeCollected: "$1,240",
+  homeRevenueNote: "Chair revenue up 18% vs last month",
+  homeUpNext: [
+    { time: "1:00 PM", title: "Groom party (5 cuts) · Brooks", tech: "Andre W." },
+    { time: "3:30 PM", title: "Skin fade + beard · Marcus D.", tech: "Andre W.", ticket: "1042" },
+  ],
+  homeNeeds: [
+    { title: "$90 overdue · Copper Club", body: "Membership 21 days past due", icon: Receipt, tone: "bg-warning/15 text-warning", go: "billing" },
+    { title: "No-show to rebook", body: "#1041 first cut · Curtis B.", icon: Ticket, tone: "bg-warning/15 text-warning", go: "tickets" },
+    { title: "1 AI-answered booking call to review", body: "Transcribed, waiting on you", icon: PhoneCall, tone: "bg-green/10 text-green-600", go: "calls" },
+  ],
+  hearTranscript: [
+    { who: "Caller", line: "Hey, I need a skin fade and a beard trim before an event Friday, and I always go to Andre." },
+    { who: "OneBy", line: "Absolutely, I can get you in with Andre. Would Friday at 3:30 work, or do you want something earlier?" },
+    { who: "Caller", line: "3:30 is good." },
+    { who: "OneBy", line: "Great. That's a skin fade and beard with Andre, Friday at 3:30." },
+    { who: "Caller", line: "Perfect." },
+    { who: "OneBy", line: "You're all set. I'll text you a confirmation and a reminder before your chair time." },
+  ],
+};

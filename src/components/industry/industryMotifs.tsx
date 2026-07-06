@@ -80,4 +80,24 @@ export const motifBySlug: Record<string, ReactNode> = {
       <path d="M150 38 h24 v20 h20 v24 h-20 v20 h-24 v-20 h-20 v-24 h20 z" opacity={0.5} />
     </g>
   ),
+  dental: (
+    <g stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <path d="M78 40 C56 40 47 62 51 96 C54 122 64 156 73 156 C82 156 84 120 100 120 C116 120 118 156 127 156 C136 156 146 122 149 96 C153 62 144 40 122 40 C110 40 107 50 100 50 C93 50 90 40 78 40 Z" />
+      <path d="M74 70 q10 10 26 8" opacity={0.5} />
+    </g>
+  ),
+  barber: (
+    <g stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <rect x="84" y="42" width="32" height="116" rx="16" />
+      <path d="M84 66 L116 50 M84 92 L116 76 M84 118 L116 102 M84 144 L116 128" opacity={0.7} />
+      <path d="M92 42 v-12 h16 v12 M92 158 v12 h16 v-12" />
+    </g>
+  ),
+  landscaping: (
+    <g stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <path d="M100 38 C60 60 52 120 100 170 C148 120 140 60 100 38 Z" />
+      <path d="M100 52 V162" />
+      <path d="M100 90 L74 76 M100 90 L126 76 M100 118 L72 102 M100 118 L128 102" opacity={0.6} />
+    </g>
+  ),
 };

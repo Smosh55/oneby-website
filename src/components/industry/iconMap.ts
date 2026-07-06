@@ -10,6 +10,9 @@ import {
   Server,
   Scale,
   Stethoscope,
+  Smile,
+  Scissors,
+  Sprout,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -27,6 +30,9 @@ export const iconMap: Record<string, LucideIcon> = {
   Server,
   Scale,
   Stethoscope,
+  Smile,
+  Scissors,
+  Sprout,
   Wrench,
 };
 

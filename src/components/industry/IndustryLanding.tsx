@@ -5,7 +5,6 @@ import {
   CheckCircle2,
   ArrowRight,
   ChevronRight,
-  Star,
   Phone,
   Calendar,
   Bot,
@@ -185,14 +184,13 @@ export default function IndustryLanding({
       <section className="border-y border-line bg-canvas/60 py-6">
         <div className="container-x flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:gap-8">
           <div className="inline-flex items-center gap-2 text-sm text-muted">
-            <span className="flex">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} size={15} className="fill-green text-green" />
-              ))}
-            </span>
+            <Sparkles size={15} className="text-green" />
             <span>
-              <span className="font-semibold text-navy">4.9/5</span> from{" "}
-              {industry.shortName.toLowerCase()} teams
+              Built for{" "}
+              <span className="font-semibold text-navy">
+                {industry.shortName}
+              </span>{" "}
+              · Launching August 2026
             </span>
           </div>
           <span className="hidden h-4 w-px bg-line sm:block" />
@@ -446,25 +444,29 @@ export default function IndustryLanding({
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="pb-18 lg:pb-24">
-        <div className="container-x">
-          <Reveal>
-            <figure className="mx-auto max-w-3xl rounded-[24px] border border-line bg-canvas px-7 py-12 text-center sm:px-14">
-              <Sparkles size={24} className="mx-auto text-blue" />
-              <blockquote className="mt-5 text-xl font-medium leading-relaxed text-navy sm:text-2xl">
-                “{industry.quote}”
-              </blockquote>
-              <figcaption className="mt-6 text-sm text-muted">
-                <span className="font-semibold text-navy">
-                  {industry.quoteName}
-                </span>{" "}
-                · {industry.quoteRole}
-              </figcaption>
-            </figure>
-          </Reveal>
-        </div>
-      </section>
+      {/* Quote (only when a real, attributable testimonial exists) */}
+      {industry.quote && (
+        <section className="pb-18 lg:pb-24">
+          <div className="container-x">
+            <Reveal>
+              <figure className="mx-auto max-w-3xl rounded-[24px] border border-line bg-canvas px-7 py-12 text-center sm:px-14">
+                <Sparkles size={24} className="mx-auto text-blue" />
+                <blockquote className="mt-5 text-xl font-medium leading-relaxed text-navy sm:text-2xl">
+                  “{industry.quote}”
+                </blockquote>
+                {industry.quoteName && (
+                  <figcaption className="mt-6 text-sm text-muted">
+                    <span className="font-semibold text-navy">
+                      {industry.quoteName}
+                    </span>{" "}
+                    · {industry.quoteRole}
+                  </figcaption>
+                )}
+              </figure>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* Embedded lead form */}
       <section id="demo-form" className="bg-canvas py-18 lg:py-24">

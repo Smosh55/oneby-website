@@ -1068,6 +1068,310 @@ export const comparisons: Comparison[] = [
       { q: "Is OneBy a full field-service platform?", a: "It runs the call-to-cash loop: answering, tickets, scheduling, invoicing, and payments. For heavy dispatch or inventory, it integrates." },
     ],
   },
+  {
+    slug: "weave",
+    competitor: "Weave",
+    category: "Dental & practice software",
+    metaTitle: "OneBy vs Weave: Honest Comparison",
+    metaDescription:
+      "Weave is a mature patient-communication platform for dental and healthcare practices. OneBy answers the phone with AI and turns every call into a task, at one flat price. Compare them.",
+    keywords: ["OneBy vs Weave", "Weave alternative", "Weave dental phones", "dental phone system with AI"],
+    heroTitle: "OneBy vs Weave",
+    heroSub:
+      "Weave is a polished communication platform built specifically for dental and healthcare practices, with phones, texting, reviews, and payments. OneBy is a communications-first all-in-one whose AI actually answers the calls your front desk can't, and turns each one into a task.",
+    theirStrengths: [
+      "Purpose-built for dental and healthcare practices",
+      "Mature patient texting, reviews, and payments",
+      "Deep integrations with practice management systems",
+    ],
+    wins: [
+      { title: "AI that answers the overflow", body: "Weave rings your front desk. OneBy's AI receptionist picks up the calls the desk can't, captures why the patient is calling, and creates the task, so no new patient lands in voicemail." },
+      { title: "One flat price, AI included", body: "OneBy includes the AI receptionist in a flat monthly price, so a busy Monday never spikes your bill." },
+      { title: "Runs the whole visit", body: "The call becomes a task, a booked visit, and an invoice in one place, not just a note on the patient's file." },
+    ],
+    matrix: [
+      { label: "Built for dental practices", oneby: "Trade setups", them: true },
+      { label: "Patient texting + reminders", oneby: true, them: true },
+      { label: "AI receptionist answers your calls", oneby: true, them: "Limited" },
+      { label: "Turns calls into assigned tasks", oneby: true, them: false },
+      { label: "Reviews & payments", oneby: "Payments built in", them: true },
+      { label: "Live in a day", oneby: true, them: "Varies" },
+    ],
+    pickThemIf:
+      "You want a mature, dental-specific communication suite with established reviews and payments, and you are staffing the phones yourself.",
+    pickOneByIf:
+      "You want the AI to answer the calls your front desk misses and turn each into a booked visit, at one flat price. Weave is mature today; OneBy launches August 2026.",
+    faqs: [
+      { q: "Is OneBy dental-specific like Weave?", a: "OneBy is built for service businesses with per-trade setups, including dental. Weave is dental and healthcare specialized and mature today; OneBy launches August 2026." },
+      { q: "What does OneBy add over Weave?", a: "An AI receptionist that answers overflow and after-hours calls and turns each into an assigned task, included in a flat price." },
+    ],
+  },
+  {
+    slug: "nexhealth",
+    competitor: "NexHealth",
+    category: "Dental & practice software",
+    metaTitle: "OneBy vs NexHealth: Honest Comparison",
+    metaDescription:
+      "NexHealth is a patient-experience platform with online scheduling and real-time practice-management sync. OneBy answers the phone with AI and turns calls into tasks. Compare them.",
+    keywords: ["OneBy vs NexHealth", "NexHealth alternative", "dental online scheduling", "dental AI phone"],
+    heroTitle: "OneBy vs NexHealth",
+    heroSub:
+      "NexHealth is a patient-experience platform known for online scheduling and real-time sync with practice management systems. OneBy comes at it from the phone: an AI receptionist that answers the calls your desk can't and turns each into a task.",
+    theirStrengths: [
+      "Strong online booking and patient self-scheduling",
+      "Real-time write-back to practice management systems",
+      "Good patient reminders and forms",
+    ],
+    wins: [
+      { title: "It answers the phone", body: "NexHealth shines at online self-scheduling. OneBy catches the patients who call instead of booking online, answers with AI, and creates the task." },
+      { title: "Every call becomes action", body: "Answered or missed, the call turns into a summary and an assigned front-desk task, not just a form submission." },
+      { title: "One flat price", body: "The AI receptionist is included, so overflow days never meter up your bill." },
+    ],
+    matrix: [
+      { label: "Online patient self-scheduling", oneby: "Booking flow", them: true },
+      { label: "AI receptionist answers phone calls", oneby: true, them: false },
+      { label: "Turns calls into assigned tasks", oneby: true, them: false },
+      { label: "Practice-management sync", oneby: "Via integration", them: true },
+      { label: "Patient reminders", oneby: true, them: true },
+      { label: "Live in a day", oneby: true, them: "Varies" },
+    ],
+    pickThemIf:
+      "Your priority is online self-scheduling with deep real-time sync into your practice management system.",
+    pickOneByIf:
+      "You want the calls your front desk misses answered by AI and turned into booked visits. NexHealth is mature today; OneBy launches August 2026.",
+    faqs: [
+      { q: "Does OneBy replace NexHealth?", a: "They solve different halves. NexHealth is online scheduling and practice-management sync; OneBy answers the phone and turns calls into tasks. Many practices would run both." },
+      { q: "Does OneBy sync with my practice software?", a: "OneBy creates structured tasks and, on Solo and Pro, plugs into popular practice tools." },
+    ],
+  },
+  {
+    slug: "booksy",
+    competitor: "Booksy",
+    category: "Booking & scheduling apps",
+    metaTitle: "OneBy vs Booksy: Honest Comparison",
+    metaDescription:
+      "Booksy is a popular booking app and marketplace for barbers and salons. OneBy answers the phone with AI and books the chair, so calls do not ring out. Compare them.",
+    keywords: ["OneBy vs Booksy", "Booksy alternative", "barbershop booking app", "barber phone answering"],
+    heroTitle: "OneBy vs Booksy",
+    heroSub:
+      "Booksy is a well-known booking app and consumer marketplace where clients find and book barbers and salons online. OneBy handles the other half, the phone: its AI answers the calls you can't take mid-cut and books the chair.",
+    theirStrengths: [
+      "Large consumer marketplace that drives discovery",
+      "Mature online booking and client app",
+      "Established across barbershops and salons",
+    ],
+    wins: [
+      { title: "It answers your phone", body: "Booksy handles online bookings. OneBy catches the clients who call instead, answers with AI even when your hands are full, and books the chair." },
+      { title: "Every call becomes a booking or task", body: "Missed or answered, the call turns into a booking or a follow-up task, so nothing rings out to voicemail." },
+      { title: "The whole business, not just the calendar", body: "Calls, texts, bookings, and payments live together, so you are not stitching a phone line onto a booking app." },
+    ],
+    matrix: [
+      { label: "Online booking + client app", oneby: "Booking flow", them: true },
+      { label: "Consumer discovery marketplace", oneby: false, them: true },
+      { label: "AI answers your phone calls", oneby: true, them: false },
+      { label: "Turns calls into bookings/tasks", oneby: true, them: false },
+      { label: "Business SMS + reminders", oneby: true, them: true },
+      { label: "Live in a day", oneby: true, them: true },
+    ],
+    pickThemIf:
+      "You mainly want the consumer marketplace and online booking app that clients already use to discover barbers.",
+    pickOneByIf:
+      "You want the phone answered and every call turned into a booked chair. Booksy is mature today; OneBy launches August 2026.",
+    faqs: [
+      { q: "Does OneBy have a client-facing booking marketplace?", a: "No. Booksy's strength is its consumer marketplace. OneBy focuses on answering your phone and turning calls into bookings, and it can run alongside a booking app." },
+      { q: "Can OneBy take card payments?", a: "Yes. Card payments and invoicing are built in." },
+    ],
+  },
+  {
+    slug: "squire",
+    competitor: "Squire",
+    category: "Booking & scheduling apps",
+    metaTitle: "OneBy vs Squire: Honest Comparison",
+    metaDescription:
+      "Squire is a booking and point-of-sale platform built for barbershops. OneBy answers the phone with AI and turns calls into booked chairs. Compare them.",
+    keywords: ["OneBy vs Squire", "Squire alternative", "barbershop software", "barber booking and POS"],
+    heroTitle: "OneBy vs Squire",
+    heroSub:
+      "Squire is a polished booking and point-of-sale platform made for barbershops, with online booking, payments, and shop management. OneBy adds the piece a booking app does not cover: an AI receptionist that answers the phone and books the chair.",
+    theirStrengths: [
+      "Barbershop-specific booking and POS",
+      "Strong payments and shop management",
+      "Nice client-facing booking experience",
+    ],
+    wins: [
+      { title: "It answers the phone", body: "Squire runs bookings and checkout. OneBy answers the clients who call instead of booking online, captures the service and barber, and books the chair." },
+      { title: "Calls become bookings", body: "Every call turns into a booking or a rebook task, so a missed call is not a lost chair." },
+      { title: "One flat price with AI", body: "The AI receptionist is included, with no per-call metering on a busy Saturday." },
+    ],
+    matrix: [
+      { label: "Barbershop booking + POS", oneby: "Booking + payments", them: true },
+      { label: "AI answers your phone calls", oneby: true, them: false },
+      { label: "Turns calls into bookings/tasks", oneby: true, them: false },
+      { label: "Card payments", oneby: true, them: true },
+      { label: "No-show reminders + rebooking", oneby: true, them: true },
+      { label: "Live in a day", oneby: true, them: "Varies" },
+    ],
+    pickThemIf:
+      "You want a barbershop-specific booking and POS system and you are staffing the phones yourself.",
+    pickOneByIf:
+      "You want every call answered and turned into a booked chair, with payments in the same place. Squire is mature today; OneBy launches August 2026.",
+    faqs: [
+      { q: "Is OneBy a POS like Squire?", a: "OneBy includes invoicing and card payments, but Squire's checkout and shop management are more specialized. OneBy's focus is answering the phone and booking the chair." },
+      { q: "Can they work together?", a: "Yes. Run OneBy as the phone and call-automation layer alongside a booking or POS app." },
+    ],
+  },
+  {
+    slug: "yardbook",
+    competitor: "Yardbook",
+    category: "Field service software",
+    metaTitle: "OneBy vs Yardbook: Honest Comparison",
+    metaDescription:
+      "Yardbook is free landscaping business software for estimates, scheduling, and invoicing. OneBy answers the phone with AI and turns calls into jobs. Compare them.",
+    keywords: ["OneBy vs Yardbook", "Yardbook alternative", "landscaping software", "lawn care phone answering"],
+    heroTitle: "OneBy vs Yardbook",
+    heroSub:
+      "Yardbook is popular free software for landscaping businesses, with estimates, scheduling, and invoicing. OneBy adds the part Yardbook does not cover: an AI receptionist that answers the calls your crew cannot take from the field, and turns each into a job.",
+    theirStrengths: [
+      "Free to start, landscaping-specific",
+      "Estimates, scheduling, and invoicing",
+      "A large base of green-industry users",
+    ],
+    wins: [
+      { title: "It answers your phone", body: "Yardbook manages the work once it exists. OneBy answers the call that creates the work, even when the crew is on a mower, and books the estimate." },
+      { title: "Every call becomes a job", body: "Missed or answered, the call becomes a summary and an assigned job, so a spring-rush lead does not slip to voicemail." },
+      { title: "Answering and ops in one place", body: "Calling, SMS, AI answering, scheduling, and invoicing live together, so the call that starts the job is captured." },
+    ],
+    matrix: [
+      { label: "Landscaping estimates + invoicing", oneby: true, them: true },
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Business calling + SMS", oneby: true, them: false },
+      { label: "Turns calls into jobs automatically", oneby: true, them: "Manual" },
+      { label: "Scheduling & routing", oneby: true, them: true },
+      { label: "Free tier", oneby: false, them: true },
+    ],
+    pickThemIf:
+      "You want free landscaping software for estimates and invoicing and you are happy answering the phones yourself.",
+    pickOneByIf:
+      "You want every estimate call answered and turned into a booked job, phone system included. Yardbook is available today; OneBy launches August 2026.",
+    faqs: [
+      { q: "Is OneBy free like Yardbook?", a: "No. OneBy is a paid all-in-one that includes the phone system and AI answering, with founders pricing from $29/mo. The missed calls it catches typically pay for it." },
+      { q: "Does Yardbook answer your phone?", a: "No, it is business-management software. OneBy is the calling and AI-answering layer that captures the calls." },
+    ],
+  },
+  {
+    slug: "singleops",
+    competitor: "SingleOps",
+    category: "Field service software",
+    metaTitle: "OneBy vs SingleOps: Honest Comparison",
+    metaDescription:
+      "SingleOps is deep business software for the green industry. OneBy answers the phone with AI and turns every call into a job, at one flat price. Compare them.",
+    keywords: ["OneBy vs SingleOps", "SingleOps alternative", "green industry software", "landscaping CRM with phone"],
+    heroTitle: "OneBy vs SingleOps",
+    heroSub:
+      "SingleOps is capable, green-industry business software with CRM, estimating, scheduling, and invoicing for established landscaping and tree-care companies. OneBy comes at it from the phone: an AI receptionist that answers every call and turns it into a job.",
+    theirStrengths: [
+      "Deep green-industry CRM and estimating",
+      "Scheduling, invoicing, and payments",
+      "Built for established landscaping and tree-care firms",
+    ],
+    wins: [
+      { title: "It answers your phone", body: "SingleOps manages the operation. OneBy answers the call that feeds it, even mid-route, captures the property details, and books the estimate. SingleOps has no AI receptionist." },
+      { title: "Every call becomes a job", body: "The conversation flows into a summary and an assigned job, with the AI doing the intake." },
+      { title: "Simple, and live in a day", body: "No implementation project. Port your number, plug in, and go." },
+    ],
+    matrix: [
+      { label: "Green-industry CRM & estimating", oneby: "Core set", them: true },
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Business calling + SMS", oneby: true, them: false },
+      { label: "Turns calls into jobs automatically", oneby: true, them: "Manual" },
+      { label: "Scheduling & invoicing", oneby: true, them: true },
+      { label: "Simple, live in a day", oneby: true, them: "Varies" },
+    ],
+    pickThemIf:
+      "You are an established green-industry company that wants deep estimating and operations software right now, and you have the team to run it.",
+    pickOneByIf:
+      "You want every call answered and turned into a booked job in something simple, phone system included. SingleOps is mature today; OneBy launches August 2026.",
+    faqs: [
+      { q: "Is OneBy as deep as SingleOps for estimating?", a: "No. SingleOps has deeper green-industry estimating and operations. OneBy's focus is answering the phone and turning calls into jobs, and it can complement heavier ops software." },
+      { q: "Can they work together?", a: "Yes. Run OneBy as the phone and call-automation layer and pass jobs into your operations software." },
+    ],
+  },
+  {
+    slug: "acculynx",
+    competitor: "AccuLynx",
+    category: "Field service software",
+    metaTitle: "OneBy vs AccuLynx: Honest Comparison",
+    metaDescription:
+      "AccuLynx is deep, roofing-specific business software for production, insurance, and financials. OneBy answers the phone with AI and turns storm calls into inspections. Compare them.",
+    keywords: ["OneBy vs AccuLynx", "AccuLynx alternative", "roofing CRM", "roofing phone answering"],
+    heroTitle: "OneBy vs AccuLynx",
+    heroSub:
+      "AccuLynx is capable, roofing-specific software for job production, insurance and supplement workflows, aerial measurement, and financials. OneBy comes at it from the phone: an AI receptionist that answers every storm-season call and turns it into a booked inspection.",
+    theirStrengths: [
+      "Deep roofing production and job management",
+      "Insurance, supplement, and aerial measurement workflows",
+      "Built for established roofing companies",
+    ],
+    wins: [
+      { title: "It answers your phone", body: "AccuLynx manages the job once it exists. OneBy answers the storm-day calls that create the jobs, at unlimited volume, and books the inspection. AccuLynx has no AI receptionist." },
+      { title: "It handles the storm surge", body: "A hailstorm can multiply call volume in a day. OneBy answers every simultaneous call, so leads do not overflow to voicemail." },
+      { title: "Calls become inspections", body: "Each call turns into a summary and an assigned inspection task, with the damage and address captured." },
+    ],
+    matrix: [
+      { label: "Roofing production & financials", oneby: "Core set", them: true },
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Handles simultaneous storm calls", oneby: true, them: false },
+      { label: "Business calling + SMS", oneby: true, them: false },
+      { label: "Turns calls into inspections", oneby: true, them: "Manual" },
+      { label: "Simple, live in a day", oneby: true, them: "Varies" },
+    ],
+    pickThemIf:
+      "You are an established roofing company that needs deep production, insurance, and financial workflows right now, and you have the team to run it.",
+    pickOneByIf:
+      "You want every storm-season call answered and turned into an inspection, phone system included. AccuLynx is mature today; OneBy launches August 2026.",
+    faqs: [
+      { q: "Is OneBy an AccuLynx replacement?", a: "Usually not. AccuLynx has deep roofing production and financials. OneBy is the phone and call-automation layer that captures the calls and can feed your production software." },
+      { q: "Can they work together?", a: "Yes. Run OneBy as the answering and intake layer and pass inspections and summaries into AccuLynx." },
+    ],
+  },
+  {
+    slug: "jobnimbus",
+    competitor: "JobNimbus",
+    category: "Field service software",
+    metaTitle: "OneBy vs JobNimbus: Honest Comparison",
+    metaDescription:
+      "JobNimbus is a popular roofing and contractor CRM with pipelines and project management. OneBy answers the phone with AI and turns calls into jobs. Compare them.",
+    keywords: ["OneBy vs JobNimbus", "JobNimbus alternative", "roofing CRM", "contractor phone answering"],
+    heroTitle: "OneBy vs JobNimbus",
+    heroSub:
+      "JobNimbus is a widely used CRM and project-management tool for roofers and contractors, with boards, pipelines, and integrations. OneBy adds the part a CRM does not cover: an AI receptionist that answers every call and turns it into a job.",
+    theirStrengths: [
+      "Flexible roofing and contractor pipelines",
+      "Project management boards and documents",
+      "Good integration catalog",
+    ],
+    wins: [
+      { title: "It answers your phone", body: "JobNimbus organizes the pipeline. OneBy answers the calls that fill it, even during a storm surge, and books the inspection. JobNimbus has no AI receptionist." },
+      { title: "Every call becomes a job", body: "Missed or answered, the call turns into a summary and an assigned job, so leads do not sit in voicemail." },
+      { title: "One place, first ring to paid", body: "Calls, tickets, scheduling, invoicing, and payments live together, so the job runs without leaving OneBy." },
+    ],
+    matrix: [
+      { label: "Roofing/contractor CRM & pipelines", oneby: "Core set", them: true },
+      { label: "AI receptionist answers your calls", oneby: true, them: false },
+      { label: "Handles simultaneous storm calls", oneby: true, them: false },
+      { label: "Business calling + SMS", oneby: true, them: false },
+      { label: "Turns calls into jobs automatically", oneby: true, them: "Manual" },
+      { label: "Simple, live in a day", oneby: true, them: true },
+    ],
+    pickThemIf:
+      "You want a flexible roofing and contractor CRM with pipelines and project boards right now, and you will staff the phones yourself.",
+    pickOneByIf:
+      "You want every call answered and turned into a job, phone system included. JobNimbus is mature today; OneBy launches August 2026.",
+    faqs: [
+      { q: "Does OneBy replace JobNimbus?", a: "For teams that mainly need calls answered and turned into jobs, often yes. For deep pipeline and document management, OneBy complements the CRM by feeding it calls and tasks." },
+      { q: "Can they work together?", a: "Yes. On Solo and Pro, OneBy passes call summaries and jobs into popular CRMs." },
+    ],
+  },
 ];
 
 export const comparisonsBySlug = Object.fromEntries(
@@ -1094,5 +1398,13 @@ export const comparisonCategories: Array<{ category: string; items: Comparison[]
   {
     category: "CRMs",
     items: comparisons.filter((c) => c.category === "CRM"),
+  },
+  {
+    category: "Dental & practice software",
+    items: comparisons.filter((c) => c.category === "Dental & practice software"),
+  },
+  {
+    category: "Booking & scheduling apps",
+    items: comparisons.filter((c) => c.category === "Booking & scheduling apps"),
   },
 ];

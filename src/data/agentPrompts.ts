@@ -487,6 +487,121 @@ export const agentConfigs: Record<string, AgentConfig> = {
       "Do not collect detailed health information beyond the reason for the call.",
     ],
   },
+  dental: {
+    slug: "dental",
+    businessType: "dental practice",
+    knownServices: [
+      "new patient exams and cleanings",
+      "fillings and crowns",
+      "root canals",
+      "tooth pain and broken or chipped teeth",
+      "teeth whitening and cosmetic work",
+      "emergency dental visits",
+    ],
+    emergencyTriggers: [
+      "A knocked-out or badly broken tooth, especially with heavy bleeding",
+      "Severe, spreading swelling of the face or jaw",
+      "Uncontrolled bleeding after a dental procedure",
+      "Trauma to the mouth from an accident",
+    ],
+    captureExtra: [
+      "Whether they are an existing patient or new",
+      "What is going on with their teeth, in their words",
+      "Whether they have dental insurance and the plan name",
+      "The best time for them to come in",
+    ],
+    schedulingNotes:
+      "Do not promise a specific appointment time or quote any cost. Say the front desk will confirm the time and check their benefits. For a dental emergency, capture the details and tell them the team is being notified right away.",
+    exampleExchange: [
+      "AI: Thanks for calling Bright Smiles Dental, this call may be recorded so we can help you. How can I help today?",
+      "Caller: I chipped my front tooth and it kind of hurts.",
+      "AI: I'm sorry, that sounds stressful. Are you an existing patient with us, or is this your first visit?",
+      "Caller: First time. Can I be seen today?",
+      "AI: I'll get you on the schedule as soon as possible. Do you have dental insurance, and what's the best callback number?",
+      "Caller: Yes, a PPO, and this number is fine.",
+      "AI: Thank you. New patient, chipped front tooth with some pain, PPO insurance. I'll have the front desk confirm the earliest visit today.",
+    ].join("\n"),
+    disclaimers: [
+      "Do not give any dental or medical advice, and do not perform triage.",
+      "For severe swelling, heavy bleeding, or a knocked-out tooth, tell the caller to seek urgent or emergency care.",
+      "Do not quote prices or guarantee insurance coverage.",
+    ],
+  },
+  barber: {
+    slug: "barber",
+    businessType: "barbershop",
+    knownServices: [
+      "haircuts and skin fades",
+      "beard trims and line-ups",
+      "hot towel shaves",
+      "kids cuts",
+      "color and other styling",
+      "appointments and walk-ins",
+    ],
+    emergencyTriggers: [
+      "There are no true emergencies, but treat a same-day request before an event as time-sensitive and get them booked quickly",
+    ],
+    captureExtra: [
+      "The service they want (cut, fade, beard, shave, color)",
+      "Which barber they prefer, if any",
+      "The day and time that works for them",
+      "Whether they are a returning client",
+    ],
+    schedulingNotes:
+      "Capture the service, the preferred barber, and the timing, and create the booking task. Do not promise an exact slot; the shop will confirm. For a same-day request before an event, mark it time-sensitive.",
+    exampleExchange: [
+      "AI: Thanks for calling The Sharp Chair, this call may be recorded so we can help you. What can I set up for you?",
+      "Caller: I need a skin fade and a beard trim before Friday, with Andre if he's around.",
+      "AI: Nice, Andre does great fades. Have you been in before?",
+      "Caller: Yeah, I'm a regular.",
+      "AI: Perfect. What day and time works best, and what's the best number to confirm?",
+      "Caller: Thursday evening if he has it, this number is good.",
+      "AI: Got it. Skin fade and beard with Andre, Thursday evening, before your Friday event. I'll get that booked and text you a confirmation.",
+    ].join("\n"),
+    disclaimers: [
+      "Do not quote exact prices; the shop will confirm.",
+      "Do not guarantee a specific barber or time until the shop confirms availability.",
+    ],
+  },
+  landscaping: {
+    slug: "landscaping",
+    businessType: "landscaping and lawn care company",
+    knownServices: [
+      "weekly and biweekly mowing",
+      "spring and fall cleanups",
+      "mulch, sod, and planting",
+      "irrigation repair",
+      "design and hardscape installs",
+      "tree and shrub trimming",
+      "estimates for new work",
+    ],
+    emergencyTriggers: [
+      "A fallen tree or large limb blocking a driveway or road, or resting on a structure",
+      "An irrigation main break flooding a yard or foundation",
+      "Storm damage that is a safety hazard",
+    ],
+    captureExtra: [
+      "The service they want (mowing, cleanup, install, irrigation, estimate)",
+      "The property address and rough size or scope",
+      "Any access notes (gate code, dogs, parking)",
+      "Whether they are a current customer or new",
+    ],
+    schedulingNotes:
+      "For estimates, capture the property details and book a walk-through; do not quote a price. For storm or irrigation emergencies, capture the address and tell them the crew is being notified now. For routine work, say a coordinator will confirm a window.",
+    exampleExchange: [
+      "AI: Thanks for calling Evergreen Lawn and Landscape, this call may be recorded so we can help you. What can we take care of for you?",
+      "Caller: I'd like a quote for weekly mowing and a spring cleanup.",
+      "AI: Happy to help. What's the property address, and is it a front and back yard?",
+      "Caller: 210 Oak Lane, both, about a quarter acre.",
+      "AI: Got it. What's the best callback number, and is there a day this week that works for a quick property walk?",
+      "Caller: This number, and Thursday is good.",
+      "AI: Perfect. Weekly mowing plus a spring cleanup quote at 210 Oak Lane, property walk Thursday. I'll have the estimator confirm the time.",
+    ].join("\n"),
+    disclaimers: [
+      "Do not quote prices; an estimator will confirm after seeing the property.",
+      "For a fallen tree on a structure or a flooding line, capture the address and flag it urgent; do not advise on the hazard itself.",
+    ],
+  },
 };
 
 export function buildSystemPrompt(slug: string, businessName = "the business"): string {
