@@ -9,7 +9,7 @@ tags: ["dental", "new patients", "front desk", "lead capture"]
 industry: "dental"
 featured: false
 seoTitle: "Why Dental Practices Lose New Patients on the Phone"
-seoDescription: "New-patient callers rarely leave a voicemail, they dial the next practice. Here is why dental offices lose new patients on the phone and how to answer every call."
+seoDescription: "New-patient callers rarely leave a voicemail, they dial the next practice. Here is why dental offices lose new patients and how to answer every call."
 keywords:
   - "dental new patient calls"
   - "dental front desk phone"
@@ -45,7 +45,7 @@ Practices close the desk for an hour, and callers do not know the schedule. A ne
 
 ### New callers simply will not wait
 
-This is the part that stings. Existing patients tolerate a callback. New ones do not. Research on caller behavior across service businesses is consistent on this, and dental is no exception: a first-time caller who reaches voicemail overwhelmingly hangs up and moves on rather than leaving a message. You are not competing with a voicemail box. You are competing with the next practice in the search results.
+This is the part that stings. Existing patients tolerate a callback. New ones do not. Think about your own behavior when you are calling a business for the first time: reach a voicemail box and you are far more likely to hang up and try the next name on the list than to leave a message and wait. A first-time dental caller is no different. You are not competing with a voicemail box. You are competing with the next practice in the search results.
 
 > A returning patient who misses you calls back. A new patient who misses you calls someone else. The whole game is answering the ones you have never met.
 
@@ -66,7 +66,9 @@ The only way to stop losing new patients on the phone is to have something pick 
 
 That is what an [AI receptionist](/ai-receptionist) does for a dental front desk. It answers in your practice's voice, greets the caller like a person, and has a real conversation instead of a beep. Crucially, it captures the reason for the call: are they a new patient or an existing one, what do they need, are they in pain, when are they free, and how to reach them.
 
-Then it hands your team a clean record, not a garbled voicemail. New-patient calls get flagged as exactly that, so your coordinator can call the hot ones back first while they are still warm and still deciding. Nothing sits forgotten in a voicemail box until 3 p.m.
+Then it hands your team a clean record and an assigned task, not a garbled voicemail. New-patient calls get flagged as exactly that, so your coordinator can call the hot ones back first while they are still warm and still deciding. Nothing sits forgotten in a voicemail box until 3 p.m.
+
+To be clear about what it does and does not do: the AI captures the reason for the call and creates a task for your team to act on. It does not give dental or medical advice or perform clinical triage. If a caller describes something that sounds like a true emergency, it points them to urgent or emergency care right away and still logs the details so your team can follow up.
 
 The point is not to replace your front desk. Your team is the reason patients stay. The point is to make sure your team never loses a brand-new patient to a busy signal during the ten minutes they physically could not reach the phone.
 

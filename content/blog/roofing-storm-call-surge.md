@@ -9,7 +9,7 @@ tags: ["roofing", "storm leads", "missed calls", "lead capture"]
 industry: "roofing"
 featured: false
 seoTitle: "Roofing Storm Call Surge: Catch Every Lead"
-seoDescription: "A hailstorm can 10x roofing call volume in a day. Learn why one front desk cannot catch a storm surge and how answering every simultaneous call keeps leads out of voicemail."
+seoDescription: "A hailstorm can 10x roofing calls in a day. See why one front desk cannot catch a storm surge and how answering every call at once keeps leads out of voicemail."
 keywords:
   - "roofing storm leads"
   - "roofing missed calls"

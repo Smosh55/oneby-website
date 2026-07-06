@@ -8,7 +8,7 @@ category: "Guides"
 tags: ["barber", "barbershop", "booking", "missed calls"]
 industry: "barber"
 featured: false
-seoTitle: "Barbershop Booking Calls: Stop Losing Clients to Missed Calls"
+seoTitle: "Barbershop Booking Calls: Stop Losing Clients"
 seoDescription: "A missed booking call sends your next client down the street. Here is how barbershops and salons answer every call and book the chair even when hands are full."
 keywords:
   - "barbershop booking calls"
@@ -22,7 +22,7 @@ Picture the chair. You have got clippers in one hand, a client's head tilted jus
 
 Here is the thing nobody in the shop wants to admit. That caller did not leave a message. They did not wait. They pulled up the next barbershop on the map and called them instead. Your empty 3 o'clock just got filled by the guy two blocks over, and you will never even know it happened.
 
-This is the quiet leak in almost every [barbershops](/barber) and salon we talk to. Not bad haircuts. Not bad prices. Just a phone that rings while everyone's hands are full.
+This is the quiet leak in almost every [barbershop](/barber) and salon. Not bad haircuts. Not bad prices. Just a phone that rings while everyone's hands are full.
 
 ## Why booking calls slip through in a shop
 

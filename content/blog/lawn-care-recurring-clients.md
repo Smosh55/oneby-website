@@ -61,7 +61,7 @@ The front of the funnel, and the retention side of the back end, both come down 
 
 ## Protect the backbone
 
-Recurring maintenance is what makes a lawn care business worth owning. It is predictable, it compounds, and it is far cheaper to keep than to replace. The single most boring, most reliable way to protect it is to make sure no client call ever ends in a voicemail box nobody checks until dark.
+Recurring maintenance is what makes a lawn care business worth owning. It is predictable, it compounds, and it is far cheaper to keep than to replace. The single most boring, most reliable way to protect it is to make sure no client call ever ends as a message nobody returns.
 
 Every call becomes a captured request, a logged add-on, an assigned callback. The renewals get confirmed, the "can you also" jobs get booked onto routes you are already running, and the referrals stop dying on the vine. You keep doing the work. The phone stops quietly costing you the revenue you already earned.
 
