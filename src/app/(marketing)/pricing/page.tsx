@@ -106,8 +106,9 @@ export default function PricingPage() {
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             Every plan includes the full CRM: AI receptionist, ticketing,
             scheduling, invoicing, and SMS. Put a cheap Line on the phones that
-            just dial, and an AI seat where the jobs come in. Launching August
-            2026. Founding members lock these rates for two years.
+            just dial, and an AI seat where the jobs come in. Early access opens
+            to founding members in August 2026, and founders lock these rates
+            for two years.
           </p>
         </div>
       </section>

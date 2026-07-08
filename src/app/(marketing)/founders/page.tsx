@@ -33,15 +33,15 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "What does \"founder rate locked for two years\" actually mean?",
-    a: `You pay your pledge today, which covers your first full year. After that, your plan renews at your locked founder rate ($${founderPricing.soloLockedMonthly}/mo for Solo, $${founderPricing.proLockedMonthly}/user for Pro) and stays there for two more years. Standard pricing will climb over that window. Yours won't. When the two years are up you roll to standard pricing, and we will always tell you before anything changes.`,
+    a: `You pay your pledge today, which covers your first full year, and that year starts the day your service is activated, not the day you pledge. After that, your plan renews at your locked founder rate ($${founderPricing.soloLockedMonthly}/mo for Solo, $${founderPricing.proLockedMonthly}/user for Pro) and stays there for two more years. Standard pricing will climb over that window. Yours won't. When the two years are up you roll to standard pricing, and we will always tell you before anything changes.`,
   },
   {
     q: "Why isn't it free forever after I pay?",
     a: "Because running your line costs us real money every single month: the AI that answers and writes things up, and the actual phone calls. A \"pay once, free forever\" promise would force us to cut corners later or go out of business, and then you'd have nothing. A fair founder rate, locked for two years, keeps OneBy healthy and your price honest. That's a deal we can both keep.",
   },
   {
-    q: "When do I get it?",
-    a: "Founding members get the first beta invites as we roll out, in the order you backed. Phones ship as your tier unlocks. We'll keep you posted with real updates, not vague ones.",
+    q: "What's live on day one?",
+    a: "Early access opens to founding members in August, in the order you backed. Day one is the full platform: calls and texting, jobs, scheduling, invoicing, and AI call summaries with drafted follow-ups on every call. The AI receptionist that answers calls live rolls out to founding members first this fall. Phones ship as your tier unlocks, and we'll keep you posted with real updates, not vague ones.",
   },
   {
     q: "Do I have to take a phone?",
@@ -110,8 +110,8 @@ export default function FoundersPage() {
               second you plug it in.
             </p>
             <p className="mt-3 text-sm font-semibold text-navy">
-              Founder rates end at launch in August. After that, standard
-              pricing applies.
+              Founder rates end when early access opens in August. After that,
+              standard pricing applies.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a href="#tiers" className="btn btn-primary text-base">
@@ -221,6 +221,55 @@ export default function FoundersPage() {
               two years, keeps OneBy healthy and keeps your price honest. We
               would rather both still be here in five years.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* What ships when (honest rollout) */}
+      <section className="py-16 lg:py-20">
+        <div className="container-x">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="eyebrow justify-center text-blue">
+              <Sparkles size={14} /> What ships when
+            </span>
+            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+              Founders get every piece first.
+            </h2>
+            <p className="mt-4 text-muted">
+              No vague promises. Here is what's live at each step, before the
+              public sees any of it.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-3">
+            {[
+              {
+                n: "Aug",
+                t: "Early access opens",
+                b: "Founding members onboard first: port your number, set up your team, trades, and price book. The full platform is live: calls, texting, jobs, scheduling, invoicing, and AI call summaries with drafted follow-ups on every call.",
+              },
+              {
+                n: "Fall",
+                t: "AI answering goes live",
+                b: "The AI receptionist starts picking up the calls you can't, founding members first. By then it has been listening to and summarizing your real calls for weeks.",
+              },
+              {
+                n: "Then",
+                t: "Public launch",
+                b: "We open to everyone at standard pricing. Your founder rate is already locked for two years, and you've been running on OneBy since day one.",
+              },
+            ].map((s) => (
+              <div
+                key={s.n}
+                className="rounded-2xl border border-line bg-surface p-6"
+              >
+                <span className="grid h-9 w-14 place-items-center rounded-full bg-blue/10 text-sm font-bold text-blue">
+                  {s.n}
+                </span>
+                <h3 className="mt-4 font-bold text-navy">{s.t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{s.b}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
