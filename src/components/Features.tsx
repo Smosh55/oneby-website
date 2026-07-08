@@ -14,6 +14,7 @@ import {
   CalendarDays,
   Receipt,
   Search,
+  MessageSquareReply,
 } from "lucide-react";
 
 const features = [
@@ -42,6 +43,11 @@ const features = [
     icon: Bot,
     title: "AI Receptionist",
     body: "When a call goes unanswered, AI answers, captures the details, and hands off a ready-to-action task.",
+  },
+  {
+    icon: MessageSquareReply,
+    title: "Missed-Call Text Back",
+    body: "Can't pick up? OneBy texts the caller back in seconds from your business number, so they get a reply instead of dialing the next company.",
   },
   {
     icon: Ticket,

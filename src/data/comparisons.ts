@@ -72,6 +72,7 @@ export const comparisons: Comparison[] = [
       { label: "Creates AND assigns tasks from calls", oneby: true, them: false },
       { label: "Mix cheap lines with AI seats", oneby: true, them: false },
       { label: "Live in a day, no pro-services", oneby: true, them: "Varies" },
+      { label: "Runs the job too: tickets, scheduling, invoicing", oneby: true, them: false },
     ],
     pickThemIf:
       "You're a large enterprise that needs a global contact center, deep admin controls, and a long list of legacy integrations.",
@@ -264,6 +265,7 @@ export const comparisons: Comparison[] = [
       { label: "Online fax", oneby: true, them: "Add-on" },
       { label: "Mix cheap lines with AI seats", oneby: true, them: false },
       { label: "Per-industry playbooks", oneby: true, them: false },
+      { label: "Runs the job too: tickets, scheduling, invoicing", oneby: true, them: false },
     ],
     pickThemIf:
       "Your priority is real-time AI coaching for a large sales or support floor.",
@@ -323,6 +325,7 @@ export const comparisons: Comparison[] = [
       { label: "Creates AND assigns tasks from calls", oneby: true, them: false },
       { label: "Per-industry playbooks", oneby: true, them: false },
       { label: "Mix cheap lines with AI seats", oneby: true, them: false },
+      { label: "Runs the job too: tickets, scheduling, invoicing", oneby: true, them: false },
     ],
     pickThemIf:
       "Your team already runs everything in Zoom and you just want calling in the same place.",
@@ -381,6 +384,7 @@ export const comparisons: Comparison[] = [
       { label: "Post-call automation on every call", oneby: true, them: false },
       { label: "Creates AND assigns tasks from calls", oneby: true, them: false },
       { label: "Mix cheap lines with AI seats", oneby: true, them: false },
+      { label: "Runs the job too: tickets, scheduling, invoicing", oneby: true, them: false },
     ],
     pickThemIf:
       "You want a mature, broadly supported phone system with contact-center options and you don't need calls turned into tasks.",

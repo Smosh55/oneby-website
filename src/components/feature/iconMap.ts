@@ -15,6 +15,8 @@ import {
   CalendarDays,
   Receipt,
   Sparkles,
+  MessageSquareReply,
+  Workflow,
   type LucideIcon,
 } from "lucide-react";
 
@@ -34,6 +36,8 @@ export const featureIconMap: Record<string, LucideIcon> = {
   Ticket,
   CalendarDays,
   Receipt,
+  MessageSquareReply,
+  Workflow,
 };
 
 export function getFeatureIcon(name: string): LucideIcon {

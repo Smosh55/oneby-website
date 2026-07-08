@@ -80,6 +80,36 @@ export const features: Feature[] = [
     cardline: "Replace the beep with an AI that acts.",
   },
   {
+    slug: "missed-call-text-back",
+    name: "Missed-Call Text Back",
+    group: "AI & automation",
+    icon: "MessageSquareReply",
+    metaTitle: "Missed-Call Text Back for Business",
+    metaDescription:
+      "Miss a call and OneBy texts the caller back in seconds, so they get a reply instead of dialing your competitor. Turn it on once and it runs on its own.",
+    keywords: ["missed call text back", "auto text missed calls", "missed call auto reply", "text back software"],
+    heroEyebrow: "Missed-Call Text Back",
+    heroTitle: "Miss the call, catch the customer anyway.",
+    heroSub:
+      "When you can't pick up, the worst outcome is silence. OneBy texts the caller back the second the call is missed, so they get a real reply in their hand instead of dialing the next number on the list.",
+    bullets: [
+      "Every missed call gets an automatic text back in seconds",
+      "Send your own message or a ready-made template",
+      "Different replies for after-hours versus every-line-busy",
+      "Works the day you turn it on, no AI receptionist required",
+    ],
+    how: [
+      { step: "The call goes unanswered", body: "Busy on a job, after hours, or every line tied up. OneBy sees the miss the moment it happens." },
+      { step: "A text goes out", body: "The caller gets a friendly message from your business number within seconds, so they feel answered instead of ignored." },
+      { step: "The conversation continues", body: "Their reply lands in your shared inbox and on the customer timeline, ready for anyone on the team to pick up." },
+    ],
+    faqs: [
+      { q: "Do I need the AI receptionist for this?", a: "No. Missed-call text back works on its own from day one. You can layer the AI receptionist on later." },
+      { q: "Can I customize the message?", a: "Yes. Write your own or start from a template, and send different texts for after-hours versus when every line is busy. It always sends from your business number." },
+    ],
+    cardline: "Miss the call, text back in seconds.",
+  },
+  {
     slug: "smart-summaries",
     name: "Smart Summaries",
     group: "AI & automation",
@@ -168,6 +198,36 @@ export const features: Feature[] = [
       { q: "Does it sync with my other tools?", a: "On Solo and Pro, tasks flow into popular CRM and field-service software." },
     ],
     cardline: "Calls become owned, due-dated tasks.",
+  },
+  {
+    slug: "automations",
+    name: "Automations",
+    group: "AI & automation",
+    icon: "Workflow",
+    metaTitle: "Workflow Automations for Service Businesses",
+    metaDescription:
+      "Build simple if-this-then-that rules across calls, jobs, and tasks. When a voicemail lands, text the caller and alert the on-call tech, on its own.",
+    keywords: ["workflow automation", "business automation", "if this then that", "missed call automation"],
+    heroEyebrow: "Automations",
+    heroTitle: "Set the rule once. It runs every time.",
+    heroSub:
+      "The follow-ups you keep forgetting become rules that fire on their own. Pick a trigger, add a condition, choose what happens. No code, just plain English.",
+    bullets: [
+      "Triggers across calls, voicemails, jobs, visits, and tasks",
+      "Conditions so a rule only fires when it should",
+      "Multi-step actions: text the customer, alert the on-call tech, and more",
+      "Reads back in plain English before you switch it on",
+    ],
+    how: [
+      { step: "Pick a trigger", body: "A missed call, a new voicemail, a job that moves to a stage, a task coming due. Choose what starts the rule." },
+      { step: "Add your conditions", body: "Only for VIP customers, only after hours, only for emergencies. The rule fires when it matters and stays quiet when it doesn't." },
+      { step: "Choose what happens", body: "Send a text, alert a teammate, move the job, open a task. Stack several steps into one rule." },
+    ],
+    faqs: [
+      { q: "Do I need to be technical?", a: "No. You pick from menus, and OneBy shows the finished rule as a plain-English sentence before it goes live." },
+      { q: "What can trigger an automation?", a: "Calls and voicemails, job and visit stages, and task events like created, assigned, or due. We add more triggers over time." },
+    ],
+    cardline: "If this, then that, for your whole shop.",
   },
   {
     slug: "customer-timeline",

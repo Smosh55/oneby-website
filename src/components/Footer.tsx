@@ -13,6 +13,8 @@ const groups: { title: string; links: FooterLink[] }[] = [
     links: [
       { label: "Overview", href: "/product" },
       { label: "AI Receptionist", href: "/features/ai-receptionist" },
+      { label: "Missed-Call Text Back", href: "/features/missed-call-text-back" },
+      { label: "Automations", href: "/features/automations" },
       { label: "Ticketing", href: "/features/ticketing" },
       { label: "Scheduling", href: "/features/scheduling" },
       { label: "Invoicing & Payments", href: "/features/invoicing" },
