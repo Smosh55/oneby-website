@@ -131,8 +131,13 @@ P2 (nice before launch):
 
 ## Website punch list (depends on AI answer)
 
-- [ ] Decide August AI scope; align hero, ai-receptionist page, demo badges,
-      ads kit, drip emails accordingly.
+- [x] Decide August AI scope. ANSWERED (July 6): v1 ships without live AI
+      answering; summaries ~3 weeks (by the August opening), agents ~2 months.
+      Site now sequences the promise: founders page "What ships when" section,
+      day-one FAQ, year-starts-at-activation, early-access framing on pricing
+      and drip email 4. Live answering is dated only as "founders first this
+      fall". REMAINING: if summaries slip past the August opening, soften the
+      day-one copy; revisit ads kit A-series angles before ads resume.
 - [ ] Add Good/Better/Best estimates section + blog post.
 - [ ] Add "speaks your trade" Modules section.
 - [ ] Refresh founders stretch goals (calendar sync already built).
