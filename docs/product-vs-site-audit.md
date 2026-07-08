@@ -3,6 +3,8 @@
 Date: July 5, 2026. Source: screenshots of the real platform at dev1.elygrp.com,
 reviewed against everything oneby.ai currently promises. Update this doc as more
 of the product is reviewed or built.
+Updated July 8, 2026 with a 49-screenshot capability sweep (see the July 8
+section near the bottom).
 
 ## Verdict in one paragraph
 
@@ -142,3 +144,92 @@ P2 (nice before launch):
 - [ ] Add "speaks your trade" Modules section.
 - [ ] Refresh founders stretch goals (calendar sync already built).
 - [ ] Add integrations logos once confirmed real.
+
+## July 8 capability sweep (49 screenshots, bugs ignored by request)
+
+New confirmed capabilities, beyond everything above:
+
+Phone system (deeper than previously known):
+- Call types: normal, voicemail, parked, transfer, conference. Call recording
+  with playback ("only recorded calls" filter). Rich filtering: direction,
+  outcome, ring/talk time ranges, per-number, extensions.
+- Create job / Add task directly from a call; "What happened" plain-English
+  call timeline; call tagging.
+- Missed-call KPIs on Home; dark mode across the app.
+
+Automation engine (real builder, not just toggles):
+- Cross-module triggers: voicemail received, missed call, job moves to stage,
+  visit scheduled/completed, task created/status/priority/due/assigned.
+- Conditions (e.g. contact tag has any of X), multi-step actions (notify
+  teammate, custom message), plain-English rule summary, preview.
+- Missed-call text-back is a first-class example flow.
+
+Tickets (full field-service object):
+- Lifecycle actions: On my way, Reschedule, Put on hold, Cancel; status
+  banner; Office / Field / Dispatch role views on the same ticket.
+- Two-way customer SMS and calling embedded in the ticket; field photos;
+  notes; timeline with activity log; checklists and attachable inspection
+  forms (e.g. "HVAC Inspection" from the Forms module).
+- Custom fields on tickets: 8 field types (text, long text, number, dropdown,
+  multi-select, checkbox, date, rating), built inline, live-editable.
+- Parts + labor ("The work") with running total; billing card offering
+  "bill it all at once" or progress billing ("bill in stages").
+- List / Board / Schedule views inside Tickets (note: duplicates the
+  standalone Schedule; unification spec sent to Eli July 8).
+
+Price book (much deeper than the import modal suggested):
+- 118 services + 23 products in the seeded catalog; import; categories;
+  active/archived.
+- Per-item: margin/profit display, taxable toggle, variants (size/model/
+  finish each with own price), volume/contractor price tiers, bundles/kits
+  composed of other items, requirements (skills/equipment/permits) that gate
+  which techs can be scheduled.
+- "Improve with AI" description writer on items: the first LIVE AI feature
+  observed in the product.
+
+Estimates:
+- Good/Better/Best builder confirmed with per-trade starter template importer
+  (HVAC 2, Plumbing 2, Electrical 1, Roofing 1), customer view (tap-to-pick),
+  per-option deposit %, star recommended, create-price-book-item-on-the-fly,
+  add a 4th option. End-to-end send/accept/deposit still unverified.
+- Quote-to-invoice conversion endpoint exists (/quotes/{id}/convert).
+
+Billing:
+- Recurring invoices with auto-charge each cycle (weekly/monthly/quarterly/
+  yearly/custom) and first-run preview; progress billing from tickets.
+
+Tasks (project-management grade):
+- Projects, epics, watchers, custom fields, dependencies (blocked by/blocks/
+  relates to), time tracking (estimate + log), reminders, recurring tasks,
+  skill-based assignment, @-mention comments, private and shared lists,
+  Board/Table/Calendar/Timeline/Workload views, custom statuses, swimlanes.
+- Universal linking from tasks to: Lead, Contact, Client, Voicemail, Call,
+  Message, Ticket, Quote, Invoice (confirms Leads exist as an object).
+
+Settings / org:
+- Customizable job-status pipeline (9 defaults: Unscheduled, Quoted, Approved,
+  Scheduled, In progress, On hold, Completed, Invoiced, Paid), reorderable,
+  hideable. Matches the unified-lifecycle spec sent to Eli.
+- Skills & crews: jobs can require a skill, soft-warn when scheduling someone
+  without it; crews as dispatch groups with their own board column.
+- Multi-BUSINESS tenancy (separate businesses under one account) on top of
+  multi-location; "Look & branding" and "Emails we send" customization.
+- Users + groups; contacts with multi email/phone, labels, company, title,
+  account rep.
+
+Website implications (queue behind the AI-sequencing work already shipped):
+1. Missed-call text-back deserves its own feature bullet everywhere (it works
+   TODAY without the AI receptionist; competitors charge for it).
+2. Automations page/section can now show real triggers and the builder story.
+3. Price book depth (variants, contractor tiers, bundles, margin) is a
+   feature page of its own; "Improve with AI" is honest AI-today proof.
+4. Estimates starter templates strengthen the planned G/B/B section: "import
+   5 ready-made estimates for your trade" (template build prompt sent to Eli
+   July 8, covers 35 industries).
+5. Progress billing + recurring auto-charge belong on pricing/features pages.
+6. Custom fields + inspection forms + Office/Field/Dispatch views are
+   credibility details for the trades pages (dispatch-heavy buyers notice).
+7. Call recording, park/transfer/conference, extensions: table stakes rows
+   for the compare pages vs RingCentral/Nextiva/Dialpad, all honest now.
+8. Time tracking + projects/epics could anchor a "runs your office too"
+   angle for MSP/law-firm verticals.
