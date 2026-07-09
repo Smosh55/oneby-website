@@ -114,25 +114,28 @@ export const founderTiers: FounderTier[] = [
   },
 ];
 
+// Stretch goals are things NOT yet in the product. Calendar sync, the mobile
+// app, and invoicing/payments already shipped, so they were retired from this
+// list. Keep this list to genuinely-ahead features so it stays honest.
 export const stretchGoals = [
   {
     amount: "$25k",
-    title: "Calendar sync",
-    body: "Two-way Google and Microsoft sync so booked jobs land straight on your schedule.",
-  },
-  {
-    amount: "$50k",
     title: "Bilingual AI",
     body: "A natural Spanish-speaking AI so you never lose a caller to a language gap.",
   },
   {
+    amount: "$50k",
+    title: "Online booking page",
+    body: "Customers book you from your website or a link, and it lands straight on your schedule.",
+  },
+  {
     amount: "$75k",
-    title: "Mobile app",
-    body: "Your calls, summaries, and tasks in your pocket, with push notifications.",
+    title: "Automated review requests",
+    body: "After a paid job, OneBy asks happy customers for a Google review on its own.",
   },
   {
     amount: "$100k",
-    title: "Invoicing and payments",
-    body: "Turn a finished job into an invoice and a tap-to-pay link, right from the call.",
+    title: "QuickBooks and Xero sync",
+    body: "Push invoices, customers, and payments to your books automatically, no double entry.",
   },
 ];

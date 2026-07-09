@@ -15,6 +15,7 @@ import {
   Receipt,
   Search,
   MessageSquareReply,
+  Layers,
 } from "lucide-react";
 
 const features = [
@@ -60,9 +61,14 @@ const features = [
     body: "Assign a tech and a time, see the whole week, and sync two-way with Google and Microsoft calendars.",
   },
   {
+    icon: Layers,
+    title: "Good/Better/Best Estimates",
+    body: "Send three options instead of one price. Star the one you recommend, and most customers pick the middle.",
+  },
+  {
     icon: Receipt,
     title: "Invoicing & Payments",
-    body: "Quote it, invoice it, and text a pay link the customer taps to pay by card. Milestone billing for big jobs.",
+    body: "Quote it, invoice it, and text a pay link the customer taps to pay by card. Milestone and recurring billing too.",
   },
   {
     icon: History,

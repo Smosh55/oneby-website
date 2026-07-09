@@ -17,6 +17,8 @@ import {
   Sparkles,
   MessageSquareReply,
   Workflow,
+  Layers,
+  Tags,
   type LucideIcon,
 } from "lucide-react";
 
@@ -38,6 +40,8 @@ export const featureIconMap: Record<string, LucideIcon> = {
   Receipt,
   MessageSquareReply,
   Workflow,
+  Layers,
+  Tags,
 };
 
 export function getFeatureIcon(name: string): LucideIcon {

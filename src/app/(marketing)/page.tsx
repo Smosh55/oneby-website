@@ -6,6 +6,7 @@ import Solution from "@/components/Solution";
 import HearItWork from "@/components/HearItWork";
 import Stories from "@/components/Stories";
 import Industries from "@/components/Industries";
+import SpeaksYourTrade from "@/components/SpeaksYourTrade";
 import Comparison from "@/components/Comparison";
 import Features from "@/components/Features";
 import Pricing from "@/components/Pricing";
@@ -69,6 +70,7 @@ export default function Home() {
         <HearItWork />
         <Stories />
         <Industries />
+        <SpeaksYourTrade />
         <Comparison />
         <Features />
         <Pricing />

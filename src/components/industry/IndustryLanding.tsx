@@ -32,6 +32,17 @@ const trustChips = [
   "No contract",
 ];
 
+// Links to the core platform capabilities, shown on every trade page for
+// credibility and internal linking. Icons are already imported above.
+const platformLinks = [
+  { label: "AI receptionist", href: "/features/ai-receptionist", icon: Bot },
+  { label: "Missed-call text back", href: "/features/missed-call-text-back", icon: PhoneMissed },
+  { label: "Tickets", href: "/features/ticketing", icon: Ticket },
+  { label: "Scheduling", href: "/features/scheduling", icon: Calendar },
+  { label: "Estimates", href: "/features/estimates", icon: Sparkles },
+  { label: "Invoicing & payments", href: "/features/invoicing", icon: Receipt },
+];
+
 export default function IndustryLanding({
   industry,
   relatedPosts = [],
@@ -353,6 +364,39 @@ export default function IndustryLanding({
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* One platform strip: links to the core capabilities, on every trade page */}
+      <section className="pb-18 lg:pb-24">
+        <div className="container-x">
+          <Reveal className="rounded-[24px] border border-line bg-canvas p-8 sm:p-10">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+                One platform runs the whole job.
+              </h2>
+              <p className="mt-3 text-muted">
+                From the first ring to paid, all in one place. Here is what
+                powers your {industry.shortName} workspace.
+              </p>
+            </div>
+            <div className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-3">
+              {platformLinks.map((p) => (
+                <Link
+                  key={p.href}
+                  href={p.href}
+                  className="group flex items-center gap-3 rounded-xl border border-line bg-surface px-4 py-3 transition-colors hover:border-blue/40"
+                >
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue">
+                    <p.icon size={18} />
+                  </span>
+                  <span className="text-[0.9rem] font-semibold text-navy">
+                    {p.label}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 

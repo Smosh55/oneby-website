@@ -487,6 +487,7 @@ export const features: Feature[] = [
       "Invoice the finished job in a couple of taps",
       "Text a pay link, take a card, get paid faster",
       "Milestone billing for deposits and big installs",
+      "Recurring invoices that auto-charge the card each cycle",
     ],
     how: [
       { step: "Send the quote", body: "Turn the job into a quote and text it over for one-tap approval." },
@@ -496,8 +497,69 @@ export const features: Feature[] = [
     faqs: [
       { q: "Can customers pay by card?", a: "Yes. They tap the texted pay link and pay by card, no app or login needed." },
       { q: "Can I bill big jobs in stages?", a: "Yes. Use milestone billing for a deposit up front and the balance on completion." },
+      { q: "Can I bill recurring customers automatically?", a: "Yes. Set up a recurring invoice (weekly, monthly, quarterly, or yearly) and OneBy charges the card on file each cycle, with no manual sending." },
     ],
     cardline: "Quote, bill, and get paid in one place.",
+  },
+  {
+    slug: "estimates",
+    name: "Estimates",
+    group: "Jobs & billing",
+    icon: "Layers",
+    metaTitle: "Good, Better, Best Estimates That Win Bigger Jobs",
+    metaDescription:
+      "Send three options instead of one price. OneBy builds Good, Better, Best estimates with a recommended pick and deposits, and most customers choose the middle.",
+    keywords: ["good better best estimates", "option based pricing", "service estimate software", "three option quote"],
+    heroEyebrow: "Estimates",
+    heroTitle: "Give them three choices, not one price.",
+    heroSub:
+      "A single price is a yes or no. Three options turns the question into which one, and most customers pick the middle. OneBy builds Good, Better, Best estimates in a couple of taps, with a recommended option and a deposit on approval.",
+    bullets: [
+      "Good, Better, Best options on one clean estimate",
+      "Star the option you recommend, and most people take it",
+      "Each option pulls from your price book and can collect a deposit",
+      "The customer taps to pick and approve, right from their phone",
+    ],
+    how: [
+      { step: "Build three options", body: "Start from a trade template or your price book. Good, Better, and Best, each with its own line items and total." },
+      { step: "Recommend one", body: "Star the middle option so it stands out as the pick, which is the one most customers choose." },
+      { step: "Send and get paid", body: "The customer sees a clean, tap-to-pick version, approves the option they want, and puts a deposit down to start." },
+    ],
+    faqs: [
+      { q: "Why offer three options?", a: "One price is a yes-or-no decision. Three options shifts the customer to choosing which level they want, which lifts your average ticket and closes more jobs." },
+      { q: "Do I have to build them from scratch?", a: "No. Start from a ready-made set for your trade or reuse your own template, then edit anything before you send." },
+    ],
+    cardline: "Good, Better, Best. Most pick the middle.",
+  },
+  {
+    slug: "price-book",
+    name: "Price Book",
+    group: "Jobs & billing",
+    icon: "Tags",
+    metaTitle: "Flat-Rate Price Book for Service Businesses",
+    metaDescription:
+      "Set your prices once and reuse them on every estimate and invoice. Variants, contractor tiers, bundles, and margin tracking, with AI to write the descriptions.",
+    keywords: ["flat rate price book", "service pricing software", "price book software", "flat rate pricing"],
+    heroEyebrow: "Price Book",
+    heroTitle: "Price it once. Use it everywhere.",
+    heroSub:
+      "Your services and parts, priced and ready. Build an estimate or an invoice from the same catalog every time, so quoting is fast and your prices stay consistent across the whole team.",
+    bullets: [
+      "One catalog of services and parts, reused on every quote and invoice",
+      "Variants and volume or contractor pricing tiers",
+      "Bundles and kits that combine parts and labor into one line",
+      "Margin tracking, so you see the profit on every item",
+    ],
+    how: [
+      { step: "Build your book", body: "Add your services and parts with prices, or import a ready-made starter for your trade and trim it." },
+      { step: "Quote in seconds", body: "Type a line on any estimate or invoice and pick from the book. No re-keying prices, no guessing." },
+      { step: "Keep it sharp", body: "Track margin per item, set contractor and volume tiers, and let AI draft clean customer-facing descriptions." },
+    ],
+    faqs: [
+      { q: "Can I set different prices for contractors or volume?", a: "Yes. Each item can carry price tiers, so a bulk or contractor rate applies automatically at the right quantity." },
+      { q: "What are bundles?", a: "A bundle combines several products and services into one priced line, like an install that includes the equipment and the labor, so you add it in one tap." },
+    ],
+    cardline: "Set prices once, reuse everywhere.",
   },
 ];
 
