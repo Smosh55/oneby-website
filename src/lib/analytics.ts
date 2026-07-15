@@ -5,17 +5,28 @@
 
 type Props = Record<string, string | number | boolean | undefined>;
 
+// Which landing-page A/B variant this visitor was served ("ai" | "org"), set as
+// a cookie by middleware. Tagging every event with it is what lets us compare
+// conversion rate per variant instead of just raw traffic.
+function variant(): string | undefined {
+  if (typeof document === "undefined") return undefined;
+  const m = document.cookie.match(/(?:^|;\s*)ob-variant=(ai|org)\b/);
+  return m?.[1];
+}
+
 export function track(event: string, props: Props = {}) {
   if (typeof window === "undefined") return;
   const w = window as unknown as {
     gtag?: (...args: unknown[]) => void;
     plausible?: (e: string, opts?: { props: Props }) => void;
   };
+  const v = variant();
+  const tagged: Props = v ? { variant: v, ...props } : props;
   try {
-    w.gtag?.("event", event, props);
-    w.plausible?.(event, { props });
+    w.gtag?.("event", event, tagged);
+    w.plausible?.(event, { props: tagged });
     if (process.env.NODE_ENV !== "production") {
-      console.debug("[track]", event, props);
+      console.debug("[track]", event, tagged);
     }
   } catch {
     /* swallow */
