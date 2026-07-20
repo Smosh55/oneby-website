@@ -560,10 +560,44 @@ function PhoneArt() {
           <p className="mt-4 text-[0.7rem] font-semibold uppercase tracking-wide text-white/40">
             Incoming, answered by AI
           </p>
-          <div className="mt-2 space-y-1.5">
-            <div className="h-2 w-full rounded-full bg-white/15" />
-            <div className="h-2 w-4/5 rounded-full bg-white/15" />
-            <div className="h-2 w-2/3 rounded-full bg-blue/40" />
+
+          {/* caller */}
+          <div className="mt-3 flex items-center gap-2.5">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-[0.7rem] font-bold text-white">
+              RM
+            </span>
+            <div className="min-w-0 leading-tight">
+              <p className="truncate text-[0.82rem] font-semibold text-white">
+                Rebecca M.
+              </p>
+              <p className="text-[0.68rem] text-white/45">
+                (602) 555-0148 · 0:42
+              </p>
+            </div>
+            <span className="ml-auto rounded-md bg-green/20 px-1.5 py-0.5 text-[0.6rem] font-semibold text-green-200">
+              Booked
+            </span>
+          </div>
+
+          {/* AI summary */}
+          <div className="mt-3 rounded-xl bg-white/[0.06] p-3">
+            <p className="text-[0.58rem] font-semibold uppercase tracking-wide text-white/40">
+              AI summary
+            </p>
+            <p className="mt-1 text-[0.75rem] leading-snug text-white/80">
+              New customer, upstairs AC out since last night. Wants same-day,
+              home after 3pm.
+            </p>
+          </div>
+
+          {/* resulting task */}
+          <div className="mt-2 flex items-center gap-2 rounded-lg bg-blue/20 px-2.5 py-1.5">
+            <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-blue">
+              <Check size={10} strokeWidth={3} className="text-white" />
+            </span>
+            <p className="text-[0.7rem] font-medium text-white/85">
+              Book A/C diagnostic, today 3 to 5pm
+            </p>
           </div>
         </div>
 
