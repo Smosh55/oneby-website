@@ -40,12 +40,12 @@ So what does a real service business actually pay? An example, using their publi
 | --- | --- | --- |
 | Phone seat | $23 | Included |
 | AI answering, ~100 calls/mo | $49 (Sona tier) | Included |
-| **Total, normal month** | **≈ $72/mo** | **$29/mo founders ($39 retail)** |
-| **Total, busy month (~250 AI calls)** | **≈ $122/mo** | **Still $29/mo founders** |
+| **Total, normal month** | **≈ $72/mo** | **$49/mo ($39 founders)** |
+| **Total, busy month (~250 AI calls)** | **≈ $122/mo** | **Still $49/mo flat** |
 
 Add a second seat and Quo's number climbs again. And because Sona is credit-metered, your best month, the one where the phone won't stop ringing, is also your most expensive one. That's exactly backwards for a business that wants every call answered.
 
-OneBy is one flat price. Founders pricing is $29/mo for Solo, locked for two years ($39 retail after launch). Busy season doesn't change your bill.
+OneBy is one flat price. The AI Suite is $49/mo, and founders lock $39 for two years. Busy season doesn't change your bill.
 
 ## Where Sona Stops, and Where OneBy Keeps Going
 

@@ -194,12 +194,12 @@ export const comparisons: Comparison[] = [
       { label: "Built specifically for the trades", oneby: true, them: "Broad SMB" },
       {
         label: "Example: 1 seat + AI on ~100 calls/mo",
-        oneby: "$29 flat (founders)",
+        oneby: "$49 flat ($39 founders)",
         them: "≈ $72/mo",
       },
       {
         label: "Example: busy month, ~250 AI calls",
-        oneby: "$29 flat (founders)",
+        oneby: "$49 flat ($39 founders)",
         them: "≈ $122/mo",
       },
     ],
@@ -214,7 +214,7 @@ export const comparisons: Comparison[] = [
       },
       {
         q: "Isn't Quo cheaper than OneBy?",
-        a: "The seat is, the total often isn't. Per quo.com as of July 2026, plans run $15 to $35 per user/month (annual), and Sona AI is metered separately at $25 to $199/mo with $0.45 to $1.00 per-call overage. One seat plus AI on about 100 calls a month lands near $72/mo. OneBy founders pricing is $29/mo flat, AI included ($39 retail at launch).",
+        a: "The seat is, the total often isn't. Per quo.com as of July 2026, plans run $15 to $35 per user/month (annual), and Sona AI is metered separately at $25 to $199/mo with $0.45 to $1.00 per-call overage. One seat plus AI on about 100 calls a month lands near $72/mo. OneBy is $49/mo flat, AI included and no per-call meter, with founders locked at $39.",
       },
       {
         q: "Does Quo's AI run the job like OneBy does?",
@@ -1258,7 +1258,7 @@ export const comparisons: Comparison[] = [
     pickOneByIf:
       "You want every estimate call answered and turned into a booked job, phone system included. Yardbook is available today; OneBy launches October 2026.",
     faqs: [
-      { q: "Is OneBy free like Yardbook?", a: "No. OneBy is a paid all-in-one that includes the phone system and AI answering, with founders pricing from $29/mo. The missed calls it catches typically pay for it." },
+      { q: "Is OneBy free like Yardbook?", a: "No. OneBy is a paid all-in-one that includes the phone system and AI answering, with founders pricing from $39/mo. The missed calls it catches typically pay for it." },
       { q: "Does Yardbook answer your phone?", a: "No, it is business-management software. OneBy is the calling and AI-answering layer that captures the calls." },
     ],
   },
