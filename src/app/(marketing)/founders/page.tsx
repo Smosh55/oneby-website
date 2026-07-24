@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import {
   Check,
   Lock,
@@ -12,44 +11,38 @@ import {
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import WaitlistForm from "@/components/WaitlistForm";
-import {
-  founderTiers,
-  stretchGoals,
-  founderPricing,
-  type FounderTier,
-} from "@/data/founders";
+import { founderPerks, stretchGoals, founderPricing } from "@/data/founders";
 import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
-import ReserveButton from "@/components/ReserveButton";
 
 const base = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
 
 export const metadata: Metadata = {
   title: "Become a OneBy Founding Member",
   description:
-    "Back OneBy early and lock a founder rate we hold for two years. Get a year of service, an optional plug-and-play phone, and an honest price that will not jump the day we launch.",
+    "Back OneBy before launch and lock the AI Suite at $39 a month for two years, while everyone else pays $49. Get it free for your first 6 months. The software is free and your line is $15, always.",
   alternates: { canonical: "/founders" },
 };
 
 const faqs = [
   {
-    q: "What does \"founder rate locked for two years\" actually mean?",
-    a: `You pay your pledge today, which covers your first full year, and that year starts the day your service is activated, not the day you pledge. After that, your plan renews at your locked founder rate ($${founderPricing.soloLockedMonthly}/mo for Solo, $${founderPricing.proLockedMonthly}/user for Pro) and stays there for two more years. Standard pricing will climb over that window. Yours won't. When the two years are up you roll to standard pricing, and we will always tell you before anything changes.`,
+    q: "What does the founder rate actually get me?",
+    a: `The software is free and your line is $${founderPricing.lineMonthly} a month, always. As a founder you get the full AI Suite free for your first 6 months (the public gets a 30-day trial), and after that it locks at $${founderPricing.founderMonthly}/mo for two years while everyone else pays $${founderPricing.standardMonthly}. When the two years are up you roll to standard pricing, and we always tell you before anything changes.`,
   },
   {
-    q: "Why isn't it free forever after I pay?",
-    a: "Because running your line costs us real money every single month: the AI that answers and writes things up, and the actual phone calls. A \"pay once, free forever\" promise would force us to cut corners later or go out of business, and then you'd have nothing. A fair founder rate, locked for two years, keeps OneBy healthy and your price honest. That's a deal we can both keep.",
+    q: "Is there a per-call meter or a surprise bill?",
+    a: "No. The AI Suite is a flat monthly price with generous usage included. There is no per-call meter and no surprise bill, no matter how busy your month gets.",
   },
   {
     q: "What's live on day one?",
-    a: "Early access opens to founding members in October, in the order you backed. Day one is the full platform: calls and texting, jobs, scheduling, invoicing, and AI call summaries with drafted follow-ups on every call. The AI receptionist that answers calls live rolls out to founding members first, shortly after. Phones ship as your tier unlocks, and we'll keep you posted with real updates, not vague ones.",
+    a: "Early access opens to founding members in October, in the order you backed. Day one is the full platform: calls and texting, jobs, scheduling, invoicing, and AI call summaries with drafted follow-ups on every call. The AI receptionist that answers calls live rolls out to founding members first, shortly after.",
   },
   {
-    q: "Do I have to take a phone?",
-    a: "Not at all. Founding Solo uses the phone and number you already have. The OneBy Phone and Office Starter tiers add a ready-to-go device for folks who want to plug in and forget about setup.",
+    q: "Do I have to pay anything to claim it?",
+    a: "No. Claiming your founder spot is free, no card. You add a payment method later, when early access opens and you decide to turn the AI Suite on.",
   },
   {
     q: "What if it's not for me?",
-    a: "You're covered by a straightforward refund window, and you're never locked into a contract. The only thing locked is your price, and only if you want it.",
+    a: "You're never locked into a contract. Start the free CRM, add the $15 line when you want a phone, and try the AI Suite free. Cancel anytime.",
   },
 ];
 
@@ -100,30 +93,33 @@ export default function FoundersPage() {
               <Gift size={14} /> Founding member pre-sale, launching soon
             </span>
             <h1 className="mt-5 text-[2.5rem] leading-[1.05] font-extrabold tracking-tight text-navy sm:text-6xl">
-              Get in early. Lock your{" "}
-              <span className="text-gradient">rate for two years.</span>
+              Get in early. Lock the AI at{" "}
+              <span className="text-gradient">${founderPricing.founderMonthly}.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
               OneBy answers your calls, writes the summary, and turns each one
-              into the next thing to do. Back us now and you lock a founder rate
-              we hold for two full years, plus an optional phone that works the
-              second you plug it in.
+              into the next thing to do. The software is free and your line is
+              ${founderPricing.lineMonthly} a month, always. Founders get the
+              full AI Suite free for 6 months, then locked at $
+              {founderPricing.founderMonthly} while everyone else pays $
+              {founderPricing.standardMonthly}.
             </p>
             <p className="mt-3 text-sm font-semibold text-navy">
               Founder rates end when early access opens in October. After that,
               standard pricing applies.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a href="#tiers" className="btn btn-primary text-base">
-                See the tiers <ArrowRight size={18} />
+              <a href="#claim" className="btn btn-primary text-base">
+                Claim your spot <ArrowRight size={18} />
               </a>
               <a href="#how" className="btn btn-ghost text-base">
-                How the price lock works
+                How the lock works
               </a>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted">
               <span className="inline-flex items-center gap-1.5">
-                <Lock size={16} className="text-green" /> Rate locked for two years
+                <Lock size={16} className="text-green" /> Locked at $
+                {founderPricing.founderMonthly} for two years
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <ShieldCheck size={16} className="text-green" /> No contract, cancel anytime
@@ -137,7 +133,7 @@ export default function FoundersPage() {
         </div>
       </section>
 
-      {/* How the price lock works (transparency) */}
+      {/* How the lock works (transparency) */}
       <section id="how" className="border-y border-line bg-canvas/50 py-16 lg:py-20">
         <div className="container-x">
           <div className="mx-auto max-w-2xl text-center">
@@ -145,7 +141,7 @@ export default function FoundersPage() {
               <Lock size={14} /> Founder pricing, in plain numbers
             </span>
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              Your founder rate, frozen for two years.
+              Your founder rate, in plain numbers.
             </h2>
             <p className="mt-4 text-muted">
               No fine print, no bait and switch. Here is exactly what you pay,
@@ -153,25 +149,19 @@ export default function FoundersPage() {
             </p>
           </div>
 
-          {/* standard vs locked */}
+          {/* standard vs founder */}
           <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2">
             <PriceCard
               label="Standard price (later)"
               tone="muted"
-              rows={[
-                ["Solo", `$${founderPricing.soloRetailMonthly}/mo`],
-                ["Pro", `$${founderPricing.proRetailMonthly}/user`],
-              ]}
+              rows={[["AI Suite", `$${founderPricing.standardMonthly}/mo`]]}
               foot="What everyone else pays after launch."
             />
             <PriceCard
               label="Your founder rate (locked 2 years)"
               tone="primary"
-              rows={[
-                ["Solo", `$${founderPricing.soloLockedMonthly}/mo`],
-                ["Pro", `$${founderPricing.proLockedMonthly}/user`],
-              ]}
-              foot="Held for two years past your first year. Then standard pricing."
+              rows={[["AI Suite", `$${founderPricing.founderMonthly}/mo`]]}
+              foot="Free for your first 6 months, then locked for two years."
             />
           </div>
 
@@ -180,18 +170,18 @@ export default function FoundersPage() {
             {[
               {
                 n: "1",
-                t: "You pledge today",
-                b: "Your pledge covers your first full year of OneBy. That part is done, paid, and yours.",
+                t: "Claim your spot, free",
+                b: "No card. You're a founding member and your rate is reserved.",
               },
               {
                 n: "2",
-                t: "Year two renews at your locked rate",
-                b: `After year one, your plan renews at your founder rate, $${founderPricing.soloLockedMonthly}/mo for Solo. Not the standard $${founderPricing.soloRetailMonthly}.`,
+                t: "6 months of AI, free",
+                b: "At launch the full AI Suite is on us for six months, not the public 30 days.",
               },
               {
                 n: "3",
-                t: "Your rate holds for two years",
-                b: "Your founder rate stays locked for two years. Standard prices climb in that window. Yours doesn't, until the lock ends and we give you fair notice.",
+                t: `Then $${founderPricing.founderMonthly}/mo, locked 2 years`,
+                b: `While standard is $${founderPricing.standardMonthly}. Your $${founderPricing.lineMonthly} line and free software never change.`,
               },
             ].map((s) => (
               <div
@@ -212,14 +202,13 @@ export default function FoundersPage() {
             <ShieldCheck size={20} className="mt-0.5 shrink-0 text-blue" />
             <p className="text-sm leading-relaxed text-ink">
               <span className="font-semibold text-navy">
-                Why we don't promise "free forever."
+                Why the software is free but the AI isn't.
               </span>{" "}
-              Every line costs real money to run each month: the AI that answers
-              and writes things up, and the actual phone calls. A pay-once,
-              free-forever deal would force us to cut corners later or fold, and
-              then you'd be left with nothing. A fair founder rate, locked for
-              two years, keeps OneBy healthy and keeps your price honest. We
-              would rather both still be here in five years.
+              The CRM costs us very little to run, so it's free, forever. The AI
+              that answers your calls, and the calls themselves, cost real money
+              every month. So the AI Suite is a fair flat price with no per-call
+              meter, and founders lock it low for two years. A deal we can both
+              keep.
             </p>
           </div>
         </div>
@@ -274,33 +263,63 @@ export default function FoundersPage() {
         </div>
       </section>
 
-      {/* Tiers */}
-      <section id="tiers" className="py-16 lg:py-24">
+      {/* The offer (one clean card) */}
+      <section id="claim" className="py-16 lg:py-24">
         <div className="container-x">
           <div className="mx-auto max-w-2xl text-center">
             <span className="eyebrow justify-center text-blue">
-              <Sparkles size={14} /> Pick your founding tier
+              <Gift size={14} /> Your founder offer
             </span>
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              Every tier locks your founder rate for two years.
+              One offer. Claim it free.
             </h2>
             <p className="mt-4 text-muted">
-              Start with what you have, or grab a phone that works out of the box.
-              The deeper tiers just add hardware and hands-on help.
+              No tiers to compare, no pledge to puzzle over. Lock the rate now,
+              decide the rest at launch.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {founderTiers.map((t) => (
-              <TierCard key={t.id} tier={t} />
-            ))}
+          <div className="mx-auto mt-10 max-w-xl">
+            <div className="relative rounded-3xl border border-blue/40 bg-blue/[0.03] p-8 shadow-[var(--shadow-lg)] sm:p-10">
+              <span className="absolute -top-3 left-8 rounded-full bg-blue px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
+                Founding member
+              </span>
+              <h3 className="text-2xl font-extrabold tracking-tight text-navy">
+                Free to claim
+              </h3>
+              <div className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-md bg-green/10 px-2 py-1 text-[0.78rem] font-semibold text-green-600">
+                <Lock size={12} /> then ${founderPricing.founderMonthly}/mo, locked 2 years
+              </div>
+              <ul className="mt-6 space-y-3">
+                {founderPerks.map((p) => (
+                  <li
+                    key={p}
+                    className="flex items-start gap-2.5 text-sm text-ink"
+                  >
+                    <Check
+                      size={16}
+                      strokeWidth={3}
+                      className="mt-0.5 shrink-0 text-green-600"
+                    />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-7">
+                <WaitlistForm />
+              </div>
+              <p className="mt-4 text-center text-xs text-faint">
+                No card to claim. Running a team?{" "}
+                <a
+                  href="/demo"
+                  className="font-semibold text-blue hover:underline"
+                >
+                  Talk to us about founder seats
+                </a>
+                .
+              </p>
+            </div>
           </div>
-
-          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-faint">
-            Phones come pre-configured for OneBy and ready to plug in. Year one of
-            service is included in every paid tier; it renews after at your locked
-            founder rate.
-          </p>
         </div>
       </section>
 
@@ -394,19 +413,19 @@ export default function FoundersPage() {
             Be a founder, not a follower.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/70">
-            Lock a founder rate OneBy holds for two years and help shape what we
-            build next. Pick a tier above, or at least save your spot in line,
-            free.
+            Lock the AI Suite at ${founderPricing.founderMonthly} a month for two
+            years and help shape what we build next. Claim your spot free, before
+            it's ${founderPricing.standardMonthly}.
           </p>
           <div className="mt-8">
             <WaitlistForm />
           </div>
           <div className="mt-6">
             <a
-              href="#tiers"
+              href="#how"
               className="btn border border-white/25 text-base text-white hover:bg-white/10"
             >
-              Compare founder tiers
+              How the lock works
             </a>
           </div>
         </div>
@@ -462,71 +481,6 @@ function PriceCard({
   );
 }
 
-function TierCard({ tier }: { tier: FounderTier }) {
-  return (
-    <div
-      className={`relative flex flex-col rounded-2xl border p-6 ${
-        tier.highlight
-          ? "border-blue/40 bg-blue/[0.03] shadow-[var(--shadow-lg)]"
-          : "border-line bg-surface"
-      }`}
-    >
-      {tier.badge && (
-        <span
-          className={`absolute -top-3 left-6 rounded-full px-2.5 py-1 text-[11px] font-bold ${
-            tier.highlight ? "bg-blue text-white" : "bg-navy text-white"
-          }`}
-        >
-          {tier.badge}
-        </span>
-      )}
-
-      <div className="flex items-center gap-2">
-        {tier.hardware ? (
-          <Phone size={16} className="text-blue" />
-        ) : (
-          <Sparkles size={16} className="text-blue" />
-        )}
-        <h3 className="font-bold text-navy">{tier.name}</h3>
-      </div>
-
-      <div className="mt-3 flex items-baseline gap-1">
-        <span className="text-4xl font-extrabold tracking-tight text-navy">
-          ${tier.price}
-        </span>
-        <span className="text-sm font-medium text-faint">one time</span>
-      </div>
-
-      {tier.locked ? (
-        <div className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-md bg-green/10 px-2 py-1 text-[0.78rem] font-semibold text-green-600">
-          <Lock size={12} /> then {tier.locked}, locked 2 years
-        </div>
-      ) : (
-        <div className="mt-2 text-[0.78rem] font-medium text-faint">
-          One-time pledge
-        </div>
-      )}
-
-      <p className="mt-4 text-sm leading-relaxed text-muted">{tier.tagline}</p>
-
-      <ul className="mt-4 space-y-2.5">
-        {tier.includes.map((it) => (
-          <li key={it} className="flex items-start gap-2.5 text-sm text-ink">
-            <Check
-              size={16}
-              strokeWidth={3}
-              className="mt-0.5 shrink-0 text-green-600"
-            />
-            {it}
-          </li>
-        ))}
-      </ul>
-
-      <ReserveButton tier={tier.id} primary={tier.highlight} className="mt-6 w-full" />
-    </div>
-  );
-}
-
 function PhoneArt() {
   return (
     <div className="relative mx-auto w-full max-w-sm">
@@ -536,7 +490,7 @@ function PhoneArt() {
           <Lock size={11} /> Locked 2 years
         </p>
         <p className="text-sm font-extrabold text-navy">
-          ${founderPricing.soloLockedMonthly}/mo
+          ${founderPricing.founderMonthly}/mo
         </p>
       </div>
 

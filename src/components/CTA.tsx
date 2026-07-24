@@ -35,7 +35,7 @@ export default function CTA() {
                 <WaitlistForm />
               </div>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/60">
-                {["Founder rate locked 2 years", "Keep your number", "No contract"].map(
+                {["No per-call meter", "Keep your number", "No contract"].map(
                   (t) => (
                     <span key={t} className="inline-flex items-center gap-1.5">
                       <CheckCircle2 size={16} className="text-green" /> {t}

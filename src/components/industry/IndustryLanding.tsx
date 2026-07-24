@@ -107,9 +107,9 @@ export default function IndustryLanding({
                   href="/founders"
                   className="transition-colors hover:text-navy"
                 >
-                  Founders pricing from{" "}
-                  <span className="font-bold text-navy">$29/mo</span>, locked
-                  for two years
+                  Founders lock the AI at{" "}
+                  <span className="font-bold text-navy">$39/mo</span>, not the
+                  $49 standard
                 </Link>
               </p>
               <div className="mt-7 inline-flex items-baseline gap-2">

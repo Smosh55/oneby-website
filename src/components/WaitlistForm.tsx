@@ -98,7 +98,7 @@ export default function WaitlistForm() {
               Skip the line: become a founding member
             </span>
             <span className="block text-[0.82rem] text-muted">
-              Lock your founder rate for two years. Limited spots.
+              Lock the AI at $39 for two years. Limited spots.
             </span>
           </span>
           <ArrowRight size={18} className="shrink-0 text-green-600" />
