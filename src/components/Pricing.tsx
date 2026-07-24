@@ -13,14 +13,14 @@ export default function Pricing() {
             Plans that pay for themselves in one saved job.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            Cheap lines for the phones that just dial. AI seats only on the
-            lines that book jobs. Founding members lock these rates for two years.
+            The CRM is free. Your line is $15. Add the AI Suite where the jobs
+            come in, free for 30 days. No per-call meter, no surprise bill.
           </p>
           <Link
             href="/pricing"
             className="mt-4 inline-flex text-sm font-semibold text-blue hover:underline"
           >
-            Build your plan with the estimator →
+            See the full comparison →
           </Link>
         </Reveal>
 

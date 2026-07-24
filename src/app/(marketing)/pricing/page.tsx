@@ -9,7 +9,7 @@ import { jsonLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "Pricing: Simple Plans for the Whole Platform",
   description:
-    "Put a basic line on the phones that just dial, and AI seats on the lines that book jobs. Estimate your plan in seconds, then lock founding pricing before launch.",
+    "The CRM is free. A business line is $15 a month, and the AI Suite is $49 with a 30-day free trial and no per-call meter. Founders lock a better rate before launch.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -18,15 +18,19 @@ const cols = plans.map((p) => p.name);
 const pricingFaqs = [
   {
     q: "What's included in each plan?",
-    a: "Every plan includes the full CRM: AI receptionist, ticketing, scheduling, invoicing, and SMS, plus calling and desk phones. Higher plans add more users, integrations, and priority support.",
+    a: "The CRM is free on every plan: tickets, scheduling, invoicing, estimates, and the customer timeline. The $15 Line adds your business phone, SMS, and desk phones. The AI Suite adds the AI receptionist, summaries, and automations.",
+  },
+  {
+    q: "Is the AI metered or charged per call?",
+    a: "No. The AI Suite is a flat monthly price with generous usage included. There is no per-call meter and no surprise bill, no matter how busy your month gets.",
   },
   {
     q: "Do I need a credit card to start?",
     a: "No. Start the CRM free with no card. You add a card when you're ready to put your business line on OneBy and go live, and you keep your number.",
   },
   {
-    q: "What's the difference between Line, Solo, and Pro?",
-    a: "Line is the phone system for phones that just need a dialtone. Solo adds the AI that answers, summarizes, and turns calls into jobs. Pro is Solo for a whole team, with shared inbox, integrations, and priority support.",
+    q: "What's the difference between Free, Line, and the AI Suite?",
+    a: "Free is the whole CRM at no cost. Line adds your business phone for $15 a month per user. The AI Suite adds the AI that answers, summarizes, and turns calls into jobs, for $49 a month per seat, with a 30-day free trial.",
   },
   {
     q: "Can I change plans later?",
@@ -101,14 +105,15 @@ export default function PricingPage() {
             Pricing
           </span>
           <h1 className="mx-auto mt-5 max-w-3xl text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[3.25rem]">
-            One simple price for the whole platform.
+            Free software. You just keep the phone on.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-            Every plan includes the full CRM: AI receptionist, ticketing,
-            scheduling, invoicing, and SMS. Put a cheap Line on the phones that
-            just dial, and an AI seat where the jobs come in. Early access opens
-            to founding members in October 2026, and founders lock these rates
-            for two years.
+            The CRM is free, forever: tickets, scheduling, invoicing, estimates,
+            and your customer timeline. Your business line is $15 a month, and
+            the AI Suite that answers and books the job is $49, free for 30 days,
+            with generous usage included and no per-call meter. Early access
+            opens to founding members in October 2026, and founders lock a better
+            rate for two years.
           </p>
         </div>
       </section>

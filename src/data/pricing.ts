@@ -1,12 +1,13 @@
 // Pricing data shared by the homepage preview (Pricing.tsx) and the full
-// /pricing page. Model: a cheap "Line" (the phone system) plus AI plans (Solo,
-// Pro) that add the brain. Priced to undercut the AI-receptionist market while
-// staying margin-safe (cost to serve a Solo is ~$75/yr).
+// /pricing page. Model: the CRM software is free; a business phone Line is
+// $15/user/mo (the always-on floor); the AI Suite adds the AI receptionist and
+// automation for $49/user/mo, all-in, with a 30-day free trial and generous
+// usage included (no visible per-call meter). Founders lock a better rate.
 
 export type Plan = {
   name: string;
   tagline: string;
-  price: string; // "15" or "Custom"
+  price: string; // "0", "15", "49", or "Custom"
   unit: string;
   cta: string;
   ctaClass: string; // btn-* class for the homepage card
@@ -16,58 +17,57 @@ export type Plan = {
 
 export const plans: Plan[] = [
   {
-    name: "Line",
-    tagline: "For phones that just need to work",
-    price: "15",
-    unit: "/line / mo",
+    name: "Free",
+    tagline: "The whole CRM, on the house",
+    price: "0",
+    unit: "forever",
     cta: "Start free",
     ctaClass: "btn-ghost",
     features: [
-      "Business calling & SMS",
-      "Desk phone with auto-provisioning",
-      "Online fax",
-      "Keep your number (free porting)",
-      "Mobile app",
-      "Customer timeline",
+      "Tickets, scheduling, and invoicing",
+      "Good, Better, Best estimates and price book",
+      "Customer timeline and tasks",
+      "Add a phone line whenever you're ready",
     ],
   },
   {
-    name: "Solo",
+    name: "Line",
+    tagline: "Your business phone, always $15",
+    price: "15",
+    unit: "/user / mo",
+    cta: "Add a line",
+    ctaClass: "btn-navy",
+    features: [
+      "Everything in Free",
+      "Business calling and SMS",
+      "Desk phone with auto-provisioning",
+      "Online fax and mobile app",
+      "Keep your number (free porting)",
+      "Missed-call text back",
+    ],
+  },
+  {
+    name: "AI Suite",
     tagline: "The AI that answers and books the job",
-    price: "39",
-    unit: "/mo",
-    cta: "Start free",
+    price: "49",
+    unit: "/user / mo",
+    cta: "Try the AI free",
     ctaClass: "btn-primary",
     featured: true,
     features: [
       "Everything in Line",
       "24/7 AI receptionist",
-      "Post-call automation on every call",
-      "Create AND assign tasks automatically",
-      "Call recording + AI search",
-      "Popular CRM & tool integrations",
-    ],
-  },
-  {
-    name: "Pro",
-    tagline: "For teams that run on the phone",
-    price: "49",
-    unit: "/user / mo",
-    cta: "Start free",
-    ctaClass: "btn-navy",
-    features: [
-      "Everything in Solo",
-      "Multiple users & numbers",
-      "Shared team inbox & workflow automation",
-      "Advanced analytics & reporting",
-      "Custom integrations",
-      "Priority support",
+      "Call summaries and auto-created tasks",
+      "Automations across calls and jobs",
+      "Call recording and AI search",
+      "Generous usage included, no per-call meter",
     ],
   },
 ];
 
 // Feature comparison matrix. value: true = included, false = not,
-// or a string for plan-specific detail. Columns map to plans above.
+// or a string for plan-specific detail. Columns map to plans above
+// (Free, Line, AI Suite).
 export type MatrixRow = {
   label: string;
   values: [boolean | string, boolean | string, boolean | string];
@@ -76,37 +76,44 @@ export type MatrixGroup = { group: string; rows: MatrixRow[] };
 
 export const matrix: MatrixGroup[] = [
   {
-    group: "Calling & devices (on every line)",
+    group: "The CRM (free, always)",
     rows: [
-      { label: "Cloud business phone system", values: [true, true, true] },
-      { label: "Keep / port your number", values: [true, true, true] },
-      { label: "Included phone numbers", values: ["1", "1", "1 / user"] },
-      { label: "Business SMS", values: [true, true, true] },
-      { label: "Online fax", values: [true, true, true] },
-      { label: "Desk phones with auto-provisioning", values: [true, true, true] },
-      { label: "Mobile app", values: [true, true, true] },
-      { label: "Multi-location routing", values: [false, false, true] },
+      { label: "Tickets, scheduling, and invoicing", values: [true, true, true] },
+      { label: "Good, Better, Best estimates", values: [true, true, true] },
+      { label: "Price book", values: [true, true, true] },
+      { label: "Customer timeline and tasks", values: [true, true, true] },
+      { label: "Team members and roles", values: [true, true, true] },
     ],
   },
   {
-    group: "AI & automation (the brain)",
+    group: "Phone system (the $15 line)",
     rows: [
-      { label: "AI receptionist", values: [false, "24/7", "24/7"] },
-      { label: "Call transcription & summaries", values: [false, true, true] },
-      { label: "Create AND assign tasks", values: [false, true, true] },
-      { label: "Workflow automation", values: [false, true, true] },
-      { label: "Call recording + AI search", values: [false, true, true] },
+      { label: "Business calling and SMS", values: [false, true, true] },
+      { label: "Keep / port your number", values: [false, true, true] },
+      { label: "Desk phones with auto-provisioning", values: [false, true, true] },
+      { label: "Online fax", values: [false, true, true] },
+      { label: "Mobile app", values: [false, true, true] },
+      { label: "Missed-call text back", values: [false, true, true] },
     ],
   },
   {
-    group: "Collaboration & admin",
+    group: "AI Suite (the brain)",
     rows: [
-      { label: "Included users", values: ["1", "1", "2+"] },
-      { label: "Customer timeline", values: [true, true, true] },
-      { label: "Shared team inbox", values: [false, false, true] },
-      { label: "Analytics & reporting", values: ["Basic", "Standard", "Advanced"] },
-      { label: "CRM & tool integrations", values: [false, "Popular tools", "Custom"] },
-      { label: "Support", values: ["Email", "Priority", "Dedicated"] },
+      { label: "24/7 AI receptionist", values: [false, false, true] },
+      { label: "Call summaries and auto-tasks", values: [false, false, true] },
+      { label: "Automations across calls and jobs", values: [false, false, true] },
+      { label: "Call recording + AI search", values: [false, false, true] },
+      { label: "Included AI usage", values: [false, false, "Generous, no meter"] },
+      { label: "Free trial", values: [false, false, "30 days"] },
+    ],
+  },
+  {
+    group: "Collaboration and admin",
+    rows: [
+      { label: "Shared team inbox", values: [false, true, true] },
+      { label: "Analytics and reporting", values: ["Basic", "Standard", "Advanced"] },
+      { label: "Integrations", values: ["Core set", "Core set", "Popular + custom"] },
+      { label: "Priority support", values: [false, false, true] },
     ],
   },
 ];
@@ -114,6 +121,6 @@ export const matrix: MatrixGroup[] = [
 export const addOns: { name: string; detail: string }[] = [
   { name: "Extra phone numbers", detail: "Local or toll-free, add as many as you need." },
   { name: "Desk phone hardware", detail: "Plug-and-play handsets that provision themselves." },
-  { name: "Extra basic lines", detail: "Phones that just dial, $15 each, no AI needed." },
-  { name: "Multi-location & Enterprise", detail: "Custom routing, a branded AI voice, and a dedicated manager. Talk to sales." },
+  { name: "Extra lines", detail: "Phones that just dial, $15 each, no AI needed." },
+  { name: "Multi-location and Enterprise", detail: "Custom routing, a branded AI voice, and a dedicated manager. Talk to sales." },
 ];
