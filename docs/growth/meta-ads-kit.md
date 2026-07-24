@@ -4,7 +4,7 @@ Ready to run. Budget: $40/day total to start ($10/day × 4 ad sets). Objective: 
 (website conversions on waitlist signup) — optimize for the `waitlist_submit` GA4/Pixel
 event, fall back to landing-page views for the first 50 conversions if the pixel is thin.
 
-Launch date context: founders pre-sale is live now; retail launch ~Aug 2026. Every ad
+Launch date context: founders pre-sale is live now; retail launch ~Oct 2026. Every ad
 sends to a trade page or /founders with full UTMs. Nothing in an ad promises anything
 the site doesn't say.
 
@@ -124,7 +124,7 @@ CTA button on all: **Sign Up**. Destination: oneby.ai/founders.
 **F1 — the straight offer**
 - Headline: $29/mo. Locked for 2 years. Ends at launch.
 - Primary text: OneBy answers your calls with AI, writes the summary, and turns it
-  into a task: phone system and CRM in one. Back us before the August launch and
+  into a task: phone system and CRM in one. Back us before the October launch and
   your rate locks at $29/mo for two years. Standard pricing will be higher and will
   keep climbing. Yours won't.
 
@@ -156,9 +156,9 @@ CTA button on all: **Sign Up**. Destination: oneby.ai/founders.
   charge for a slow Tuesday.
 
 **F6 — deadline plain**
-- Headline: Founder pricing ends when we launch in August
+- Headline: Founder pricing ends when we launch in October
 - Primary text: No fake countdown timers. One real deadline: when OneBy launches in
-  August, founder tiers close and standard pricing starts. Until then, a year of
+  October, founder tiers close and standard pricing starts. Until then, a year of
   service plus a locked-for-life rate starts at $129. Read the tiers — the math is
   all on the page.
 

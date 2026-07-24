@@ -82,4 +82,4 @@ Ask three quick questions about your own practice.
 
 For most practices, the problem was never the software behind the desk. It was the call that never reached anyone. Fix the answering, capture the reason, and the rest of your scheduling gets easier. If you are weighing all-in-one options, our [OneBy vs Weave](/compare/weave) breakdown covers where a phone-forward approach differs from the usual dental communication suites.
 
-*OneBy launches in August 2026. If losing new patients on the phone sounds familiar, [join the founders list](/founders) to be first in line, or [book a 10-minute demo](/demo) and see a call turn into a captured new-patient lead in real time.*
+*OneBy launches in October 2026. If losing new patients on the phone sounds familiar, [join the founders list](/founders) to be first in line, or [book a 10-minute demo](/demo) and see a call turn into a captured new-patient lead in real time.*

@@ -201,7 +201,7 @@ export default function IndustryLanding({
               <span className="font-semibold text-navy">
                 {industry.shortName}
               </span>{" "}
-              · Launching August 2026
+              · Launching October 2026
             </span>
           </div>
           <span className="hidden h-4 w-px bg-line sm:block" />
@@ -243,7 +243,7 @@ export default function IndustryLanding({
             </div>
             <div className="relative mx-auto max-w-2xl">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-green/40 bg-green/10 px-3.5 py-1.5 text-[0.8rem] font-bold uppercase tracking-wide text-green">
-                Launching August 2026
+                Launching October 2026
               </span>
               <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
                 Be the first {industry.shortName.toLowerCase()} shop in your

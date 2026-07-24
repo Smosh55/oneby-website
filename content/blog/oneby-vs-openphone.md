@@ -14,7 +14,7 @@ keywords: ["Quo alternative", "OpenPhone vs Quo", "Quo pricing", "OpenPhone alte
 
 First, housekeeping: if you're searching for OpenPhone and keep landing on something called Quo, you're not lost. OpenPhone rebranded to **Quo** in September 2025, keeping the same product and team and adding a bigger AI story around their agent, **Sona**. Same company, new name, new ambitions.
 
-We updated this comparison for 2026 because the pricing model changed in a way that really matters for a small service business. Quo's numbers below are as of July 2026, per quo.com. OneBy launches in August 2026, and founders pricing is live now, so we'll compare like-for-like and show our math.
+We updated this comparison for 2026 because the pricing model changed in a way that really matters for a small service business. Quo's numbers below are as of July 2026, per quo.com. OneBy launches in October 2026, and founders pricing is live now, so we'll compare like-for-like and show our math.
 
 ## What Quo Is Great At
 
@@ -80,7 +80,7 @@ Both products are good. They're built for different businesses.
 
 ## So Which One Do You Need
 
-Honest answer: if you're a distributed team that mostly needs a beautiful phone app, shared numbers, and deep integrations into a CRM you already run, pick Quo. It's a mature product with years of reviews behind it, and OneBy doesn't launch until August 2026.
+Honest answer: if you're a distributed team that mostly needs a beautiful phone app, shared numbers, and deep integrations into a CRM you already run, pick Quo. It's a mature product with years of reviews behind it, and OneBy doesn't launch until October 2026.
 
 But if you're a plumber, electrician, HVAC shop, or any business where the phone call *is* the job, ask what happens after the AI takes the message. With Quo, the answer is: you (or another subscription) do the rest. With OneBy, the call becomes the ticket, the ticket becomes the schedule, the schedule becomes the invoice, and the invoice becomes money, without leaving one system or watching a credit meter.
 

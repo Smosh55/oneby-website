@@ -180,7 +180,7 @@ adopter signups, and "coming soon" momentum. Batch-submit in one afternoon.
 
 | Directory | Submission URL | Cost | Notes |
 |---|---|---|---|
-| Product Hunt Coming Soon **[V]** | producthunt.com/coming-soon | Free | Set up now to accrue followers ahead of the Aug launch. |
+| Product Hunt Coming Soon **[V]** | producthunt.com/coming-soon | Free | Set up now to accrue followers ahead of the Oct launch. |
 | Uneed **[V]** | uneed.best → Submit a Tool | Free (paid skip-line) | Curated; listed within days. |
 | MicroLaunch **[V]** | microlaunch.net | Free | Month-long launch window + monthly rankings — more durable than PH's 24 hours. |
 | Peerlist Launchpad **[V]** | peerlist.io/launchpad | Free | Week-long voting cycle. |

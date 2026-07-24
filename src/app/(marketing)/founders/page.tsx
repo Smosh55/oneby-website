@@ -41,7 +41,7 @@ const faqs = [
   },
   {
     q: "What's live on day one?",
-    a: "Early access opens to founding members in August, in the order you backed. Day one is the full platform: calls and texting, jobs, scheduling, invoicing, and AI call summaries with drafted follow-ups on every call. The AI receptionist that answers calls live rolls out to founding members first this fall. Phones ship as your tier unlocks, and we'll keep you posted with real updates, not vague ones.",
+    a: "Early access opens to founding members in October, in the order you backed. Day one is the full platform: calls and texting, jobs, scheduling, invoicing, and AI call summaries with drafted follow-ups on every call. The AI receptionist that answers calls live rolls out to founding members first, shortly after. Phones ship as your tier unlocks, and we'll keep you posted with real updates, not vague ones.",
   },
   {
     q: "Do I have to take a phone?",
@@ -110,7 +110,7 @@ export default function FoundersPage() {
               second you plug it in.
             </p>
             <p className="mt-3 text-sm font-semibold text-navy">
-              Founder rates end when early access opens in August. After that,
+              Founder rates end when early access opens in October. After that,
               standard pricing applies.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -244,17 +244,17 @@ export default function FoundersPage() {
           <div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-3">
             {[
               {
-                n: "Aug",
+                n: "Oct",
                 t: "Early access opens",
                 b: "Founding members onboard first: port your number, set up your team, trades, and price book. The full platform is live: calls, texting, jobs, scheduling, invoicing, and AI call summaries with drafted follow-ups on every call.",
               },
               {
-                n: "Fall",
+                n: "Then",
                 t: "AI answering goes live",
                 b: "The AI receptionist starts picking up the calls you can't, founding members first. By then it has been listening to and summarizing your real calls for weeks.",
               },
               {
-                n: "Then",
+                n: "Later",
                 t: "Public launch",
                 b: "We open to everyone at standard pricing. Your founder rate is already locked for two years, and you've been running on OneBy since day one.",
               },

@@ -21,7 +21,7 @@ the blog: plainspoken, owner-to-owner, no hype. One CTA per email.
 
 Hey {first name},
 
-You're on the OneBy waitlist. When doors open in August you'll get in before
+You're on the OneBy waitlist. When doors open in October you'll get in before
 anyone else.
 
 Two things while you wait:
@@ -44,7 +44,7 @@ example, but run your own numbers: oneby.ai/missed-call-calculator
 The fix isn't answering more. It's a phone that answers itself, writes down
 what the caller needed, and puts the job on your board.
 
-That's what we're launching in August. Your spot's saved.
+That's what we're launching in October. Your spot's saved.
 
 ## 3. Proof (day 5)
 **Subject:** Watch it answer a call (2 minutes)
@@ -63,7 +63,7 @@ Solo will cost $39/mo at launch. Founding members lock $29/mo for two years.
 Pledge $129 today, get your entire first year, and your renewal price holds at
 $29/mo for two more. No contract; straightforward refund window.
 
-Founders get in first: early access opens in August with the full platform plus
+Founders get in first: early access opens in October with the full platform plus
 AI call summaries from day one, and live AI answering rolls out to founders
 first in the fall. Your year starts the day your service is activated, not the
 day you pledge.

@@ -123,7 +123,7 @@ Subject: `last one from me — founder rate ends at launch`
 >
 > Last email, I promise.
 >
-> OneBy launches in August. Until then we're taking founding members: a full year
+> OneBy launches in October. Until then we're taking founding members: a full year
 > of service from $129, then $29/mo locked for as long as you stay. Standard
 > pricing will be higher and will keep climbing; a founder's rate won't. We don't
 > do "pay once, free forever" — answering your calls costs us money every month,
@@ -220,7 +220,7 @@ Subject: `Story: we called 200 [HVAC] shops after hours — most jobs walked`
 > mailbox. Every one is a homeowner dialing the next company.
 >
 > I'm the founder of OneBy, an AI receptionist for home-service shops (launching
-> August), so I'm biased — but the dataset is real and yours to check. Happy to
+> October), so I'm biased — but the dataset is real and yours to check. Happy to
 > share the raw sheet, the methodology, and what the handful of shops that DID
 > answer do differently.
 >

@@ -83,6 +83,6 @@ This is exactly what OneBy's [Good/Better/Best estimate builder](/features/estim
 
 And because OneBy is an all-in-one, the estimate does not live on an island. The call that started it can be answered by the [AI receptionist](/ai-receptionist) even when you are on a job, captured as a lead, and turned into an estimate you send the same day. Answered call, three honest options, deposit collected, work scheduled.
 
-OneBy launches in August 2026, so this is a look at how it will work rather than a war story. If it sounds like the way you would rather quote, that is the point.
+OneBy launches in October 2026, so this is a look at how it will work rather than a war story. If it sounds like the way you would rather quote, that is the point.
 
 *Want to be building three-option estimates on day one? [Grab early access as a founder](/founders) or [book a 10-minute demo](/demo). You can also compare [pricing](/pricing) while you are at it.*

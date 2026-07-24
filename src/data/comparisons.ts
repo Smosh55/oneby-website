@@ -204,7 +204,7 @@ export const comparisons: Comparison[] = [
       },
     ],
     pickThemIf:
-      "You're a distributed SMB team that mainly wants a beautiful phone app with deep integrations into a CRM you already run, and per-call AI credits fit your volume. Quo is mature today; OneBy launches August 2026.",
+      "You're a distributed SMB team that mainly wants a beautiful phone app with deep integrations into a CRM you already run, and per-call AI credits fit your volume. Quo is mature today; OneBy launches October 2026.",
     pickOneByIf:
       "You run a service business and want every call answered by AI and turned into a scheduled, invoiced job, at one flat price you can budget in busy season.",
     faqs: [
@@ -1104,9 +1104,9 @@ export const comparisons: Comparison[] = [
     pickThemIf:
       "You want a mature, dental-specific communication suite with established reviews and payments, and you are staffing the phones yourself.",
     pickOneByIf:
-      "You want the AI to answer the calls your front desk misses and turn each into a booked visit, at one flat price. Weave is mature today; OneBy launches August 2026.",
+      "You want the AI to answer the calls your front desk misses and turn each into a booked visit, at one flat price. Weave is mature today; OneBy launches October 2026.",
     faqs: [
-      { q: "Is OneBy dental-specific like Weave?", a: "OneBy is built for service businesses with per-trade setups, including dental. Weave is dental and healthcare specialized and mature today; OneBy launches August 2026." },
+      { q: "Is OneBy dental-specific like Weave?", a: "OneBy is built for service businesses with per-trade setups, including dental. Weave is dental and healthcare specialized and mature today; OneBy launches October 2026." },
       { q: "What does OneBy add over Weave?", a: "An AI receptionist that answers overflow and after-hours calls and turns each into an assigned task, included in a flat price." },
     ],
   },
@@ -1142,7 +1142,7 @@ export const comparisons: Comparison[] = [
     pickThemIf:
       "Your priority is online self-scheduling with deep real-time sync into your practice management system.",
     pickOneByIf:
-      "You want the calls your front desk misses answered by AI and turned into booked visits. NexHealth is mature today; OneBy launches August 2026.",
+      "You want the calls your front desk misses answered by AI and turned into booked visits. NexHealth is mature today; OneBy launches October 2026.",
     faqs: [
       { q: "Does OneBy replace NexHealth?", a: "They solve different halves. NexHealth is online scheduling and practice-management sync; OneBy answers the phone and turns calls into tasks. Many practices would run both." },
       { q: "Does OneBy sync with my practice software?", a: "OneBy creates structured tasks and, on Solo and Pro, plugs into popular practice tools." },
@@ -1180,7 +1180,7 @@ export const comparisons: Comparison[] = [
     pickThemIf:
       "You mainly want the consumer marketplace and online booking app that clients already use to discover barbers.",
     pickOneByIf:
-      "You want the phone answered and every call turned into a booked chair. Booksy is mature today; OneBy launches August 2026.",
+      "You want the phone answered and every call turned into a booked chair. Booksy is mature today; OneBy launches October 2026.",
     faqs: [
       { q: "Does OneBy have a client-facing booking marketplace?", a: "No. Booksy's strength is its consumer marketplace. OneBy focuses on answering your phone and turning calls into bookings, and it can run alongside a booking app." },
       { q: "Can OneBy take card payments?", a: "Yes. Card payments and invoicing are built in." },
@@ -1218,7 +1218,7 @@ export const comparisons: Comparison[] = [
     pickThemIf:
       "You want a barbershop-specific booking and POS system and you are staffing the phones yourself.",
     pickOneByIf:
-      "You want every call answered and turned into a booked chair, with payments in the same place. Squire is mature today; OneBy launches August 2026.",
+      "You want every call answered and turned into a booked chair, with payments in the same place. Squire is mature today; OneBy launches October 2026.",
     faqs: [
       { q: "Is OneBy a POS like Squire?", a: "OneBy includes invoicing and card payments, but Squire's checkout and shop management are more specialized. OneBy's focus is answering the phone and booking the chair." },
       { q: "Can they work together?", a: "Yes. Run OneBy as the phone and call-automation layer alongside a booking or POS app." },
@@ -1256,7 +1256,7 @@ export const comparisons: Comparison[] = [
     pickThemIf:
       "You want free landscaping software for estimates and invoicing and you are happy answering the phones yourself.",
     pickOneByIf:
-      "You want every estimate call answered and turned into a booked job, phone system included. Yardbook is available today; OneBy launches August 2026.",
+      "You want every estimate call answered and turned into a booked job, phone system included. Yardbook is available today; OneBy launches October 2026.",
     faqs: [
       { q: "Is OneBy free like Yardbook?", a: "No. OneBy is a paid all-in-one that includes the phone system and AI answering, with founders pricing from $29/mo. The missed calls it catches typically pay for it." },
       { q: "Does Yardbook answer your phone?", a: "No, it is business-management software. OneBy is the calling and AI-answering layer that captures the calls." },
@@ -1294,7 +1294,7 @@ export const comparisons: Comparison[] = [
     pickThemIf:
       "You are an established green-industry company that wants deep estimating and operations software right now, and you have the team to run it.",
     pickOneByIf:
-      "You want every call answered and turned into a booked job in something simple, phone system included. SingleOps is mature today; OneBy launches August 2026.",
+      "You want every call answered and turned into a booked job in something simple, phone system included. SingleOps is mature today; OneBy launches October 2026.",
     faqs: [
       { q: "Is OneBy as deep as SingleOps for estimating?", a: "No. SingleOps has deeper green-industry estimating and operations. OneBy's focus is answering the phone and turning calls into jobs, and it can complement heavier ops software." },
       { q: "Can they work together?", a: "Yes. Run OneBy as the phone and call-automation layer and pass jobs into your operations software." },
@@ -1332,7 +1332,7 @@ export const comparisons: Comparison[] = [
     pickThemIf:
       "You are an established roofing company that needs deep production, insurance, and financial workflows right now, and you have the team to run it.",
     pickOneByIf:
-      "You want every storm-season call answered and turned into an inspection, phone system included. AccuLynx is mature today; OneBy launches August 2026.",
+      "You want every storm-season call answered and turned into an inspection, phone system included. AccuLynx is mature today; OneBy launches October 2026.",
     faqs: [
       { q: "Is OneBy an AccuLynx replacement?", a: "Usually not. AccuLynx has deep roofing production and financials. OneBy is the phone and call-automation layer that captures the calls and can feed your production software." },
       { q: "Can they work together?", a: "Yes. Run OneBy as the answering and intake layer and pass inspections and summaries into AccuLynx." },
@@ -1370,7 +1370,7 @@ export const comparisons: Comparison[] = [
     pickThemIf:
       "You want a flexible roofing and contractor CRM with pipelines and project boards right now, and you will staff the phones yourself.",
     pickOneByIf:
-      "You want every call answered and turned into a job, phone system included. JobNimbus is mature today; OneBy launches August 2026.",
+      "You want every call answered and turned into a job, phone system included. JobNimbus is mature today; OneBy launches October 2026.",
     faqs: [
       { q: "Does OneBy replace JobNimbus?", a: "For teams that mainly need calls answered and turned into jobs, often yes. For deep pipeline and document management, OneBy complements the CRM by feeding it calls and tasks." },
       { q: "Can they work together?", a: "Yes. On Solo and Pro, OneBy passes call summaries and jobs into popular CRMs." },

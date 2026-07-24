@@ -75,4 +75,4 @@ Storm season does not test your roofing. It tests your phone. The roofer who win
 
 You cannot hire your way out of a spike you cannot predict. You can make sure that when forty homeowners call in one afternoon, every single one of them reaches a live answer and lands on your board as a lead.
 
-*OneBy launches August 2026, built to catch exactly this. [Join the founders list](/founders) to lock in early access before the next storm season, or [book a demo](/demo) to see how surge answering works.*
+*OneBy launches October 2026, built to catch exactly this. [Join the founders list](/founders) to lock in early access before the next storm season, or [book a demo](/demo) to see how surge answering works.*

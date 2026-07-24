@@ -120,7 +120,7 @@ How Quo shows the product:
 | Product demo | Screenshots, audio samples, **live call-the-AI number**, webinar | **Fully interactive in-browser workspace per trade** |
 | SEO | /compare hub (12 pages) + competitor keyword clusters + heavy schema + footer link architecture | 74-post blog, per-trade hubs, 12-city pages × 11 trades, /compare pages |
 | War chest | $105M, ~91% to sales & marketing | Bootstrapped pre-launch |
-| Weak flank | Trustpilot 3.7 (billing/support complaints); AI is an add-on meter; doesn't run the job | No live product, no reviews, no brand until Aug 2026 |
+| Weak flank | Trustpilot 3.7 (billing/support complaints); AI is an add-on meter; doesn't run the job | No live product, no reviews, no brand until Oct 2026 |
 
 ---
 

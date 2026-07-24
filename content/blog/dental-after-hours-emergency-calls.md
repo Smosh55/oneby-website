@@ -82,4 +82,4 @@ A few honest questions to size this up:
 
 If you are weighing dedicated dental platforms, our [OneBy vs NexHealth](/compare/nexhealth) comparison covers where a phone-first, capture-everything approach fits alongside the scheduling and patient-communication tools you may already use.
 
-*OneBy launches in August 2026. If after-hours emergencies are slipping past your practice, [join the founders list](/founders) to get early access, or [book a 10-minute demo](/demo) and see how a late-night call gets captured, triaged, and turned into a booked patient.*
+*OneBy launches in October 2026. If after-hours emergencies are slipping past your practice, [join the founders list](/founders) to get early access, or [book a 10-minute demo](/demo) and see how a late-night call gets captured, triaged, and turned into a booked patient.*

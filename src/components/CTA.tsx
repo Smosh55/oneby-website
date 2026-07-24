@@ -16,7 +16,7 @@ export default function CTA() {
 
             <div className="relative mx-auto max-w-2xl">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-green/40 bg-green/10 px-3.5 py-1.5 text-[0.8rem] font-bold uppercase tracking-wide text-green">
-                Launching August 2026
+                Launching October 2026
               </span>
               <p className="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-sm font-medium text-white/70">
                 <CheckCircle2 size={16} className="shrink-0 text-green" />

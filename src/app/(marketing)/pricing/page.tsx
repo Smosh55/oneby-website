@@ -107,7 +107,7 @@ export default function PricingPage() {
             Every plan includes the full CRM: AI receptionist, ticketing,
             scheduling, invoicing, and SMS. Put a cheap Line on the phones that
             just dial, and an AI seat where the jobs come in. Early access opens
-            to founding members in August 2026, and founders lock these rates
+            to founding members in October 2026, and founders lock these rates
             for two years.
           </p>
         </div>

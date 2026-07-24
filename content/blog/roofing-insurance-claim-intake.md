@@ -75,4 +75,4 @@ Closing that gap is the point. Capture the right details when the phone first ri
 
 Insurance roofing rewards preparation, and preparation starts on the first call. Decide what your process needs to know, ask it every single time, and hand your estimator a lead that is already sorted and documented. The claim moves faster, the visit is not wasted, and your team spends its energy on roofs instead of driveway interviews.
 
-*OneBy launches August 2026, built to capture the details you configure on every call. [Join the founders list](/founders) for early access, or [book a demo](/demo) to see how insurance intake works.*
+*OneBy launches October 2026, built to capture the details you configure on every call. [Join the founders list](/founders) for early access, or [book a demo](/demo) to see how insurance intake works.*
