@@ -59,24 +59,25 @@ scheduled → invoiced. That's the whole pitch.
 ## 4. Founders (day 8)
 **Subject:** The founder rate, in plain numbers
 
-Solo will cost $39/mo at launch. Founding members lock $29/mo for two years.
-Pledge $129 today, get your entire first year, and your renewal price holds at
-$29/mo for two more. No contract; straightforward refund window.
+Here's the whole thing, in plain numbers. The software is free, forever. Your
+business line is $15 a month. The AI Suite that answers your calls is $49 a
+month at launch, with no per-call meter and no surprise bill.
 
-Founders get in first: early access opens in October with the full platform plus
-AI call summaries from day one, and live AI answering rolls out to founders
-first in the fall. Your year starts the day your service is activated, not the
-day you pledge.
+Founders get the better deal: claim your spot free today (no card), and the AI
+Suite is on us for your first 6 months, not the public 30-day trial. After that
+it locks at $39 a month for two years while everyone else pays $49. It never
+jumps for you.
 
-We're doing this because early believers fund the launch, and in return they
-get the best deal we will offer before launch: oneby.ai/founders
+Early access opens in October with the full platform plus AI call summaries from
+day one, and live AI answering rolls out to founders first, shortly after. Claim
+your spot: oneby.ai/founders
 
 ## 5. Scarcity (day 14, ONLY send with a real number)
 **Subject:** {N} founder spots left
 
-Founder tiers are capped. {N} remain. When they're gone the lock is gone.
-Launch pricing is $39/mo, founders keep $29/mo for two years.
-oneby.ai/founders
+Founder spots are capped. {N} remain. When they're gone the founder rate is
+gone. At launch the AI Suite is $49/mo; founders lock $39 for two years, with
+6 months free first. oneby.ai/founders
 
 ## 6. Launch (launch week)
 **Subject:** Doors open {date}, you're first

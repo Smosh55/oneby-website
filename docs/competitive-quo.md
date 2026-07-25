@@ -26,7 +26,7 @@
 
 **Sona AI agent is metered separately:** Free (10 calls/mo) → $25 (40 calls) → $49 (100) → $99 (250) → $199 (600), with per-call overages of $0.45–$1.00. Extra numbers $5/mo; automated SMS $0.01/msg. **7-day free trial**, "Cancel anytime (we'll even remind you)" — no card requirement stated.
 
-Key packaging takeaway: **the AI is an add-on meter, not the plan.** A home-services shop that wants real 24/7 AI coverage on the Business tier pays $23–$33/user *plus* $49–$99+/mo for Sona minutes. Their realistic all-in price for OneBy's target customer is $70–$130/mo — much closer to OneBy's $29–$39 than their "$15" anchor suggests.
+Key packaging takeaway: **the AI is an add-on meter, not the plan.** A home-services shop that wants real 24/7 AI coverage on the Business tier pays $23–$33/user *plus* $49–$99+/mo for Sona minutes. Their realistic all-in price for OneBy's target customer is $70–$130/mo — much closer to OneBy's $39–$49 than their "$15" anchor suggests.
 
 ---
 
@@ -112,7 +112,7 @@ How Quo shows the product:
 | Category | Business phone system → "AI front office" | AI receptionist + all-in-one CRM for service businesses |
 | Core job | Answer/route/text; Sona takes messages, answers FAQs, captures leads, transfers | Answer the call **and run the job**: summary → ticket → schedule → invoice/payment → SMS |
 | Where the workflow ends | Call summary + task + handoff to your CRM (Jobber, HubSpot…) | Money collected |
-| Price | $15–$35/user/mo (annual) **+ Sona metering $25–$199/mo**; realistic AI-on price $70–130/mo | Founders: $29/mo Solo locked-for-life (vs $39 retail), $35/user Pro (vs $49) |
+| Price | $15–$35/user/mo (annual) **+ Sona metering $25–$199/mo**; realistic AI-on price $70–130/mo | Free CRM, $15 line, AI Suite $49 (founders lock $39, 2 yrs), no per-call meter |
 | Pricing model risk | Per-call AI credits — costs scale with call volume, hard to predict | Flat — easy for an owner to budget |
 | Target | Broad SMB (startups to healthcare), 11 verticals incl. home services | US home services + local SMB, owner-operators 1–15 seats, 11 trades deep |
 | Proof | 4.7/3,300+ G2, 90k businesses, brand logos, quantified case studies, G2 badges, SOC 2 | Pre-launch: interactive demos, real call data preview, founders program — no review corpus yet |
@@ -142,7 +142,7 @@ How Quo shows the product:
 ## 7. What we do better / our wedge — honest
 
 1. **We run the job; they take a message.** Sona's ceiling is: answer, summarize, capture lead, transfer, text a link. Then it hands off to "your CRM" (their own home-services page brags about logging into *Jobber* — they need someone else's software to finish the story). OneBy: call → summary → ticket → schedule → invoice → paid, one system. That's the wedge, and their own architecture confirms it.
-2. **One flat price vs a meter.** Their AI is a credit meter ($0.45–$1.00 per call overage). A busy plumbing office doing 300 calls/mo faces a variable ~$99+/mo AI bill *on top of* per-seat fees. "$29/mo, every call answered, flat" is a knife against that — and owner-operators hate variable bills.
+2. **One flat price vs a meter.** Their AI is a credit meter ($0.45–$1.00 per call overage). A busy plumbing office doing 300 calls/mo faces a variable ~$99+/mo AI bill *on top of* per-seat fees. "$49 flat, every call answered, no meter" is a knife against that — and owner-operators hate variable bills.
 3. **Depth per trade, not breadth per vertical.** Their home-services page is one page with generic HVAC/plumbing name-drops. We have 11 full mini-sites with trade-specific interactive demos, trade data, per-trade blogs, and 132 city pages. Nobody at a $105M horizontal company will out-specific us on garage doors.
 4. **Interactive product demo.** They show screenshots and run webinars. A prospect can *use* OneBy's simulated workspace in the browser before signing up. (Caveat: we must pair it with the audible "hear the AI" proof — see actions.)
 5. **Owner-to-owner voice.** Their copy is excellent SaaS copy. Ours can be a plumber talking to a plumber. At 1–15 seats, that's a moat their brand budget can't buy.
@@ -159,7 +159,7 @@ How Quo shows the product:
 | 2 | **Refresh the Quo/OpenPhone comparison surface**: rename to "OneBy vs Quo (formerly OpenPhone)" everywhere (blog post + /compare/openphone), add /compare/quo slug or redirect, update to 2026 pricing incl. the Sona meter math, add the year to the title ("…(2026)"), and a "Last updated" line. They rebranded 9 months ago; our page still says OpenPhone and misses all "Quo alternative" queries. | Low | SEO + conversion — captures a fresh, low-competition keyword ("Quo alternative" barely contested) |
 | 3 | **Total-cost calculator vs Quo/others** on comparison pages: seats × calls/mo → their bill (plan + Sona credits) vs OneBy flat. Steal their own trick — they did this to Google Voice's "$7." | Med | Conversion + differentiation — turns our flat pricing into a visible weapon |
 | 4 | **Structured data pass**: FAQPage, SoftwareApplication, BreadcrumbList, HowTo (onboarding/switching steps) JSON-LD on comparison pages, trade pages, and pricing; visible "Last updated" dates. | Low | SEO — rich results + freshness; near-zero risk |
-| 5 | **Price anchor in the hero**: "Founders pricing from $29/mo, locked for two years" in the homepage hero and every trade hero, next to the waitlist CTA. Quo proves the anchor belongs in the hero. | Low | Conversion, removes price anxiety at first touch, strengthens founders urgency |
+| 5 | **Price anchor in the hero**: "Founders lock the AI at $39/mo, not the $49 standard" in the homepage hero and every trade hero, next to the waitlist CTA. Quo proves the anchor belongs in the hero. | Low | Conversion, removes price anxiety at first touch, strengthens founders urgency |
 | 6 | **Quantified-outcome testimonial engine**: instrument from day one to produce "X after-hours calls answered," "$Y in jobs booked while you slept," "Z hours saved" per customer; template case studies like Quo's ("375+ hours saved weekly"). Start now with the MD Auto Rental real-call-data preview as proof pattern #1. | Med (ongoing) | Trust — compounding; our answer to their 3,300 reviews |
 | 7 | **Competitor keyword clusters**, starting with Quo: "Quo pricing explained," "Sona AI cost per call," "Quo alternatives for home services," "Quo vs Jobber phone," "does Quo do invoicing/scheduling." Then repeat for RingCentral/Smith.ai. We have the 74-post blog infrastructure; this is an editorial pattern, not a rebuild. | Med (ongoing) | SEO — own the question space around competitors, incl. AI-assistant answers |
 | 8 | **Switching/porting concierge promise**: "/switch" page + band on trade pages — keep your number, we do the port, no downtime, try OneBy in parallel first. Mirrors "Switch from any provider for free." | Low–Med | Conversion — removes the #1 practical objection for phone-adjacent products |

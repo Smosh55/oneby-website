@@ -122,45 +122,42 @@ Swap the bracketed trade tokens; HVAC wording shown, plumbing swap noted.
 CTA button on all: **Sign Up**. Destination: oneby.ai/founders.
 
 **F1 — the straight offer**
-- Headline: $29/mo. Locked for 2 years. Ends at launch.
+- Headline: The software is free. Lock the AI at $39.
 - Primary text: OneBy answers your calls with AI, writes the summary, and turns it
-  into a task: phone system and CRM in one. Back us before the October launch and
-  your rate locks at $29/mo for two years. Standard pricing will be higher and will
-  keep climbing. Yours won't.
+  into a task: phone system and CRM in one. The CRM is free and your line is $15 a
+  month. Claim a founder spot before the October launch and the AI is free for 6
+  months, then locked at $39 while everyone else pays $49. No per-call meter, ever.
 
-**F2 — why not free forever (honesty as the hook)**
-- Headline: We won't sell you "pay once, free forever"
-- Primary text: Answering your calls costs us real money every month, so a
-  free-forever deal would mean cutting corners later. Instead: back OneBy now, get
-  a full year, then a locked founder rate held for two years. A deal we can both
-  keep. That's the whole pitch.
+**F2 — no meter (honesty as the hook)**
+- Headline: No per-call meter. No surprise bill.
+- Primary text: Some AI phones charge you by the call, so your busiest month is your
+  most expensive one. OneBy is a flat price with generous usage included. Founders
+  lock it at $39 a month for two years. Budget it and forget it.
 
-**F3 — the phone tier**
-- Headline: A phone that works the second you plug it in
-- Primary text: The OneBy Phone tier: a ready-to-go desk or cordless phone, a full
-  year of service, and AI that answers when you can't. $199 once, then a locked
-  founder rate. No IT guy, no setup call, no forwarding maze. Keep your number or
-  pick a new one.
+**F3 — free to claim**
+- Headline: Claim your founder rate free
+- Primary text: No card, no pledge. Lock the founder rate now, and at launch the full
+  AI Suite is on us for 6 months. After that it is $39 a month while everyone else
+  pays $49. The software stays free and your line stays $15.
 
-**F4 — early access + skin in the game**
+**F4 — early access + shape it**
 - Headline: Founding members get the first invites
-- Primary text: We're building OneBy for [HVAC companies / plumbing shops] and
-  founding members shape it — first beta invites, a say in what we build next, and
-  the lowest rate we'll ever offer, locked. From $10 to hold your spot.
+- Primary text: We're building OneBy for [HVAC companies / plumbing shops], and
+  founding members shape it: first beta invites, a say in what we build next, and a
+  rate locked at $39 for two years. Free to claim your spot.
 
 **F5 — versus an answering service**
 - Headline: After-hours coverage without the answering service bill
 - Primary text: A human answering service charges by the minute and still just takes
   a message. OneBy answers 24/7, asks the right questions for your trade, and builds
-  the dispatch task itself. Founders lock in at $29/mo — less than most services
-  charge for a slow Tuesday.
+  the dispatch task itself. Founders lock the AI at $39 a month, less than most
+  services charge for a slow Tuesday.
 
 **F6 — deadline plain**
-- Headline: Founder pricing ends when we launch in October
-- Primary text: No fake countdown timers. One real deadline: when OneBy launches in
-  October, founder tiers close and standard pricing starts. Until then, a year of
-  service plus a locked-for-life rate starts at $129. Read the tiers — the math is
-  all on the page.
+- Headline: Founder rates end when we open in October
+- Primary text: No fake countdown timers. One real deadline: when early access opens
+  in October, the founder rate closes and standard pricing starts. Until then, claim
+  your spot free and lock the AI at $39 for two years. It never jumps to $49 for you.
 
 ## 5. UTM templates
 

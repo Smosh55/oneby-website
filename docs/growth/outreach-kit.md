@@ -14,7 +14,7 @@ call IS the demo.
 
 1. Build the night's list earlier in the day: 15–20 businesses in one trade + one
    metro (pull from Google Maps: "hvac repair <city>", sort by reviews 10–200 —
-   big enough to afford $29/mo, small enough to have no call center).
+   big enough to afford $49/mo, small enough to have no call center).
 2. Log each in a sheet: business name, number, owner name if findable (site/GBP/
    state license lookup), source URL.
 3. Between 8–9pm local, call each number once from your cell. Log the outcome:
@@ -40,8 +40,8 @@ to voicemail" becomes content later (real number, from the sheet, or don't say i
 >    after hours."
 > 3. "I'm building OneBy — an AI that answers those calls, gets the address and
 >    the problem, and has a job ticket waiting for you in the morning."
-> 4. "It's $29 a month locked for our founding members — less than what one missed
->    NIGHT JOB TYPE (e.g. no-cool call / burst pipe) pays you."
+> 4. "The software is free, and founders lock the AI at $39 a month, less than
+>    what one missed NIGHT JOB TYPE (e.g. no-cool call / burst pipe) pays you."
 > 5. "Can I text you a 2-minute demo link, or is this a bad problem to have?"
 
 Then stop talking. If they say missed calls aren't a problem, thank them and end it
@@ -123,11 +123,10 @@ Subject: `last one from me — founder rate ends at launch`
 >
 > Last email, I promise.
 >
-> OneBy launches in October. Until then we're taking founding members: a full year
-> of service from $129, then $29/mo locked for as long as you stay. Standard
-> pricing will be higher and will keep climbing; a founder's rate won't. We don't
-> do "pay once, free forever" — answering your calls costs us money every month,
-> and a promise we can't keep helps neither of us.
+> OneBy launches in October. Until then we're taking founding members: the
+> software is free, your line is $15, and the AI Suite is free for your first 6
+> months, then locked at $39 a month for two years while everyone else pays $49.
+> No per-call meter, no surprise bill. Free to claim, no card.
 >
 > The tiers are all here: https://oneby.ai/founders?utm_source=email&utm_medium=outreach&utm_campaign=afterhours&utm_content=e3
 >
