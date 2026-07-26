@@ -1,7 +1,7 @@
-# Meta Ads Kit — Pre-Launch (Waitlist + Founders)
+# Meta Ads Kit, Pre-Launch (Waitlist + Founders)
 
 Ready to run. Budget: $40/day total to start ($10/day × 4 ad sets). Objective: Leads
-(website conversions on waitlist signup) — optimize for the `waitlist_submit` GA4/Pixel
+(website conversions on waitlist signup), optimize for the `waitlist_submit` GA4/Pixel
 event, fall back to landing-page views for the first 50 conversions if the pixel is thin.
 
 Launch date context: founders pre-sale is live now; retail launch ~Oct 2026. Every ad
@@ -15,13 +15,13 @@ the site doesn't say.
 One campaign per trade. Two trades to start (highest volume + best after-hours pain):
 
 ```
-Campaign: OneBy — HVAC (Leads, ABO)
+Campaign: OneBy, HVAC (Leads, ABO)
 ├── Ad set: hvac-pain      $10/day → oneby.ai/hvac
 │     └── 6 ads (P1–P6)
 └── Ad set: hvac-founders  $10/day → oneby.ai/founders
       └── 6 ads (F1–F6)
 
-Campaign: OneBy — Plumbing (Leads, ABO)
+Campaign: OneBy, Plumbing (Leads, ABO)
 ├── Ad set: plumbing-pain      $10/day → oneby.ai/plumbing
 │     └── 6 ads (P1–P6, plumbing wording)
 └── Ad set: plumbing-founders  $10/day → oneby.ai/founders
@@ -44,7 +44,7 @@ is available.
 **Base for every ad set:** US, age 25–60, all genders.
 
 **Interest stacks (Detailed Targeting, OR within the stack).** Note: Meta keeps pruning
-detailed-targeting options; verify each still exists in Ads Manager when building —
+detailed-targeting options; verify each still exists in Ads Manager when building,
 anything missing, just drop it.
 
 - Trade layer (HVAC): HVAC, Heating ventilating and air conditioning, Air conditioning,
@@ -53,11 +53,11 @@ anything missing, just drop it.
 - Owner layer (narrow with AND if audience > ~2M): Small business, Entrepreneurship,
   Business owner, plus software they'd only know as owners/office staff:
   ServiceTitan, Jobber, Housecall Pro, Angi, Thumbtack, QuickBooks
-- Behavior layer (optional narrow): Facebook Page admins (Business page admins) —
+- Behavior layer (optional narrow): Facebook Page admins (Business page admins),
   availability varies by account; use if present.
 
 **Ad set recipe:** Trade layer AND (Owner layer OR Behavior layer). If the resulting
-audience is under ~500k, drop the AND and go trade-layer only — the creative
+audience is under ~500k, drop the AND and go trade-layer only, the creative
 ("your techs", "your dispatcher") self-selects owners.
 
 **Also build (week 2+):**
@@ -67,15 +67,15 @@ audience is under ~500k, drop the AND and go trade-layer only — the creative
 - Lookalike 1% of waitlist emails once the list passes ~500.
 
 **Exclusions everywhere:** existing waitlist/customer email list (upload as custom
-audience), job titles aren't targetable reliably — don't bother.
+audience), job titles aren't targetable reliably, don't bother.
 
-## 3. Ad copy — Angle A: "missed call = lost job" (pain)
+## 3. Ad copy, Angle A: "missed call = lost job" (pain)
 
 CTA button on all: **Learn More** (pain angle sells the click, not the signup).
 Destination: oneby.ai/hvac or oneby.ai/plumbing.
 Swap the bracketed trade tokens; HVAC wording shown, plumbing swap noted.
 
-**P1 — the 9pm call**
+**P1, the 9pm call**
 - Headline: The 9pm no-cool call went to your competitor
 - Primary text: Somebody's AC died at 9 last night. [Plumbing: Somebody's water
   heater let go at 9 last night.] They called you first. It rang, hit voicemail,
@@ -83,77 +83,77 @@ Swap the bracketed trade tokens; HVAC wording shown, plumbing swap noted.
   gets the address and the symptom, and drops a ready-to-dispatch job in your queue
   for the morning. See how it works on a real call.
 
-**P2 — the math, framed honestly**
+**P2, the math, framed honestly**
 - Headline: What does a missed call actually cost you?
 - Primary text: Quick example, not a promise: if you miss 10 calls a week, 4 are
-  real jobs, you'd close half, and your average ticket is $400 — that's $800 a week
+  real jobs, you'd close half, and your average ticket is $400, that's $800 a week
   walking. Your numbers are different. Plug them in and see. Free calculator, no
   email required.
 - Destination override: oneby.ai/missed-call-calculator
 
-**P3 — the crawl space**
+**P3, the crawl space**
 - Headline: Your techs can't answer from a crawl space
 - Primary text: [HVAC: Rooftops and crawl spaces.] [Plumbing: Under a house with a
-  pipe wrench in both hands.] That's where the work is — and exactly when the phone
+  pipe wrench in both hands.] That's where the work is, and exactly when the phone
   rings. OneBy answers, asks the questions your dispatcher would ask, and writes it
   up as a task. You call back with the details already in front of you.
 
-**P4 — voicemail is where jobs die**
+**P4, voicemail is where jobs die**
 - Headline: Most callers won't leave a voicemail
-- Primary text: When a homeowner has water on the floor, they don't leave a message —
+- Primary text: When a homeowner has water on the floor, they don't leave a message,
   they hang up and call the next company. OneBy picks up on the first ring, 24/7,
   sounds like a sharp office assistant, and texts you the summary in seconds.
 
-**P5 — the vague callback**
+**P5, the vague callback**
 - Headline: "Call me back about my AC" tells you nothing
 - Primary text: [Plumbing: "Call me back about my water heater" tells you nothing.]
   A voicemail like that wastes a callback and sometimes a truck roll. OneBy grabs
-  the unit, the symptom, the address, and when they're home — before you ever pick
+  the unit, the symptom, the address, and when they're home, before you ever pick
   up the phone. Hear a sample call on the site.
 
-**P6 — one-man-shop angle**
+**P6, one-man-shop angle**
 - Headline: You're the tech, the dispatcher, and the office
 - Primary text: When it's just you, every call you can't take is a job you didn't
   quote. OneBy is the office you haven't hired yet: it answers, writes the summary,
   and lines up your callbacks. Runs on the number you already have.
 
-## 4. Ad copy — Angle B: founders deal
+## 4. Ad copy, Angle B: founders deal
 
 CTA button on all: **Sign Up**. Destination: oneby.ai/founders.
 
-**F1 — the straight offer**
+**F1, the straight offer**
 - Headline: The software is free. Lock the AI at $39.
 - Primary text: OneBy answers your calls with AI, writes the summary, and turns it
   into a task: phone system and CRM in one. The CRM is free and your line is $15 a
   month. Claim a founder spot before the October launch and the AI is free for 6
   months, then locked at $39 while everyone else pays $49. No per-call meter, ever.
 
-**F2 — no meter (honesty as the hook)**
+**F2, no meter (honesty as the hook)**
 - Headline: No per-call meter. No surprise bill.
 - Primary text: Some AI phones charge you by the call, so your busiest month is your
   most expensive one. OneBy is a flat price with generous usage included. Founders
   lock it at $39 a month for two years. Budget it and forget it.
 
-**F3 — free to claim**
+**F3, free to claim**
 - Headline: Claim your founder rate free
 - Primary text: No card, no pledge. Lock the founder rate now, and at launch the full
   AI Suite is on us for 6 months. After that it is $39 a month while everyone else
   pays $49. The software stays free and your line stays $15.
 
-**F4 — early access + shape it**
+**F4, early access + shape it**
 - Headline: Founding members get the first invites
 - Primary text: We're building OneBy for [HVAC companies / plumbing shops], and
   founding members shape it: first beta invites, a say in what we build next, and a
   rate locked at $39 for two years. Free to claim your spot.
 
-**F5 — versus an answering service**
+**F5, versus an answering service**
 - Headline: After-hours coverage without the answering service bill
 - Primary text: A human answering service charges by the minute and still just takes
   a message. OneBy answers 24/7, asks the right questions for your trade, and builds
   the dispatch task itself. Founders lock the AI at $39 a month, less than most
   services charge for a slow Tuesday.
 
-**F6 — deadline plain**
+**F6, deadline plain**
 - Headline: Founder rates end when we open in October
 - Primary text: No fake countdown timers. One real deadline: when early access opens
   in October, the founder rate closes and standard pricing starts. Until then, claim
@@ -207,4 +207,4 @@ top performer's hook, keep total live ads per ad set at 3–4.
 
 **Sanity ceiling:** founders leads are worth more than waitlist leads. If founders
 ad sets run $5–8 CPL but pre-orders are landing (check Stripe/GA4 against
-utm_campaign), keep them — the kill rule bends for proven revenue, never for hope.
+utm_campaign), keep them, the kill rule bends for proven revenue, never for hope.
