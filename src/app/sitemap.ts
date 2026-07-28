@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/voip-crm`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/ai-receptionist`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/missed-call-calculator`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/free-invoicing`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/templates`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/pricing`, changeFrequency: "monthly", priority: 0.9 },
     // The /industries hub is only part of the multi-industry master site.
