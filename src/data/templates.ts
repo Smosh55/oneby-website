@@ -284,6 +284,318 @@ export const templates: Template[] = [
     ],
     relatedFeature: { label: "See the estimate builder", href: "/features/estimates" },
   },
+  {
+    slug: "roofing-estimate-template",
+    tradeSlug: "roofing",
+    trade: "Roofing",
+    kind: "Estimate",
+    scenario: "Asphalt shingle roof replacement",
+    metaTitle: "Free Roofing Estimate Template (Good / Better / Best)",
+    metaDescription:
+      "A free roofing estimate template built around a shingle roof replacement, with the three-option layout that wins bigger jobs. Print it or build and send it in OneBy.",
+    keywords: [
+      "roofing estimate template",
+      "free roofing estimate template",
+      "roof replacement estimate template",
+      "roofing quote template",
+      "roofing proposal template",
+      "roofing bid template",
+    ],
+    h1: "Free Roofing Estimate Template",
+    heroSub:
+      "A three-option estimate built around a real shingle roof replacement, clear enough that the homeowner decides for themselves. Use it as-is, or build and send it in two taps inside OneBy.",
+    intro: [
+      "A roof is a big number, and a single price sends the homeowner straight to two more contractors. Give them three options on one page, the patch, the full replacement most choose, and the premium system, and the decision becomes which one instead of who else to call.",
+      "This template is free to use. Print it, copy the structure into your own forms, or fill it in on screen. Prices are left blank, add yours.",
+    ],
+    tiers: [
+      {
+        tier: "Good",
+        name: "Repair and patch",
+        blurb: "Stop the leak and buy time on an aging roof.",
+        lines: [
+          { label: "Replace damaged and missing shingles" },
+          { label: "Reseal flashing and pipe boots" },
+          { label: "Spot-replace rotten decking as found" },
+          { label: "Roof inspection and photo report" },
+        ],
+      },
+      {
+        tier: "Better",
+        name: "Full architectural shingle replacement",
+        blurb: "Complete tear-off and new roof, under warranty. The common pick.",
+        recommended: true,
+        lines: [
+          { label: "Tear off to deck and inspect sheathing" },
+          { label: "Synthetic underlayment and new architectural shingles" },
+          { label: "New flashing, boots, and ridge ventilation" },
+          { label: "Manufacturer and workmanship warranty" },
+        ],
+      },
+      {
+        tier: "Best",
+        name: "Impact-resistant premium system",
+        blurb: "Toughest, longest coverage, may lower insurance.",
+        lines: [
+          { label: "Class 4 impact-resistant shingles" },
+          { label: "Full ice-and-water shield and upgraded ventilation" },
+          { label: "Transferable manufacturer warranty" },
+          { label: "Documentation for a possible insurance discount" },
+        ],
+      },
+    ],
+    optionsNote:
+      "Storm-damaged roofs are urgent and often partly insured, so put the patch and the full system side by side. Many homeowners move up once they see the warranty and the impact-resistant option in plain terms.",
+    faqs: [
+      {
+        q: "What should a roofing estimate include?",
+        a: "Your business and license info, the customer and property address, a clear scope per option, materials and warranty, tear-off and disposal, the price, and an acceptance line. The template below has all of it.",
+      },
+      {
+        q: "Why give three options on a roofing estimate?",
+        a: "A roof is expensive enough that a single price gets bid against two other contractors. Three options keep the conversation with you and let the homeowner weigh a repair against a warrantied replacement, which routinely lifts the average job.",
+      },
+      {
+        q: "Can I send this from the roof?",
+        a: "In OneBy you save the three options as a reusable template and send a branded estimate from your phone on site. The customer taps accept and it becomes a scheduled job. Join the founders list for early access.",
+      },
+    ],
+    relatedFeature: { label: "See the estimate builder", href: "/features/estimates" },
+  },
+  {
+    slug: "garage-door-estimate-template",
+    tradeSlug: "garage-door",
+    trade: "Garage Door",
+    kind: "Estimate",
+    scenario: "Garage door replacement",
+    metaTitle: "Free Garage Door Estimate Template (Good / Better / Best)",
+    metaDescription:
+      "A free garage door estimate template built around a door replacement, with the three-option layout that wins bigger jobs. Print it or build and send it in OneBy.",
+    keywords: [
+      "garage door estimate template",
+      "free garage door estimate template",
+      "garage door quote template",
+      "garage door replacement estimate",
+      "garage door proposal template",
+      "garage door repair estimate template",
+    ],
+    h1: "Free Garage Door Estimate Template",
+    heroSub:
+      "A three-option estimate built around a real garage door replacement, clear enough that the customer decides for themselves. Use it as-is, or build and send it in two taps inside OneBy.",
+    intro: [
+      "Most garage door calls start as a repair and turn into a bigger sale when the customer sees the options. Put them on one page, the repair, the new door most choose, and the insulated door with a smart opener, and the choice becomes which one instead of just fix it.",
+      "This template is free to use. Print it, copy the structure into your own forms, or fill it in on screen. Prices are left blank, add yours.",
+    ],
+    tiers: [
+      {
+        tier: "Good",
+        name: "Repair the existing door",
+        blurb: "Get it opening again for the least money today.",
+        lines: [
+          { label: "Replace broken springs, cables, or rollers" },
+          { label: "Realign track and tune the opener" },
+          { label: "Safety sensor check and balance test" },
+          { label: "Lubricate and adjust hardware" },
+        ],
+      },
+      {
+        tier: "Better",
+        name: "New steel door and hardware",
+        blurb: "Fresh door, quiet hardware, under warranty. The popular pick.",
+        recommended: true,
+        lines: [
+          { label: "New steel sectional door, installed" },
+          { label: "New springs, rollers, and quiet nylon hardware" },
+          { label: "Haul-away of old door" },
+          { label: "Manufacturer and labor warranty" },
+        ],
+      },
+      {
+        tier: "Best",
+        name: "Insulated door + smart opener",
+        blurb: "Quietest, most efficient, phone-controlled.",
+        lines: [
+          { label: "Insulated door with upgraded panels and windows" },
+          { label: "Smart Wi-Fi opener with phone control" },
+          { label: "Battery backup and new weather seal" },
+          { label: "Extended warranty on door and opener" },
+        ],
+      },
+    ],
+    optionsNote:
+      "A snapped spring is the moment to show the new door. The customer is already stuck at home waiting, so laying the repair next to an insulated upgrade with a smart opener turns a service call into a replacement more often than you would think.",
+    faqs: [
+      {
+        q: "What should a garage door estimate include?",
+        a: "Your business and license info, the customer and job address, a clear scope per option, the door and opener specs, warranty, haul-away, the price, and an acceptance line. The template below covers all of it.",
+      },
+      {
+        q: "Why give three options on a garage door estimate?",
+        a: "A single repair price rarely surfaces the bigger sale. Three options let the customer weigh a fix against a new insulated door and a smart opener, and a good share move up once they see it side by side.",
+      },
+      {
+        q: "Can I send this from the driveway?",
+        a: "In OneBy you save the three options as a reusable template and send a branded estimate from your phone on site. The customer taps accept and it becomes a scheduled job. Join the founders list for early access.",
+      },
+    ],
+    relatedFeature: { label: "See the estimate builder", href: "/features/estimates" },
+  },
+  {
+    slug: "pest-control-quote-template",
+    tradeSlug: "pest-control",
+    trade: "Pest Control",
+    kind: "Estimate",
+    scenario: "Recurring pest control service",
+    metaTitle: "Free Pest Control Quote Template (Good / Better / Best)",
+    metaDescription:
+      "A free pest control quote template with one-time, quarterly, and premium plan options, the three-tier layout that wins recurring accounts. Print it or build it in OneBy.",
+    keywords: [
+      "pest control quote template",
+      "free pest control quote template",
+      "pest control estimate template",
+      "pest control proposal template",
+      "pest control service agreement template",
+      "pest control pricing template",
+    ],
+    h1: "Free Pest Control Quote Template",
+    heroSub:
+      "A three-option quote built around recurring service, from one-time treatment to a premium plan, so the customer chooses the coverage they want. Use it as-is, or build and send it in two taps inside OneBy.",
+    intro: [
+      "Pest control lives on recurring accounts, and the fastest way to win one is to show the plans side by side. Put a one-time treatment next to a quarterly plan and a premium plan, and most customers step up to recurring on their own instead of calling once and disappearing.",
+      "This template is free to use. Print it, copy the structure into your own forms, or fill it in on screen. Prices are left blank, add yours.",
+    ],
+    tiers: [
+      {
+        tier: "Good",
+        name: "One-time treatment",
+        blurb: "Knock down the problem today.",
+        lines: [
+          { label: "Full interior and exterior inspection" },
+          { label: "Targeted treatment for the active pest" },
+          { label: "Exterior barrier application" },
+          { label: "30-day retreatment if they come back" },
+        ],
+      },
+      {
+        tier: "Better",
+        name: "Quarterly protection plan",
+        blurb: "Year-round coverage, free re-services. The best value.",
+        recommended: true,
+        lines: [
+          { label: "Initial treatment plus quarterly visits" },
+          { label: "Covers common household pests" },
+          { label: "Free re-services between visits" },
+          { label: "No long-term contract required" },
+        ],
+      },
+      {
+        tier: "Best",
+        name: "Premium plan + termite monitoring",
+        blurb: "Total coverage with termite and rodent protection.",
+        lines: [
+          { label: "Everything in the quarterly plan" },
+          { label: "Termite monitoring stations and inspection" },
+          { label: "Rodent control and exclusion" },
+          { label: "Priority scheduling and annual report" },
+        ],
+      },
+    ],
+    optionsNote:
+      "A one-time call is a customer you will chase again next season. Showing the quarterly and premium plans on the same page turns a single treatment into a recurring account, which is the number that actually grows a pest business.",
+    faqs: [
+      {
+        q: "What should a pest control quote include?",
+        a: "Your business and license info, the customer and service address, a clear scope per plan, what pests are covered, the service frequency, re-service terms, the price, and an acceptance line. The template below covers all of it.",
+      },
+      {
+        q: "Why give three options on a pest control quote?",
+        a: "A single one-time price wins one visit. Three tiers, one-time, quarterly, and premium, let the customer choose recurring coverage themselves, and recurring accounts are what build predictable revenue in pest control.",
+      },
+      {
+        q: "Can I send this from the customer's yard?",
+        a: "In OneBy you save the three plans as a reusable template and send a branded quote from your phone on site. The customer taps accept and it becomes a scheduled, recurring job. Join the founders list for early access.",
+      },
+    ],
+    relatedFeature: { label: "See the estimate builder", href: "/features/estimates" },
+  },
+  {
+    slug: "landscaping-estimate-template",
+    tradeSlug: "landscaping",
+    trade: "Landscaping",
+    kind: "Estimate",
+    scenario: "Front yard landscape renovation",
+    metaTitle: "Free Landscaping Estimate Template (Good / Better / Best)",
+    metaDescription:
+      "A free landscaping estimate template built around a yard renovation, with the three-option layout that wins bigger jobs. Print it or build and send it in OneBy.",
+    keywords: [
+      "landscaping estimate template",
+      "free landscaping estimate template",
+      "lawn care estimate template",
+      "landscaping quote template",
+      "landscaping proposal template",
+      "landscaping bid template",
+    ],
+    h1: "Free Landscaping Estimate Template",
+    heroSub:
+      "A three-option estimate built around a real yard renovation, so the customer chooses the scope they want. Use it as-is, or build and send it in two taps inside OneBy.",
+    intro: [
+      "Landscaping budgets are wide open, so a single number rarely matches what the customer had in mind. Give them three options on one page, the cleanup, the renovation most choose, and the full design build, and they pick the scope that fits their budget instead of shopping the whole job.",
+      "This template is free to use. Print it, copy the structure into your own forms, or fill it in on screen. Prices are left blank, add yours.",
+    ],
+    tiers: [
+      {
+        tier: "Good",
+        name: "Cleanup and refresh",
+        blurb: "Make the yard look cared for again.",
+        lines: [
+          { label: "Cleanup, pruning, and weeding" },
+          { label: "Re-edge beds and fresh mulch" },
+          { label: "Seasonal color at the entry" },
+          { label: "Haul-away of debris" },
+        ],
+      },
+      {
+        tier: "Better",
+        name: "Renovation with new plantings",
+        blurb: "New beds, plants, and irrigation tune-up. The popular pick.",
+        recommended: true,
+        lines: [
+          { label: "Bed redesign and soil prep" },
+          { label: "New shrubs, perennials, and mulch" },
+          { label: "Irrigation repair and tune-up" },
+          { label: "Sod patching and cleanup" },
+        ],
+      },
+      {
+        tier: "Best",
+        name: "Full design build",
+        blurb: "Designed landscape with irrigation and lighting.",
+        lines: [
+          { label: "Landscape design and plan" },
+          { label: "Hardscape accents and new plantings" },
+          { label: "New drip irrigation system" },
+          { label: "Low-voltage lighting and plant warranty" },
+        ],
+      },
+    ],
+    optionsNote:
+      "Curb appeal sells itself once the customer can picture it. Putting a simple refresh next to a designed build lets them reach for more yard than they first asked for, without you having to push.",
+    faqs: [
+      {
+        q: "What should a landscaping estimate include?",
+        a: "Your business info, the customer and property address, a clear scope per option, materials and plantings, cleanup and haul-away, the price, and an acceptance line. The template below covers all of it.",
+      },
+      {
+        q: "Why give three options on a landscaping estimate?",
+        a: "Landscaping budgets vary widely, so a single price often misses. Three options let the customer choose between a refresh, a renovation, and a full design build, which keeps the job with you and lifts the average ticket.",
+      },
+      {
+        q: "Can I send this from the job site?",
+        a: "In OneBy you save the three options as a reusable template and send a branded estimate from your phone in the yard. The customer taps accept and it becomes a scheduled job. Join the founders list for early access.",
+      },
+    ],
+    relatedFeature: { label: "See the estimate builder", href: "/features/estimates" },
+  },
 ];
 
 export function getTemplate(slug: string): Template | undefined {
