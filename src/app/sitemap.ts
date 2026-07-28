@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { industries } from "@/data/industries";
 import { comparisons } from "@/data/comparisons";
 import { features } from "@/data/features";
+import { templates } from "@/data/templates";
 import { cities } from "@/data/locations";
 import { getAllPosts } from "@/lib/blog";
 import { focusedIndustrySlug } from "@/config/site";
@@ -16,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/voip-crm`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/ai-receptionist`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/missed-call-calculator`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/templates`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/pricing`, changeFrequency: "monthly", priority: 0.9 },
     // The /industries hub is only part of the multi-industry master site.
     ...(focusedIndustrySlug
@@ -34,6 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const featureRoutes: MetadataRoute.Sitemap = features.map((f) => ({
     url: `${BASE}/features/${f.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  const templateRoutes: MetadataRoute.Sitemap = templates.map((t) => ({
+    url: `${BASE}/templates/${t.slug}`,
     changeFrequency: "monthly",
     priority: 0.7,
   }));
@@ -88,6 +96,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...featureRoutes,
+    ...templateRoutes,
     ...industryRoutes,
     ...localRoutes,
     ...hubRoutes,

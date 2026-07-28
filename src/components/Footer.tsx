@@ -43,6 +43,7 @@ const groups: { title: string; links: FooterLink[] }[] = [
     title: "Resources",
     links: [
       { label: "AI Receptionist Guide", href: "/ai-receptionist" },
+      { label: "Free Estimate Templates", href: "/templates" },
       { label: "Missed Call Calculator", href: "/missed-call-calculator" },
       { label: "Founding Members", href: "/founders" },
       { label: "Blog", href: "/blog" },
