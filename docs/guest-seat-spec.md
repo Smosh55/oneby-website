@@ -1,4 +1,24 @@
-# Guest Seat, product spec
+# Guest Seat ("Looped"), product spec
+
+Market name (Moshe, July 29): **Looped**, from the in-product tagline "keep
+them looped." Working name in earlier docs: Guest Pass. Trademark screening
+in progress; "OneBy Looped" is the fallback framing if standalone "Looped"
+is crowded. The base tier is Looped; the AI layer is Looped+.
+
+## Status visual language (states and meaning; implementation is yours)
+
+The loop mark is the tier language, decided July 29:
+
+- **Grey open loop** (dashed, with the guest's dot sitting at the gap): the
+  $0.99 base guest. Incomplete, not wrong.
+- **Amber open loop**: the premium guest (Looped+, $3.99): warmer, closer,
+  still open. Amber is reserved for this tier state only, never for warnings.
+- **Green closed loop**: a full OneBy user. The upgrade language everywhere
+  is "close the loop."
+
+Pricing runway note: if Looped proves popular, the base seat may move from
+$0.99 to $4.99 for NEW passes. Passes already granted keep the price they
+were granted at (same grandfathering rule as the promotional terms).
 
 For the platform build. This defines what a guest seat is, the rules it obeys,
 and the monetization logic. How to model or implement any of it is your call.

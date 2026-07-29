@@ -30,9 +30,13 @@ You are responsible for safeguarding credentials and restricting access. We may 
 
 The Service may generate AI outputs such as transcriptions, summaries, or classifications. AI outputs may contain errors and are for informational purposes only. You are responsible for verifying outputs before relying on them. OneBy does not sell AI-processed data for advertising; data is encrypted in transit and at rest.
 
-## 6. Call Recording & Consent Laws
+## 6. Call Recording, Transcription & AI Note-Taking; Consent Laws
 
-OneBy operates in a one-party consent jurisdiction (New York). Other jurisdictions may require two-party or all-party consent. You are solely responsible for determining, obtaining, and maintaining all legally required notices and consents before recording or transcribing any communication. OneBy provides recording only as a technical feature and disclaims liability for compliance.
+The Service may offer call recording, transcription, and AI-generated summaries or notes of communications ("Call Intelligence"). These are provided solely as technical features, and this section applies whether or not any audio recording is created, retained, or made available to you: some jurisdictions treat listening to, transcribing, or summarizing a communication as interception or recording that requires notice to, or consent of, one or all parties.
+
+- OneBy operates from a one-party consent jurisdiction (New York). Other jurisdictions, including all-party-consent states such as California, Florida, Illinois, Maryland, Massachusetts, Montana, New Hampshire, Pennsylvania, and Washington, may require the consent of every party to the communication.
+- You are solely responsible for (a) determining which laws apply to your communications, (b) providing all legally required notices and obtaining all legally required consents before enabling recording, transcription, or AI summaries, and (c) configuring and using Call Intelligence features accordingly.
+- By enabling any Call Intelligence feature you represent that all required notices and consents have been or will be given and obtained. OneBy provides no legal advice, makes no representation that any feature or default satisfies the law of any jurisdiction, and disclaims all liability for your compliance. Claims arising from your failure to comply are subject to your indemnification obligations in Section 12.
 
 ## 7. Subscription, Billing & Fees
 
