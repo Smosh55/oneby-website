@@ -303,10 +303,12 @@ The trigger logic:
   weak side is paying us to stay in the loop, and we now hold a billing
   relationship with a future customer. Both sides buying is fine; do not
   double-charge, treat it as covered.
-- Every host gets 3 guest invites free, permanently (Moshe, July 28). Seats
-  beyond 3 are $0.99 each. The first three exist purely to seed the loop:
-  they cost nothing to serve and every activated guest is an acquisition
-  candidate. Founders may get more as a launch perk; number pending.
+- Every host gets 5 guest invites free, permanently (Moshe, July 29; raised
+  from 3 to better cover a new account's first wave of core relationships so
+  they reach the activation moment before hitting the paywall). Seats beyond 5
+  are $0.99 each. The first five exist purely to seed the loop: they cost
+  nothing to serve and every activated guest is an acquisition candidate.
+  Founders may get more as a launch perk; number pending.
 
 ## The conversion path (guest -> customer)
 

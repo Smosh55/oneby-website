@@ -79,7 +79,7 @@ const faqs = [
   },
   {
     q: "What does Looped cost?",
-    a: "Every OneBy account includes 3 passes free. More passes are 99 cents a month each. Looped+ adds AI call summaries on shared jobs and unlimited messaging for $3.99 a month per pass.",
+    a: "Every OneBy account includes 5 passes free. More passes are 99 cents a month each. Looped+ adds AI call summaries on shared jobs and unlimited messaging for $3.99 a month per pass.",
   },
   {
     q: "What does the guest need?",
@@ -227,7 +227,7 @@ export default function LoopedPage() {
                   </p>
                 </div>
                 <p className="mt-1 text-[0.85rem] font-semibold text-green-600">
-                  3 passes free with every account
+                  5 passes free with every account
                 </p>
                 <ul className="mt-4 space-y-2 text-[0.9rem] text-muted">
                   <li className="flex gap-2"><Check size={16} className="mt-0.5 shrink-0 text-blue" /> Shared jobs, tasks, and appointments</li>
