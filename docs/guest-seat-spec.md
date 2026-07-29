@@ -104,6 +104,70 @@ and one outside party. Everything the guest can ever see hangs off that scope:
   that happened stays with the host. The guest loses access, never the host's
   history.
 
+## The guest timeline: a shared system of record, not a feed (July 29)
+
+The reason a seat beats a text thread or a plain automated notification is that
+it is a persistent, trusted record of the relationship, not a stream of
+disposable alerts. An automation can push "job done" to a phone; it cannot be
+the place both sides point to when they disagree about what was approved. That
+record is the moat (automations are a commodity; a mutually trusted ledger is
+not), and it must hold four properties or the seat degrades into "just
+notifications":
+
+1. **Persistent and authoritative.** Every shared action (status change,
+   approval, upload, completed form, comment) is timestamped, attributed to a
+   named identity, and not silently editable after the fact. The value is that
+   there is one version of events, not two.
+2. **Bi-directional.** The guest acts inside the timeline (accepts, checks off,
+   uploads, requests a reschedule, comments), not just receives. A guest who
+   only receives has a feed; a guest who contributes has a shared record.
+3. **Scoped identity.** The timeline is THE home for this one relationship, the
+   shared history of the host and this one party, with nothing else bleeding in.
+4. **Neutral within the shared scope.** The host controls what is shared and can
+   revoke access, but what has been shared forms an authoritative record that
+   neither side can quietly rewrite. This is what makes the guest trust it enough
+   to rely on it, and what turns "the contractor's app" into a record that
+   protects the guest too.
+
+This complements, and does not soften, host control. The host still owns the
+full audit trail across all their relationships; what is new is that within a
+single shared relationship, the record is authoritative to both parties. Host
+control over SCOPE and the mutual trustworthiness of the shared RECORD are not in
+tension: the host decides what enters the record, and once it is in, it reads the
+same for both.
+
+Design consequence, and it is a hard rule: every element on the timeline should
+be something both parties would independently want to exist. If the timeline
+reads only as the host watching the guest, guests stop opening it (the
+field-service portal graveyard). If it reads as the one place neither side can
+get burned, they return unprompted, no mandate required. A guest wanting their
+own copy of "what was authorized" is the reason they show up, not a threat.
+
+Notifications are a spoke, never the product. Outbound alerts to the guest (SMS
+from the host's number, or email) exist only to pull them back into the timeline
+when something needs them; this is one-directional alerting and gives the guest
+no telephony, consistent with the host-only phone ceiling below. Anything that
+must be remembered, referenced, or trusted lives in the timeline, not the text.
+
+## Guest identity and sign-in (July 29)
+
+Guests sign in. A seat is a real authenticated account, not an anonymous share
+link, because attribution is what makes the timeline trustworthy (property 1
+above): an anonymous link cannot say who approved what.
+
+- Guests authenticate through existing single sign-on (the Google or Microsoft
+  account they already have). This is both the low-friction on-ramp (one tap, no
+  new password, nothing to set up beyond the login) and the identity anchor that
+  stamps every guest action with a verified person.
+- One SSO identity carries across every host a guest works with: one sign-in,
+  many passes. A sub serving five general contractors has one Looped identity and
+  five scoped relationship timelines, and each host sees only their own. This is
+  what removes the "another login per relationship" friction while keeping every
+  host fully isolated from the others.
+- Because the identity is verified and known, not an anonymous recipient, every
+  guest is a named, reachable future customer. That is what makes the conversion
+  funnel later in this doc real rather than aspirational.
+
 ## What a guest can see and do (the default grant)
 
 Only objects the host has explicitly linked to the relationship, and only these
@@ -271,6 +335,44 @@ The guest experience is also an onboarding funnel, and should be built as one:
   tries to run techs on guest seats, seat limits and the permission ceiling
   (no price book, no invoicing, no customer list) make that self-defeating.
   Flag abuse patterns rather than policing them pre-emptively.
+
+## Platform capabilities Looped assumes (confirm before building, July 29)
+
+These are the assumptions the feature rests on, stated as what Looped needs to be
+TRUE about the platform, not as instructions on how to make it true. The
+architecture is yours. Flagging them because the answer to the first one decides
+whether Looped is an additive feature or needs groundwork first.
+
+1. **One user, many tenants.** Looped assumes a single authenticated identity can
+   hold guest membership in many separate host tenants at once, under one login.
+   The fork: if a user is already global with many-to-many membership into
+   tenants, a guest is simply a new, heavily scoped membership type and this is
+   additive. If a user is today pinned to exactly one tenant, a
+   tenant-independent identity layer is the prerequisite and comes first. SSO
+   already working points toward the global-identity case, which is the good
+   outcome. Confirm which is true before scoping the rest, it changes the size of
+   the job more than anything else here.
+
+2. **Record-level scoping below the tenant line.** Existing multitenancy isolates
+   whole tenants from each other. Looped additionally needs a guest to see only a
+   SLICE of a host's tenant (the objects linked to their one relationship), not
+   the tenant as a whole. This finer-grained, per-record visibility is distinct
+   from tenant isolation and is where most of the feature's real work
+   concentrates.
+
+3. **Isolation on the aggregated guest surface.** The guest's cross-host view
+   (their list of passes spanning many hosts) is the one place the system
+   deliberately reads across tenants for a single identity. It must never leak one
+   host to another: a guest must never surface host B inside host A's context, and
+   a host must never learn which other hosts their guest serves. This aggregated
+   surface is exactly what tenant isolation does NOT cover on its own, so it is
+   the security-critical part to design and test hardest. Cross-tenant leakage
+   here is the highest-severity failure mode of the whole feature.
+
+4. **Verified attribution across the boundary.** Every guest action taken inside a
+   host's tenant must carry the guest's verified (SSO) identity and a timestamp
+   into that host's record, so the shared timeline stays authoritative (see the
+   system-of-record properties above).
 
 ## Decisions flagged for Moshe (not build questions)
 
