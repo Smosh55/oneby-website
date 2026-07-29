@@ -102,6 +102,14 @@ Explicitly NOT in the default grant: call summaries, transcripts, recordings,
 customer contact history, invoices and money, the host's price book, other
 vendors, anything about the host's business beyond the shared objects.
 
+One hard ceiling above all toggles: **the CRM is host-side only, at every
+permission level.** Contacts, customer records, leads, and client lists are
+never grantable to a guest, full stop. A guest seat is a window into shared
+work, never a seat in the host's CRM. This guards two things: the host's
+customer list (their most sensitive asset) can never leak through a
+permission mistake, and a guest who wants CRM capability is by definition
+ready for their own account, which is exactly what the free tier is for.
+
 ## The $3.99 AI unlock (per relationship, per month)
 
 Adds the post-call layer to that one relationship:
@@ -120,12 +128,18 @@ shares, never to the host's call history.
 - The host holds every permission. Guest capabilities are a strict subset,
   granted per relationship, editable any time, built from the existing granular
   permission model rather than a new one.
-- Sensible presets so hosts do not build roles by hand: Field vendor (work
-  orders + schedule + photos + forms), Referral partner (status visibility on
-  referred jobs only, no field actions), Reviewer (read-only on shared items,
-  fits adjusters and co-counsel), and Regular (read-only across the jobs tied
-  to their properties, accounts, or matters, plus their appointments; built
-  for the owner or account contact who otherwise calls for updates).
+- The primary control surface is host-side, per guest, per object type: for
+  each of jobs/work orders, tasks, appointments, photos, forms, and messages,
+  the host toggles view / add / edit / delete independently. The host decides
+  what each relationship deserves; the product does not decide for them. No
+  industry assumptions baked in anywhere.
+- Presets exist only as optional quick starts so a host is never forced to
+  build from toggles: Field vendor (work orders + schedule + photos + forms),
+  Referral partner (status visibility on referred jobs, no field actions),
+  Reviewer (read-only on shared items), Regular (read-only across the jobs
+  tied to their properties, accounts, or matters, plus their appointments).
+  Picking a preset just sets the toggles; the host can change any of them
+  after.
 - Everything a guest does is stamped in the host's timeline (status changes,
   photo uploads, form completions, comments). The audit trail belongs to the
   host.
@@ -143,6 +157,33 @@ wire the loop once and forget it:
   completion form.
 - Trigger: guest has not accepted within X hours -> action: notify host or
   offer to next vendor.
+
+## How seats get sold (in-product, not campaigns)
+
+The primary sales channel is the product itself, triggered by data we uniquely
+have because we run the host's phone. The go-to-market decision (Moshe,
+July 28) is explicitly NOT industry targeting: sell it to every host at the
+moment the product can see the relationship, and let hosts decide who is
+worth a seat. The tagline, in the host's own product surfaces:
+
+> Talk to them all the time? Keep them in the loop for 99 cents.
+
+The trigger logic:
+
+- The call log knows who the host talks to constantly. When a contact crosses
+  a frequency line (repeated calls or texts over a rolling window), surface
+  the offer on that contact, on the post-call screen, and in the call detail:
+  "You've talked to this number 14 times this month. Keep them looped for
+  $0.99." One tap starts the invite.
+- Same trigger when a host repeatedly forwards, copies, or texts job details
+  to the same outside number: that is the manual version of what the seat
+  automates, and the moment the pitch is self-evident.
+- The invite is delivered as a text from the HOST'S own number (we run their
+  phone). The guest receives access from a person they already work with,
+  not marketing from us. Follow-up email optional, the text is primary.
+- Exact thresholds and prompt frequency are tuning decisions; the principle
+  is fixed: offers appear where the relationship is already visible in the
+  host's data, and never as generic upsell banners.
 
 ## Monetization and billing rules
 

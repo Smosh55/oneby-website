@@ -1,17 +1,46 @@
-# Guest Seat: the four launch industries + the campaign
+# Guest Pass: the growth loop + supporting campaign
 
 Companion to [../guest-seat-spec.md](../guest-seat-spec.md) (the product spec
-for the platform). This doc picks the four verticals where the guest seat lands
-hardest and lays out the phase 2 marketing campaign aimed at them.
+for the platform).
+
+**Strategy reset (Moshe, July 28): this is not an industry play, it is a viral
+play.** The primary channel is in-product: the platform sees who each host
+talks to constantly (we run their phone) and sells the seat on that contact at
+that moment, with one tagline:
+
+> Talk to them all the time? Keep them in the loop for 99 cents.
+
+Hosts decide who is worth a seat, control every permission level from their
+side, and the invite arrives as a text from the host's own number. Every
+invite is distribution. The loop, not any ad set, is the campaign:
+
+1. Trigger: call frequency crosses a line -> offer appears on the contact.
+2. Invite: one tap, sent by SMS from the host's number. Near-perfect open
+   rate because it comes from a person the guest already works with.
+3. Guest experience: real value on their slice, the rest of the platform
+   visibly locked, "Powered by OneBy" throughout.
+4. Accumulation: guests collect passes from multiple hosts; multi-host guests
+   get the "run your own business here, invoicing is free" prompt.
+5. New hosts create new call logs, which create new triggers. Repeat.
+
+KPIs for the loop, in order: invite acceptance rate, guest-to-account
+conversion, seats per host, multi-host guest count, $3.99 attach (split by
+who paid). Seat revenue last, always.
+
+Everything below supports the loop; none of it replaces it. The industries in
+Part 1 are NOT targeting segments. They are worked examples that prove the
+mechanic in different power dynamics, and they feed preset defaults, website
+copy, and sales conversations. Write copy from them; do not gate spend by
+them.
 
 Working name used throughout: **Guest Pass**. Alternatives if it collides:
-Partner Seat, Vendor Link. Guest Pass reads best in ad copy ("give your plumber
-a Guest Pass") and implies exactly the right power dynamic: guests are invited,
-and invitations get revoked.
+Partner Seat, Vendor Link. Guest Pass reads best in copy ("give your plumber
+a Guest Pass") and implies exactly the right power dynamic: guests are
+invited, and invitations get revoked.
 
 ---
 
-## Part 1: the four industries
+## Part 1: four worked examples (copy fodder, not targeting)
 
 Scored on the four things that make the model work: how often outside parties
 touch their jobs, how lopsided the power is (our user must hold the work, the
@@ -95,12 +124,18 @@ existing rails.
 
 ---
 
-## Part 2: the campaign
+## Part 2: the supporting campaign (awareness for the loop)
+
+External marketing here has one job: make hosts aware the loop exists so the
+in-product triggers land on primed users. It is support, not the engine.
 
 ### Positioning
 
-One sentence: **Stop being the switchboard between your customers and your
-vendors.**
+In-product (primary): **Talk to them all the time? Keep them in the loop for
+99 cents.**
+
+External one-liner: **Stop being the switchboard between your customers and
+your vendors.**
 
 The pitch under it: every job you dispatch to an outside vendor today runs on
 your personal cell: forwarded voicemails, retyped addresses, "did you finish?"
