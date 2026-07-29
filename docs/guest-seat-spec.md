@@ -33,6 +33,26 @@ means staying out of the loop.
    what the customer said on the phone. We own both ends, so the call itself is
    the shareable object.
 
+## Two kinds of guests, one mechanic
+
+The seat covers two host-side sells with identical mechanics:
+
+1. **Vendors and partners** (the original case): subs, adjusters, process
+   servers, referral partners. The host dispatches work to them.
+2. **Regulars** (the personal case): the people the host talks to constantly
+   about ongoing work but does not dispatch to. The property owner who calls
+   for updates, the facility manager at a commercial account, the realtor or
+   insurance agent who refers jobs monthly, the client on a long-running
+   matter. For these the pass is read-mostly: their jobs, their statuses,
+   their appointments, and (with the $3.99 layer) the call summaries about
+   their stuff, so they stop calling the host for updates.
+
+The boundary that keeps positioning clean: a seat is for a RECURRING
+relationship with an ongoing stream of jobs, tasks, or referrals. One-off
+customers never get seats; they get the normal share surfaces (estimate view,
+invoice pay link). If Guest Pass reads as a paid customer portal, competitors
+give that away free and we lose the story. Recurring is the word that guards it.
+
 ## The relationship object
 
 A guest seat is always scoped to a named relationship between one host business
@@ -90,7 +110,9 @@ shares, never to the host's call history.
 - Sensible presets so hosts do not build roles by hand: Field vendor (work
   orders + schedule + photos + forms), Referral partner (status visibility on
   referred jobs only, no field actions), Reviewer (read-only on shared items,
-  fits adjusters and co-counsel).
+  fits adjusters and co-counsel), and Regular (read-only across the jobs tied
+  to their properties, accounts, or matters, plus their appointments; built
+  for the owner or account contact who otherwise calls for updates).
 - Everything a guest does is stamped in the host's timeline (status changes,
   photo uploads, form completions, comments). The audit trail belongs to the
   host.

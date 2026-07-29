@@ -99,6 +99,20 @@ texts. A Guest Pass puts that vendor inside YOUR workspace instead: they see
 exactly the jobs you give them, nothing else, and every update lands on your
 timeline. You stay in control. They stay in the loop. A dollar a month.
 
+Two sells to the same host, same mechanic:
+
+1. **The vendor sell:** the people you dispatch work to. "They see what you
+   share. You see everything. Revoke in one tap."
+2. **The regulars sell:** the people you talk to all the time about ongoing
+   work. The property owner calling for updates, the facility manager at the
+   commercial account, the realtor who refers three jobs a month. Give them a
+   pass and they stop calling you for status: "Stop being the update desk."
+
+Boundary to keep in all copy: passes are for recurring relationships, never
+one-off customers. Never let it read as a paid customer portal (Jobber gives
+a client portal away free; recurring relationships with history are what they
+cannot do, because they have no call layer to share).
+
 Three supporting hooks, in priority order:
 
 1. Control: "They see what you share. You see everything. Revoke in one tap."
@@ -150,6 +164,19 @@ Ad, PM primary:
 > plumber at 9pm? OneBy answers the call, writes the work order, and your
 > vendor sees it on a $0.99 Guest Pass you control. They update. You watch.
 > Nobody plays telephone.
+
+Ad, PM regulars (the owner angle, possibly the strongest single ad here):
+> Your owners don't want a monthly PDF. They want to know the leak in unit 4B
+> got fixed. Give each owner a $0.99 pass that shows their properties' work
+> orders, statuses, and appointments, updated as your team works. They stop
+> calling you for updates. You control every pixel they see.
+
+Ad, trades regulars (facility manager / referral partner):
+> The facility manager at your biggest account calls you every week for
+> status. Put them on a Guest Pass instead: their site's tickets, their
+> appointment windows, nothing else. And the realtor who refers you three
+> jobs a month? Give them a pass that shows their referrals getting handled.
+> Referrers who can see the follow-through keep referring.
 
 Ad, restoration/roofing (documentation angle):
 > The adjuster wants the timeline. Give them a read-only seat instead of a
