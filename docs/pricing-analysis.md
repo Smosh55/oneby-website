@@ -136,17 +136,28 @@ The two guardrails that make it work:
 2. Fraud controls. Free VoIP attracts SMS-pumping and toll fraud: fair-use
    minute caps, international off by default, SMS limited until paid.
 
-Open pricing decision: the proposal mentioned $35/mo AI for this cohort. The
-published ladder is $49 standard / $39 founders locked. A third price would
-undercut both (nobody pays $49 while a $35 exists). Recommendation: hold the
-$39/$49 ladder; the free year is already the sweetener. If $35 is where the
-market should clear, reprice publicly instead of discounting quietly.
+Resolved (Moshe, July 28): the $35 is NOT a third price. It is the unbundled
+AI portion of the same ~$50 bill: $49.89 total, $15 of it the line, $35 the
+AI. As a pitch it anchors the AI against the line ("you pay $15 for a phone
+anyway, the AI that answers it is $35"), which is stronger than anchoring
+against zero. The public ladder is unchanged.
 
-Recommended structure: run the free phone year as a FOUNDERS-COHORT perk, not
-the permanent public offer. "Port your number, your line is free for a year,
-then $15; AI free 6 months, then your locked $39." Bounded cost, urgency,
-maximum infection at launch, and the public ladder stays intact. Extending a
-successful offer later is easy; un-giving a permanent free year is impossible.
+Structure (resolved): this is an IN-PERSON sales offer first, sold personally
+by Moshe, not a public online offer. Rep-controlled and naturally bounded, so
+it is a pilot, not a repricing. COGS confirmed at roughly $5/line/mo, so a
+free year costs ~$60 per signed business.
+
+Pilot economics and the online-rollout trigger:
+- A converted account yields roughly $35-40/mo margin ($10 line, $25-30 AI),
+  so one conversion covers about 20 months of another business's free year.
+- Break-even conversion is therefore only ~10-15%.
+- Decision rule set in advance: if the in-person cohort converts north of
+  ~30% after the free year (or simply keeps the $15 line), roll a version
+  out online. Under ~15%, keep it as an in-person tool for hand-picked
+  shops. In between, tune the offer (shorter free window, annual-AI
+  requirement) and rerun.
+- Port-to-qualify and the fraud caps still apply in person; porting is what
+  makes the $60 buy custody of the number.
 
 The 3-free-guest-invites piece is adopted into the guest seat spec already
 (3 free permanently, $0.99 after). Decision owner on all of the above: Moshe
