@@ -37,6 +37,10 @@ The Service may offer call recording, transcription, and AI-generated summaries 
 - OneBy operates from a one-party consent jurisdiction (New York). Other jurisdictions, including all-party-consent states such as California, Florida, Illinois, Maryland, Massachusetts, Montana, New Hampshire, Pennsylvania, and Washington, may require the consent of every party to the communication.
 - You are solely responsible for (a) determining which laws apply to your communications, (b) providing all legally required notices and obtaining all legally required consents before enabling recording, transcription, or AI summaries, and (c) configuring and using Call Intelligence features accordingly.
 - By enabling any Call Intelligence feature you represent that all required notices and consents have been or will be given and obtained. OneBy provides no legal advice, makes no representation that any feature or default satisfies the law of any jurisdiction, and disclaims all liability for your compliance. Claims arising from your failure to comply are subject to your indemnification obligations in Section 12.
+- OneBy provides disclosure mechanisms (for example, call announcements and an AI assistant that identifies itself). Enabling, disabling, and configuring these mechanisms appropriately for your jurisdictions is your responsibility; disabling or modifying a default disclosure is your election alone.
+- You appoint OneBy as your service provider and agent for answering, processing, and documenting communications on your behalf; Call Intelligence features act solely on your instructions and on your behalf.
+- OneBy processes call content solely to provide the Service to you and does not use your call content to train generalized AI models without opt-in consent.
+- You are likewise solely responsible for compliance with laws that require disclosing to a caller that they are interacting with an AI or automated system.
 
 ## 7. Subscription, Billing & Fees
 

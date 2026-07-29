@@ -7,6 +7,7 @@ import { deliverLead } from "@/lib/leads";
 type WaitlistBody = {
   name?: string;
   email?: string;
+  phone?: string;
   industry?: string;
   source?: string;
   ref?: string;
@@ -22,6 +23,7 @@ const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const LIMITS: Record<string, number> = {
   name: 120,
   email: 200,
+  phone: 40,
   industry: 80,
   source: 200,
   ref: 200,
@@ -105,6 +107,7 @@ export async function POST(req: Request) {
     kind: "waitlist" as const,
     name,
     email,
+    phone: body.phone?.trim() ?? "",
     industry: body.industry?.trim() ?? "",
     source: body.source?.trim() ?? "",
     ref: body.ref?.trim() ?? "",

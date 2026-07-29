@@ -2,7 +2,7 @@
 // configured destination; failures are logged, never thrown.
 
 export type CleanLead = {
-  kind: "demo" | "waitlist";
+  kind: "demo" | "waitlist" | "onboarding";
   name: string;
   email: string;
   phone?: string;
@@ -24,7 +24,9 @@ export function leadText(l: CleanLead): string {
   const title =
     l.kind === "waitlist"
       ? `New waitlist signup — ${l.name}`
-      : `New demo request — ${l.name} (${l.company})`;
+      : l.kind === "onboarding"
+        ? `New onboarding booking — ${l.name}`
+        : `New demo request — ${l.name} (${l.company})`;
   const lines = [
     title,
     "",

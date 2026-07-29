@@ -2,8 +2,10 @@
 
 Market name (Moshe, July 29): **Looped**, from the in-product tagline "keep
 them looped." Working name in earlier docs: Guest Pass. Trademark screening
-in progress; "OneBy Looped" is the fallback framing if standalone "Looped"
-is crowded. The base tier is Looped; the AI layer is Looped+.
+done (see docs/legal/looped-trademark-check.md): no live standalone LOOPED
+registration, but the LOOP field is crowded, so the posture is house-branded
+"OneBy Looped" externally, bare "Looped" inside the product, and no standalone
+registration attempt. The base tier is Looped; the AI layer is Looped+.
 
 ## Status visual language (states and meaning; implementation is yours)
 

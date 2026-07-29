@@ -14,14 +14,19 @@ const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 // credited via ?ref= on the signup that follows).
 // requireClaimCode (in-person offer pages): adds a required 5-digit brochure
 // code so the lead attributes to a rep and codes can't be quietly reused.
+// Phone is always collected (this is a phone company); requirePhone makes it
+// mandatory on conversion pages, elsewhere it stays optional.
 export default function WaitlistForm({
   requireClaimCode = false,
+  requirePhone = false,
 }: {
   requireClaimCode?: boolean;
+  requirePhone?: boolean;
 } = {}) {
   const siteIndustry = useSiteIndustry();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [claimCode, setClaimCode] = useState("");
   const [industry, setIndustry] = useState(siteIndustry?.shortName ?? "");
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -52,6 +57,15 @@ export default function WaitlistForm({
       setError("A name and a real email is all we need.");
       return;
     }
+    const phoneDigits = phone.replace(/\D/g, "");
+    if (requirePhone && phoneDigits.length < 10) {
+      setError("Add your mobile number so we can reach you about your line.");
+      return;
+    }
+    if (!requirePhone && phone.trim() && phoneDigits.length < 10) {
+      setError("That phone number looks short. Mind checking it?");
+      return;
+    }
     if (requireClaimCode && !/^\d{5}$/.test(claimCode.trim())) {
       setError("Enter the 5-digit claim code written on your brochure.");
       return;
@@ -65,6 +79,7 @@ export default function WaitlistForm({
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
+          phone: phone.trim(),
           industry,
           source: source.current,
           ref: ref.current,
@@ -171,6 +186,16 @@ export default function WaitlistForm({
           className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-[0.95rem] text-white outline-none placeholder:text-white/50 focus:border-green"
         />
       </div>
+      <input
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        placeholder={requirePhone ? "Mobile number" : "Mobile number (optional)"}
+        aria-label="Mobile number"
+        type="tel"
+        inputMode="tel"
+        autoComplete="tel"
+        className="mt-2.5 w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-[0.95rem] text-white outline-none placeholder:text-white/50 focus:border-green"
+      />
       {requireClaimCode && (
         <input
           value={claimCode}
