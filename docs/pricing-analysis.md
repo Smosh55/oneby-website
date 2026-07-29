@@ -180,3 +180,24 @@ Pilot economics and the online-rollout trigger:
 The 3-free-guest-invites piece is adopted into the guest seat spec already
 (3 free permanently, $0.99 after). Decision owner on all of the above: Moshe
 with Eli on provisioning cost reality.
+
+Launch sequencing update (July 29, Moshe): converting starts NOW, ahead of
+the October retail launch. AI call summaries ship this week; live AI
+answering arrives ~October. The sequencing rules:
+
+- Convert immediately: port + lines + CRM + summaries, free year running.
+  Converting now needs NO billing infrastructure: everything the customer
+  touches is free until the AI upsell, so the first dollar ever charged is
+  live answering. Day-one dependencies are only porting workflow, A2P
+  texting registration (days to weeks per number; start at onboarding), and
+  onboarding capacity. Confirm all three with Eli before volume.
+- The free AI month clock starts at live-answering GA, never at summaries.
+  Summaries are free during the gap: the daily-habit taste that primes the
+  $35/user upsell. Customer-facing line: "the clock never runs on something
+  you do not have yet."
+- The upsell moment is when answering ships: weeks of summaries in their
+  inbox make the pitch "you have read what you missed; now it picks up."
+- /free-year and the brochure now say onboarding is open. The PUBLIC site
+  (homepage chips, founders page, drip) still says October; flipping that to
+  "early access open" is a separate call for Moshe when platform readiness
+  is confirmed, not implied by the in-person pilot.

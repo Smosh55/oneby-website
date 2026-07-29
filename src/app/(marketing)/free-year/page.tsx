@@ -40,8 +40,8 @@ const deal = [
   },
   {
     icon: Bot,
-    title: "The AI answers free for your first month",
-    body: "Miss a call and the AI picks up, gets the address and the problem, and leaves a ready-to-go job on your board. After the free month it is $35 a month per user.",
+    title: "AI summaries now, AI answering this fall",
+    body: "From day one, every call gets an AI summary in plain words. Live AI answering, the AI that picks up and books the job when you can't, arrives this fall. Your first month of it is free when it ships, then it is $35 a month per user.",
   },
   {
     icon: Users,
@@ -65,7 +65,7 @@ const faqs = [
   },
   {
     q: "When does this start?",
-    a: "OneBy opens in October 2026. Claim now and you are first in line: we reach out, handle the port with you, and your free year starts the day your number goes live, not the day you signed up.",
+    a: "Now. Claim your spot and we schedule your onboarding right away: we walk the port with you, and your free year starts the day your number goes live, not the day you signed up. AI call summaries are included from day one. Live AI answering rolls out this fall, and your free AI month starts when it ships, so the clock never runs on something you do not have yet.",
   },
   {
     q: "Why are you doing this?",
@@ -122,9 +122,8 @@ export default function FreeYearPage() {
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-muted">
             Port your business number to OneBy and every line you run costs
-            nothing for 12 months. The AI that answers the calls you miss is
-            free for your first month. No card to claim it, and your number
-            stays yours.
+            nothing for 12 months, with AI call summaries included from day
+            one. No card to claim it, and your number stays yours.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <a href="#claim" className="btn btn-primary">
@@ -132,7 +131,7 @@ export default function FreeYearPage() {
             </a>
           </div>
           <p className="mt-4 text-[0.8rem] text-faint">
-            Doors open October 2026. Your year starts when your number goes
+            Onboarding is open. Your year starts the day your number goes
             live, not today.
           </p>
         </div>
