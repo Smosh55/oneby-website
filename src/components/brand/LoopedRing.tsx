@@ -21,17 +21,17 @@ export default function LoopedRing({
       {closed ? (
         <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="2.4" />
       ) : (
-        /* open loop: arc with a gap at the lower right, dashed */
+        /* open loop: solid arc with a gap at the lower right (dashes turn
+           into unreadable dots at icon size) */
         <path
-          d="M 17.3 18.4 A 8.5 8.5 0 1 1 19.6 15"
+          d="M 16.6 19.1 A 8.5 8.5 0 1 1 19.9 14.4"
           stroke="currentColor"
           strokeWidth="2.4"
           strokeLinecap="round"
-          strokeDasharray="0.5 4"
         />
       )}
       {/* the guest, at the gap (or riding the closed loop) */}
-      <circle cx={closed ? 12 : 18.9} cy={closed ? 3.5 : 17.2} r="2.6" fill="currentColor" />
+      <circle cx={closed ? 12 : 19.3} cy={closed ? 3.5 : 17.6} r="2.6" fill="currentColor" />
     </svg>
   );
 }
