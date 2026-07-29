@@ -43,9 +43,22 @@ The seat covers two host-side sells with identical mechanics:
    about ongoing work but does not dispatch to. The property owner who calls
    for updates, the facility manager at a commercial account, the realtor or
    insurance agent who refers jobs monthly, the client on a long-running
-   matter. For these the pass is read-mostly: their jobs, their statuses,
-   their appointments, and (with the $3.99 layer) the call summaries about
-   their stuff, so they stop calling the host for updates.
+   matter, the builder or developer the host does recurring project work for.
+   For these the pass is read-mostly: their jobs, their statuses, their
+   appointments, and (with the $3.99 layer) the call summaries about their
+   stuff, so they stop calling the host for updates.
+
+   Note the power dynamic can run either way here and the mechanics hold both
+   ways. A vendor needs the host's work; a developer guest may be the host's
+   biggest client. In that case the host grants the pass to keep the account
+   (the client who can watch their own jobs move does not shop the
+   relationship), and the host still controls scope completely.
+
+   The multi-host effect matters most for this kind of guest: a developer
+   holding passes from their plumber, electrician, and roofer on one build has
+   assembled a bird's-eye view of their own project inside OneBy without
+   buying anything. That guest is the ripest host-conversion target in the
+   funnel; the upgrade pitch is running the whole project from their side.
 
 The boundary that keeps positioning clean: a seat is for a RECURRING
 relationship with an ongoing stream of jobs, tasks, or referrals. One-off

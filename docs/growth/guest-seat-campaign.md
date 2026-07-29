@@ -83,6 +83,15 @@ existing rails.
   scheduling; the lab juggling 30 practices is a heavy future host).
 - MSP/IT with hardware vendors and ISPs per client site.
 - General contractors, once GC exists as a vertical.
+- Small developers and custom builders as a host vertical. As hosts their
+  wedge fit is weaker (their pain is outbound coordination, not missed
+  inbound calls, and construction PM is Procore/Buildertrend territory), so
+  they enter as GUESTS first: the recurring commercial client of our trade
+  hosts, and the owner seat at scale for PM hosts. A developer who
+  accumulates passes from several trades on one build has a project-wide
+  view of their own job sitting in OneBy already; that is the warmest host
+  upgrade conversation we will ever have. Track multi-host guests and aim
+  the "run it from your side" pitch at them.
 
 ---
 
