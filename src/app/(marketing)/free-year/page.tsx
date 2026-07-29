@@ -18,9 +18,9 @@ import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
 // ladder is never undercut by a Google-able better deal. The copy mirrors the
 // face-to-face pitch so the page continues the conversation, not restarts it.
 export const metadata: Metadata = {
-  title: "Your Phone Line, Free for a Year",
+  title: "Your Phone Lines, Free for a Year",
   description:
-    "The offer you just heard, in writing. Port your business number to OneBy: your line is free for 12 months, the AI answers free for your first month, and 3 Guest Passes are included.",
+    "The offer you just heard, in writing. Port your business number to OneBy: every line is free for 12 months, the AI answers free for your first month, and 3 Guest Passes are included.",
   robots: { index: false, follow: false },
   alternates: { canonical: "/free-year" },
 };
@@ -35,13 +35,13 @@ const deal = [
   },
   {
     icon: BadgeDollarSign,
-    title: "Your line is free for 12 months",
-    body: "A full year of business phone service on us. After the year, it is $15 a month. That is the whole phone bill, no per-minute games.",
+    title: "Every line is free for 12 months",
+    body: "All the lines your business runs, free for a full year. After the year each line is $15 a month, and that is the whole phone bill, no per-minute games.",
   },
   {
     icon: Bot,
     title: "The AI answers free for your first month",
-    body: "Miss a call and the AI picks up, gets the address and the problem, and leaves a ready-to-go job on your board. After the free month it is $35 a month on top of your line, about $50 all in.",
+    body: "Miss a call and the AI picks up, gets the address and the problem, and leaves a ready-to-go job on your board. After the free month it is $35 a month per user.",
   },
   {
     icon: Users,
@@ -57,11 +57,11 @@ const faqs = [
   },
   {
     q: "What does the free year cost me?",
-    a: "Nothing, and there is no card required to claim it. Normal business use is covered; the line is for your business calls and texts, not call-center volume, and international calling is off unless you ask for it.",
+    a: "Nothing, and there is no card required to claim it. Normal business use is covered; your lines are for your business calls and texts, not call-center volume, and international calling is off unless you ask for it.",
   },
   {
     q: "What happens after the free year?",
-    a: "Your line is $15 a month. That is it. If you added the AI, it is $35 a month on top, about $50 all in, with no per-call meter and no surprise bill. The CRM and invoicing underneath are free forever either way.",
+    a: "Each line is $15 a month, and that is the whole phone bill. If you added the AI, it is $35 a month per user. No per-call meter, no surprise bill, and the CRM and invoicing underneath are free forever either way.",
   },
   {
     q: "When does this start?",
@@ -118,12 +118,13 @@ export default function FreeYearPage() {
             <Handshake size={14} /> The offer you just heard, in writing
           </span>
           <h1 className="mt-5 text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[3.2rem]">
-            Your phone line. Free for a year.
+            Your phone lines. Free for a year.
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            Port your business number to OneBy and your line costs nothing for
-            12 months. The AI that answers the calls you miss is free for your
-            first month. No card to claim it, and your number stays yours.
+            Port your business number to OneBy and every line you run costs
+            nothing for 12 months. The AI that answers the calls you miss is
+            free for your first month. No card to claim it, and your number
+            stays yours.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <a href="#claim" className="btn btn-primary">
@@ -181,8 +182,8 @@ export default function FreeYearPage() {
               </Link>
               <ul className="w-full space-y-2 pt-3">
                 {[
-                  "Year one: $0 for the line. $35/mo for the AI if you keep it after the free month.",
-                  "Year two on: $15 line + $35 AI, about $50 all in.",
+                  "Year one: $0 for every line. $35/user for the AI if you keep it after the free month.",
+                  "Year two on: $15 per line plus $35 per user for the AI.",
                   "No per-call meter. Your busiest month costs the same as your slowest.",
                 ].map((x) => (
                   <li key={x} className="flex gap-2.5 text-[0.92rem] text-ink">

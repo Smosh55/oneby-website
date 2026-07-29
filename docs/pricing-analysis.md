@@ -145,7 +145,25 @@ against zero. The public ladder is unchanged.
 Structure (resolved): this is an IN-PERSON sales offer first, sold personally
 by Moshe, not a public online offer. Rep-controlled and naturally bounded, so
 it is a pilot, not a repricing. COGS confirmed at roughly $5/line/mo, so a
-free year costs ~$60 per signed business.
+free year costs ~$60 per signed business per line.
+
+Offer terms (per Moshe, July 29): the free year covers ALL the business's
+lines, $15 per line per month after. The AI Suite is per USER, not flat:
+$35/user/mo in this framing ($50 total per user with their line). Multi-line
+shops raise the free-year cost (2 lines ~= $120/yr) but also the converted
+value ($15 x lines + $35 x users), so the payback math holds or improves
+with size.
+
+Whole-company discount (sales lever, NOT advertised): a whole-company AI
+option exists as a closing tool in the sales conversation only. It is off
+the brochure and the /free-year page on purpose; the rep offers it when it
+closes the deal. Rules and open math:
+- Gate it at 3+ users. Below that, "whole company" is just a discount with
+  no volume behind it.
+- At the stated 25% off: 3 users = $78.75/mo ($26.25/user). Moshe's target
+  number was ~$71/mo for 3 users; that is ~32% off (about $23.67/user).
+  Decision pending: keep a clean 25%, or set the whole-company price to hit
+  the ~$71 point. One or the other, not both.
 
 Pilot economics and the online-rollout trigger:
 - A converted account yields roughly $35-40/mo margin ($10 line, $25-30 AI),
