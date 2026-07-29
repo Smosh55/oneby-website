@@ -96,19 +96,39 @@ kinds of objects:
 - Appointments involving them: their visits on the calendar, reschedule
   requests (request, not unilateral change; the host approves).
 - A message thread per shared job, so coordination stops living in personal
-  texts.
+  texts. Free for guests up to a monthly cap (see the messaging rules below);
+  this is in-platform messaging, not SMS through the phone system, which
+  stays host-only.
 
 Explicitly NOT in the default grant: call summaries, transcripts, recordings,
 customer contact history, invoices and money, the host's price book, other
 vendors, anything about the host's business beyond the shared objects.
 
-One hard ceiling above all toggles: **the CRM is host-side only, at every
-permission level.** Contacts, customer records, leads, and client lists are
-never grantable to a guest, full stop. A guest seat is a window into shared
-work, never a seat in the host's CRM. This guards two things: the host's
-customer list (their most sensitive asset) can never leak through a
-permission mistake, and a guest who wants CRM capability is by definition
-ready for their own account, which is exactly what the free tier is for.
+One hard ceiling above all toggles (corrected July 28): **the guest seat is
+the CRM/collaboration layer only. Telephony is host-only, at every permission
+level.** Calling, phone lines, SMS through the phone system, voicemail, and
+anything else that touches the phone stack is never part of a guest seat, at
+any price. Two reasons:
+
+- The phone is the paid wedge. A $0.99 seat that can call would cannibalize
+  the $15 line. A guest who wants to call through the platform has exactly
+  one path: become a host.
+- It keeps the power dynamic physical. The host owns the number the customer
+  calls; the guest works downstream of it.
+
+The guest's toolkit is relationship management for this one relationship:
+shared jobs, tasks, appointments, forms, photos, notes, and messaging. The
+host's customer list stays protected by relationship scoping as defined
+above (guests only ever see objects linked to their relationship), not by
+removing the collaboration tools that make the seat worth having.
+
+**Messaging: free but capped.** Guests get in-platform messaging on their
+shared threads at no charge, up to a monthly cap, so coordination moves off
+personal texts and into the workspace (that is the stickiness and the data)
+without the seat becoming a free comms product. Recommendation: bundle
+unlimited messaging into the $3.99 layer, which gives that tier a second
+compelling reason to exist and gives the cap a clean release valve. Cap size
+and reset cadence are business decisions, flagged below.
 
 ## The $3.99 AI unlock (per relationship, per month)
 
@@ -241,6 +261,9 @@ The guest experience is also an onboarding funnel, and should be built as one:
 3. Seat cap per host on lower tiers, if any.
 4. Whether transcripts (not summaries) sit only in the $3.99 tier or need the
    host's per-call approval as well (I lean both).
+5. The free messaging cap: size and reset cadence (e.g. N messages per
+   relationship per month), and whether unlimited messaging bundles into the
+   $3.99 layer (recommended above).
 
 ## Out of scope for this document
 
