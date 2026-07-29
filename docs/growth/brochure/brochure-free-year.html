@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OneBy Free Year Brochure (bifold, print letter landscape, flip on short edge)</title>
+<style>
+  /* Bifold leave-behind: US Letter landscape, half-fold to 5.5in x 8.5in.
+     Sheet 1 (outside): back cover | front cover. Sheet 2 (inside): left | right.
+     Print double-sided, FLIP ON SHORT EDGE, fold in half. */
+  @page { size: 11in 8.5in; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #04034f;
+    --navy-700: #0a0985;
+    --blue: #008fe0;
+    --blue-600: #007acc;
+    --green: #1cdb96;
+    --green-600: #12b87b;
+    --ink: #1a1a1a;
+    --muted: #6b7280;
+    --faint: #9ca3af;
+    --line: #e5e7eb;
+    --canvas: #f8f9fb;
+  }
+  body {
+    font-family: "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sheet {
+    width: 11in; height: 8.5in;
+    display: flex;
+    overflow: hidden;
+    page-break-after: always;
+    background: #fff;
+  }
+  .panel { width: 5.5in; height: 8.5in; position: relative; overflow: hidden; }
+
+  /* ---------- FRONT COVER (navy) ---------- */
+  .cover {
+    background: var(--navy);
+    color: #fff;
+    padding: 0.65in 0.55in 0.55in;
+    display: flex; flex-direction: column;
+  }
+  .cover .glow {
+    position: absolute; top: -1.4in; right: -1.6in;
+    width: 4in; height: 4in; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0,143,224,0.35), transparent);
+  }
+  .cover .logo { width: 2.1in; margin-bottom: 0.9in; position: relative; }
+  .cover h1 {
+    font-size: 44pt; line-height: 1.04; letter-spacing: -0.02em;
+    font-weight: 800; position: relative;
+  }
+  .cover h1 .free { color: var(--green); }
+  .cover .sub {
+    margin-top: 0.28in; font-size: 12.5pt; line-height: 1.5;
+    color: rgba(255,255,255,0.75); max-width: 3.9in; position: relative;
+  }
+  .cover .spacer { flex: 1; }
+  .cover .footbar {
+    position: relative;
+    border-top: 3px solid var(--green);
+    padding-top: 0.16in;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 10.5pt; color: rgba(255,255,255,0.85); font-weight: 600;
+  }
+
+  /* ---------- BACK COVER ---------- */
+  .back {
+    background: var(--canvas);
+    padding: 0.65in 0.55in 0.55in;
+    display: flex; flex-direction: column;
+  }
+  .back .mark { width: 0.55in; }
+  .back h2 { margin-top: 0.25in; font-size: 17pt; color: var(--navy); letter-spacing: -0.01em; }
+  .back .tag { margin-top: 0.12in; font-size: 11pt; color: var(--muted); line-height: 1.55; max-width: 3.8in; }
+  .back .contact { margin-top: 0.4in; }
+  .back .contact .row {
+    display: flex; align-items: baseline; gap: 0.12in;
+    padding: 0.1in 0; border-bottom: 1px solid var(--line);
+    font-size: 11pt;
+  }
+  .back .contact .row .k { color: var(--faint); font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.06em; width: 0.7in; font-weight: 700; }
+  .back .contact .row .v { color: var(--navy); font-weight: 600; }
+  .back .spacer { flex: 1; }
+  .back .fine {
+    font-size: 7.5pt; line-height: 1.5; color: var(--faint);
+    border-top: 1px solid var(--line); padding-top: 0.14in;
+  }
+  .back .copyright { margin-top: 0.1in; font-size: 7.5pt; color: var(--faint); }
+
+  /* ---------- INSIDE PANELS ---------- */
+  .inside { padding: 0.55in 0.5in; display: flex; flex-direction: column; }
+  .inside.right { border-left: 1px dashed var(--line); }
+  .eyebrow {
+    font-size: 8.5pt; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--blue);
+  }
+  .inside h3 {
+    margin-top: 0.08in; font-size: 20pt; line-height: 1.12;
+    letter-spacing: -0.015em; color: var(--navy); font-weight: 800;
+  }
+  .steps { margin-top: 0.28in; display: flex; flex-direction: column; gap: 0.19in; }
+  .step { display: flex; gap: 0.16in; }
+  .step .n {
+    flex: none; width: 0.34in; height: 0.34in; border-radius: 50%;
+    background: var(--navy); color: #fff; font-weight: 800; font-size: 11.5pt;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step h4 { font-size: 11.5pt; color: var(--navy); margin-bottom: 0.03in; }
+  .step p { font-size: 9.5pt; line-height: 1.5; color: var(--muted); }
+  .meterbox {
+    margin-top: 0.28in;
+    background: rgba(28,219,150,0.1);
+    border: 1.5px solid var(--green-600);
+    border-radius: 10px; padding: 0.16in 0.2in;
+  }
+  .meterbox b { color: var(--navy); font-size: 10.5pt; display: block; }
+  .meterbox span { font-size: 9pt; color: var(--muted); }
+
+  .flow { margin-top: 0.26in; display: flex; flex-direction: column; }
+  .flow .f { display: flex; gap: 0.14in; align-items: flex-start; }
+  .flow .dotcol { display: flex; flex-direction: column; align-items: center; width: 0.2in; flex: none; }
+  .flow .dot {
+    width: 0.16in; height: 0.16in; border-radius: 50%;
+    background: var(--blue); flex: none; margin-top: 0.03in;
+  }
+  .flow .dot.last { background: var(--green-600); }
+  .flow .stem { width: 2px; flex: 1; min-height: 0.14in; background: var(--line); }
+  .flow .t { padding-bottom: 0.14in; }
+  .flow .t b { font-size: 10.5pt; color: var(--navy); display: block; }
+  .flow .t span { font-size: 9pt; color: var(--muted); line-height: 1.45; }
+
+  .mathbox {
+    margin-top: 0.16in;
+    background: var(--navy); color: #fff;
+    border-radius: 10px; padding: 0.18in 0.2in;
+  }
+  .mathbox b { font-size: 10.5pt; display: block; margin-bottom: 0.05in; }
+  .mathbox p { font-size: 8.8pt; line-height: 1.5; color: rgba(255,255,255,0.8); }
+  .mathbox .num { color: var(--green); font-weight: 700; }
+
+  .qrcard {
+    margin-top: 0.22in;
+    border: 2px solid var(--navy); border-radius: 12px;
+    padding: 0.16in 0.2in;
+    display: flex; align-items: center; gap: 0.22in;
+    background: #fff;
+  }
+  .qrcard .qr { width: 1.25in; height: 1.25in; flex: none; }
+  .qrcard .qr svg { width: 100%; height: 100%; display: block; }
+  .qrcard b { font-size: 13pt; color: var(--navy); line-height: 1.2; display: block; }
+  .qrcard .url { margin-top: 0.06in; font-size: 10pt; font-weight: 700; color: var(--blue-600); }
+  .qrcard .hint { margin-top: 0.04in; font-size: 8pt; color: var(--faint); }
+</style>
+</head>
+<body>
+
+<!-- ============ SHEET 1: OUTSIDE (back cover | front cover) ============ -->
+<div class="sheet">
+
+  <!-- Back cover -->
+  <div class="panel back">
+    <svg class="mark" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <polygon fill="#1cdb96" points="490.72 29.93 489.76 457.8 309.41 457.8 309.41 142.18 241.31 142.18 315.82 29.93 490.72 29.93"/>
+      <polygon fill="#008fe0" points="309.42 457.81 234.9 570.07 60 570.07 60.73 241.05 60.96 142.17 241.32 142.17 175.7 241.05 241.32 241.05 241.32 457.81 309.42 457.81"/>
+    </svg>
+    <h2>One platform for the whole job.</h2>
+    <p class="tag">The phone that answers when you can't, the CRM that runs the job, and the invoice that gets you paid. Built for the trades.</p>
+    <div class="contact">
+      <div class="row"><span class="k">Web</span><span class="v">oneby.ai</span></div>
+      <div class="row"><span class="k">Email</span><span class="v">support@oneby.ai</span></div>
+      <div class="row"><span class="k">Phone</span><span class="v">(626) ONE-BY44</span></div>
+    </div>
+    <div class="spacer"></div>
+    <p class="fine">Free-year offer: available to businesses that port or forward their business number to OneBy. Covers normal business use; international calling off by default. Doors open October 2026; your free year starts the day your number goes live. Line $15/mo after year one. AI Suite free for your first month, then $35/mo. Guest Passes: 3 included, then $0.99/mo each. Prices USD and subject to the terms at oneby.ai/terms.</p>
+    <p class="copyright">© 2026 OneBy. All rights reserved.</p>
+  </div>
+
+  <!-- Front cover -->
+  <div class="panel cover">
+    <div class="glow"></div>
+    <svg class="logo" viewBox="0 0 1920 600" xmlns="http://www.w3.org/2000/svg" aria-label="OneBy">
+      <g>
+        <polygon fill="#1cdb96" points="490.72 29.93 489.76 457.8 309.41 457.8 309.41 142.18 241.31 142.18 315.82 29.93 490.72 29.93"/>
+        <polygon fill="#008fe0" points="309.42 457.81 234.9 570.07 60 570.07 60.73 241.05 60.96 142.17 241.32 142.17 175.7 241.05 241.32 241.05 241.32 457.81 309.42 457.81"/>
+      </g>
+      <g fill="#ffffff">
+        <path d="M819.3,214.06c-8.82-8.82-19.26-15.7-31.31-20.63-12.05-4.93-25.18-7.4-39.41-7.4s-27.14,2.52-39.28,7.54c-12.14,5.03-22.62,11.91-31.45,20.63-8.82,8.73-15.75,19.07-20.77,31.02-5.03,11.95-7.54,24.95-7.54,38.99s2.51,27.04,7.54,38.99c5.02,11.95,11.96,22.34,20.77,31.16,8.82,8.82,19.31,15.7,31.45,20.63,12.14,4.93,25.23,7.4,39.28,7.4s27.36-2.47,39.41-7.4c12.05-4.93,22.48-11.81,31.31-20.63,8.82-8.82,15.74-19.21,20.77-31.16,5.03-11.95,7.55-24.95,7.55-38.99s-2.52-27.04-7.55-38.99c-5.03-11.95-11.95-22.34-20.77-31.16ZM797.53,305.69c-2.66,6.73-6.36,12.52-11.1,17.36-4.75,4.84-10.35,8.64-16.8,11.39-6.45,2.75-13.46,4.13-21.05,4.13s-14.62-1.38-21.07-4.13c-6.45-2.75-12.05-6.54-16.79-11.39-4.75-4.84-8.45-10.62-11.1-17.36-2.65-6.73-3.98-13.99-3.98-21.77s1.33-14.94,3.98-21.49c2.65-6.54,6.36-12.24,11.1-17.07,4.74-4.84,10.34-8.63,16.79-11.38,6.45-2.75,13.47-4.13,21.07-4.13s14.6,1.38,21.05,4.13c6.45,2.75,12.05,6.54,16.8,11.38,4.74,4.84,8.43,10.53,11.1,17.07,2.65,6.54,3.98,13.71,3.98,21.49s-1.33,15.04-3.98,21.77Z"/>
+        <path d="M1003.08,242.66c-4.66-5.12-10.25-9.11-16.79-11.95-6.54-2.85-13.81-4.27-21.77-4.27-8.73,0-17.17,1.99-25.33,5.98-8.16,3.98-15.27,9.58-21.34,16.79v-19.92h-42.69v150.26h42.69v-78.54c.19-5.12,1.14-9.86,2.85-14.23,1.71-4.36,3.99-8.15,6.83-11.38,2.84-3.22,6.16-5.74,9.96-7.54,3.79-1.8,7.88-2.7,12.24-2.7,7.77,0,13.99,2.56,18.63,7.68,4.66,5.12,6.98,11.86,6.98,20.2v86.51h42.69v-95.62c0-8.35-1.33-16.03-3.99-23.05-2.65-7.01-6.31-13.09-10.95-18.21Z"/>
+        <path d="M1194.69,291.89c-.76-9.68-3.23-18.54-7.4-26.61-4.18-8.06-9.64-14.94-16.36-20.63-6.74-5.69-14.62-10.15-23.62-13.37-9.02-3.22-18.74-4.84-29.17-4.84-11.39,0-21.82,1.95-31.31,5.83-9.49,3.89-17.65,9.25-24.47,16.08-6.84,6.83-12.14,15.04-15.94,24.62-3.8,9.58-5.7,20.06-5.7,31.45s1.95,21.86,5.84,31.45c3.89,9.58,9.3,17.79,16.22,24.62,6.93,6.83,15.26,12.14,25.05,15.93,9.77,3.79,20.44,5.7,32.02,5.7,18.4,0,33.95-4.46,46.66-13.37,12.71-8.92,21.25-21.82,25.62-38.71h-42.4c-1.9,5.12-5.36,9.11-10.39,11.95-5.03,2.85-10.96,4.27-17.79,4.27-9.68,0-17.7-2.7-24.05-8.11-6.36-5.41-10.39-12.85-12.1-22.34h109.85c.18-2.47.28-5.02.28-7.68,0-1.33-.04-3.27-.14-5.84-.1-2.56-.33-6.02-.71-10.38ZM1085.98,290.47c2.08-8.54,6.07-15.23,11.96-20.06,5.88-4.84,12.99-7.26,21.34-7.26,9.1,0,16.65,2.42,22.62,7.26,5.98,4.84,9.44,11.52,10.38,20.06h-66.3Z"/>
+        <path d="M1360.46,248.07c-6.16-6.83-13.61-12.1-22.34-15.8-8.73-3.7-18.41-5.55-29.03-5.55-9.87,0-18.79,1.99-26.75,5.98-7.98,3.98-14.71,9.68-20.2,17.07v-75.13h-42.69v204.9h42.69v-20.2c4.36,7.02,10.71,12.57,19.06,16.65,8.34,4.08,17.64,6.12,27.89,6.12s19.73-1.95,28.46-5.84c8.73-3.88,16.22-9.25,22.48-16.08,6.25-6.83,11.14-14.99,14.65-24.48,3.51-9.48,5.26-19.92,5.26-31.3s-1.7-22.15-5.11-31.73c-3.42-9.58-8.21-17.79-14.37-24.62ZM1333.28,319.64c-1.9,4.65-4.46,8.64-7.68,11.95-3.24,3.32-7.11,5.93-11.67,7.83-4.56,1.9-9.49,2.84-14.8,2.84s-10.24-.94-14.8-2.84c-4.55-1.9-8.49-4.51-11.81-7.83-3.32-3.31-5.88-7.25-7.68-11.81-1.81-4.55-2.7-9.57-2.7-15.08,0-11.2,3.41-20.3,10.24-27.32,6.83-7.02,15.74-10.53,26.75-10.53,5.5,0,10.48.95,14.94,2.85,4.46,1.9,8.35,4.51,11.67,7.83,3.32,3.32,5.88,7.31,7.68,11.95,1.8,4.65,2.7,9.73,2.7,15.23s-.95,10.29-2.84,14.94Z"/>
+        <polygon points="1493.58 229.28 1460 320.63 1427.56 229.28 1382.59 229.28 1439.79 377.83 1418.73 435.03 1459.43 435.03 1538.26 229.28 1493.58 229.28"/>
+        <path d="M1558.66,337.42c-6.45,0-11.86,2.18-16.22,6.54-4.36,4.36-6.54,9.58-6.54,15.65,0,6.45,2.18,11.86,6.54,16.22,4.36,4.36,9.77,6.54,16.22,6.54,6.07,0,11.29-2.19,15.65-6.54,4.36-4.36,6.54-9.78,6.54-16.22,0-6.07-2.18-11.29-6.54-15.65-4.36-4.36-9.59-6.54-15.65-6.54Z"/>
+        <path d="M1673.49,188.87l-70.01,190.67h44.67l12.81-35.29h78.83l12.8,35.29h44.69l-70.01-190.67h-53.79ZM1672.63,310.39l27.89-76.55,27.6,76.55h-55.49Z"/>
+        <rect x="1814.47" y="229.28" width="42.4" height="150.26"/>
+        <path d="M1835.81,211.92c6.82,0,12.56-2.28,17.22-6.83,4.64-4.55,6.97-10.15,6.97-16.79s-2.33-11.95-6.97-16.51c-4.66-4.55-10.39-6.83-17.22-6.83s-12.86,2.28-17.51,6.83c-4.65,4.55-6.98,10.06-6.98,16.51s2.33,12.24,6.98,16.79c4.65,4.55,10.48,6.83,17.51,6.83Z"/>
+      </g>
+    </svg>
+    <h1>Your phone line.<br><span class="free">Free for a year.</span></h1>
+    <p class="sub">The offer we just made you, in writing. No card, no catch, and your number stays yours.</p>
+    <div class="spacer"></div>
+    <div class="footbar">
+      <span>oneby.ai</span>
+      <span>(626) ONE-BY44</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SHEET 2: INSIDE (left | right) ============ -->
+<div class="sheet">
+
+  <!-- Inside left: the deal -->
+  <div class="panel inside">
+    <span class="eyebrow">The deal</span>
+    <h3>Four steps, all in your favor</h3>
+    <div class="steps">
+      <div class="step">
+        <span class="n">1</span>
+        <div>
+          <h4>Port your number, keep your number</h4>
+          <p>The number on your trucks and your Google listing stays yours. We move it onto OneBy and it works day one: calls, texts, voicemail.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="n">2</span>
+        <div>
+          <h4>Your line is free for 12 months</h4>
+          <p>A full year of business phone service on us. After the year it is $15 a month, and that is the whole phone bill.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="n">3</span>
+        <div>
+          <h4>The AI answers, free for your first month</h4>
+          <p>Miss a call and the AI picks up, gets the address and the problem, and leaves a ready-to-go job on your board. Keep it after the free month for $35 a month, about $50 all in.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="n">4</span>
+        <div>
+          <h4>3 Guest Passes included</h4>
+          <p>Put the people you talk to all the time, a vendor, a property owner, a builder, inside your workspace so they stop calling you for updates. Three free, 99 cents each after.</p>
+        </div>
+      </div>
+    </div>
+    <div class="meterbox">
+      <b>No per-call meter. Ever.</b>
+      <span>Your busiest month costs the same as your slowest. The CRM and invoicing underneath are free forever either way.</span>
+    </div>
+  </div>
+
+  <!-- Inside right: why + QR -->
+  <div class="panel inside right">
+    <span class="eyebrow">Why bother</span>
+    <h3>The 9pm call is the whole story</h3>
+    <div class="flow">
+      <div class="f">
+        <div class="dotcol"><span class="dot"></span><span class="stem"></span></div>
+        <div class="t"><b>The phone rings. You're on a job.</b><span>Both hands full, and a customer with a real problem is calling.</span></div>
+      </div>
+      <div class="f">
+        <div class="dotcol"><span class="dot"></span><span class="stem"></span></div>
+        <div class="t"><b>The AI answers on the first ring</b><span>It asks what your dispatcher would ask: the address, the problem, when they're home.</span></div>
+      </div>
+      <div class="f">
+        <div class="dotcol"><span class="dot"></span><span class="stem"></span></div>
+        <div class="t"><b>You get the summary by text</b><span>What they said, what they need, in plain words. No voicemail roulette.</span></div>
+      </div>
+      <div class="f">
+        <div class="dotcol"><span class="dot last"></span></div>
+        <div class="t"><b>The job is on your board</b><span>Ready to schedule in the morning. That call never walks to a competitor.</span></div>
+      </div>
+    </div>
+    <div class="mathbox">
+      <b>The honest math</b>
+      <p>An example, not a promise: miss 10 calls a week, 4 are real jobs, you close half at a <span class="num">$400</span> ticket. That is about <span class="num">$800 a week</span> walking to whoever picks up. Run your own numbers at oneby.ai/missed-call-calculator.</p>
+    </div>
+    <div class="qrcard">
+      <div class="qr">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 41" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h41v41H0z"/><path stroke="#04034f" d="M4 4.5h7m1 0h1m4 0h1m2 0h4m1 0h1m1 0h2m1 0h7M4 5.5h1m5 0h1m1 0h2m3 0h1m4 0h1m2 0h1m1 0h2m1 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m3 0h1m6 0h1m1 0h2m1 0h1m3 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h3m3 0h1m1 0h2m2 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m2 0h6m5 0h2m2 0h1m1 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m2 0h1m1 0h1m1 0h2m3 0h4m2 0h1m1 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h1m1 0h1m6 0h2m1 0h1m2 0h2M4 12.5h1m1 0h2m1 0h3m1 0h1m2 0h3m2 0h3m1 0h1m2 0h1m1 0h1m2 0h1m1 0h2M4 13.5h3m2 0h1m2 0h5m1 0h1m1 0h1m2 0h3m1 0h1m2 0h2m1 0h4M4 14.5h2m1 0h2m1 0h1m1 0h2m1 0h1m2 0h1m1 0h2m4 0h2m2 0h4m1 0h2M7 15.5h1m4 0h2m1 0h4m3 0h3m2 0h1m1 0h3m1 0h1m2 0h1M4 16.5h1m1 0h7m1 0h1m4 0h1m2 0h1m2 0h1m3 0h1m1 0h3m1 0h2M4 17.5h2m6 0h2m1 0h1m1 0h1m2 0h1m1 0h1m5 0h2m1 0h1m3 0h1M4 18.5h1m1 0h9m1 0h2m1 0h2m5 0h1m3 0h4M4 19.5h1m1 0h2m5 0h1m1 0h1m1 0h1m2 0h1m2 0h4m1 0h3m1 0h3M5 20.5h2m1 0h1m1 0h1m3 0h2m3 0h2m1 0h5m2 0h2m1 0h1m1 0h1M5 21.5h3m1 0h1m3 0h2m4 0h1m1 0h1m2 0h7m1 0h2m1 0h2M5 22.5h1m1 0h4m1 0h1m2 0h1m1 0h1m1 0h3m4 0h1m4 0h2m1 0h2M4 23.5h3m4 0h4m3 0h3m2 0h3m1 0h2m3 0h1m2 0h1M4 24.5h1m1 0h5m4 0h1m1 0h1m1 0h1m2 0h3m6 0h1m1 0h3M4 25.5h1m1 0h1m2 0h1m2 0h1m1 0h3m2 0h1m2 0h1m4 0h1m2 0h2m2 0h1m1 0h1M10 26.5h1m3 0h1m3 0h1m1 0h3m4 0h3m1 0h1m1 0h4M5 27.5h1m2 0h1m3 0h2m1 0h2m3 0h1m1 0h2m3 0h1m2 0h4m1 0h2M4 28.5h1m1 0h6m1 0h1m1 0h1m1 0h1m1 0h3m2 0h1m3 0h5m2 0h2M12 29.5h2m2 0h2m1 0h1m1 0h1m1 0h1m3 0h2m3 0h2m1 0h1M4 30.5h7m1 0h1m3 0h3m1 0h1m2 0h1m2 0h3m1 0h1m1 0h1M4 31.5h1m5 0h1m1 0h1m2 0h2m1 0h1m4 0h6m3 0h5M4 32.5h1m1 0h3m1 0h1m2 0h1m1 0h1m5 0h1m2 0h1m2 0h6m1 0h2M4 33.5h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h1m3 0h4m2 0h1m2 0h1m3 0h2M4 34.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m4 0h2m2 0h2m2 0h2m1 0h1M4 35.5h1m5 0h1m3 0h1m1 0h1m2 0h5m2 0h4m1 0h2m3 0h1M4 36.5h7m1 0h1m1 0h1m1 0h4m1 0h2m2 0h1m1 0h1m2 0h1m1 0h1m1 0h1"/></svg>
+      </div>
+      <div>
+        <b>Scan to claim your free year</b>
+        <div class="url">oneby.ai/free-year</div>
+        <div class="hint">No card. Two fields. Done in 20 seconds.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
