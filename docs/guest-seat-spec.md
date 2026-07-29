@@ -111,10 +111,12 @@ wire the loop once and forget it:
 
 ## Monetization and billing rules
 
-- $0.99 per relationship per month, billed to the host by default. It is
-  deliberately trivial: the host expenses their whole vendor network without a
-  thought, and the per-seat price exists mainly so seats are real, countable,
-  and spam-free rather than free-forever ghosts.
+- $0.99 per relationship per month, billed to the host (working assumption;
+  see flagged decision 2). It is deliberately trivial: the host expenses their
+  whole vendor network without a thought, and the per-seat price exists mainly
+  so seats are real, countable, and spam-free rather than free-forever ghosts.
+  Where a host hesitates, the answer is host-side promotion in the product,
+  not routing billing to the guest.
 - The $3.99 AI unlock can be bought by EITHER side. When the guest buys it, the
   weak side is paying us to stay in the loop, and we now hold a billing
   relationship with a future customer. Both sides buying is fine; do not
@@ -153,8 +155,13 @@ The guest experience is also an onboarding funnel, and should be built as one:
 ## Decisions flagged for Moshe (not build questions)
 
 1. Included free guest seats for founders (how many, how long).
-2. Whether the $0.99 can also be guest-paid when a host refuses to pay (I lean
-   yes: never let a billing preference kill an invite).
+2. Who can pay the $0.99 base seat. Status: under discussion between Moshe and
+   Eli. Moshe leans host-paid only, with in-product host-side promotion as the
+   answer when a host hesitates (advertise the seat to the host, do not route
+   billing around them). Treat host-paid as the working assumption; do not
+   assume guest-paid base seats unless that discussion lands otherwise. The
+   $3.99 AI unlock staying either-side is a separate question and unchanged
+   for now.
 3. Seat cap per host on lower tiers, if any.
 4. Whether transcripts (not summaries) sit only in the $3.99 tier or need the
    host's per-call approval as well (I lean both).
