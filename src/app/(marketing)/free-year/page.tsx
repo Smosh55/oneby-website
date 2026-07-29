@@ -5,10 +5,10 @@ import {
   PhoneForwarded,
   BadgeDollarSign,
   Bot,
-  Users,
   Check,
   Handshake,
 } from "lucide-react";
+import LoopedRing from "@/components/brand/LoopedRing";
 import WaitlistForm from "@/components/WaitlistForm";
 import { jsonLd as serializeJsonLd } from "@/lib/jsonld";
 
@@ -44,8 +44,8 @@ const deal = [
     body: "From day one, every call gets an AI summary in plain words. Live AI answering, the AI that picks up and books the job when you can't, arrives this fall. Your first month of it is free when it ships, then it is $35 a month per user.",
   },
   {
-    icon: Users,
-    title: "3 Guest Passes included",
+    icon: LoopedRing,
+    title: "3 Looped passes included",
     body: "Talk to somebody all the time? A vendor, a property owner, a builder, a friend on the job. Keep them looped: they see just the work you share with them, nothing else. Three passes free, 99 cents each after.",
   },
 ];
