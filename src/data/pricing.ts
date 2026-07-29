@@ -39,7 +39,7 @@ export const plans: Plan[] = [
     ctaClass: "btn-navy",
     features: [
       "Everything in Free",
-      "Business calling and SMS",
+      "Business calling and voicemail",
       "Desk phone with auto-provisioning",
       "Online fax and mobile app",
       "Keep your number (free porting)",
@@ -88,7 +88,7 @@ export const matrix: MatrixGroup[] = [
   {
     group: "Phone system (the $15 line)",
     rows: [
-      { label: "Business calling and SMS", values: [false, true, true] },
+      { label: "Business calling and voicemail", values: [false, true, true] },
       { label: "Keep / port your number", values: [false, true, true] },
       { label: "Desk phones with auto-provisioning", values: [false, true, true] },
       { label: "Online fax", values: [false, true, true] },
@@ -120,6 +120,7 @@ export const matrix: MatrixGroup[] = [
 
 export const addOns: { name: string; detail: string }[] = [
   { name: "Extra phone numbers", detail: "Local or toll-free, add as many as you need." },
+  { name: "Business texting", detail: "Two-way SMS on your number, carrier-registered (10DLC): $19.99/mo per number, includes 2,000 monthly texts under fair use." },
   { name: "Desk phone hardware", detail: "Plug-and-play handsets that provision themselves." },
   { name: "Extra lines", detail: "Phones that just dial, $15 each, no AI needed." },
   { name: "Multi-location and Enterprise", detail: "Custom routing, a branded AI voice, and a dedicated manager. Talk to sales." },

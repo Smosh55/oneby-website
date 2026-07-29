@@ -31,7 +31,7 @@ const deal = [
   {
     icon: PhoneForwarded,
     title: "Port your number, keep your number",
-    body: "The number on your trucks and your Google listing stays yours. We move it onto OneBy and it works day one: calls, texts, voicemail, all of it.",
+    body: "The number on your trucks and your Google listing stays yours. We move it onto OneBy and it works day one: calls and voicemail, all of it. Business texting is an add-on at $19.99 a month per number.*",
   },
   {
     icon: BadgeDollarSign,
@@ -46,7 +46,7 @@ const deal = [
   {
     icon: Users,
     title: "3 Guest Passes included",
-    body: "Put the people you talk to all the time, a vendor, a property owner, a builder, inside your workspace so they stop calling you for updates. Three seats free, 99 cents each after.",
+    body: "Talk to somebody all the time? A vendor, a property owner, a builder, a friend on the job. Keep them looped: they see just the work you share with them, nothing else. Three passes free, 99 cents each after.",
   },
 ];
 
@@ -57,7 +57,7 @@ const faqs = [
   },
   {
     q: "What does the free year cost me?",
-    a: "Nothing, and there is no card required to claim it. Normal business use is covered; your lines are for your business calls and texts, not call-center volume, and international calling is off unless you ask for it.",
+    a: "Nothing, and there is no card required to claim it. Normal business use is covered: your lines are for business calling, not call-center volume, and international calling is off unless you ask for it. Business texting is an optional add-on, $19.99 a month per number with 2,000 monthly texts under fair use, because carriers require paid registration (10DLC) to text from a business number.",
   },
   {
     q: "What happens after the free year?",
@@ -143,7 +143,7 @@ export default function FreeYearPage() {
           <h2 className="text-center text-2xl font-bold tracking-tight text-navy sm:text-3xl">
             The whole deal, no fine print voice
           </h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2" id="deal">
             {deal.map((d, i) => (
               <div key={d.title} className="surface-card rounded-2xl p-6">
                 <div className="flex items-center gap-3">
@@ -159,6 +159,11 @@ export default function FreeYearPage() {
               </div>
             ))}
           </div>
+          <p className="mt-4 text-[0.8rem] leading-relaxed text-faint">
+            *Texting from a business number requires paid carrier registration
+            (10DLC). The add-on includes 2,000 monthly texts under our fair-use
+            policy.
+          </p>
         </div>
       </section>
 
@@ -170,10 +175,9 @@ export default function FreeYearPage() {
               The math we showed you
             </h2>
             <p className="mt-3 leading-relaxed text-muted">
-              An example, not a promise: miss 10 calls a week, say 4 are real
-              jobs, you close half, and your average ticket is $400. That is
-              about $800 a week walking to whoever picks up. Your numbers are
-              different, which is the point. Run them yourself:
+              An example, not a promise: miss 10 calls a week, and just 2
+              become $400 jobs? That is $800 a week walking out the door. Run
+              your own numbers:
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Link href="/missed-call-calculator" className="btn btn-ghost">
