@@ -112,3 +112,42 @@ margin as usage grows.
 1. Free AI window: 30-day public trial + 6-month founder perk (was 6-month
    public / 12-month founder).
 2. Founder locked rate: $39 (best-practice ~20% off) instead of $29 (42% off).
+
+## Addendum, July 28: the free-phone-year proposal (Moshe)
+
+Proposal under discussion: give a business its line free for year one, then
+$15/line, with 1 month of free AI, 3 free guest invites, then $0.99 per seat,
+so the platform spreads ("infects") through real usage.
+
+Unit math (ranges, not promises):
+- A free line is not free to us: number rental, minutes, E911, carrier fees.
+  Realistic COGS for an active line runs about $4-8/mo, so a free year costs
+  $50-100 per business. Against SMB SaaS paid CAC of $150-400+, that is cheap
+  acquisition IF the account is a real business.
+- Payback: a $15 line conversion repays the free year in roughly half a year
+  of margin; an AI conversion at $39-49 repays it in weeks. If ~1/3 of
+  free-line businesses convert to anything paid, the offer clearly pays.
+
+The two guardrails that make it work:
+1. Port to qualify. The free year requires porting (or forwarding) the real
+   business number. Freeloaders and fraudsters will not port; real businesses
+   will, and a ported number is the deepest lock-in the product has. The
+   free year is really buying custody of the number for ~$75.
+2. Fraud controls. Free VoIP attracts SMS-pumping and toll fraud: fair-use
+   minute caps, international off by default, SMS limited until paid.
+
+Open pricing decision: the proposal mentioned $35/mo AI for this cohort. The
+published ladder is $49 standard / $39 founders locked. A third price would
+undercut both (nobody pays $49 while a $35 exists). Recommendation: hold the
+$39/$49 ladder; the free year is already the sweetener. If $35 is where the
+market should clear, reprice publicly instead of discounting quietly.
+
+Recommended structure: run the free phone year as a FOUNDERS-COHORT perk, not
+the permanent public offer. "Port your number, your line is free for a year,
+then $15; AI free 6 months, then your locked $39." Bounded cost, urgency,
+maximum infection at launch, and the public ladder stays intact. Extending a
+successful offer later is easy; un-giving a permanent free year is impossible.
+
+The 3-free-guest-invites piece is adopted into the guest seat spec already
+(3 free permanently, $0.99 after). Decision owner on all of the above: Moshe
+with Eli on provisioning cost reality.
