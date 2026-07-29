@@ -13,6 +13,10 @@ export type CleanLead = {
   source?: string;
   ref?: string;
   message?: string;
+  // 5-digit brochure claim code (in-person free-year offer): first 2 digits
+  // identify the rep, last 3 the physical brochure, so leads attribute to a
+  // rep and a reused code is visible immediately.
+  claimCode?: string;
   receivedAt: string;
 };
 
@@ -31,6 +35,7 @@ export function leadText(l: CleanLead): string {
     ...(l.teamSize ? [`Team size: ${l.teamSize}`] : []),
     ...(l.provider ? [`Provider:  ${l.provider}`] : []),
     `Source:    ${l.source || "—"}`,
+    ...(l.claimCode ? [`Claim code: ${l.claimCode} (rep ${l.claimCode.slice(0, 2)}, brochure ${l.claimCode.slice(2)})`] : []),
     ...(l.ref ? [`Referred by: ${l.ref}`] : []),
     ...(l.message ? ["", "Message:", l.message] : []),
     "",

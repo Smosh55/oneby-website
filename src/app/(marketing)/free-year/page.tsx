@@ -208,8 +208,12 @@ export default function FreeYearPage() {
             months start the day your number goes live. No card.
           </p>
           <div className="mt-8">
-            <WaitlistForm />
+            <WaitlistForm requireClaimCode />
           </div>
+          <p className="mt-4 text-[0.8rem] text-white/50">
+            Your claim code is the 5 digits written on your brochure. One code
+            per business. No code? Text the person who gave it to you.
+          </p>
           <p className="mt-6 text-sm text-white/60">
             Want to pick your onboarding time right now?{" "}
             <Link href="/demo" className="font-semibold text-green underline-offset-2 hover:underline">

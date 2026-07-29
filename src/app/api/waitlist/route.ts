@@ -10,6 +10,9 @@ type WaitlistBody = {
   industry?: string;
   source?: string;
   ref?: string;
+  // 5-digit brochure claim code (in-person offer); optional site-wide,
+  // required client-side on /free-year
+  claimCode?: string;
   // honeypot: real users never fill this
   website?: string;
 };
@@ -22,6 +25,7 @@ const LIMITS: Record<string, number> = {
   industry: 80,
   source: 200,
   ref: 200,
+  claimCode: 10,
 };
 
 const WINDOW_MS = 60_000;
@@ -87,6 +91,16 @@ export async function POST(req: Request) {
     );
   }
 
+  // Claim code (brochure offer): optional overall, but if sent it must be
+  // exactly 5 digits so a typo never silently drops rep attribution.
+  const claimCode = body.claimCode?.trim() ?? "";
+  if (claimCode && !/^\d{5}$/.test(claimCode)) {
+    return NextResponse.json(
+      { ok: false, error: "That claim code doesn't look right. It's the 5 digits written on your brochure." },
+      { status: 400 }
+    );
+  }
+
   const clean = {
     kind: "waitlist" as const,
     name,
@@ -94,6 +108,7 @@ export async function POST(req: Request) {
     industry: body.industry?.trim() ?? "",
     source: body.source?.trim() ?? "",
     ref: body.ref?.trim() ?? "",
+    claimCode,
     receivedAt: new Date().toISOString(),
   };
 

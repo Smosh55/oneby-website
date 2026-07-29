@@ -12,10 +12,17 @@ const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 // to the two highest-value asks at the moment of peak intent: lock founding
 // pricing (revenue now) and share a referral link (growth loop — referrals are
 // credited via ?ref= on the signup that follows).
-export default function WaitlistForm() {
+// requireClaimCode (in-person offer pages): adds a required 5-digit brochure
+// code so the lead attributes to a rep and codes can't be quietly reused.
+export default function WaitlistForm({
+  requireClaimCode = false,
+}: {
+  requireClaimCode?: boolean;
+} = {}) {
   const siteIndustry = useSiteIndustry();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [claimCode, setClaimCode] = useState("");
   const [industry, setIndustry] = useState(siteIndustry?.shortName ?? "");
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState("");
@@ -45,6 +52,10 @@ export default function WaitlistForm() {
       setError("A name and a real email is all we need.");
       return;
     }
+    if (requireClaimCode && !/^\d{5}$/.test(claimCode.trim())) {
+      setError("Enter the 5-digit claim code written on your brochure.");
+      return;
+    }
     setError("");
     setStatus("sending");
     try {
@@ -57,6 +68,7 @@ export default function WaitlistForm() {
           industry,
           source: source.current,
           ref: ref.current,
+          ...(requireClaimCode ? { claimCode: claimCode.trim() } : {}),
           website: honeypot.current?.value ?? "",
         }),
       });
@@ -159,6 +171,17 @@ export default function WaitlistForm() {
           className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-[0.95rem] text-white outline-none placeholder:text-white/50 focus:border-green"
         />
       </div>
+      {requireClaimCode && (
+        <input
+          value={claimCode}
+          onChange={(e) => setClaimCode(e.target.value.replace(/\D/g, "").slice(0, 5))}
+          placeholder="5-digit claim code from your brochure"
+          aria-label="Claim code"
+          inputMode="numeric"
+          autoComplete="off"
+          className="mt-2.5 w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-center text-[1.05rem] font-bold tracking-[0.35em] text-white outline-none placeholder:text-white/50 placeholder:font-normal placeholder:tracking-normal focus:border-green"
+        />
+      )}
       {!siteIndustry && (
         <select
           value={industry}

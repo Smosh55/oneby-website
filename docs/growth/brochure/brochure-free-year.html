@@ -155,6 +155,16 @@
   .qrcard b { font-size: 13pt; color: var(--navy); line-height: 1.2; display: block; }
   .qrcard .url { margin-top: 0.06in; font-size: 10pt; font-weight: 700; color: var(--blue-600); }
   .qrcard .hint { margin-top: 0.04in; font-size: 8pt; color: var(--faint); }
+  .codelabel {
+    margin-top: 0.1in; font-size: 7.5pt; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy);
+  }
+  .codeboxes { margin-top: 0.05in; display: flex; gap: 0.07in; }
+  .codeboxes .box {
+    width: 0.34in; height: 0.4in;
+    border: 1.5px solid var(--navy); border-radius: 6px;
+    background: var(--canvas);
+  }
 </style>
 </head>
 <body>
@@ -286,7 +296,11 @@
       <div>
         <b>Scan to claim your free year</b>
         <div class="url">oneby.ai/free-year</div>
-        <div class="hint">No card. Two fields. Done in 20 seconds.</div>
+        <div class="codelabel">Your claim code</div>
+        <div class="codeboxes">
+          <span class="box"></span><span class="box"></span><span class="box"></span><span class="box"></span><span class="box"></span>
+        </div>
+        <div class="hint">Enter this code when you claim. One code per business.</div>
       </div>
     </div>
   </div>
