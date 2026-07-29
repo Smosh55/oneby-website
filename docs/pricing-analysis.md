@@ -160,10 +160,8 @@ the brochure and the /free-year page on purpose; the rep offers it when it
 closes the deal. Rules and open math:
 - Gate it at 3+ users. Below that, "whole company" is just a discount with
   no volume behind it.
-- At the stated 25% off: 3 users = $78.75/mo ($26.25/user). Moshe's target
-  number was ~$71/mo for 3 users; that is ~32% off (about $23.67/user).
-  Decision pending: keep a clean 25%, or set the whole-company price to hit
-  the ~$71 point. One or the other, not both.
+- RESOLVED (Moshe, July 29): a clean 25% off. 3 users = $78.75/mo
+  ($26.25/user); the earlier ~$71 figure was a miscalculation, discarded.
 
 Pilot economics and the online-rollout trigger:
 - A converted account yields roughly $35-40/mo margin ($10 line, $25-30 AI),

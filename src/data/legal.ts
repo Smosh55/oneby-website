@@ -4,7 +4,7 @@ export const legalDocs: Record<"terms" | "privacy" | "refunds", LegalDoc> = {
   terms: {
     slug: "terms",
     title: "Terms & Conditions",
-    effective: "November 10, 2025",
+    effective: "July 29, 2026",
     body: `Welcome to oneby.ai. These Terms & Conditions ("Terms") govern your access to and use of our website, software, and services at https://oneby.ai (the "Service"). By accessing or using the Service, you agree to these Terms and to the policies referenced herein, including our Privacy Policy and Refund & Subscription Policy.
 
 ## 1. Acceptance & Electronic Agreement
@@ -47,24 +47,31 @@ Subscriptions are billed monthly or annually and renew automatically unless canc
 
 Subscription fees are generally non-refundable. Refund requests must be submitted within seven days of charge and may only be approved in limited circumstances such as duplicate billing or confirmed technical failure.
 
-### c) 10DLC Registration
+### c) Business Texting, 10DLC Registration & Fair Use
 
-U.S. A2P messaging may require 10DLC brand or campaign registration. A one-time, non-refundable $199 fee per brand may apply for filing, verification, and administration. Failure to complete registration or maintain compliance does not entitle you to a refund and may limit messaging functionality.
+- Business texting (two-way SMS on your business number) is an optional add-on priced at $19.99 per month per number, which includes 2,000 monthly texts under this fair-use policy.
+- U.S. A2P messaging may require 10DLC brand or campaign registration. A one-time, non-refundable $199 fee per brand may apply for filing, verification, and administration. Failure to complete registration or maintain compliance does not entitle you to a refund and may limit messaging functionality.
+- Fair use, texting: the allowance covers ordinary person-to-person business messaging (scheduling, updates, follow-ups) consistent with your registered use case. Bulk or marketing blasts outside your registered campaign, spam, or prohibited content are not permitted. Usage above the monthly allowance may be slowed, may require an additional number or plan, or may be billed at then-current overage rates with notice.
+- Fair use, calling: lines are provided for normal business calling, not call-center, autodialer, or resale volume. International calling is disabled by default and available on request.
 
-### d) Equipment; Returns
+### d) Promotional Offers
+
+Promotional offers (for example, a free period of line service) apply as described at the time of claim: they are one per business, non-transferable, have no cash value, and begin on the date stated in the offer (for ported numbers, the day your number goes live). Offer terms for new claims may change at any time; an offer already claimed keeps the terms it was claimed under. Promotional periods cover the stated services only; optional add-ons (such as business texting) bill normally unless the offer states otherwise.
+
+### e) Equipment; Returns
 
 - Hardware supplied by OneBy must be returned in its original packaging and condition with all accessories.
 - Missing packaging or materials incur a $100 per device replacement charge.
 - Devices not returned within 15 days of cancellation are deemed purchased and may be charged accordingly.
 - Customer is responsible for return shipping unless otherwise agreed in writing.
 
-### e) Free Trials, Upgrades & Downgrades
+### f) Free Trials, Upgrades & Downgrades
 
 - Trials convert to paid service unless canceled before expiration.
 - Upgrades take effect immediately and may be prorated.
 - Downgrades take effect at renewal; premium features or data may become unavailable.
 
-### f) Chargebacks & Non-Payment
+### g) Chargebacks & Non-Payment
 
 Initiating a chargeback without contacting support may result in account suspension. Late fees up to 1.5% per month (or the maximum allowed by law) may apply, and we may recover reasonable collection and attorney fees.
 
