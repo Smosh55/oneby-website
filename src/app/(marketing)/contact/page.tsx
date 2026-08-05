@@ -19,8 +19,8 @@ const ways = [
   {
     icon: Phone,
     label: "Call or text",
-    value: "(626) ONE-BY44",
-    href: "tel:+16266632944",
+    value: "(442) 44-ONEBY",
+    href: "tel:+14424466329",
   },
   {
     icon: CalendarClock,

@@ -649,7 +649,7 @@ export default function IndustryLanding({
         className="fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-line bg-white/95 px-4 py-3 backdrop-blur-md lg:hidden"
         style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
       >
-        <a href="tel:+16266632944" className="btn btn-ghost flex-1">
+        <a href="tel:+14424466329" className="btn btn-ghost flex-1">
           <Phone size={17} /> Call
         </a>
         <a href="#demo-form" className="btn btn-primary flex-1">

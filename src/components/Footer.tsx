@@ -111,8 +111,8 @@ export default function Footer() {
               <a href="mailto:support@oneby.ai" className="block hover:text-white">
                 support@oneby.ai
               </a>
-              <a href="tel:+16266632944" className="block hover:text-white">
-                (626) ONE-BY44
+              <a href="tel:+14424466329" className="block hover:text-white">
+                (442) 44-ONEBY
               </a>
             </div>
           </div>

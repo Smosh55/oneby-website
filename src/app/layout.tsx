@@ -70,7 +70,7 @@ const orgJsonLd = {
         "OneBy is the all-in-one CRM for service businesses: it catches every call and turns it into a ticket, a schedule, and an invoice, in one place.",
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+1-626-663-2944",
+        telephone: "+1-442-446-6329",
         email: "support@oneby.ai",
         contactType: "customer support",
         areaServed: "US",
