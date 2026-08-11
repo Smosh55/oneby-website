@@ -1,7 +1,19 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { focusedIndustrySlug } from "@/config/site";
+import { focusedIndustrySlug, salesFocusMode } from "@/config/site";
 import { industriesBySlug } from "@/data/industries";
+
+// Pages that stay reachable during the temporary sales-window focus mode.
+// /free-year and /onboarding are the funnel; the rest are kept because the
+// printed brochure and the offer's fine print link to them directly.
+const FOCUS_ALLOW = new Set([
+  "/free-year",
+  "/onboarding",
+  "/missed-call-calculator",
+  "/terms",
+  "/privacy",
+  "/refunds",
+]);
 
 // Bots (and preview/link-unfurlers) always get the canonical homepage so the
 // A/B rewrite never affects what search engines index.
@@ -10,6 +22,19 @@ const BOT_RE =
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  // TEMPORARY (see salesFocusMode in config/site.ts): the whole site funnels
+  // to the in-person offer. 307 so nothing is cached as permanent; flip the
+  // flag to restore every page exactly as it was.
+  if (salesFocusMode) {
+    if (!FOCUS_ALLOW.has(pathname)) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/free-year";
+      url.search = req.nextUrl.search; // keep utm params from ads/brochure
+      return NextResponse.redirect(url, 307);
+    }
+    return NextResponse.next();
+  }
 
   // Single-industry deployment: the homepage IS the industry, so the
   // /industries hub, every industry short URL, and legacy /industries/* paths
@@ -64,9 +89,9 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/",
-    "/industries/:path*",
-    "/:slug(hvac|plumbing|electricians|roofing|restoration|garage-door|pest-control|property-management|msp-it|law-firms|medical-offices|dental|barber|landscaping)/:path*",
-  ],
+  // Broad matcher (everything except api routes, Next internals, and files
+  // with extensions) so focus mode can gate the whole site. The non-focus
+  // logic below only acts on "/" and industry paths, so normal operation is
+  // unchanged beyond the middleware running on more routes.
+  matcher: ["/((?!api|_next/static|_next/image|.*\\..*).*)"],
 };
