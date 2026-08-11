@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/ai-receptionist`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/missed-call-calculator`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/free-invoicing`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/low-voltage`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/looped`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/templates`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/pricing`, changeFrequency: "monthly", priority: 0.9 },

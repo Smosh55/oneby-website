@@ -57,6 +57,7 @@ const groups: { title: string; links: FooterLink[] }[] = [
     title: "Company",
     links: [
       { label: "About", href: "/about" },
+      { label: "Wiring & Field Services", href: "/low-voltage" },
       { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
     ],

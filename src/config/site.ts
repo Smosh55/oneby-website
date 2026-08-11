@@ -16,10 +16,8 @@ export function focusedIndustry(): Industry | null {
   return focusedIndustrySlug ? industriesBySlug[focusedIndustrySlug] : null;
 }
 
-// TEMPORARY sales-window focus mode (enabled August 10, 2026, intended for
-// ~48-72 hours, so revert around August 13 by flipping to false). While true,
-// the middleware
-// redirects the whole site to the in-person offer funnel: only /free-year and
-// /onboarding render (plus legal pages and the calculator, because the printed
-// brochure links them). Flip to false to restore the full site.
-export const salesFocusMode = true;
+// Sales-window focus mode: while true, the middleware redirects the whole
+// site to the in-person offer funnel (only /free-year, /onboarding, legal
+// pages, and the calculator render). Used Aug 10-11, 2026, then reverted in
+// favor of keeping the full site up alongside the offer pages.
+export const salesFocusMode = false;
