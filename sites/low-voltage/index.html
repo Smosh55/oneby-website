@@ -3,289 +3,269 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Low Voltage Contractor</title>
-<meta name="description" content="Structured cabling, security cameras, and access control for grocery stores, nursing homes, and schools. Clean installs, labeled and tested, on your schedule.">
+<title>OneBy | Low Voltage, Security & Communications</title>
+<meta name="description" content="OneBy is a low-voltage contractor providing structured cabling, video surveillance, and access control for grocery stores, healthcare facilities, schools, and commercial buildings.">
 <script>
 /* ================= EDIT THIS BLOCK, NOTHING ELSE ======================
-   One place to rebrand the whole site. Fill in and redeploy. */
+   One place to update contact details. */
 const SITE = {
-  name: "Your Company Name",            // e.g. "Klein Low Voltage"
-  tagline: "Low Voltage Contractors",
+  name: "OneBy",
+  division: "Low Voltage, Security & Communications",
   phone: "(000) 000-0000",              // display format
   phoneHref: "+10000000000",            // tel: format
-  email: "quotes@example.com",
-  area: "Serving the Hudson Valley, North Jersey, and NYC metro",
-  license: "Licensed and insured. COI available on request.",
+  email: "service@oneby.ai",
+  area: "Hudson Valley, North Jersey, and the NYC metropolitan area",
+  license: "Licensed and insured. Certificate of insurance available on request.",
 };
 /* ====================================================================== */
 </script>
 <style>
   :root {
-    --ink: #eef1f5;
-    --muted: #9aa3ad;
-    --bg: #101318;
-    --bg-2: #171b22;
-    --card: #1c2129;
-    --line: #2a303a;
-    --accent: #ffd60a;      /* cable yellow */
-    --accent-ink: #101318;
+    --navy: #04034f;
+    --blue: #008fe0;
+    --blue-dark: #006bb8;
+    --green: #1cdb96;
+    --ink: #22262b;
+    --muted: #5b6570;
+    --line: #d7dce2;
+    --bg: #ffffff;
+    --bg-2: #f4f6f8;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
-    background: var(--bg); color: var(--ink); line-height: 1.6;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    background: var(--bg); color: var(--ink);
+    line-height: 1.65; font-size: 16px;
   }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
-  a { color: inherit; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  a { color: var(--blue-dark); }
+  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; color: var(--navy); font-weight: 700; }
 
-  /* header */
-  header {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(16,19,24,0.92); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
-  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: 0.02em; }
-  .brand .bolt {
-    width: 34px; height: 34px; border-radius: 8px; background: var(--accent);
-    display: grid; place-items: center; color: var(--accent-ink); font-size: 19px; font-weight: 900;
-  }
-  .brand small { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; }
-  .call-btn {
-    background: var(--accent); color: var(--accent-ink); text-decoration: none;
-    font-weight: 800; padding: 10px 18px; border-radius: 10px; font-size: 15px;
-    white-space: nowrap;
-  }
+  /* top strip */
+  .topbar { background: var(--navy); color: #fff; font-size: 13.5px; }
+  .topbar .wrap { display: flex; justify-content: space-between; gap: 12px; padding: 7px 20px; flex-wrap: wrap; }
+  .topbar a { color: #fff; text-decoration: none; }
 
-  /* hero */
-  .hero { padding: 72px 0 56px; background:
-    radial-gradient(800px 400px at 80% -10%, rgba(255,214,10,0.09), transparent),
-    var(--bg); }
-  .hero h1 { font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.08; letter-spacing: -0.02em; font-weight: 800; max-width: 21ch; }
-  .hero h1 em { font-style: normal; color: var(--accent); }
-  .hero p.lead { margin-top: 18px; font-size: 1.15rem; color: var(--muted); max-width: 56ch; }
-  .hero .cta-row { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn {
-    display: inline-block; text-decoration: none; font-weight: 800; border-radius: 12px;
-    padding: 14px 24px; font-size: 16px;
-  }
-  .btn.primary { background: var(--accent); color: var(--accent-ink); }
-  .btn.ghost { border: 1.5px solid var(--line); color: var(--ink); }
-  .markets { margin-top: 34px; display: flex; gap: 10px; flex-wrap: wrap; }
-  .chip {
-    border: 1px solid var(--line); background: var(--bg-2); color: var(--muted);
-    border-radius: 999px; padding: 7px 14px; font-size: 13.5px; font-weight: 600;
-  }
-  .chip b { color: var(--ink); }
+  /* header + nav */
+  header { border-bottom: 3px solid var(--navy); background: #fff; }
+  .head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand svg { height: 44px; width: auto; display: block; }
+  .brand .nm { font-family: Georgia, serif; font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.1; }
+  .brand .dv { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14.5px; }
+  nav a { color: var(--blue-dark); }
 
-  /* sections */
-  section { padding: 56px 0; }
-  section.alt { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .eyebrow { color: var(--accent); font-size: 12.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
-  h2 { margin-top: 8px; font-size: clamp(1.5rem, 3.4vw, 2.1rem); letter-spacing: -0.01em; }
-  .sub { margin-top: 10px; color: var(--muted); max-width: 60ch; }
+  /* banner */
+  .banner { background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 40px 0 36px; }
+  .banner h1 { font-size: clamp(1.6rem, 3.6vw, 2.3rem); line-height: 1.2; max-width: 30ch; }
+  .banner p { margin-top: 14px; max-width: 68ch; color: var(--ink); }
+  .banner .area { margin-top: 10px; font-size: 14px; color: var(--muted); font-style: italic; }
 
-  .grid { display: grid; gap: 16px; margin-top: 28px; }
-  @media (min-width: 720px) { .grid.cols-2 { grid-template-columns: 1fr 1fr; } .grid.cols-4 { grid-template-columns: repeat(4, 1fr); } }
-  .card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px;
-  }
-  .card .ico { font-size: 24px; }
-  .card h3 { margin-top: 10px; font-size: 1.05rem; }
-  .card p { margin-top: 6px; font-size: 0.92rem; color: var(--muted); }
+  section { padding: 40px 0 8px; }
+  section h2 { font-size: 1.45rem; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 18px; }
+  section p { margin-bottom: 14px; max-width: 74ch; }
+  section h3 { font-size: 1.05rem; margin: 20px 0 6px; }
 
-  /* gallery */
-  .shots { display: grid; gap: 12px; margin-top: 28px; grid-template-columns: 1fr 1fr; }
-  @media (min-width: 720px) { .shots { grid-template-columns: repeat(4, 1fr); } }
-  .shot { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 3/4; background: var(--card); }
-  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .shot figcaption {
-    position: absolute; inset: auto 0 0 0; padding: 26px 12px 10px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.82));
-    font-size: 12.5px; font-weight: 700;
-  }
+  ul.plain { margin: 0 0 14px 22px; }
+  ul.plain li { margin-bottom: 7px; }
 
-  /* process */
-  .steps { counter-reset: s; margin-top: 28px; display: grid; gap: 14px; }
-  @media (min-width: 720px) { .steps { grid-template-columns: repeat(4, 1fr); } }
-  .step { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
-  .step::before {
-    counter-increment: s; content: counter(s);
-    display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
-    background: var(--accent); color: var(--accent-ink); font-weight: 900; margin-bottom: 12px;
-  }
-  .step h3 { font-size: 1rem; }
-  .step p { margin-top: 5px; font-size: 0.9rem; color: var(--muted); }
+  /* two-column info layout on wide screens */
+  .cols { display: grid; gap: 0 40px; }
+  @media (min-width: 760px) { .cols { grid-template-columns: 1fr 1fr; } }
 
-  /* why us */
-  .why li { list-style: none; display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
-  .why li:last-child { border-bottom: 0; }
-  .why .tick { color: var(--accent); font-weight: 900; }
-  .why b { display: block; }
-  .why span { color: var(--muted); font-size: 0.93rem; }
+  /* work photos */
+  .shots { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; margin: 6px 0 20px; }
+  @media (min-width: 760px) { .shots { grid-template-columns: repeat(4, 1fr); } }
+  .shot { border: 1px solid var(--line); background: #fff; padding: 6px; }
+  .shot img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
+  .shot figcaption { padding: 8px 4px 4px; font-size: 12.5px; color: var(--muted); line-height: 1.4; }
 
-  /* quote CTA */
-  .quote { text-align: center; padding: 64px 0; }
-  .quote .box {
-    background: var(--card); border: 1.5px solid var(--accent); border-radius: 18px;
-    padding: 40px 24px; max-width: 720px; margin: 0 auto;
-  }
-  .quote h2 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); }
-  .quote p { color: var(--muted); margin-top: 10px; }
-  .quote .cta-row { margin-top: 24px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .quote .hint { margin-top: 14px; font-size: 0.85rem; color: var(--muted); }
+  /* contact block */
+  .contact { background: var(--bg-2); border: 1px solid var(--line); padding: 22px 26px; margin: 8px 0 20px; max-width: 560px; }
+  .contact dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; font-size: 15px; }
+  .contact dt { font-weight: bold; color: var(--navy); }
+  .contact p { margin: 12px 0 0; font-size: 13.5px; color: var(--muted); }
 
-  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 0.9rem; }
-  .foot { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+  footer { margin-top: 40px; border-top: 3px solid var(--navy); background: var(--bg-2); padding: 20px 0 30px; font-size: 13.5px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 </style>
 </head>
 <body>
 
+<div class="topbar">
+  <div class="wrap">
+    <span data-cfg="license">Licensed and insured.</span>
+    <span><a data-cfg-href="tel" href="#"><span data-cfg="phone">(000) 000-0000</span></a> &nbsp;|&nbsp; <a data-cfg-href="mail" href="#"><span data-cfg="email">service@oneby.ai</span></a></span>
+  </div>
+</div>
+
 <header>
-  <div class="wrap nav">
+  <div class="wrap head">
     <div class="brand">
-      <span class="bolt">&#9889;</span>
-      <span><span data-cfg="name">Your Company Name</span><small data-cfg="tagline">Low Voltage Contractors</small></span>
+      <svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" aria-label="OneBy mark">
+        <polygon fill="#1cdb96" points="490.72 29.93 489.76 457.8 309.41 457.8 309.41 142.18 241.31 142.18 315.82 29.93 490.72 29.93"/>
+        <polygon fill="#008fe0" points="309.42 457.81 234.9 570.07 60 570.07 60.73 241.05 60.96 142.17 241.32 142.17 175.7 241.05 241.32 241.05 241.32 457.81 309.42 457.81"/>
+      </svg>
+      <div>
+        <div class="nm" data-cfg="name">OneBy</div>
+        <div class="dv" data-cfg="division">Low Voltage, Security &amp; Communications</div>
+      </div>
     </div>
-    <a class="call-btn" data-cfg-href="tel" href="#"><span data-cfg="phone">(000) 000-0000</span></a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#industries">Industries</a>
+      <a href="#work">Our Work</a>
+      <a href="#standards">Standards</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
 </header>
 
-<section class="hero">
+<div class="banner">
   <div class="wrap">
-    <h1>Cabling, cameras, and access control. <em>Done clean.</em></h1>
-    <p class="lead">
-      We wire, secure, and connect facilities that can't afford downtime:
-      grocery stores that never close, nursing homes where residents live, and
-      schools full of kids. Every run terminated, tested, and labeled.
+    <h1>Structured Cabling, Video Surveillance &amp; Access Control</h1>
+    <p>
+      OneBy is a low-voltage contracting company. We design, install, and
+      service the wiring and systems that commercial buildings run on: network
+      cabling, camera systems, and door access, for facilities that operate
+      around the clock and cannot close for construction.
     </p>
-    <div class="cta-row">
-      <a class="btn primary" data-cfg-href="tel" href="#">Call or text for a quote</a>
-      <a class="btn ghost" href="#work">See our work</a>
-    </div>
-    <div class="markets">
-      <span class="chip"><b>Grocery</b> and retail</span>
-      <span class="chip"><b>Nursing homes</b> and assisted living</span>
-      <span class="chip"><b>Schools</b> and campuses</span>
-      <span class="chip"><b>Offices</b> and warehouses</span>
+    <p class="area"><span data-cfg="area">Hudson Valley, North Jersey, and the NYC metropolitan area</span></p>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <h2>Services</h2>
+    <div class="cols">
+      <div>
+        <h3>Structured Cabling</h3>
+        <p>
+          Category 6 and 6A copper installations: horizontal runs, backbone
+          pathways, patch panels, and workstation drops. Every run is
+          terminated to standard, tested end to end, and labeled at both ends
+          with a port map delivered at completion.
+        </p>
+        <h3>Video Surveillance</h3>
+        <p>
+          IP camera systems for interior and exterior coverage: sales floors,
+          entrances, loading areas, corridors, and common areas. We handle
+          camera placement and aiming, network video recorder configuration,
+          retention settings, and remote viewing for authorized staff.
+        </p>
+      </div>
+      <div>
+        <h3>Access Control</h3>
+        <p>
+          Card, fob, and keypad systems with door controllers, electric
+          strikes and maglocks, scheduled locking, and entry logs. Systems are
+          configured so administrators can add and remove credentials without
+          calling a vendor for every change.
+        </p>
+        <h3>Equipment Racks &amp; Remediation</h3>
+        <p>
+          New rack and enclosure builds, and remediation of existing closets:
+          cable dressing, re-termination, labeling, and documentation of
+          equipment that has accumulated over years of piecemeal work.
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="alt" id="services">
+<section id="industries">
   <div class="wrap">
-    <span class="eyebrow">What we do</span>
-    <h2>Four things, done right</h2>
-    <div class="grid cols-4">
-      <div class="card">
-        <div class="ico">&#128268;</div>
-        <h3>Structured cabling</h3>
-        <p>Cat6 and Cat6A runs, patch panels, drops where you actually need them. Terminated, tested, and labeled on both ends.</p>
-      </div>
-      <div class="card">
-        <div class="ico">&#128249;</div>
-        <h3>Security cameras</h3>
-        <p>IP camera systems designed for real coverage: aisles, entrances, loading docks, corridors. NVR setup and phone viewing included.</p>
-      </div>
-      <div class="card">
-        <div class="ico">&#128272;</div>
-        <h3>Access control</h3>
-        <p>Fobs, keypads, readers, and door controllers. Who gets in, where, and when, with schedules and an audit trail.</p>
-      </div>
-      <div class="card">
-        <div class="ico">&#129520;</div>
-        <h3>Rack builds and cleanups</h3>
-        <p>New racks built right, or the mess you inherited dressed, labeled, and documented so the next tech isn't guessing.</p>
-      </div>
-    </div>
+    <h2>Industries Served</h2>
+    <p>
+      Most of our work is in occupied, operating facilities. Installations are
+      scheduled and sequenced so normal operations continue: overnight and
+      off-hours work, section-by-section cutovers, and clean, closed ceilings
+      at the end of every shift.
+    </p>
+    <ul class="plain">
+      <li><strong>Grocery and retail.</strong> Camera coverage for sales floors, points of sale, receiving, and exterior lots; network cabling for registers, scales, and back-office systems, installed without interrupting trading hours.</li>
+      <li><strong>Nursing homes and assisted living.</strong> Surveillance of common areas and entries, door control for resident safety and wander management support, and cabling for nurse call and administrative systems, performed by technicians accustomed to working respectfully in residents' living environment.</li>
+      <li><strong>Schools and campuses.</strong> Classroom and corridor cabling, building entry control, visitor management support, and camera systems, with work scheduled around the academic calendar and staff background documentation available to administrators.</li>
+      <li><strong>Offices and warehouses.</strong> Full network cabling for fit-outs and expansions, camera and access systems, and equipment room builds coordinated with general contractors and IT vendors.</li>
+    </ul>
   </div>
 </section>
 
 <section id="work">
   <div class="wrap">
-    <span class="eyebrow">Our work</span>
-    <h2>The racks speak for themselves</h2>
-    <p class="sub">Real photos from real jobs. This is the standard on every install: dressed, labeled, and tested before we hand it over.</p>
+    <h2>Our Work</h2>
+    <p>Photographs from recent installations.</p>
     <div class="shots">
       <figure class="shot">
-        <img src="images/work-1.jpg" alt="Dressed yellow cable runs into patch panels" onerror="this.onerror=null;this.src='images/placeholder-1.svg'">
-        <figcaption>Dressed and bundled runs</figcaption>
+        <img src="images/work-1.jpg" alt="Dressed cable bundles entering patch panels" onerror="this.onerror=null;this.src='images/placeholder-1.svg'">
+        <figcaption>Horizontal runs dressed and bundled into the rack</figcaption>
       </figure>
       <figure class="shot">
-        <img src="images/work-2.jpg" alt="Patch panels terminated and organized mid-build" onerror="this.onerror=null;this.src='images/placeholder-2.svg'">
-        <figcaption>Panels terminated and tested</figcaption>
+        <img src="images/work-2.jpg" alt="Patch panels during termination" onerror="this.onerror=null;this.src='images/placeholder-2.svg'">
+        <figcaption>Patch panel termination in progress, mid-build</figcaption>
       </figure>
       <figure class="shot">
-        <img src="images/work-3.jpg" alt="Finished rack with switches, labeled ports, and camera NVR" onerror="this.onerror=null;this.src='images/placeholder-3.svg'">
-        <figcaption>Labeled switching + camera NVR</figcaption>
+        <img src="images/work-3.jpg" alt="Completed rack with labeled patch panels, switches, and camera monitor" onerror="this.onerror=null;this.src='images/placeholder-3.svg'">
+        <figcaption>Completed rack: labeled panels, switching, and camera recording</figcaption>
       </figure>
       <figure class="shot">
-        <img src="images/work-4.jpg" alt="Overhead ladder rack with organized cable pathways" onerror="this.onerror=null;this.src='images/placeholder-4.svg'">
-        <figcaption>Ceiling pathways on ladder rack</figcaption>
+        <img src="images/work-4.jpg" alt="Overhead ladder rack cable pathways" onerror="this.onerror=null;this.src='images/placeholder-4.svg'">
+        <figcaption>Overhead pathways on ladder rack above the equipment room</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
-<section class="alt">
+<section id="standards">
   <div class="wrap">
-    <div class="grid cols-2">
-      <div>
-        <span class="eyebrow">Why us</span>
-        <h2>Built for sensitive buildings</h2>
-        <ul class="why" style="margin-top: 20px;">
-          <li><span class="tick">&#10003;</span><div><b>We work around your hours</b><span>Nights, weekends, and section-by-section, so the store keeps selling and residents keep their routine.</span></div></li>
-          <li><span class="tick">&#10003;</span><div><b>Techs you can have in the building</b><span>Background-checked, badged, and respectful. We know what it means to work where kids learn and people live.</span></div></li>
-          <li><span class="tick">&#10003;</span><div><b>Everything labeled and documented</b><span>Port maps, test results, and photos at handoff. Your next IT guy will thank you.</span></div></li>
-          <li><span class="tick">&#10003;</span><div><b>Licensed and insured</b><span data-cfg="license">Licensed and insured. COI available on request.</span></div></li>
-        </ul>
-      </div>
-      <div>
-        <span class="eyebrow">How it goes</span>
-        <h2>Walkthrough to handoff</h2>
-        <div class="steps" style="grid-template-columns: 1fr;">
-          <div class="step"><h3>Walkthrough</h3><p>We walk the site, count the drops and doors, and listen to what's been annoying you.</p></div>
-          <div class="step"><h3>Fixed quote</h3><p>A written number, not an estimate that grows. Options if you want good, better, best.</p></div>
-          <div class="step"><h3>Install on your schedule</h3><p>Clean pathways, no ceiling tiles left open overnight, broom-swept every shift.</p></div>
-          <div class="step"><h3>Documented handoff</h3><p>Labels, port maps, camera views, and codes handed over. You own it, and you understand it.</p></div>
-        </div>
-      </div>
-    </div>
+    <h2>Standards &amp; Practices</h2>
+    <ul class="plain">
+      <li>Terminations and testing to ANSI/TIA-568 standards; test results provided with the closeout package.</li>
+      <li>Both ends of every run labeled, with a port map and as-built documentation at handoff.</li>
+      <li>Camera systems documented with a view map, retention configuration, and administrator credentials transferred to the owner.</li>
+      <li>Technicians are background checked, and identification is provided in advance for facilities that require it.</li>
+      <li>Work areas are left clean at the end of each shift; ceiling tiles are closed and debris removed nightly.</li>
+      <li data-cfg="license">Licensed and insured. Certificate of insurance available on request.</li>
+    </ul>
   </div>
 </section>
 
-<section class="quote" id="quote">
+<section id="contact">
   <div class="wrap">
-    <div class="box">
-      <span class="eyebrow">Free site walkthrough</span>
-      <h2>Tell us what the building needs</h2>
-      <p>Call, text, or email. Send a floor plan or a few photos and the quote comes back faster.</p>
-      <div class="cta-row">
-        <a class="btn primary" data-cfg-href="tel" href="#"><span data-cfg="phone">(000) 000-0000</span></a>
-        <a class="btn ghost" data-cfg-href="mail" href="#"><span data-cfg="email">quotes@example.com</span></a>
-      </div>
-      <p class="hint" data-cfg="area">Serving the Hudson Valley, North Jersey, and NYC metro</p>
+    <h2>Contact</h2>
+    <p>
+      For proposals, site visits, or service on an existing system, contact
+      our office. Plans and photographs are helpful for preparing accurate
+      proposals but are not required.
+    </p>
+    <div class="contact">
+      <dl>
+        <dt>Telephone</dt><dd><a data-cfg-href="tel" href="#"><span data-cfg="phone">(000) 000-0000</span></a></dd>
+        <dt>Email</dt><dd><a data-cfg-href="mail" href="#"><span data-cfg="email">service@oneby.ai</span></a></dd>
+        <dt>Service area</dt><dd data-cfg="area">Hudson Valley, North Jersey, and the NYC metropolitan area</dd>
+      </dl>
+      <p data-cfg="license">Licensed and insured. Certificate of insurance available on request.</p>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap foot">
-    <span>&copy; <span id="yr"></span> <span data-cfg="name">Your Company Name</span>. All rights reserved.</span>
-    <span data-cfg="license">Licensed and insured.</span>
+  <div class="wrap">
+    <span>&copy; <span id="yr"></span> <span data-cfg="name">OneBy</span>. All rights reserved.</span>
+    <span data-cfg="division">Low Voltage, Security &amp; Communications</span>
   </div>
 </footer>
 
 <script>
-  // Fill every branded slot from the SITE config at the top of this file.
   document.querySelectorAll("[data-cfg]").forEach((el) => {
     const v = SITE[el.getAttribute("data-cfg")];
     if (v) el.textContent = v;
   });
   document.querySelectorAll('[data-cfg-href="tel"]').forEach((a) => (a.href = "tel:" + SITE.phoneHref));
   document.querySelectorAll('[data-cfg-href="mail"]').forEach((a) => (a.href = "mailto:" + SITE.email));
-  document.title = SITE.name + " | Cabling, Cameras & Access Control";
+  document.title = SITE.name + " | " + SITE.division;
   document.getElementById("yr").textContent = new Date().getFullYear();
 </script>
 </body>
