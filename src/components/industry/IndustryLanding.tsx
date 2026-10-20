@@ -53,6 +53,12 @@ export default function IndustryLanding({
   asHome?: boolean;
 }) {
   const Icon = getIcon(industry.icon);
+  // Lowercase the trade name for mid-sentence use, but keep acronyms like
+  // "MSP / IT" and "HVAC" in caps so they don't render as "msp / it".
+  const lowerName = industry.shortName
+    .split(" ")
+    .map((w) => (w.length > 1 && w === w.toUpperCase() ? w : w.toLowerCase()))
+    .join(" ");
   // Real, industry-specific jobs pulled from this vertical's demo workspace.
   const useCases = getDemo(industry.slug).tickets.slice(0, 3);
 
@@ -221,11 +227,11 @@ export default function IndustryLanding({
           <Reveal className="mx-auto mb-10 max-w-2xl text-center">
             <span className="eyebrow">Live demo</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              See OneBy run a real {industry.shortName.toLowerCase()} call.
+              See OneBy run a real {lowerName} call.
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted">
               This is the real workspace, loaded with{" "}
-              {industry.shortName.toLowerCase()} calls, tickets, and jobs. Click
+              {lowerName} calls, tickets, and jobs. Click
               into anything.
             </p>
           </Reveal>
@@ -246,7 +252,7 @@ export default function IndustryLanding({
                 Invite-only early access
               </span>
               <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
-                Be the first {industry.shortName.toLowerCase()} shop in your
+                Be the first {lowerName} shop in your
                 market on OneBy.
               </h2>
               <div className="mt-6">
@@ -263,7 +269,7 @@ export default function IndustryLanding({
           <Reveal className="mx-auto max-w-2xl text-center">
             <span className="eyebrow text-error">The cost of a lost conversation</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              What {industry.shortName.toLowerCase()} teams lose on every call.
+              What {lowerName} teams lose on every call.
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-5 sm:grid-cols-3">
@@ -312,7 +318,7 @@ export default function IndustryLanding({
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
               Missed-call answering is just the start. After <em>every</em>{" "}
-              {industry.shortName.toLowerCase()} call, picked up at the desk, on
+              {lowerName} call, picked up at the desk, on
               a mobile, or by the AI, OneBy transcribes it, writes the summary,
               and creates and assigns the follow-up task. Nothing said on a call
               slips through again.
@@ -404,7 +410,7 @@ export default function IndustryLanding({
       <section className="pb-18 lg:pb-24">
         <div className="container-x">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <span className="eyebrow">Real {industry.shortName.toLowerCase()} jobs</span>
+            <span className="eyebrow">Real {lowerName} jobs</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
               See how a {industry.shortName} job runs, start to finish.
             </h2>
@@ -459,7 +465,7 @@ export default function IndustryLanding({
           <Reveal className="mx-auto max-w-2xl text-center">
             <span className="eyebrow">One platform, not four</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              The whole {industry.shortName.toLowerCase()} job, in one place.
+              The whole {lowerName} job, in one place.
             </h2>
             <p className="mt-4 text-muted">
               OneBy catches the call, then tickets, schedules, and invoices the
@@ -590,7 +596,7 @@ export default function IndustryLanding({
           <div className="container-x">
             <Reveal className="mb-8 flex items-center gap-3">
               <h2 className="text-xl font-bold tracking-tight text-navy">
-                More on {industry.shortName.toLowerCase()} and the phone
+                More on {lowerName} and the phone
               </h2>
               <span className="h-px flex-1 bg-line" />
             </Reveal>
@@ -623,7 +629,7 @@ export default function IndustryLanding({
               </div>
               <div className="relative mx-auto max-w-2xl">
                 <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-[2.5rem] sm:leading-[1.1]">
-                  Stop letting the phone cost you {industry.shortName.toLowerCase()} jobs.
+                  Stop letting the phone cost you {lowerName} jobs.
                 </h2>
                 <p className="mt-5 text-lg leading-relaxed text-white/70">
                   See OneBy answer every call and run the job from first ring to
