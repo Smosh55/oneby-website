@@ -65,7 +65,7 @@ export const industries: Industry[] = [
     heroTitle: "Never lose another no-cooling call to voicemail.",
     heroSub:
       "Your techs are on rooftops and in crawl spaces, not glued to the phone. When a call lands and nobody can grab it, OneBy's AI picks up, gets the address and the symptom, and drops a ready-to-dispatch task in your queue. From there the same platform schedules the tech, invoices the job, and texts the arrival window, so the whole job runs in one place.",
-    heroStat: { stat: "+31%", label: "more service calls booked" },
+    heroStat: { stat: "24/7", label: "answering, even after hours" },
     pains: [
       {
         title: "Peak season buries the front desk",
@@ -144,7 +144,7 @@ export const industries: Industry[] = [
     heroTitle: "A burst pipe can't wait for a callback.",
     heroSub:
       "Plumbing emergencies love midnight, Sundays, and the exact moment you're under a sink across town. OneBy answers, calms the customer down, gets what's flooding and where, and turns it into an urgent job your team can act on. Then it books the visit, sends the quote, and collects payment, all without leaving the platform.",
-    heroStat: { stat: "4 hrs", label: "saved per day on callbacks" },
+    heroStat: { stat: "24/7", label: "emergency answering, even at 2am" },
     pains: [
       {
         title: "Emergencies go to whoever answers first",
@@ -167,7 +167,7 @@ export const industries: Industry[] = [
     outcomes: [
       { stat: "24/7", label: "emergency call coverage" },
       { stat: "100%", label: "of calls answered, even mid-job" },
-      { stat: "+28%", label: "after-hours jobs captured" },
+      { stat: "0", label: "after-hours leads lost to voicemail" },
     ],
     capabilities: [
       {
@@ -221,7 +221,7 @@ export const industries: Industry[] = [
     heroTitle: "Stop letting quote requests ring out.",
     heroSub:
       "Panel upgrades, EV chargers, outages, inspections. Electrical leads are worth real money and easy to lose. OneBy answers the call, captures the scope and the property details, and turns it into a quote-ready task. From the same place you send the estimate, schedule the work, and invoice it when the job is done.",
-    heroStat: { stat: "+34%", label: "more estimate requests captured" },
+    heroStat: { stat: "0", label: "quote requests lost to voicemail" },
     pains: [
       {
         title: "High-ticket jobs hang up fast",
@@ -300,7 +300,7 @@ export const industries: Industry[] = [
     heroTitle: "Catch every storm-season lead.",
     heroSub:
       "When a storm rolls through, the phone doesn't stop. OneBy answers every call, captures the damage details and the address, and books the inspection, so you fill the schedule instead of the voicemail box. Then OneBy tickets the job, schedules the crew, and invoices the work, start to finish in one platform.",
-    heroStat: { stat: "+40%", label: "more inspections booked after storms" },
+    heroStat: { stat: "24/7", label: "answering through every storm surge" },
     pains: [
       {
         title: "Storm spikes overwhelm the office",
@@ -454,7 +454,7 @@ export const industries: Industry[] = [
     heroTitle: "A car stuck in the garage is a same-day job.",
     heroSub:
       "Broken springs and stuck doors are urgent, high-intent calls. OneBy answers every one, captures the door type and the symptom, and books the repair before the customer dials the next company on the list. From there it schedules the tech, sends the invoice, and texts the customer, the whole job in one place.",
-    heroStat: { stat: "+27%", label: "more same-day repairs booked" },
+    heroStat: { stat: "Every call", label: "answered, even mid-job" },
     pains: [
       {
         title: "Stuck-door calls won't wait",
@@ -531,7 +531,7 @@ export const industries: Industry[] = [
     heroTitle: "An infestation is an emotional, urgent call.",
     heroSub:
       "Someone staring at a wasp nest or bed bugs wants help today, not tomorrow. OneBy answers, captures the pest and the property details, and books the treatment, turning anxious callers into scheduled jobs. Then OneBy schedules the route, invoices the visit, and texts reminders, all from one platform.",
-    heroStat: { stat: "+25%", label: "more treatments scheduled" },
+    heroStat: { stat: "Every call", label: "captured, even on route" },
     pains: [
       {
         title: "Urgent pests can't wait for a callback",
@@ -554,7 +554,7 @@ export const industries: Industry[] = [
     outcomes: [
       { stat: "100%", label: "of calls answered, even on route" },
       { stat: "8 sec", label: "to team notification" },
-      { stat: "+25%", label: "more jobs booked" },
+      { stat: "0", label: "treatment calls lost to voicemail" },
     ],
     capabilities: [
       {
@@ -763,7 +763,7 @@ export const industries: Industry[] = [
     heroTitle: "Capture every new matter, even in court.",
     heroSub:
       "A prospective client who hits voicemail just dials the next firm on the list. OneBy answers, qualifies the matter, and captures the intake details, so you book consultations while you're still in session. Then it schedules the consult, tracks the matter, and invoices the client, all in one place.",
-    heroStat: { stat: "+35%", label: "more consultations booked" },
+    heroStat: { stat: "Every", label: "new-matter call captured" },
     pains: [
       {
         title: "You can't answer from the courtroom",
@@ -918,7 +918,7 @@ export const industries: Industry[] = [
     heroTitle: "Never send a new patient to voicemail.",
     heroSub:
       "Your front desk can only hold so many lines at once. When the phones stack up at lunch or after close, OneBy's AI answers, captures why the patient is calling, and books or routes the visit, so a new patient never hangs up and calls the practice down the street. The same platform schedules the chair, sends the reminder, and keeps every call on the patient's record.",
-    heroStat: { stat: "+30%", label: "more new patients booked" },
+    heroStat: { stat: "Every call", label: "answered, never voicemail" },
     pains: [
       {
         title: "Peak hours bury the front desk",
@@ -996,7 +996,7 @@ export const industries: Industry[] = [
     heroTitle: "Every missed call is a chair someone else filled.",
     heroSub:
       "When your hands are in a fade, you can't grab the phone. OneBy answers, books the chair, and captures the service and the barber they want, so the booking lands on your calendar instead of the shop down the block. The same platform confirms the appointment, sends the reminder, and rebooks the cancellations that would have gone empty.",
-    heroStat: { stat: "+22%", label: "more bookings captured" },
+    heroStat: { stat: "Every", label: "booking captured, even mid-cut" },
     pains: [
       {
         title: "You can't cut hair and answer the phone",
@@ -1074,7 +1074,7 @@ export const industries: Industry[] = [
     heroTitle: "Win the spring rush instead of missing it.",
     heroSub:
       "When the season hits, the phone rings faster than your crew can answer from behind a mower. OneBy picks up every call, captures the property details and the service they want, and books the estimate, so leads fill your schedule instead of your voicemail. The same platform routes the crew, invoices the job, and texts the customer, start to finish in one place.",
-    heroStat: { stat: "+33%", label: "more estimates booked in season" },
+    heroStat: { stat: "Every", label: "estimate call captured in season" },
     pains: [
       {
         title: "Crews can't answer from the field",

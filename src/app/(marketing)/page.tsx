@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
-import LogoCloud from "@/components/LogoCloud";
 import Problem from "@/components/Problem";
 import Solution from "@/components/Solution";
 import HearItWork from "@/components/HearItWork";
-import Stories from "@/components/Stories";
 import Industries from "@/components/Industries";
 import SpeaksYourTrade from "@/components/SpeaksYourTrade";
 import Comparison from "@/components/Comparison";
@@ -64,11 +62,12 @@ export default function Home() {
       />
       <HomeDemoProvider>
         <Hero />
-        <LogoCloud />
+        {/* LogoCloud and Stories removed: fabricated "trusted by" logos and
+            customer testimonials. Restore with real proof once we have
+            permissioned founding-customer quotes/logos. */}
         <Problem />
         <Solution />
         <HearItWork />
-        <Stories />
         <Industries />
         <SpeaksYourTrade />
         <Comparison />

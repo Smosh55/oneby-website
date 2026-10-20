@@ -42,7 +42,7 @@ const TABS: Tab[] = [
     label: "Schedule",
     icon: CalendarDays,
     headline: "A schedule the whole crew shares",
-    body: "Who is on what, today and next week, synced two-way with Google and Microsoft calendars. Drag a job to a tech and a time.",
+    body: "Who is on what, today and next week. Drag a job to a tech and a time, and the customer gets a confirmation text.",
     Visual: ScheduleVisual,
   },
   {

@@ -15,7 +15,7 @@ const pillars = [
   {
     icon: CalendarDays,
     title: "It schedules the work",
-    body: "Drop the job on a tech and a time, synced two-way with Google and Microsoft calendars.",
+    body: "Drop the job on a tech and a time, and the customer gets an automatic confirmation text.",
   },
   {
     icon: Receipt,

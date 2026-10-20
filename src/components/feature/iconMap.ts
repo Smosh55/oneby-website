@@ -19,6 +19,13 @@ import {
   Workflow,
   Layers,
   Tags,
+  Plug,
+  Wrench,
+  ClipboardCheck,
+  Repeat,
+  Clock,
+  BarChart3,
+  Building2,
   type LucideIcon,
 } from "lucide-react";
 
@@ -42,6 +49,13 @@ export const featureIconMap: Record<string, LucideIcon> = {
   Workflow,
   Layers,
   Tags,
+  Plug,
+  Wrench,
+  ClipboardCheck,
+  Repeat,
+  Clock,
+  BarChart3,
+  Building2,
 };
 
 export function getFeatureIcon(name: string): LucideIcon {

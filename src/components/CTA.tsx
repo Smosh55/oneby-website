@@ -1,6 +1,7 @@
 import Reveal from "./Reveal";
 import { CheckCircle2 } from "lucide-react";
 import WaitlistForm from "./WaitlistForm";
+import { launch } from "@/config/site";
 
 export default function CTA() {
   return (
@@ -16,7 +17,7 @@ export default function CTA() {
 
             <div className="relative mx-auto max-w-2xl">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-green/40 bg-green/10 px-3.5 py-1.5 text-[0.8rem] font-bold uppercase tracking-wide text-green">
-                Launching October 2026
+                {launch.statusLabel}
               </span>
               <p className="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-sm font-medium text-white/70">
                 <CheckCircle2 size={16} className="shrink-0 text-green" />
@@ -24,12 +25,12 @@ export default function CTA() {
                 this page. Click through it above.
               </p>
               <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-[2.75rem] sm:leading-[1.1]">
-                Be first in line when doors open.
+                Get an invite before public launch.
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-white/70">
-                Join the waitlist and get first access at launch, plus the
-                chance to lock founding-member pricing before it&apos;s gone
-                for good.
+                OneBy is live now by invite. Request one to start today, and
+                lock founding-member pricing before general availability in{" "}
+                {launch.publicLaunch}.
               </p>
               <div className="mt-8">
                 <WaitlistForm />

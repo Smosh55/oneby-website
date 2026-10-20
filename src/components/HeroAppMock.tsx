@@ -1263,7 +1263,7 @@ function ScheduleView({
           </div>
         </div>
 
-        <p className="mt-3 inline-flex items-center gap-1.5 text-[0.72rem] text-faint"><Calendar size={12} /> Synced two-way with Google and Microsoft calendars</p>
+        <p className="mt-3 inline-flex items-center gap-1.5 text-[0.72rem] text-faint"><Calendar size={12} /> Automatic confirmation text to the customer</p>
       </div>
     </div>
   );

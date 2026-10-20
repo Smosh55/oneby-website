@@ -110,7 +110,7 @@ export default function WaitlistForm({
           </span>
           <div>
             <p className="text-lg font-bold text-navy">You&apos;re on the list, {name.split(" ")[0]}.</p>
-            <p className="text-sm text-muted">We&apos;ll email you the moment doors open.</p>
+            <p className="text-sm text-muted">We&apos;ll email you your invite details shortly.</p>
           </div>
         </div>
 
@@ -231,16 +231,16 @@ export default function WaitlistForm({
       >
         {status === "sending" ? (
           <>
-            <Loader2 size={18} className="animate-spin" /> Saving your spot…
+            <Loader2 size={18} className="animate-spin" /> Sending your request…
           </>
         ) : (
           <>
-            Save my spot <ArrowRight size={18} />
+            Request an invite <ArrowRight size={18} />
           </>
         )}
       </button>
       <p className="mt-3 text-center text-[0.8rem] text-white/50">
-        No spam, no card. Just first dibs when doors open.
+        No spam, no card. Just your invite when it&apos;s ready.
       </p>
     </form>
   );

@@ -39,7 +39,7 @@ const base = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
 const modules = [
   { icon: Bot, name: "AI Receptionist", href: "/features/ai-receptionist", body: "Answers the calls your team can't, in a natural voice, day or night." },
   { icon: Ticket, name: "Ticketing", href: "/features/ticketing", body: "Every call becomes a structured, assigned ticket on its own." },
-  { icon: CalendarDays, name: "Scheduling", href: "/features/scheduling", body: "Book a tech and a time, synced two-way with Google and Microsoft." },
+  { icon: CalendarDays, name: "Scheduling", href: "/features/scheduling", body: "Book a tech and a time, with an automatic confirmation text to the customer." },
   { icon: Receipt, name: "Invoicing & Payments", href: "/features/invoicing", body: "Quote it, invoice it, and text a pay link the customer taps to pay." },
   { icon: MessageSquare, name: "Business SMS", href: "/features/business-sms", body: "A shared text inbox, so messages never strand on one phone." },
   { icon: Phone, name: "Calling & desk phones", href: "/features/desk-phones", body: "A full phone system: calling, desk phones, and fax, ready in a day." },
@@ -239,7 +239,7 @@ export default function VoipCrmPage() {
             One platform, from the first ring to paid.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/70">
-            Join the waitlist and, at launch, watch the AI catch a call and turn it
+            Request an invite and watch the AI catch a call and turn it
             into a job, then add your line when you're ready.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -251,7 +251,7 @@ export default function VoipCrmPage() {
             </Link>
           </div>
           <p className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-white/60">
-            {["Launching October 2026", "No per-call meter", "Keep your number"].map((r) => (
+            {["Invite-only early access", "No per-call meter", "Keep your number"].map((r) => (
               <span key={r} className="inline-flex items-center gap-1.5">
                 <Check size={15} className="text-green" /> {r}
               </span>

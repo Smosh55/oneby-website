@@ -16,6 +16,10 @@ import {
   Search,
   MessageSquareReply,
   Layers,
+  Plug,
+  Wrench,
+  ClipboardCheck,
+  BarChart3,
 } from "lucide-react";
 
 const features = [
@@ -51,6 +55,12 @@ const features = [
     body: "Can't pick up? OneBy texts the caller back in seconds from your business number, so they get a reply instead of dialing the next company.",
   },
   {
+    icon: Plug,
+    title: "Connect Your AI Assistant",
+    body: "Plug Claude, ChatGPT, Gemini, or Cursor straight into your business. Ask it about customers, calls, and invoices, and let it do the busywork, with your permission.",
+    span: true,
+  },
+  {
     icon: Ticket,
     title: "Ticketing",
     body: "Every call becomes a structured ticket, assigned and ready, with the summary attached. Nothing lives on a sticky note.",
@@ -58,7 +68,7 @@ const features = [
   {
     icon: CalendarDays,
     title: "Scheduling",
-    body: "Assign a tech and a time, see the whole week, and sync two-way with Google and Microsoft calendars.",
+    body: "Assign a tech and a time, see the whole week, and the customer gets an automatic confirmation text.",
   },
   {
     icon: Layers,
@@ -69,6 +79,21 @@ const features = [
     icon: Receipt,
     title: "Invoicing & Payments",
     body: "Quote it, invoice it, and text a pay link the customer taps to pay by card. Milestone and recurring billing too.",
+  },
+  {
+    icon: Wrench,
+    title: "Equipment & Warranties",
+    body: "Track the units you install, their serials and warranties, and full service history. OneBy flags what's due for maintenance.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Forms & Checklists",
+    body: "Inspections, work authorizations, and safety checks, built or imported ready-made, attached to the job, filled in from the field.",
+  },
+  {
+    icon: BarChart3,
+    title: "Reports & Insights",
+    body: "Revenue, who owes you and for how long, and what's actually selling. Your numbers, always up to date, no spreadsheet.",
   },
   {
     icon: History,

@@ -201,7 +201,7 @@ export default function IndustryLanding({
               <span className="font-semibold text-navy">
                 {industry.shortName}
               </span>{" "}
-              · Launching October 2026
+              · Invite-only early access
             </span>
           </div>
           <span className="hidden h-4 w-px bg-line sm:block" />
@@ -243,7 +243,7 @@ export default function IndustryLanding({
             </div>
             <div className="relative mx-auto max-w-2xl">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-green/40 bg-green/10 px-3.5 py-1.5 text-[0.8rem] font-bold uppercase tracking-wide text-green">
-                Launching October 2026
+                Invite-only early access
               </span>
               <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
                 Be the first {industry.shortName.toLowerCase()} shop in your
@@ -471,7 +471,7 @@ export default function IndustryLanding({
             {[
               { icon: Bot, t: "AI answers every call", b: "Overflow and after-hours included, captured, never sent to voicemail." },
               { icon: Ticket, t: "Tickets the job", b: `Every call becomes an assigned ${industry.shortName} ticket on its own.` },
-              { icon: Calendar, t: "Schedules the work", b: "Book a tech and a time, synced two-way with Google and Microsoft calendars." },
+              { icon: Calendar, t: "Schedules the work", b: "Book a tech and a time, and the customer gets an automatic confirmation text." },
               { icon: Receipt, t: "Invoices and gets paid", b: "Send a pay link, take a card, and close the job out." },
             ].map((m, i) => (
               <Reveal key={m.t} delay={i * 70}>

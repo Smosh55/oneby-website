@@ -36,7 +36,7 @@ export default function NotFound() {
             <Home size={18} /> Back home
           </Link>
           <Link href="/#waitlist" className="btn btn-ghost text-base">
-            Join the waitlist <ArrowRight size={18} />
+            Request an invite <ArrowRight size={18} />
           </Link>
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium">

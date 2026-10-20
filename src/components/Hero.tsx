@@ -1,5 +1,6 @@
-import { Sparkles, CheckCircle2, ArrowRight, Star } from "lucide-react";
+import { Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import DemoSwitcher from "./DemoSwitcher";
+import { launch } from "@/config/site";
 
 export default function Hero() {
   return (
@@ -51,7 +52,7 @@ export default function Hero() {
             style={{ animationDelay: "180ms" }}
           >
             <a href="#waitlist" className="btn btn-primary text-base">
-              Join the waitlist <ArrowRight size={18} />
+              Request an invite <ArrowRight size={18} />
             </a>
             <a href="/founders" className="btn btn-ghost text-base">
               Lock founding pricing
@@ -75,7 +76,7 @@ export default function Hero() {
             className="animate-rise mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium text-muted"
             style={{ animationDelay: "240ms" }}
           >
-            {["Launching October 2026", "No per-call meter", "Keep your number", "No contract"].map(
+            {[launch.statusLabel, "No per-call meter", "Keep your number", "No contract"].map(
               (r) => (
                 <span key={r} className="inline-flex items-center gap-1.5">
                   <CheckCircle2 size={16} className="text-green" /> {r}
@@ -84,18 +85,6 @@ export default function Hero() {
             )}
           </div>
 
-          {/* proof */}
-          <div
-            className="animate-rise mt-4 inline-flex items-center gap-1.5 text-sm text-muted"
-            style={{ animationDelay: "300ms" }}
-          >
-            <span className="flex">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} size={15} className="fill-green text-green" />
-              ))}
-            </span>
-            4.9/5 from service pros
-          </div>
         </div>
 
         {/* Oversized, interactive app mock with an industry switcher */}

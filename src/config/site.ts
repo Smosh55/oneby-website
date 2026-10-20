@@ -16,6 +16,17 @@ export function focusedIndustry(): Industry | null {
   return focusedIndustrySlug ? industriesBySlug[focusedIndustrySlug] : null;
 }
 
+// Launch state. The product is live now in invite-only early access; full
+// public launch is targeted for January 2027. Components read from here so the
+// phase and date are set in one place instead of scattered across the site.
+export const launch = {
+  phase: "invite-only" as "invite-only" | "public",
+  // Short label for badges/chips.
+  statusLabel: "Invite-only early access",
+  // When general availability opens.
+  publicLaunch: "January 2027",
+} as const;
+
 // Sales-window focus mode: while true, the middleware redirects the whole
 // site to the in-person offer funnel (only /free-year, /onboarding, legal
 // pages, and the calculator render). Used Aug 10-11, 2026, then reverted in

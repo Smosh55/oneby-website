@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import OrgHero from "@/components/OrgHero";
-import LogoCloud from "@/components/LogoCloud";
 import Problem from "@/components/Problem";
 import OrganizedShowcase from "@/components/OrganizedShowcase";
-import Stories from "@/components/Stories";
 import Industries from "@/components/Industries";
 import SpeaksYourTrade from "@/components/SpeaksYourTrade";
 import Comparison from "@/components/Comparison";
@@ -27,10 +25,10 @@ export default function OrganizedVariant() {
   return (
     <HomeDemoProvider>
       <OrgHero />
-      <LogoCloud />
+      {/* LogoCloud and Stories removed: fabricated logos and testimonials.
+          Restore with real, permissioned proof. */}
       <Problem />
       <OrganizedShowcase />
-      <Stories />
       <Industries />
       <SpeaksYourTrade />
       <Comparison />

@@ -4,7 +4,12 @@
 export type Feature = {
   slug: string;
   name: string;
-  group: "AI & automation" | "Jobs & billing" | "Calling & devices" | "Collaboration";
+  group:
+    | "AI & automation"
+    | "Jobs & billing"
+    | "Calling & devices"
+    | "Collaboration"
+    | "Operations & insights";
   icon: string;
   metaTitle: string;
   metaDescription: string;
@@ -444,30 +449,30 @@ export const features: Feature[] = [
     name: "Scheduling",
     group: "Jobs & billing",
     icon: "CalendarDays",
-    metaTitle: "Scheduling: Book the Job, Sync the Calendar",
+    metaTitle: "Scheduling: Book the Job on the Call",
     metaDescription:
-      "Assign a job to a tech and a time, see your whole week, and sync two-way with Google and Microsoft calendars. Scheduling built right into the call.",
+      "Assign a job to a tech and a time, see your whole week, and send the customer an automatic confirmation text. Scheduling built right into the call.",
     keywords: ["job scheduling software", "field service scheduling", "appointment scheduling", "dispatch scheduling"],
     heroEyebrow: "Scheduling",
     heroTitle: "Book the job before you hang up.",
     heroSub:
-      "Assign a ticket to a tech and a time, see the whole week at a glance, and let it sync both ways with Google and Microsoft calendars. The job is on the books before the call ends.",
+      "Assign a ticket to a tech and a time and see the whole week at a glance. The job is on the books before the call ends, and the customer gets a confirmation text automatically.",
     bullets: [
       "Assign a tech and a time straight from the ticket",
       "A week view, not just today",
-      "Two-way Google and Microsoft calendar sync",
+      "Reschedule or reassign in a tap",
       "The customer gets a confirmation text automatically",
     ],
     how: [
       { step: "Pick a slot", body: "Drop the job on a tech and a time from the ticket or the calendar." },
-      { step: "It syncs", body: "The booking lands on your calendar and theirs, both ways, instantly." },
+      { step: "It's on the board", body: "The job lands on the schedule for that tech and time, visible to the whole team." },
       { step: "Everyone knows", body: "The tech sees their day and the customer gets a heads-up text." },
     ],
     faqs: [
-      { q: "Does it sync with my calendar?", a: "Yes, two-way with Google Calendar and Microsoft 365, so nothing double-books." },
+      { q: "Can I sync it with Google or Microsoft calendar?", a: "Calendar sync is on the roadmap. For now, your schedule lives in OneBy with a clean week view, and customers get an automatic confirmation text so nobody misses the appointment." },
       { q: "Is this a full dispatch board?", a: "It is lightweight scheduling for small teams: assign a tech and a time, see the week, and go. No bloated dispatch software to learn." },
     ],
-    cardline: "Book the job, sync the calendar.",
+    cardline: "Book the job, text the confirmation.",
   },
   {
     slug: "invoicing",
@@ -561,6 +566,246 @@ export const features: Feature[] = [
     ],
     cardline: "Set prices once, reuse everywhere.",
   },
+  {
+    slug: "connect-your-ai-assistant",
+    name: "Connect Your AI Assistant",
+    group: "AI & automation",
+    icon: "Plug",
+    metaTitle: "Connect Claude, ChatGPT, or Gemini to Your Business",
+    metaDescription:
+      "OneBy has a secure connector so you can plug your own AI assistant, Claude, ChatGPT, Gemini, or Cursor, straight into your business and ask it anything or have it get work done.",
+    keywords: ["MCP connector", "connect AI to CRM", "ChatGPT business connector", "Claude business data", "AI assistant integration"],
+    heroEyebrow: "Connect Your AI Assistant",
+    heroTitle: "Bring your own AI. Point it at your business.",
+    heroSub:
+      "OneBy opens a secure connector to the assistants you already use. Ask Claude, ChatGPT, Gemini, or Cursor about your customers, calls, jobs, and invoices in plain English, and let it do the busywork, with your permission.",
+    bullets: [
+      "Works with Claude, ChatGPT, Gemini, and Cursor",
+      "Ask about customers, calls, jobs, invoices, and payments in plain English",
+      "Let it draft a text, build an invoice, or schedule a visit, only when you allow it",
+      "You control what it can see and whether it can make changes, read-only by default",
+    ],
+    how: [
+      { step: "Connect once", body: "Add the OneBy connector to your assistant with a guided, step-by-step setup. No code." },
+      { step: "Set the guardrails", body: "Choose what the assistant can reach and whether it can only read or also make changes. You stay in control." },
+      { step: "Just ask", body: "“Which customers asked about financing last month?” or “Text the Johnsons their invoice.” It answers, or does it, with your say-so." },
+    ],
+    faqs: [
+      { q: "Which assistants can I connect?", a: "Claude (web, desktop, and Code), ChatGPT, Gemini, and Cursor, with guided setup for each. More are added over time." },
+      { q: "Is my data safe?", a: "You decide what the assistant can access, and it is read-only unless you turn on changes for it. Every connection is scoped to your account and you can turn it off anytime." },
+    ],
+    cardline: "Plug your own AI into your business.",
+  },
+  {
+    slug: "equipment-warranties",
+    name: "Equipment & Warranties",
+    group: "Jobs & billing",
+    icon: "Wrench",
+    metaTitle: "Equipment and Warranty Tracking for Service Businesses",
+    metaDescription:
+      "Track the equipment you install, its serial numbers and warranties, and its full service history. OneBy flags maintenance that's due and files warranty claims.",
+    keywords: ["equipment tracking", "warranty tracking software", "asset tracking field service", "HVAC equipment history", "serial number tracking"],
+    heroEyebrow: "Equipment & Warranties",
+    heroTitle: "Know every unit you've ever installed.",
+    heroSub:
+      "Log the equipment you install against the customer and the job, keep serial numbers and warranties on file, and see the whole service history in one place. When maintenance is due, OneBy tells you.",
+    bullets: [
+      "Track installed units by customer, location, and job",
+      "Serial numbers, models, and warranty terms on file",
+      "Full service history for every piece of equipment",
+      "Maintenance-due list and one-tap warranty claims",
+    ],
+    how: [
+      { step: "Log it on the job", body: "When you install or service a unit, record the model, serial, and warranty right from the job." },
+      { step: "It builds the history", body: "Every visit, repair, and part attaches to that unit, so the whole story is in one place." },
+      { step: "Stay ahead of it", body: "See what's due for maintenance, and file a warranty claim in a tap when something fails." },
+    ],
+    faqs: [
+      { q: "Who is this for?", a: "Any trade that installs or services equipment: HVAC, appliances, garage doors, generators, pumps, and property maintenance. It turns one-time installs into ongoing service relationships." },
+      { q: "Can I see what's under warranty?", a: "Yes. Each unit carries its warranty terms, so you know in seconds whether a repair is covered before you quote it." },
+    ],
+    cardline: "Every installed unit, tracked for life.",
+  },
+  {
+    slug: "forms-checklists",
+    name: "Forms & Checklists",
+    group: "Jobs & billing",
+    icon: "ClipboardCheck",
+    metaTitle: "Digital Forms and Checklists for the Field",
+    metaDescription:
+      "Build your own forms or start from ready-made packs, then attach them to jobs and customers: inspections, work authorizations, safety checks, and before-and-after photos.",
+    keywords: ["field service forms", "digital inspection forms", "job checklists", "work order forms", "custom forms software"],
+    heroEyebrow: "Forms & Checklists",
+    heroTitle: "Every job, done the same way every time.",
+    heroSub:
+      "Inspections, work authorizations, safety checks, punch lists. Build the forms your trade needs or start from a ready-made pack, attach them to the job, and your team fills them in from the field.",
+    bullets: [
+      "Drag-and-drop form builder, or start from ready-made packs",
+      "Attach forms to jobs and customers automatically",
+      "Photos, signatures, checkboxes, and required fields",
+      "Completed forms saved to the job and the customer record",
+    ],
+    how: [
+      { step: "Pick or build a form", body: "Import a ready-made pack for your trade, or build your own with the drag-and-drop editor." },
+      { step: "Attach it to the work", body: "Forms ride along on the job, so the tech has the right checklist in hand on site." },
+      { step: "File it automatically", body: "Completed forms, photos, and signatures save to the job and the customer, ready to show or send." },
+    ],
+    faqs: [
+      { q: "Do I have to build forms from scratch?", a: "No. Start from ready-made starter packs and trim them, or build your own from scratch. Either way they attach to jobs on their own." },
+      { q: "Can techs fill them in from the field?", a: "Yes. Forms work on the mobile app, with photos and signatures captured right on site." },
+    ],
+    cardline: "The right checklist on every job.",
+  },
+  {
+    slug: "service-plans",
+    name: "Service Plans & Recurring Billing",
+    group: "Jobs & billing",
+    icon: "Repeat",
+    metaTitle: "Service Plans and Recurring Billing",
+    metaDescription:
+      "Turn one-time jobs into recurring revenue. Set up service plans and recurring invoices that charge the card on file each cycle, plus milestone billing for big jobs.",
+    keywords: ["recurring billing", "service plans", "maintenance agreements", "subscription invoicing", "milestone billing"],
+    heroEyebrow: "Service Plans & Recurring Billing",
+    heroTitle: "Turn one-off jobs into recurring revenue.",
+    heroSub:
+      "Maintenance agreements, monthly retainers, and seasonal plans run themselves. Set up a recurring invoice once and OneBy charges the card on file every cycle, and bills big jobs by milestone.",
+    bullets: [
+      "Recurring invoices on any cycle: weekly, monthly, quarterly, or yearly",
+      "Charges the card on file automatically, no manual sending",
+      "Milestone billing for deposits and big installs",
+      "Payment terms and net-30 style billing for commercial accounts",
+    ],
+    how: [
+      { step: "Set the plan", body: "Build a recurring invoice or a milestone schedule once, with the amount, cycle, and customer." },
+      { step: "It bills itself", body: "OneBy charges the card on file each cycle or at each milestone, and reconciles it against the job." },
+      { step: "You keep the revenue", body: "Predictable monthly income with no chasing, and a clear record of what's billed and paid." },
+    ],
+    faqs: [
+      { q: "Who uses recurring billing?", a: "Property managers, maintenance-plan shops, and anyone on a retainer. It turns a one-time customer into steady monthly revenue." },
+      { q: "Can I bill big jobs in stages?", a: "Yes. Milestone billing takes a deposit up front and the balance on completion, all tracked against the same job." },
+    ],
+    cardline: "Recurring revenue that bills itself.",
+  },
+  {
+    slug: "time-tracking",
+    name: "Time Tracking & Timesheets",
+    group: "Operations & insights",
+    icon: "Clock",
+    metaTitle: "Time Tracking and Timesheets for Field Teams",
+    metaDescription:
+      "Your team clocks in and out from the app, hours roll up into timesheets you can review, approve, and lock, so payroll and job costing are accurate.",
+    keywords: ["time tracking", "timesheets", "clock in clock out app", "field team hours", "job costing"],
+    heroEyebrow: "Time Tracking & Timesheets",
+    heroTitle: "Clock in from the truck. Approve from the office.",
+    heroSub:
+      "Your team clocks in and out right from the app, and their hours roll up into timesheets you can review, approve, and lock. Payroll and job costing stop being a guessing game.",
+    bullets: [
+      "One-tap clock in and out from the mobile app",
+      "Hours roll up into clean weekly timesheets",
+      "Review, approve, and lock before payroll",
+      "See labor time against the job it belongs to",
+    ],
+    how: [
+      { step: "The team clocks in", body: "Techs start and stop their time from the app, on site or on the road." },
+      { step: "Hours roll up", body: "Time lands on a weekly timesheet per person, ready for review." },
+      { step: "You approve and lock", body: "Check the week, approve it, and lock it so the numbers are final for payroll." },
+    ],
+    faqs: [
+      { q: "Can I correct a mistake before payroll?", a: "Yes. Review and edit the week, then lock it so nothing changes after it's approved." },
+      { q: "Does it tie time to jobs?", a: "Yes. Labor time attaches to the job, so you can see what a job actually cost in hours." },
+    ],
+    cardline: "Clock in, roll up, approve, done.",
+  },
+  {
+    slug: "reports-insights",
+    name: "Reports & Insights",
+    group: "Operations & insights",
+    icon: "BarChart3",
+    metaTitle: "Business Reports and Insights for Service Pros",
+    metaDescription:
+      "Know your numbers at a glance: revenue, money owed and aging, sales by product or service, and tax summaries, all built in, no spreadsheet required.",
+    keywords: ["business reports", "revenue report", "accounts receivable aging", "sales by product", "service business analytics"],
+    heroEyebrow: "Reports & Insights",
+    heroTitle: "Know your numbers without a spreadsheet.",
+    heroSub:
+      "Revenue, who owes you and for how long, what's selling, and what you owe in tax. The reports that tell you how the business is really doing are built in and always up to date.",
+    bullets: [
+      "Revenue over time, and revenue by customer",
+      "Accounts-receivable aging, so you know who's overdue",
+      "Sales by product or service, to see what actually pays",
+      "Tax summaries, ready for filing time",
+    ],
+    how: [
+      { step: "It adds up on its own", body: "Every invoice and payment feeds the reports automatically. Nothing to export or re-key." },
+      { step: "See the whole picture", body: "Open a report and see revenue, receivables, and what's selling, up to date to the minute." },
+      { step: "Act on it", body: "Spot overdue customers, your best-selling work, and your tax position, then do something about it." },
+    ],
+    faqs: [
+      { q: "Do I need an accountant to read these?", a: "No. The reports are built for owners: plain numbers that answer what you earned, who owes you, and what's selling." },
+      { q: "Is the data current?", a: "Yes. Reports update as invoices and payments happen, so you're never looking at last month's picture." },
+    ],
+    cardline: "Revenue, receivables, and what's selling.",
+  },
+  {
+    slug: "texting-compliance",
+    name: "Texting Compliance Built In",
+    group: "Operations & insights",
+    icon: "ShieldCheck",
+    metaTitle: "Business Texting Compliance: 10DLC and Opt-Outs",
+    metaDescription:
+      "OneBy handles the parts of business texting that get you blocked: 10DLC registration, STOP opt-out handling, and spam controls, so your texts actually get delivered.",
+    keywords: ["10DLC registration", "business texting compliance", "STOP opt-out", "A2P messaging", "SMS deliverability"],
+    heroEyebrow: "Texting Compliance Built In",
+    heroTitle: "The texting rules, handled for you.",
+    heroSub:
+      "Business texting has rules now, and breaking them gets your messages blocked. OneBy walks you through 10DLC registration, honors STOP opt-outs on its own, and keeps your number in good standing so your texts land.",
+    bullets: [
+      "Guided 10DLC business-texting registration",
+      "STOP and opt-out requests honored automatically",
+      "Block and spam controls for problem numbers",
+      "Emergency (E911) address handling for your lines",
+    ],
+    how: [
+      { step: "Register the right way", body: "OneBy walks you through 10DLC registration so carriers trust your number from day one." },
+      { step: "Stay compliant on autopilot", body: "Opt-outs are honored automatically, and you can block or report problem numbers in a tap." },
+      { step: "Keep landing in the inbox", body: "A registered, well-behaved number means your texts get delivered instead of filtered." },
+    ],
+    faqs: [
+      { q: "What is 10DLC and do I need it?", a: "It's the carrier registration required to text customers from a business number in the US. OneBy guides you through it so your texts don't get blocked." },
+      { q: "Do I have to manage opt-outs myself?", a: "No. When a customer texts STOP, OneBy stops texting them automatically and keeps you compliant." },
+    ],
+    cardline: "10DLC and opt-outs, handled.",
+  },
+  {
+    slug: "multi-location-teams",
+    name: "Multi-Location & Teams",
+    group: "Operations & insights",
+    icon: "Building2",
+    metaTitle: "Multi-Location and Team Roles in OneBy",
+    metaDescription:
+      "Run several businesses or locations under one login, with role-based access so each person sees exactly what they should. Scales from a solo shop to a multi-site team.",
+    keywords: ["multi-location software", "multi-business management", "team roles and permissions", "franchise field service software"],
+    heroEyebrow: "Multi-Location & Teams",
+    heroTitle: "One login. Every location. The right access.",
+    heroSub:
+      "Run more than one business or location without juggling logins, and give each person a role that shows them exactly what they need. OneBy grows from a one-person shop to a multi-site team.",
+    bullets: [
+      "Multiple businesses and locations under one account",
+      "Role-based access for owners, office staff, and field techs",
+      "Route calls, texts, and jobs by location",
+      "Add and remove team members in a couple of taps",
+    ],
+    how: [
+      { step: "Add your locations", body: "Set up each business or location, with its own numbers, hours, and routing." },
+      { step: "Give people the right role", body: "Owners see everything; office and field roles see just what they need to do their job." },
+      { step: "Run it from one place", body: "Switch between locations in a tap, with the whole operation under one login." },
+    ],
+    faqs: [
+      { q: "Can I run more than one business?", a: "Yes. Manage several businesses or locations under one account and switch between them instantly." },
+      { q: "Can I limit what my team sees?", a: "Yes. Roles control what each person can see and do, so field techs and office staff get the right, scoped view." },
+    ],
+    cardline: "Every location, one login, right access.",
+  },
 ];
 
 export const featuresBySlug = Object.fromEntries(
@@ -572,4 +817,5 @@ export const featureGroups: Array<{ group: Feature["group"]; items: Feature[] }>
   { group: "Jobs & billing", items: features.filter((f) => f.group === "Jobs & billing") },
   { group: "Calling & devices", items: features.filter((f) => f.group === "Calling & devices") },
   { group: "Collaboration", items: features.filter((f) => f.group === "Collaboration") },
+  { group: "Operations & insights", items: features.filter((f) => f.group === "Operations & insights") },
 ];

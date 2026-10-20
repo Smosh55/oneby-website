@@ -149,7 +149,7 @@ export default function FreeInvoicingPage() {
             </Link>
           </div>
           <p className="mt-4 text-[0.8rem] text-faint">
-            Launching October 2026. Claim your spot now, no card, invoicing stays free.
+            Now in invite-only early access. Claim your spot now, no card, invoicing stays free.
           </p>
         </div>
       </section>

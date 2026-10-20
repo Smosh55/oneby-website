@@ -103,7 +103,7 @@ export default function HearItWork({ data: dataProp }: { data?: DemoData }) {
             <div className="mt-6 rounded-2xl border border-line bg-surface p-5">
               <p className="text-xs font-bold uppercase tracking-wide text-faint">Works with what you've got</p>
               <div className="mt-2.5 flex flex-wrap gap-2">
-                {["Keep your number", "Google Calendar", "Microsoft 365", "QuickBooks"].map((w) => (
+                {["Keep your number", "Claude, ChatGPT & Gemini", "QuickBooks (beta)", "Yealink desk phones"].map((w) => (
                   <span key={w} className="rounded-full border border-line bg-canvas px-3 py-1 text-[0.8rem] font-medium text-ink/75">
                     {w}
                   </span>
