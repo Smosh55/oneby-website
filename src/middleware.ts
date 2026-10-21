@@ -57,32 +57,11 @@ export function middleware(req: NextRequest) {
   //   "org" -> /o (OrgHero + OrganizedShowcase, organization-first framing)
   // Assignment is sticky via the ob-variant cookie so a visitor always sees the
   // same page; conversion events are tagged with the variant in lib/analytics.
+  // A/B PAUSED (2026-10-21): everyone gets the new "ai" homepage hero while we
+  // finalize the redesign. To restore the 50/50 split with /o, revert this
+  // block to the cookie + Math.random() assignment.
   if (pathname === "/") {
-    const ua = req.headers.get("user-agent") ?? "";
-    if (BOT_RE.test(ua)) return NextResponse.next();
-
-    const existing = req.cookies.get("ob-variant")?.value;
-    const variant =
-      existing === "ai" || existing === "org"
-        ? existing
-        : Math.random() < 0.5
-          ? "ai"
-          : "org";
-
-    const res =
-      variant === "org"
-        ? NextResponse.rewrite(new URL("/o", req.url))
-        : NextResponse.next();
-
-    if (existing !== variant) {
-      res.cookies.set("ob-variant", variant, {
-        path: "/",
-        maxAge: 60 * 60 * 24 * 60, // 60 days
-        sameSite: "lax",
-        httpOnly: false, // readable client-side so track() can tag events
-      });
-    }
-    return res;
+    return NextResponse.next();
   }
 
   return NextResponse.next();
