@@ -50,8 +50,10 @@ export default function PostCard({ post }: { post: PostMeta }) {
           <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.13em] text-white/90">
             <span className="h-1.5 w-1.5 rounded-full bg-green" /> {post.category}
           </span>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/oneby-logo-white.svg" alt="OneBy" className="h-4 w-auto opacity-85" />
+          <span className="grid h-7 w-7 place-items-center rounded-lg bg-white shadow-[0_2px_8px_rgba(4,3,79,0.22)] ring-1 ring-black/5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/oneby-mark.svg" alt="OneBy" className="h-5 w-5" />
+          </span>
         </div>
 
         {/* title as the cover headline */}
