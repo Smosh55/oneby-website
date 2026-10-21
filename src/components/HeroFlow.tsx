@@ -1,7 +1,7 @@
 // Hero animation: a real-looking OneBy customer timeline that BUILDS as one
 // job moves from call to paid. Slow, deliberate, product-real (not a
-// motion-graphic slideshow). Pure CSS, ~20s loop (a colourful intro splash,
-// then the timeline builds), a few KB. Lives on the right
+// motion-graphic slideshow). ~18s loop; the OneBy logo animation plays once on
+// load, then the timeline builds and loops. A few KB. Lives on the right
 // of the hero; swap for a Lottie/MP4 later without touching the layout.
 
 export default function HeroFlow() {
@@ -11,12 +11,18 @@ export default function HeroFlow() {
 
       {/* app window */}
       <div className="relative overflow-hidden rounded-[22px] border border-line bg-white shadow-[var(--shadow-xl)]">
-        {/* intro splash — a colourful "before" beat, then the timeline builds */}
+        {/* intro splash — the OneBy logo animation, plays once then reveals the timeline */}
         <div className="obf-splash" aria-hidden>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/oneby-logo-white.svg" alt="" className="h-6 w-auto" />
-          <span className="obf-phone"><IconPhone /></span>
-          <p className="obf-splash-text">One call, from the first ring to paid.</p>
+          <video
+            className="obf-splash-vid"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            poster="/brand/oneby-logo-splash-poster.jpg"
+          >
+            <source src="/brand/oneby-logo-splash.mp4" type="video/mp4" />
+          </video>
         </div>
 
         {/* header chrome */}
@@ -167,46 +173,32 @@ const css = `
 .obf-assignee { display:inline-flex; align-items:center; gap:5px; }
 .obf-avatar { display:grid; place-items:center; width:16px; height:16px; border-radius:50%; background:#04034F; color:#fff; font-size:0.55rem; font-weight:700; }
 
-/* intro splash */
+/* intro splash — the OneBy logo animation, plays once then fades to reveal the timeline */
 .obf-splash {
-  position: absolute; inset: 0; z-index: 5; pointer-events: none;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
-  padding: 24px; text-align: center; color: #fff;
-  background: linear-gradient(135deg,#1a0a63 0%,#008FE0 42%,#12c6b4 72%,#1CDB96 100%);
-  animation: obf-splash 20s ease-in-out infinite both;
+  position: absolute; inset: 0; z-index: 5; pointer-events: none; overflow: hidden;
+  background: #eef2f6;
+  animation: obf-splash-out 0.6s ease 3.2s forwards;
 }
-.obf-splash-text { font-size: 0.95rem; font-weight: 700; line-height: 1.3; max-width: 240px; }
-.obf-phone {
-  position: relative; display: grid; place-items: center; width: 60px; height: 60px;
-  border-radius: 50%; background: rgba(255,255,255,0.18); color: #fff;
-  animation: obf-shake 0.9s ease-in-out infinite;
-}
-.obf-phone svg { width: 26px; height: 26px; }
-.obf-phone::before, .obf-phone::after {
-  content: ""; position: absolute; inset: 0; border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.55); animation: obf-ring 1.6s ease-out infinite;
-}
-.obf-phone::after { animation-delay: 0.6s; }
-@keyframes obf-ring { 0%{transform:scale(1);opacity:.6} 100%{transform:scale(2);opacity:0} }
-@keyframes obf-shake { 0%,100%{transform:rotate(0)} 20%{transform:rotate(-12deg)} 45%{transform:rotate(10deg)} 70%{transform:rotate(-7deg)} }
-@keyframes obf-splash { 0%{opacity:1} 12%{opacity:1} 17%{opacity:0} 95%{opacity:0} 100%{opacity:1} }
+.obf-splash-vid { width: 100%; height: 100%; object-fit: cover; display: block; }
+@keyframes obf-splash-out { to { opacity: 0; visibility: hidden; } }
 
 .obf-live { animation: obf-blink 1.8s ease-in-out infinite; }
 @keyframes obf-blink { 0%,100%{opacity:1} 50%{opacity:.25} }
 
 /* Each row slides + fades in at its moment, holds the whole time, then the
    timeline gently resets. Slow and deliberate over an 18s loop. */
-.obf-r1 { animation: obf-r1 20s ease-out infinite both; }
-.obf-r2 { animation: obf-r2 20s ease-out infinite both; }
-.obf-r3 { animation: obf-r3 20s ease-out infinite both; }
-.obf-r4 { animation: obf-r4 20s ease-out infinite both; }
-.obf-r5 { animation: obf-r5 20s ease-out infinite both; }
-/* Rows begin after the intro splash clears (~17%), then build in sequence. */
-@keyframes obf-r1 { 0%,15%{opacity:0;transform:translateY(12px)} 20%{opacity:1;transform:translateY(0)} 92%{opacity:1} 96%{opacity:0;transform:translateY(-6px)} 100%{opacity:0} }
-@keyframes obf-r2 { 0%,29%{opacity:0;transform:translateY(12px)} 34%{opacity:1;transform:translateY(0)} 92%{opacity:1} 96%{opacity:0;transform:translateY(-6px)} 100%{opacity:0} }
-@keyframes obf-r3 { 0%,43%{opacity:0;transform:translateY(12px)} 48%{opacity:1;transform:translateY(0)} 92%{opacity:1} 96%{opacity:0;transform:translateY(-6px)} 100%{opacity:0} }
-@keyframes obf-r4 { 0%,57%{opacity:0;transform:translateY(12px)} 62%{opacity:1;transform:translateY(0)} 92%{opacity:1} 96%{opacity:0;transform:translateY(-6px)} 100%{opacity:0} }
-@keyframes obf-r5 { 0%,71%{opacity:0;transform:translateY(12px)} 76%{opacity:1;transform:translateY(0)} 92%{opacity:1} 96%{opacity:0;transform:translateY(-6px)} 100%{opacity:0} }
+.obf-r1 { animation: obf-r1 18s ease-out infinite both; }
+.obf-r2 { animation: obf-r2 18s ease-out infinite both; }
+.obf-r3 { animation: obf-r3 18s ease-out infinite both; }
+.obf-r4 { animation: obf-r4 18s ease-out infinite both; }
+.obf-r5 { animation: obf-r5 18s ease-out infinite both; }
+/* Timeline builds from the start and loops; the logo splash covers the first
+   ~3s on initial load only. */
+@keyframes obf-r1 { 0%{opacity:0;transform:translateY(12px)} 2%{opacity:0;transform:translateY(12px)} 6%{opacity:1;transform:translateY(0)} 92%{opacity:1} 97%{opacity:0;transform:translateY(-6px)} 100%{opacity:0} }
+@keyframes obf-r2 { 0%,19%{opacity:0;transform:translateY(12px)} 24%{opacity:1;transform:translateY(0)} 92%{opacity:1} 97%{opacity:0;transform:translateY(-6px)} 100%{opacity:0} }
+@keyframes obf-r3 { 0%,38%{opacity:0;transform:translateY(12px)} 43%{opacity:1;transform:translateY(0)} 92%{opacity:1} 97%{opacity:0;transform:translateY(-6px)} 100%{opacity:0} }
+@keyframes obf-r4 { 0%,57%{opacity:0;transform:translateY(12px)} 62%{opacity:1;transform:translateY(0)} 92%{opacity:1} 97%{opacity:0;transform:translateY(-6px)} 100%{opacity:0} }
+@keyframes obf-r5 { 0%,74%{opacity:0;transform:translateY(12px)} 79%{opacity:1;transform:translateY(0)} 92%{opacity:1} 97%{opacity:0;transform:translateY(-6px)} 100%{opacity:0} }
 
 @media (prefers-reduced-motion: reduce) {
   .obf-row { opacity: 1 !important; transform: none !important; animation: none !important; }
