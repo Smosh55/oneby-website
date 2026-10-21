@@ -21,7 +21,7 @@ export const plans: Plan[] = [
     tagline: "The whole CRM, on the house",
     price: "0",
     unit: "forever",
-    cta: "Start free",
+    cta: "Reserve the free CRM",
     ctaClass: "btn-ghost",
     features: [
       "Tickets, scheduling, and invoicing",
@@ -35,7 +35,7 @@ export const plans: Plan[] = [
     tagline: "Your business phone, always $15",
     price: "15",
     unit: "/user / mo",
-    cta: "Add a line",
+    cta: "Reserve a line",
     ctaClass: "btn-navy",
     features: [
       "Everything in Free",
@@ -51,7 +51,7 @@ export const plans: Plan[] = [
     tagline: "The AI that answers and books the job",
     price: "49",
     unit: "/user / mo",
-    cta: "Try the AI free",
+    cta: "Reserve the AI trial",
     ctaClass: "btn-primary",
     featured: true,
     features: [

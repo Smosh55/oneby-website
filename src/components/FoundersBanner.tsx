@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Gift, ArrowRight, Lock } from "lucide-react";
+import { launch } from "@/config/site";
 
 export default function FoundersBanner() {
   return (
@@ -20,7 +21,7 @@ export default function FoundersBanner() {
               pays $49.
             </p>
             <p className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-green-600">
-              <Lock size={14} /> Locked at $39 for two years, no contract
+              <Lock size={14} /> Lock $39 for two years. Founding offer closes at public launch, {launch.publicLaunch}.
             </p>
           </div>
           <Link href="/founders" className="btn btn-primary shrink-0 text-base">

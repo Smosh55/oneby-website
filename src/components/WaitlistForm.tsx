@@ -48,7 +48,13 @@ export default function WaitlistForm({
   const shareUrl = () => {
     const base =
       typeof window !== "undefined" ? window.location.origin : "https://oneby.ai";
-    return `${base}/?ref=${encodeURIComponent(email.trim())}`;
+    // Opaque, deterministic referral code so a shared link never exposes the
+    // referrer's email. Backend credits by hashing signup emails the same way.
+    const e = email.trim().toLowerCase();
+    let h = 0;
+    for (let i = 0; i < e.length; i++) h = (Math.imul(31, h) + e.charCodeAt(i)) | 0;
+    const code = (h >>> 0).toString(36);
+    return `${base}/?ref=${code}`;
   };
 
   const submit = async (ev: React.FormEvent) => {

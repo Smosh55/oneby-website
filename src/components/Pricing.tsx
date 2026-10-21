@@ -81,7 +81,7 @@ export default function Pricing() {
                 </div>
 
                 <a
-                  href="#demo"
+                  href="#waitlist"
                   className={`btn mt-6 w-full ${
                     plan.featured ? "btn-white" : plan.ctaClass
                   }`}
