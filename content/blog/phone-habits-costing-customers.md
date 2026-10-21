@@ -1,7 +1,7 @@
 ---
 title: "5 Phone Habits That Are Quietly Costing You Customers"
 excerpt: "Most lost customers don't slam the door. They just stop calling back. Here are five phone habits doing the damage and how to fix each one."
-date: "2026-02-06"
+date: "2026-10-05"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

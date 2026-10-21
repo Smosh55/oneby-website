@@ -1,7 +1,7 @@
 ---
 title: "OneBy vs Quo (formerly OpenPhone): 2026 Comparison"
 excerpt: "OpenPhone rebranded to Quo and added a metered AI agent. Here's the honest math on what it really costs, where their AI stops, and where OneBy picks up."
-date: "2026-07-05"
+date: "2026-07-20"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

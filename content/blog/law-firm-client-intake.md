@@ -1,7 +1,7 @@
 ---
 title: "Law Firm Intake: Never Miss a New Client Call"
 excerpt: "A potential client rarely calls one firm. They call three. Here's how answering and routing every intake call keeps the work from walking next door."
-date: "2026-06-12"
+date: "2026-10-14"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

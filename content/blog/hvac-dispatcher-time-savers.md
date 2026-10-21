@@ -1,7 +1,7 @@
 ---
 title: "How HVAC Dispatchers Can Win Back Hours Every Day"
 excerpt: "Dispatchers lose hours to phone tag and mystery voicemails. Here's how call summaries and auto-created tasks hand that time back."
-date: "2026-04-04"
+date: "2026-06-04"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

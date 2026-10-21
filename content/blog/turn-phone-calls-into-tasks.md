@@ -1,7 +1,7 @@
 ---
 title: "How to Turn Phone Calls Into Tasks Automatically"
 excerpt: "The gap between a conversation and the actual work is where customers get lost. Here's how to close it by turning every call into an assigned task."
-date: "2026-05-22"
+date: "2026-10-08"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Product"

@@ -1,7 +1,7 @@
 ---
 title: "Best AI Receptionists for Small Business (2026)"
 excerpt: "A plainspoken roundup of the best AI receptionist tools for small business in 2026, what to look for, and which type fits your shop."
-date: "2026-05-02"
+date: "2026-09-09"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

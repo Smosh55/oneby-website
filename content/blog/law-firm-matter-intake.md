@@ -1,7 +1,7 @@
 ---
 title: "Law Firm Intake: Qualifying New Matters Without a Full-Time Receptionist"
 excerpt: "The best new-client call of your month comes in while you are standing in a courtroom hallway with your phone on silent. Here is how a small firm captures and qualifies matters without paying for a front desk that sits idle half the day."
-date: "2026-06-27"
+date: "2026-09-21"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

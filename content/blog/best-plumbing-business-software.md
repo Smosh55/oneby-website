@@ -1,7 +1,7 @@
 ---
 title: "Best Software for a Plumbing Business: An Honest Roundup"
 excerpt: "Field-service software, simple scheduling tools, or an all-in-one that also answers the phone? An honest look at what plumbing software actually solves, and the gap most of it leaves wide open."
-date: "2026-06-27"
+date: "2026-10-09"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

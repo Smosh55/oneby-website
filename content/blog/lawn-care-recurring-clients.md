@@ -1,7 +1,7 @@
 ---
 title: "How a Dropped Call Quietly Costs Lawn Care Companies Recurring Revenue"
 excerpt: "Recurring maintenance is the backbone of a lawn-care business. A dropped call is not one lost job, it is a renewal, an add-on, or a route stop you never got. Here is how never missing a call protects recurring revenue and route density."
-date: "2026-07-06"
+date: "2026-10-20"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

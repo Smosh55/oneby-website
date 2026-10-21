@@ -1,7 +1,7 @@
 ---
 title: "Job Scheduling Software for Small Service Businesses"
 excerpt: "A plain guide to picking job scheduling software that actually fits a small crew, plus the mistakes that quietly cost you jobs."
-date: "2026-06-21"
+date: "2026-08-19"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

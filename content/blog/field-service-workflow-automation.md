@@ -1,7 +1,7 @@
 ---
 title: "Workflow Automation for Field Service Teams, Explained"
 excerpt: "Workflow automation sounds like enterprise jargon, but for a field service team it's simple: a call comes in, and the right task lands on the right person automatically."
-date: "2026-01-23"
+date: "2026-09-11"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Product"

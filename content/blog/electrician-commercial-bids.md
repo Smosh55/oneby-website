@@ -1,7 +1,7 @@
 ---
 title: "How Electricians Win More Commercial Bids"
 excerpt: "GCs and property managers do not pick the best electrician. They pick the one who picks up. Here is why commercial bids are won on reachability, and how to stop losing them to a ringing phone."
-date: "2026-06-28"
+date: "2026-04-21"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

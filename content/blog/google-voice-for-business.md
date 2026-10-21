@@ -1,7 +1,7 @@
 ---
 title: "Google Voice for Business: Where It Falls Short"
 excerpt: "Google Voice is a fine cheap second number. But once you're running a real business off it, the cracks show. Here's an honest look at what it does well and where it stops."
-date: "2026-04-24"
+date: "2026-04-17"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

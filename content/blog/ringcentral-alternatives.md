@@ -1,7 +1,7 @@
 ---
 title: "RingCentral Alternatives for Small Business (2026)"
 excerpt: "RingCentral is powerful, but it can be heavy and pricey for a small team. Here are the RingCentral alternatives worth a look in 2026, and who each one fits."
-date: "2026-05-22"
+date: "2026-06-22"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

@@ -1,7 +1,7 @@
 ---
 title: "IT Help Desk Intake: Turn Support Calls Into Tickets With Real Context"
 excerpt: "A ticket that says 'user called, computer not working' is not a ticket, it is a scavenger hunt. Here is how to capture account, system, and symptom on the first call so your techs start fixing instead of interrogating."
-date: "2026-06-26"
+date: "2026-09-04"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

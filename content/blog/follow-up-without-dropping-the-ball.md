@@ -1,7 +1,7 @@
 ---
 title: "How to Follow Up With Customers Without Dropping the Ball"
 excerpt: "Follow-ups don't die because people are lazy. They die because no task got created and nobody owns it. Here's the fix."
-date: "2026-02-20"
+date: "2026-02-26"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Growth"

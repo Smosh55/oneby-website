@@ -1,7 +1,7 @@
 ---
 title: "Turn Every Call Into a Task: A Field-Service Guide to Workflow Automation"
 excerpt: "Most businesses treat calls and work as two separate worlds. The best ones wire them together, so every conversation automatically becomes action. Here's how."
-date: "2026-04-16"
+date: "2026-09-28"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Product"

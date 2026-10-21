@@ -1,7 +1,7 @@
 ---
 title: "Best CRM for Roofing Companies: An Honest Roundup"
 excerpt: "Most roofing CRMs are either bloated storm-restoration platforms or generic sales tools that never touch your phone. Here is an honest look at the options, what each is actually good for, and where the phone-to-pipeline gap usually hides."
-date: "2026-06-26"
+date: "2026-07-10"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

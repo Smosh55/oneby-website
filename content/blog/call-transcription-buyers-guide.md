@@ -1,7 +1,7 @@
 ---
 title: "Call Transcription for Business: A No-Nonsense Buyer's Guide"
 excerpt: "Not all call transcription software is worth paying for. Here's what to look for on accuracy, search, and what should actually happen with your transcripts."
-date: "2026-04-10"
+date: "2026-07-30"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Product"

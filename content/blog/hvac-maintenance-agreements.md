@@ -1,7 +1,7 @@
 ---
 title: "HVAC Maintenance Agreements: Book More, Keep More"
 excerpt: "Maintenance agreements are the closest thing an HVAC shop has to a paycheck that shows up on its own. Here is how to book more of them and stop letting renewals slip through a ringing phone."
-date: "2026-06-25"
+date: "2026-07-14"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

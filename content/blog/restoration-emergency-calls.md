@@ -1,7 +1,7 @@
 ---
 title: "Water Damage Restoration Leads: Minutes Decide the Job"
 excerpt: "A flooded basement at 2am doesn't wait for office hours. Here's why restoration jobs are won or lost in the first few minutes of a call, and how to stop bleeding work to whoever picks up first."
-date: "2026-05-16"
+date: "2026-08-28"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

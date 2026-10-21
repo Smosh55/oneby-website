@@ -1,7 +1,7 @@
 ---
 title: "From Phone Call to Paid: Invoicing Without the Busywork"
 excerpt: "Stop re-typing the same job into three different apps. Here's how to turn a phone call into a paid invoice, with a pay link the customer taps to pay by card."
-date: "2026-06-20"
+date: "2026-07-29"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Growth"

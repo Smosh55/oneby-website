@@ -1,7 +1,7 @@
 ---
 title: "Electrician Answering Service: Stop Losing Emergency Calls"
 excerpt: "Every missed call is a panel upgrade or a no-power emergency walking to your competitor. Here is why electricians bleed calls, and how an AI that answers every time plugs the leak."
-date: "2026-06-18"
+date: "2026-08-20"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

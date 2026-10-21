@@ -1,7 +1,7 @@
 ---
 title: "CRM vs Field Service Software: What Do You Need?"
 excerpt: "A CRM tracks the relationship. Field service software runs the job. Here's where they overlap, what a small shop really needs, and why the phone matters more than either."
-date: "2026-06-22"
+date: "2026-05-28"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

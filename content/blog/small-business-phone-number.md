@@ -1,7 +1,7 @@
 ---
 title: "How to Get a Small Business Phone Number That Works"
 excerpt: "A plain guide to getting a small business phone number: local vs toll-free, keeping work and personal separate, porting your existing line, and what actually matters."
-date: "2026-05-06"
+date: "2026-03-26"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

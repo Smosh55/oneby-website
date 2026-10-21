@@ -1,7 +1,7 @@
 ---
 title: "Missed Call Text Back: Why Auto-Replies Aren't Enough"
 excerpt: "Missed call text back is a fine band-aid, but a text that says sorry isn't the same as answering. Here's why picking up wins."
-date: "2026-05-29"
+date: "2026-07-08"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Growth"

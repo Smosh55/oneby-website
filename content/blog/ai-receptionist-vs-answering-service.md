@@ -1,7 +1,7 @@
 ---
 title: "AI Receptionist vs. Answering Service: Which Is Right for Your Business?"
 excerpt: "Live answering services have been the default for decades. AI receptionists quietly rewrote the math. Here's an honest comparison of cost, quality, and what actually gets booked."
-date: "2026-05-28"
+date: "2026-05-26"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

@@ -1,7 +1,7 @@
 ---
 title: "Ticketing for Service Businesses: Kill the Sticky Notes"
 excerpt: "Sticky notes and memory lose jobs. Here's why ticketing for service businesses turns every call into a tracked work item that actually gets done."
-date: "2026-06-19"
+date: "2026-03-02"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

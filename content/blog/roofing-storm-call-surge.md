@@ -1,7 +1,7 @@
 ---
 title: "When the Hail Hits: Why One Front Desk Cannot Catch a Storm Surge"
 excerpt: "A single hailstorm can 10x your call volume in an afternoon. One person answering the phone will miss most of it, and every miss goes to the roofer who picked up. Here is how to catch a surge instead of drowning in it."
-date: "2026-07-06"
+date: "2026-02-16"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

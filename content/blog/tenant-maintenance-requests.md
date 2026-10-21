@@ -1,7 +1,7 @@
 ---
 title: "Tenant Maintenance Requests: From Call to Closed Ticket"
 excerpt: "A tenant call is only the start. The real work is turning it into a tracked ticket, routing it to the right vendor, and closing it out across an entire portfolio. Here is how to make that happen every time, without dropping a single request."
-date: "2026-06-27"
+date: "2026-04-03"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

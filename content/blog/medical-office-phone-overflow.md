@@ -1,7 +1,7 @@
 ---
 title: "Medical Office Phone Overflow: Handling Peak-Hour Call Volume"
 excerpt: "At 9 a.m. every line is lit, your front desk is checking in a waiting room, and patients are stacking up in a hold queue they will abandon. Here is how to handle peak-hour overflow so no patient gets stuck in voicemail."
-date: "2026-06-29"
+date: "2026-09-03"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

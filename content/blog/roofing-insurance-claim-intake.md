@@ -1,7 +1,7 @@
 ---
 title: "Insurance Claim Intake for Roofers: Get the Right Details on the First Call"
 excerpt: "The claim moves faster and your estimator shows up prepared when the first call captures the right damage and insurance details. Here is a tactical look at what to ask, and how to make sure it gets asked every time."
-date: "2026-07-06"
+date: "2026-09-16"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

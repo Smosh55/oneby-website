@@ -1,7 +1,7 @@
 ---
 title: "Scheduling & Dispatch Software for Electrical Contractors"
 excerpt: "Not all scheduling software is built for the way electrical work actually runs. Here is what electrical contractors should look for in scheduling and dispatch, and the feature every roundup forgets."
-date: "2026-06-29"
+date: "2026-10-07"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

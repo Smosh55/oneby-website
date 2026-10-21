@@ -1,7 +1,7 @@
 ---
 title: "How to Stop Forgetting What Was Said on Customer Calls"
 excerpt: "Details from answered calls vanish faster than you'd think, and it costs you. Here's why it happens and how summaries plus a timeline fix it."
-date: "2026-05-16"
+date: "2026-06-01"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

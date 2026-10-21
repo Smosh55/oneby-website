@@ -1,7 +1,7 @@
 ---
 title: "After-Hours Answering for Medical & Dental Practices"
 excerpt: "When your office is closed, a patient calling should not hit a dead voicemail. Here is how after-hours answering captures the reason for every call and hands your front desk a ready task in the morning, without ever giving medical advice."
-date: "2026-06-30"
+date: "2026-10-13"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

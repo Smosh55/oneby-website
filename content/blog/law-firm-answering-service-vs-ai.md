@@ -1,7 +1,7 @@
 ---
 title: "Answering Service vs AI Receptionist for Small Law Firms: An Honest Comparison"
 excerpt: "A live answering service and an AI receptionist both promise your phone gets answered. For a small firm the real question is what happens after 'hello.' Here is an honest side-by-side, including where each one actually wins."
-date: "2026-06-28"
+date: "2026-07-24"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

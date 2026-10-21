@@ -1,7 +1,7 @@
 ---
 title: "How to Choose a Business Phone System (2026 Guide)"
 excerpt: "A plain-English buyer's guide to picking a business phone system in 2026, including what actually matters, how to think about cost, and the mistakes that trip people up."
-date: "2026-05-26"
+date: "2026-03-05"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

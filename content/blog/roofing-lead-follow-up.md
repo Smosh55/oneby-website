@@ -1,7 +1,7 @@
 ---
 title: "Roofing Lead Follow-Up: Turn Storm Inspections Into Signed Jobs"
 excerpt: "You booked the inspection. You climbed the roof. Then the homeowner ghosts you and signs with the next guy. Here is how speed and persistence in your follow-up turn hail and storm inspections into signed contracts."
-date: "2026-06-25"
+date: "2026-05-18"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

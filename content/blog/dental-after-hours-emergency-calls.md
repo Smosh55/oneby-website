@@ -1,7 +1,7 @@
 ---
 title: "The After-Hours Dental Emergency Call (and How to Capture It)"
 excerpt: "A chipped tooth at 9pm, swelling on a Saturday, a crown that fell out before a wedding. These after-hours calls turn into some of your highest-value patients, if anyone picks up. Here is how to capture and triage them without a pricey answering service."
-date: "2026-07-06"
+date: "2026-08-06"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

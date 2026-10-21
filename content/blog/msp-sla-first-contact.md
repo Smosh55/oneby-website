@@ -1,7 +1,7 @@
 ---
 title: "MSP SLA Management: Never Miss the First-Contact Clock"
 excerpt: "Your SLA clock starts the second a client calls, not when someone gets around to logging the ticket. Here is why MSPs blow first-response targets on the phone, and how to stop the clock the moment it should start."
-date: "2026-06-25"
+date: "2026-06-19"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

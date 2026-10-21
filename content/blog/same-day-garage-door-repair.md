@@ -1,7 +1,7 @@
 ---
 title: "Same-Day Garage Door Repair: Capturing the Broken-Spring Call"
 excerpt: "A snapped spring or a car trapped in the garage is a same-day emergency, and the homeowner will call until someone can come today. Here is how to capture the broken-spring and trapped-car calls that pay the bills."
-date: "2026-06-29"
+date: "2026-09-30"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

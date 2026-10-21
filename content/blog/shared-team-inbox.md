@@ -1,7 +1,7 @@
 ---
 title: "Why Business Texts Shouldn't Live on One Person's Phone"
 excerpt: "When customer texts hide on a personal phone, your business doesn't own the relationship. A shared team inbox fixes that. Here's how, and why it matters."
-date: "2026-04-24"
+date: "2026-05-05"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Product"

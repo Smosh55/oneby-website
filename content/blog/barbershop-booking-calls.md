@@ -1,7 +1,7 @@
 ---
 title: "Every Missed Call Is a Chair That Sits Empty"
 excerpt: "When a barber is mid-cut and the phone rings out, that booking walks to the shop down the street. Here is how answering every call and booking the chair, even hands-full, protects your schedule."
-date: "2026-07-06"
+date: "2026-10-02"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

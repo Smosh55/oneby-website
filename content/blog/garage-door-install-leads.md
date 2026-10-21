@@ -1,7 +1,7 @@
 ---
 title: "How Garage Door Companies Book More New-Door Installs"
 excerpt: "Repairs pay the bills, but new-door installs are where the real money is. These higher-ticket leads take more nurturing and get lost more easily. Here is how garage door companies capture and close more install jobs."
-date: "2026-06-30"
+date: "2026-08-24"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

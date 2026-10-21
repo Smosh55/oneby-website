@@ -1,7 +1,7 @@
 ---
 title: "The Customer Timeline That Finally Ends Phone Tag"
 excerpt: "Every call, text, voicemail, task, and note about a customer in one scrollable view. No more 'remind me who you are' or three people calling the same person."
-date: "2026-02-27"
+date: "2026-09-17"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Product"

@@ -1,7 +1,7 @@
 ---
 title: "Virtual Receptionist vs AI Receptionist: Which to Pick"
 excerpt: "A virtual receptionist can be a person or software. Here's the honest difference, and how a small business picks the one that fits."
-date: "2026-05-09"
+date: "2026-07-23"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

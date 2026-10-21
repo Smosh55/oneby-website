@@ -1,7 +1,7 @@
 ---
 title: "Garage Door Repair Leads: Catch Every Same-Day Job"
 excerpt: "Same-day garage door jobs go to whoever picks up first. Here is why your missed calls hand work to the competition, and how answering every one wins it back."
-date: "2026-05-13"
+date: "2026-03-27"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

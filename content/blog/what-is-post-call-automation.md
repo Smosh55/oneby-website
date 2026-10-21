@@ -1,7 +1,7 @@
 ---
 title: "What Is Post-Call Automation? A Plain-English Guide"
 excerpt: "Post-call automation handles everything that usually falls through the cracks after you hang up. Here's how it works and why it beats scribbling notes."
-date: "2026-06-05"
+date: "2026-03-17"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Product"

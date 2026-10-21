@@ -1,7 +1,7 @@
 ---
 title: "Good, Better, Best: Why Three Estimate Options Win Bigger Jobs"
 excerpt: "One price is a yes-or-no gamble. Three options change the question the customer is asking. Here is how to build an honest Good, Better, Best estimate that wins more work and a bigger average ticket."
-date: "2026-07-08"
+date: "2026-02-23"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

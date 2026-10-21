@@ -1,7 +1,7 @@
 ---
 title: "Pest Control Scheduling: Protect Recurring Plans and Routes"
 excerpt: "One-time jobs pay the bills this week. Recurring plans pay them for years. Here is how smart pest control scheduling protects renewals, keeps quarterly accounts from lapsing, and stops a chaotic phone from wrecking your routes."
-date: "2026-06-26"
+date: "2026-02-18"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

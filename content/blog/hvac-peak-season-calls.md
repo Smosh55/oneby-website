@@ -1,7 +1,7 @@
 ---
 title: "How HVAC Companies Can Stop Losing Calls During Peak Season"
 excerpt: "The first heat wave can 10x your call volume overnight. Here's how the best HVAC companies catch every call when demand spikes, without building a phone room."
-date: "2026-04-30"
+date: "2026-08-14"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

@@ -1,7 +1,7 @@
 ---
 title: "Speed to Lead: Why the First Business to Answer Wins the Job"
 excerpt: "In service businesses, the company that responds first usually wins, often no matter the price. Here's why speed beats nearly everything, and how to win on it."
-date: "2026-05-14"
+date: "2026-08-13"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Growth"

@@ -1,7 +1,7 @@
 ---
 title: "Urgent Pest Control Calls: Why First to Answer Wins"
 excerpt: "Wasps by the door, bed bugs in the mattress, a rat in the kitchen. These callers are scared and ready to book now. Here is why the first pest control company to answer wins the job, and how to be that company every time."
-date: "2026-06-25"
+date: "2026-06-15"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

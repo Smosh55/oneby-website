@@ -1,7 +1,7 @@
 ---
 title: "After-Hours Property Emergencies: Handling the 2 A.M. Burst Pipe"
 excerpt: "A burst pipe at 2 a.m. or no heat on the coldest night does not wait for office hours. Here is how to handle after-hours property emergencies properly, without paying for a live answering service that fumbles the details."
-date: "2026-06-28"
+date: "2026-05-29"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

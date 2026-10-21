@@ -1,7 +1,7 @@
 ---
 title: "Roofing Leads: Why Storm-Season Calls Slip Away"
 excerpt: "Storm hits, the phone melts down, and half your roofing leads go to whoever picks up. Here's why it happens and how to catch every call."
-date: "2026-06-16"
+date: "2026-02-19"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

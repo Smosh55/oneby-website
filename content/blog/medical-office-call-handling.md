@@ -1,7 +1,7 @@
 ---
 title: "Medical Office Call Handling: Cut Phone Tag, Keep Patients"
 excerpt: "Phone tag and dropped calls quietly cost your practice patients every week. Here's how to fix front-desk call handling without burning out your team."
-date: "2026-06-09"
+date: "2026-06-26"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

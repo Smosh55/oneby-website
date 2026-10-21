@@ -1,7 +1,7 @@
 ---
 title: "What Does an Answering Service Cost? (2026 Breakdown)"
 excerpt: "Answering service pricing looks simple until your busy month shows up. Here's how per-minute, per-call, and monthly minimum billing really works, with example math."
-date: "2026-04-21"
+date: "2026-07-06"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

@@ -1,7 +1,7 @@
 ---
 title: "The Property Manager's Playbook for Maintenance Requests"
 excerpt: "Tenant calls turn into chaos fast across a portfolio. Here's how to turn every maintenance call into a tracked, routed ticket."
-date: "2026-03-20"
+date: "2026-06-05"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

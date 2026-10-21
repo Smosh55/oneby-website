@@ -1,7 +1,7 @@
 ---
 title: "The True Cost of a Missed Call for Home Service Businesses"
 excerpt: "A missed call isn't really a missed call. It's a missed job, a lost customer, and free money handed to your competitor. Here's how to actually put a number on it."
-date: "2026-06-10"
+date: "2026-09-25"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Growth"

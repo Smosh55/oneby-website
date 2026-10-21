@@ -1,7 +1,7 @@
 ---
 title: "24/7 Answering for Restoration Companies: Why Every Minute Counts"
 excerpt: "Fire, water, and mold losses do not wait for business hours. On a restoration emergency, every minute between the call and the crew rolling matters. Here is why 24/7 answering is not a luxury for restoration companies, it is the business."
-date: "2026-06-28"
+date: "2026-06-24"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Home Services"

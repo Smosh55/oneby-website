@@ -1,7 +1,7 @@
 ---
 title: "AI Call Summaries: The Feature You'll Wonder How You Lived Without"
 excerpt: "AI call summaries turn a 14-minute conversation into five lines you can read in ten seconds. Here's what makes a good one and how teams actually use them."
-date: "2026-05-30"
+date: "2026-03-12"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Product"

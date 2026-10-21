@@ -1,7 +1,7 @@
 ---
 title: "Why Dental Practices Lose New Patients on the Phone"
 excerpt: "A brand-new patient calling your practice is worth thousands over their lifetime. Yet most of those calls land at the worst possible moment, roll to voicemail, and get answered by the office down the street. Here is where the leak is and how to close it."
-date: "2026-07-06"
+date: "2026-10-06"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

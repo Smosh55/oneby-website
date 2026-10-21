@@ -1,7 +1,7 @@
 ---
 title: "From Voicemail to Booked Job: Fixing Your Call Intake"
 excerpt: "A good call intake process is the difference between a voicemail folder full of dead leads and a calendar full of booked jobs. Here's how to build one."
-date: "2026-01-30"
+date: "2026-05-27"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Growth"

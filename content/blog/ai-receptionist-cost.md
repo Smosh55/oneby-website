@@ -1,7 +1,7 @@
 ---
 title: "What Should an AI Receptionist Actually Cost?"
 excerpt: "Per-minute or flat rate? Hidden fees or honest pricing? Here's a straight look at AI receptionist cost, what's fair, and the ROI math that matters."
-date: "2026-05-02"
+date: "2026-08-07"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Comparisons"

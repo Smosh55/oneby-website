@@ -1,7 +1,7 @@
 ---
 title: "All-in-One Field Service Software: What It Should Mean"
 excerpt: "Most 'all-in-one' tools still let your phone ring out. Here's what the phrase should actually deliver, and why five apps duct-taped together always leaks."
-date: "2026-06-13"
+date: "2026-07-17"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Insights"

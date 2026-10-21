@@ -1,7 +1,7 @@
 ---
 title: "How to Reduce No-Shows and Keep Every Chair Full"
 excerpt: "No-shows quietly drain a barbershop's income one empty slot at a time. Here is the honest, tactical playbook: confirmations, reminders, and fast rebooking that keep chairs full."
-date: "2026-07-06"
+date: "2026-09-23"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Guides"

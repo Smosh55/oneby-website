@@ -1,7 +1,7 @@
 ---
 title: "The Small Business Owner's Guide to Never Dropping a Lead"
 excerpt: "Most leads aren't lost to competitors. They're lost to a missed call, a forgotten callback, or a note nobody followed up on. Here's how to stop the leak."
-date: "2026-01-16"
+date: "2026-08-21"
 author: "The OneBy Team"
 authorRole: "OneBy"
 category: "Growth"
