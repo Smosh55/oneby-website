@@ -18,38 +18,44 @@ export default function PostCard({ post }: { post: PostMeta }) {
       {/* Generated editorial cover, themed by trade accent */}
       <div
         style={industryAccentStyle(post.industry)}
-        className="relative flex aspect-[3/2] flex-col justify-between overflow-hidden bg-gradient-to-br from-blue to-navy p-5 text-white"
+        className="relative flex aspect-[3/2] flex-col justify-between overflow-hidden p-5 text-white"
       >
+        {/* base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue via-blue to-navy" />
+        {/* top-left light glow for depth */}
+        <div className="pointer-events-none absolute -left-12 -top-16 h-52 w-52 rounded-full bg-white/20 blur-2xl" />
         {/* dot-grid texture */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.14]"
+          className="pointer-events-none absolute inset-0 opacity-[0.10]"
           style={{
             backgroundImage: "radial-gradient(#fff 1px, transparent 1px)",
             backgroundSize: "15px 15px",
           }}
         />
-        {/* bold trade motif */}
-        <div className="pointer-events-none absolute -bottom-12 -right-10 text-white/[0.22]">
+        {/* bold trade motif, oversized and tilted */}
+        <div className="pointer-events-none absolute -right-8 top-1/2 -translate-y-1/2 -rotate-[8deg] text-white/[0.24]">
           {motif ? (
-            <svg viewBox="0 0 200 200" className="h-60 w-60" fill="none" aria-hidden>
+            <svg viewBox="0 0 200 200" className="h-72 w-72" fill="none" aria-hidden>
               {motif}
             </svg>
           ) : (
-            <Phone className="h-52 w-52" strokeWidth={1} aria-hidden />
+            <Phone className="h-64 w-64" strokeWidth={0.9} aria-hidden />
           )}
         </div>
+        {/* bottom scrim so the title always reads */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
 
-        {/* top row: category + brand mark */}
+        {/* top row: category kicker + brand mark */}
         <div className="relative flex items-center justify-between">
-          <span className="rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-semibold backdrop-blur-sm">
-            {post.category}
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.13em] text-white/90">
+            <span className="h-1.5 w-1.5 rounded-full bg-green" /> {post.category}
           </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/oneby-logo-white.svg" alt="OneBy" className="h-4 w-auto opacity-80" />
+          <img src="/brand/oneby-logo-white.svg" alt="OneBy" className="h-4 w-auto opacity-85" />
         </div>
 
         {/* title as the cover headline */}
-        <h3 className="relative mt-6 line-clamp-3 text-[1.15rem] font-bold leading-snug tracking-tight">
+        <h3 className="relative line-clamp-3 text-[1.25rem] font-extrabold leading-[1.13] tracking-tight [text-shadow:0_1px_12px_rgba(4,3,79,0.25)]">
           {post.title}
         </h3>
       </div>
