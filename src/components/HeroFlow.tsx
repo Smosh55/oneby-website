@@ -177,7 +177,7 @@ const css = `
 .obf-splash {
   position: absolute; inset: 0; z-index: 5; pointer-events: none; overflow: hidden;
   background: #eef2f6;
-  animation: obf-splash-out 0.6s ease 3.5s forwards;
+  animation: obf-splash-out 0.6s ease 4.8s forwards;
 }
 .obf-splash-vid { width: 100%; height: 100%; object-fit: cover; display: block; }
 @keyframes obf-splash-out { to { opacity: 0; visibility: hidden; } }
