@@ -1,8 +1,8 @@
 // Hero animation: a real-looking OneBy customer timeline that BUILDS as one
 // job moves from call to paid. Slow, deliberate, product-real (not a
-// motion-graphic slideshow). ~18s loop; the OneBy logo animation plays once on
-// load, then the timeline builds and loops. A few KB. Lives on the right
-// of the hero; swap for a Lottie/MP4 later without touching the layout.
+// motion-graphic slideshow). ~18s loop; the timeline builds and loops. A few KB.
+// Lives on the right of the hero; swap for a Lottie/MP4 later without touching
+// the layout.
 
 export default function HeroFlow() {
   return (
@@ -10,21 +10,7 @@ export default function HeroFlow() {
       <style>{css}</style>
 
       {/* app window */}
-      <div className="relative overflow-hidden rounded-[22px] border border-line bg-white shadow-[var(--shadow-xl)]">
-        {/* intro splash — the OneBy logo animation, plays once then reveals the timeline */}
-        <div className="obf-splash" aria-hidden>
-          <video
-            className="obf-splash-vid"
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            poster="/brand/oneby-logo-splash-poster.jpg"
-          >
-            <source src="/brand/oneby-logo-splash.mp4" type="video/mp4" />
-          </video>
-        </div>
-
+      <div className="overflow-hidden rounded-[22px] border border-line bg-white shadow-[var(--shadow-xl)]">
         {/* header chrome */}
         <div className="flex items-center justify-between border-b border-line bg-canvas px-5 py-3">
           <div className="flex items-center gap-2.5">
@@ -174,27 +160,18 @@ const css = `
 .obf-assignee { display:inline-flex; align-items:center; gap:5px; }
 .obf-avatar { display:grid; place-items:center; width:16px; height:16px; border-radius:50%; background:#04034F; color:#fff; font-size:0.55rem; font-weight:700; }
 
-/* intro splash — the OneBy logo animation, plays once then fades to reveal the timeline */
-.obf-splash {
-  position: absolute; inset: 0; z-index: 5; pointer-events: none; overflow: hidden;
-  background: #eef2f6;
-  animation: obf-splash-out 0.6s ease 4.8s forwards;
-}
-.obf-splash-vid { width: 100%; height: 100%; object-fit: cover; display: block; }
-@keyframes obf-splash-out { to { opacity: 0; visibility: hidden; } }
-
 .obf-live { animation: obf-blink 1.8s ease-in-out infinite; }
 @keyframes obf-blink { 0%,100%{opacity:1} 50%{opacity:.25} }
 
-/* The timeline builds ONCE, after the logo splash lifts (~5.4s), one row at a
-   time, so you see the call first, then the AI create the ticket, then the
-   rest. No loop, so there is no "both populated at once" on reveal. */
+/* The timeline builds ONCE on load, one row at a time, so you see the call
+   first, then the AI create the ticket, then the rest. No loop, so there is no
+   "both populated at once" on reveal. */
 .obf-row { animation: obf-in 0.6s ease-out both; }
-.obf-r1 { animation-delay: 5.3s; }
-.obf-r2 { animation-delay: 7.3s; }
-.obf-r3 { animation-delay: 9.3s; }
-.obf-r4 { animation-delay: 11.1s; }
-.obf-r5 { animation-delay: 12.9s; }
+.obf-r1 { animation-delay: 0.3s; }
+.obf-r2 { animation-delay: 2.3s; }
+.obf-r3 { animation-delay: 4.3s; }
+.obf-r4 { animation-delay: 6.1s; }
+.obf-r5 { animation-delay: 7.9s; }
 @keyframes obf-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 /* The golden ticket: the one step the AI does on its own, called out in gold,
@@ -205,7 +182,7 @@ const css = `
   padding: 12px 14px; border-radius: 14px;
   background: linear-gradient(135deg,#FFFAED,#FFF1CF);
   border: 1.5px solid #F6C84B;
-  animation: obf-glow 1.3s ease-out 7.3s both;
+  animation: obf-glow 1.3s ease-out 2.3s both;
 }
 .obf-goldcard .obf-title { font-size: 1.04rem; }
 .obf-aibadge {
@@ -222,6 +199,5 @@ const css = `
 @media (prefers-reduced-motion: reduce) {
   .obf-row { opacity: 1 !important; transform: none !important; animation: none !important; }
   .obf-live { animation: none; }
-  .obf-splash { display: none; }
 }
 `;
