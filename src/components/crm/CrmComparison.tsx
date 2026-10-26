@@ -11,8 +11,8 @@ const rows: { label: string; cells: boolean[] }[] = [
   { label: "Customer history & timeline", cells: [true, true, true] },
   { label: "Built-in business phone & SMS", cells: [true, false, false] },
   { label: "Open AI connector (bring Claude, ChatGPT, Gemini)", cells: [true, false, false] },
-  { label: "Online fax", cells: [true, false, false] },
-  { label: "Free CRM tier", cells: [true, false, false] },
+  { label: "Onboarding + a dedicated rep on every plan", cells: [true, false, false] },
+  { label: "Customizations to fit your workflow", cells: [true, false, false] },
 ];
 
 const cols = [
@@ -33,7 +33,7 @@ export default function CrmComparison() {
           <p className="mt-5 text-lg leading-relaxed text-muted">
             Jobber and Housecall Pro are good at running jobs. OneBy runs jobs
             too, then adds the business phone, an open connector for the AI you
-            already use, and a CRM that&apos;s free to start.
+            already use, and a dedicated rep with onboarding on every plan.
           </p>
         </Reveal>
 

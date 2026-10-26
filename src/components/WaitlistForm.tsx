@@ -220,7 +220,7 @@ export default function WaitlistForm({
           aria-label="Your industry"
           className={`mt-2.5 w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-[0.95rem] outline-none focus:border-green ${industry ? "text-white" : "text-white/50"}`}
         >
-          <option value="" className="text-ink">What&apos;s your trade? (optional)</option>
+          <option value="" className="text-ink">What&apos;s your industry? (optional)</option>
           {industries.map((i) => (
             <option key={i.slug} value={i.shortName} className="text-ink">
               {i.shortName}

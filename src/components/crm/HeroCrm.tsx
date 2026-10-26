@@ -30,9 +30,9 @@ export default function HeroCrm() {
               className="animate-rise mt-6 text-[2.75rem] font-extrabold leading-[1.0] tracking-tight text-navy sm:text-6xl lg:text-[4rem]"
               style={{ animationDelay: "60ms" }}
             >
-              The CRM your service business actually{" "}
+              Run your whole team and your entire sales cycle in{" "}
               <span className="relative whitespace-nowrap">
-                runs on
+                one place
                 <span className="absolute -bottom-1 left-0 h-[0.16em] w-full rounded-full bg-green" />
               </span>
               .
@@ -42,10 +42,11 @@ export default function HeroCrm() {
               className="animate-rise mt-6 max-w-xl text-lg leading-relaxed text-muted"
               style={{ animationDelay: "120ms" }}
             >
-              Jobs, scheduling, estimates, invoicing, and every customer&apos;s
-              history in one place. Built and run every day by an IT company that
-              lives in it. The straightforward alternative to Jobber and Housecall
-              Pro.
+              From the first lead to the final invoice, OneBy keeps your
+              customers, team, jobs, and pipeline together in one platform, for
+              any business in any industry. Tailored to how you work, with a
+              dedicated account rep and an open connector for the AI you already
+              use.
             </p>
 
             <div
@@ -76,9 +77,9 @@ export default function HeroCrm() {
               style={{ animationDelay: "240ms" }}
             >
               {[
-                "Open API — plug in Claude, ChatGPT & Gemini",
-                "Built by an MSP that runs on it",
-                "The CRM is free",
+                "$15 per user, every feature included",
+                "Complimentary onboarding + a dedicated rep",
+                "Open API — Claude, ChatGPT & Gemini",
               ].map((r) => (
                 <span key={r} className="inline-flex items-center gap-1.5">
                   <CheckCircle2 size={16} className="text-green" /> {r}

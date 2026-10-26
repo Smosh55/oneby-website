@@ -39,15 +39,16 @@ export function generateMetadata(): Metadata {
   }
   if (crmFirst) {
     return {
-      title: "OneBy — The CRM your service business runs on",
+      title: "OneBy — Run your whole team and sales cycle in one place",
       description:
-        "Jobs, scheduling, estimates, invoicing, and customers in one place, with an open connector for the AI you already use. The straightforward alternative to Jobber and Housecall Pro.",
+        "One platform for your customers, team, jobs, and entire sales cycle, for any business in any industry. $15 per user, every feature included, with complimentary onboarding and a dedicated account rep.",
       keywords: [
-        "field service CRM",
-        "service business CRM",
+        "CRM",
+        "team management software",
+        "sales CRM",
+        "business management platform",
         "Jobber alternative",
         "Housecall Pro alternative",
-        "job scheduling and invoicing software",
       ],
       alternates: { canonical: "/" },
     };
