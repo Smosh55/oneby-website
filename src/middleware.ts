@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { focusedIndustrySlug, salesFocusMode } from "@/config/site";
+import { focusedIndustrySlug, salesFocusMode, isParkedPath } from "@/config/site";
 import { industriesBySlug } from "@/data/industries";
 
 // Pages that stay reachable during the temporary sales-window focus mode.
@@ -22,6 +22,20 @@ const BOT_RE =
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  // CRM-first mode (see crmFirst in config/site.ts): the AI answering /
+  // automation routes are parked. Rewrite them to the "Shipping ..." screen
+  // so the URL still resolves (no 404) and the real page file stays untouched
+  // on disk, ready to light back up when the flag flips. Rewrite (not
+  // redirect) keeps the original URL in the address bar; the coming-soon page
+  // is noindex, so parked URLs never get indexed.
+  if (isParkedPath(pathname)) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/coming-soon";
+    url.search = "";
+    url.searchParams.set("from", pathname);
+    return NextResponse.rewrite(url);
+  }
 
   // TEMPORARY (see salesFocusMode in config/site.ts): the whole site funnels
   // to the in-person offer. 307 so nothing is cached as permanent; flip the

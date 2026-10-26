@@ -6,8 +6,20 @@ import { getFeatureIcon } from "@/components/feature/iconMap";
 import Reveal from "@/components/Reveal";
 import HeroAppMock from "@/components/HeroAppMock";
 import IndustryDemo from "@/components/IndustryDemo";
-import { focusedIndustry } from "@/config/site";
+import { focusedIndustry, crmFirst, parkedFeatureSlugs } from "@/config/site";
 import { industryAccentStyle } from "@/data/industryThemes";
+
+// In CRM-first mode the parked AI features drop out of the hub, and the
+// "AI & automation" group (which still holds the live MCP connector card) is
+// relabeled so the page reads CRM-first.
+const displayGroups = crmFirst
+  ? featureGroups
+      .map((g) => ({
+        group: g.group === "AI & automation" ? "Connect your AI" : g.group,
+        items: g.items.filter((f) => !parkedFeatureSlugs.has(f.slug)),
+      }))
+      .filter((g) => g.items.length > 0)
+  : featureGroups;
 
 export function generateMetadata(): Metadata {
   const focus = focusedIndustry();
@@ -15,6 +27,14 @@ export function generateMetadata(): Metadata {
     return {
       title: `The all-in-one platform for ${focus.name}`,
       description: focus.metaDescription,
+      alternates: { canonical: "/product" },
+    };
+  }
+  if (crmFirst) {
+    return {
+      title: "Product: The All-in-One CRM for Service Businesses",
+      description:
+        "Jobs, scheduling, estimates, invoicing, the price book, equipment history, and every customer in one place, with an open connector for the AI you already use.",
       alternates: { canonical: "/product" },
     };
   }
@@ -41,13 +61,14 @@ export default function ProductHub() {
           <h1 className="mx-auto mt-5 max-w-3xl text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[3.25rem]">
             {focus
               ? `Run your whole ${focus.shortName.toLowerCase()} business on one platform.`
-              : "Every call answered. Every job run. One platform."}
+              : crmFirst
+                ? "Every job run. One platform."
+                : "Every call answered. Every job run. One platform."}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-            A built-in business phone system, calling, desk phones, and SMS,
-            comes standard, so you can retire the old PBX. Then the AI turns
-            every call into a summary and an assigned task, and the job moves
-            from ticket to schedule to invoice without leaving the platform.
+            {crmFirst && !focus
+              ? "Jobs, scheduling, estimates, invoicing, the price book, equipment history, and every customer's record in one place. Plus a built-in business phone and SMS, and an open connector for the AI assistant you already use."
+              : "A built-in business phone system, calling, desk phones, and SMS, comes standard, so you can retire the old PBX. Then the AI turns every call into a summary and an assigned task, and the job moves from ticket to schedule to invoice without leaving the platform."}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/demo" className="btn btn-primary text-base">
@@ -60,7 +81,9 @@ export default function ProductHub() {
         </div>
       </section>
 
-      {/* Interactive workspace tour (full) */}
+      {/* Interactive workspace tour (full) — hidden in CRM-first mode on the
+          main site, since the mock leads with the parked AI call flow. */}
+      {(!crmFirst || focus) && (
       <section className="pb-10 pt-4">
         <div className="container-x">
           <Reveal className="mx-auto mb-10 max-w-2xl text-center">
@@ -76,8 +99,9 @@ export default function ProductHub() {
           {focus ? <IndustryDemo slug={focus.slug} compact={false} /> : <HeroAppMock />}
         </div>
       </section>
+      )}
 
-      {featureGroups.map((grp) => (
+      {displayGroups.map((grp) => (
         <section key={grp.group} className="py-10">
           <div className="container-x">
             <div className="mb-7 flex items-center gap-3">
@@ -131,10 +155,12 @@ export default function ProductHub() {
             </div>
             <div className="relative mx-auto max-w-2xl">
               <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-[2.5rem] sm:leading-[1.1]">
-                One platform. Every call handled.
+                {crmFirst ? "One platform. Every job, in one place." : "One platform. Every call handled."}
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-white/70">
-                Book a demo and see the whole thing work on a real call.
+                {crmFirst
+                  ? "Book a demo and see how the whole job runs, from first request to paid."
+                  : "Book a demo and see the whole thing work on a real call."}
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Link href="/demo" className="btn btn-primary text-base">

@@ -32,3 +32,42 @@ export const launch = {
 // pages, and the calculator render). Used Aug 10-11, 2026, then reverted in
 // favor of keeping the full site up alongside the offer pages.
 export const salesFocusMode = false;
+
+// CRM-first mode. The public site leads with the CRM (jobs, scheduling,
+// invoicing, customers) and the open MCP connector. The AI answering-service /
+// agentic-automation pages aren't part of the story yet, so they're PARKED:
+// their files stay on disk untouched, but middleware rewrites them to a
+// "Shipping January 2027" coming-soon screen, and they're dropped from the
+// nav, footer, and sitemap (and never indexed). Flip to false to restore the
+// full AI-first site exactly as it was.
+export const crmFirst = true;
+
+// Standalone AI/answering landing pages parked in CRM-first mode.
+export const parkedPaths: ReadonlySet<string> = new Set([
+  "/ai-receptionist",
+  "/missed-call-calculator",
+  "/looped",
+  "/voip-crm",
+]);
+
+// Feature deep-dive slugs parked in CRM-first mode (the AI & answering ones).
+// Everything else in data/features.ts stays live as CRM capability pages.
+export const parkedFeatureSlugs: ReadonlySet<string> = new Set([
+  "ai-receptionist",
+  "ai-voicemail-replacement",
+  "missed-call-text-back",
+  "smart-summaries",
+  "honest-ai",
+  "task-automation",
+  "automations",
+  "call-recording",
+]);
+
+// True when a given path is parked (coming-soon) under CRM-first mode.
+export function isParkedPath(pathname: string): boolean {
+  if (!crmFirst) return false;
+  if (parkedPaths.has(pathname)) return true;
+  const m = pathname.match(/^\/features\/([^/]+)\/?$/);
+  if (m && parkedFeatureSlugs.has(m[1])) return true;
+  return false;
+}

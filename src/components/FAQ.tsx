@@ -3,9 +3,15 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import Reveal from "./Reveal";
-import { homeFaqs as faqs } from "@/data/homeFaqs";
+import { homeFaqs } from "@/data/homeFaqs";
 
-export default function FAQ() {
+export default function FAQ({
+  faqs = homeFaqs,
+  blurb = "Still curious? Book a 20-minute demo and we'll walk through your exact call flow.",
+}: {
+  faqs?: { q: string; a: string }[];
+  blurb?: string;
+} = {}) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -17,8 +23,7 @@ export default function FAQ() {
             Questions, answered.
           </h2>
           <p className="mt-5 text-[0.975rem] leading-relaxed text-muted">
-            Still curious? Book a 20-minute demo and we&apos;ll walk through
-            your exact call flow.
+            {blurb}
           </p>
           <a href="#demo" className="btn btn-ghost mt-6">
             Talk to us

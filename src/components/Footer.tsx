@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { cities } from "@/data/locations";
 import { useSiteIndustry } from "@/lib/useSiteIndustry";
-import { isFocusedSite } from "@/config/site";
+import { isFocusedSite, crmFirst } from "@/config/site";
 
 type FooterLink = { label: string; href: string };
 
-const groups: { title: string; links: FooterLink[] }[] = [
+// Full AI-first footer (restored when crmFirst is false).
+const aiGroups: { title: string; links: FooterLink[] }[] = [
   {
     title: "Product",
     links: [
@@ -64,6 +65,47 @@ const groups: { title: string; links: FooterLink[] }[] = [
   },
 ];
 
+// CRM-first footer: only the live CRM pages, the comparison angle, and the
+// MCP connector. No parked AI/answering links.
+const crmGroups: { title: string; links: FooterLink[] }[] = [
+  {
+    title: "CRM",
+    links: [
+      { label: "Overview", href: "/product" },
+      { label: "Customers & Timeline", href: "/features/customer-timeline" },
+      { label: "Scheduling", href: "/features/scheduling" },
+      { label: "Estimates", href: "/features/estimates" },
+      { label: "Invoicing & Payments", href: "/features/invoicing" },
+      { label: "Price Book", href: "/features/price-book" },
+      { label: "Equipment & Warranties", href: "/features/equipment-warranties" },
+      { label: "Reports & Insights", href: "/features/reports-insights" },
+      { label: "Connect Your AI Assistant", href: "/features/connect-your-ai-assistant" },
+      { label: "Pricing", href: "/pricing" },
+    ],
+  },
+  {
+    title: "Why OneBy",
+    links: [
+      { label: "Compare", href: "/compare" },
+      { label: "Free Invoicing", href: "/free-invoicing" },
+      { label: "Free Estimate Templates", href: "/templates" },
+      { label: "Founding Members", href: "/founders" },
+      { label: "Book a demo", href: "/demo" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Blog", href: "/blog" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
+];
+
+const groups = crmFirst ? crmGroups : aiGroups;
+
 export default function Footer() {
   // In a single-industry context, replace the cross-industry column with links
   // scoped to that trade (overview + local service areas) so the footer doesn't
@@ -96,7 +138,13 @@ export default function Footer() {
   return (
     <footer className="bg-navy text-white">
       <div className="container-x py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
+        <div
+          className={`grid gap-12 ${
+            crmFirst
+              ? "lg:grid-cols-[1.4fr_repeat(3,1fr)]"
+              : "lg:grid-cols-[1.4fr_repeat(4,1fr)]"
+          }`}
+        >
           <div className="max-w-xs">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

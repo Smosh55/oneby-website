@@ -6,14 +6,23 @@ import { Menu, X, ChevronDown, Gift } from "lucide-react";
 import { industryGroups } from "@/data/industries";
 import { getIcon } from "@/components/industry/iconMap";
 import { useSiteIndustry } from "@/lib/useSiteIndustry";
-import { isFocusedSite } from "@/config/site";
+import { isFocusedSite, crmFirst } from "@/config/site";
 
-const links = [
-  { label: "Product", href: "/product" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
-];
+// CRM-first mode leads with the product + the head-to-head comparison and
+// drops the cross-industry chrome; the full-site nav keeps About instead.
+const links = crmFirst
+  ? [
+      { label: "Product", href: "/product" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Compare", href: "/compare" },
+      { label: "Blog", href: "/blog" },
+    ]
+  : [
+      { label: "Product", href: "/product" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Blog", href: "/blog" },
+      { label: "About", href: "/about" },
+    ];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -48,8 +57,9 @@ export default function Nav() {
         </Link>
 
         <div className="hidden lg:flex items-center gap-1">
-          {/* Industries mega-dropdown — hidden in single-industry context */}
-          {!industry && (
+          {/* Industries mega-dropdown — hidden in single-industry context and
+              in CRM-first mode (industry landers are parked). */}
+          {!industry && !crmFirst && (
           <div className="group relative">
             <Link
               href="/industries"
@@ -135,7 +145,7 @@ export default function Nav() {
       {open && (
         <div className="lg:hidden border-t border-line bg-white max-h-[calc(100vh-4rem)] overflow-y-auto">
           <div className="container-x py-4 flex flex-col gap-1">
-            {!industry && (<>
+            {!industry && !crmFirst && (<>
             <button
               onClick={() => setMobileIndustries((v) => !v)}
               className="flex items-center justify-between px-3 py-3 rounded-lg text-[0.95rem] font-medium text-ink hover:bg-canvas-2"
