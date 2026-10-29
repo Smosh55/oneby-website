@@ -573,14 +573,14 @@ export const features: Feature[] = [
     icon: "Plug",
     metaTitle: "Connect Claude, ChatGPT, or Gemini to Your Business",
     metaDescription:
-      "OneBy has a secure connector so you can plug your own AI assistant, Claude, ChatGPT, Gemini, or Cursor, straight into your business and ask it anything or have it get work done.",
+      "OneBy has a secure connector so you can plug your own AI assistant, Claude, ChatGPT, Gemini, Cursor, or any model that allows connections, straight into your business and ask it anything or have it get work done.",
     keywords: ["MCP connector", "connect AI to CRM", "ChatGPT business connector", "Claude business data", "AI assistant integration"],
     heroEyebrow: "Connect Your AI Assistant",
     heroTitle: "Bring your own AI. Point it at your business.",
     heroSub:
-      "OneBy opens a secure connector to the assistants you already use. Ask Claude, ChatGPT, Gemini, or Cursor about your customers, calls, jobs, and invoices in plain English, and let it do the busywork, with your permission.",
+      "OneBy opens a secure connector to the assistants you already use. Ask Claude, ChatGPT, Gemini, Cursor, or any model that allows connections about your customers, calls, jobs, and invoices in plain English, and let it do the busywork, with your permission.",
     bullets: [
-      "Works with Claude, ChatGPT, Gemini, and Cursor",
+      "Works with Claude, ChatGPT, Gemini, Cursor, and any model that allows connections",
       "Ask about customers, calls, jobs, invoices, and payments in plain English",
       "Let it draft a text, build an invoice, or schedule a visit, only when you allow it",
       "You control what it can see and whether it can make changes, read-only by default",
@@ -591,7 +591,7 @@ export const features: Feature[] = [
       { step: "Just ask", body: "“Which customers asked about financing last month?” or “Text the Johnsons their invoice.” It answers, or does it, with your say-so." },
     ],
     faqs: [
-      { q: "Which assistants can I connect?", a: "Claude (web, desktop, and Code), ChatGPT, Gemini, and Cursor, with guided setup for each. More are added over time." },
+      { q: "Which assistants can I connect?", a: "Claude (web, desktop, and Code), ChatGPT, Gemini, and Cursor, with guided setup for each, plus any AI model or app that supports connections. The connector is open, so if your assistant can connect to outside tools, it works." },
       { q: "Is my data safe?", a: "You decide what the assistant can access, and it is read-only unless you turn on changes for it. Every connection is scoped to your account and you can turn it off anytime." },
     ],
     cardline: "Plug your own AI into your business.",

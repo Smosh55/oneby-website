@@ -12,7 +12,7 @@ export const crmFaqs: { q: string; a: string }[] = [
   },
   {
     q: "Can I connect my own AI assistant?",
-    a: "Yes. OneBy opens a secure connector to the assistants you already use — Claude, ChatGPT, Gemini, and Cursor. Ask about your customers, jobs, and invoices in plain English, and let it do the busywork when you allow it. It's over 100 actions, read-only by default, scoped to exactly what you permit.",
+    a: "Yes. OneBy opens a secure connector to the assistants you already use — Claude, ChatGPT, Gemini, Cursor, and any model that allows connections. Ask about your customers, jobs, and invoices in plain English, and let it do the busywork when you allow it. It's over 500 actions, read-only by default, scoped to exactly what you permit.",
   },
   {
     q: "How does getting paid work?",

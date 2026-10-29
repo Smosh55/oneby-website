@@ -6,8 +6,8 @@ import { Plug, ShieldCheck, Zap, Check, ArrowRight } from "lucide-react";
 // OneBy isn't an "AI product," it opens a secure connector so the assistant
 // YOU already use can read and (with permission) run your business.
 const bullets = [
-  { icon: Plug, text: "Works with Claude, ChatGPT, Gemini & Cursor" },
-  { icon: Zap, text: "100+ actions — customers, jobs, invoices, scheduling, reports" },
+  { icon: Plug, text: "Works with Claude, ChatGPT, Gemini, Cursor — and any model that allows connections" },
+  { icon: Zap, text: "500+ actions — customers, jobs, invoices, scheduling, reports" },
   { icon: ShieldCheck, text: "Read-only by default. You choose what it can change." },
 ];
 

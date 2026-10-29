@@ -57,7 +57,7 @@ const features = [
   {
     icon: Plug,
     title: "Connect Your AI Assistant",
-    body: "Plug Claude, ChatGPT, Gemini, or Cursor straight into your business. Ask it about customers, calls, and invoices, and let it do the busywork, with your permission.",
+    body: "Plug Claude, ChatGPT, Gemini, Cursor, or any model that allows connections straight into your business. Ask it about customers, calls, and invoices, and let it do the busywork, with your permission.",
     span: true,
   },
   {
