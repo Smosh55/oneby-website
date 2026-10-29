@@ -16,33 +16,33 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://oneby.ai";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "OneBy: The All-in-One CRM That Catches Every Call",
+    default: "OneBy — Run your whole team and your entire sales cycle in one place",
     template: "%s · OneBy",
   },
   description:
-    "OneBy is the all-in-one CRM for service businesses. Catch every call, then ticket, schedule, and invoice the job, all in one place. Now in invite-only early access; public launch January 2027.",
+    "OneBy is the all-in-one CRM that runs your whole team and your entire sales cycle in one place: customers, pipeline, scheduling, and invoicing, with a built-in phone system and an open connector for your own AI. Now in invite-only early access; public launch January 2027.",
   keywords: [
-    "VoIP CRM",
-    "all-in-one CRM for service business",
-    "field service CRM",
-    "AI receptionist",
+    "all-in-one CRM",
+    "team management software",
+    "sales pipeline CRM",
     "business phone system",
-    "ticketing scheduling invoicing software",
     "CRM with phone system",
+    "ticketing scheduling invoicing software",
+    "CRM with AI connector",
   ],
   openGraph: {
-    title: "OneBy: Catch Every Call. Win Every Job.",
+    title: "OneBy — Run your whole team and your entire sales cycle in one place",
     description:
-      "The all-in-one CRM for service businesses: calls, tickets, scheduling, and invoicing in one place. Now in invite-only early access; public launch January 2027.",
+      "The all-in-one CRM for your whole team and entire sales cycle: customers, pipeline, scheduling, and invoicing, with a built-in phone system and an open connector for your own AI. Now in invite-only early access; public launch January 2027.",
     type: "website",
     url: SITE_URL,
     siteName: "OneBy",
   },
   twitter: {
     card: "summary_large_image",
-    title: "OneBy: Catch Every Call. Win Every Job.",
+    title: "OneBy — Run your whole team and your entire sales cycle in one place",
     description:
-      "The all-in-one CRM for service businesses: calls, tickets, scheduling, and invoicing in one place.",
+      "The all-in-one CRM for your whole team and entire sales cycle: customers, pipeline, scheduling, and invoicing, with a built-in phone system and an open connector for your own AI.",
   },
   icons: {
     icon: "/brand/oneby-mark.svg",
@@ -67,7 +67,7 @@ const orgJsonLd = {
       url: SITE_URL,
       logo: `${SITE_URL}/brand/oneby-logo.svg`,
       description:
-        "OneBy is the all-in-one CRM for service businesses: it catches every call and turns it into a ticket, a schedule, and an invoice, in one place.",
+        "OneBy is the all-in-one CRM that runs your whole team and your entire sales cycle in one place: customers, pipeline, scheduling, and invoicing, with a built-in phone system and an open connector for your own AI.",
       contactPoint: {
         "@type": "ContactPoint",
         telephone: "+1-442-446-6329",
