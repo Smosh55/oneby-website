@@ -39,9 +39,9 @@ export function generateMetadata(): Metadata {
   }
   if (crmFirst) {
     return {
-      title: "OneBy — Run your whole team and sales cycle in one place",
+      title: "OneBy — Run your whole team and all your work in one place",
       description:
-        "One platform for your customers, team, jobs, and entire sales cycle, for any business in any industry. $15 per user, every feature included, with complimentary onboarding and a dedicated account rep.",
+        "One platform for your whole team to manage customers, projects, scheduling, and invoicing, for any business in any industry. $15 per user, every feature included, with complimentary onboarding and a dedicated account rep.",
       keywords: [
         "CRM",
         "team management software",
