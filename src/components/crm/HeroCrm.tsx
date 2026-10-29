@@ -30,7 +30,7 @@ export default function HeroCrm() {
               className="animate-rise mt-6 text-[2.75rem] font-extrabold leading-[1.0] tracking-tight text-navy sm:text-6xl lg:text-[4rem]"
               style={{ animationDelay: "60ms" }}
             >
-              Run your whole team and your entire sales cycle in{" "}
+              Run your whole team and all your work in{" "}
               <span className="relative whitespace-nowrap">
                 one place
                 <span className="absolute -bottom-1 left-0 h-[0.16em] w-full rounded-full bg-green" />
@@ -42,11 +42,11 @@ export default function HeroCrm() {
               className="animate-rise mt-6 max-w-xl text-lg leading-relaxed text-muted"
               style={{ animationDelay: "120ms" }}
             >
-              From the first lead to the final invoice, OneBy keeps your
-              customers, team, jobs, and pipeline together in one platform, for
-              any business in any industry. Tailored to how you work, with a
-              dedicated account rep and an open connector for the AI you already
-              use.
+              OneBy gives your whole team one place to manage customers,
+              projects, scheduling, and invoicing, from the first request to the
+              final payment, for any business in any industry. Tailored to how
+              you work, with a dedicated account rep and an open connector for
+              the AI you already use.
             </p>
 
             <div
@@ -79,7 +79,7 @@ export default function HeroCrm() {
               {[
                 "$15 per user, every feature included",
                 "Complimentary onboarding + a dedicated rep",
-                "Open API — Claude, ChatGPT & Gemini",
+                "Open connector — works with any AI model",
               ].map((r) => (
                 <span key={r} className="inline-flex items-center gap-1.5">
                   <CheckCircle2 size={16} className="text-green" /> {r}
