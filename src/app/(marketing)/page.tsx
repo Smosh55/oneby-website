@@ -17,6 +17,7 @@ import { HomeDemoProvider } from "@/components/HomeDemoContext";
 // CRM-first homepage sections
 import HeroCrm from "@/components/crm/HeroCrm";
 import CrmShowcase from "@/components/crm/CrmShowcase";
+import ProductTour from "@/components/crm/ProductTour";
 import McpSection from "@/components/crm/McpSection";
 import CrmComparison from "@/components/crm/CrmComparison";
 import CrmPricing from "@/components/crm/CrmPricing";
@@ -92,6 +93,7 @@ export default function Home() {
         />
         <HeroCrm />
         <CrmShowcase />
+        <ProductTour />
         <McpSection />
         <CrmComparison />
         <CrmPricing />

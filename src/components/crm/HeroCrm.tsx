@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import HeroBoard from "./HeroBoard";
 import { launch } from "@/config/site";
 
 // CRM-first hero. Leads with the CRM (jobs, scheduling, invoicing, customers)
@@ -88,9 +88,25 @@ export default function HeroCrm() {
             </div>
           </div>
 
-          {/* Right: real-looking CRM board */}
+          {/* Right: a real screen from the product (demo data only) */}
           <div className="animate-rise min-w-0" style={{ animationDelay: "160ms" }}>
-            <HeroBoard />
+            <div className="mx-auto w-full max-w-xl overflow-hidden rounded-[22px] border border-line bg-white shadow-[var(--shadow-xl)]">
+              <div className="flex items-center gap-1.5 border-b border-line bg-canvas px-4 py-2.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-line" />
+                <span className="h-2.5 w-2.5 rounded-full bg-line" />
+                <span className="h-2.5 w-2.5 rounded-full bg-line" />
+                <span className="ml-2 text-[0.72rem] font-semibold text-muted">
+                  Work board
+                </span>
+              </div>
+              <img
+                src="/product/jobs-board.png"
+                width={1512}
+                height={791}
+                alt="A OneBy work board with jobs moving across Active, In progress, On hold, and Done columns, each showing the customer, schedule, and assigned person."
+                className="block h-auto w-full"
+              />
+            </div>
           </div>
         </div>
       </div>
