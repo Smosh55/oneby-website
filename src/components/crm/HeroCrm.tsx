@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { CheckCircle2, ArrowRight, CalendarCheck, CircleDollarSign } from "lucide-react";
 import Link from "next/link";
 import { launch } from "@/config/site";
 
@@ -27,13 +27,13 @@ export default function HeroCrm() {
             </span>
 
             <h1
-              className="animate-rise mt-6 text-[2.75rem] font-extrabold leading-[1.0] tracking-tight text-navy sm:text-6xl lg:text-[4rem]"
+              className="animate-rise mt-6 text-[2.75rem] font-extrabold leading-[1.05] tracking-tight text-navy sm:text-6xl lg:text-[4rem]"
               style={{ animationDelay: "60ms" }}
             >
               Run your whole team and all your work in{" "}
               <span className="relative whitespace-nowrap">
                 one place
-                <span className="absolute -bottom-1 left-0 h-[0.16em] w-full rounded-full bg-green" />
+                <span className="absolute -bottom-0.5 left-0 h-[5px] w-full rounded-full bg-green" />
               </span>
               .
             </h1>
@@ -88,9 +88,15 @@ export default function HeroCrm() {
             </div>
           </div>
 
-          {/* Right: a real screen from the product (demo data only) */}
-          <div className="animate-rise min-w-0" style={{ animationDelay: "160ms" }}>
-            <div className="mx-auto w-full max-w-xl overflow-hidden rounded-[22px] border border-line bg-white shadow-[var(--shadow-xl)]">
+          {/* Right: a real screen from the product on a soft brand stage, with
+              small floating status cards for life (Jobber / Housecall-Pro feel).
+              Labels are illustrative product events only — no stats or reviews. */}
+          <div className="animate-rise relative min-w-0" style={{ animationDelay: "160ms" }}>
+            {/* soft tinted stage behind the product */}
+            <div className="pointer-events-none absolute -inset-x-5 -top-6 bottom-0 -z-0 rounded-[32px] bg-[linear-gradient(135deg,rgba(28,219,150,0.16),rgba(0,143,224,0.10))]" />
+
+            {/* framed real screenshot */}
+            <div className="relative z-10 mx-auto w-full max-w-xl overflow-hidden rounded-[18px] border border-line bg-white shadow-[var(--shadow-xl)]">
               <div className="flex items-center gap-1.5 border-b border-line bg-canvas px-4 py-2.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-line" />
                 <span className="h-2.5 w-2.5 rounded-full bg-line" />
@@ -106,6 +112,34 @@ export default function HeroCrm() {
                 alt="A OneBy work board with jobs moving across Active, In progress, On hold, and Done columns, each showing the customer, schedule, and assigned person."
                 className="block h-auto w-full"
               />
+            </div>
+
+            {/* floating status card — top left */}
+            <div
+              className="animate-rise absolute -left-4 top-12 z-20 hidden items-center gap-2.5 rounded-xl border border-line bg-white px-3.5 py-2.5 shadow-[var(--shadow-lg)] sm:flex"
+              style={{ animationDelay: "340ms" }}
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-green/15 text-green-600">
+                <CalendarCheck size={16} />
+              </span>
+              <div className="leading-tight">
+                <p className="text-[0.8rem] font-bold text-navy">Job scheduled</p>
+                <p className="text-[0.72rem] text-muted">Added to the board</p>
+              </div>
+            </div>
+
+            {/* floating status card — bottom right */}
+            <div
+              className="animate-rise absolute -right-3 bottom-10 z-20 hidden items-center gap-2.5 rounded-xl border border-line bg-white px-3.5 py-2.5 shadow-[var(--shadow-lg)] sm:flex"
+              style={{ animationDelay: "440ms" }}
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue/12 text-blue">
+                <CircleDollarSign size={16} />
+              </span>
+              <div className="leading-tight">
+                <p className="text-[0.8rem] font-bold text-navy">Invoice paid</p>
+                <p className="text-[0.72rem] text-muted">Marked on the job</p>
+              </div>
             </div>
           </div>
         </div>
